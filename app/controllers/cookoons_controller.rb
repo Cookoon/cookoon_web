@@ -3,18 +3,19 @@ class CookoonsController < ApplicationController
     @lat_lng = cookies[:lat_lng].try(:split, "|")
     @new_search = UserSearch.new(number: 2, duration: 2, date: DateTime.now + 2.days)
     @last_search = current_search || @new_search
-    @cookoons = Cookoon.near(@last_search.address.presence || @lat_lng || 'Paris', 10)
+    @cookoons = policy_scope(Cookoon).near(@last_search.address.presence || @lat_lng || 'Paris', 10)
     prepare_infos
     build_markers
   end
 
   def new
     @cookoon = Cookoon.new
+    authorize @cookoon
   end
 
   def create
-    @cookoon = Cookoon.new(cookoon_params)
-    @cookoon.user = current_user
+    @cookoon = current_user.cookoons.build(cookoon_params)
+    authorize @cookoon
     if @cookoon.save
       redirect_to @cookoon
     else
@@ -24,6 +25,7 @@ class CookoonsController < ApplicationController
 
   def show
     @cookoon = Cookoon.find(params[:id])
+    authorize @cookoon
     @reservation = current_user.reservations.build(
       cookoon: @cookoon,
       date: current_search.try(:date) || DateTime.now + 2.days,

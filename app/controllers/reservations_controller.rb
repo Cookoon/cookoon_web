@@ -2,11 +2,7 @@ class ReservationsController < ApplicationController
   before_action :find_cookoon, :build_reservation, only: [:create]
 
   def index
-    @reservations = current_user.reservations
-  end
-
-  def show
-    @reservation = Reservation.find(params[:id])
+    @reservations = policy_scope(Reservation)
   end
 
   def create
@@ -27,6 +23,7 @@ class ReservationsController < ApplicationController
 
   def build_reservation
     @reservation = current_user.reservations.build(reservation_params)
+    authorize @reservation
   end
 
   def reservation_params

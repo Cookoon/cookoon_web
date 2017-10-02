@@ -40,7 +40,7 @@
     </div>
   </div>
 
-  <%= form_tag reservation_paiements_path(@reservation), id: 'stripe_form' do %>
+  <%= form_tag reservation_paiements_path(@reservation), id: 'stripe_form', remote: true do %>
     <%= hidden_field_tag :stripe_token %>
   <% end %>
 </div>

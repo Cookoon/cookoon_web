@@ -51,11 +51,13 @@ gem "gmaps4rails"
 
 gem 'stripe'
 
+# Config
 gem 'figaro'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise_invitable', '~> 1.7.0'
 gem 'money-rails', '~>1'
+gem 'pundit'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

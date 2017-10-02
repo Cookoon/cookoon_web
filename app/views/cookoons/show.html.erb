@@ -58,11 +58,13 @@
 </script>
 
 <script>
-  $('.carousel').hammer().bind("swipeleft", function() {
-    $(this).carousel('next');
-  });
+  document.addEventListener("turbolinks:load", function() {
+    $('.carousel').hammer().bind("swipeleft", function() {
+      $(this).carousel('next');
+    });
 
-  $('.carousel').hammer().bind("swiperight", function() {
-    $(this).carousel('prev');
+    $('.carousel').hammer().bind("swiperight", function() {
+      $(this).carousel('prev');
+    });
   });
 </script>

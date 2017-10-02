@@ -5,6 +5,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="recapModalLabel">Votre réservation</h4>
       </div>
+      <%= simple_form_for [@cookoon, @reservation], remote: true do |f| %>
       <div class="modal-body">
         <div class="recap">
           <div class="text-left">
@@ -12,7 +13,6 @@
               <span id="cookoon-price"><%= humanized_money @cookoon.price %></span> <%= currency_symbol %> par heure
             </span>
           </div>
-          <%= simple_form_for [@cookoon, @reservation], remote: true do |f| %>
           <div class="recap-datetime">
             <p>Vous arrivez le:</p>
             <%= f.input :date, as: :string, label: false, input_html: { value: l(@reservation.date, format: '%e %B à %k:%M') }, readonly: true %>
@@ -60,12 +60,14 @@
 
 
 <script>
-  $("#reservation_date").datetimepicker({
-    autoclose: true,
-    weekStart: 1,
-    minuteStep: 30,
-    format: 'd MM à h:ii',
-    language: 'fr',
-    startDate: new Date()
+  document.addEventListener("turbolinks:load", function() {
+    $("#reservation_date").datetimepicker({
+      autoclose: true,
+      weekStart: 1,
+      minuteStep: 30,
+      format: 'd MM à h:ii',
+      language: 'fr',
+      startDate: new Date()
+    });
   });
 </script>

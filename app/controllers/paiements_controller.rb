@@ -23,5 +23,6 @@ class PaiementsController < ApplicationController
 
   def set_reservation
     @reservation = Reservation.where(status: :pending).find(params[:reservation_id])
+    authorize @reservation
   end
 end

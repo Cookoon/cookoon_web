@@ -1,7 +1,7 @@
 <div class="container">
   <h2>Modifier le profil</h2>
 
-  <%= simple_form_for current_user, url: users_path, remote: true do |f| %>
+  <%= simple_form_for @user, url: users_path, remote: true do |f| %>
     <div class="form-inputs">
       <%= f.input :photo, as: :attachinary %>
       <%= f.input :first_name %>
@@ -14,7 +14,7 @@
       <div>
         <%= f.button :submit, "Mettre à jour", class: 'button button-blue'  %>
       </div>
-      <% unless current_user.stripe_verified? %>
+      <% unless @user.stripe_verified? %>
         <div class="light-padded">
           <%= link_to "Connecter mon compte avec Stripe", new_stripe_account_path, class: 'button button-blue' %>
         </div>

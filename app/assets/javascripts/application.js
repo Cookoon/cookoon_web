@@ -1,6 +1,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
+//= require turbolinks
 //= require bootstrap-sprockets
 //= require smalot-bootstrap-datetimepicker
 //= require underscore
@@ -9,6 +10,5 @@
 //= require hammer
 //= require attachinary
 //= require gmaps/google
-//= require turbolinks
 //= require_tree .
 //= require_tree ./locale

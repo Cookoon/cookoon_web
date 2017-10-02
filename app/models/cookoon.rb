@@ -18,5 +18,7 @@ class Cookoon < ApplicationRecord
 
   after_validation :geocode, if: :address_changed?
 
+  scope :displayable_on_index, -> { joins(:user).where.not(users: {stripe_account_id: nil}) }
+
   CATEGORIES = %w(Appartement Maison Jardin Loft Terrasse Toit Villa)
 end

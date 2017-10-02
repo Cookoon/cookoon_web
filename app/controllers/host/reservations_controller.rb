@@ -2,7 +2,7 @@ class Host::ReservationsController < ApplicationController
   before_action :find_reservation, only: [:edit, :update]
 
   def index
-    @reservations = current_user.reservations_requests
+    @reservations = policy_scope([:host, Reservation])
     @cookoons = current_user.cookoons
   end
 
@@ -36,6 +36,7 @@ class Host::ReservationsController < ApplicationController
 
   def find_reservation
     @reservation = Reservation.find(params[:id])
+    authorize [:host, @reservation]
   end
 
   def reservation_params
