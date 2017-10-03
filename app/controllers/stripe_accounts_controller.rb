@@ -19,6 +19,7 @@ class StripeAccountsController < ApplicationController
   private
 
   def get_service
+    authorize [:stripe_account, current_user]
     @account_service = StripeAccountService.new(params: params[:stripe], user: current_user, request_ip: request.remote_ip)
   end
 

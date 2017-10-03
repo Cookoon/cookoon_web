@@ -8,10 +8,6 @@ class ApplicationController < ActionController::Base
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
   after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
 
-  if Rails.env.staging?
-    http_basic_authenticate_with name: ENV["HTTP_AUTH_NAME"], password: ENV["HTTP_AUTH_PASSWORD"]
-  end
-
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:invite, keys: [:first_name, :last_name])
   end
