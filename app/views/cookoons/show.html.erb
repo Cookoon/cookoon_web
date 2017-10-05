@@ -25,12 +25,8 @@
 <!-- Map -->
 <div id="map" class="map-cookoon-show"></div>
 
-<!-- Booking -->
-<div class="fixed-bottom bottom-block">
-  <button type="button" class="button button-fixed" data-toggle="modal" data-target="#recap-modal">
-    RESERVER
-  </button>
-</div>
+<!-- Booking / review block -->
+<%= booking_button_or_review_block_for(@cookoon) %>
 
 <script>
   document.addEventListener("turbolinks:load", function() {
