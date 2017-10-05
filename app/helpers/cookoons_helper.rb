@@ -14,4 +14,12 @@ module CookoonsHelper
       image_tag 'https://unsplash.it/150/100'
     end
   end
+
+  def booking_button_or_review_block_for(cookoon)
+    if cookoon.under_review?
+      render 'under_review_card'
+    else
+      render 'reservation_button'
+    end
+  end
 end
