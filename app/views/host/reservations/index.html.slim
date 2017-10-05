@@ -2,7 +2,7 @@
   p Vos dernières demandes de réservation
   - @reservations.each do |reservation|
       = link_to edit_host_reservation_path(reservation) do
-        = render 'user_infos', reservation: reservation
+        = render 'cookoon_infos', reservation: reservation
       -  if reservation.accepted? && !reservation.inventory
         .thin-padded
           = link_to 'Débuter la location', new_host_reservation_inventory_path(reservation), class: 'button button-blue'

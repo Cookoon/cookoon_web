@@ -12,7 +12,13 @@
           </p>
         </div>
         <div class="service-input">
-          <%= f.input :cleaning, label: false, input_html: { class: 'reservation-option', data: {price: 15} } %>
+          <div class="form-group boolean optional reservation_cleaning">
+            <input value="0" type="hidden" name="reservation[cleaning]">
+            <input class="boolean optional hidden reservation-option" type="checkbox" value="1" name="reservation[cleaning]" id="reservation_cleaning" data-price="15">
+            <label class="boolean optional toggle" for="reservation_cleaning">
+              <span class="toggle-handler"></span>
+            </label>
+          </div>
         </div>
       </div>
       <div class="flex-container">
@@ -25,7 +31,13 @@
           </p>
         </div>
         <div class="service-input">
-          <%= f.input :janitor, label: false, input_html: { class: 'reservation-option', data: {price: 15} } %>
+          <div class="form-group boolean optional reservation_janitor">
+            <input value="0" type="hidden" name="reservation[janitor]">
+            <input class="boolean optional hidden reservation-option" type="checkbox" value="1" name="reservation[janitor]" id="reservation_janitor" data-price="15">
+            <label class="boolean optional toggle" for="reservation_janitor">
+              <span class="toggle-handler"></span>
+            </label>
+          </div>
         </div>
       </div>
       <hr style="border-top: 1px solid white">
