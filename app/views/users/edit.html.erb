@@ -11,14 +11,32 @@
     </div>
 
     <div class="form-actions">
-      <div>
+      <div class='text-center'>
         <%= f.button :submit, "Mettre à jour", class: 'button button-blue'  %>
       </div>
-      <% unless @user.stripe_verified? %>
-        <div class="light-padded">
-          <%= link_to "Connecter mon compte avec Stripe", new_stripe_account_path, class: 'button button-blue' %>
-        </div>
-      <% end %>
     </div>
   <% end %>
+
+  <div class="text-center thin-padded">
+    <%= link_to destroy_user_session_path, method: :delete do %>
+      <i class="fa fa-power-off" aria-hidden="true"></i> Se déconnecter
+    <% end %>
+  </div>
 </div>
+
+<% unless @user.stripe_verified? %>
+  <div class="card-bottom">
+    <div class="card-bottom-title">
+      <h4>Vous êtes hôte ?</h4>
+    </div>
+    <div class="card-bottom-content">
+      <p>
+        Pour recevoir vos paiements, vous devez renseigner des informations supplémentaires,
+        comme votre adresse et votre IBAN.
+      </p>
+    </div>
+    <div class="card-bottom-footer">
+      <%= link_to "RECEVOIR MES VIREMENTS", new_stripe_account_path %>
+    </div>
+  </div>
+<% end %>
