@@ -43,3 +43,37 @@
   margin-top: 15px;
   margin-left: 30px;
 }
+
+.review-card {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: $blue;
+  padding: 20px;
+  color: white;
+  &-title {
+    padding-bottom: 20px;
+    font-weight: bold;
+  }
+}
+
+.card-bottom {
+  width: 100%;
+  background: $blue;
+  padding: 20px;
+  color: white;
+  a {
+    color: white;
+    &:focus {
+      color: white;
+    }
+  }
+  &-title {
+    padding-bottom: 20px;
+    font-weight: bold;
+  }
+  &-footer {
+    text-align: right;
+  }
+}

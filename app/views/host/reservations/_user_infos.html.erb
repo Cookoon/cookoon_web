@@ -1,0 +1,17 @@
+<div class="flex-container reservation">
+  <div class="reservation-image">
+    <% if current_user.photo? %>
+      <%= cl_image_tag(current_user.photo.path, { size: '50x50', crop: :thumb, gravity: :face, class: 'avatar-large' }) %>
+    <% else %>
+      <%= image_tag 'http://via.placeholder.com/50x50', class: 'avatar-large' %>
+    <% end %>
+  </div>
+  <div class="reservation-infos">
+    <p>
+      <span class="reservation-title">
+        <%= reservation.user.full_name %>
+      </span>
+    </p>
+    <p><%= "#{reservation.date.strftime('%d %B %Y')} - #{reservation.duration} H" %></p>
+  </div>
+</div>

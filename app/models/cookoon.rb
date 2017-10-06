@@ -5,6 +5,7 @@ class Cookoon < ApplicationRecord
   has_attachments :photos, maximum: 5
 
   monetize :price_cents
+  enum status: [:under_review, :approved, :suspended]
 
   geocoded_by :address
 

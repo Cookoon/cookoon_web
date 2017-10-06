@@ -1,6 +1,6 @@
 class CookoonPolicy < ApplicationPolicy
   def show?
-    true
+    record.user == user || record.approved?
   end
 
   def create?
@@ -9,7 +9,7 @@ class CookoonPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope.displayable_on_index
+      scope.approved.displayable_on_index
     end
   end
 end

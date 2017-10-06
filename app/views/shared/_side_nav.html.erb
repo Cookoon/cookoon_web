@@ -12,7 +12,9 @@
           <% else %>
             <%= image_tag 'http://via.placeholder.com/50x50', class: 'avatar-large' %>
           <% end %>
-          <%= link_to current_user.full_name, edit_users_path %>
+          <%= link_to edit_users_path do %>
+            <%= current_user.full_name %> - <i class="fa fa-pencil" aria-hidden="true"></i> 
+          <% end %>
         </div>
       <% end %>
       <ul>
@@ -22,11 +24,14 @@
             <span class="notif notif-sidebar"></span>
           <% end %>
         </li>
-        <li><i class="fa fa-exchange" aria-hidden="true"></i>&nbsp; <%= link_to 'MON ESPACE HÔTE', host_reservations_path %></li>
         <li><i class="fa fa-send-o" aria-hidden="true"></i>&nbsp; <%= link_to 'PARRAINER MES AMIS', new_user_invitation_path %></li>
         <li><i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp; <%= link_to 'NOUS CONTACTER', '#' %></li>
       </ul>
-      <p class='pinned-bottom'>Conditions Générales</p>
+      <p>Conditions Générales</p>
+      <div class="side-nav-fixedbot">
+        <i class="fa fa-exchange" aria-hidden="true"></i>&nbsp; <%= link_to 'MON ESPACE HÔTE', host_reservations_path %>
+      </div>
+
     </div>
   </div>
 </div>
