@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       resources :inventories, only: [:new, :create]
     end
     resources :inventories, only: [:edit, :update]
+    get 'dashboard', to: 'users#dashboard'
   end
 
   # -------- CUSTOM ROUTES ---------
