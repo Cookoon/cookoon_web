@@ -1,0 +1,29 @@
+<div class="container">
+  <p>Vos dernières demandes de réservation</p>
+  <p>Vous avez <span class="text-blue"><%= @pending_reservations_count %> demande(s) de réservation</span> en attente</p>
+  <div class="text-center thin-padded">
+    <%= link_to 'Voir toutes mes Réservations', host_reservations_path, class: 'button button-blue' %>
+  </div>
+  <hr>
+  <p>Vos Cookoons</p>
+  <div class="row">
+    <% @cookoons.each do |cookoon| %>
+      <div class="col-xs-12 col-md-6">
+        <div class="card" style="background-image: url(<%= cookoon_safe_picture(cookoon) %>)">
+          <div class="card-data">
+            <div class="card-text">
+              <%= cookoon.name %>
+            </div>
+            <div class="card-infos">
+              <%= category_display_for(cookoon) %>
+              <%= price_display_for(cookoon) %>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="thin-padded">
+    <%= link_to "AJOUTER UN ESPACE", new_cookoon_path, class: 'button button-blue' %>
+  </div>
+</div>
