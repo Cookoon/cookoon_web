@@ -12,7 +12,9 @@
           <% else %>
             <%= image_tag 'http://via.placeholder.com/50x50', class: 'avatar-large' %>
           <% end %>
-          <%= link_to current_user.full_name, edit_users_path %>
+          <%= link_to edit_users_path do %>
+            <%= current_user.full_name %> - <i class="fa fa-pencil" aria-hidden="true"></i> 
+          <% end %>
         </div>
       <% end %>
       <ul>

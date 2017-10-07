@@ -101,3 +101,23 @@
     margin-left: 20px;
   }
 }
+
+.card-bottom {
+  width: 100%;
+  background: $blue;
+  padding: 20px;
+  color: white;
+  a {
+    color: white;
+    &:focus {
+      color: white;
+    }
+  }
+  &-title {
+    padding-bottom: 20px;
+    font-weight: bold;
+  }
+  &-footer {
+    text-align: right;
+  }
+}
