@@ -58,6 +58,50 @@
   }
 }
 
+.reservation-preview-card {
+  padding: 15px;
+  background: white;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  &-blue {
+    background: $blue;
+    color: white;
+  }
+  &-white {
+    background: white;
+    color: $blue;
+  }
+  &-grey {
+    background: $grey;
+    color: white;
+  }
+  &-infos {
+    display: flex;
+    justify-content: space-between;
+  }
+  &-recap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .infos-block {
+    margin-right: 60px;
+  }
+  p {
+    margin: 6px;
+  }
+  i {
+    font-size: 25px;
+  }
+  .price {
+    font-size: 15px;
+    font-weight: bold;
+  }
+  #force-margin {
+    margin-left: 20px;
+  }
+}
+
 .card-bottom {
   width: 100%;
   background: $blue;
