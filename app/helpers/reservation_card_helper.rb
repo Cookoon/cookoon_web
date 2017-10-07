@@ -4,6 +4,8 @@ module ReservationCardHelper
   end
 
   class ReservationCard
+    include Rails.application.routes.url_helpers
+
     def initialize(view, reservation)
       @view, @reservation = view, reservation
       @user = @reservation.user
@@ -11,7 +13,7 @@ module ReservationCardHelper
 
     def html
       content = safe_join([infos, recap, button])
-      content_tag(:div, content, class: "reservation-card #{color}")
+      content_tag(:div, content, class: "reservation-preview-card reservation-preview-card-#{color}")
     end
 
     private
@@ -21,54 +23,61 @@ module ReservationCardHelper
 
     def infos
       content = safe_join([user_picture, user_infos, status])
-      content_tag(:div, content, class: 'reservation-card-infos')
+      content_tag(:div, content, class: 'reservation-preview-card-infos')
     end
 
     def user_picture
       if user.photo?
-        cl_image_tag(user.photo.path, { size: '50x50', crop: :thumb, gravity: :face, class: 'avatar-large' })
+        cl_image_tag(user.photo.path, { size: '80x80', crop: :thumb, gravity: :face, class: 'avatar-larger' })
       else
-        image_tag 'http://via.placeholder.com/50x50', class: 'avatar-large'
+        image_tag 'http://via.placeholder.com/80x80', class: 'avatar-larger'
       end
     end
 
     def user_infos
-      user_name = content_tag(:p, user.full_name, class: text_color)
-      date = content_tag(:p, reservation.date)
-      duration = content_tag(:p, "#{reservation.date.hour} . #{reservation.duration}")
-      safe_join([user_name, date, duration])
+      user_name = content_tag(:p, user.full_name)
+      date = content_tag(:p, reservation.date.strftime('%d %B %Y'))
+      duration = content_tag(:p, "#{reservation.date.hour}h pour #{reservation.duration}h")
+      content = safe_join([user_name, date, duration])
+      content_tag(:div, content, class: 'infos-block')
     end
 
     def status
       case reservation.status
-      when :paid
-        content_tag(:i, nil, class: "co-reversed-meeting #{text_color}")
-      when :accepted, :passed
-        content_tag(:i, nil, class: 'co-reversed-check #{text_color}')
-      when :refused
-        content_tag(:i, nil, class: 'fa fa-times #{text_color}')
+      when 'paid'
+        content_tag(:i, nil, class: "co co-reversed-meeting")
+      when 'accepted', 'passed'
+        content_tag(:i, nil, class: 'fa fa-check-circle-o')
+      when 'refused'
+        content_tag(:i, nil, class: 'fa fa-ban')
       end
     end
 
     def recap
       content = safe_join([user_rating, receive_text, price])
-      content_tag(:div, content, class: 'reservation-card-recap')
+      content_tag(:div, content, class: 'reservation-preview-card-recap')
     end
 
     def user_rating
-      content_tag(:p, '100%')
+      content_tag(:p, '100%', id: 'force-margin')
     end
 
     def receive_text
-      content_tag(:p, 'Vous recevrez :')
+      if reservation.passed?
+        content_tag(:p, 'Vous avez reçu :')
+      elsif reservation.refused?
+        content_tag(:p, 'Vous auriez reçu :')
+      else
+        content_tag(:p, 'Vous recevrez :')
+      end
     end
 
     def price
-      content_tag(:p, "#{reservation.price}  €", class: text_color)
+      content_tag(:p, "#{reservation.payout_price_for_host}  €", class: 'price')
     end
 
     def button
-      content_tag(:div, button_tag, class: 'text-center')
+      content_tag(:div, button_tag, class: 'text-center light-padded')
     end
 
     def button_tag
@@ -76,7 +85,15 @@ module ReservationCardHelper
         link_to('Répondre à la demande', edit_host_reservation_path(reservation), class: 'button button-blue')
       else
         #TODO: Edit path
-        link_to('Voir la réservation', "", class: 'button button-white')
+        link_to('Voir la réservation', new_host_reservation_inventory_path(reservation), class: 'button button-white')
+      end
+    end
+
+    def color
+      case reservation.status
+      when 'paid' then 'white'
+      when 'passed', 'refused' then 'grey'
+      else 'blue'
       end
     end
   end

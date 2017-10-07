@@ -1,5 +1,7 @@
 <div class="container">
   <p>Toutes vos réservations</p>
 
-  TODO: List reservations with cards
+  <% @reservations.each do |reservation| %>
+    <%= card_for(reservation) %>
+  <% end %>
 </div>
