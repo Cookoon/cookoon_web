@@ -3,6 +3,6 @@ class Host::UsersController < ApplicationController
     @user = current_user
     authorize [:host, @user]
     @pending_reservations_count = @user.reservations_requests.paid.count
-    @cookoons = @user.cookoons
+    @cookoons = @user.cookoons.includes(:photo_files)
   end
 end

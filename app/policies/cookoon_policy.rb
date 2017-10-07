@@ -9,7 +9,7 @@ class CookoonPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope.approved.displayable_on_index
+      scope.includes(:photo_files).approved.displayable_on_index
     end
   end
 end
