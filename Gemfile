@@ -77,6 +77,7 @@ group :development do
   gem 'rubocop', '~> 0.49.1', require: false
   gem 'i18n-debug'
   gem "letter_opener"
+  gem 'bullet'
 end
 
 source 'https://rails-assets.org' do
