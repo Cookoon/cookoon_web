@@ -2,11 +2,13 @@
   document.addEventListener("turbolinks:load", function() {
     var handler = StripeCheckout.configure({
       key: '<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>',
-      image: 'https://stripe.com/img/documentation/checkout/marketplace.png',
+      image: '<%= image_path 'cookoon_logo' %>',
       locale: 'fr',
       email: '<%= current_user.email %>',
       token: function(token) {
         $("#stripe_token").val(token.id);
+        $('#customButton').prop("disabled", true);
+        $('#customButton').html('<i class="fa fa-spinner fa-spin" style="margin-right: 10px;"></i>Chargement');
         $("#stripe_form").submit();
       }
     });
