@@ -1,5 +1,5 @@
 <% content_for :navbar do %>
-  <%= render 'shared/navbar_light' %>
+  <%= render 'shared/navbar_light', url: cookoon_path(@reservation.cookoon) %>
 <% end %>
 
 <div class="container">
