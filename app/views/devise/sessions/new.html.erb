@@ -4,19 +4,12 @@
 
 <div class="container">
   <div class="home-title title-block text-center">
-      <h1>COOKOON</h1>
-      <h3>RECEVONS PARTOUT !</h3>
+    <h1>COOKOON</h1>
+    <h3>RECEVONS PARTOUT !</h3>
+  </div>
+  <div class="text-center">
+    <p id="error_messages"></p>
   </div>
 
-  <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), remote: true) do |f| %>
-    <div class="form-inputs">
-      <%= f.input :email, label: "Adresse email", required: false, autofocus: true %>
-      <%= f.input :password, required: false %>
-      <%= link_to "J'ai perdu mes idenfiants", new_password_path(resource_name), class: 'italic' %>
-      <div class="home-links links-block light-padded">
-        <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
-        <%= f.button :submit, "Se Connecter", class: 'button button-blue' %>
-      </div>
-    </div>
-  <% end %>
+  <%= render 'form' %>
 </div>
