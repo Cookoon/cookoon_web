@@ -41,6 +41,7 @@ class Host::InventoriesController < ApplicationController
 
   def build_inventory
     @inventory = @reservation.build_inventory
+    authorize [:host, @inventory]
   end
 
   def find_inventory
