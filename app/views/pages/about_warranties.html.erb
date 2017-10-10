@@ -1,1 +1,117 @@
-Quanranties
+<div class="text-center" style="padding: 30px">
+  <%= link_to 'ACCÈS MEMBRE', new_user_session_path, class: 'button button-blue' %>
+</div>
+
+<header>
+  <div class="text-center">
+  <div class="home-wrapper text-center">
+    <div class="home-container">
+      <div class="home-title title-block">
+        <h1>COOKOON</h1>
+        <h3>RECEVONS PARTOUT !</h3>
+      </div>
+      <div class="home-description">
+        <p>
+            Une communauté exclusive pour organiser vos événements chez les autres
+        </p>
+      </div>
+      <div class="col xl-6 col-md-6 col-sm-6 col-xs-12">
+            <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
+            <%= image_tag("iphone.png", class: "img-responsive", style: "margin-bottom: -30px", :alt => "iphone") %>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+<body>
+  <section id="content">
+    <div class="container" style="background-color: #fafeef">
+      <div class="row">
+          <div class="col-lg-12 text-center">
+              <div class="section-heading">
+                  <h3>Des inquiétudes ?</h3>
+                  <h4 class="text-center">Vous êtes couvert</h4>
+          </div>
+      </div>
+
+      <div class="row" style="margin-bottom: 30px">
+          <div class="col-xs-3 text-center">
+                <i class="co co-bank fa-5x" aria-hidden="true"></i>
+          </div>
+          <div class="col-xs-9">
+            <h3>Tous les Cookoons sont assurés</h3>
+            <p>Une assurance simple et efficace pour toutes les locations, c’est primordial pour batir la confiance !
+              <br>
+              <b>Chaque location est couverte gratuitement par une assurance au compte, à hauteur de 1 000 000€.</b>
+              <br>
+              Ainsi, à chaque check-out, les dégats ne sont pas laissés pour compte.</p>
+          </div>
+      </div>
+
+        <div class="row" style="margin-bottom: 30px">
+            <div class="col-xs-3 text-center">
+                      <i class="co co-concierge fa-5x" aria-hidden="true"></i>
+            </div>
+            <div class="col-xs-9">
+              <h3>Sans démarche compliquée</h3>
+              <p>En tant que membre de la communauté Cookoon, vous êtes automatiquement couvert par l’Assurance AXA.
+                <br>
+                Pas de mauvaise surprise au moment de déclarer un sinistre, vous pouvez facilement déclarer un incident en contactant l'agent général AXA.
+                <br>
+                Notre <b>numéro de contrat</b>, à fournir pendant vos échanges : <b>XXXXXXX</b></p>.
+            </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 30px">
+            <div class="col-xs-3 text-center">
+                      <i class="co co-user fa-5x" aria-hidden="true"></i>
+            </div>
+            <div class="col-xs-9">
+              <h3>Une vision partagée de la communauté</h3>
+              <p>Cookoon est le premier partenaire 'logement collaboratif' d'AXA. C'est parce que nous partageons une vision responsable de l'économie collaborative que nous avons leur confiance.
+              <br>
+              Désormais, c'est à nos membres que nosu faisons confiance</p>
+            </div>
+        </div>
+
+      </div>
+  </section>
+
+  <section id="warranty">
+    <div class="container" style="margin: 20px 0px">
+      <div class="row">
+          <div class="col-xs-8">
+            <h4>AXA s'engage auprès des entreprises innovantes et responsables</h4>
+          </div>
+          <div class="col-xs-4">
+            <%= image_tag("axa_logo_solid_rgb.png", class: "img-responsive", style: "max-width: 100%; margin: 0 auto;") %>
+          </div>
+          <div class="col-xs-12" style="text-align: right; margin-top : 15px">
+            <h4><%= link_to 'En savoir plus >', '#', class: 'no-button' %></h4>
+          </div>
+        </div>
+    </div>
+  </section>
+
+  <section id="community">
+    <div class="container" style="background: #006F8B;">
+      <div class="row" style="margin: 20px 0px; color: white">
+          <h4>Découvrir Cookoon</h4>
+          <b>Découvrez tous les avantages de la communauté Cookoon</b>
+      </div>
+      <div class="text-center" style="margin-bottom: 20px">
+      <%= link_to 'DÉCOUVRIR COOKOON', en_savoir_plus_path, class: 'btn btn-default button button-white' %>
+      </div>
+    </div>
+  </section>
+
+
+  <footer>
+      <div class="container text-center" style="padding: 20px">
+        <p>&copy; Cookoon 2017.
+        <br>Tous droits réservés.</p>
+        <%= link_to 'Conditions Générales', '#', class: 'no-button' %>
+        <%= link_to 'Presse', '#', class: 'no-button' %>
+      </div>
+  </footer>

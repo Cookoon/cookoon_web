@@ -1,3 +1,7 @@
+<div class="text-center" style="padding: 30px">
+  <%= link_to 'ACCÈS MEMBRE', new_user_session_path, class: 'button button-blue' %>
+</div>
+
 <header>
   <div class="home-wrapper text-center">
     <div class="home-container">
@@ -123,23 +127,23 @@ Selon l’heure de votre réception, nous vous proposons à chaque fois une offr
         </div>
   </section>
 
-
-<section id="warranty">
-      <div class="container" style="margin: 20px 0px">
-        <div class="row">
-            <div class="col-sm-6 text-center">
-              <h4>En partenariat avec AXA</h4>
-            </div>
-            <div class="col-sm-6 text-center">
-              <%= image_tag("axa_logo_solid_rgb.png", class: "img-responsive", style: "max-width: 25%; margin: 0 auto;") %>
-              <br>
-              <%= link_to 'En savoir plus >', en_savoir_plus_garanties_cookoon_path, class: 'no-button' %>
-            </div>
+  <section id="warranty">
+    <div class="container" style="margin: 20px 0px">
+      <div class="row">
+          <div class="col-xs-8">
+            <h4>En partenariat avec AXA</h4>
           </div>
-      </div>
-</section>
+          <div class="col-xs-4">
+            <%= image_tag("axa_logo_solid_rgb.png", class: "img-responsive", style: "max-width: 100%; margin: 0 auto;") %>
+          </div>
+          <div class="col-xs-12" style="text-align: right; margin-top : 15px">
+            <h4><%= link_to 'En savoir plus >', en_savoir_plus_garanties_cookoon_path, class: 'no-button' %></h4>
+          </div>
+        </div>
+    </div>
+  </section>
 
-<section id="community">
+  <section id="community">
         <div class="container" style="background: #006F8B;">
           <div class="row" style="margin: 20px 0px; color: white">
               <h4>Rejoindre la communauté ?</h4>
@@ -151,7 +155,7 @@ Selon l’heure de votre réception, nous vous proposons à chaque fois une offr
                 <%= link_to 'TROUVER UN PARRAIN', en_savoir_plus_path, class: 'btn btn-default button button-white' %>
           </div>
         </div>
-</section>
+  </section>
 
 <footer>
     <div class="container text-center" style="padding: 20px">
