@@ -37,6 +37,10 @@ class Reservation < ApplicationRecord
     price_for_rent + cookoon_fees
   end
 
+  def cookoon_owner
+    cookoon.user
+  end
+
   def price_for_services
     amount = 0
     amount += base_option_price if janitor
