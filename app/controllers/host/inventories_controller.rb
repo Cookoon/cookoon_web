@@ -13,7 +13,7 @@ class Host::InventoriesController < ApplicationController
     if @inventory.save && @reservation.ongoing!
       paiement_service = StripePaiementService.new(user: @reservation.cookoon_owner, reservation: @reservation)
       # Pas de test ici, il faut monitorer sur les premieres locations
-      # Ajouter une transaction ?
+      # Ajouter une transaction ? Ou poster sur Slack pour le declencher à la main.
       paiement_service.tax_and_payout
       flash[:notice] = 'La reservation vient de démarrer'
       redirect_to host_reservations_path
