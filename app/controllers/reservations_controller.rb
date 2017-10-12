@@ -15,6 +15,8 @@ class ReservationsController < ApplicationController
     end
   end
 
+  # TODO : #update pour l'annulation
+
   private
 
   def find_cookoon

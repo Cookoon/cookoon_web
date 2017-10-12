@@ -6,7 +6,7 @@ class PaiementsController < ApplicationController
 
   def create
     paiement_service = StripePaiementService.new(
-      user: current_user,
+      user: @reservation.user,
       token: params[:stripe_token],
       reservation: @reservation
     )

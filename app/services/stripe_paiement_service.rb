@@ -13,18 +13,6 @@ class StripePaiementService
     update_reservation if create_charge
   end
 
-  def capture_tax_and_payout
-    capture_charge
-    pay_cookoon
-    payout
-  end
-
-  def displayable_errors
-    @errors.join(" ")
-  end
-
-  private
-
   def capture_charge
     retrieve_charge
     begin
@@ -37,13 +25,30 @@ class StripePaiementService
     end
   end
 
+  def tax_and_payout
+    pay_cookoon
+    payout
+  end
+
+  def displayable_errors
+    @errors.join(" ")
+  end
+
+  private
+
   def pay_cookoon
-    Stripe::Charge.create(
-      #nombre d'options
-      :amount => reservation.total_fees_with_services_for_host.fractional,
-      :currency => "eur",
-      :source => user.stripe_account_id
-    )
+    begin
+      Stripe::Charge.create(
+        :amount => reservation.total_fees_with_services_for_host.fractional,
+        :currency => "eur",
+        :source => user.stripe_account_id
+      )
+    rescue Stripe::InvalidRequestError => e
+      Rails.logger.error("Failed to create Charge for cookoon options, source: #{user.stripe_account_id}")
+      Rails.logger.error(e.message)
+      @errors << e.message
+      false
+    end
   end
 
   def payout
@@ -65,14 +70,10 @@ class StripePaiementService
   end
 
   def retrieve_or_create_customer
-    if user.stripe_customer_id
-      retrieve_customer
-    else
-      create_customer
-    end
+    user.stripe_customer_id ? retrieve_customer : create_customer
   end
 
-  # le customer est créer avec sa carte
+  # le customer est créé avec sa carte
   # TODO: faire en sorte que le user puisse choisir parmi ses cartes sur le #new
   # sans avoir à saisir a nouveau.
   def create_customer

@@ -7,7 +7,7 @@ class Reservation < ApplicationRecord
 
   validates :price_cents, presence: true
 
-  enum status: [ :pending, :accepted, :refused, :paid, :cancelled, :ongoing, :passed ]
+  enum status: [ :pending, :paid, :accepted, :refused, :cancelled, :ongoing, :passed ]
 
   def host_cookoon_fee_rate
     0.05
@@ -35,6 +35,10 @@ class Reservation < ApplicationRecord
 
   def price_for_rent_with_fees
     price_for_rent + cookoon_fees
+  end
+
+  def cookoon_owner
+    cookoon.user
   end
 
   def price_for_services
