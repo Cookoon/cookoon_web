@@ -13,7 +13,7 @@
             <%= image_tag 'http://via.placeholder.com/50x50', class: 'avatar-large' %>
           <% end %>
           <%= link_to edit_users_path do %>
-            <%= current_user.full_name %> - <i class="fa fa-pencil" aria-hidden="true"></i> 
+            <%= current_user.full_name %> - <i class="fa fa-pencil" aria-hidden="true"></i>
           <% end %>
         </div>
       <% end %>
@@ -24,6 +24,7 @@
             <span class="notif notif-sidebar"></span>
           <% end %>
         </li>
+        <li><i class="fa fa-credit-card" aria-hidden="true"></i>&nbsp; <%= link_to 'MES MOYENS DE PAIEMENT', '#' %></li>
         <li><i class="fa fa-send-o" aria-hidden="true"></i>&nbsp; <%= link_to 'PARRAINER MES AMIS', new_user_invitation_path %></li>
         <li><i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp; <%= link_to 'NOUS CONTACTER', '#' %></li>
       </ul>
