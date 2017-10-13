@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resource :users, only: [:edit, :update]
   resources :user_searches, only: :create
   resources :stripe_accounts, only: [:new, :create]
+  resources :credit_cards, only: [:index, :create, :destroy]
 
   resources :cookoons do
     resources :reservations, only: [:create]
