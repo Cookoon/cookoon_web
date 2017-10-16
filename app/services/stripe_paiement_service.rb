@@ -44,6 +44,11 @@ class StripePaiementService
     customer.sources.create(source: token)
   end
 
+  def set_default_card(card)
+    customer.default_source = card.id
+    customer.save
+  end
+
   def destroy_card(card)
     customer.sources.retrieve(card).delete
   end

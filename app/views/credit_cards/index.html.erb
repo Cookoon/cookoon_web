@@ -6,8 +6,9 @@
     <p>Vous n'avez aucune carte de crédit, Ajoutez en une dès maintenant !</p>
   <% else %>
     <ul>
-      <% @stripe_sources.data.each do |card_data| %>
+      <% @stripe_sources.data.each_with_index do |card_data, index| %>
         <li>
+          <%= "(Principale)" if index.zero? %>
           <%= "#{card_data.brand.upcase} se terminant par : #{card_data.last4}" %> -
           <%= link_to 'supprimer', credit_card_path(card_data.id), method: :delete %>
         </li>
@@ -34,6 +35,16 @@
 
         <%= simple_form_for :credit_card, url: credit_cards_path, remote: true, authenticity_token: true, html: { id: 'card-form' } do |f| %>
           <div id="card-element"></div>
+          <div class="flex-container light-padded">
+            <p>Utiliser comme carte principale</p>
+            <div class="form-group boolean optional">
+              <input value="0" type="hidden" name="credit_card[default]">
+              <input class="boolean optional hidden" type="checkbox" value="1" name="credit_card[default]" id="credit_card_default">
+              <label class="boolean optional toggle" for="credit_card_default">
+                <span class="toggle-handler"></span>
+              </label>
+            </div>
+          </div>
           <div id="card-errors" role="alert"></div>
           <%= f.input :stripe_token, as: :hidden %>
           <div class="light-padded text-center">

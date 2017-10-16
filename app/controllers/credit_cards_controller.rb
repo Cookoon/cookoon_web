@@ -9,10 +9,12 @@ class CreditCardsController < ApplicationController
   end
 
   def create
-    # retrieve or create customer
-    # add_source + set it as default ?
     @paiement_service.token = params[:credit_card][:stripe_token]
-    @paiement_service.add_source_to_customer
+    # add_source
+    card = @paiement_service.add_source_to_customer
+
+    # set as default card if asked
+    @paiement_service.set_default_card(card) if params[:credit_card][:default] == "1"
 
     redirect_to credit_cards_path
   end
