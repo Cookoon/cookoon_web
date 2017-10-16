@@ -1,5 +1,5 @@
 class StripePaiementService
-  attr_reader :user, :token, :reservation, :customer, :charge
+  attr_accessor :user, :token, :reservation, :customer, :charge, :sources
 
   def initialize(attributes)
     @user = attributes[:user]
@@ -25,9 +25,28 @@ class StripePaiementService
     end
   end
 
+  def user_sources
+    if user.stripe_customer_id
+      retrieve_customer
+      @sources = customer.sources.all(:object => "card")
+    else
+      @sources = nil
+    end
+  end
+
   def tax_and_payout
     pay_cookoon
     payout
+  end
+
+  def add_source_to_customer
+    retrieve_or_create_customer
+    customer.sources.create(source: token)
+  end
+
+  def destroy_card(card)
+    retrieve_customer
+    customer.sources.retrieve(card).delete
   end
 
   def displayable_errors
@@ -69,20 +88,17 @@ class StripePaiementService
     reservation.update(status: :paid, stripe_charge_id: @charge.id)
   end
 
-  def retrieve_or_create_customer
-    user.stripe_customer_id ? retrieve_customer : create_customer
-  end
-
-  # le customer est créé avec sa carte
-  # TODO: faire en sorte que le user puisse choisir parmi ses cartes sur le #new
-  # sans avoir à saisir a nouveau.
   def create_customer
     @customer = Stripe::Customer.create(
-      :description => "Customer for #{user.email}",
-      :source => token
+      description: "Customer for #{user.email}",
+      email: user.email
     )
     user.update(stripe_customer_id: customer.id)
     return @customer
+  end
+
+  def retrieve_or_create_customer
+    user.stripe_customer_id ? retrieve_customer : create_customer
   end
 
   def retrieve_customer
