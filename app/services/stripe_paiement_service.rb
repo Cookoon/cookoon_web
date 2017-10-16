@@ -6,6 +6,7 @@ class StripePaiementService
     @token = attributes[:token]
     @reservation = attributes[:reservation]
     @errors = []
+    retrieve_customer if user.stripe_customer_id
   end
 
   def create_charge_and_update_reservation
@@ -27,7 +28,6 @@ class StripePaiementService
 
   def user_sources
     if user.stripe_customer_id
-      retrieve_customer
       @sources = customer.sources.all(:object => "card")
     else
       @sources = nil
@@ -45,7 +45,6 @@ class StripePaiementService
   end
 
   def destroy_card(card)
-    retrieve_customer
     customer.sources.retrieve(card).delete
   end
 
@@ -98,7 +97,7 @@ class StripePaiementService
   end
 
   def retrieve_or_create_customer
-    user.stripe_customer_id ? retrieve_customer : create_customer
+    @customer.nil? ? create_customer : @customer
   end
 
   def retrieve_customer
