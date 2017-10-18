@@ -1,0 +1,13 @@
+.credit-card-select {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  .paiement_source {
+    flex: 10;
+  }
+  i {
+    flex: 1;
+    font-size: 24px;
+    margin: 0 10px 8px;
+  }
+}

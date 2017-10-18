@@ -2,12 +2,17 @@ class PaiementsController < ApplicationController
   before_action :set_reservation
 
   def new
+    paiement_service = StripePaiementService.new(
+      user: current_user,
+      reservation: @reservation
+    )
+    @user_cards = paiement_service.user_sources.try(:data)
   end
 
   def create
     paiement_service = StripePaiementService.new(
       user: @reservation.user,
-      token: params[:stripe_token],
+      source: params[:paiement][:source],
       reservation: @reservation
     )
 

@@ -1,16 +1,19 @@
 class StripePaiementService
-  attr_reader :user, :token, :reservation, :customer, :charge
+  attr_accessor :user, :token, :reservation, :customer, :charge, :sources, :source
 
   def initialize(attributes)
     @user = attributes[:user]
     @token = attributes[:token]
+    @source = attributes[:source]
     @reservation = attributes[:reservation]
     @errors = []
+    retrieve_customer if user.stripe_customer_id
   end
 
   def create_charge_and_update_reservation
-    retrieve_or_create_customer
-    update_reservation if create_charge
+    if retrieve_customer
+      update_reservation if create_charge
+    end
   end
 
   def capture_charge
@@ -25,9 +28,31 @@ class StripePaiementService
     end
   end
 
+  def user_sources
+    if user.stripe_customer_id
+      @sources = customer.sources.all(:object => "card")
+    else
+      @sources = nil
+    end
+  end
+
   def tax_and_payout
     pay_cookoon
     payout
+  end
+
+  def add_source_to_customer
+    retrieve_or_create_customer
+    customer.sources.create(source: token)
+  end
+
+  def set_default_card(card)
+    customer.default_source = card.id
+    customer.save
+  end
+
+  def destroy_card(card)
+    customer.sources.retrieve(card).delete
   end
 
   def displayable_errors
@@ -69,24 +94,28 @@ class StripePaiementService
     reservation.update(status: :paid, stripe_charge_id: @charge.id)
   end
 
-  def retrieve_or_create_customer
-    user.stripe_customer_id ? retrieve_customer : create_customer
-  end
-
-  # le customer est créé avec sa carte
-  # TODO: faire en sorte que le user puisse choisir parmi ses cartes sur le #new
-  # sans avoir à saisir a nouveau.
   def create_customer
     @customer = Stripe::Customer.create(
-      :description => "Customer for #{user.email}",
-      :source => token
+      description: "Customer for #{user.email}",
+      email: user.email
     )
     user.update(stripe_customer_id: customer.id)
     return @customer
   end
 
+  def retrieve_or_create_customer
+    @customer.nil? ? create_customer : @customer
+  end
+
   def retrieve_customer
-    @customer = Stripe::Customer.retrieve(user.stripe_customer_id)
+    begin
+      @customer = Stripe::Customer.retrieve(user.stripe_customer_id)
+    rescue Stripe::InvalidRequestError => e
+      Rails.logger.error("Failed to retrieve customer for #{user.email}")
+      Rails.logger.error(e.message)
+      @errors << e.message
+      false
+    end
   end
 
   def retrieve_charge
@@ -99,6 +128,7 @@ class StripePaiementService
         amount: reservation.price_for_rent_with_fees.fractional,
         currency: 'eur',
         customer: @customer.id,
+        source: @source,
         description:  "Paiement pour #{reservation.cookoon.name}",
         capture: false,
         destination: {

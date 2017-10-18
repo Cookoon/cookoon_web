@@ -51,7 +51,17 @@
       <div class="modal-footer">
         <h4>TOTAL : <span id='total-price'><%= humanized_money @reservation.price_for_rent_with_fees %></span> €</h4>
         <p style="font-size:12px; margin-bottom: 20px">Ce montant comprend les frais de services de la plateforme Cookoon</p>
-        <%= f.submit 'RESERVER', class: "button button-white" %>
+        <% if current_user.stripe_customer_id %>
+          <%= f.submit 'RESERVER', class: "button button-white" %>
+        <% else %>
+        <div class="text-center thin-padded">
+          <div class="thin-padded">
+            <p>Vous n'avez aucun moyen de paiement</p>
+            <p>Vous devez en ajouter un avant de pouvoir faire une demande de réservation</p>
+          </div>
+          <%= link_to 'Ajouter une carte', credit_cards_path, class: 'button button-white' %>
+        </div>
+        <% end %>
       </div>
       <% end %>
     </div>

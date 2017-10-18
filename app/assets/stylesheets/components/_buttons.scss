@@ -24,6 +24,14 @@
     &:hover {
       background: darken($blue, 5%);
     }
+    &:focus {
+      background: $blue;
+      color: white;
+    }
+    &:active {
+      background: $blue;
+      color: white;
+    }
   }
   &-gray {
     background: #999999;

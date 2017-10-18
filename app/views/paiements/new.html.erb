@@ -25,25 +25,44 @@
     </div>
   </div>
 
-  <div class="text-center">
-    <button id="customButton" class="button button-blue">PAYER</button>
-  </div>
-
-  <div class="text-center">
-    <div style="font-size:12px; margin-top: 15px">
-      <p>
-        Votre carte bleue ne sera débitée que si l'Hôte accepte votre demande de location.
-      </p>
-      <p>
-        Attention : nous procédons tout de même à une demande d'autorisation de paiement sur votre compte.
-      </p>
+  <!-- ========= CARD SELECTION ============= -->
+  <% if @user_cards.blank? %>
+    <div class="text-center thin-padded">
+      <div class="thin-padded">
+        <p>Vous n'avez aucun moyen de paiement</p>
+        <p>Vous devez en ajouter un avant de pouvoir faire une demande de réservation</p>
+      </div>
+      <%= link_to 'Ajouter une carte', credit_cards_path, class: 'button button-blue' %>
     </div>
-  </div>
-
-  <%= form_tag reservation_paiements_path(@reservation), id: 'stripe_form', remote: true do %>
-    <%= hidden_field_tag :stripe_token %>
+  <% else %>
+    <%= simple_form_for :paiement, url: reservation_paiements_path(@reservation), remote: true, html: { id: 'pay-form' } do |f| %>
+      <div class="credit-card-select">
+        <i class="fa fa-credit-card" aria-hidden="true"></i>
+        <%= f.input :source, collection: @user_cards, selected: :first, label: false, label_method: ->(card){ "#{card.brand.upcase} XXXX-XXXX-XXXX-#{card.last4}" }, value_method: ->(card){ card.id } %>
+      </div>
+      <div class="text-center">
+        <%= f.button :button, 'PAYER', as: :submit, class: 'button button-blue', id: 'pay-button' %>
+      </div>
+    <% end %>
+    <div class="text-center">
+      <div style="font-size:12px; margin-top: 15px">
+        <p>
+          Votre carte bleue ne sera débitée que si l'Hôte accepte votre demande de location.
+        </p>
+        <p>
+          Attention : nous procédons tout de même à une demande d'autorisation de paiement sur votre compte.
+        </p>
+      </div>
+    </div>
   <% end %>
+  <!-- ========= END CARD SELECTION ============= -->
 </div>
 
-<!-- Stripe JS -->
-<%= render 'stripe_js' %>
+<script>
+  var form = document.getElementById('pay-form');
+  var $button = $('#pay-button');
+  form.addEventListener('submit', function(event) {
+    $button.prop("disabled", true);
+    $button.html('<i class="fa fa-spinner fa-spin" style="margin-right: 10px;"></i>Chargement');
+  });
+</script>
