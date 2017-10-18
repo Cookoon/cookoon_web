@@ -35,13 +35,13 @@
       <%= link_to 'Ajouter une carte', credit_cards_path, class: 'button button-blue' %>
     </div>
   <% else %>
-    <%= simple_form_for :paiement, url: reservation_paiements_path(@reservation) do |f| %>
+    <%= simple_form_for :paiement, url: reservation_paiements_path(@reservation), remote: true, html: { id: 'pay-form' } do |f| %>
       <div class="credit-card-select">
         <i class="fa fa-credit-card" aria-hidden="true"></i>
         <%= f.input :source, collection: @user_cards, selected: :first, label: false, label_method: ->(card){ "#{card.brand.upcase} XXXX-XXXX-XXXX-#{card.last4}" }, value_method: ->(card){ card.id } %>
       </div>
       <div class="text-center">
-        <%= f.button :button, 'PAYER', as: :submit, class: 'button button-blue' %>
+        <%= f.button :button, 'PAYER', as: :submit, class: 'button button-blue', id: 'pay-button' %>
       </div>
     <% end %>
     <div class="text-center">
@@ -57,3 +57,12 @@
   <% end %>
   <!-- ========= END CARD SELECTION ============= -->
 </div>
+
+<script>
+  var form = document.getElementById('pay-form');
+  var $button = $('#pay-button');
+  form.addEventListener('submit', function(event) {
+    $button.prop("disabled", true);
+    $button.html('<i class="fa fa-spinner fa-spin" style="margin-right: 10px;"></i>Chargement');
+  });
+</script>
