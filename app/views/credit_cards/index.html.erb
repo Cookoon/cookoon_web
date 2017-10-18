@@ -2,7 +2,7 @@
   <h3>Cartes Enregistrées</h3>
   <p>Mes cartes de crédit</p>
 
-  <% if @stripe_sources.nil? %>
+  <% if @stripe_sources.blank? %>
     <p>Vous n'avez aucune carte de crédit, Ajoutez en une dès maintenant !</p>
   <% else %>
     <ul>
