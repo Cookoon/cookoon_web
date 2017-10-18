@@ -25,18 +25,35 @@
     </div>
   </div>
 
-  <div class="text-center">
-    <button id="customButton" class="button button-blue">PAYER</button>
-  </div>
-
-  <div class="text-center">
-    <div style="font-size:12px; margin-top: 15px">
-      <p>
-        Votre carte bleue ne sera débitée que si l'Hôte accepte votre demande de location.
-      </p>
-      <p>
-        Attention : nous procédons tout de même à une demande d'autorisation de paiement sur votre compte.
-      </p>
+  <!-- ========= CARD SELECTION ============= -->
+  <% if @user_cards.blank? %>
+    <div class="text-center thin-padded">
+      <div class="thin-padded">
+        <p>Vous n'avez aucun moyen de paiement</p>
+        <p>Vous devez en ajouter un avant de pouvoir faire une demande de réservation</p>
+      </div>
+      <%= link_to 'Ajouter une carte', credit_cards_path, class: 'button button-blue' %>
     </div>
-  </div>
+  <% else %>
+    <%= simple_form_for :paiement, url: reservation_paiements_path(@reservation) do |f| %>
+      <div class="credit-card-select">
+        <i class="fa fa-credit-card" aria-hidden="true"></i>
+        <%= f.input :source, collection: @user_cards, selected: :first, label: false, label_method: ->(card){ "#{card.brand.upcase} XXXX-XXXX-XXXX-#{card.last4}" }, value_method: ->(card){ card.id } %>
+      </div>
+      <div class="text-center">
+        <%= f.button :button, 'PAYER', as: :submit, class: 'button button-blue' %>
+      </div>
+    <% end %>
+    <div class="text-center">
+      <div style="font-size:12px; margin-top: 15px">
+        <p>
+          Votre carte bleue ne sera débitée que si l'Hôte accepte votre demande de location.
+        </p>
+        <p>
+          Attention : nous procédons tout de même à une demande d'autorisation de paiement sur votre compte.
+        </p>
+      </div>
+    </div>
+  <% end %>
+  <!-- ========= END CARD SELECTION ============= -->
 </div>
