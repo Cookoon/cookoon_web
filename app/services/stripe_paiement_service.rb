@@ -1,17 +1,19 @@
 class StripePaiementService
-  attr_accessor :user, :token, :reservation, :customer, :charge, :sources
+  attr_accessor :user, :token, :reservation, :customer, :charge, :sources, :source
 
   def initialize(attributes)
     @user = attributes[:user]
     @token = attributes[:token]
+    @source = attributes[:source]
     @reservation = attributes[:reservation]
     @errors = []
     retrieve_customer if user.stripe_customer_id
   end
 
   def create_charge_and_update_reservation
-    retrieve_or_create_customer
-    update_reservation if create_charge
+    if retrieve_customer
+      update_reservation if create_charge
+    end
   end
 
   def capture_charge
@@ -106,7 +108,14 @@ class StripePaiementService
   end
 
   def retrieve_customer
-    @customer = Stripe::Customer.retrieve(user.stripe_customer_id)
+    begin
+      @customer = Stripe::Customer.retrieve(user.stripe_customer_id)
+    rescue Stripe::InvalidRequestError => e
+      Rails.logger.error("Failed to retrieve customer for #{user.email}")
+      Rails.logger.error(e.message)
+      @errors << e.message
+      false
+    end
   end
 
   def retrieve_charge
@@ -119,6 +128,7 @@ class StripePaiementService
         amount: reservation.price_for_rent_with_fees.fractional,
         currency: 'eur',
         customer: @customer.id,
+        source: @source,
         description:  "Paiement pour #{reservation.cookoon.name}",
         capture: false,
         destination: {
