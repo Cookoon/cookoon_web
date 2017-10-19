@@ -6,7 +6,7 @@ class ReservationPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope.where(user: user)
+      scope.includes(cookoon: :photo_files).where(user: user)
     end
   end
 end
