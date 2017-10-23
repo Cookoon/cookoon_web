@@ -29,6 +29,7 @@ class ReservationsController < ApplicationController
 
   def find_reservation
     @reservation = Reservation.find(params[:id])
+    authorize @reservation
   end
 
   def find_cookoon
