@@ -1,8 +1,12 @@
 class ReservationsController < ApplicationController
   before_action :find_cookoon, :build_reservation, only: [:create]
+  before_action :find_reservation, only: [:edit, :update, :show]
 
   def index
     @reservations = policy_scope(Reservation)
+  end
+
+  def show
   end
 
   def create
@@ -15,9 +19,17 @@ class ReservationsController < ApplicationController
     end
   end
 
-  # TODO : #update pour l'annulation
+  def edit
+  end
+
+  def update
+  end
 
   private
+
+  def find_reservation
+    @reservation = Reservation.find(params[:id])
+  end
 
   def find_cookoon
     @cookoon = Cookoon.find(params[:cookoon_id])
