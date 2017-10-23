@@ -1,0 +1,6 @@
+<div class="container">
+  <p>Vos réservations</p>
+  <% @reservations.each do |reservation| %>
+    <%= user_card_for(reservation) %>
+  <% end %>
+</div>
