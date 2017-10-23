@@ -1,6 +1,6 @@
 puts "Destroying"
-Reservation.destroy_all
 Inventory.destroy_all
+Reservation.destroy_all
 Cookoon.destroy_all
 UserSearch.destroy_all
 User.destroy_all
