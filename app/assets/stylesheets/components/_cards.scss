@@ -133,6 +133,7 @@
   }
   &-grey {
     background-color: $grey;
+    color: white;
   }
   &-white {
     background-color: white;
@@ -168,5 +169,9 @@
   }
   &-grey {
     background: $grey;
+    color: white;
+  }
+  i {
+    font-size: 10px;
   }
 }
