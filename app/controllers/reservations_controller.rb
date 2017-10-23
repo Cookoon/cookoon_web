@@ -23,6 +23,8 @@ class ReservationsController < ApplicationController
   end
 
   def update
+    @reservation.cancelled!
+    redirect_to reservations_path
   end
 
   private
