@@ -122,6 +122,7 @@
   }
 }
 
+// Reservations#index
 .user-reservation-card {
   padding: 10px;
   border-radius: 5px;
@@ -155,5 +156,17 @@
     top: 10px;
     right: 10px;
     font-size: 25px;
+  }
+}
+
+.reservation-details-card {
+  padding: 25px;
+  border-radius: 25px;
+  &-blue {
+    background: $blue;
+    color: white;
+  }
+  &-grey {
+    background: $grey;
   }
 }
