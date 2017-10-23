@@ -1,7 +1,6 @@
 <div class="container">
-  <p>Toutes vos réservations</p>
-
+  <p>Vos réservations</p>
   <% @reservations.each do |reservation| %>
-    <%= host_card_for(reservation) %>
+    <%= user_card_for(reservation) %>
   <% end %>
 </div>

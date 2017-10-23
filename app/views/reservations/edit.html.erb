@@ -1,0 +1,45 @@
+<%= content_for :navbar do %>
+  <%= render 'shared/navbar_light', url: reservations_path %>
+<% end %>
+
+<div class="container">
+  <div class="reservation-details-card reservation-details-card-blue">
+    <p><%= @reservation.cookoon.name.upcase %></p>
+    <p><%= "#{@reservation.date.strftime('%d %B %Y')} . à #{@reservation.date.hour}h . pour #{@reservation.duration}h" %></p>
+    <p><%= "#{@reservation.cookoon.category} - #{@reservation.cookoon.address} chez #{@reservation.cookoon.user.full_name}" %></p>
+    <div class="text-center">
+      <i class="fa fa-circle" aria-hidden="true"></i>
+    </div>
+    <div class="host-details thin-padded">
+      <div class="flex-container">
+        <p>Numéro de téléphone : </p>
+        <p><%= @reservation.cookoon.user.phone_number %></p>
+      </div>
+      <div class="flex-container">
+        <p>E-mail : </p>
+        <p><%= @reservation.cookoon.user.email %></p>
+      </div>
+    </div>
+    <div class="text-center">
+      <i class="fa fa-circle" aria-hidden="true"></i>
+    </div>
+    <div class="light-padded">
+      <div class="flex-container">
+        <p>Prix de la location</p>
+        <p><%= humanized_money_with_symbol @reservation.price %></p>
+      </div>
+      <div class="flex-container">
+        <p>Frais de services</p>
+        <p><%= humanized_money_with_symbol @reservation.cookoon_fees %></p>
+      </div>
+      <hr class='hr-white'>
+      <div class="flex-container">
+        <p>TOTAL</p>
+        <p><%= humanized_money_with_symbol @reservation.price_for_rent_with_fees %></p>
+      </div>
+      <div class="text-center light-padded">
+        <%= link_to 'Annuler la réservation', reservation_path(@reservation), method: :patch, class: 'button button-white' %>
+      </div>
+    </div>
+  </div>
+</div>
