@@ -1,9 +1,9 @@
-module ReservationCardHelper
-  def card_for(reservation)
-    ReservationCard.new(self, reservation).html
+module HostReservationCardHelper
+  def host_card_for(reservation)
+    HostReservationCard.new(self, reservation).html
   end
 
-  class ReservationCard
+  class HostReservationCard
     include Rails.application.routes.url_helpers
 
     def initialize(view, reservation)
