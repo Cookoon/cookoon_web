@@ -12,7 +12,9 @@ module UserReservationCardHelper
 
     def html
       content = safe_join([header, picture])
-      content_tag(:div, content, class: "user-reservation-card user-reservation-card-#{color}")
+      link_to reservation_link do
+        content_tag(:div, content, class: "user-reservation-card user-reservation-card-#{color}")
+      end
     end
 
     private
@@ -59,6 +61,13 @@ module UserReservationCardHelper
       when 'paid' then 'white'
       when 'accepted' then 'blue'
       else 'grey'
+      end
+    end
+
+    def reservation_link
+      case reservation.status
+      when 'paid', 'accepted' then edit_reservation_path(reservation)
+      when 'refused', 'passed', 'cancelled' then reservation_path(reservation)
       end
     end
   end
