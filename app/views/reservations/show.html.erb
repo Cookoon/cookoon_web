@@ -37,9 +37,14 @@
         <p>TOTAL</p>
         <p><%= humanized_money_with_symbol @reservation.price_for_rent_with_fees %></p>
       </div>
-      <div class="text-center light-padded">
-        <%= link_to 'Télécharger la facture', '#', class: 'button button-white', disable: true %>
-      </div>
+      <% if @reservation.passed? %>
+        <div class="text-center light-padded">
+          <%= link_to 'Télécharger la facture', '#', class: 'button button-white', disable: true %>
+        </div>
+      <% else %>
+        <h4>Réservation annulée le :</h4>
+        <h5> <%= @reservation.updated_at.strftime('%d %B %Y') %></h5>
+      <% end %>
     </div>
   </div>
 </div>
