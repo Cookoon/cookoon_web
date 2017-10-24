@@ -81,11 +81,16 @@ module HostReservationCardHelper
     end
 
     def button_tag
-      if reservation.paid?
+      case reservation.status
+      when 'paid'
         link_to('Répondre à la demande', edit_host_reservation_path(reservation), class: 'button button-blue')
-      else
+      when 'accepted'
         #TODO: Edit path
-        link_to('Voir la réservation', new_host_reservation_inventory_path(reservation), class: 'button button-white')
+        link_to('Démarrer la location', new_host_reservation_inventory_path(reservation), class: 'button button-white')
+      when 'ongoing'
+        link_to('Terminer la location', edit_host_inventory_path(reservation.inventory), class: 'button button-white')
+      else
+        # TODO : Add Host::Reservation#show
       end
     end
 

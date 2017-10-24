@@ -1,4 +1,8 @@
 class Host::ReservationPolicy < ApplicationPolicy
+  def create?
+    record.cookoon.user == user
+  end
+
   def update?
     record.cookoon.user == user
   end
