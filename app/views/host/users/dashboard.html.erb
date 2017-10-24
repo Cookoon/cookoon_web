@@ -1,4 +1,7 @@
 <div class="container">
+  <p>Votre activité</p>
+  <p>Historique des revenus : <span class="text-blue"><%= current_user.total_payouts_for_dashboard %> €</span></p>
+  <hr>
   <p>Vos dernières demandes de réservation</p>
   <p>Vous avez <span class="text-blue"><%= @pending_reservations_count %> demande(s) de réservation</span> en attente</p>
   <div class="text-center thin-padded">
