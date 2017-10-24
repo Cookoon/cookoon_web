@@ -50,10 +50,12 @@ class Host::InventoriesController < ApplicationController
 
   def find_inventory
     @inventory = Inventory.find(params[:id])
+    authorize [:host, @inventory]
   end
 
   def find_reservation
     @reservation = Reservation.find(params[:reservation_id])
+    authorize [:host, @reservation]
   end
 
   def checkin_inventory_params
