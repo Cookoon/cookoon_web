@@ -2,7 +2,7 @@ function onPlaceChanged() {
   var place = this.getPlace();
   var components = getAddressComponents(place);
   $('#user_search_address').trigger('blur').val(components.full_address);
-  $('#infos-address').text(components.address == null ? "Autour" : components.address);
+  $('#infos-address').text(components.address == null ? "Adresse" : components.address);
 }
 
 function getAddressComponents(place) {
