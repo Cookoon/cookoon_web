@@ -1,12 +1,24 @@
 <div class="container">
+  <h4>Vous préparez la sortie d'un locatatire</h4>
   <p>Avant de terminer la location vous devez :</p>
-  <ul>
-    <li>Récupérer les clés.</li>
-    <li>Faire l'état des lieux.</li>
-  </ul>
-  <p>En cas de conflit vous pouvez ajouter des photos : </p>
+  <ol>
+    <li><strong>Faire l'état des lieux</strong></li>
+    <p>
+      Vérifiez ensemble l'état de votre logement.
+      Pensez à prendre des photos si vous constatez une dégradation.
+    </p>
+    <li><strong>Récupérer vos clés</strong></li>
+    <p>
+      Cela peut parraître évident, mais ne négligez pas cette étape !
+    </p>
+    <li><strong>Ajouter une note pour notre équipe</strong></li>
+    <p>
+      Le champs ci-dessous est à vous !
+      En cas de soucis, soyez rassurés notre équipe prendra contact avec vous.
+    </p>
+  </ol>
   <%= simple_form_for [:host, @inventory] do |f| %>
-    <%= f.input :checkout_photos, as: :attachinary %>
+    <%= f.input :remark, label: false, placeholder: 'Ajoutez ici les remarques que vous voulez partager à notre équipe (Ce champs peut rester vide)', input_html: { rows: 4 }  %>
     <div class="fixed-bottom light-padded">
       <%= f.button :button, 'TERMINER LA LOCATION', type: :submit, class: 'button button-blue' %>
     </div>
