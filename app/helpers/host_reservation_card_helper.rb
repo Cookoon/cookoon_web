@@ -96,7 +96,7 @@ module HostReservationCardHelper
 
     def color
       case reservation.status
-      when 'paid', 'ongoing' then 'white'
+      when 'paid' then 'white'
       when 'passed', 'refused' then 'grey'
       else 'blue'
       end
