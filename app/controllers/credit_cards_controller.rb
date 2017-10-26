@@ -15,8 +15,13 @@ class CreditCardsController < ApplicationController
 
     # set as default card if asked
     @paiement_service.set_default_card(card) if params[:credit_card][:default] == "1"
-
-    redirect_to credit_cards_path
+    if card
+      redirect_to credit_cards_path
+    else
+      @stripe_sources = @paiement_service.user_sources
+      flash[:alert] = @paiement_service.displayable_errors
+      render :index
+    end
   end
 
   def destroy

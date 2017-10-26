@@ -43,10 +43,11 @@ class StripePaiementService
 
   def add_source_to_customer
     retrieve_or_create_customer
-    customer.sources.create(source: token)
+    create_source_for_customer
   end
 
   def set_default_card(card)
+    return false unless card
     customer.default_source = card.id
     customer.save
   end
@@ -120,6 +121,17 @@ class StripePaiementService
 
   def retrieve_charge
     @charge = Stripe::Charge.retrieve(reservation.stripe_charge_id)
+  end
+
+  def create_source_for_customer
+    begin
+      customer.sources.create(source: token)
+    rescue Stripe::CardError => e
+      Rails.logger.error("Failed to create credit_card for #{user.email}")
+      Rails.logger.error(e.message)
+      @errors << e.message
+      false
+    end
   end
 
   def create_charge
