@@ -11,7 +11,7 @@ class StripeAccountsController < ApplicationController
       flash[:notice] = "Votre compte est maintenant lié avec Stripe. Vous pourrez prochainement récupérer vos paiements en attente"
       redirect_to edit_users_path
     else
-      flash[:alert] = @account_service.error_messages
+      flash.now[:alert] = @account_service.error_messages
       render :new
     end
   end

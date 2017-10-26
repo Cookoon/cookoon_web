@@ -22,7 +22,9 @@
       <%= render 'shared/navbar' %>
     <% end %>
     <%= render 'shared/side_nav' %>
-    <%= render 'shared/flashes' %>
+    <div id="flash">
+      <%= render 'shared/flashes' %>
+    </div>  
     <%= yield %>
   </body>
 </html>
