@@ -4,15 +4,15 @@
 
 <%= render 'user_searches/search_form' %>
 
-<div class="container">
+<!-- <div class="container"> -->
   <% if @cookoons.empty? %>
-    <h3>Aucun Cookoon dans cette zone, veuillez essayer une autre recherche</h3>
+    <%= render 'no_cookoon' %>
   <% else %>
     <div class="row">
       <%= render 'cookoons_and_map' %>
     </div>
   <% end %>
-</div>
+<!-- </div> -->
 
 <!-- Paiement success modal -->
 <%= render 'paiements/succeed' %>

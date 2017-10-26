@@ -175,3 +175,14 @@
     font-size: 10px;
   }
 }
+
+.no-cookoon-card {
+  background: $blue;
+  padding: 25px;
+  color: white;
+  margin: 0 15px;
+  #cookoon-error {
+    width: 80px;
+    margin-bottom: 25px;
+  }
+}
