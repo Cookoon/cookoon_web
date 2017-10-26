@@ -19,7 +19,7 @@ class CreditCardsController < ApplicationController
       redirect_to credit_cards_path
     else
       @stripe_sources = @paiement_service.user_sources
-      flash[:alert] = @paiement_service.displayable_errors
+      flash.now[:alert] = @paiement_service.displayable_errors
       render :index
     end
   end
