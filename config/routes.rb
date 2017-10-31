@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
   # -------- CUSTOM ROUTES ---------
   get 'setcookies', to: 'pages#setcookies'
+  get 'support', to: 'pages#support'
   get 'en-savoir-plus', to: 'pages#about'
   get 'en-savoir-plus/louer-un-cookoon', to: 'pages#about_rent'
   get 'en-savoir-plus/devenir-hote', to: 'pages#about_hosting'
