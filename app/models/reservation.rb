@@ -56,6 +56,10 @@ class Reservation < ApplicationRecord
     host_cookoon_fees + price_for_services
   end
 
+  def starts_soon?
+    date.between?(Time.zone.now, (Time.zone.now + 3.hours))
+  end
+
   private
 
   def base_option_price

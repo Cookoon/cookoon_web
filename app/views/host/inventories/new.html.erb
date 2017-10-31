@@ -19,9 +19,9 @@
       Soyez tranquille l'équipe Cookoon veille !
     </p>
   </ol>
-  <%= simple_form_for [:host, @reservation, @inventory] do |f| %>
-    <div class="fixed-bottom light-padded">
-      <%= f.button :button, 'DEMARRER LA LOCATION', type: :submit, class: 'button button-blue' %>
-    </div>
-  <% end %>
 </div>
+<% if @reservation.starts_soon? %>
+  <%= render 'inventory_form' %>
+<% else %>
+  <%= render 'too_soon_card' %>
+<% end %>
