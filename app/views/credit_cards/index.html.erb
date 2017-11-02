@@ -1,6 +1,5 @@
 <div class="container">
   <h3>Cartes enregistrées</h3>
-  <p>Mes cartes de crédit</p>
 
   <% if @stripe_sources.blank? %>
     <p>Vous n'avez aucune carte de crédit, Ajoutez en une dès maintenant !</p>
@@ -10,7 +9,7 @@
         <li>
           <%= "(Principale)" if index.zero? %>
           <%= "#{card_data.brand.upcase} se terminant par : #{card_data.last4}" %> -
-          <%= link_to 'supprimer', credit_card_path(card_data.id), method: :delete %>
+          <%= link_to 'supprimer', credit_card_path(card_data.id), method: :delete, class: 'no-button' %>
         </li>
       <% end %>
     </ul>
