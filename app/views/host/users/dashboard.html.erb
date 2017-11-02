@@ -1,10 +1,10 @@
 <div class="container">
   <p>Votre activité</p>
-  <p>Historique des revenus : <span class="text-blue"><%= current_user.total_payouts_for_dashboard %> €</span></p>
+  <b>Historique des revenus : <span class="text-blue"><%= current_user.total_payouts_for_dashboard %> €</span></b>
   <hr>
   <p>Vos dernières demandes de réservation</p>
-  <p>Vous avez <span class="text-blue"><%= @pending_reservations_count %> demande(s) de réservation</span> en attente</p>
-  <div class="text-center thin-padded">
+  <b>Vous avez <span class="text-blue"><%= @pending_reservations_count %> demande(s) de réservation</span> en attente</b>
+  <div class="text-center light-padded">
     <%= link_to 'Voir mes Réservations', host_reservations_path, class: 'button button-blue' %>
   </div>
   <hr>
