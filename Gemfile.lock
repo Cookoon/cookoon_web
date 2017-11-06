@@ -121,6 +121,8 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (5.0.5)
       railties (>= 3.2.16)
+    json (2.1.0)
+    json (2.1.0-java)
     launchy (2.4.3)
       addressable (~> 2.3)
     launchy (2.4.3-java)
@@ -173,6 +175,12 @@ GEM
     pg (0.21.0)
     pg (0.21.0-x64-mingw32)
     pg (0.21.0-x86-mingw32)
+    postmark (1.10.0)
+      json
+      rake
+    postmark-rails (0.15.0)
+      actionmailer (>= 3.0.0)
+      postmark (~> 1.10.0)
     powerpack (0.1.1)
     public_suffix (2.0.5)
     puma (3.9.1)
@@ -344,6 +352,7 @@ DEPENDENCIES
   momentjs-rails (>= 2.9.0)
   money-rails (~> 1)
   pg (~> 0.18)
+  postmark-rails
   puma (~> 3.7)
   pundit
   rails (~> 5.1.2)
