@@ -1,6 +1,6 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!
-  layout "naked"
+  skip_before_action :authenticate_user!, except: [:support]
+  layout "naked", except: [:support, :cgu]
 
   def home
   end
@@ -15,6 +15,12 @@ class PagesController < ApplicationController
   end
 
   def about_warranties
+  end
+
+  def support
+  end
+
+  def cgu
   end
 
   def setcookies

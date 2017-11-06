@@ -23,20 +23,3 @@
     <% end %>
   </div>
 </div>
-
-<% unless @user.stripe_verified? %>
-  <div class="card-bottom">
-    <div class="card-bottom-title">
-      <h4>Vous êtes hôte ?</h4>
-    </div>
-    <div class="card-bottom-content">
-      <p>
-        Pour recevoir vos paiements, vous devez renseigner des informations supplémentaires,
-        comme votre adresse et votre IBAN.
-      </p>
-    </div>
-    <div class="card-bottom-footer">
-      <%= link_to "RECEVOIR MES VIREMENTS", new_stripe_account_path %>
-    </div>
-  </div>
-<% end %>
