@@ -42,6 +42,7 @@ gem 'hammerjs-rails'
 gem 'momentjs-rails', '>= 2.9.0'
 
 gem 'slim'
+gem 'postmark-rails'
 
 gem 'cloudinary'
 gem 'attachinary'
