@@ -1,1 +1,32 @@
-confirmation
+<p>Bonjour <%= @cookoon.user.first_name %>,</p>
+
+<p>Merci d'accueillir <%= @tenant.first_name %> dans votre Cookoon :</p>
+
+<p><b><%= @cookoon.name %>,</b>
+<br>Le <b><%= @reservation.date %></b>
+<br>pour <b><%= @reservation.duration %></b> heures.</p>
+
+<p>Vous recevrez :
+<br><b><%= @reservation.payout_price_for_host %> €</b>
+<br>soit <%= humanized_money @reservation.price %> € - [COOKOON FEE FOR HOST] €</p>
+
+<p>Contactez vôtre Locataire :
+<br><b><%= @tenant.first_name %></b>
+<br><b><%= @tenant.phone_number %></b>
+<br><b><%= @tenant.email %></b></p>
+
+<p>Pour ajouter un service de ménage ou de concierge, n'hésitez pas à contacter notre équipe : concierge@cookoon.fr</p>
+
+<b>Préparez-vous à l'arrivée de votre Locataire</b>
+
+<ul>
+<li>Indiquez à votre locataire comment accéder à votre Cookoon : adresse, codes d’accès, étage, etc.</li>
+<li>Mettez les informations basiques à sa disposition : code Wifi, quelles pièces sont inacessibles, etc.</li>
+<li>Rangez votre appartement : assurez-vous que vos locataires seront accueillis dans un endroit bien tenu et chaleureux !</li>
+</ul>
+
+<p>Une question, une envie ? Rendez-vous sur faq.cookoon.fr</p>
+
+<p>A bientôt,
+<br>L’équipe Cookoon
+<br>#cookoonlife</p>

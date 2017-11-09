@@ -1,1 +1,26 @@
-ending_survey_for_host
+<p>Bonjour <%= @cookoon.user.first_name %>,</p>
+
+<p>Merci d'avoir accueilli <%= @tenant.first_name %> dans votre Cookoon :</p>
+
+<p><b><%= @cookoon.name %>,</b>
+<br>Le <b><%= @reservation.date %></b>
+<br>pour <b><%= @reservation.duration %></b> heures.</p>
+
+<p>Vous allez recevoir :
+<br><b><%= @reservation.payout_price_for_host %> €</b>
+<br>soit <%= humanized_money @reservation.price %> € - [COOKOON FEE FOR HOST] €</p>
+
+<p>Notez vôtre Locataire :
+<br><b><%= @tenant.first_name %></b>
+<br>link to review form</p>
+
+
+<b>Partagez Cookoon</b>
+
+<p>Vous faites partie de nos membres les plus actifs; partagez l’expérience avec vos amis et vos proches avec #cookoonlife ou dans votre application “Parrainner mes amis’.</p>
+
+<p>A bientôt,
+<br>L’équipe Cookoon
+<br>#cookoonlife</p>
+
+<p>PS : une question, une envie ? Rendez-vous sur faq.cookoon.fr</p>

@@ -1,1 +1,25 @@
-pending_request
+<p>Bonjour <%= @cookoon.user.first_name %>,</p>
+
+<p>Vous avez reçu une nouvelle demande de location :</p>
+
+<p><b><%= @tenant.first_name %>,</b>
+<br>Le <b><%= @reservation.date %></b>
+<br>pour <b><%= @reservation.duration %></b> heures.</p>
+
+<p>Vous recevrez :
+<br><b><%= @reservation.payout_price_for_host %> €</b></p>
+
+<p>Votre locataire :
+<br><b><%= @tenant.first_name %></b>
+
+<p>Vous souhaitez d'abord échanger avec <b><%= @tenant.first_name %></b> ? Voici son adresse e-mail : <%= @tenant.email %></p>
+
+<b>Répondre à cette demande</b> deep link vers l'appli
+
+
+<p><b>Nous nous occupons de tout</b>
+<br>Pour fêter notre lancement, le ménage et la conciergerie vous sont offerts pendant 2 mois.</p>
+
+<p>A bientôt,
+<br>L’équipe Cookoon
+<br>#cookoonlife</p>

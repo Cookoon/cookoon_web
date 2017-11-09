@@ -1,1 +1,29 @@
-confirmed_by_host
+<p>Bonjour <%= @tenant.first_name %>,</p>
+
+<p>Votre demande de location du Cookoon a bien été acceptée par l’Hôte :</p>
+
+<p><b><%= @cookoon.name %>,</b>
+<br>Le <b><%= @reservation.date %></b>
+<br>pour <b><%= @reservation.duration %></b> heures.</p>
+
+<p>Vous avez payé :
+<br><b><%= humanized_money @reservation.price_for_rent_with_fees %> €</b></p>
+
+<p>L'adresse de votre Cookoon :
+<b><%= @reservation.cookoon.address %>,</b>
+
+<p>Contactez vôtre hôte :
+<br><b><%= @cookoon.user.first_name %></b>
+<br><b><%= @reservation.cookoon.user.phone_number %></b>
+<br><b><%= @reservation.cookoon.user.email %></b></p>
+
+<b>Règles d’Usages</b>
+
+<p>Pensez à votre Hôte et aux autres membres après vous : rendez le Cookoon dans l’état dans lequel vous l’avez trouvé.
+<br>Vous trouverez ci-joint un guide de bienvenue avec les règles d’usage en vigueur dans tous les Cookoons que vous utilisez.</p>
+
+<p>Une question, une envie ? Rendez-vous sur faq.cookoon.fr</p>
+
+<p>A bientôt,
+<br>L’équipe Cookoon
+<br>#cookoonlife</p>
