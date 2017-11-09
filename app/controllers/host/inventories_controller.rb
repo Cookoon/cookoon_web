@@ -28,6 +28,8 @@ class Host::InventoriesController < ApplicationController
     reservation = @inventory.reservation
     full_params = checkout_inventory_params.merge({checkout_at: DateTime.now, status: :checked_out})
     if @inventory.update(full_params) && reservation.passed!
+      ReservationMailer.ending_survey_for_user(reservation).deliver_now
+      ReservationMailer.ending_survey_for_host(reservation).deliver_now
       flash[:notice] = "La réservation est maintenant terminée"
       redirect_to host_reservations_path
     else
