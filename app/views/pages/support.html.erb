@@ -1,8 +1,9 @@
 <div class="container">
   <h4>Vous avez une question ?</h4>
-  <p class="padded">Vous pouvez trouver toutes les réponses à vos questions sur notre centre d'aide.
-
-  <%= link_to 'Rendez-vous sur la FAQ en cliquant ici', 'https://aide.cookoon.fr', target: "_blank"%></p>
+  <div class="padded">
+    <p>Vous pouvez trouver toutes les réponses à vos questions sur notre centre d'aide.</p>
+    <p><%= link_to raw("Rendez-vous sur la FAQ en <strong class='text-blue'>cliquant ici</strong>"), 'https://aide.cookoon.fr', target: "_blank"%></p>
+  </div>
 
 </div>
 <div class="card-bottom light-padded">
