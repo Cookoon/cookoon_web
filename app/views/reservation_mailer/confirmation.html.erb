@@ -33,7 +33,7 @@
                       <td style="padding: 40px 30px 20px; text-align: center;">
                         <p>
                           <b style="color: #006F8B"><%= @cookoon.name %>,</b>
-                          <br>Le <b style="color: #006F8B"><%= @reservation.date %></b>
+                          <br>Le <b style="color: #006F8B"><%= @reservation.date.strftime('%d/%m/%Y à %H:%M') %></b>
                           <br>pour <b style="color: #006F8B"><%= @reservation.duration %></b> heures.
                         </p>
                       </td>
