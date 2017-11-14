@@ -53,7 +53,7 @@
                       <br>
                       <b style="color: #006F8B"><%= humanized_money @reservation.price_for_rent_with_fees %> €</b>
                       <br>
-                      soit <%= humanized_money @reservation.price %> € - [COOKOON FEES FOR TENANT] €
+                      soit <%= humanized_money @reservation.price %> € + <%= humanized_money @reservation.cookoon_fees %> €
                     </p>
                   </td>
                 </tr>
