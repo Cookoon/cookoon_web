@@ -1,32 +1,88 @@
-<p>Bonjour <%= @cookoon.user.first_name %>,</p>
+<table class:"email-wrapper">
 
-<p>Merci d'accueillir <%= @tenant.first_name %> dans votre Cookoon :</p>
+  <!-- Email Header : BEGIN -->
+       <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="600" style="margin: auto;" class="email-content">
+           <tr>
+               <td style="text-align: center">
+                   <%= image_tag("header-mailing.png", style: "width: 100%; border= 0; height: auto; background: #FFF") %>
+               </td>
+           </tr>
+       </table>
+  <!-- Email Header : END --><tr><td>
 
-<p><b><%= @cookoon.name %>,</b>
-<br>Le <b><%= @reservation.date %></b>
-<br>pour <b><%= @reservation.duration %></b> heures.</p>
+  <!-- Email Body : BEGIN -->
+          <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="600" style="margin: auto;" class="email-body">
 
-<p>Vous recevrez :
-<br><b><%= @reservation.payout_price_for_host %> €</b>
-<br>soit <%= humanized_money @reservation.price %> € - [COOKOON FEE FOR HOST] €</p>
+              <tr>
+                  <td bgcolor="#ffffff" style="padding: 40px 40px 20px; text-align: center;">
+                      <h1 style="margin: 0; font-family: sans-serif; font-size: 24px; line-height: 125%; color: #333333; font-weight: normal;">Bonjour <%= @cookoon.user.first_name %>,</h1>
+                  </td>
+              </tr>
+              <tr>
+                  <td bgcolor="#ffffff" style="padding: 0 40px 0; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555; text-align: center;">
+                      <p style="margin: 0;">Merci d'accueillir <%= @tenant.first_name %> dans votre Cookoon :</p>
+                  </td>
+              </tr>
 
-<p>Contactez vôtre Locataire :
-<br><b><%= @tenant.first_name %></b>
-<br><b><%= @tenant.phone_number %></b>
-<br><b><%= @tenant.email %></b></p>
+              <tr>
+                <td align="center" valign="top" style="padding: 10px;">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                    <tr>
+                        <!-- Column : BEGIN -->
+                        <td class="stack-column-center">
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                                <tr>
+                                    <td style="padding: 40px 30px 20px; text-align: center;">
+                                      <p><b style="color: #006F8B"><%= @cookoon.name %>,</b>
+                                      <br>Le <b style="color: #006F8B"><%= @reservation.date %></b>
+                                      <br>pour <b style="color: #006F8B"><%= @reservation.duration %></b> heures.</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <!-- Column : END -->
+                        <!-- Column : BEGIN -->
+                        <td class="stack-column-center">
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                                <tr>
+                                  <td style="padding: 40px 30px 20px; text-align: center;">
+                                        <p><b>Vous recevrez :</b>
+                                        <br><b style="color: #006F8B"><%= @reservation.payout_price_for_host %> €</b>
+                                        <br>soit <%= humanized_money @reservation.price %> € - [COOKOON FEE FOR HOST] €</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <!-- Column : END -->
+                    </tr>
+                </table>
+              </td>
+            </tr>
+        <!-- 2 Even Columns : END -->
+        <tr>
 
-<p>Pour ajouter un service de ménage ou de concierge, n'hésitez pas à contacter notre équipe : concierge@cookoon.fr</p>
+            <td bgcolor="#ffffff" style="padding: 0 40px 40px; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555; text-align: center;">
+                <h2 style="margin: 0; color: #006F8B">Contactez vôtre Locataire :</h2>
+                <br><p><b><%= @tenant.first_name %></b>
+                <br><b><%= @tenant.phone_number %></b>
+                <br><b><%= @tenant.email %></b></p>
 
-<b>Préparez-vous à l'arrivée de votre Locataire</b>
+              <h2 style="color: #006F8B">Préparez-vous à l'arrivée de votre Locataire</h2>
 
-<ul>
-<li>Indiquez à votre locataire comment accéder à votre Cookoon : adresse, codes d’accès, étage, etc.</li>
-<li>Mettez les informations basiques à sa disposition : code Wifi, quelles pièces sont inacessibles, etc.</li>
-<li>Rangez votre appartement : assurez-vous que vos locataires seront accueillis dans un endroit bien tenu et chaleureux !</li>
-</ul>
+              <ul style=" text-align: left;">
+                <li>Indiquez à votre locataire comment accéder à votre Cookoon : adresse, codes d’accès, étage, etc.</li>
+                <li>Mettez les informations basiques à sa disposition : code Wifi, quelles pièces sont inacessibles, etc.</li>
+                <li>Rangez votre appartement : assurez-vous que vos locataires seront accueillis dans un endroit bien tenu et chaleureux !</li>
+                <li>Pour ajouter un service de ménage ou de concierge, n'hésitez pas à contacter notre équipe : <%= mail_to 'concierge@cookoon.fr' do %> <strong>concierge@cookoon.fr</strong><% end %></li>
+              </ul>
 
-<p>Une question, une envie ? Rendez-vous sur faq.cookoon.fr</p>
+              <h2 style="color: #006F8B">Contactez-nous</h2>
 
-<p>A bientôt,
-<br>L’équipe Cookoon
-<br>#cookoonlife</p>
+              <p>Une question, une envie ? <%= link_to raw("Rendez-vous sur la FAQ en <strong class='text-blue'>cliquant ici</strong>"), 'https://aide.cookoon.fr', target: "_blank"%></p>
+
+              <p>A bientôt,
+              <br>L’équipe Cookoon
+              <br>#cookoonlife</p>
+            </td>
+          </tr>
+</table>

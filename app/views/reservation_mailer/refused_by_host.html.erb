@@ -1,18 +1,89 @@
-<p>Bonjour <%= @tenant.first_name %>,</p>
+<table class:"email-wrapper">
 
-<p>Votre demande de location du Cookoon a été refusée par l’Hôte :</p>
+  <!-- Email Header : BEGIN -->
+       <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="600" style="margin: auto;" class="email-content">
+           <tr>
+               <td style="text-align: center">
+                   <%= image_tag("header-mailing.png", style: "width: 100%; border= 0; height: auto; background: #FFF") %>
+               </td>
+           </tr>
+       </table>
+  <!-- Email Header : END --><tr><td>
 
-<p><b><%= @cookoon.name %>,</b>
-<br>Le <b><%= @reservation.date %></b>
-<br>pour <b><%= @reservation.duration %></b> heures.</p>
+  <!-- Email Body : BEGIN -->
+          <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="600" style="margin: auto;" class="email-body">
 
-<b>Trouvez un autre Cookoon pour votre événement</b>
+              <tr>
+                  <td bgcolor="#ffffff" style="padding: 40px 40px 20px; text-align: center;">
+                      <h1 style="margin: 0; font-family: sans-serif; font-size: 24px; line-height: 125%; color: #333333; font-weight: normal;">Bonjour <%= @tenant.first_name %>,</h1>
+                  </td>
+              </tr>
+              <tr>
+                  <td bgcolor="#ffffff" style="padding: 0 40px 0; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555; text-align: center;">
+                      <p style="margin: 0;">Votre demande de location du Cookoon a été refusée par l’Hôte :</p>
+                  </td>
+              </tr>
 
-<p>Rendez-vous sur l’application Cookoon pour trouver un autre espace qui correspond à vos besoins !
-<br>Vous pouvez faire plusieurs demandes de location : vous n’êtes débité que si l’Hôte accepte votre demande !</p>
+              <tr>
+                <td align="center" valign="top" style="padding: 10px;">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                    <tr>
+                        <!-- Column : BEGIN -->
+                        <td class="stack-column-center">
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                                <tr>
+                                    <td style="padding: 10px 30px 0px; text-align: center;">
+                                      <p><b style="color: #006F8B"><%= @cookoon.name %>,</b>
+                                      <br>Le <b style="color: #006F8B"><%= @reservation.date %></b>
+                                      <br>pour <b style="color: #006F8B"><%= @reservation.duration %></b> heures.</p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <!-- Column : END -->
+                        <!-- Column : BEGIN -->
+                        <td class="stack-column-center">
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                                <tr>
+                                  <td style="padding: 10px 30px 0px; text-align: center;">
+                                        <p><b>Votre carte n'a pas été débitée !</b>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                        <!-- Column : END -->
+                    </tr>
+                </table>
+              </td>
+            </tr>
 
-<p>Une question, une envie ? Rendez-vous sur faq.cookoon.fr</p>
+            <tr>
+              <td bgcolor="#ffffff" style="padding: 0 40px 40px; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555;">
+                <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" style="margin: auto">
+                  <tr>
+                    <td style="border-radius: 30px; background: #006F8B; text-align: center;" class="button-td">
+                      <a href="http://www.google.com" style="border: 15px solid #006F8B; font-family: sans-serif; font-size: 13px; line-height: 110%; text-align: center; text-decoration: none; display: block; border-radius: 30px; font-weight: bold;" class="button-a">
+                      &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#ffffff;">Trouvez un autre Cookoon</span>&nbsp;&nbsp;&nbsp;&nbsp;
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+              <td>
+            </tr>
 
-<p>A bientôt,
-<br>L’équipe Cookoon
-<br>#cookoonlife</p>
+        <tr>
+          <td bgcolor="#ffffff" style="padding: 0 40px 40px; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555; text-align: center;">
+
+              <p>Rendez-vous sur l’application Cookoon pour trouver un autre espace qui correspond à vos besoins !
+              <br>Vous pouvez faire plusieurs demandes de location : vous n’êtes débité que si l’Hôte accepte votre demande !<p>
+
+              <h2 style="color: #006F8B">Contactez-nous</h2>
+
+              <p>Une question, une envie ? <%= link_to raw("Rendez-vous sur la FAQ en <strong class='text-blue'>cliquant ici</strong>"), 'https://aide.cookoon.fr', target: "_blank"%></p>
+
+              <p>A bientôt,
+              <br>L’équipe Cookoon
+              <br>#cookoonlife</p>
+            </td>
+          </tr>
+</table>
