@@ -34,7 +34,7 @@
                     <p>
                       <b style="color: #006F8B"><%= @cookoon.name %>,</b>
                       <br>
-                      Le <b style="color: #006F8B"><%= @reservation.date %></b>
+                      Le <b style="color: #006F8B"><%= @reservation.date.strftime('%d/%m/%Y à %H:%M') %></b>
                       <br>
                       pour <b style="color: #006F8B"><%= @reservation.duration %></b> heures.
                     </p>
@@ -52,7 +52,7 @@
                       <b>Vous allez recevoir :</b>
                       <br>
                       <b style="color: #006F8B"><%= @reservation.payout_price_for_host %> €</b>
-                      <br>soit <%= humanized_money @reservation.price %> € - [COOKOON FEE FOR HOST] €
+                      <br>soit <%= humanized_money @reservation.price %> € - <%= humanized_money @reservation.host_cookoon_fees %> €
                     </p>
                   </td>
                 </tr>
