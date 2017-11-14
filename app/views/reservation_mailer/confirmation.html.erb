@@ -49,7 +49,7 @@
                         <p>
                           <b>Vous recevrez :</b>
                           <br><b style="color: #006F8B"><%= @reservation.payout_price_for_host %> €</b>
-                          <br>soit <%= humanized_money @reservation.price %> € - [COOKOON FEE FOR HOST] €
+                          <br>soit <%= humanized_money @reservation.price %> € - <%= humanized_money @reservation.host_cookoon_fees %> €
                         </p>
                       </td>
                     </tr>
