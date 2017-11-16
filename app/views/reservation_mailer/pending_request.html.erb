@@ -1,1 +1,69 @@
-pending_request
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="600" style="margin: auto;" class="email-body">
+  <tr>
+    <td bgcolor="#ffffff" style="padding: 40px 40px 20px; text-align: center;">
+      <h1 style="margin: 0; font-family: sans-serif; font-size: 24px; line-height: 125%; color: #333333; font-weight: normal;">Bonjour <%= @cookoon.user.first_name %>,</h1>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="padding: 0 40px 0; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555; text-align: center;">
+      <p style="margin: 0;">Vous avez reçu une nouvelle demande de location :</p>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="top" style="padding: 10px;">
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+          <!-- Column : BEGIN -->
+          <td class="stack-column-center">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+              <tr>
+                <td style="padding: 40px 30px 20px; text-align: center;">
+                  <p>Prénom du locataire : <b style="color: #006F8B"><%= @tenant.first_name %></b>
+                    <br><b style="color: #006F8B"><%= @cookoon.name %>,</b>
+                    <br>Le <b style="color: #006F8B"><%= @reservation.date.strftime('%d/%m/%Y à %H:%M') %></b>
+                    <br>pour <b style="color: #006F8B"><%= @reservation.duration %></b> heures.
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <!-- Column : END -->
+          <!-- Column : BEGIN -->
+          <td class="stack-column-center">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+              <tr>
+                <td style="padding: 40px 30px 20px; text-align: center;">
+                  <p>
+                    <b>Vous recevrez :</b>
+                    <br>
+                    <b style="color: #006F8B"><%= @reservation.payout_price_for_host %> €</b>
+                    <br>
+                    soit <%= humanized_money @reservation.price %> € - <%= humanized_money @reservation.host_cookoon_fees %> €
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <!-- Column : END -->
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <!-- 2 Even Columns : END -->
+  <tr>
+    <td bgcolor="#ffffff" style="padding: 0 40px 40px; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555; text-align: left;">
+      <h2 style="margin: 0; color: #006F8B"><p>Vous souhaitez d'abord échanger avec <b><%= @tenant.first_name %></b> ? Voici son adresse e-mail : <%= @tenant.email %></h2>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="padding: 0 40px 40px; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555;">
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" style="margin: auto">
+        <tr>
+          <td style="border-radius: 30px; background: #006F8B; text-align: center;" class="button-td">
+            <%= link_to 'Répondre à la demande', host_reservations_url, class: 'button', target: "_blank" %>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>

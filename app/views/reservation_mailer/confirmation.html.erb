@@ -1,1 +1,68 @@
-confirmation
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="600" style="margin: auto;" class="email-body">
+  <tr>
+    <td bgcolor="#ffffff" style="padding: 40px 40px 20px; text-align: center;">
+      <h1 style="margin: 0; font-family: sans-serif; font-size: 24px; line-height: 125%; color: #333333; font-weight: normal;">Bonjour <%= @cookoon.user.first_name %>,</h1>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="padding: 0 40px 0; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555; text-align: center;">
+      <p style="margin: 0;">Merci d'accueillir <%= @tenant.first_name %> dans votre Cookoon :</p>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="top" style="padding: 10px;">
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+          <!-- Column : BEGIN -->
+          <td class="stack-column-center">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+              <tr>
+                <td style="padding: 40px 30px 20px; text-align: center;">
+                  <p>
+                    <b style="color: #006F8B"><%= @cookoon.name %>,</b>
+                    <br>Le <b style="color: #006F8B"><%= @reservation.date.strftime('%d/%m/%Y à %H:%M') %></b>
+                    <br>pour <b style="color: #006F8B"><%= @reservation.duration %></b> heures.
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <!-- Column : END -->
+          <!-- Column : BEGIN -->
+          <td class="stack-column-center">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+              <tr>
+                <td style="padding: 40px 30px 20px; text-align: center;">
+                  <p>
+                    <b>Vous recevrez :</b>
+                    <br><b style="color: #006F8B"><%= @reservation.payout_price_for_host %> €</b>
+                    <br>soit <%= humanized_money @reservation.price %> € - <%= humanized_money @reservation.host_cookoon_fees %> €
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+        <!-- Column : END -->
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="padding: 0 40px 40px; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555; text-align: center;">
+      <h2 style="margin: 0; color: #006F8B">Contactez vôtre Locataire :</h2>
+      <br>
+      <p>
+        <b><%= @tenant.first_name %></b>
+        <br><b><%= @tenant.phone_number %></b>
+        <br><b><%= @tenant.email %></b>
+      </p>
+      <h2 style="color: #006F8B">Préparez-vous à l'arrivée de votre Locataire</h2>
+      <ul style=" text-align: left;">
+        <li>Indiquez à votre locataire comment accéder à votre Cookoon : adresse, codes d’accès, étage, etc.</li>
+        <li>Mettez les informations basiques à sa disposition : code Wifi, quelles pièces sont inacessibles, etc.</li>
+        <li>Rangez votre appartement : assurez-vous que vos locataires seront accueillis dans un endroit bien tenu et chaleureux !</li>
+        <li>Pour ajouter un service de ménage ou de concierge, n'hésitez pas à contacter notre équipe : <%= mail_to 'concierge@cookoon.fr' do %> <strong>concierge@cookoon.fr</strong><% end %></li>
+      </ul>
+    </td>
+  </tr>
+</table>
