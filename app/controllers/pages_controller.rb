@@ -27,4 +27,9 @@ class PagesController < ApplicationController
     lat_lng = "#{params[:lat]}|#{params[:lng]}"
     cookies[:lat_lng] ||= { value: lat_lng, expires: 5.hour.from_now }
   end
+
+  def apple_app_site_association
+    association_json = File.read(Rails.public_path + "apple_app_site_association")
+    render json: association_json, content_type: "application/json"
+  end
 end
