@@ -100,8 +100,8 @@
     var form = document.getElementById('card-form');
     form.addEventListener('submit', function(event) {
       var $button = $('#add-card');
-      event.preventDefault();
       event.stopPropagation();
+      event.preventDefault();
       $button.prop("disabled", true);
       $button.html('<i class="fa fa-spinner fa-spin" style="margin-right: 10px;"></i>Chargement');
 
