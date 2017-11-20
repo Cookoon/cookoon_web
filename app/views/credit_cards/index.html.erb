@@ -9,7 +9,7 @@
         <li><i class="fa-li co co-cb"></i>
           <%= "(Principale)" if index.zero? %>
           <%= "#{card_data.brand.upcase} se terminant par : #{card_data.last4}" %> -
-          <%= link_to 'supprimer', credit_card_path(card_data.id), method: :delete, class: 'no-button' %>
+          <%= link_to 'supprimer', credit_card_path(card_data.id), remote: true, method: :delete, class: 'no-button slowLoad' %>
         </li>
       <% end %>
     </ul>
