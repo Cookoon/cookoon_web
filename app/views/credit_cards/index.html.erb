@@ -31,26 +31,7 @@
         <h4 class="modal-title" id="creditCardModalLabel">Ajouter une carte</h4>
       </div>
       <div class="modal-body" style='padding: 15px;'>
-
-        <%= simple_form_for :credit_card, url: credit_cards_path, remote: true, authenticity_token: true, html: { id: 'card-form' } do |f| %>
-          <div id="card-element"></div>
-          <div class="flex-container light-padded">
-            <p>Utiliser comme carte principale</p>
-            <div class="form-group boolean optional">
-              <input value="0" type="hidden" name="credit_card[default]">
-              <input class="boolean optional hidden" type="checkbox" value="1" name="credit_card[default]" id="credit_card_default">
-              <label class="boolean optional toggle" for="credit_card_default">
-                <span class="toggle-handler"></span>
-              </label>
-            </div>
-          </div>
-          <div id="card-errors" role="alert"></div>
-          <%= f.input :stripe_token, as: :hidden %>
-          <div class="light-padded text-center">
-            <%= f.button :button, 'Ajouter une carte', type: :submit, class: 'button button-white', id: 'add-card' %>
-          </div>
-        <% end %>
-
+        <%= render 'form' %>
       </div>
       <div class="modal-footer"></div>
     </div>
