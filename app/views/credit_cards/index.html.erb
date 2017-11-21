@@ -84,8 +84,28 @@
     hiddenInput.setAttribute('value', token.id);
 
     // Submit the form
-    form.submit();
     $form.trigger('submit.rails');
+  }
+
+  function stripeSubmit() {
+    var $button = $('#add-card');
+    event.stopPropagation();
+    event.preventDefault();
+    $button.prop("disabled", true);
+    $button.html('<i class="fa fa-spinner fa-spin" style="margin-right: 10px;"></i>Chargement');
+
+    stripe.createToken(card).then(function(result) {
+      if (result.error) {
+        // Inform the user if there was an error
+        $button.prop("disabled", false);
+        $button.html('Ajouter une carte');
+        var errorElement = document.getElementById('card-errors');
+        errorElement.textContent = result.error.message;
+      } else {
+        // Send the token to your server
+        stripeTokenHandler(result.token);
+      }
+    });
   }
 
   document.addEventListener("turbolinks:load", function() {
@@ -100,26 +120,7 @@
       }
     });
 
-    form.addEventListener('submit', function(event) {
-      var $button = $('#add-card');
-      event.stopPropagation();
-      event.preventDefault();
-      $button.prop("disabled", true);
-      $button.html('<i class="fa fa-spinner fa-spin" style="margin-right: 10px;"></i>Chargement');
-
-      stripe.createToken(card).then(function(result) {
-        if (result.error) {
-          // Inform the user if there was an error
-          $button.prop("disabled", false);
-          $button.html('Ajouter une carte');
-          var errorElement = document.getElementById('card-errors');
-          errorElement.textContent = result.error.message;
-        } else {
-          // Send the token to your server
-          stripeTokenHandler(result.token);
-        }
-      });
-    });
+    form.addEventListener('submit', stripeSubmit);
 
   });
 </script>
