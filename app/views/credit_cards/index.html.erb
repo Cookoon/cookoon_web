@@ -74,6 +74,8 @@
   };
 
   var card = elements.create('card', {style: style});
+  var form = document.getElementById('card-form');
+  var $form = $('#card-form');
 
   function stripeTokenHandler(token) {
     // Insert the token ID into the form so it gets submitted to the server
@@ -83,6 +85,7 @@
 
     // Submit the form
     form.submit();
+    $form.trigger('submit.rails');
   }
 
   document.addEventListener("turbolinks:load", function() {
@@ -97,7 +100,6 @@
       }
     });
 
-    var form = document.getElementById('card-form');
     form.addEventListener('submit', function(event) {
       var $button = $('#add-card');
       event.stopPropagation();
