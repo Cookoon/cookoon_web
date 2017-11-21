@@ -1,0 +1,10 @@
+<%= simple_form_for :stripe, url: stripe_accounts_path, remote: true do |f| %>
+  <%= f.simple_fields_for :address do |a| %>
+    <%= a.input :city, label: "Votre ville de résidence", input_html: { value: @infos[:city] } %>
+    <%= a.input :street, label: "Votre addresse de résidence", input_html: { value: @infos[:street] } %>
+    <%= a.input :post_code, label: "Votre code postal", input_html: { value: @infos[:post_code] } %>
+  <% end %>
+  <%= f.input :dob, as: :date, start_year: Date.today.year - 90, end_year: Date.today.year - 12, selected: {year: @infos[:year], day: @infos[:day], month: @infos[:month]}, label: "Votre date de naissance"  %>
+  <%= f.input :iban, label: "Votre numéro de compte (IBAN)" %>
+  <%= f.button :submit, "Connecter mon compte", class: 'button button-blue slowLoad' %>
+<% end %>

@@ -9,7 +9,7 @@
         <li><i class="fa-li co co-cb"></i>
           <%= "(Principale)" if index.zero? %>
           <%= "#{card_data.brand.upcase} se terminant par : #{card_data.last4}" %> -
-          <%= link_to 'supprimer', credit_card_path(card_data.id), method: :delete, class: 'no-button' %>
+          <%= link_to 'supprimer', credit_card_path(card_data.id), remote: true, method: :delete, class: 'no-button slowLoad' %>
         </li>
       <% end %>
     </ul>
@@ -31,26 +31,7 @@
         <h4 class="modal-title" id="creditCardModalLabel">Ajouter une carte</h4>
       </div>
       <div class="modal-body" style='padding: 15px;'>
-
-        <%= simple_form_for :credit_card, url: credit_cards_path, remote: true, authenticity_token: true, html: { id: 'card-form' } do |f| %>
-          <div id="card-element"></div>
-          <div class="flex-container light-padded">
-            <p>Utiliser comme carte principale</p>
-            <div class="form-group boolean optional">
-              <input value="0" type="hidden" name="credit_card[default]">
-              <input class="boolean optional hidden" type="checkbox" value="1" name="credit_card[default]" id="credit_card_default">
-              <label class="boolean optional toggle" for="credit_card_default">
-                <span class="toggle-handler"></span>
-              </label>
-            </div>
-          </div>
-          <div id="card-errors" role="alert"></div>
-          <%= f.input :stripe_token, as: :hidden %>
-          <div class="light-padded text-center">
-            <%= f.button :button, 'Ajouter une carte', type: :submit, class: 'button button-white', id: 'add-card' %>
-          </div>
-        <% end %>
-
+        <%= render 'form' %>
       </div>
       <div class="modal-footer"></div>
     </div>
@@ -74,6 +55,8 @@
   };
 
   var card = elements.create('card', {style: style});
+  var form = document.getElementById('card-form');
+  var $form = $('#card-form');
 
   function stripeTokenHandler(token) {
     // Insert the token ID into the form so it gets submitted to the server
@@ -82,7 +65,28 @@
     hiddenInput.setAttribute('value', token.id);
 
     // Submit the form
-    form.submit();
+    $form.trigger('submit.rails');
+  }
+
+  function stripeSubmit() {
+    var $button = $('#add-card');
+    event.stopPropagation();
+    event.preventDefault();
+    $button.prop("disabled", true);
+    $button.html('<i class="fa fa-spinner fa-spin" style="margin-right: 10px;"></i>Chargement');
+
+    stripe.createToken(card).then(function(result) {
+      if (result.error) {
+        // Inform the user if there was an error
+        $button.prop("disabled", false);
+        $button.html('Ajouter une carte');
+        var errorElement = document.getElementById('card-errors');
+        errorElement.textContent = result.error.message;
+      } else {
+        // Send the token to your server
+        stripeTokenHandler(result.token);
+      }
+    });
   }
 
   document.addEventListener("turbolinks:load", function() {
@@ -97,27 +101,7 @@
       }
     });
 
-    var form = document.getElementById('card-form');
-    form.addEventListener('submit', function(event) {
-      var $button = $('#add-card');
-      event.preventDefault();
-      event.stopPropagation();
-      $button.prop("disabled", true);
-      $button.html('<i class="fa fa-spinner fa-spin" style="margin-right: 10px;"></i>Chargement');
-
-      stripe.createToken(card).then(function(result) {
-        if (result.error) {
-          // Inform the user if there was an error
-          $button.prop("disabled", false);
-          $button.html('Ajouter une carte');
-          var errorElement = document.getElementById('card-errors');
-          errorElement.textContent = result.error.message;
-        } else {
-          // Send the token to your server
-          stripeTokenHandler(result.token);
-        }
-      });
-    });
+    form.addEventListener('submit', stripeSubmit);
 
   });
 </script>
