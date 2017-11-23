@@ -5,21 +5,18 @@
 <header>
   <div class="home-wrapper text-center">
     <div class="home-container">
-      <div class="home-title title-block">
+      <div class="title-block">
         <h1>COOKOON</h1>
         <h3>RECEVONS PARTOUT !</h3>
       </div>
-      <div class="home-description">
-        <p>
-            Une communauté exclusive pour organiser vos événements chez les autres
-        </p>
+      <div class="col lg-7 col sm-7">
+        <h2>Une communauté exclusive pour organiser vos événements chez les autres</h2>
       </div>
-        <div class="col xl-6 col-md-6 col-sm-6 col-xs-12">
-            <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
-            <%= image_tag("iphone.png", class: "img-responsive", style: "margin-bottom: -30px", :alt => "iphone") %>
-        </div>
+      <div class="col lg-5 sm-5">
+        <%= image_tag("iphone.png", class: "img-responsive", style: "margin : 0 auto -30px", :alt => "Application iPhone") %>
+      </div>
     </div>
-</div>
+  </div>
 </header>
 
 <body>
@@ -122,19 +119,18 @@
     </div>
   </section>
 
-<section id="community" style="background: #006F8B">
-  <div class="container">
-    <div class="row" style="margin: 20px 0px; color: white">
-        <h4>Rejoindre la communauté ?</h4>
-        <b>Vos proches sont membres de la communauté Cookoon ?
-        <br>
-        Demandez leur une invitation !</b>
+  <section id="community" style="background: #006F8B">
+    <div class="container">
+      <div class="row" style="margin: 20px 0px; color: white">
+          <h4>Convaincu(e) ?</h4>
+          <b>Prenez rendez-vous avec l'un de nos photographes
+          <br>pour caputer les atours de votre lieu de vie !</b>
+      </div>
+      <div class="text-center" style="margin-bottom: 20px">
+        <%= link_to raw("En savoir +"), 'https://quentin21.typeform.com/to/ljnp8X', target: "_blank", class: 'btn btn-default button button-white'%>
+      </div>
     </div>
-    <div class="text-center" style="margin-bottom: 20px">
-    <%= link_to 'TROUVER UN PARRAIN', en_savoir_plus_path, class: 'btn btn-default button button-white' %>
-    </div>
-  </div>
-</section>
+  </section>
 
 
 <footer>

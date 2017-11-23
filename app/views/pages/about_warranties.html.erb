@@ -1,3 +1,5 @@
+<div class="warranty-page">
+
 <div class="text-center" style="padding: 30px">
   <%= link_to 'ACCÈS MEMBRE', new_user_session_path, class: 'button button-blue' %>
 </div>
@@ -5,23 +7,21 @@
 <header>
   <div class="home-wrapper text-center">
     <div class="home-container">
-      <div class="home-title title-block">
+      <div class="title-block">
         <h1>COOKOON</h1>
-        <h3>RECEVONS PARTOUT !</h3>
+        <h3>Votre assurance incluse à chaque location</h3>
       </div>
-      <div class="home-description">
-        <p>
-            Une communauté exclusive pour organiser vos événements chez les autres
-        </p>
+
+      <div class="col lg-7 col sm-7">
+        <h2>Découvrez les garanties de notre partenaire</h2>
       </div>
-      <div class="col xl-6 col-md-6 col-sm-6 col-xs-12">
-            <!-- Demo image for screen mockup, you can put an image here, some HTML, an animation, video, or anything else! -->
-            <%= image_tag("iphone.png", class: "img-responsive", style: "margin-bottom: -30px", :alt => "iphone") %>
+      <div class="col lg-5 col sm-5">
+        <b>en partenariat avec</b>
+        <%= image_tag("axa_logo_open_white_rgb.png", class: "img-responsive", style: "max-width: 200px; margin: 0 auto;") %>
       </div>
     </div>
   </div>
 </header>
-
 
 <body>
   <section id="content" style="background-color: #fafeef">
@@ -30,95 +30,176 @@
           <div class="col-lg-12 text-center">
               <div class="section-heading">
                   <h3>Des inquiétudes ?</h3>
-                  <h4 class="text-center">Vous êtes couvert</h4>
+                  <h4 class="text-center">Vous êtes immédiatement assuré</h4>
+              </div>
           </div>
       </div>
 
+      <!-- One Bullet Point -->
       <div class="row" style="margin-bottom: 30px">
           <div class="col-xs-3 text-center">
-                <i class="co co-bank fa-5x" aria-hidden="true"></i>
+            <i class="co co-success fa-5x" aria-hidden="true"></i>
           </div>
           <div class="col-xs-9">
-            <h3>Tous les Cookoons sont assurés</h3>
-            <p>Une assurance simple et efficace pour toutes les locations, c’est primordial pour batir la confiance !
-              <br>
-              <b>Chaque location est couverte gratuitement par une assurance au compte, à hauteur de 1 000 000€.</b>
-              <br>
-              Ainsi, à chaque check-out, les dégats ne sont pas laissés pour compte.</p>
+              <h4>Un verre de vin renversé sur la moquette</h4>
           </div>
       </div>
+      <!-- End of Bullet Point -->
 
-        <div class="row" style="margin-bottom: 30px">
-            <div class="col-xs-3 text-center">
-                      <i class="co co-concierge fa-5x" aria-hidden="true"></i>
-            </div>
-            <div class="col-xs-9">
-              <h3>Sans démarche compliquée</h3>
-              <p>En tant que membre de la communauté Cookoon, vous êtes automatiquement couvert par l’Assurance AXA.
-                <br>
-                Pas de mauvaise surprise au moment de déclarer un sinistre, vous pouvez facilement déclarer un incident en contactant l'agent général AXA.
-                <br>
-                Notre <b>numéro de contrat</b>, à fournir pendant vos échanges : <b>XXXXXXX</b></p>.
-            </div>
-        </div>
-
-        <div class="row" style="margin-bottom: 30px">
-            <div class="col-xs-3 text-center">
-                      <i class="co co-user fa-5x" aria-hidden="true"></i>
-            </div>
-            <div class="col-xs-9">
-              <h3>Une vision partagée de la communauté</h3>
-              <p>Cookoon est le premier partenaire 'logement collaboratif' d'AXA. C'est parce que nous partageons une vision responsable de l'économie collaborative que nous avons leur confiance.
-              <br>
-              Désormais, c'est à nos membres que nosu faisons confiance</p>
-            </div>
-        </div>
-
-      </div>
-  </section>
-
-  <section id="not-warranted">
-    <div class="container" style="margin: 20px; padding: 20px; background : #006F8B; border-radius:8px">
-      <div class="row text-center">
-          <div class="col-xs-12" style="color: white">
-            <h4>Attention, certains biens ne sont pas couverts par l’assurance AXA</h4>
-            <br>
-            <p>Vous voulez mettre sur Cookoon un hôtel ? un batiment classé historique ? un chalet de haute-montagne ?</p>
-            <p>Vous ne pourrez peut-être pas bénéficier de l’assurance AXA spécialement concue pour Cookoon.</p>
-            <b>Consultez le <%= link_to "contrat d'assrance", '#', class: 'no-button' %> pour connaître le détail<b>
+      <!-- One Bullet Point -->
+      <div class="row" style="margin-bottom: 30px">
+          <div class="col-xs-3 text-center">
+            <i class="co co-success fa-5x" aria-hidden="true"></i>
           </div>
+          <div class="col-xs-9">
+              <h4>Une porte de placard endommagée ?</h4>
+          </div>
+      </div>
+      <!-- End of Bullet Point -->
+
+      <!-- One Bullet Point -->
+      <div class="row" style="margin-bottom: 30px">
+          <div class="col-xs-3 text-center">
+            <i class="co co-success fa-5x" aria-hidden="true"></i>
+          </div>
+          <div class="col-xs-9">
+              <h4>Un incendie ou un dégat des eaux ?</h4>
+          </div>
+      </div>
+      <!-- End of Bullet Point -->
+
+      <!-- One Bullet Point -->
+      <div class="row" style="margin-bottom: 30px">
+          <div class="col-xs-3 text-center">
+            <i class="co co-success fa-5x" aria-hidden="true"></i>
+          </div>
+          <div class="col-xs-9">
+              <h4>Un objet disparu ?</h4>
+          </div>
+      </div>
+      <!-- End of Bullet Point -->
+
+      <div class="row" style="margin-bottom: 30px">
+        <div class="col-xs-12">
+            <p>Même lorsque l’on est précautionneux, des accidents peuvent arriver.
+            <br>Afin de protéger et de rassurer les hôtes, Cookoon et AXA ont mis en place une solution d’assurance dédiée qui couvre les biens immobiliers et mobiliers durant les occupations.</p>
+            <p>Cookoon et AXA proposent donc cette solution d’assurance automatiquement incluse,valable pour toutes les réservations réalisées via la plateforme) dans la limite des conditions prévues au contrat. Les membres de la communauté éviteront ainsi une situation embarrassante ou coûteuse.</p>
         </div>
+      </div>
+
     </div>
   </section>
 
-  <section id="warranty">
-    <div class="container" style="margin: 20px 0px">
-      <div class="row">
-          <div class="col-xs-8">
-            <h4>AXA s'engage auprès des entreprises innovantes et responsables</h4>
-          </div>
-          <div class="col-xs-4">
-            <%= image_tag("axa_logo_solid_rgb.png", class: "img-responsive", style: "max-width: 100%; margin: 0 auto;") %>
-          </div>
-          <div class="col-xs-12" style="text-align: right; margin-top : 15px">
-            <h4><%= link_to 'En savoir plus >', '#', class: 'no-button' %></h4>
-          </div>
+  <section id="faq" style="background-color: #fafeef">
+    <div class="container">
+      <div class="tab">
+        <input id="tab-one" type="checkbox" name="tabs">
+        <label for="tab-one">Quelles sont les garanties ?</label>
+        <div class="tab-content">
+          <ul>
+            <li>La responsabilité civile du locataire encourue vis-à- vis du propriétaire;</li>
+            <li>Les dommages aux biens : incendie, inondation , dégâts des eaux, vol/vandalisme, bris de glace (fenêtres, mobiliers en verre).</li>
+          </ul>
+          <p>Attention, cette assurance ne se substitue pas à l’assurance habitation. Les espaces mis en location sur Cookoon doivent être couverts par un contrat Multirisque Habitation ou un contratd’assurance spécifique en fonction du local loué.</p>
         </div>
+      </div>
+      <div class="tab">
+        <input id="tab-two" type="checkbox" name="tabs">
+        <label for="tab-two">Qui est couvert par l'offre Cookoon en partenariat en AXA ?</label>
+        <div class="tab-content">
+          <ul>
+            <li>Particulier ou professionnel ayant réservé un logement meublé via l’application ou le site Cookoon ;</li>
+            <li>Son conjoint et ses enfants ;</li>
+            <li>Toute autre personne participant à l’occupation du lieu.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tab">
+        <input id="tab-three" type="checkbox" name="tabs">
+        <label for="tab-three">Quels sont les biens couverts par l'assurance ?</label>
+        <div class="tab-content">
+          <ul>
+            <li>Les maisons ou villas</li>
+            <li>Les appartements</li>
+            <li>Les châteaux, chalets ou lodges</li>
+            <li>Les dépendances de moins de 200 m2</li>
+            <li>Les meubles contenus de dans la location meublée</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tab">
+        <input id="tab-four" type="checkbox" name="tabs">
+        <label for="tab-four">Quels sont les biens qui ne sont pas couverts par l'assurance ?</label>
+        <div class="tab-content">
+          <ul>
+            <li>Les hôtels ;</li>
+            <li>Les bâtiments classés monuments historiques ;</li>
+            <li>Les chalets de haute montagne (inaccessibles aux véhicules de secours pendant au moins une partie de l’année) ;</li>
+            <li>Les installations extérieures au bien loué (piscine, tennis, statues à demeure, bancs de pierre,…) ;</li>
+            <li>Les objets de valeurs personnels (bijoux, objets d’arts ...) et les fonds et valeurs de l’occupant (chèques, espèces, tickets cadeaux etc.)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tab">
+        <input id="tab-five" type="checkbox" name="tabs">
+        <label for="tab-five">Quelles sont les garanties ?</label>
+        <div class="tab-content">
+          <p>La franchise est le montant qui reste à la charge du locataire en cas de sinistre.</p>
+
+          <ul>Le montant de la franchise applicable est égal à :
+            <li> Sur la garantie Dommages immobiliers : 350 euros</li>
+            <li>Sur la garantie Dommages mobiliers : 200 euros (ex : porte de placard endommagée)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tab">
+        <input id="tab-six" type="checkbox" name="tabs">
+        <label for="tab-six">Que faire en cas d'incident ?</label>
+        <div class="tab-content">
+          <p>En cas d’incident, il appartient à l’occupant de le déclarer dans les délais indiqués ci-dessous à notre Agent Général François-Xavier Combes agence.fxcombe1@axa.fr
+          <br>Si l’hôte constate, après l’occupation, un sinistre qui n’a pas été porté à sa connaissance par l’occupant, il lui appartient alors de le déclarer.</p>
+
+          <ul>Attention ! Vos déclarations devront être soumises dans des délais impartis :
+            <li>dans les 2 jours ouvrés pour le vol ;</li>
+            <li>dans les 10 jours de la publication de l’arrêté interministériel constatant l’état de catastrophe naturelle s’il s’agit de dommages mettant en œuvre l’assurance de ce risque ;</li>
+            <li>dans les 5 jours pour les autres cas.</li>
+          </ul>
+
+          <ul>Merci d'inclure :
+            <li>vos coordonnées, la nature du sinistre (vol, dégât des eaux, incendie…) et ses circonstances (date, lieu,…) ;</li>
+            <li>un état descriptif et estimatif, certifié sincère et signé, des objets assurés qui ont été endommagés, volés ou détruits ;</li>
+            <li>les factures, bons de garantie, photos ou tout autre justificatif ;</li>
+            <li>le dépôt de plainte en cas de vol.</li>
+          </ul>
+
+          <p>Les informations ci-dessus sont non contractuelles, pour toute information supplémentaire, merci de consulter les conditions générales et les conditions particulières des garanties offertes par Cookoon.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="disclaimer">
+    <div class="container" style="margin: 20px 0px">
+      <div class="row text-center">
+          <div class="col-xs-12">
+            <h4>Les informations ci-dessus sont non contractuelles. Pour toute information supplémentaire, merci de consulter les Conditions Générales et les Conditions Particulières de Garanties offertes par Cookoon</h4>
+          </div>
+      </div>
     </div>
   </section>
 
   <section id="community" style="background: #006F8B">
     <div class="container">
-      <div class="row" style="margin: 20px 0px; color: white">
+      <div class="row" style="margin: 20px 65px; color: white">
           <h4>Découvrir Cookoon</h4>
-          <b>Découvrez tous les avantages de la communauté Cookoon</b>
+          <p>Découvrez tous les avantages de la communauté Cookoon.
+          <br>C'est par ici !</p>
       </div>
       <div class="text-center" style="margin-bottom: 20px">
       <%= link_to 'DÉCOUVRIR COOKOON', en_savoir_plus_path, class: 'btn btn-default button button-white' %>
       </div>
     </div>
   </section>
-
 
   <footer>
       <div class="container text-center" style="padding: 20px">
@@ -128,3 +209,5 @@
         <%= link_to 'Presse', '#', class: 'no-button' %>
       </div>
   </footer>
+
+</div>

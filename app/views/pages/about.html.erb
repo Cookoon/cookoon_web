@@ -5,19 +5,15 @@
 <header>
   <div class="home-wrapper text-center">
     <div class="home-container">
-      <div class="home-title title-block">
+      <div class="title-block">
         <h1>COOKOON</h1>
         <h3>RECEVONS PARTOUT !</h3>
       </div>
-      <div class="row">
-        <div class="col lg-7 col sm-7">
-          <p>
-              Une communauté exclusive pour organiser vos événements chez les autres
-          </p>
-        </div>
-        <div class="col lg-5 sm-5">
-          <%= image_tag("iphone.png", class: "img-responsive", style: "margin-bottom: -30px", :alt => "iphone") %>
-        </div>
+      <div class="col lg-7 col sm-7">
+        <h2>Une communauté exclusive pour organiser vos événements chez les autres</h2>
+      </div>
+      <div class="col lg-5 sm-5">
+        <%= image_tag("iphone.png", class: "img-responsive", style: "margin : 0 auto -30px", :alt => "Application iPhone") %>
       </div>
     </div>
   </div>
@@ -36,52 +32,48 @@
 
       <div class="row" style="margin-bottom: 30px">
           <div class="col-xs-3 text-center">
-                <i class="co co-user fa-5x" aria-hidden="true"></i>
+            <i class="co co-success fa-5x" aria-hidden="true"></i>
           </div>
 
           <div class="col-xs-9">
-            <h3>Etre Membre</h3>
-            <p> Chez Cookoon, tout le monde se connaît, ou presque.<br>
-            <span class="text-muted">Chaque membre est invité par un parrain qui est responsable de son filleul. La communauté se construit sur des valeurs d'échange et de respect.</span></p>
-          </div>
-
-          <div class="col-xs-12" style="text-align:right">
-            <%= link_to 'En savoir plus >', en_savoir_plus_louer_un_cookoon_url, class: 'no-button' %>
-          </div>
-        </div>
-
-        <div class="row" style="margin-bottom: 30px">
-            <div class="col-xs-3 text-center">
-                      <i class="co co-success fa-5x" aria-hidden="true"></i>
-            </div>
-
-            <div class="col-xs-9">
               <h3>Organiser un Evénement</h3>
               <p>Louez l’appartement d’un autre membre <span class="text-muted">en 3 minutes pour tous vos besoins de courte durée : rendez-vous,
 dîner entre amis, réunions & moments de calme.</span></p>
               <p>Choisissez vos options : <span class="text-muted">traiteur, chef à domicile, joueur de harpe … pour personnaliser votre expérience.<span></p>
-            </div>
+          </div>
 
-            <div class="col-xs-12" style="text-align:right">
-              <%= link_to 'En savoir plus >', en_savoir_plus_louer_un_cookoon_path, class: 'no-button' %>
-            </div>
+          <div class="col-xs-12" style="text-align:right">
+            <%= link_to 'En savoir plus >', en_savoir_plus_louer_un_cookoon_path, class: 'no-button' %>
+          </div>
         </div>
 
         <div class="row" style="margin-bottom: 30px">
-            <div class="col-xs-3 text-center">
-                      <i class="co co-home fa-5x" aria-hidden="true"></i>
-            </div>
+          <div class="col-xs-3 text-center">
+            <i class="co co-home fa-5x" aria-hidden="true"></i>
+          </div>
 
-            <div class="col-xs-9">
+          <div class="col-xs-9">
               <h3>Devenir Hôte</h3>
               <p>Participer à la communauté en proposant votre appartement <span class="text-muted">ou votre maison, pour rentabiliser votre lieu de vie pendant votre absence.
                 Et pas besoin de dormir ailleurs !</span>
                 <br>Choisissez des services <span class="text-muted">pour vous affranchir de toutes contraintes : ménage, concierge...<span></p>
-            </div>
+          </div>
 
-            <div class="col-xs-12" style="text-align:right">
-              <%= link_to 'En savoir plus >', en_savoir_plus_devenir_hote_path, class: 'no-button' %>
-            </div>
+          <div class="col-xs-12" style="text-align:right">
+            <%= link_to 'En savoir plus >', en_savoir_plus_devenir_hote_path, class: 'no-button' %>
+          </div>
+        </div>
+
+        <div class="row" style="margin-bottom: 30px">
+          <div class="col-xs-3 text-center">
+            <i class="co co-user fa-5x" aria-hidden="true"></i>
+          </div>
+
+          <div class="col-xs-9">
+              <h3>Etre Membre</h3>
+              <p> Chez Cookoon, tout le monde se connaît, ou presque.<br>
+              <span class="text-muted">Chaque membre est invité par un parrain qui est responsable de son filleul. La communauté se construit sur des valeurs d'échange et de respect.</span></p>
+          </div>
         </div>
 
       </div>
@@ -112,7 +104,7 @@ dîner entre amis, réunions & moments de calme.</span></p>
               Demandez leur une invitation !</b>
         </div>
         <div class="text-center" style="margin-bottom: 20px">
-              <%= link_to 'TROUVER UN PARRAIN', en_savoir_plus_path, class: 'btn btn-default button button-white' %>
+              <%= link_to raw("En savoir +"), 'https://aide.cookoon.fr/hc/fr/articles/115002653231-Comment-rejoindre-la-communaut%C3%A9-', target: "_blank", class: 'btn btn-default button button-white'%>
         </div>
       </div>
   </section>

@@ -1,0 +1,72 @@
+/* Acordeon styles */
+.tab {
+  position: relative;
+  margin-bottom: 1px;
+  width: 100%;
+  color: #fff;
+  overflow: hidden;
+}
+.warranty-page input {
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+.warranty-page label {
+  position: relative;
+  display: block;
+  padding: 0 0 0 1em;
+  background: #006F8B;
+  font-weight: bold;
+  line-height: 3;
+  cursor: pointer;
+}
+
+.tab-content {
+  max-height: 0;
+  overflow: hidden;
+  background: #fafeef;
+  -webkit-transition: max-height .35s;
+  -o-transition: max-height .35s;
+  transition: max-height .35s;
+}
+
+.tab-content p {
+  margin: 1em;
+  color: black;
+}
+
+.tab-content ul {
+  color: black;
+  margin: 1em;
+}
+
+/* :checked */
+.warranty-page input:checked ~ .tab-content {
+  max-height: 20em;
+}
+/* Icon */
+.warranty-page label::after {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: block;
+  width: 3em;
+  height: 3em;
+  line-height: 3;
+  text-align: center;
+  -webkit-transition: all .35s;
+  -o-transition: all .35s;
+  transition: all .35s;
+}
+.warranty-page input[type=checkbox] + label::after {
+  content: "+";
+}
+.warranty-page input[type=radio] + label::after {
+  content: "\25BC";
+}
+.warranty-page input[type=checkbox]:checked + label::after {
+  transform: rotate(315deg);
+}
+.warranty-page input[type=radio]:checked + label::after {
+  transform: rotateX(180deg);
+}
