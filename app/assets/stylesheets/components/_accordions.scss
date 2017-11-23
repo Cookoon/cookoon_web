@@ -6,12 +6,12 @@
   color: #fff;
   overflow: hidden;
 }
-input {
+.warranty-page input {
   position: absolute;
   opacity: 0;
   z-index: -1;
 }
-label {
+.warranty-page label {
   position: relative;
   display: block;
   padding: 0 0 0 1em;
@@ -41,11 +41,11 @@ label {
 }
 
 /* :checked */
-input:checked ~ .tab-content {
+.warranty-page input:checked ~ .tab-content {
   max-height: 20em;
 }
 /* Icon */
-label::after {
+.warranty-page label::after {
   position: absolute;
   right: 0;
   top: 0;
@@ -58,15 +58,15 @@ label::after {
   -o-transition: all .35s;
   transition: all .35s;
 }
-input[type=checkbox] + label::after {
+.warranty-page input[type=checkbox] + label::after {
   content: "+";
 }
-input[type=radio] + label::after {
+.warranty-page input[type=radio] + label::after {
   content: "\25BC";
 }
-input[type=checkbox]:checked + label::after {
+.warranty-page input[type=checkbox]:checked + label::after {
   transform: rotate(315deg);
 }
-input[type=radio]:checked + label::after {
+.warranty-page input[type=radio]:checked + label::after {
   transform: rotateX(180deg);
 }
