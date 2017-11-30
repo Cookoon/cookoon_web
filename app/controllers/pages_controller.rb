@@ -32,4 +32,9 @@ class PagesController < ApplicationController
     association_json = File.read(Rails.public_path + "apple_app_site_association")
     render json: association_json, content_type: "application/json"
   end
+
+  def android_assetlinks
+    association_json = File.read(Rails.public_path + "android_assetlinks.json")
+    render json: association_json, content_type: "application/json"
+  end
 end
