@@ -38,7 +38,7 @@
         <p><%= humanized_money_with_symbol @reservation.price_for_rent_with_fees %></p>
       </div>
       <div class="text-center light-padded">
-        <%= link_to 'Annuler la réservation', reservation_path(@reservation), method: :patch, class: 'button button-white' %>
+        <%= link_to 'Annuler la réservation', reservation_path(@reservation), method: :patch, remote: true, class: 'button button-white' %>
       </div>
     </div>
   </div>
