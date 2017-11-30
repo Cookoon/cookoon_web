@@ -34,6 +34,7 @@ Rails.application.routes.draw do
   # -------- CUSTOM ROUTES ---------
   get 'setcookies', to: 'pages#setcookies'
   get 'apple-app-site-association', to: 'pages#apple_app_site_association'
+  get '/.well-known/assetlinks.json', to: 'pages#android_assetlinks'
   get 'support', to: 'pages#support'
   get 'conditions-generales', to: 'pages#cgu', as: :cgu
   get 'en-savoir-plus', to: 'pages#about'
