@@ -20,7 +20,7 @@ module UserReservationCardHelper
     private
 
     attr_accessor :view, :reservation
-    delegate :link_to, :content_tag, :image_tag, :cl_image_tag, :safe_join, :safe_picture_tag_for_reservations_index, :cl_image_path, to: :view
+    delegate :link_to, :content_tag, :image_tag, :cl_image_tag, :safe_join, :safe_picture_tag_for_reservations_index, :cl_image_path, :display_datetime_for, to: :view
 
     def header
       content = safe_join([header_infos, header_status])
@@ -37,7 +37,7 @@ module UserReservationCardHelper
     end
 
     def details
-      content_tag(:p, "#{reservation.date.strftime('%d %B %Y')} . à #{reservation.date.hour}h . pour #{reservation.duration}h")
+      content_tag(:p, "#{display_datetime_for(reservation.date, join_expression: '. à')} . pour #{reservation.duration}h")
     end
 
     def header_status

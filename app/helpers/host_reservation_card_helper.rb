@@ -19,7 +19,7 @@ module HostReservationCardHelper
     private
 
     attr_accessor :view, :reservation, :user
-    delegate :link_to, :content_tag, :image_tag, :cl_image_tag, :safe_join, to: :view
+    delegate :link_to, :content_tag, :image_tag, :cl_image_tag, :safe_join, :display_date_for, :display_time_for, to: :view
 
     def infos
       content = safe_join([user_picture, user_infos, status])
@@ -36,8 +36,8 @@ module HostReservationCardHelper
 
     def user_infos
       user_name = content_tag(:p, user.full_name)
-      date = content_tag(:p, reservation.date.strftime('%d %B %Y'))
-      duration = content_tag(:p, "#{reservation.date.hour}h pour #{reservation.duration}h")
+      date = content_tag(:p, display_date_for(reservation.date))
+      duration = content_tag(:p, "#{display_time_for(reservation.date)} pour #{reservation.duration}h")
       content = safe_join([user_name, date, duration])
       content_tag(:div, content, class: 'infos-block')
     end
