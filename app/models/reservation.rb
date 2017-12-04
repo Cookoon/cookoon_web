@@ -9,9 +9,14 @@ class Reservation < ApplicationRecord
 
   enum status: %i[pending paid accepted refused cancelled ongoing passed]
 
-  scope :for_tenant, -> { where.not(status: :pending).order(date: :asc) }
+  scope :for_tenant, (lambda do
+    where(status: %i[paid accepted refused cancelled ongoing passed])
+    .order(date: :asc)
+  end)
+
   scope :for_host, (lambda do
-    where(status: %i[paid refused passed ongoing accepted]).order(date: :asc)
+    where(status: %i[paid accepted refused ongoing passed])
+    .order(date: :asc)
   end)
 
   def host_cookoon_fee_rate
