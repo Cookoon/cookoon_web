@@ -26,11 +26,11 @@ class Host::InventoriesController < ApplicationController
 
   def update
     reservation = @inventory.reservation
-    full_params = checkout_inventory_params.merge({checkout_at: DateTime.now, status: :checked_out})
+    full_params = checkout_inventory_params.merge(checkout_at: DateTime.now, status: :checked_out)
     if @inventory.update(full_params) && reservation.passed!
       ReservationMailer.ending_survey_for_user(reservation).deliver_now
       ReservationMailer.ending_survey_for_host(reservation).deliver_now
-      flash[:notice] = "La réservation est maintenant terminée"
+      flash[:notice] = 'La réservation est maintenant terminée'
       redirect_to host_reservations_path
     else
       render :edit
@@ -40,7 +40,7 @@ class Host::InventoriesController < ApplicationController
   private
 
   def redirect_with_error
-    flash[:alert] = "La réservation a déja commencé"
+    flash[:alert] = 'La réservation a déja commencé'
     redirect_to host_reservations_path
   end
 
