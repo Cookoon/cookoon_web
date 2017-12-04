@@ -1,5 +1,6 @@
 <div class="container">
   <%= simple_form_for [:host, @reservation, @inventory] do |f| %>
+    <%= f.input :checkin_photos, as: :attachinary %>
     <div class="text-center light-padded">
       <%= f.button :button, 'DEMARRER LA LOCATION', type: :submit, class: 'button button-blue' %>
     </div>
