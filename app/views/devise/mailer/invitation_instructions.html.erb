@@ -6,7 +6,7 @@
   </tr>
   <tr>
     <td bgcolor="#ffffff" style="padding: 0 40px 0; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555; text-align: center;">
-      <p style="margin: 0;"><%= @resource.invited_by.first_name %> vous a invité à rejoindre Cookoon : la communauté exclusive qui vous permet d’organiser vos événements en 3 minutes chez les autres !</p>
+      <p style="margin: 0;"><%= @resource.invited_by.try(:first_name) %> vous a invité à rejoindre Cookoon : la communauté exclusive qui vous permet d’organiser vos événements en 3 minutes chez les autres !</p>
     </td>
   </tr>
   <tr>
