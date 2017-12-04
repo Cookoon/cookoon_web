@@ -17,6 +17,7 @@ class PaiementsController < ApplicationController
     )
 
     if paiement_service.create_charge_and_update_reservation
+      ReservationMailer.new_request(@reservation).deliver_now
       redirect_to cookoons_path, flash: { paiement_succeed: true }
     else
       flash[:alert] = paiement_service.displayable_errors
