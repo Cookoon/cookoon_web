@@ -5,39 +5,9 @@ fr:
     required:
       text: 'requis'
       mark: '*'
-      # You can uncomment the line below if you need to overwrite the whole required html.
-      # When using html, text and mark won't be used.
-      # html: '<abbr title="required">*</abbr>'
     error_notification:
       default_message: "Merci de revoir les éléments ci-dessous :"
-    # Examples
-    # labels:
-    #   defaults:
-    #     password: 'Password'
-    #   user:
-    #     new:
-    #       email: 'E-mail to sign in.'
-    #     edit:
-    #       email: 'E-mail.'
-    #   admin_user:
-    #     name: Name
-    # hints:
-    #   defaults:
-    #     username: 'User name to sign in.'
-    #     password: 'No special characters, please.'
-    # include_blanks:
-    #   defaults:
-    #     age: 'Rather not say'
-    # prompts:
-    #   defaults:
-    #     age: 'Select your age'
-    # options:
-    #   user:
-    #     role:
-    #       admin: 'Administrator'
-    #       editor: 'Editor'
   helpers:
     submit:
       user:
-        # create: "Add %{model}"
         update: Mettre à jour
