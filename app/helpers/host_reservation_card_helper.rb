@@ -5,6 +5,8 @@ module HostReservationCardHelper
 
   class HostReservationCard
     include Rails.application.routes.url_helpers
+    include ActionView::Helpers::TranslationHelper
+    include DatetimeHelper
 
     def initialize(view, reservation)
       @view, @reservation = view, reservation
@@ -19,7 +21,7 @@ module HostReservationCardHelper
     private
 
     attr_accessor :view, :reservation, :user
-    delegate :link_to, :content_tag, :image_tag, :cl_image_tag, :safe_join, :display_date_for, :display_time_for, to: :view
+    delegate :link_to, :content_tag, :image_tag, :cl_image_tag, :safe_join, to: :view
 
     def infos
       content = safe_join([user_picture, user_infos, status])

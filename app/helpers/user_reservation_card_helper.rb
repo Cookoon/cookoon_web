@@ -5,6 +5,8 @@ module UserReservationCardHelper
 
   class UserReservationCard
     include Rails.application.routes.url_helpers
+    include ActionView::Helpers::TranslationHelper
+    include DatetimeHelper
 
     def initialize(view, reservation)
       @view, @reservation = view, reservation
@@ -20,7 +22,7 @@ module UserReservationCardHelper
     private
 
     attr_accessor :view, :reservation
-    delegate :link_to, :content_tag, :image_tag, :cl_image_tag, :safe_join, :safe_picture_tag_for_reservations_index, :cl_image_path, :display_datetime_for, to: :view
+    delegate :link_to, :content_tag, :image_tag, :cl_image_tag, :safe_join, :safe_picture_tag_for_reservations_index, :cl_image_path, to: :view
 
     def header
       content = safe_join([header_infos, header_status])
