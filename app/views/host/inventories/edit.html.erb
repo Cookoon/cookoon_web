@@ -17,13 +17,12 @@
       En cas de soucis, soyez rassurés notre équipe prendra contact avec vous.
     </p>
   </ol>
+  <div class="thin-padded">
+    <% if @inventory.checkin_photos.any? %>
+      <h5 >Photos réalisées à l'entrée des lieux</h5>
+      <%= carousel_for @inventory.checkin_photos %>
+    <% end %>
 
-  <% if @inventory.checkin_photos.present? %>
-    <h5 class="light-padded">Photos réalisées à l'entrée des lieux</h5>
-    <%= carousel_for @inventory.checkin_photos %>
-  <% end %>
-
-  <%= render 'checkout_form' %>
-
-  <div class="padded"></div>
+    <%= render 'checkout_form' %>
+  </div>
 </div>

@@ -1,7 +1,7 @@
 <%= simple_form_for [:host, @inventory], html: { class: 'light-padded' }, remote: true do |f| %>
   <%= f.input :checkout_photos, as: :attachinary %>
   <%= f.input :remark, label: false, placeholder: 'Ajoutez ici les remarques que vous voulez partager à notre équipe (Ce champs peut rester vide)', input_html: { rows: 4 }  %>
-  <div class="fixed-bottom zi-20 light-padded">
+  <div class="light-padded">
     <%= f.button :button, 'TERMINER LA LOCATION', type: :submit, class: 'button button-blue' %>
   </div>
 <% end %>
