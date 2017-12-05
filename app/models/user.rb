@@ -37,7 +37,7 @@ class User < ApplicationRecord
   end
 
   def total_payouts_for_dashboard
-    price = reservations_requests.passed.sum { |request| request.payout_price_for_host }
+    price = reservations_requests.passed.includes(:cookoon).sum(&:payout_price_for_host)
     price.zero? ? Money.new(price) : price
   end
 end
