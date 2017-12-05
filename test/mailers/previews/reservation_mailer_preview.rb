@@ -26,6 +26,10 @@ class ReservationMailerPreview < ActionMailer::Preview
     ReservationMailer.pending_request(Reservation.first)
   end
 
+  def cancelled_by_tenant
+    ReservationMailer.cancelled_by_tenant(Reservation.first)
+  end
+
   def confirmation
     ReservationMailer.confirmation(Reservation.first)
   end

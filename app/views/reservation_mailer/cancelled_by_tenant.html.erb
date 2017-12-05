@@ -1,0 +1,31 @@
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="600" style="margin: auto;" class="email-body">
+
+  <tr>
+    <td bgcolor="#ffffff" style="padding: 40px 40px 20px; text-align: center;">
+      <h1 style="margin: 0; font-family: sans-serif; font-size: 24px; line-height: 125%; color: #333333; font-weight: normal;">Bonjour <%= @host.first_name %>,</h1>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="padding: 0 40px 0; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555; text-align: center;">
+      <p style="margin: 0;"><%= @tenant.first_name %> a annulé la location de votre Cookoon :</p>
+    </td>
+  </tr>
+
+  <tr>
+    <td bgcolor="#ffffff" style="padding: 40px 40px 20px; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555; text-align: center;">
+      <p>
+        <b style="color: #006F8B"><%= @cookoon.name %>,</b>
+        <br>Le <b style="color: #006F8B"><%= @reservation.date.strftime('%d/%m/%Y à %H:%M') %></b>
+        <br>pour <b style="color: #006F8B"><%= @reservation.duration %></b> heures.
+      </p>
+    </td>
+  </tr>
+
+  <tr>
+    <td bgcolor="#ffffff" style="padding: 0 40px 40px; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555; text-align: center;">
+      <p>
+        Nous sommes désolés pour le dérangement occasionné : votre Cookoon est de nouveau disponible à la location sur cette période.
+      </p>
+    </td>
+  </tr>
+</table>
