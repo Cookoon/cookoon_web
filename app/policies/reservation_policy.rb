@@ -14,7 +14,7 @@ class ReservationPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope.where(user: user)
+      scope.for_tenant(user).displayable
     end
   end
 end

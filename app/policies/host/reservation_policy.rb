@@ -10,7 +10,7 @@ class Host::ReservationPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       # here scope is an array because of namespacing
-      scope.last.where(cookoon: user.cookoons)
+      scope.last.for_host(user).displayable
     end
   end
 end
