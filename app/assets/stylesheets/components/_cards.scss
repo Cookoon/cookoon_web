@@ -1,5 +1,6 @@
 .card {
   background-size: cover;
+  background-position: center;
   height: 200px;
   position: relative;
   margin-bottom: 10px;
@@ -16,6 +17,12 @@
     justify-content: space-between;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
+  }
+  &-text {
+    padding-right: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   &-infos {
     display: flex;
@@ -145,12 +152,21 @@
   &-header {
     display: flex;
     justifiy-content: space-between;
+    &-infos {
+      width: 100%;
+    }
+  }
+  &-title {
+    padding-right: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   &-picture {
     width: 100%;
     height: 150px;
     background-size: cover;
-    background-position: center bottom;
+    background-position: center;
   }
   i {
     position: absolute;

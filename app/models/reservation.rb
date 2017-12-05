@@ -7,7 +7,11 @@ class Reservation < ApplicationRecord
 
   validates :price_cents, presence: true
 
-  enum status: [ :pending, :paid, :accepted, :refused, :cancelled, :ongoing, :passed ]
+  enum status: %i[pending paid accepted refused cancelled ongoing passed]
+
+  scope :displayable, -> { where.not(status: :pending).order(date: :asc) }
+  scope :for_tenant, ->(user) { where(user: user) }
+  scope :for_host, ->(user) { where(cookoon: user.cookoons) }
 
   def host_cookoon_fee_rate
     0.05

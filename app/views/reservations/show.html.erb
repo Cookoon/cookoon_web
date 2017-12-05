@@ -5,7 +5,7 @@
 <div class="container">
   <div class="reservation-details-card reservation-details-card-grey">
     <p><%= @reservation.cookoon.name.upcase %></p>
-    <p><%= "#{@reservation.date.strftime('%d %B %Y')} . à #{@reservation.date.hour}h . pour #{@reservation.duration}h" %></p>
+    <p><%= "#{display_datetime_for(@reservation.date, join_expression: '. à')} . pour #{@reservation.duration}h" %></p>
     <p><%= "#{@reservation.cookoon.category} - #{@reservation.cookoon.address} chez #{@reservation.cookoon.user.full_name}" %></p>
     <div class="text-center">
       <i class="fa fa-circle" aria-hidden="true"></i>

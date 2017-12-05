@@ -12,6 +12,6 @@
         <%= reservation.user.full_name %>
       </span>
     </p>
-    <p><%= "#{reservation.date.strftime('%d %B %Y')} - #{reservation.duration} H" %></p>
+    <p><%= "#{display_datetime_for(reservation.date)} - #{reservation.duration} H" %></p>
   </div>
 </div>
