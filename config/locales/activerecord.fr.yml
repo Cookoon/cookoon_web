@@ -9,3 +9,6 @@ fr:
         phone_number: Numéro de téléphone
         description: Description
         photo: Photo
+      inventory:
+        checkin_photos: Photos à l'entrée des lieux
+        checkout_photos: Photos à la sortie des lieux
