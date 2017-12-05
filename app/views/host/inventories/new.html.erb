@@ -21,7 +21,9 @@
   </ol>
 </div>
 <% if @reservation.starts_soon? %>
-  <%= render 'inventory_form' %>
+  <div class="container light-padded">
+    <%= render 'checkin_form' %>
+  </div>
 <% else %>
   <%= render 'too_soon_card' %>
 <% end %>
