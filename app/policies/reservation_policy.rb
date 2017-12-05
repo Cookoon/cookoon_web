@@ -14,7 +14,7 @@ class ReservationPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope.where.not(status: :pending).includes(cookoon: :photo_files).where(user: user)
+      scope.for_tenant(user).displayable
     end
   end
 end
