@@ -1,27 +1,26 @@
 class ReservationsController < ApplicationController
   before_action :find_cookoon, :build_reservation, only: [:create]
-  before_action :find_reservation, only: [:edit, :update, :show]
+  before_action :find_reservation, only: %i[edit update show]
 
   def index
     @reservations = policy_scope(Reservation)
   end
 
-  def show
-  end
+  def show; end
 
   def create
     @reservation.price = @reservation.price_for_rent
-    if @reservation.save
+    trello_service = TrelloReservationService.new(reservation: @reservation)
+    if trello_service.create_trello_card_and_save_reservation
       ReservationMailer.new_request(@reservation).deliver_now
       redirect_to new_reservation_paiement_path(@reservation)
     else
-      flash[:alert] = 'Erreur'
+      flash[:alert] = 'Une erreur est survenue, veuillez réessayer'
       redirect_to @cookoon
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     @reservation.cancelled!
