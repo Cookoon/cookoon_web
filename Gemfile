@@ -62,6 +62,7 @@ gem 'pundit'
 
 # Tracking
 gem 'raygun4ruby'
+gem 'scout_apm'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
