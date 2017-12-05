@@ -20,10 +20,6 @@ class TrelloReservationService
     @card ? save_card_id_in_reservation : false
   end
 
-  def displayable_errors
-    @errors.any? ? @errors.join(' ') : 'Erreur'
-  end
-
   private
 
   def save_card_id_in_reservation
