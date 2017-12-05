@@ -17,6 +17,12 @@
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
   }
+  &-text {
+    padding-right: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
   &-infos {
     display: flex;
     justify-content: space-around;
@@ -145,6 +151,15 @@
   &-header {
     display: flex;
     justifiy-content: space-between;
+    &-infos {
+      width: 100%;
+    }
+  }
+  &-title {
+    padding-right: 25px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   &-picture {
     width: 100%;
