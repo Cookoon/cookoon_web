@@ -8,8 +8,7 @@ class Host::InventoriesController < ApplicationController
   end
 
   def create
-    @inventory.attributes = checkin_inventory_params
-                            .merge(checkin_at: DateTime.now)
+    @inventory.attributes = inventory_params.merge(checkin_at: DateTime.now)
     if @inventory.save && @reservation.ongoing!
       paiement_service = StripePaiementService.new(user: @reservation.cookoon_owner, reservation: @reservation)
       # Pas de test ici, il faut monitorer sur les premieres locations
@@ -27,7 +26,7 @@ class Host::InventoriesController < ApplicationController
 
   def update
     reservation = @inventory.reservation
-    full_params = checkout_inventory_params.merge(checkout_at: DateTime.now, status: :checked_out)
+    full_params = inventory_params.merge(checkout_at: DateTime.now, status: :checked_out)
     if @inventory.update(full_params) && reservation.passed!
       ReservationMailer.ending_survey_for_user(reservation).deliver_now
       ReservationMailer.ending_survey_for_host(reservation).deliver_now
@@ -60,11 +59,7 @@ class Host::InventoriesController < ApplicationController
     authorize [:host, @reservation]
   end
 
-  def checkin_inventory_params
-    params.require(:inventory).permit(checkin_photos: [])
-  end
-
-  def checkout_inventory_params
-    params.require(:inventory).permit(:remark, checkout_photos: [])
+  def inventory_params
+    params.require(:inventory).permit(:remark, checkin_photos: [], checkout_photos: [])
   end
 end
