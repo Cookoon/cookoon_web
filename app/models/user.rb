@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :invitable, :database_authenticatable,:recoverable,
-    :trackable, :validatable, :rememberable
+  devise :invitable, :database_authenticatable, :recoverable,
+         :trackable, :validatable, :rememberable
 
   has_many :cookoons
   has_many :reservations
@@ -15,7 +15,7 @@ class User < ApplicationRecord
     if first_name && last_name
       "#{first_name.capitalize} #{last_name.capitalize}"
     else
-      "Utilisateur Cookoon"
+      'Utilisateur Cookoon'
     end
   end
 
