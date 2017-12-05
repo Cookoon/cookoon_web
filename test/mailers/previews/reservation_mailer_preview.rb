@@ -4,6 +4,10 @@ class ReservationMailerPreview < ActionMailer::Preview
     ReservationMailer.new_request(Reservation.first)
   end
 
+  def cancelled_request
+    ReservationMailer.cancelled_request(Reservation.first)
+  end
+
   def confirmed_by_host
     ReservationMailer.confirmed_by_host(Reservation.first)
   end
