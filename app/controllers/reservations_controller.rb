@@ -10,8 +10,7 @@ class ReservationsController < ApplicationController
 
   def create
     @reservation.price = @reservation.price_for_rent
-    trello_service = TrelloReservationService.new(reservation: @reservation)
-    if trello_service.create_trello_card_and_save_reservation
+    if @reservation.save
       ReservationMailer.new_request(@reservation).deliver_now
       redirect_to new_reservation_paiement_path(@reservation)
     else
