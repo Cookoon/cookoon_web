@@ -19,6 +19,8 @@ en:
     #       email: 'E-mail to sign in.'
     #     edit:
     #       email: 'E-mail.'
+    #   admin_user:
+    #     name: Name
     # hints:
     #   defaults:
     #     username: 'User name to sign in.'
@@ -29,3 +31,13 @@ en:
     # prompts:
     #   defaults:
     #     age: 'Select your age'
+    # options:
+    #   user:
+    #     role:
+    #       admin: 'Administrator'
+    #       editor: 'Editor'
+    # helpers:
+    #   submit:
+    #     user:
+    #       create: "Add %{model}"
+    #       update: "Save Changes"

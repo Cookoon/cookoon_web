@@ -4,6 +4,11 @@ body {
   min-height: 100vh;
 }
 
+// Z-indexes
+.zi-20 {
+  z-index: 20;
+}
+
 // Paddings
 .padded {
   padding-top: 5em;
@@ -40,7 +45,7 @@ body {
   background: #aeaeae;
 }
 .bg-blue {
-  background: #006F8B;
+  background: #006f8b;
 }
 .bg-dark-blue {
   background: #3b5998;
@@ -92,17 +97,16 @@ a {
 
 // Horizontal Rules
 hr {
-  margin-top : 22px;
+  margin-top: 22px;
   margin-bottom: 22px;
-  border-top: 1px solid black
+  border-top: 1px solid black;
 }
 
 .hr-white {
-  margin-top : 22px;
+  margin-top: 22px;
   margin-bottom: 22px;
-  border-top: 1px solid white
+  border-top: 1px solid white;
 }
-
 
 // Fonts
 h2 {
@@ -115,20 +119,20 @@ h2 {
 }
 
 // Trick to disable zoom on Ios mobile devices
-input[type="color"],
-input[type="date"],
-input[type="datetime"],
-input[type="datetime-local"],
-input[type="email"],
-input[type="month"],
-input[type="number"],
-input[type="password"],
-input[type="search"],
-input[type="tel"],
-input[type="text"],
-input[type="time"],
-input[type="url"],
-input[type="week"],
+input[type='color'],
+input[type='date'],
+input[type='datetime'],
+input[type='datetime-local'],
+input[type='email'],
+input[type='month'],
+input[type='number'],
+input[type='password'],
+input[type='search'],
+input[type='tel'],
+input[type='text'],
+input[type='time'],
+input[type='url'],
+input[type='week'],
 select:focus,
 textarea {
   font-size: 16px;

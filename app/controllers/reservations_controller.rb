@@ -3,7 +3,7 @@ class ReservationsController < ApplicationController
   before_action :find_reservation, only: %i[edit update show]
 
   def index
-    @reservations = policy_scope(Reservation)
+    @reservations = policy_scope(Reservation).includes(cookoon: :photo_files)
   end
 
   def show; end
@@ -11,11 +11,9 @@ class ReservationsController < ApplicationController
   def create
     @reservation.price = @reservation.price_for_rent
     if @reservation.save
-      ReservationMailer.new_request(@reservation).deliver_now
       redirect_to new_reservation_paiement_path(@reservation)
     else
-      flash[:alert] = 'Une erreur est survenue, veuillez réessayer'
-      redirect_to @cookoon
+      render 'reservations/new'
     end
   end
 
@@ -23,6 +21,8 @@ class ReservationsController < ApplicationController
 
   def update
     @reservation.cancelled!
+    ReservationMailer.cancelled_request(@reservation).deliver_now
+    ReservationMailer.cancelled_by_tenant(@reservation).deliver_now
     redirect_to reservations_path
   end
 

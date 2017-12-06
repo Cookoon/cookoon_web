@@ -5,6 +5,8 @@ module HostReservationCardHelper
 
   class HostReservationCard
     include Rails.application.routes.url_helpers
+    include ActionView::Helpers::TranslationHelper
+    include DatetimeHelper
 
     def initialize(view, reservation)
       @view, @reservation = view, reservation
@@ -36,8 +38,8 @@ module HostReservationCardHelper
 
     def user_infos
       user_name = content_tag(:p, user.full_name)
-      date = content_tag(:p, reservation.date.strftime('%d %B %Y'))
-      duration = content_tag(:p, "#{reservation.date.hour}h pour #{reservation.duration}h")
+      date = content_tag(:p, display_date_for(reservation.date))
+      duration = content_tag(:p, "#{display_time_for(reservation.date)} pour #{reservation.duration}h")
       content = safe_join([user_name, date, duration])
       content_tag(:div, content, class: 'infos-block')
     end

@@ -1,0 +1,6 @@
+<%= simple_form_for [:host, @reservation, @inventory], remote: true do |f| %>
+  <%= f.input :checkin_photos, as: :attachinary %>
+  <div class="text-center light-padded">
+    <%= f.button :button, 'DEMARRER LA LOCATION', type: :submit, class: 'button button-blue' %>
+  </div>
+<% end %>

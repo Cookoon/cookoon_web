@@ -61,6 +61,10 @@ gem 'money-rails', '~>1'
 gem 'pundit'
 gem 'ruby-trello'
 
+# Tracking
+gem 'raygun4ruby'
+gem 'scout_apm'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

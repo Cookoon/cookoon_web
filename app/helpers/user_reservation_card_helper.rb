@@ -5,6 +5,8 @@ module UserReservationCardHelper
 
   class UserReservationCard
     include Rails.application.routes.url_helpers
+    include ActionView::Helpers::TranslationHelper
+    include DatetimeHelper
 
     def initialize(view, reservation)
       @view, @reservation = view, reservation
@@ -33,11 +35,11 @@ module UserReservationCardHelper
     end
 
     def title
-      content_tag(:h4, "#{reservation.cookoon.name}")
+      content_tag(:h4, reservation.cookoon.name, class: 'user-reservation-card-title')
     end
 
     def details
-      content_tag(:p, "#{reservation.date.strftime('%d %B %Y')} . à #{reservation.date.hour}h . pour #{reservation.duration}h")
+      content_tag(:p, "#{display_datetime_for(reservation.date, join_expression: '. à')} . pour #{reservation.duration}h")
     end
 
     def header_status

@@ -1,0 +1,20 @@
+fr:
+  activerecord:
+    models:
+      user: Utilisateur
+    attributes:
+      user:
+        first_name: Prénom
+        last_name: Nom
+        phone_number: Numéro de téléphone
+        description: Description
+        photo: Photo
+      inventory:
+        checkin_photos: Photos à l'entrée des lieux
+        checkout_photos: Photos à la sortie des lieux
+    errors:
+      models:
+        reservation:
+          attributes:
+            date:
+              not_after_48_hours: doit être dans plus de 48 heures

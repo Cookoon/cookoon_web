@@ -1,5 +1,5 @@
 <div class="container">
-  <h4>Vous préparez la sortie d'un locatatire</h4>
+  <h4>Vous préparez la sortie d'un locataire</h4>
   <p>Avant de terminer la location vous devez :</p>
   <ol>
     <li><strong>Faire l'état des lieux</strong></li>
@@ -17,10 +17,12 @@
       En cas de soucis, soyez rassurés notre équipe prendra contact avec vous.
     </p>
   </ol>
-  <%= simple_form_for [:host, @inventory] do |f| %>
-    <%= f.input :remark, label: false, placeholder: 'Ajoutez ici les remarques que vous voulez partager à notre équipe (Ce champs peut rester vide)', input_html: { rows: 4 }  %>
-    <div class="fixed-bottom light-padded">
-      <%= f.button :button, 'TERMINER LA LOCATION', type: :submit, class: 'button button-blue' %>
-    </div>
-  <% end %>
+  <div class="thin-padded">
+    <% if @inventory.checkin_photos.any? %>
+      <h5 >Photos réalisées à l'entrée des lieux</h5>
+      <%= carousel_for @inventory.checkin_photos %>
+    <% end %>
+
+    <%= render 'checkout_form' %>
+  </div>
 </div>

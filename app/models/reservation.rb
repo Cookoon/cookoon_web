@@ -6,8 +6,13 @@ class Reservation < ApplicationRecord
   monetize :price_cents
 
   validates :price_cents, presence: true
+  validate :date_after_48_hours
 
-  enum status: [ :pending, :paid, :accepted, :refused, :cancelled, :ongoing, :passed ]
+  enum status: %i[pending paid accepted refused cancelled ongoing passed]
+
+  scope :displayable, -> { where.not(status: :pending).order(date: :asc) }
+  scope :for_tenant, ->(user) { where(user: user) }
+  scope :for_host, ->(user) { where(cookoon: user.cookoons) }
 
   before_create :create_trello_card
   before_save :update_trello_card, if: :status_changed?
@@ -75,6 +80,10 @@ class Reservation < ApplicationRecord
 
   def trello_service
     TrelloReservationService.new(reservation: self)
+  end
+
+  def date_after_48_hours
+    errors.add(:date, :not_after_48_hours) if date < (Time.zone.now + 48.hours)
   end
 
   def base_option_price

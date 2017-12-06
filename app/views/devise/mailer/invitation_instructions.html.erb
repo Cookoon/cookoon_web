@@ -1,7 +1,65 @@
-<p><%= t("devise.mailer.invitation_instructions.hello", email: @resource.email) %></p>
+<table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="600" style="margin: auto;" class="email-body">
+  <tr>
+    <td bgcolor="#ffffff" style="padding: 40px 40px 20px; text-align: center;">
+      <h1 style="margin: 0; font-family: sans-serif; font-size: 24px; line-height: 125%; color: #333333; font-weight: normal;">Bonjour <%= @resource.first_name %>,</h1>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="padding: 0 40px 0; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555; text-align: center;">
+      <p style="margin: 0;"><%= @resource.invited_by.try(:first_name) %> vous a invité à rejoindre Cookoon : la communauté exclusive qui vous permet d’organiser vos événements en 3 minutes chez les autres !</p>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="padding: 0 40px 40px; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555;">
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" style="margin: auto; padding: 25px">
+        <tr>
+          <td style="border-radius: 30px; background: #006F8B; text-align: center;" class="button-td">
+            <%= link_to ("Accepter l'invitation"), accept_invitation_url(@resource, :invitation_token => @token),  class: 'button' %>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <!-- 2 Even Columns : BEGIN -->
+  <tr>
+    <td align="center" valign="top" style="padding: 10px;">
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+        <tr>
+          <!-- Column : BEGIN -->
+          <td class="stack-column-center">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+              <tr>
+                <td style="padding: 40px 30px 20px; text-align: center;">
+                  <h2 style="color: #006F8B">Cookoon, c'est quoi ?</h2>
 
-<p><%= t("devise.mailer.invitation_instructions.someone_invited_you", url: root_url) %></p>
+                  <ul style=" text-align: left;">
+                    <li>Une application communautaire pour organiser vos événements du quotidien,</li>
+                    <li>en louant l'appartement d'un autre membre,</li>
+                    <li>et en choisissant des options supplémentaires.</li>
+                  </ul>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <!-- Column : END -->
+          <!-- Column : BEGIN -->
+          <td class="stack-column-center">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+              <tr>
+                <td style="padding: 40px 30px 20px; text-align: center;">
+                  <h2 style="color: #006F8B">Pour faire quoi ?</h2>
 
-<p><%= link_to t("devise.mailer.invitation_instructions.accept"), accept_invitation_url(@resource, :invitation_token => @token) %></p>
-
-<p><%= t("devise.mailer.invitation_instructions.ignore").html_safe %></p>
+                  <p style=" text-align: left;">Organisez vos événements personnels et/ou professionnels : rendez-vous, réunions, déjeuners, etc.
+                  <br>Rentabilisez votre lieu de vie quand vous ne l’occupez pas, sans les contraintes habituelles
+                  </p>
+                </td>
+              </tr>
+            </table>
+          </td>
+          <!-- Column : END -->
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <!-- 2 Even Columns : END -->
+</table>

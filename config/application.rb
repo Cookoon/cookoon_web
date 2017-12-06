@@ -24,6 +24,8 @@ module CookoonWeb
 
     config.i18n.default_locale = :fr
 
+    config.to_prepare { Devise::Mailer.layout "mailer" }
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

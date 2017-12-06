@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :invitable, :database_authenticatable,:recoverable,
-    :trackable, :validatable, :rememberable
+  devise :invitable, :database_authenticatable, :recoverable,
+         :trackable, :validatable, :rememberable
 
   has_many :cookoons
   has_many :reservations
@@ -15,7 +15,7 @@ class User < ApplicationRecord
     if first_name && last_name
       "#{first_name.capitalize} #{last_name.capitalize}"
     else
-      "Utilisateur Cookoon"
+      'Utilisateur Cookoon'
     end
   end
 
@@ -37,7 +37,7 @@ class User < ApplicationRecord
   end
 
   def total_payouts_for_dashboard
-    price = reservations_requests.passed.sum { |request| request.payout_price_for_host }
+    price = reservations_requests.passed.includes(:cookoon).sum(&:payout_price_for_host)
     price.zero? ? Money.new(price) : price
   end
 end

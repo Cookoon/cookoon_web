@@ -1,5 +1,5 @@
 <div class="container">
-  <h4>Vous accuillez un nouveau locatatire</h4>
+  <h4>Vous accueillez un nouveau locataire</h4>
   <p>Avant de démarrer la location vous devez :</p>
   <ol>
     <li><strong>Vérifier l'identité du locataire</strong></li>
@@ -21,7 +21,9 @@
   </ol>
 </div>
 <% if @reservation.starts_soon? %>
-  <%= render 'inventory_form' %>
+  <div class="container thin-padded">
+    <%= render 'checkin_form' %>
+  </div>
 <% else %>
   <%= render 'too_soon_card' %>
 <% end %>
