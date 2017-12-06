@@ -6,5 +6,16 @@
 
   <br><br>
 
-  <%= render 'new_form' %>
+  <%= simple_form_for resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post} do |f| %>
+    <%= devise_error_messages! %>
+
+    <%= f.input :email, label: "L'E-mail de votre invité" %>
+    <%= f.input :first_name, label: "Le prénom de votre invité" %>
+    <%= f.input :last_name, label: "Le nom de votre invité" %>
+
+    <div class="text-center">
+      <%= f.button :submit, "INVITER", class: 'button button-blue' %>
+    </div>
+
+  <% end %>
 </div>
