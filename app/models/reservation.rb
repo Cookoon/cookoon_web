@@ -14,11 +14,11 @@ class Reservation < ApplicationRecord
   scope :for_host, ->(user) { where(cookoon: user.cookoons) }
 
   def host_cookoon_fee_rate
-    0.05
+    0.07
   end
 
   def rent_cookoon_fee_rate
-    0.07
+    0.05
   end
 
   def pending_or_paid?
@@ -67,6 +67,6 @@ class Reservation < ApplicationRecord
   private
 
   def base_option_price
-    15
+    20
   end
 end
