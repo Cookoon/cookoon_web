@@ -41,7 +41,3 @@ en:
     #     user:
     #       create: "Add %{model}"
     #       update: "Save Changes"
-    # errors:
-    #   messages:
-    #     not_a_valid_email: should be a valid E-mail
-    #     not_a_valid_phone: should be a valid Phone number
