@@ -6,7 +6,6 @@ class Reservation < ApplicationRecord
   monetize :price_cents
 
   validates :price_cents, presence: true
-  validate :date_after_48_hours
 
   enum status: %i[pending paid accepted refused cancelled ongoing passed]
 
@@ -66,12 +65,6 @@ class Reservation < ApplicationRecord
   end
 
   private
-
-  def date_after_48_hours
-    if date < (Time.zone.now + 48.hours)
-      errors.add(:date, :not_after_48_hours)
-    end
-  end
 
   def base_option_price
     15

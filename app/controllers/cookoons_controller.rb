@@ -28,8 +28,8 @@ class CookoonsController < ApplicationController
     authorize @cookoon
     @reservation = current_user.reservations.build(
       cookoon: @cookoon,
-      date: current_search.try(:date) || Time.zone.now + 2.days,
-      duration: current_search.try(:duration) || 2
+      date: current_search.try(:date) || DateTime.now + 2.days,
+      duration: current_search.try(:duration) || 2,
     )
   end
 
