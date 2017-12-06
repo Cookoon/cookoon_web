@@ -27,38 +27,36 @@ class TrelloReservationService
 
   private
 
+  attr_accessor :reservation
+  attr_reader :card, :host, :tenant, :cookoon
+
   def move_card_to_desired_list
-    @card.move_to_list(list_id)
+    card.move_to_list(list_id)
   rescue Trello::Error
-    Rails.logger.error("Faild to move Trello Card to #{@reservation.status}_list")
+    Rails.logger.error("Faild to move Trello Card to #{reservation.status}_list")
     false
   end
 
   def retrieve_card
-    @card = Trello::Card.find(@reservation.trello_card_id)
+    @card = Trello::Card.find(reservation.trello_card_id)
   rescue Trello::Error
     Rails.logger.error('Faild to retrieve Trello Card')
     false
   end
 
   def list_id
-    id = TRELLO_LISTS_IDS["#{@reservation.status}_list_id".to_sym]
+    id = TRELLO_LISTS_IDS["#{reservation.status}_list_id".to_sym]
     # prevent bug from tello api if id is nil
     id ? id : ''
-  end
-
-  def save_card_id_in_reservation
-    @reservation.trello_card_id = @card.id
-    @reservation.save
   end
 
   def create_card
     card = Trello::Card.create(
       list_id: TRELLO_LISTS_IDS[:pending_list_id],
-      name: "#{@cookoon.name} - #{@reservation.date.strftime('%d/%m/%Y')}",
+      name: "#{cookoon.name} - #{reservation.date.strftime('%d/%m/%Y')}",
       desc: description
     )
-    @reservation.trello_card_id = card.id
+    reservation.trello_card_id = card&.id
   rescue Trello::Error => e
     Rails.logger.error('Failed to create Trello Card')
     Rails.logger.error(e.message)
@@ -66,15 +64,15 @@ class TrelloReservationService
   end
 
   def description
-    desc_string = "**locataire : #{@tenant.full_name} [#{@tenant.id}]** \n"
-    desc_string << "email: #{@tenant.email} \n"
-    desc_string << "téléphone: #{@tenant.phone_number} \n"
-    desc_string << "**propriétaire : #{@host.full_name} [#{@host.id}]** \n"
-    desc_string << "email: #{@host.email} \n"
-    desc_string << "téléphone: #{@host.phone_number} \n"
+    desc_string = "**locataire : #{tenant.full_name} [#{tenant.id}]** \n"
+    desc_string << "email: #{tenant.email} \n"
+    desc_string << "téléphone: #{tenant.phone_number} \n"
+    desc_string << "**propriétaire : #{host.full_name} [#{host.id}]** \n"
+    desc_string << "email: #{host.email} \n"
+    desc_string << "téléphone: #{host.phone_number} \n"
     desc_string << "\n"
-    desc_string << "**prix payé par le locataire :** #{@reservation.price_for_rent_with_fees} € \n"
-    desc_string << "**somme versée à l'hôte :** #{@reservation.payout_price_for_host} € \n"
+    desc_string << "**prix payé par le locataire :** #{reservation.price_for_rent_with_fees} € \n"
+    desc_string << "**somme versée à l'hôte :** #{reservation.payout_price_for_host} € \n"
 
     if @reservation.catering
       desc_string << "\n"
