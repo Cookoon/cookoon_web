@@ -1,13 +1,11 @@
 .search {
-  background: #006F8B;
+  background: #006f8b;
   color: white;
   margin-bottom: 10px;
   padding-bottom: 10px;
   margin: 15px;
-  box-shadow:
-    0 1px 2px rgba(0,0,0,0.12),
-    0 1px 1px rgba(0,0,0,0.24);
-  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 1px 1px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   &-header {
     display: flex;
     justify-content: space-between;
@@ -24,17 +22,19 @@
 }
 
 .search:hover {
-  box-shadow: 0 5px 5px rgba(0,0,0,0.25), 0 5px 12px rgba(0,0,0,0.22);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.25), 0 5px 12px rgba(0, 0, 0, 0.22);
 }
 
-.search-body input, .search-body select {
+.search-body input,
+.search-body select {
   border-bottom: 2px solid white;
-  background: #006F8B;
+  background: #006f8b;
   color: white;
   margin-bottom: 10px;
 }
 
-.search-body input:focus, .search-body select:focus {
+.search-body input:focus,
+.search-body select:focus {
   border: none;
   border-bottom: 2px solid white;
 }
@@ -46,7 +46,7 @@
 .increment-block {
   display: flex;
   justify-content: space-between;
-  background: #006F8B;
+  background: #006f8b;
   align-items: center;
   color: white;
   padding: 25px;
@@ -57,22 +57,22 @@
 }
 
 @keyframes bump {
-  30% { transform: scale(1.2); }
+  30% {
+    transform: scale(1.2);
+  }
 }
 
 .datetimepicker {
   background: $blue;
   color: white;
   table tr td span.active.active {
-    background: #3F88C5;
+    background: $blue;
   }
 }
 
 .form-control[readonly] {
   background: $blue;
 }
-
-
 
 @media (max-width: 400px) {
   #infos-address {
@@ -83,8 +83,18 @@
   }
 }
 
-.search .form-control::-webkit-input-placeholder { color: white; }  /* WebKit, Blink, Edge */
-.search .form-control:-moz-placeholder { color: white; }  /* Mozilla Firefox 4 to 18 */
-.search .form-control::-moz-placeholder { color: white; }  /* Mozilla Firefox 19+ */
-.search .form-control:-ms-input-placeholder { color: white; }  /* Internet Explorer 10-11 */
-.search .form-control::-ms-input-placeholder { color: white; }  /* Microsoft Edge */
+.search .form-control::-webkit-input-placeholder {
+  color: white;
+} /* WebKit, Blink, Edge */
+.search .form-control:-moz-placeholder {
+  color: white;
+} /* Mozilla Firefox 4 to 18 */
+.search .form-control::-moz-placeholder {
+  color: white;
+} /* Mozilla Firefox 19+ */
+.search .form-control:-ms-input-placeholder {
+  color: white;
+} /* Internet Explorer 10-11 */
+.search .form-control::-ms-input-placeholder {
+  color: white;
+} /* Microsoft Edge */
