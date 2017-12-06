@@ -9,6 +9,9 @@ class Reservation < ApplicationRecord
 
   enum status: [ :pending, :paid, :accepted, :refused, :cancelled, :ongoing, :passed ]
 
+  before_create :create_trello_card
+  before_save :update_trello_card, if: :status_changed?
+
   def host_cookoon_fee_rate
     0.05
   end
@@ -61,6 +64,18 @@ class Reservation < ApplicationRecord
   end
 
   private
+
+  def update_trello
+    trello_service.move_card # if Rails.env.production?
+  end
+
+  def create_trello_card
+    trello_service.create_trello_card # if Rails.env.production?
+  end
+
+  def trello_service
+    TrelloReservationService.new(reservation: self)
+  end
 
   def base_option_price
     15
