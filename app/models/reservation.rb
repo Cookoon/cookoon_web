@@ -71,11 +71,17 @@ class Reservation < ApplicationRecord
   private
 
   def update_trello
-    trello_service.move_card # if Rails.env.production?
+    return unless Rails.env.production?
+    if accepted?
+      trello_service.enrich_and_move_card
+    else
+      trello_service.move_card
+    end
   end
 
   def create_trello_card
-    trello_service.create_trello_card # if Rails.env.production?
+    return unless Rails.env.production?
+    trello_service.create_trello_card
   end
 
   def trello_service
