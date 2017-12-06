@@ -14,7 +14,8 @@ class ReservationsController < ApplicationController
     if @reservation.save
       redirect_to new_reservation_paiement_path(@reservation)
     else
-      render 'reservations/new'
+      flash[:alert] = 'Erreur'
+      redirect_to @cookoon
     end
   end
 

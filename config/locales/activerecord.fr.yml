@@ -12,9 +12,3 @@ fr:
       inventory:
         checkin_photos: Photos à l'entrée des lieux
         checkout_photos: Photos à la sortie des lieux
-    errors:
-      models:
-        reservation:
-          attributes:
-            date:
-              not_after_48_hours: doit être dans plus de 48 heures
