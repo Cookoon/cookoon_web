@@ -22,7 +22,14 @@ class TrelloReservationService
   end
 
   def move_card
-    move_card_to_desired_list if retrieve_card
+    retrieve_card
+    move_card_to_desired_list
+  end
+
+  def enrich_and_move_card
+    retrieve_card
+    enrich_description
+    move_card_to_desired_list
   end
 
   private
@@ -30,7 +37,14 @@ class TrelloReservationService
   attr_accessor :reservation
   attr_reader :card, :host, :tenant, :cookoon
 
+  def enrich_description
+    return unless card
+    card.desc = description
+    card.save
+  end
+
   def move_card_to_desired_list
+    return unless card
     card.move_to_list(list_id)
   rescue Trello::Error
     Rails.logger.error("Faild to move Trello Card to #{reservation.status}_list")
@@ -74,9 +88,19 @@ class TrelloReservationService
     desc_string << "**prix payé par le locataire :** #{reservation.price_for_rent_with_fees} € \n"
     desc_string << "**somme versée à l'hôte :** #{reservation.payout_price_for_host} € \n"
 
-    if @reservation.catering
+    if reservation.catering
       desc_string << "\n"
-      desc_string << '**SERVICE TRAITEUR À PRÉVOIR**'
+      desc_string << "**SERVICE TRAITEUR À PRÉVOIR** \n"
+    end
+
+    if reservation.cleaning
+      desc_string << "\n"
+      desc_string << "**SERVICE MENAGE À PRÉVOIR** \n"
+    end
+
+    if reservation.janitor
+      desc_string << "\n"
+      desc_string << "**SERVICE CONCIERGE À PRÉVOIR** \n"
     end
 
     desc_string
