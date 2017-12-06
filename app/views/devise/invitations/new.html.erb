@@ -6,7 +6,7 @@
 
   <br><br>
 
-  <%= simple_form_for resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post} do |f| %>
+  <%= simple_form_for resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post, remote: true } do |f| %>
     <%= devise_error_messages! %>
 
     <%= f.input :email, label: "L'E-mail de votre invité" %>
