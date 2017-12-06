@@ -65,9 +65,6 @@
 .datetimepicker {
   background: $blue;
   color: white;
-  table tr td span:focus {
-    background: red;
-  }
   table tr td span.active.active {
     background: $blue;
   }
