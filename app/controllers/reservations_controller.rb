@@ -1,13 +1,12 @@
 class ReservationsController < ApplicationController
   before_action :find_cookoon, :build_reservation, only: [:create]
-  before_action :find_reservation, only: [:edit, :update, :show]
+  before_action :find_reservation, only: %i[edit update show]
 
   def index
     @reservations = policy_scope(Reservation).includes(cookoon: :photo_files)
   end
 
-  def show
-  end
+  def show; end
 
   def create
     @reservation.price = @reservation.price_for_rent
@@ -18,8 +17,7 @@ class ReservationsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     @reservation.cancelled!

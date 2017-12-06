@@ -59,6 +59,7 @@ gem 'devise-i18n'
 gem 'devise_invitable', '~> 1.7.0'
 gem 'money-rails', '~>1'
 gem 'pundit'
+gem 'ruby-trello'
 
 # Tracking
 gem 'raygun4ruby'
