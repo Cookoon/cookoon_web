@@ -1,12 +1,14 @@
 class TrelloReservationService
-  RESERVATION_BOARD_ID = '5a25793534f1ae1cfe4ee2f3'
-  PENDING_LIST_ID = '5a2579418ee80817fe7bc895'
-  PAID_LIST_ID = '5a257963d78c51fb153efcc9'
-  ACCEPTED_LIST_ID = '5a257967cdb5c264f6b366b3'
-  REFUSED_LIST_ID = '5a25796e043080a82bbb7d00'
-  CANCELLED_LIST_ID = '5a2579740c812810b01aeea0'
-  ONGOING_LIST_ID = '5a25798044d805dc0874fac0'
-  PASSED_LIST_ID = '5a257983040c2a29948c4a1e'
+  TRELLO_LISTS_IDS = {
+    reservation_board_id: '5a25793534f1ae1cfe4ee2f3',
+    pending_list_id: '5a2579418ee80817fe7bc895',
+    paid_list_id: '5a257963d78c51fb153efcc9',
+    accepted_list_id: '5a257967cdb5c264f6b366b3',
+    refused_list_id: '5a25796e043080a82bbb7d00',
+    cancelled_list_id: '5a2579740c812810b01aeea0',
+    ongoing_list_id: '5a25798044d805dc0874fac0',
+    passed_list_id: '5a257983040c2a29948c4a1e'
+  }
 
   def initialize(attributes)
     @reservation = attributes[:reservation]
@@ -15,24 +17,48 @@ class TrelloReservationService
     @host = @cookoon.user
   end
 
-  def create_trello_card_and_save_reservation
-    create_trello_card
-    @card ? save_card_id_in_reservation : false
+  def create_trello_card
+    create_card
+  end
+
+  def move_card
+    move_card_to_desired_list if retrieve_card
   end
 
   private
+
+  def move_card_to_desired_list
+    @card.move_to_list(list_id)
+  rescue Trello::Error
+    Rails.logger.error("Faild to move Trello Card to #{@reservation.status}_list")
+    false
+  end
+
+  def retrieve_card
+    @card = Trello::Card.find(@reservation.trello_card_id)
+  rescue Trello::Error
+    Rails.logger.error('Faild to retrieve Trello Card')
+    false
+  end
+
+  def list_id
+    id = TRELLO_LISTS_IDS["#{@reservation.status}_list_id".to_sym]
+    # prevent bug from tello api if id is nil
+    id ? id : ''
+  end
 
   def save_card_id_in_reservation
     @reservation.trello_card_id = @card.id
     @reservation.save
   end
 
-  def create_trello_card
-    @card = Trello::Card.create(
-      list_id: PENDING_LIST_ID,
+  def create_card
+    card = Trello::Card.create(
+      list_id: TRELLO_LISTS_IDS[:pending_list_id],
       name: "#{@cookoon.name} - #{@reservation.date.strftime('%d/%m/%Y')}",
       desc: description
     )
+    @reservation.trello_card_id = card.id
   rescue Trello::Error => e
     Rails.logger.error('Failed to create Trello Card')
     Rails.logger.error(e.message)
