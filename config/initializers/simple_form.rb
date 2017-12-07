@@ -168,6 +168,8 @@ SimpleForm.setup do |config|
   # config.i18n_scope = 'simple_form'
 end
 
+# Adds a default disable_with options to every simple_form
+# Seems good but can be safely removed at any point
 module DisableDoubleClickOnSimpleForms
   def submit(field, options = {})
     if field.is_a?(Hash)
