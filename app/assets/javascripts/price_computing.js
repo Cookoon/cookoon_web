@@ -33,7 +33,7 @@ function compute_price_for_rent(duration_input) {
       .replace(',', '.') *
     duration_input.val() *
     100;
-  var total_price_cents = price_cents_without_fees * 1.07;
+  var total_price_cents = price_cents_without_fees * 1.05;
   $('#total-price').text(
     (total_price_cents / 100).toFixed(2).replace('.', ',')
   );
