@@ -11,6 +11,8 @@ class User < ApplicationRecord
 
   has_attachment :photo
 
+  validates :terms_of_service, acceptance: { message: 'Vous devez accepter les conditions générales pour continuer' }
+
   def full_name
     if first_name && last_name
       "#{first_name.capitalize} #{last_name.capitalize}"
