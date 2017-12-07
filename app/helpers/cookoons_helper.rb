@@ -4,7 +4,8 @@ module CookoonsHelper
   end
 
   def cookoon_safe_picture(cookoon)
-    cookoon.photos? ? "https://res.cloudinary.com/cookoon/image/upload/#{cookoon.photos.first.path}" : 'http://lorempixel.com/400/200/city/'
+    cookoon.photos? ? cl_image_path(cookoon.photos.last.path) : 'http://lorempixel.com/400/200/city/'
+
   end
 
   def safe_picture_tag_for_reservations_index(cookoon)

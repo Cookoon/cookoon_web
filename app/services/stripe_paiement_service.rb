@@ -57,7 +57,7 @@ class StripePaiementService
   end
 
   def displayable_errors
-    @errors.join(" ")
+    @errors.join(' ')
   end
 
   private
