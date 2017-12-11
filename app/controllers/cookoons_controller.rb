@@ -1,4 +1,6 @@
 class CookoonsController < ApplicationController
+  include DatetimeHelper
+
   def index
     @lat_lng = cookies[:lat_lng].try(:split, "|")
     @new_search = UserSearch.new(number: 2, duration: 2, date: DateTime.now + 2.days)
@@ -42,7 +44,7 @@ class CookoonsController < ApplicationController
   def prepare_infos
     @search_infos = {
       position: @last_search.address.try(:split, " - ").try(:first) || 'Adresse',
-      time_slot: l(@last_search.date, format: '%e %B %k:%M') || 'Tout de suite',
+      time_slot: display_datetime_for(@last_search.date, join_expression: 'à', without_year: true, time_separator: ':') || 'Tout de suite',
       people_number: @last_search.number || 4
     }
   end
