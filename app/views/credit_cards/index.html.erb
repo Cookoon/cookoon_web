@@ -4,12 +4,14 @@
   <% if @stripe_sources.blank? %>
     <p>Vous n'avez aucune carte de crédit, Ajoutez en une dès maintenant !</p>
   <% else %>
-    <ul class="fa-ul">
+    <ul class="fa-ul fs-16">
       <% @stripe_sources.data.each_with_index do |card_data, index| %>
         <li><i class="fa-li co co-cb"></i>
           <%= "(Principale)" if index.zero? %>
-          <%= "#{card_data.brand.upcase} se terminant par : #{card_data.last4}" %> -
-          <%= link_to 'supprimer', credit_card_path(card_data.id), remote: true, method: :delete, class: 'no-button slowLoad' %>
+          <%= display_credit_card_for card_data %> -
+          <%= link_to credit_card_path(card_data.id), remote: true, method: :delete, class: 'no-button slowLoad' do %>
+            <i class="fa fa-times"></i> Supprimer
+          <% end %>
         </li>
       <% end %>
     </ul>

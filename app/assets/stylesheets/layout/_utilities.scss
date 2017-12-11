@@ -9,6 +9,11 @@ body {
   z-index: 20;
 }
 
+// Font sizes
+.fs-16 {
+  font-size: 16px;
+}
+
 // Paddings
 .padded {
   padding-top: 5em;
@@ -140,4 +145,10 @@ textarea {
 
 select {
   -webkit-appearance: none;
+}
+
+// Font Awesome UL
+.fa-ul > li,
+.fa-ul > li > i.fa-li {
+  padding: 1em 0;
 }
