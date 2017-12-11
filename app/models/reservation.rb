@@ -6,7 +6,10 @@ class Reservation < ApplicationRecord
   monetize :price_cents
 
   validates :price_cents, presence: true
+  validates :duration, presence: true
+  validates :date, presence: true
   validate :date_after_48_hours
+  validate :not_my_cookoon
 
   enum status: %i[pending paid accepted refused cancelled ongoing passed]
 
@@ -89,7 +92,13 @@ class Reservation < ApplicationRecord
   end
 
   def date_after_48_hours
+    return unless date
     errors.add(:date, :not_after_48_hours) if date < (Time.zone.now + 48.hours)
+  end
+
+  def not_my_cookoon
+    return unless cookoon && user
+    errors.add(:cookoon, :cannot_book_mine) if cookoon.user == user
   end
 
   def base_option_price
