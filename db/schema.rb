@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171205140017) do
+ActiveRecord::Schema.define(version: 20171211091327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20171205140017) do
     t.string "category"
     t.text "description"
     t.integer "status", default: 0
+    t.string "trello_card_id"
     t.index ["user_id"], name: "index_cookoons_on_user_id"
   end
 
