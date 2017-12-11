@@ -1,4 +1,6 @@
 class TrelloCookoonService
+  include CloudinaryHelper
+
   TRELLO_LISTS_IDS = {
     under_review_list_id: '5a253938f1a56c25084f5400',
     approved_list_id: '5a2e482923c373d2c8769bd7',
@@ -42,9 +44,8 @@ class TrelloCookoonService
 
   def add_attached_pictures
     return false unless card
-    cloudinary_base_url = 'https://res.cloudinary.com/cookoon-dev/image/upload/'
     cookoon.photos.each do |photo|
-      picture_url = cloudinary_base_url + photo.path
+      picture_url = cl_image_path(photo.path)
       card.add_attachment(picture_url)
     end
   rescue Trello::Error => e
