@@ -16,7 +16,7 @@
     <%= javascript_include_tag 'application' %>
     <%= cloudinary_js_config %>
   </head>
-  <body class="bg-cream">
+  <body class="<%= controller_name %> <%= action_name %> bg-cream">
     <%= render 'shared/loader' %>
     <% if content_for?(:navbar) %>
       <%= yield(:navbar) %>
