@@ -1,6 +1,8 @@
 class TrelloCookoonService
   TRELLO_LISTS_IDS = {
-    under_review_list_id: '5a253938f1a56c25084f5400'
+    under_review_list_id: '5a253938f1a56c25084f5400',
+    approved_list_id: '5a2e482923c373d2c8769bd7',
+    suspended_list_id: '5a2e4847258b5c7821ff7ddf'
   }
 
   def initialize(attributes)
@@ -13,6 +15,11 @@ class TrelloCookoonService
     add_attached_map
     add_attached_pictures
     save_card
+  end
+
+  def move_card
+    retrieve_card
+    move_card_to_desired_list
   end
 
   private
@@ -64,6 +71,27 @@ class TrelloCookoonService
     Rails.logger.error('Failed to save Card')
     Rails.logger.error(e.message)
     false
+  end
+
+  def move_card_to_desired_list
+    return unless card
+    card.move_to_list(list_id)
+  rescue Trello::Error
+    Rails.logger.error("Faild to move Trello Card to #{cookoon.status}_list")
+    false
+  end
+
+  def retrieve_card
+    @card ||= Trello::Card.find(cookoon.trello_card_id)
+  rescue Trello::Error
+    Rails.logger.error('Faild to retrieve Trello Card')
+    false
+  end
+
+  def list_id
+    id = TRELLO_LISTS_IDS["#{cookoon.status}_list_id".to_sym]
+    # prevent bug from tello api if id is nil
+    id ? id : ''
   end
 
   def description
