@@ -18,8 +18,26 @@ class Cookoon < ApplicationRecord
   validates :photos, presence: true
 
   after_validation :geocode, if: :address_changed?
+  before_create :create_trello_card
+  before_save :update_trello, if: :status_changed?
 
   scope :displayable_on_index, -> { joins(:user).where.not(users: {stripe_account_id: nil}) }
 
   CATEGORIES = %w(Appartement Maison Jardin Loft Terrasse Toit Villa)
+
+  private
+
+  def create_trello_card
+    return unless Rails.env.production?
+    trello_service.create_trello_card
+  end
+
+  def update_trello
+    return unless Rails.env.production?
+    trello_service.move_card
+  end
+
+  def trello_service
+    @trello_service ||= TrelloCookoonService.new(cookoon: self)
+  end
 end

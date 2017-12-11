@@ -85,7 +85,7 @@ class Reservation < ApplicationRecord
   end
 
   def trello_service
-    TrelloReservationService.new(reservation: self)
+    @trello_service ||= TrelloReservationService.new(reservation: self)
   end
 
   def date_after_48_hours
