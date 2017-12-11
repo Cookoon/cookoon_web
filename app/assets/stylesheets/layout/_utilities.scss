@@ -147,6 +147,16 @@ select {
   padding: 1em 0;
 }
 
+// Opacity
+
+.op-90 {
+  opacity: 0.9;
+}
+
+.text-shadow-none {
+  text-shadow: none;
+}
+
 // Atomic classes
 
 // Z-indexes
@@ -161,6 +171,10 @@ select {
 
 .fs-20 {
   font-size: 20px;
+}
+
+.fs-24 {
+  font-size: 24px;
 }
 
 // Margins
