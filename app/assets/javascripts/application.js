@@ -10,5 +10,5 @@
 //= require hammer
 //= require attachinary
 //= require gmaps/google
-//= require_tree .
+//= require_tree ./content
 //= require_tree ./locale
