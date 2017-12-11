@@ -44,6 +44,7 @@
       <!-- ==== FIN CUSTOM CHECKBOX ==== -->
     </div>
   </div>
+  <%= f.error :cookoon %>
 </div>
 <div class="modal-footer">
   <h4>TOTAL : <span id='total-price'><%= humanized_money @reservation.price_for_rent_with_fees %></span> €</h4>
