@@ -1,10 +1,21 @@
 <div class="container">
   <h2>Mes invitations</h2>
-  <p>(Invitations restantes : <%= current_user.invitation_limit %>)</p>
-
-  <b>Invitez vos proches à rejoindre Cookoon : nous vous offrons des services en plus et notre reconnaissance éternelle.</b>
+  <p>Des proches souhaitent rejoindre Cookoon ?</p>
+  <p>Vous pouvez les parrainer, vous disposez actuellement de <%= current_user.invitation_limit %> invitations.</p>
+  <p>Choisissez-les bien !</p>
 
   <br><br>
 
   <%= render 'new_form' %>
+
+  <div class="card-bottom light-padded mt-20">
+    <div class="card-bottom-content">
+      <p>
+        Pour obtenir des invitations supplémentaires, ajoutez votre appartement sur Cookoon.
+      </p>
+      <p>
+        Les évaluations positives des autres membres pourront également vous valoir des invitations supplémentaires.
+      </p>
+    </div>
+  </div>
 </div>
