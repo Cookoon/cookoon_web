@@ -28,12 +28,12 @@ class Cookoon < ApplicationRecord
   private
 
   def create_trello_card
-    # return unless Rails.env.production?
+    return unless Rails.env.production?
     trello_service.create_trello_card
   end
 
   def update_trello
-    # return unless Rails.env.production?
+    return unless Rails.env.production?
     trello_service.move_card
   end
 
