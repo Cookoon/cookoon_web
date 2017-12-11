@@ -25,18 +25,20 @@
 
 <script>
   $(document).on('turbolinks:load ajaxComplete', function() {
-    var handler = Gmaps.build('Google');
-    handler.buildMap({
-      provider: {
-        scrollwheel: false
-      },
-      internal: {
-        id: 'map'
-      }
-    }, function() {
-      markers = handler.addMarkers(<%=raw @hash.to_json %>);
-      handler.bounds.extendWith(markers);
-      handler.fitMapToBounds();
-    });
+    if (document.getElementById('map')) {
+      var handler = Gmaps.build('Google');
+      handler.buildMap({
+        provider: {
+          scrollwheel: false
+        },
+        internal: {
+          id: 'map'
+        }
+      }, function() {
+        markers = handler.addMarkers(<%=raw @hash.to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+      });
+    }
   });
 </script>

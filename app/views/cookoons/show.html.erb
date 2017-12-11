@@ -30,26 +30,28 @@
 
 <script>
   $(document).on('turbolinks:load ajaxComplete', function() {
-    var handler = Gmaps.build('Google');
-    handler.buildMap({
-      provider: {
-        scrollwheel: false
-      },
-      internal: {
-        id: 'map'
-      }
-    }, function() {
-      markers = handler.addMarkers([
-        {
-          "lat": <%= @cookoon.latitude %>,
-          "lng": <%= @cookoon.longitude %>,
-          "infowindow": "<h3><%= @cookoon.name %></h3>"
+    if (document.getElementById('map')) {
+      var handler = Gmaps.build('Google');
+      handler.buildMap({
+        provider: {
+          scrollwheel: false
+        },
+        internal: {
+          id: 'map'
         }
-      ]);
-      handler.bounds.extendWith(markers);
-      handler.fitMapToBounds();
-      handler.getMap().setZoom(14);
-    });
+      }, function() {
+        markers = handler.addMarkers([
+          {
+            "lat": <%= @cookoon.latitude %>,
+            "lng": <%= @cookoon.longitude %>,
+            "infowindow": "<h3><%= @cookoon.name %></h3>"
+          }
+        ]);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+        handler.getMap().setZoom(14);
+      });
+    }
   });
 </script>
 
