@@ -85,7 +85,6 @@ class Reservation < ApplicationRecord
   end
 
   def trello_service
-    # A VALIDER
     @trello_service ||= TrelloReservationService.new(reservation: self)
   end
 
