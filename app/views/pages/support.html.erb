@@ -6,7 +6,7 @@
     Vous trouverez toutes les réponses sur notre centre d'aide.
   </p>
   <div class="text-center thin-padded">
-    <%= link_to 'centre d’aide', 'https://aide.cookoon.fr', target: '_blank', class: 'btn btn-default button button-blue' %>
+    <%= link_to 'Centre d’aide', 'https://aide.cookoon.fr', class: 'btn btn-default button button-blue', target: '_blank', data: { turbolinks: false } %>
   </div>
 
   <hr>
@@ -17,7 +17,7 @@
     N'hésitez pas à nous contacter, notre concierge répond à toutes vos questions ou besoins.
   </p>
   <div class="text-center thin-padded">
-    <%= mail_to "concierge@cookoon.fr", "Contacter notre concierge", class: 'btn btn-default button button-blue', target: "_blank" %>
+    <%= mail_to 'concierge@cookoon.fr', 'Contacter notre concierge', class: 'btn btn-default button button-blue', target: '_blank', data: { turbolinks: false } %>
   </div>
 
   <hr>
@@ -25,7 +25,6 @@
   <h4>Un incident ?</h4>
   <b>Vous devez déclarer dans les plus brefs délais les détails de l'incident à notre agent général AXA</b>
   <div class="text-center thin-padded">
-    <%= mail_to "agence.fxcombe1@axa.fr", "Contacter François-Xavier Combes", class: 'btn btn-default button button-blue', target: "_blank" %>
+    <%= mail_to 'agence.fxcombe1@axa.fr', 'Contacter François-Xavier Combes', class: 'btn btn-default button button-blue', target: '_blank', data: { turbolinks: false } %>
   </div>
-
 </div>
