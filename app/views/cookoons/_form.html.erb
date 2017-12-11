@@ -2,7 +2,7 @@
   <%= f.input :name, label: 'Nom du Cookoon' %>
   <%= f.input :surface, label: 'Surface de réception en m²' %>
   <%= f.input :price, label: 'Prix / heure' %>
-  <%= f.input :address, label: 'Adresse' %>
+  <%= f.input :address, label: 'Adresse', placeholder: '' %>
   <%= f.input :capacity, label: "Capacité d'accueil" %>
   <%= f.input :category, label: 'Categorie', collection: Cookoon::CATEGORIES %>
   <%= f.input :photos, as: :attachinary %>
