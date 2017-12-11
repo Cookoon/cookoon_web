@@ -17,4 +17,6 @@ fr:
         reservation:
           attributes:
             date:
-              not_after_48_hours: doit être dans plus de 48 heures
+              not_after_48_hours: Un minimum de 48h est requis.
+            cookoon:
+              cannot_book_mine: Vous ne pouvez pas réserver votre propre Cookoon !
