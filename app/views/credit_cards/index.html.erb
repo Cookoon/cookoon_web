@@ -95,19 +95,20 @@
     });
   }
 
-  document.addEventListener("turbolinks:load", function() {
-    card.mount('#card-element');
+  $(document).on('turbolinks:load ajaxComplete', function() {
+    if ($('.credit_cards.index').length) {
+      card.mount('#card-element');
 
-    card.addEventListener('change', function(event) {
-      var displayError = document.getElementById('card-errors');
-      if (event.error) {
-        displayError.textContent = event.error.message;
-      } else {
-        displayError.textContent = '';
-      }
-    });
+      card.addEventListener('change', function(event) {
+        var displayError = document.getElementById('card-errors');
+        if (event.error) {
+          displayError.textContent = event.error.message;
+        } else {
+          displayError.textContent = '';
+        }
+      });
 
-    form.addEventListener('submit', stripeSubmit);
-
+      form.addEventListener('submit', stripeSubmit);
+    }
   });
 </script>
