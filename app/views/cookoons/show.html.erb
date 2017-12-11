@@ -29,7 +29,7 @@
 <%= booking_button_or_review_block_for(@cookoon) %>
 
 <script>
-  document.addEventListener("turbolinks:load", function() {
+  $(document).on('turbolinks:load ajaxComplete', function() {
     var handler = Gmaps.build('Google');
     handler.buildMap({
       provider: {
@@ -54,7 +54,7 @@
 </script>
 
 <script>
-  document.addEventListener("turbolinks:load", function() {
+  $(document).on('turbolinks:load ajaxComplete', function() {
     $('.carousel').hammer().bind("swipeleft", function() {
       $(this).carousel('next');
     });

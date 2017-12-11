@@ -24,7 +24,7 @@
 </div>
 
 <script>
-  document.addEventListener("turbolinks:load", function() {
+  $(document).on('turbolinks:load ajaxComplete', function() {
     var handler = Gmaps.build('Google');
     handler.buildMap({
       provider: {
