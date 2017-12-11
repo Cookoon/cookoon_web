@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>Modifier le profil</h2>
+  <h2>Je modifie mon profil</h2>
 
   <%= simple_form_for @user, url: users_path, remote: true do |f| %>
     <div class="form-inputs">
@@ -7,7 +7,7 @@
       <%= f.input :first_name %>
       <%= f.input :last_name %>
       <%= f.input :phone_number %>
-      <%= f.input :description %>
+      <%= f.input :description, input_html: { rows: 3 } %>
     </div>
 
     <div class="form-actions">
@@ -18,7 +18,7 @@
   <% end %>
 
   <div class="text-center thin-padded">
-    <%= link_to destroy_user_session_path, method: :delete, class: 'button no-button', remote: true do  %>
+    <%= link_to destroy_user_session_path, method: :delete, class: 'no-button', remote: true do  %>
       <i class="fa fa-power-off" aria-hidden="true"></i> Se déconnecter
     <% end %>
   </div>

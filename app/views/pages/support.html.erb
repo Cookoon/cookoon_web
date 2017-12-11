@@ -1,33 +1,30 @@
 <div class="container">
+  <h2>Mes contacts utiles</h2>
 
-  <h4>Vous avez une question ?</h4>
-  <div class="padded">
-    <p>Vous pouvez trouver toutes les réponses à vos questions sur notre centre d'aide.</p>
-    <p><%= link_to raw("Rendez-vous sur la FAQ en <strong class='text-blue'>cliquant ici</strong>"), 'https://aide.cookoon.fr', target: "_blank"%></p>
-  </div>
-
-  <div class="card-bottom light-padded">
-    <div class="card-bottom-title">
-      <h4>Nous contacter ?</h4>
-    </div>
-    <div class="card-bottom-content">
-      <p>
-        Vous n'avez pas trouvé la réponse à votre question ?
-        N'hésitez pas à nous contacter, notre concierge répond à toutes vos questions
-        ou besoins.
-      </p>
-    </div>
-    <div class="card-bottom-footer">
-      <p class='fat-text'><strong>concierge@cookoon.fr</strong></p>
-    </div>
+  <h4>Une question ?</h4>
+  <p>
+    Vous trouverez toutes les réponses sur notre centre d'aide.
+  </p>
+  <div class="text-center thin-padded">
+    <%= link_to 'Centre d’aide', 'https://aide.cookoon.fr', class: 'btn btn-default button button-blue', target: '_blank', data: { turbolinks: false } %>
   </div>
 
   <hr>
 
-  <h4>Que faire en cas d'incident ?</h4>
-  <b>En cas d’incident, l'Hôte Cookoon doit le déclarer dans les plus courts délais à notre Agent Général</b>
-  <div class="text-center light-padded">
-    <%= mail_to "agence.fxcombe1@axa.fr", "Contacter François-Xavier Combes", class: 'btn btn-default button button-blue', target: "_blank" %>
+  <h4>Une demande ? Une envie ?</h4>
+  <p>
+    Vous n'avez pas trouvé la réponse à votre question ?
+    N'hésitez pas à nous contacter, notre concierge répond à toutes vos questions ou besoins.
+  </p>
+  <div class="text-center thin-padded">
+    <%= mail_to 'concierge@cookoon.fr', 'Contacter notre concierge', class: 'btn btn-default button button-blue', target: '_blank', data: { turbolinks: false } %>
   </div>
 
+  <hr>
+
+  <h4>Un incident ?</h4>
+  <b>Vous devez déclarer dans les plus brefs délais les détails de l'incident à notre agent général AXA</b>
+  <div class="text-center thin-padded">
+    <%= mail_to 'agence.fxcombe1@axa.fr', 'Contacter François-Xavier Combes', class: 'btn btn-default button button-blue', target: '_blank', data: { turbolinks: false } %>
+  </div>
 </div>

@@ -4,11 +4,6 @@ body {
   min-height: 100vh;
 }
 
-// Z-indexes
-.zi-20 {
-  z-index: 20;
-}
-
 // Paddings
 .padded {
   padding-top: 5em;
@@ -111,7 +106,11 @@ hr {
 // Fonts
 h2 {
   margin-bottom: 22px;
-  font-size: 28px;
+  font-size: 24px;
+}
+
+h3 {
+  font-size: 20px;
 }
 
 .fat-text {
@@ -135,9 +134,87 @@ input[type='url'],
 input[type='week'],
 select:focus,
 textarea {
-  font-size: 16px;
+  font-size: 16px !important;
 }
 
 select {
   -webkit-appearance: none;
+}
+
+// Font Awesome UL
+.fa-ul > li,
+.fa-ul > li > i.fa-li {
+  padding: 1em 0;
+}
+
+// Opacity
+
+.op-90 {
+  opacity: 0.9;
+}
+
+.text-shadow-none {
+  text-shadow: none;
+}
+
+// Atomic classes
+
+// Z-indexes
+.zi-20 {
+  z-index: 20;
+}
+
+// Font sizes
+.fs-16 {
+  font-size: 16px;
+}
+
+.fs-20 {
+  font-size: 20px;
+}
+
+.fs-24 {
+  font-size: 24px;
+}
+
+// Margins
+.mt-20 {
+  margin-top: 20px;
+}
+
+/*Displays*/
+.block {
+  display: block;
+}
+.inline {
+  display: inline;
+}
+.flex {
+  display: flex;
+}
+.invisible {
+  display: none;
+}
+.inline-block {
+  display: inline-block;
+}
+
+/*Flexbox*/
+.flex-row {
+  flex-direction: row;
+}
+.flex-column {
+  flex-direction: column;
+}
+.space-between {
+  justify-content: space-between;
+}
+.space-around {
+  justify-content: space-around;
+}
+.align-center {
+  align-items: center;
+}
+.shrink-none {
+  flex-shrink: 0;
 }

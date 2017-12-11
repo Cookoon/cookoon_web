@@ -1,7 +1,7 @@
 <%= simple_form_for resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post, remote: true } do |f| %>
-  <%= f.input :email, label: "L'E-mail de votre invité" %>
-  <%= f.input :first_name, label: "Le prénom de votre invité" %>
-  <%= f.input :last_name, label: "Le nom de votre invité" %>
+  <%= f.input :email, label: "L'e-mail de votre invité(e)" %>
+  <%= f.input :first_name, label: "Son prénom" %>
+  <%= f.input :last_name, label: "Son nom" %>
 
   <div class="text-center">
     <%= f.button :submit, "INVITER", class: 'button button-blue' %>

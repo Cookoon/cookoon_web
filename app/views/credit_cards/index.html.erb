@@ -1,15 +1,21 @@
 <div class="container">
-  <h3>Cartes enregistrées</h3>
+  <h2>Mes moyens de paiement</h2>
 
   <% if @stripe_sources.blank? %>
     <p>Vous n'avez aucune carte de crédit, Ajoutez en une dès maintenant !</p>
   <% else %>
-    <ul class="fa-ul">
+    <ul class="fa-ul fs-16">
       <% @stripe_sources.data.each_with_index do |card_data, index| %>
         <li><i class="fa-li co co-cb"></i>
-          <%= "(Principale)" if index.zero? %>
-          <%= "#{card_data.brand.upcase} se terminant par : #{card_data.last4}" %> -
-          <%= link_to 'supprimer', credit_card_path(card_data.id), remote: true, method: :delete, class: 'no-button slowLoad' %>
+          <div class="flex space-between">
+            <div>
+              <%= "(Principale)" if index.zero? %>
+              <%= display_credit_card_for card_data %>
+            </div>
+            <%= link_to credit_card_path(card_data.id), remote: true, method: :delete, class: 'no-button slowLoad' do %>
+              <i class="fa fa-times fs-20"></i>
+            <% end %>
+          </div>
         </li>
       <% end %>
     </ul>

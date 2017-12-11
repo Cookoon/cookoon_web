@@ -65,6 +65,11 @@
 .datetimepicker {
   background: $blue;
   color: white;
+  table tr th:hover,
+  table tr td.day:hover,
+  table tr td span:hover {
+    background-color: lighten($blue, 5%) !important;
+  }
   table tr td span.active.active {
     background: $blue;
   }
