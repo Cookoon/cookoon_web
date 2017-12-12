@@ -1,4 +1,4 @@
-document.addEventListener("turbolinks:load", function() {
+$(document).on('turbolinks:load ajaxComplete', function() {
   $('#side-nav-clicker').click(function() {
     $('.overlay').fadeIn();
     $('.side-nav').show('slide', { direction: 'left' }, 500);
@@ -8,4 +8,4 @@ document.addEventListener("turbolinks:load", function() {
     $('.overlay').fadeOut();
     $('.side-nav').hide('slide', { direction: 'left' }, 500);
   });
-})
+});

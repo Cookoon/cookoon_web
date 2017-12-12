@@ -1,8 +1,38 @@
+$(document).on('turbolinks:load ajaxComplete', function() {
+  autocomplete(document.getElementById('user_search_address'));
+  autocomplete(document.getElementById('cookoon_address'));
+});
+
+function autocomplete(addressInput) {
+  if (addressInput) {
+    var autocomplete = new google.maps.places.Autocomplete(addressInput, {
+      types: ['geocode'],
+      componentRestrictions: { country: 'fr' }
+    });
+    google.maps.event.addListener(
+      autocomplete,
+      'place_changed',
+      onPlaceChanged
+    );
+    google.maps.event.addDomListener(addressInput, 'keydown', function(e) {
+      if (e.keyCode == 13) {
+        e.preventDefault();
+      }
+    });
+  }
+}
+
 function onPlaceChanged() {
   var place = this.getPlace();
   var components = getAddressComponents(place);
-  $('#user_search_address').trigger('blur').val(components.full_address);
-  $('#infos-address').text(components.address == null ? "Adresse" : components.address);
+  if ($('.cookoons.index').length) {
+    $('#user_search_address')
+      .trigger('blur')
+      .val(components.full_address);
+    $('#infos-address').text(
+      components.address == null ? 'Adresse' : components.address
+    );
+  } // TODO [FC 11dec17] refactor this in a more elegant fashion
 }
 
 function getAddressComponents(place) {
@@ -44,24 +74,20 @@ function getAddressComponents(place) {
 
 function buildAddress(street_number, route, city) {
   if (street_number !== null && route !== null) {
-    return street_number + ' ' + route
-  }
-  else if (route !== null) {
-    return route
-  }
-  else {
-    return city
+    return street_number + ' ' + route;
+  } else if (route !== null) {
+    return route;
+  } else {
+    return city;
   }
 }
 
 function buildFullAddress(street_number, route, city) {
   if (street_number !== null && route !== null) {
-    return street_number + ' ' + route + ' ' + city
-  }
-  else if (route !== null) {
-    return route + ' ' + city
-  }
-  else {
-    return city
+    return street_number + ' ' + route + ', ' + city;
+  } else if (route !== null) {
+    return route + ', ' + city;
+  } else {
+    return city;
   }
 }
