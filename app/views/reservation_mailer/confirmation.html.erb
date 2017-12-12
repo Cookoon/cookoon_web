@@ -35,8 +35,10 @@
                 <td style="padding: 40px 30px 20px; text-align: center;">
                   <p>
                     <b>Vous recevrez :</b>
-                    <br><b style="color: #006F8B"><%= humanized_money_with_symbol @reservation.payout_price_for_host %></b>
-                    <br>soit <%= humanized_money_with_symbol @reservation.price %> - <%= humanized_money_with_symbol @reservation.host_cookoon_fees %>
+                    <br><b style="color: #006F8B"><%= humanized_money_with_symbol @reservation.payout_price_for_host %></b> (soit <%= humanized_money_with_symbol @reservation.price %> - <%= humanized_money_with_symbol @reservation.total_fees_with_services_for_host %>)
+                    <% if @reservation.services? %>
+                      <br>services : <%= humanized_money_with_symbol @reservation.price_for_services %> / frais : <%= humanized_money_with_symbol @reservation.host_cookoon_fees %>
+                    <% end %>
                   </p>
                 </td>
               </tr>

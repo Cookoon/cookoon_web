@@ -40,6 +40,10 @@ class Reservation < ApplicationRecord
     pending? || paid?
   end
 
+  def services?
+    janitor || cleaning
+  end
+
   def price_for_rent_cents
     duration * cookoon.price_cents
   end
