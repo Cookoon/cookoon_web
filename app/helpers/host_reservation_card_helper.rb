@@ -103,7 +103,7 @@ module HostReservationCardHelper
     end
 
     def cancel_text
-      content_tag(:p, "Un imprévu ? Pour annuler cette réservation :")
+      content_tag(:p, 'Un imprévu ? Pour annuler cette réservation :')
     end
 
     def cancel_link
