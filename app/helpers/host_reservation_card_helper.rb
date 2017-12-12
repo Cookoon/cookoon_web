@@ -14,7 +14,7 @@ module HostReservationCardHelper
     end
 
     def html
-      content = safe_join([infos, recap, button])
+      content = safe_join([infos, recap, button, cancel_instructions])
       content_tag(:div, content, class: "reservation-preview-card reservation-preview-card-#{color}")
     end
 
@@ -61,7 +61,8 @@ module HostReservationCardHelper
     end
 
     def user_rating
-      content_tag(:p, '100%', id: 'force-margin')
+      # UnComment when reviews are implemented
+      # content_tag(:p, '100%', id: 'force-margin')
     end
 
     def receive_text
@@ -87,13 +88,26 @@ module HostReservationCardHelper
       when 'paid'
         link_to('Répondre à la demande', edit_host_reservation_path(reservation), class: 'button button-blue')
       when 'accepted'
-        #TODO: Edit path
         link_to('Démarrer la location', new_host_reservation_inventory_path(reservation), class: 'button button-white')
       when 'ongoing'
         link_to('Terminer la location', edit_host_inventory_path(reservation.inventory), class: 'button button-white')
       else
         # TODO : Add Host::Reservation#show
       end
+    end
+
+    def cancel_instructions
+      return unless reservation.accepted?
+      content = safe_join([cancel_text, cancel_link])
+      content_tag(:div, content, class: 'text-center mt-20')
+    end
+
+    def cancel_text
+      content_tag(:p, "Un imprévu ? Pour annuler cette réservation :")
+    end
+
+    def cancel_link
+      link_to('contactez notre équipe', 'https://aide.cookoon.fr', class: 'no-button no-button-white', target: '_blank', data: { turbolinks: false })
     end
 
     def color

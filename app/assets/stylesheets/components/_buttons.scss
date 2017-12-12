@@ -61,4 +61,11 @@
   &:focus {
     color: lighten($blue, 10%);
   }
+  &-white {
+    color: white;
+    &:hover,
+    &:focus {
+      color: darken(white, 10%);
+    }
+  }
 }
