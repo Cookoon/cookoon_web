@@ -4,6 +4,14 @@ class Reservation < ApplicationRecord
   has_one :inventory
 
   monetize :price_cents
+  monetize :price_for_rent_cents
+  monetize :cookoon_fees_cents
+  monetize :host_cookoon_fees_cents
+  monetize :price_for_rent_with_fees_cents
+  monetize :price_for_services_cents
+  monetize :payout_price_for_host_cents
+  monetize :total_fees_with_services_for_host_cents
+  monetize :base_option_price_cents
 
   validates :price_cents, presence: true
   validates :duration, presence: true
@@ -32,43 +40,47 @@ class Reservation < ApplicationRecord
     pending? || paid?
   end
 
-  def price_for_rent
-    duration * cookoon.price
+  def price_for_rent_cents
+    duration * cookoon.price_cents
   end
 
-  def cookoon_fees
-    price_for_rent * rent_cookoon_fee_rate
+  def cookoon_fees_cents
+    price_for_rent_cents * rent_cookoon_fee_rate
   end
 
-  def host_cookoon_fees
-    price_for_rent * host_cookoon_fee_rate
+  def host_cookoon_fees_cents
+    price_for_rent_cents * host_cookoon_fee_rate
   end
 
-  def price_for_rent_with_fees
-    price_for_rent + cookoon_fees
+  def price_for_rent_with_fees_cents
+    price_for_rent_cents + cookoon_fees_cents
   end
 
   def cookoon_owner
     cookoon.user
   end
 
-  def price_for_services
-    amount = 0
-    amount += base_option_price if janitor
-    amount += base_option_price if cleaning
-    Money.new amount * 100
+  def price_for_services_cents
+    amount_cents = 0
+    amount_cents += base_option_price_cents if janitor
+    amount_cents += base_option_price_cents if cleaning
+    amount_cents
   end
 
-  def payout_price_for_host
-    price_for_rent - total_fees_with_services_for_host
+  def payout_price_for_host_cents
+    price_for_rent_cents - total_fees_with_services_for_host_cents
   end
 
-  def total_fees_with_services_for_host
-    host_cookoon_fees + price_for_services
+  def total_fees_with_services_for_host_cents
+    host_cookoon_fees_cents + price_for_services_cents
   end
 
   def starts_soon?
     date.between?(Time.zone.now, (Time.zone.now + 3.hours))
+  end
+
+  def base_option_price_cents
+    2000
   end
 
   private
@@ -99,9 +111,5 @@ class Reservation < ApplicationRecord
   def not_my_cookoon
     return unless cookoon && user
     errors.add(:cookoon, :cannot_book_mine) if cookoon.user == user
-  end
-
-  def base_option_price
-    20
   end
 end

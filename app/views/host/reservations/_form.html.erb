@@ -2,7 +2,7 @@
   <div class="flex-container">
     <div class='service-presentation'>
       <p>
-        Ajouter une aide ménagère - <span id="cleaning-price">15</span> € ?
+        Ajouter une aide ménagère - <span id="cleaning-price"><%= humanized_money_with_symbol @reservation.base_option_price %></span> ?
       </p>
       <p class="service-description">
         L’aide ménagère passera dans votre Cookoon après la location selon l’heure qui vous convient.
@@ -11,7 +11,7 @@
     <div class="service-input">
       <div class="form-group boolean optional reservation_cleaning">
         <input value="0" type="hidden" name="reservation[cleaning]">
-        <input class="boolean optional hidden reservation-option" type="checkbox" value="1" name="reservation[cleaning]" id="reservation_cleaning" data-price="20">
+        <input class="boolean optional hidden reservation-option" type="checkbox" value="1" name="reservation[cleaning]" id="reservation_cleaning" data-price-cents="<%= @reservation.base_option_price_cents %>">
         <label class="boolean optional toggle" for="reservation_cleaning">
           <span class="toggle-handler"></span>
         </label>
@@ -21,7 +21,7 @@
   <div class="flex-container">
     <div class='service-presentation'>
       <p>
-        Ajouter un concierge - <span id="janitor-price">15</span> € ?
+        Ajouter un concierge - <span id="janitor-price"><%= humanized_money_with_symbol @reservation.base_option_price %></span> ?
       </p>
       <p class="service-description">
         Le concierge récupère vos clés, assure le check-in et le check-out puis vous rend vos clés.
@@ -30,7 +30,7 @@
     <div class="service-input">
       <div class="form-group boolean optional reservation_janitor">
         <input value="0" type="hidden" name="reservation[janitor]">
-        <input class="boolean optional hidden reservation-option" type="checkbox" value="1" name="reservation[janitor]" id="reservation_janitor" data-price="20">
+        <input class="boolean optional hidden reservation-option" type="checkbox" value="1" name="reservation[janitor]" id="reservation_janitor" data-price-cents="<%= @reservation.base_option_price_cents %>">
         <label class="boolean optional toggle" for="reservation_janitor">
           <span class="toggle-handler"></span>
         </label>
@@ -39,7 +39,7 @@
   </div>
   <hr style="border-top: 1px solid white">
   <div class="text-right">
-    <p>Vous recevrez : <span id="display-price"><%= @reservation.payout_price_for_host %></span> €</p>
+    <p>Vous recevrez : <span id="display-price" data-reservation-price-cents="<%= @reservation.payout_price_for_host_cents %>"><%= humanized_money_with_symbol @reservation.payout_price_for_host %></span></p>
   </div>
   <% if @reservation.pending_or_paid? %>
     <div class="flex-container">

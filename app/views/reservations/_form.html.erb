@@ -6,8 +6,8 @@
 <div class="modal-body">
   <div class="recap">
     <div class="text-left">
-      <span class="recap-price">
-        <span id="cookoon-price"><%= humanized_money @cookoon.price %></span> <%= currency_symbol %> par heure
+      <span id="cookoon-price" data-cookoon-price-cents="<%= @cookoon.price_cents %>" class="recap-price">
+        <%= humanized_money_with_symbol @cookoon.price %> par heure
       </span>
     </div>
     <div class="recap-datetime">
@@ -47,7 +47,7 @@
   <%= f.error :cookoon %>
 </div>
 <div class="modal-footer">
-  <h4>TOTAL : <span id='total-price'><%= humanized_money @reservation.price_for_rent_with_fees %></span> €</h4>
+  <h4>TOTAL : <span id='total-price'><%= humanized_money_with_symbol @reservation.price_for_rent_with_fees %></span></h4>
   <p style="font-size:12px; margin-bottom: 20px">Ce montant comprend les frais de services de la plateforme Cookoon</p>
   <% if current_user.stripe_customer_id %>
     <%= f.submit 'RESERVER', class: "button button-white" %>

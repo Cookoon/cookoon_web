@@ -9,32 +9,39 @@ $(document).on('turbolinks:load ajaxComplete', function() {
 });
 
 function compute_price_for_host(input) {
-  var displayPrice = parseFloat(
-    $('#display-price')
-      .text()
-      .replace(',', '.')
+  var displayPriceCents = parseInt(
+    $('#display-price').data('reservation-price-cents'),
+    10
   );
-  var optionPrice = input.data('price');
+  var optionPriceCents = parseInt(input.data('price-cents'), 10);
   if (input.is(':checked')) {
     $('#display-price').text(
-      (displayPrice - optionPrice).toFixed(2).replace('.', ',')
+      ((displayPriceCents - optionPriceCents) / 100)
+        .toFixed(2)
+        .replace('.', ',') + ' €'
+    );
+    $('#display-price').data(
+      'reservation-price-cents',
+      displayPriceCents - optionPriceCents
     );
   } else {
     $('#display-price').text(
-      (displayPrice + optionPrice).toFixed(2).replace('.', ',')
+      ((displayPriceCents + optionPriceCents) / 100)
+        .toFixed(2)
+        .replace('.', ',') + ' €'
+    );
+    $('#display-price').data(
+      'reservation-price-cents',
+      displayPriceCents + optionPriceCents
     );
   }
 }
 
 function compute_price_for_rent(duration_input) {
   var price_cents_without_fees =
-    $('#cookoon-price')
-      .text()
-      .replace(',', '.') *
-    duration_input.val() *
-    100;
+    $('#cookoon-price').data('cookoon-price-cents') * duration_input.val();
   var total_price_cents = price_cents_without_fees * 1.05;
   $('#total-price').text(
-    (total_price_cents / 100).toFixed(2).replace('.', ',')
+    (total_price_cents / 100).toFixed(2).replace('.', ',') + ' €'
   );
 }
