@@ -2,7 +2,7 @@
   <div class="flex-container">
     <div class='service-presentation'>
       <p>
-        Ajouter une aide ménagère - <span id="cleaning-price"><%= humanized_money_with_symbol @reservation.base_option_price %></span> ?
+        Ajouter une aide ménagère - <%= humanized_money_with_symbol @reservation.base_option_price %> ?
       </p>
       <p class="service-description">
         L’aide ménagère passera dans votre Cookoon après la location selon l’heure qui vous convient.
@@ -21,7 +21,7 @@
   <div class="flex-container">
     <div class='service-presentation'>
       <p>
-        Ajouter un concierge - <span id="janitor-price"><%= humanized_money_with_symbol @reservation.base_option_price %></span> ?
+        Ajouter un concierge - <%= humanized_money_with_symbol @reservation.base_option_price %> ?
       </p>
       <p class="service-description">
         Le concierge récupère vos clés, assure le check-in et le check-out puis vous rend vos clés.
