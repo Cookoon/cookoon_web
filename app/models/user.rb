@@ -11,6 +11,8 @@ class User < ApplicationRecord
 
   has_attachment :photo
 
+  monetize :total_payouts_for_dashboard_cents
+
   validates :terms_of_service, acceptance: { message: 'Vous devez accepter les conditions générales pour continuer' }
 
   def full_name
@@ -38,8 +40,7 @@ class User < ApplicationRecord
     user_searches.recents.last
   end
 
-  def total_payouts_for_dashboard
-    price = reservations_requests.passed.includes(:cookoon).sum(&:payout_price_for_host)
-    price.zero? ? Money.new(price) : price
+  def total_payouts_for_dashboard_cents
+    reservations_requests.passed.includes(:cookoon).sum(&:payout_price_for_host_cents)
   end
 end
