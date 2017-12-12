@@ -69,7 +69,19 @@
   background-color: rgba(0, 0, 0, 0.5); /*dim the background*/
 }
 
-@media (min-width: 768px) {
+@media (min-width: 500px) {
+  .side-nav {
+    width: 60%;
+  }
+}
+
+@media (min-width: 800px) {
+  .side-nav {
+    width: 40%;
+  }
+}
+
+@media (min-width: 1100px) {
   .side-nav {
     width: 25%;
   }
