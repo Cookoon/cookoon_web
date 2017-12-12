@@ -23,46 +23,17 @@
 <%= render 'reservation_modal' %>
 
 <!-- Map -->
-<div id="map" class="map-cookoon-show"></div>
+<div id="map-cookoon-show" class="map-cookoon-show"></div>
 
 <!-- Booking / review block -->
 <%= booking_button_or_review_block_for(@cookoon) %>
 
 <script>
-  $(document).on('turbolinks:load ajaxComplete', function() {
-    if (document.getElementById('map')) {
-      var handler = Gmaps.build('Google');
-      handler.buildMap({
-        provider: {
-          scrollwheel: false
-        },
-        internal: {
-          id: 'map'
-        }
-      }, function() {
-        markers = handler.addMarkers([
-          {
-            "lat": <%= @cookoon.latitude %>,
-            "lng": <%= @cookoon.longitude %>,
-            "infowindow": "<h3><%= @cookoon.name %></h3>"
-          }
-        ]);
-        handler.bounds.extendWith(markers);
-        handler.fitMapToBounds();
-        handler.getMap().setZoom(14);
-      });
+  var marker_json = [
+    {
+      "lat": <%= @cookoon.latitude %>,
+      "lng": <%= @cookoon.longitude %>,
+      "infowindow": "<h3><%= @cookoon.name %></h3>"
     }
-  });
-</script>
-
-<script>
-  $(document).on('turbolinks:load ajaxComplete', function() {
-    $('.carousel').hammer().bind("swipeleft", function() {
-      $(this).carousel('next');
-    });
-
-    $('.carousel').hammer().bind("swiperight", function() {
-      $(this).carousel('prev');
-    });
-  });
+  ]
 </script>

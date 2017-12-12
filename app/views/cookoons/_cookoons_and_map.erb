@@ -20,25 +20,9 @@
   </div>
 </div>
 <div class="col-xs-12 col-md-4 hidden-xs">
-  <div id="map" class="map-cookoon-index"></div>
+  <div id="map-cookoon-index" class="map-cookoon-index"></div>
 </div>
 
 <script>
-  $(document).on('turbolinks:load ajaxComplete', function() {
-    if (document.getElementById('map')) {
-      var handler = Gmaps.build('Google');
-      handler.buildMap({
-        provider: {
-          scrollwheel: false
-        },
-        internal: {
-          id: 'map'
-        }
-      }, function() {
-        markers = handler.addMarkers(<%=raw @hash.to_json %>);
-        handler.bounds.extendWith(markers);
-        handler.fitMapToBounds();
-      });
-    }
-  });
+  var markers_json = <%=raw @hash.to_json %>
 </script>
