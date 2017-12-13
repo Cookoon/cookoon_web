@@ -7,6 +7,7 @@ class StripePaymentService
     @source = attributes[:source]
     @reservation = attributes[:reservation]
     @errors = []
+    # TODO : RETIRER CE FONCTIONNEMENT
     retrieve_customer if user.stripe_customer_id
   end
 
@@ -15,16 +16,10 @@ class StripePaymentService
     update_reservation if create_charge
   end
 
-  def capture_charge
+  def capture_charge_and_transfer_services_fees
     retrieve_charge
-    begin
-      charge.capture
-    rescue Stripe::InvalidRequestError => e
-      Rails.logger.error('Failed to capture Charge')
-      Rails.logger.error(e.message)
-      @errors << e.message
-      false
-    end
+    capture_charge
+    transfer_services_fees
   end
 
   def user_sources
@@ -32,9 +27,8 @@ class StripePaymentService
     @sources = customer.sources.all(object: 'card')
   end
 
-  def tax_and_payout
-    pay_cookoon
-    payout
+  def pay_host
+    trigger_payout
   end
 
   def add_source_to_customer
@@ -71,7 +65,7 @@ class StripePaymentService
     false
   end
 
-  def payout
+  def trigger_payout
     Stripe::Payout.create(
       {
         amount: reservation.payout_price_for_host_cents,
@@ -118,6 +112,34 @@ class StripePaymentService
     @charge = Stripe::Charge.retrieve(reservation.stripe_charge_id)
   end
 
+  def capture_charge
+    return false unless charge
+    charge.capture
+  rescue Stripe::InvalidRequestError => e
+    Rails.logger.error('Failed to capture Charge')
+    Rails.logger.error(e.message)
+    @errors << e.message
+    false
+  end
+
+  def transfer_services_fees
+    return false unless charge&.captured
+    Stripe::Transfer.create(
+      {
+        amount: reservation.price_for_services_cents,
+        currency: 'eur',
+        transfer_group: charge.transfer_group,
+        destination: Stripe::Account.retrieve.id
+      },
+      { stripe_account: user.stripe_account_id }
+    )
+  rescue Stripe::InvalidRequestError => e
+    Rails.logger.error('Failed to transfer services fees')
+    Rails.logger.error(e.message)
+    @errors << e.message
+    false
+  end
+
   def create_source_for_customer
     customer.sources.create(source: token)
   rescue Stripe::CardError => e
@@ -136,7 +158,7 @@ class StripePaymentService
       description:  "Paiement pour #{reservation.cookoon.name}",
       capture: false,
       destination: {
-        amount: reservation.price_for_rent_cents,
+        amount: reservation.revenue_for_host_cents,
         account: reservation.cookoon.user.stripe_account_id
       }
     )
