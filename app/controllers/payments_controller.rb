@@ -1,4 +1,4 @@
-class PaiementsController < ApplicationController
+class PaymentsController < ApplicationController
   before_action :set_reservation
 
   def new
@@ -12,14 +12,14 @@ class PaiementsController < ApplicationController
   def create
     payment_service = StripePaymentService.new(
       user: @reservation.user,
-      source: params[:paiement][:source],
+      source: params[:payment][:source],
       reservation: @reservation
     )
 
     if payment_service.create_charge_and_update_reservation
       ReservationMailer.new_request(@reservation).deliver_now
       ReservationMailer.pending_request(@reservation).deliver_now
-      redirect_to cookoons_path, flash: { paiement_succeed: true }
+      redirect_to cookoons_path, flash: { payment_succeed: true }
     else
       flash[:alert] = payment_service.displayable_errors
       render :new
