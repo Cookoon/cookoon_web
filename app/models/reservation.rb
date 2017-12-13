@@ -60,6 +60,10 @@ class Reservation < ApplicationRecord
     price_for_rent_cents + cookoon_fees_cents
   end
 
+  def revenue_for_host_cents
+    price_for_rent_cents - host_cookoon_fees_cents
+  end
+
   def cookoon_owner
     cookoon.user
   end
