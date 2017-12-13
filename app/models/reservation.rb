@@ -16,7 +16,7 @@ class Reservation < ApplicationRecord
   validates :price_cents, presence: true
   validates :duration, presence: true
   validates :date, presence: true
-  validate :date_after_48_hours
+  validate :date_after_48_hours, on: :create
   validate :not_my_cookoon
 
   enum status: %i[pending paid accepted refused cancelled ongoing passed]
