@@ -11,7 +11,7 @@ class ReservationsController < ApplicationController
   def create
     @reservation.price = @reservation.price_for_rent
     if @reservation.save
-      redirect_to new_reservation_paiement_path(@reservation)
+      redirect_to new_reservation_payment_path(@reservation)
     else
       render 'reservations/new'
     end

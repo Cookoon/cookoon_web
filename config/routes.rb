@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   end
 
   resources :reservations, only: [:index, :show, :edit, :update] do
-    resources :paiements, only: [:new, :create]
+    resources :payments, only: [:new, :create]
   end
 
   # -------- HOST NAMESPACE ---------

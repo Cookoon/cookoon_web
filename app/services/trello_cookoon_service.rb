@@ -78,14 +78,14 @@ class TrelloCookoonService
     return unless card
     card.move_to_list(list_id)
   rescue Trello::Error
-    Rails.logger.error("Faild to move Trello Card to #{cookoon.status}_list")
+    Rails.logger.error("Failed to move Trello Card to #{cookoon.status}_list")
     false
   end
 
   def retrieve_card
     @card ||= Trello::Card.find(cookoon.trello_card_id)
   rescue Trello::Error
-    Rails.logger.error('Faild to retrieve Trello Card')
+    Rails.logger.error('Failed to retrieve Trello Card')
     false
   end
 
