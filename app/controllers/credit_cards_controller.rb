@@ -32,7 +32,7 @@ class CreditCardsController < ApplicationController
   private
 
   def set_paiement_service
-    @paiement_service = StripePaiementService.new(
+    @paiement_service = StripePaymentService.new(
       user: current_user
     )
   end

@@ -10,7 +10,7 @@ class Host::InventoriesController < ApplicationController
   def create
     @inventory.attributes = inventory_params.merge(checkin_at: DateTime.now)
     if @inventory.save && @reservation.ongoing!
-      paiement_service = StripePaiementService.new(user: @reservation.cookoon_owner, reservation: @reservation)
+      paiement_service = StripePaymentService.new(user: @reservation.cookoon_owner, reservation: @reservation)
       # Pas de test ici, il faut monitorer sur les premieres locations
       # Ajouter une transaction ? Ou poster sur Slack pour le declencher à la main.
       paiement_service.tax_and_payout

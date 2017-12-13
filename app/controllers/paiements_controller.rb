@@ -2,7 +2,7 @@ class PaiementsController < ApplicationController
   before_action :set_reservation
 
   def new
-    paiement_service = StripePaiementService.new(
+    paiement_service = StripePaymentService.new(
       user: current_user,
       reservation: @reservation
     )
@@ -10,7 +10,7 @@ class PaiementsController < ApplicationController
   end
 
   def create
-    paiement_service = StripePaiementService.new(
+    paiement_service = StripePaymentService.new(
       user: @reservation.user,
       source: params[:paiement][:source],
       reservation: @reservation

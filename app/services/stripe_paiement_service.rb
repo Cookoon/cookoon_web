@@ -1,4 +1,4 @@
-class StripePaiementService
+class StripePaymentService
   attr_accessor :user, :token, :reservation, :customer, :charge, :sources, :source
 
   def initialize(attributes)

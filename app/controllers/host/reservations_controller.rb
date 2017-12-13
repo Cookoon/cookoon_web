@@ -15,7 +15,7 @@ class Host::ReservationsController < ApplicationController
 
     if @reservation.update(merged_params)
       if @reservation.accepted?
-        paiement_service = StripePaiementService.new(user: @reservation.cookoon_owner, reservation: @reservation)
+        paiement_service = StripePaymentService.new(user: @reservation.cookoon_owner, reservation: @reservation)
         if paiement_service.capture_charge
           ReservationMailer.confirmed_by_host(@reservation).deliver_now
           ReservationMailer.confirmation(@reservation).deliver_now
