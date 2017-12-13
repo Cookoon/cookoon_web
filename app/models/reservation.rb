@@ -49,11 +49,11 @@ class Reservation < ApplicationRecord
   end
 
   def cookoon_fees_cents
-    price_for_rent_cents * rent_cookoon_fee_rate
+    (price_for_rent_cents * rent_cookoon_fee_rate).round
   end
 
   def host_cookoon_fees_cents
-    price_for_rent_cents * host_cookoon_fee_rate
+    (price_for_rent_cents * host_cookoon_fee_rate).round
   end
 
   def price_for_rent_with_fees_cents
