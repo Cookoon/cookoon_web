@@ -15,13 +15,13 @@ class PaymentsController < ApplicationController
       source: params[:payment][:source],
       reservation: @reservation
     )
-
+    @user_cards = payment_service.user_sources.try(:data)
     if payment_service.create_charge_and_update_reservation
       ReservationMailer.new_request(@reservation).deliver_now
       ReservationMailer.pending_request(@reservation).deliver_now
       redirect_to cookoons_path, flash: { payment_succeed: true }
     else
-      flash[:alert] = payment_service.displayable_errors
+      flash.now.alert = payment_service.displayable_errors
       render :new
     end
   end

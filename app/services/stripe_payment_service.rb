@@ -48,7 +48,11 @@ class StripePaymentService
   end
 
   def displayable_errors
-    @errors.join(' ')
+    if @errors.any?
+      @errors.join(' ')
+    else
+      "Une erreur est survenue avec notre prestataire de paiement, essayez à nouveau ou contactez notre service d'aide"
+    end
   end
 
   private
