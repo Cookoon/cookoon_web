@@ -7,28 +7,27 @@ class StripePaymentService
     @source = attributes[:source]
     @reservation = attributes[:reservation]
     @errors = []
-    # TODO : RETIRER CE FONCTIONNEMENT
-    retrieve_customer if user.stripe_customer_id
   end
 
   def create_charge_and_update_reservation
-    return unless retrieve_customer
-    update_reservation if create_charge
+    retrieve_customer
+    create_charge
+    update_reservation
   end
 
-  def capture_charge_and_transfer_services_fees
+  def capture_payment
     retrieve_charge
     capture_charge
-    transfer_services_fees
   end
 
   def user_sources
-    return unless user.stripe_customer_id
-    @sources = customer.sources.all(object: 'card')
+    retrieve_customer
+    retrieve_sources
   end
 
   def pay_host
-    trigger_payout
+    retrieve_charge
+    trigger_transfer
   end
 
   def add_source_to_customer
@@ -36,12 +35,14 @@ class StripePaymentService
     create_source_for_customer
   end
 
-  def set_default_card(card)
+  # This method should do stripe logic in private section
+  def default_card(card)
     return false unless card
     customer.default_source = card.id
     customer.save
   end
 
+  # Same as above This method should do stripe logic in private section
   def destroy_card(card)
     customer.sources.retrieve(card).delete
   end
@@ -52,34 +53,46 @@ class StripePaymentService
 
   private
 
-  def pay_cookoon
-    Stripe::Charge.create(
-      amount: reservation.total_fees_with_services_for_host_cents,
-      currency: 'eur',
-      source: user.stripe_account_id
-    )
+  def retrieve_sources
+    return false unless customer
+    @sources = customer.sources.all(object: 'card')
+  end
+
+  def retrieve_charge
+    return false unless reservation.stripe_charge_id
+    @charge = Stripe::Charge.retrieve(reservation.stripe_charge_id)
+  end
+
+  def retrieve_customer
+    @customer ||= Stripe::Customer.retrieve(user.stripe_customer_id)
   rescue Stripe::InvalidRequestError => e
-    Rails.logger.error("Failed to create Charge for cookoon options, source: #{user.stripe_account_id}")
+    Rails.logger.error("Failed to retrieve customer for #{user.email}")
     Rails.logger.error(e.message)
     @errors << e.message
     false
   end
 
-  def trigger_payout
-    Stripe::Payout.create(
-      {
-        amount: reservation.payout_price_for_host_cents,
-        currency: 'eur'
-      },
-      {
-        stripe_account: user.stripe_account_id
-      }
-    )
+  def retrieve_or_create_customer
+    @customer ? create_customer : @customer
+  end
+
+  def trigger_transfer
+    return false unless charge
+    Stripe::Transfer.create(transfer_options)
   rescue Stripe::InvalidRequestError => e
-    Rails.logger.error("Failed to create Stripe Payout for #{user.stripe_account_id}")
+    Rails.logger.error("Failed to trigger transfer for #{charge.id}")
     Rails.logger.error(e.message)
     @errors << e.message
     false
+  end
+
+  def transfer_options
+    {
+      amount: reservation.payout_price_for_host_cents,
+      currency: 'eur',
+      source_transaction: charge.id,
+      destination: user.stripe_account_id
+    }
   end
 
   def update_reservation
@@ -95,46 +108,11 @@ class StripePaymentService
     @customer
   end
 
-  def retrieve_or_create_customer
-    @customer.nil? ? create_customer : @customer
-  end
-
-  def retrieve_customer
-    @customer = Stripe::Customer.retrieve(user.stripe_customer_id)
-  rescue Stripe::InvalidRequestError => e
-    Rails.logger.error("Failed to retrieve customer for #{user.email}")
-    Rails.logger.error(e.message)
-    @errors << e.message
-    false
-  end
-
-  def retrieve_charge
-    @charge = Stripe::Charge.retrieve(reservation.stripe_charge_id)
-  end
-
   def capture_charge
     return false unless charge
     charge.capture
   rescue Stripe::InvalidRequestError => e
     Rails.logger.error('Failed to capture Charge')
-    Rails.logger.error(e.message)
-    @errors << e.message
-    false
-  end
-
-  def transfer_services_fees
-    return false unless charge&.captured
-    Stripe::Transfer.create(
-      {
-        amount: reservation.price_for_services_cents,
-        currency: 'eur',
-        transfer_group: charge.transfer_group,
-        destination: Stripe::Account.retrieve.id
-      },
-      { stripe_account: user.stripe_account_id }
-    )
-  rescue Stripe::InvalidRequestError => e
-    Rails.logger.error('Failed to transfer services fees')
     Rails.logger.error(e.message)
     @errors << e.message
     false
@@ -150,22 +128,23 @@ class StripePaymentService
   end
 
   def create_charge
-    @charge = Stripe::Charge.create(
-      amount: reservation.price_for_rent_with_fees_cents,
-      currency: 'eur',
-      customer: @customer.id,
-      source: @source,
-      description:  "Paiement pour #{reservation.cookoon.name}",
-      capture: false,
-      destination: {
-        amount: reservation.revenue_for_host_cents,
-        account: reservation.cookoon.user.stripe_account_id
-      }
-    )
+    return false unless customer
+    @charge = Stripe::Charge.create(charge_options)
   rescue Stripe::CardError, Stripe::InvalidRequestError => e
     Rails.logger.error('Failed to create Stripe Charge')
     Rails.logger.error(e.message)
     @errors << e.message
     false
+  end
+
+  def charge_options
+    {
+      amount: reservation.price_for_rent_with_fees_cents,
+      currency: 'eur',
+      customer: @customer.id,
+      source: @source,
+      description:  "Paiement pour #{reservation.cookoon.name}",
+      capture: false
+    }
   end
 end
