@@ -64,6 +64,7 @@ class StripePaymentService
   end
 
   def retrieve_customer
+    return false unless user
     @customer ||= Stripe::Customer.retrieve(user.stripe_customer_id)
   rescue Stripe::InvalidRequestError => e
     Rails.logger.error("Failed to retrieve customer for #{user.email}")
@@ -96,7 +97,8 @@ class StripePaymentService
   end
 
   def update_reservation
-    reservation.update(status: :paid, stripe_charge_id: @charge.id)
+    return false unless charge
+    reservation.update(status: :paid, stripe_charge_id: charge.id)
   end
 
   def create_customer
