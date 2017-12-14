@@ -1,5 +1,5 @@
 <ul>
   <% @users.each do |user| %>
-    <li>Se connecter en temps que : <%= link_to user.full_name, impersonate_user_path(user), method: :post, class: 'text-blue' %></li>
+    <li>Se connecter en tant que : <%= link_to "#{user.full_name} [id: #{user.id}]", impersonate_user_path(user), method: :post, class: 'text-blue' %></li>
   <% end %>
 </ul>
