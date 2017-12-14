@@ -35,15 +35,7 @@
       <%= link_to 'Ajouter une carte', credit_cards_path, class: 'button button-blue' %>
     </div>
   <% else %>
-    <%= simple_form_for :payment, url: reservation_payments_path(@reservation), remote: true, html: { id: 'pay-form' } do |f| %>
-      <div class="credit-card-select">
-        <i class="fa fa-credit-card" aria-hidden="true"></i>
-        <%= f.input :source, collection: @user_cards, selected: :first, label: false, label_method: ->(card){ "#{card.brand.upcase} XXXX-XXXX-XXXX-#{card.last4}" }, value_method: ->(card){ card.id } %>
-      </div>
-      <div class="text-center">
-        <%= f.button :button, 'PAYER', as: :submit, class: 'button button-blue', id: 'pay-button' %>
-      </div>
-    <% end %>
+    <%= render 'form' %>
     <div class="text-center">
       <div style="font-size:12px; margin-top: 15px">
         <p>

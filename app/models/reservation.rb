@@ -1,7 +1,7 @@
 class Reservation < ApplicationRecord
   belongs_to :cookoon
   belongs_to :user
-  has_one :inventory
+  has_one :inventory, dependent: :destroy
 
   monetize :price_cents
   monetize :price_for_rent_cents

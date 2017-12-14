@@ -8,12 +8,12 @@ class Host::InventoriesController < ApplicationController
   end
 
   def create
-    @inventory.attributes = inventory_params.merge(checkin_at: DateTime.now)
+    @inventory.attributes = inventory_params.merge(checkin_at: Time.zone.now)
     if @inventory.save && @reservation.ongoing!
       payment_service = StripePaymentService.new(user: @reservation.cookoon_owner, reservation: @reservation)
       # Pas de test ici, il faut monitorer sur les premieres locations
-      # Ajouter une transaction ? Ou poster sur Slack pour le declencher à la main.
-      payment_service.tax_and_payout
+      # Ajouter une transaction ? Ou poster sur Slack pour le declencher a la main.
+      payment_service.pay_host
       flash[:notice] = 'La reservation vient de démarrer'
       redirect_to host_reservations_path
     else
