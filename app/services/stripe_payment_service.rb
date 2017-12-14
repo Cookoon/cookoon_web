@@ -91,7 +91,6 @@ class StripePaymentService
       amount: reservation.payout_price_for_host_cents,
       currency: 'eur',
       source_transaction: charge.id,
-      transfer_group: "RESA#{reservation.id}",
       destination: user.stripe_account_id
     }
   end
@@ -144,7 +143,6 @@ class StripePaymentService
       currency: 'eur',
       customer: @customer.id,
       source: @source,
-      transfer_group: "RESA#{reservation.id}",
       description: "Paiement pour #{reservation.cookoon.name}",
       capture: false
     }
