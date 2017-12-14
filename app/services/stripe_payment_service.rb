@@ -73,7 +73,7 @@ class StripePaymentService
   end
 
   def retrieve_or_create_customer
-    @customer ? create_customer : @customer
+    @customer.nil? ? create_customer : @customer
   end
 
   def trigger_transfer
