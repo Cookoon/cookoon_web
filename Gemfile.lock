@@ -186,6 +186,8 @@ GEM
       actionmailer (>= 3.0.0)
       postmark (~> 1.10.0)
     powerpack (0.1.1)
+    pretender (0.3.1)
+      actionpack
     public_suffix (2.0.5)
     puma (3.9.1)
     puma (3.9.1-java)
@@ -369,6 +371,7 @@ DEPENDENCIES
   money-rails (~> 1)
   pg (~> 0.18)
   postmark-rails
+  pretender
   puma (~> 3.7)
   pundit
   rails (~> 5.1.2)

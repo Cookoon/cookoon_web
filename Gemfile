@@ -47,8 +47,10 @@ gem 'postmark-rails'
 gem 'cloudinary'
 gem 'attachinary'
 gem 'jquery-fileupload-rails'
-gem "geocoder"
-gem "gmaps4rails"
+gem 'geocoder'
+gem 'gmaps4rails'
+
+gem 'pretender'
 
 gem 'stripe'
 
@@ -82,12 +84,12 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'rubocop', '~> 0.49.1', require: false
   gem 'i18n-debug'
-  gem "letter_opener"
+  gem 'letter_opener'
   gem 'bullet'
 end
 
 source 'https://rails-assets.org' do
-  gem "rails-assets-underscore"
+  gem 'rails-assets-underscore'
   gem 'rails-assets-smalot-bootstrap-datetimepicker'
 end
 

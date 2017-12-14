@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   resource :users, only: [:edit, :update]
+  resources :users, only: [:index] do
+    post :impersonate, on: :member
+    post :stop_impersonating, on: :collection
+  end
   resources :user_searches, only: :create
   resources :stripe_accounts, only: [:new, :create]
   resources :credit_cards, only: [:index, :create, :destroy]
