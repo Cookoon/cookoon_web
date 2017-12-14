@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = policy_scope(User)
+    @users = policy_scope(User).order(:id)
   end
 
   def impersonate
@@ -42,6 +42,6 @@ class UsersController < ApplicationController
   end
 
   def require_admin!
-    user_not_authorized unless true_user.admin?
+    raise Pundit::NotAuthorizedError unless true_user.admin?
   end
 end
