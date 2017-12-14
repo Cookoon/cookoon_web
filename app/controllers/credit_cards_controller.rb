@@ -9,12 +9,8 @@ class CreditCardsController < ApplicationController
   end
 
   def create
-    @payment_service.token = params[:credit_card][:stripe_token]
-    # add_source
     card = @payment_service.add_source_to_customer
-
-    # set as default card if asked
-    @payment_service.set_default_card(card) if params[:credit_card][:default] == "1"
+    @payment_service.default_card(card) if params[:credit_card][:default] == '1'
     if card
       redirect_to credit_cards_path
     else
@@ -33,7 +29,8 @@ class CreditCardsController < ApplicationController
 
   def set_payment_service
     @payment_service = StripePaymentService.new(
-      user: current_user
+      user: current_user,
+      token: params.dig(:credit_card, :stripe_token)
     )
   end
 end
