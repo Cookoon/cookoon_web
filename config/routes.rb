@@ -2,6 +2,11 @@ Rails.application.routes.draw do
 
   mount Attachinary::Engine => "/attachinary"
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions', invitations: 'users/invitations' }
+  # Sidekiq Web UI, only for admins.
+  require "sidekiq/web"
+  authenticate :user, lambda { |u| u.admin } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
 
   # Different root for authenticated users
   authenticated do
