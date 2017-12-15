@@ -1,0 +1,6 @@
+<% if current_user && current_user != true_user %>
+  <div class="alert alert-warning">
+    Vous (<%= true_user.first_name %>) êtes connecté en tant que <%= current_user.full_name %> - 
+    <%= link_to 'Retour à la navigation classique', stop_impersonating_users_path, method: :post, class: 'text-white' %>
+  </div>
+<% end %>
