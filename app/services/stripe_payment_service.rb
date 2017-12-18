@@ -38,12 +38,14 @@ class StripePaymentService
   # This method should do stripe logic in private section
   def default_card(card)
     return false unless card
+    retrieve_customer
     customer.default_source = card.id
     customer.save
   end
 
   # Same as above This method should do stripe logic in private section
   def destroy_card(card)
+    retrieve_customer
     customer.sources.retrieve(card).delete
   end
 
