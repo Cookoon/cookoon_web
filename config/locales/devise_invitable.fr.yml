@@ -14,7 +14,7 @@ fr:
         submit_button: "Définir mon mot de passe"
     mailer:
       invitation_instructions:
-        subject: 'Instruction de confirmation'
+        subject: 'Vous avez été invité(e) à rejoindre Cookoon !'
         hello: 'Bonjour %{email}'
         someone_invited_you: "Quelqu'un vous a invité à rejoindre %{url}, vous pouvez accepter cette invitation via le lien ci-dessous."
         accept: "Accepter l'invitation"
