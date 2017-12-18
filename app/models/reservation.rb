@@ -26,7 +26,7 @@ class Reservation < ApplicationRecord
   scope :for_host, ->(user) { where(cookoon: user.cookoons) }
 
   after_create :create_trello_card
-  after_save :update_trello, if: :status_changed?
+  after_save :update_trello, if: :saved_change_to_status?
 
   def host_cookoon_fee_rate
     0.07
