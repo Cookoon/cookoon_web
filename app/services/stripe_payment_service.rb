@@ -38,12 +38,14 @@ class StripePaymentService
   # This method should do stripe logic in private section
   def default_card(card)
     return false unless card
+    retrieve_customer
     customer.default_source = card.id
     customer.save
   end
 
   # Same as above This method should do stripe logic in private section
   def destroy_card(card)
+    retrieve_customer
     customer.sources.retrieve(card).delete
   end
 
@@ -57,14 +59,8 @@ class StripePaymentService
 
   private
 
-  def retrieve_sources
-    return false unless customer
-    @sources = customer.sources.all(object: 'card')
-  end
-
-  def retrieve_charge
-    return false unless reservation.stripe_charge_id
-    @charge = Stripe::Charge.retrieve(reservation.stripe_charge_id)
+  def retrieve_or_create_customer
+    create_customer unless retrieve_customer
   end
 
   def retrieve_customer
@@ -77,8 +73,23 @@ class StripePaymentService
     false
   end
 
-  def retrieve_or_create_customer
-    @customer.nil? ? create_customer : @customer
+  def create_customer
+    @customer = Stripe::Customer.create(
+      description: "Customer for #{user.email}",
+      email: user.email
+    )
+    user.update(stripe_customer_id: customer.id)
+    customer
+  end
+
+  def retrieve_sources
+    return false unless customer
+    @sources = customer.sources.all(object: 'card')
+  end
+
+  def retrieve_charge
+    return false unless reservation.stripe_charge_id
+    @charge = Stripe::Charge.retrieve(reservation.stripe_charge_id)
   end
 
   def trigger_transfer
@@ -103,15 +114,6 @@ class StripePaymentService
   def update_reservation
     return false unless charge
     reservation.update(status: :paid, stripe_charge_id: charge.id)
-  end
-
-  def create_customer
-    @customer = Stripe::Customer.create(
-      description: "Customer for #{user.email}",
-      email: user.email
-    )
-    user.update(stripe_customer_id: customer.id)
-    @customer
   end
 
   def capture_charge
