@@ -1,13 +1,14 @@
 Rails.application.routes.draw do
-
   mount ForestLiana::Engine => '/forest'
-  mount Attachinary::Engine => "/attachinary"
-  devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions', invitations: 'users/invitations' }
+  mount Attachinary::Engine => '/attachinary'
+
   # Sidekiq Web UI, only for admins.
   require "sidekiq/web"
   authenticate :user, lambda { |u| u.admin } do
     mount Sidekiq::Web => '/sidekiq'
   end
+
+  devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions', invitations: 'users/invitations' }
 
   # Different root for authenticated users
   authenticated do
