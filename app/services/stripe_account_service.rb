@@ -82,7 +82,7 @@ class StripeAccountService
         type: 'individual'
       },
       tos_acceptance: {
-        date: DateTime.now.to_i,
+        date: Time.zone.now.to_i,
         ip: request_ip
       }
     )

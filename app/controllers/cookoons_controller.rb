@@ -3,7 +3,7 @@ class CookoonsController < ApplicationController
 
   def index
     @lat_lng = cookies[:lat_lng].try(:split, "|")
-    @new_search = UserSearch.new(number: 2, duration: 2, date: DateTime.now + 2.days)
+    @new_search = UserSearch.new(number: 2, duration: 2, date: Time.zone.now + 3.days)
     @last_search = current_search || @new_search
     @cookoons = policy_scope(Cookoon).near(@last_search.address.presence || @lat_lng || 'Paris', 10)
     prepare_infos
