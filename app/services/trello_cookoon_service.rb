@@ -1,11 +1,12 @@
 class TrelloCookoonService
   include CloudinaryHelper
+  include MoneyRails::ActionViewExtension
 
   TRELLO_LISTS_IDS = {
     under_review_list_id: '5a253938f1a56c25084f5400',
     approved_list_id: '5a2e482923c373d2c8769bd7',
     suspended_list_id: '5a2e4847258b5c7821ff7ddf'
-  }
+  }.freeze
 
   def initialize(attributes)
     @cookoon = attributes[:cookoon]
@@ -33,7 +34,7 @@ class TrelloCookoonService
   def create_card
     @card = Trello::Card.create(
       list_id: TRELLO_LISTS_IDS[:under_review_list_id],
-      name: "#{cookoon.name}",
+      name: cookoon.name,
       desc: description
     )
   rescue Trello::Error => e
@@ -108,7 +109,7 @@ class TrelloCookoonService
     desc_string << "#{cookoon.capacity} personnes \n"
     desc_string << "\n"
     desc_string << "**Prix/H :** \n"
-    desc_string << "#{cookoon.price} € \n"
+    desc_string << "#{humanized_money_with_symbol cookoon.price} \n"
 
     desc_string
   end
