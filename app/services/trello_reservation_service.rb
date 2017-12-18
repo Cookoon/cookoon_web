@@ -19,6 +19,7 @@ class TrelloReservationService
 
   def create_trello_card
     create_card
+    card&.id
   end
 
   def move_card
@@ -65,12 +66,11 @@ class TrelloReservationService
   end
 
   def create_card
-    card = Trello::Card.create(
+    @card = Trello::Card.create(
       list_id: TRELLO_LISTS_IDS[:pending_list_id],
       name: "#{cookoon.name} - #{reservation.date.strftime('%d/%m/%Y')}",
       desc: description
     )
-    reservation.trello_card_id = card&.id
   rescue Trello::Error => e
     Rails.logger.error('Failed to create Trello Card')
     Rails.logger.error(e.message)

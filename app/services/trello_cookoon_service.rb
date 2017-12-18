@@ -17,6 +17,7 @@ class TrelloCookoonService
     add_attached_map
     add_attached_pictures
     save_card
+    card&.id
   end
 
   def move_card
@@ -35,7 +36,6 @@ class TrelloCookoonService
       name: "#{cookoon.name}",
       desc: description
     )
-    cookoon.trello_card_id = card&.id
   rescue Trello::Error => e
     Rails.logger.error('Failed to create Trello Card')
     Rails.logger.error(e.message)
