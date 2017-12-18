@@ -35,7 +35,6 @@ class TrelloCookoonService
       name: "#{cookoon.name}",
       desc: description
     )
-    cookoon.trello_card_id = card&.id
   rescue Trello::Error => e
     Rails.logger.error('Failed to create Trello Card')
     Rails.logger.error(e.message)
