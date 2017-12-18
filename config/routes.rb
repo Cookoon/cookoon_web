@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  mount ForestLiana::Engine => '/forest'
   mount Attachinary::Engine => "/attachinary"
   devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions', invitations: 'users/invitations' }
   # Sidekiq Web UI, only for admins.
