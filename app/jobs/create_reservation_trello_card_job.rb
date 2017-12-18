@@ -4,7 +4,7 @@ class CreateReservationTrelloCardJob < ApplicationJob
   def perform(reservation_id)
     reservation = Reservation.find(reservation_id)
     service = TrelloReservationService.new(reservation: reservation)
-    card = service.create_trello_card
-    reservation.update(trello_card_id: card.id) if card
+    card_id = service.create_trello_card
+    reservation.update(trello_card_id: card_id) if card_id
   end
 end
