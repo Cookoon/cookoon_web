@@ -91,20 +91,12 @@ class Reservation < ApplicationRecord
 
   def update_trello
     return unless Rails.env.production?
-    if accepted?
-      trello_service.enrich_and_move_card
-    else
-      trello_service.move_card
-    end
+    UpdateReservationTrelloCardJob.perform_later(id)
   end
 
   def create_trello_card
     return unless Rails.env.production?
-    trello_service.create_trello_card
-  end
-
-  def trello_service
-    @trello_service ||= TrelloReservationService.new(reservation: self)
+    CreateReservationTrelloCardJob.perform_later(id)
   end
 
   def date_after_48_hours
