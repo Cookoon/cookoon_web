@@ -17,8 +17,8 @@ class Host::ReservationsController < ApplicationController
       if @reservation.accepted?
         payment_service = StripePaymentService.new(user: @reservation.cookoon_owner, reservation: @reservation)
         if payment_service.capture_payment
-          ReservationMailer.confirmed_by_host(@reservation).deliver_now
-          ReservationMailer.confirmation(@reservation).deliver_now
+          ReservationMailer.confirmed_by_host(@reservation).deliver_later
+          ReservationMailer.confirmation(@reservation).deliver_later
           flash[:notice] = "Vous avez accepté la réservation"
         else
           # TODO : Essayer à nouveau de capturer la charge ou afficher une erreur.
@@ -26,7 +26,7 @@ class Host::ReservationsController < ApplicationController
           flash[:alert] = payment_service.displayable_errors
         end
       else
-        ReservationMailer.refused_by_host(@reservation).deliver_now
+        ReservationMailer.refused_by_host(@reservation).deliver_later
         flash[:notice] = "Vous avez refusé la réservation"
       end
 
