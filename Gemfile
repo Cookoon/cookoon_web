@@ -31,37 +31,45 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-# UI Gems
-gem 'bootstrap-sass'
-gem 'font-awesome-sass'
-gem 'simple_form'
-gem 'jquery-rails'
-gem 'jquery-ui-rails'
-gem 'hammerjs-rails'
 
-gem 'momentjs-rails', '>= 2.9.0'
-
-gem 'slim'
-gem 'postmark-rails'
-
-gem 'cloudinary'
+# Back
 gem 'attachinary'
-gem 'jquery-fileupload-rails'
-gem 'geocoder'
-gem 'gmaps4rails'
-
-gem 'pretender'
-
-gem 'stripe'
-
-# Config
-gem 'figaro'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise_invitable', '~> 1.7.0'
+gem 'figaro'
+gem 'geocoder'
 gem 'money-rails', '~>1'
 gem 'pundit'
+
+# Front
+gem 'bootstrap-sass'
+gem 'font-awesome-sass'
+gem 'gmaps4rails'
+gem 'hammerjs-rails'
+gem 'jquery-fileupload-rails'
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'momentjs-rails', '>= 2.9.0'
+gem 'sidekiq'
+gem 'sidekiq-failures', '~> 1.0'
+gem 'simple_form'
+gem 'slim'
+
+source 'https://rails-assets.org' do
+  gem 'rails-assets-smalot-bootstrap-datetimepicker'
+  gem 'rails-assets-underscore'
+end
+
+# Admin
+gem 'forest_liana'
+gem 'pretender'
+
+# External
+gem 'cloudinary'
+gem 'postmark-rails'
 gem 'ruby-trello'
+gem 'stripe'
 
 # Tracking
 gem 'raygun4ruby'
@@ -69,9 +77,6 @@ gem 'scout_apm'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
-
-gem 'sidekiq'
-gem 'sidekiq-failures', '~> 1.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -85,15 +90,11 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'rubocop', '~> 0.49.1', require: false
+  # Custom
+  gem 'bullet'
   gem 'i18n-debug'
   gem 'letter_opener'
-  gem 'bullet'
-end
-
-source 'https://rails-assets.org' do
-  gem 'rails-assets-underscore'
-  gem 'rails-assets-smalot-bootstrap-datetimepicker'
+  gem 'rubocop', '~> 0.49.1', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
