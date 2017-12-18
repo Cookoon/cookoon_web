@@ -19,6 +19,7 @@ class TrelloReservationService
 
   def create_trello_card
     create_card
+    card&.id
   end
 
   def move_card

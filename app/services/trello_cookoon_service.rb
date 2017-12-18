@@ -17,6 +17,7 @@ class TrelloCookoonService
     add_attached_map
     add_attached_pictures
     save_card
+    card&.id
   end
 
   def move_card
