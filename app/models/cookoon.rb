@@ -18,8 +18,8 @@ class Cookoon < ApplicationRecord
   validates :photos, presence: true
 
   after_validation :geocode, if: :address_changed?
-  before_create :create_trello_card
-  before_save :update_trello, if: :status_changed?
+  after_create :create_trello_card
+  after_save :update_trello, if: :status_changed?
 
   scope :displayable_on_index, -> { joins(:user).where.not(users: { stripe_account_id: nil }) }
 
