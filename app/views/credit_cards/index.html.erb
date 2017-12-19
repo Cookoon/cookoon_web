@@ -38,11 +38,20 @@
       </div>
       <div class="modal-body" style='padding: 15px;'>
         <%= render 'form' %>
+        <input type="text" id="invisible-input" style="position: absolute; opacity: 0;">
       </div>
       <div class="modal-footer"></div>
     </div>
   </div>
 </div>
+
+<script>
+  // iOS keyboard fix
+  $('#credit-card-modal').on('hide.bs.modal', function () {
+    $('#invisible-input').focus();
+    $('#invisible-input').blur();
+  })
+</script>
 
 <script>
   var stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
