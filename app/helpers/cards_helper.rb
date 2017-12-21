@@ -13,20 +13,20 @@ module CardsHelper
 
   def get_cookoon_icon_for(category)
     case category
-    when "Appartement"
-      content_tag(:i, nil, class: "fa fa-building-o", aria: {hidden: true})
-    when "Jardin"
-      content_tag(:i, nil, class: "fa fa-tree", aria: {hidden: true})
+    when 'Appartement'
+      content_tag(:i, nil, class: 'fa fa-building-o', aria: { hidden: true })
+    when 'Jardin'
+      content_tag(:i, nil, class: 'fa fa-tree', aria: { hidden: true })
     else
-      content_tag(:i, nil, class: "fa fa-home", aria: {hidden: true})
+      content_tag(:i, nil, class: 'fa fa-home', aria: { hidden: true })
     end
   end
 
   def get_price_rank(price_cents)
     case price_cents
-      when 0..2500 then "€"
-      when 2500..3500 then "€€"
-      else "€€€"
+    when 0..3400 then '€'
+    when 3500..4900 then '€€'
+    else '€€€'
     end
   end
 end
