@@ -11,7 +11,10 @@
         <%= simple_form_for @new_search, remote: true do |f| %>
           <div class="row">
             <div class="col-xs-12">
-              <%= f.input :address, label: false, placeholder: 'Ville, adresse ...', input_html: { value: @last_search.address } %>
+              <div class="btn-group width-100">
+                <%= f.input :address, label: false, placeholder: 'Ville, adresse ...', input_html: { value: @last_search.address } %>
+                <span id="user_search_address_clear" class="glyphicon glyphicon-remove-circle"></span>
+              </div>
             </div>
             <div class="col-xs-12">
               <%= f.input :date, label: false, placeholder: 'Date & heure', input_html: { value: display_datetime_for(@last_search.date, join_expression: 'à', without_year: true, time_separator: ':') }, as: :string, readonly: true  %>

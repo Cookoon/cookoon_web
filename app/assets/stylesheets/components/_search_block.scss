@@ -62,6 +62,16 @@
   }
 }
 
+#user_search_address_clear {
+  position: absolute;
+  right: 5px;
+  top: 10px;
+  height: 16px;
+  font-size: 16px;
+  cursor: pointer;
+  color: #ccc;
+}
+
 .datetimepicker {
   background: $blue;
   color: white;
