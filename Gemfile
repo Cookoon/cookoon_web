@@ -94,7 +94,7 @@ group :development do
   gem 'bullet'
   gem 'i18n-debug'
   gem 'letter_opener'
-  gem 'rubocop', '~> 0.52', require: false
+  gem 'rubocop', '~> 0.51.0', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
