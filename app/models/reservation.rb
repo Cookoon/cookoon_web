@@ -24,6 +24,8 @@ class Reservation < ApplicationRecord
   scope :displayable, -> { where.not(status: :pending).order(date: :asc) }
   scope :for_tenant, ->(user) { where(user: user) }
   scope :for_host, ->(user) { where(cookoon: user.cookoons) }
+  scope :active, -> { where(status: %i[paid accepted ongoing]) }
+  scope :inactive, -> { where(status: %i[refused cancelled passed]) }
 
   after_create :create_trello_card
   after_save :update_trello, if: :saved_change_to_status?
