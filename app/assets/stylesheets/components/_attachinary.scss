@@ -1,0 +1,45 @@
+label.attachinary {
+  width: 100%;
+  &.upload-zone:after {
+    height: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    border-radius: 5px;
+    background-color: #ddd;
+    font-size: 4em;
+    content: '+';
+  }
+}
+
+.attachinary-input {
+  display: none !important;
+}
+
+.attachinary_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  img {
+    height: 9em;
+    width: 12em;
+  }
+}
+
+.attachinary_container div {
+  position: relative;
+  margin: 5px;
+}
+
+.attachinary_container div a {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  padding: 0px 5px;
+  border-radius: 50%;
+  background-color: #666;
+  font-weight: bold;
+  color: white;
+}
