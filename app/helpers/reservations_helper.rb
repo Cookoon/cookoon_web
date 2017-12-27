@@ -3,8 +3,13 @@ module ReservationsHelper
     "#{reservation.duration} heures"
   end
 
-  def pending_reservations?
+  def notifiable_reservations?
     return false unless current_user
-    current_user.paid_reservations.any?
+    current_user.notifiable_reservations.any?
+  end
+
+  def notifiable_reservation_requests?
+    return false unless current_user
+    current_user.notifiable_reservation_requests.any?
   end
 end
