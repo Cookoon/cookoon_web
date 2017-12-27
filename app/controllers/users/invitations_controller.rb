@@ -6,6 +6,9 @@ class Users::InvitationsController < Devise::InvitationsController
       :invitation_token,
       :password,
       :password_confirmation,
+      :first_name,
+      :last_name,
+      :phone_number,
       :terms_of_service
     )
   end

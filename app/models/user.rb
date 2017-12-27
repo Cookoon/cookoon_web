@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  PHONE_REGEXP = /\A(\+\d+)?([\s\-\.]?\(?\d+\)?)+\z/
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :recoverable,
@@ -13,6 +15,14 @@ class User < ApplicationRecord
 
   monetize :total_payouts_for_dashboard_cents
 
+  validates :first_name, presence: true
+  validates :last_name, presence: true
+  validates :phone_number,
+            presence: true,
+            format: {
+              with: PHONE_REGEXP,
+              message: :not_a_valid_phone_number
+            }
   validates :terms_of_service, acceptance: { message: 'Vous devez accepter les conditions générales pour continuer' }
 
   def full_name

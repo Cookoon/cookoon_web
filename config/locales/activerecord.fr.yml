@@ -6,7 +6,7 @@ fr:
       user:
         first_name: Prénom
         last_name: Nom
-        phone_number: Numéro de téléphone
+        phone_number: Téléphone portable
         description: Description
         photo: Photo
       inventory:
@@ -20,3 +20,7 @@ fr:
               not_after_48_hours: Un minimum de 48h est requis.
             cookoon:
               cannot_book_mine: Vous ne pouvez pas réserver votre propre Cookoon !
+        user:
+          attributes:
+            phone_number:
+              not_a_valid_phone_number: vérifiez le format de votre numéro de téléphone
