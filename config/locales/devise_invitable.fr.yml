@@ -14,8 +14,8 @@ fr:
         header: "Envoyer une invitation"
         submit_button: "Envoyer une invitation"
       edit:
-        header: "Définir votre mot de passe"
-        submit_button: "Définir mon mot de passe"
+        header: Vous rejoignez la communauté ?
+        submit_button: Je m'inscris
     mailer:
       invitation_instructions:
         subject: 'Vous avez été invité(e) à rejoindre Cookoon !'
