@@ -19,7 +19,13 @@ class CookoonsController < ApplicationController
     @cookoon = current_user.cookoons.build(cookoon_params)
     authorize @cookoon
     if @cookoon.save
-      redirect_to @cookoon
+      if current_user.stripe_account_id
+        redirect_to @cookoon
+      else
+        flash[:notice] = "Vous avez presque terminé ! Pour que votre Cookoon soit visible et recevoir des paiements, \
+        vous devez connecter votre compte à notre organisme de paiement partenaire."
+        redirect_to new_stripe_account_path
+      end
     else
       render :new
     end
