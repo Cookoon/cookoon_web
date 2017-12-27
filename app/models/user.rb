@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   has_many :cookoons
   has_many :reservations
-  has_many :reservations_requests, through: :cookoons, source: :reservations
+  has_many :reservation_requests, through: :cookoons, source: :reservations
   has_many :user_searches
 
   has_attachment :photo
@@ -23,8 +23,12 @@ class User < ApplicationRecord
     end
   end
 
-  def paid_reservations
-    reservations.paid
+  def notifiable_reservations
+    reservations.accepted
+  end
+
+  def notifiable_reservation_requests
+    reservation_requests.paid
   end
 
   def stripe_account
@@ -41,6 +45,6 @@ class User < ApplicationRecord
   end
 
   def total_payouts_for_dashboard_cents
-    reservations_requests.passed.includes(:cookoon).sum(&:payout_price_for_host_cents)
+    reservation_requests.passed.includes(:cookoon).sum(&:payout_price_for_host_cents)
   end
 end

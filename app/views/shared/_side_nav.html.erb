@@ -20,7 +20,7 @@
       <ul>
         <li class="notifiable">
           <i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp; <%= link_to 'MES RÉSERVATIONS', reservations_path %>
-          <% if pending_reservations? %>
+          <% if notifiable_reservations? %>
             <span class="notif notif-sidebar"></span>
           <% end %>
         </li>
@@ -30,6 +30,9 @@
       </ul>
       <p><%= link_to 'Conditions Générales', cgu_path %></p>
       <div class="side-nav-fixedbot">
+        <% if notifiable_reservation_requests? %>
+          <span class="notif notif-inline"></span>
+        <% end %>
         <i class="fa fa-exchange" aria-hidden="true"></i>&nbsp; <%= link_to 'MON ESPACE HÔTE', host_dashboard_path %>
       </div>
 

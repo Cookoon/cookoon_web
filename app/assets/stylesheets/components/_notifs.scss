@@ -13,6 +13,10 @@
     top: 24px;
     left: -15px;
   }
+  &-inline {
+    display: inline-block;
+    margin: 0 10px;
+  }
 }
 
 .notifiable {
