@@ -32,7 +32,7 @@ module HostReservationCardHelper
       if user.photo?
         cl_image_tag(user.photo.path, { size: '80x80', crop: :thumb, gravity: :face, class: 'avatar-larger' })
       else
-        image_tag 'https://via.placeholder.com/80x80', class: 'avatar-larger'
+        image_tag 'base_user.png', class: 'avatar-larger'
       end
     end
 
