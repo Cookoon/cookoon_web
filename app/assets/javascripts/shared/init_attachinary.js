@@ -21,6 +21,8 @@ $(document).on('turbolinks:load ajaxComplete', function() {
   });
 });
 
+$.attachinary.config.disableWith = 'Chargement...';
+$.attachinary.config.invalidFormatMessage = 'Format de fichier invalide';
 $.attachinary.config.template =
   '\
     <% for(var i=0; i<files.length; i++){ %>\

@@ -1,5 +1,6 @@
 label.attachinary {
   width: 100%;
+  cursor: pointer;
   &.upload-zone:after {
     height: 2em;
     display: flex;
@@ -14,13 +15,18 @@ label.attachinary {
 }
 
 .attachinary-input {
-  display: none !important;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
 }
 
 .attachinary_container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
   img {
     height: 9em;
