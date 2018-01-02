@@ -6,8 +6,7 @@ class Host::ReservationsController < ApplicationController
     @inactive_reservations = policy_scope([:host, Reservation]).inactive.includes(:cookoon, user: :photo_files)
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     status = params["accept"] ? :accepted : :refused
