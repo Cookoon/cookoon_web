@@ -2,6 +2,6 @@
   <%= f.input :checkout_photos, as: :attachinary %>
   <%= f.input :remark, label: false, placeholder: 'Ajoutez ici les remarques que vous voulez partager à notre équipe (Ce champs peut rester vide)', input_html: { rows: 3 }  %>
   <div class="light-padded">
-    <%= f.submit 'TERMINER LA LOCATION', class: 'button button-blue', data: { disable_with: '<i class="fa fa-spinner fa-spin" style="margin-right: 10px;"></i>Chargement'.html_safe } %>
+    <%= f.submit 'TERMINER LA LOCATION', class: 'button button-blue' %>
   </div>
 <% end %>
