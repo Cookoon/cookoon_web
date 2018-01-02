@@ -2,8 +2,9 @@ class Host::ReservationsController < ApplicationController
   before_action :find_reservation, only: [:edit, :update]
 
   def index
-    @active_reservations = policy_scope([:host, Reservation]).active.includes(:inventory, :cookoon, user: :photo_files)
-    @inactive_reservations = policy_scope([:host, Reservation]).inactive.includes(:cookoon, user: :photo_files)
+    reservations = policy_scope([:host, Reservation]).includes(:cookoon, user: :photo_files)
+    @active_reservations = reservations.active.includes(:inventory)
+    @inactive_reservations = reservations.inactive
   end
 
   def edit; end
