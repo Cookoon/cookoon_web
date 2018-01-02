@@ -6,16 +6,12 @@
   </ul>
 
   <!-- Tab panes -->
-  <div class="tab-content">
+  <div class="tab-content thin-padded">
     <div role="tabpanel" class="tab-pane active" id="active">
-      <% @active_reservations.each do |reservation| %>
-        <%= host_card_for(reservation) %>
-      <% end %>
+      <%= reservations_list_or_empty_card(@active_reservations) %>
     </div>
     <div role="tabpanel" class="tab-pane" id="inactive">
-      <% @inactive_reservations.each do |reservation| %>
-        <%= host_card_for(reservation) %>
-      <% end %>
+      <%= reservations_list_or_empty_card(@inactive_reservations) %>
     </div>
   </div>
 </div>
