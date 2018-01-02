@@ -193,6 +193,27 @@
   }
 }
 
+.information-card {
+  background: $blue;
+  padding: 60px 45px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  color: white;
+  border-radius: 25px;
+  &-picto {
+    padding-bottom: 10px;
+    font-size: 20px;
+  }
+  &-title {
+    font-weight: bold;
+    padding-bottom: 20px;
+  }
+  &-cta {
+    margin-top: 50px;
+  }
+}
+
 .no-cookoon-card {
   background: $blue;
   padding: 25px;

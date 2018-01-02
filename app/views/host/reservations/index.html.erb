@@ -1,7 +1,17 @@
 <div class="container">
-  <p>Toutes vos réservations</p>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#active" aria-controls="active" role="tab" data-toggle="tab">À traiter</a></li>
+    <li role="presentation"><a href="#inactive" aria-controls="inactive" role="tab" data-toggle="tab">Passées</a></li>
+  </ul>
 
-  <% @reservations.each do |reservation| %>
-    <%= host_card_for(reservation) %>
-  <% end %>
+  <!-- Tab panes -->
+  <div class="tab-content thin-padded">
+    <div role="tabpanel" class="tab-pane active" id="active">
+      <%= reservations_list_or_empty_card(@active_reservations) %>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="inactive">
+      <%= reservations_list_or_empty_card(@inactive_reservations) %>
+    </div>
+  </div>
 </div>

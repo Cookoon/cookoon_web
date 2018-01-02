@@ -2,12 +2,12 @@ class Host::ReservationsController < ApplicationController
   before_action :find_reservation, only: [:edit, :update]
 
   def index
-    @reservations = policy_scope([:host, Reservation]).includes(:user, :cookoon)
-    @cookoons = current_user.cookoons
+    reservations = policy_scope([:host, Reservation]).includes(:cookoon, user: :photo_files)
+    @active_reservations = reservations.active.includes(:inventory)
+    @inactive_reservations = reservations.inactive
   end
 
-  def edit
-  end
+  def edit; end
 
   def update
     status = params["accept"] ? :accepted : :refused

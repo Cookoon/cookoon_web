@@ -3,7 +3,9 @@ class ReservationsController < ApplicationController
   before_action :find_reservation, only: %i[edit update show]
 
   def index
-    @reservations = policy_scope(Reservation).includes(cookoon: :photo_files)
+    reservations = policy_scope(Reservation).includes(cookoon: :photo_files)
+    @active_reservations = reservations.active
+    @inactive_reservations = reservations.inactive
   end
 
   def show; end

@@ -48,6 +48,8 @@ module UserReservationCardHelper
         content_tag(:i, nil, class: "co co-reversed-meeting")
       when 'accepted', 'passed'
         content_tag(:i, nil, class: 'fa fa-check-circle-o')
+      when 'ongoing'
+        content_tag(:i, nil, class: 'fa fa-bullseye')
       when 'refused'
         content_tag(:i, nil, class: 'fa fa-ban')
       end
@@ -61,7 +63,7 @@ module UserReservationCardHelper
     def color
       case reservation.status
       when 'paid' then 'white'
-      when 'accepted' then 'blue'
+      when 'accepted', 'ongoing' then 'blue'
       else 'grey'
       end
     end
