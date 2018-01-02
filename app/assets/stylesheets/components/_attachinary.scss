@@ -34,6 +34,12 @@ label.attachinary {
   }
 }
 
+@media (min-width: 500px) {
+  .attachinary_container {
+    justify-content: flex-start;
+  }
+}
+
 .attachinary_container div {
   position: relative;
   margin: 5px;
