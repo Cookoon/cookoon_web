@@ -15,4 +15,8 @@ module DatetimeHelper
     time_separator = attrs[:time_separator] || 'h'
     l(datetime, format: "%k#{time_separator}%M")
   end
+
+  def display_duration_for(duration)
+    duration == 1 ? "#{duration} heure" : "#{duration} heures"
+  end
 end
