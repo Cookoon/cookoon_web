@@ -21,7 +21,7 @@ module HostReservationCardHelper
     private
 
     attr_accessor :view, :reservation, :user
-    delegate :link_to, :content_tag, :image_tag, :cl_image_tag, :safe_join, to: :view
+    delegate :link_to, :mail_to, :content_tag, :image_tag, :cl_image_tag, :safe_join, to: :view
 
     def infos
       content = safe_join([user_picture, user_infos, status])
@@ -107,7 +107,19 @@ module HostReservationCardHelper
     end
 
     def cancel_link
-      link_to('contactez notre équipe', 'https://aide.cookoon.fr', class: 'no-button no-button-white', target: '_blank', data: { turbolinks: false })
+      mail_to(
+        'concierge@cookoon.fr',
+        'contactez notre équipe',
+        class: 'no-button no-button-white',
+        subject: 'Annulation de réservation',
+        body: cancel_mailer_body
+      )
+    end
+
+    def cancel_mailer_body
+      str = "Demande d'annulation pour la réservation n°#{reservation.id} \n"
+      str << "Prévue pour le #{display_datetime_for(reservation.date, join_expression: 'à')}"
+      str
     end
 
     def color
