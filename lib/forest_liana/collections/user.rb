@@ -9,7 +9,7 @@ module Forest
     end
 
     field :invited_by_full_name, type: 'String' do
-      object.class.find(object.invited_by_id).full_name
+      object.invited_by&.full_name
     end
   end
 end
