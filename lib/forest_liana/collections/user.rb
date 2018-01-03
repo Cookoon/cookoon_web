@@ -5,7 +5,11 @@ module Forest
     collection 'User'
 
     field :full_name, type: 'String' do
-      "#{object.first_name} #{object.last_name}"
+      object.full_name
+    end
+
+    field :invited_by_full_name, type: 'String' do
+      object.invited_by&.full_name
     end
   end
 end

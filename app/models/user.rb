@@ -24,7 +24,7 @@ class User < ApplicationRecord
   validates :terms_of_service, acceptance: { message: 'Vous devez accepter les conditions générales pour continuer' }
 
   def full_name
-    if first_name && last_name
+    if first_name.present? && last_name.present?
       "#{first_name.capitalize} #{last_name.capitalize}"
     else
       'Utilisateur Cookoon'
