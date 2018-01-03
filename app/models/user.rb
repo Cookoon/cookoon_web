@@ -31,6 +31,10 @@ class User < ApplicationRecord
     end
   end
 
+  def full_email
+    Mail::Address.new("#{full_name} <#{email}>")
+  end
+
   def notifiable_reservations
     reservations.accepted
   end
