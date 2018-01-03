@@ -1,0 +1,5 @@
+Turbolinks.visit("<%= cookoons_path %>");
+setTimeout(function() {
+  $('#info_modal').html('<%= j render "payments/succeed" %>');
+  $('#payment_succeed').modal('show');
+}, 1000);
