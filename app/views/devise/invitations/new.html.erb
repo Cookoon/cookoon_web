@@ -4,8 +4,9 @@
   <p>Vous pouvez les parrainer, <%= t 'devise.invitations.count', count: current_user.invitation_limit %></p>
 
   <br><br>
-
-  <%= render 'new_form' %>
+  <% if current_user.invitation_limit > 0 %>
+    <%= render 'new_form' %>
+  <% end %>
 </div>
 
 <div class="card-bottom light-padded mt-20">
