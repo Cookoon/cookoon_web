@@ -26,6 +26,9 @@ module CookoonWeb
     config.i18n.default_locale = :fr
     config.i18n.available_locales = [:fr]
 
+    config.action_mailer.default_options = {
+      from: '"Concierge Cookoon" <concierge@cookoon.fr>'
+    }
     config.to_prepare { Devise::Mailer.layout 'mailer' }
 
     # Settings in config/environments/* take precedence over those specified here.
