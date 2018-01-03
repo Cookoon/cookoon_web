@@ -1,4 +1,11 @@
 class Users::InvitationsController < Devise::InvitationsController
+  def create
+    self.resource = invite_resource
+    resource_invited = resource.errors.empty?
+
+    respond_with_navigational(resource) { render :new } unless resource_invited
+  end
+
   private
 
   def update_resource_params

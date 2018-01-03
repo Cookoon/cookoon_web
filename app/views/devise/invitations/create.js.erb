@@ -1,0 +1,5 @@
+Turbolinks.visit('<%= cookoons_path %>');
+setTimeout(function() {
+  $('#info_modal').html('<%= j render "invited_successfully" %>');
+  $('#invited_successfully').modal('show');
+}, 1000);
