@@ -124,11 +124,9 @@ ol {
   margin: 0;
   margin-bottom: 15px;
 }
-p li,
-ul li,
-ol li {
-  list-style-position: inside;
-  margin-left: 5px;
+
+ul {
+  padding-left: 25px;
 }
 
 a {
@@ -157,11 +155,12 @@ a {
 .btn a {
   background-color: #ffffff;
   border: solid 1px #006f8b;
-  border-radius: 5px;
+  border-radius: 25px;
   box-sizing: border-box;
   color: #006f8b;
   cursor: pointer;
   display: inline-block;
+  text-align: center;
   font-size: 14px;
   font-weight: bold;
   margin: 0;
@@ -252,11 +251,18 @@ hr {
 .info > tbody > tr > td {
   padding-bottom: 15px;
 }
+.info > tbody > tr > td:first-child {
+  width: 70px;
+}
 .info > tbody > tr > td > img {
   width: 70px;
 }
 .info b {
   color: #006f8b;
+}
+
+.store-badge img {
+  width: 135px;
 }
 
 .prefooter {
