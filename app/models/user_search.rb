@@ -1,5 +1,5 @@
 class UserSearch < ApplicationRecord
-  belongs_to :user
+  scope :recents, -> { where('created_at > ?', 3.days.ago) }
 
-  scope :recents, -> { where("created_at > ?", 3.days.ago) }
+  belongs_to :user
 end

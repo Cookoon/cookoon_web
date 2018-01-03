@@ -1,13 +1,16 @@
 class Cookoon < ApplicationRecord
+  scope :displayable_on_index, -> { joins(:user).where.not(users: { stripe_account_id: nil }) }
+
+  CATEGORIES = %w[Appartement Maison Jardin Loft Terrasse Toit Villa].freeze
+
   belongs_to :user
-  has_many :reservations
+  has_many :reservations, dependent: :restrict_with_exception
 
   has_attachments :photos, maximum: 5
 
-  monetize :price_cents
-  enum status: [:under_review, :approved, :suspended]
-
+  enum status: %i[under_review approved suspended]
   geocoded_by :address
+  monetize :price_cents
 
   validates :name,     presence: true
   validates :surface,  presence: true
@@ -15,15 +18,11 @@ class Cookoon < ApplicationRecord
   validates :address,  presence: true
   validates :capacity, presence: true
   validates :category, presence: true
-  validates :photos, presence: true
+  validates :photos,   presence: true
 
   after_validation :geocode, if: :address_changed?
   after_create :create_trello_card
   after_save :update_trello, if: :saved_change_to_status?
-
-  scope :displayable_on_index, -> { joins(:user).where.not(users: { stripe_account_id: nil }) }
-
-  CATEGORIES = %w(Appartement Maison Jardin Loft Terrasse Toit Villa)
 
   private
 
