@@ -1,4 +1,10 @@
 class Reservation < ApplicationRecord
+  scope :displayable, -> { where.not(status: :pending).order(date: :asc) }
+  scope :for_tenant, ->(user) { where(user: user) }
+  scope :for_host, ->(user) { where(cookoon: user.cookoons) }
+  scope :active, -> { where(status: %i[paid accepted ongoing]) }
+  scope :inactive, -> { where(status: %i[refused cancelled passed]) }
+
   belongs_to :cookoon
   belongs_to :user
   has_one :inventory, dependent: :destroy
@@ -13,19 +19,13 @@ class Reservation < ApplicationRecord
   monetize :total_fees_with_services_for_host_cents
   monetize :base_option_price_cents
 
+  enum status: %i[pending paid accepted refused cancelled ongoing passed]
+
   validates :price_cents, presence: true
   validates :duration, presence: true
   validates :date, presence: true
   validate :date_after_48_hours, on: :create
   validate :not_my_cookoon
-
-  enum status: %i[pending paid accepted refused cancelled ongoing passed]
-
-  scope :displayable, -> { where.not(status: :pending).order(date: :asc) }
-  scope :for_tenant, ->(user) { where(user: user) }
-  scope :for_host, ->(user) { where(cookoon: user.cookoons) }
-  scope :active, -> { where(status: %i[paid accepted ongoing]) }
-  scope :inactive, -> { where(status: %i[refused cancelled passed]) }
 
   after_create :create_trello_card
   after_save :update_trello, if: :saved_change_to_status?

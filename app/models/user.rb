@@ -1,15 +1,13 @@
 class User < ApplicationRecord
   PHONE_REGEXP = /\A(\+\d+)?([\s\-\.]?\(?\d+\)?)+\z/
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :invitable, :database_authenticatable, :recoverable,
          :trackable, :validatable, :rememberable
 
-  has_many :cookoons
-  has_many :reservations
+  has_many :cookoons, dependent: :restrict_with_exception
+  has_many :reservations, dependent: :restrict_with_exception
   has_many :reservation_requests, through: :cookoons, source: :reservations
-  has_many :user_searches
+  has_many :user_searches, dependent: :destroy
 
   has_attachment :photo
 
