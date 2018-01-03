@@ -14,17 +14,6 @@
   </div>
 <% end %>
 
-<!-- Payment success modal -->
-<%= render 'payments/succeed' %>
-
 <% unless @lat_lng %>
   <script>getGeoLocation()</script>
-<% end %>
-
-<% if flash[:payment_succeed] %>
-  <script>
-    $(document).on('turbolinks:load ajaxComplete', function() {
-      $('#payment_succeed').modal('show');
-    });
-  </script>
 <% end %>
