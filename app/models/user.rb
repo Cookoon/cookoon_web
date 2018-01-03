@@ -27,7 +27,7 @@ class User < ApplicationRecord
     if first_name.present? && last_name.present?
       "#{first_name.capitalize} #{last_name.capitalize}"
     else
-      'Utilisateur Cookoon'
+      'Membre Cookoon'
     end
   end
 
