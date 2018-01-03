@@ -166,7 +166,6 @@ a {
   margin: 0;
   padding: 12px 25px;
   text-decoration: none;
-  text-transform: capitalize;
 }
 
 .btn-primary table td {
@@ -348,10 +347,10 @@ hr {
     text-decoration: none !important;
   }
   .btn-primary table td:hover {
-    background-color: #34495e !important;
+    background-color: #095b70 !important;
   }
   .btn-primary a:hover {
-    background-color: #34495e !important;
-    border-color: #34495e !important;
+    background-color: #095b70 !important;
+    border-color: #095b70 !important;
   }
 }

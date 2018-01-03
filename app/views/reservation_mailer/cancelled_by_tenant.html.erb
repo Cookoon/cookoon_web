@@ -1,40 +1,21 @@
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="600" style="margin: auto;" class="email-body">
+<p>Bonjour <%= @tenant.first_name %>,</p>
+<p><%= @tenant.first_name %> a annulé la location de votre Cookoon :</p>
 
+<table border="0" cellpadding="0" cellspacing="10" class="info"><tbody>
   <tr>
-    <td bgcolor="#ffffff" style="padding: 40px 40px 20px; text-align: center;">
-      <h1 style="margin: 0; font-family: sans-serif; font-size: 24px; line-height: 125%; color: #333333; font-weight: normal;">Bonjour <%= @host.first_name %>,</h1>
+    <td align="center">
+      <%= image_tag('icon-home.png', alt: 'Cookoon') %>
+    </td>
+    <td>
+      <b><%= @cookoon.name %></b>
+      <br>le <%= display_date_for(@reservation.date) %>
+      <br>à <%= display_time_for(@reservation.date) %> pour <%= display_duration_for(@reservation.duration) %>
     </td>
   </tr>
-  <tr>
-    <td bgcolor="#ffffff" style="padding: 0 40px 0; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555; text-align: center;">
-      <p style="margin: 0;"><%= @tenant.first_name %> a annulé la location de votre Cookoon :</p>
-    </td>
-  </tr>
+</tbody></table>
 
-  <tr>
-    <td bgcolor="#ffffff" style="padding: 40px 40px 20px; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555; text-align: center;">
-      <p>
-        <b style="color: #006F8B"><%= @cookoon.name %>,</b>
-        <br>Le <b style="color: #006F8B"><%= @reservation.date.strftime('%d/%m/%Y à %H:%M') %></b>
-        <br>pour <b style="color: #006F8B"><%= @reservation.duration %></b> heures.
-      </p>
-    </td>
-  </tr>
+<p>Nous sommes désolés pour le dérangement occasionné. Votre Cookoon est de nouveau disponible à la location sur cette période.</p>
 
-  <tr>
-    <td bgcolor="#ffffff" style="padding: 0 40px 40px; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555; text-align: center;">
-      <p>
-        Nous sommes désolés pour le dérangement occasionné : votre Cookoon est de nouveau disponible à la location sur cette période.
-      </p>
-    </td>
-  </tr>
-</table>
-
-<table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" width="600" style="margin: auto;" class="email-body">
-  <tr>
-    <td bgcolor="#ffffff" style="padding: 0 40px 40px; font-family: sans-serif; font-size: 15px; line-height: 140%; color: #555555; text-align: center;">
-      <h2 style="color: #006F8B">Contactez-nous</h2>
-      <p>Une question ? <%= link_to raw("Rendez-vous sur la FAQ en <strong class='text-blue'>cliquant ici</strong>"), 'https://aide.cookoon.fr', target: "_blank"%></p>
-    </td>
-  </tr>
-</table>
+<% content_for :post_scriptum do %>
+  <p>PS : Une question ? Rendez-vous sur <a href="https://aide.cookoon.fr">aide.cookoon.fr</a>.</p>
+<% end %>
