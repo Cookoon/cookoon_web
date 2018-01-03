@@ -2,7 +2,20 @@
   <h2>Mes moyens de paiement</h2>
 
   <% if @stripe_sources.blank? %>
-    <p>Vous n'avez aucune carte de crédit, Ajoutez en une dès maintenant !</p>
+    <div class="information-card text-center">
+      <div class="information-card-picto">
+        <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+      </div>
+      <div class="information-card-title">
+        <p>Aucune carte associée</p>
+      </div>
+      <div class="information-card-text">
+        <p>
+          Vous pouvez ajouter votre carte de paiement en toute confiance : votre numéro de carte est crypté contre toute
+          violation, et vous ne serez pas débité quand votre Hôte n'accepte pas votre demande de location
+        </p>
+      </div>
+    </div>
   <% else %>
     <ul class="fa-ul fs-16">
       <% @stripe_sources.data.each_with_index do |card_data, index| %>
