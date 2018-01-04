@@ -7,6 +7,37 @@
     <link rel="stylesheet" href="/assets/mailer.css">
     <style type="text/css" data-roadie-ignore>
       /* -------------------------------------
+          PRESERVE THESE STYLES IN THE HEAD
+      ------------------------------------- */
+      @media all {
+        .ExternalClass {
+          width: 100%;
+        }
+        .ExternalClass,
+        .ExternalClass p,
+        .ExternalClass span,
+        .ExternalClass font,
+        .ExternalClass td,
+        .ExternalClass div {
+          line-height: 100%;
+        }
+        .apple-link a {
+          color: inherit !important;
+          font-family: inherit !important;
+          font-size: inherit !important;
+          font-weight: inherit !important;
+          line-height: inherit !important;
+          text-decoration: none !important;
+        }
+        .btn-primary table td:hover {
+          background-color: #095b70 !important;
+        }
+        .btn-primary a:hover {
+          background-color: #095b70 !important;
+          border-color: #095b70 !important;
+        }
+      }
+      /* -------------------------------------
           RESPONSIVE AND MOBILE FRIENDLY STYLES
       ------------------------------------- */
       @media only screen and (max-width: 620px) {
@@ -54,37 +85,10 @@
         .prefooter {
           border-radius: 0 !important;
         }
-      }
-
-      /* -------------------------------------
-          PRESERVE THESE STYLES IN THE HEAD
-      ------------------------------------- */
-      @media all {
-        .ExternalClass {
-          width: 100%;
-        }
-        .ExternalClass,
-        .ExternalClass p,
-        .ExternalClass span,
-        .ExternalClass font,
-        .ExternalClass td,
-        .ExternalClass div {
-          line-height: 100%;
-        }
-        .apple-link a {
-          color: inherit !important;
-          font-family: inherit !important;
-          font-size: inherit !important;
-          font-weight: inherit !important;
-          line-height: inherit !important;
-          text-decoration: none !important;
-        }
-        .btn-primary table td:hover {
-          background-color: #095b70 !important;
-        }
-        .btn-primary a:hover {
-          background-color: #095b70 !important;
-          border-color: #095b70 !important;
+        .footer td,
+        .footer span,
+        .footer a {
+          font-size: 11px !important;
         }
       }
     </style>
@@ -127,7 +131,7 @@
               <tr>
                 <td align="center" class="prefooter">
                   <b>COOKOON</b>
-                  <br>Partagez vos expériences avec <a href="https://twitter.com/search?f=tweets&q=%23cookoonlife">#cookoonlife</a>
+                  <br>Partagez vos expériences avec <a href="https://twitter.com/search?f=tweets&q=%23cookoonlife" target="_blank">#cookoonlife</a>
                 </td>
               </tr>
             </table>
