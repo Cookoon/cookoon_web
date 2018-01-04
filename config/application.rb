@@ -26,7 +26,13 @@ module CookoonWeb
     config.i18n.default_locale = :fr
     config.i18n.available_locales = [:fr]
 
-    config.to_prepare { Devise::Mailer.layout 'mailer' }
+    config.action_mailer.default_options = {
+      from: '"Concierge Cookoon" <concierge@cookoon.fr>'
+    }
+    config.to_prepare do
+      Devise::Mailer.send(:include, Roadie::Rails::Automatic)
+      Devise::Mailer.layout 'mailer'
+    end
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

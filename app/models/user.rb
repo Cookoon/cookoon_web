@@ -27,8 +27,12 @@ class User < ApplicationRecord
     if first_name.present? && last_name.present?
       "#{first_name.capitalize} #{last_name.capitalize}"
     else
-      'Utilisateur Cookoon'
+      'Membre Cookoon'
     end
+  end
+
+  def full_email
+    Mail::Address.new("#{full_name} <#{email}>")
   end
 
   def notifiable_reservations

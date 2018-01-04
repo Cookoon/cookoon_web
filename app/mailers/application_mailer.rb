@@ -1,4 +1,4 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'concierge@cookoon.fr'
+  include Roadie::Rails::Automatic
   layout 'mailer'
 end
