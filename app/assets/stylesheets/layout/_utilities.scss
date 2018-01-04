@@ -25,6 +25,10 @@ body {
   padding-bottom: 1em;
 }
 
+.bottom-padded {
+  padding-bottom: 1em;
+}
+
 // Forms
 .help-block {
   color: #ff5853 !important;
@@ -238,4 +242,15 @@ select {
 }
 .shrink-none {
   flex-shrink: 0;
+}
+
+// placeholders style
+::-webkit-input-placeholder {
+  font-style: italic;
+}
+
+@media (max-width: 320px) {
+  ::-webkit-input-placeholder {
+    font-size: 14px;
+  }
 }
