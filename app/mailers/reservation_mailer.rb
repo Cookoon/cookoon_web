@@ -23,6 +23,11 @@ class ReservationMailer < ApplicationMailer
     @tenant = @reservation.user
     @cookoon = @reservation.cookoon
     @host = @cookoon.user
+
+    attachments[@reservation.ical_file_name] = {
+      mime_type: 'application/ics',
+      content: @reservation.ical.to_ical
+    }
     mail(to: @tenant.full_email, subject: "Votre réservation Cookoon est confirmée : #{@cookoon.name}")
   end
 
@@ -65,6 +70,12 @@ class ReservationMailer < ApplicationMailer
     @tenant = @reservation.user
     @cookoon = @reservation.cookoon
     @host = @cookoon.user
+
+    attachments[@reservation.ical_file_name] = {
+      mime_type: 'application/ics',
+      content: @reservation.ical.to_ical
+    }
+
     mail(to: @host.full_email, subject: 'Vous avez confirmé une demande de location !')
   end
 
