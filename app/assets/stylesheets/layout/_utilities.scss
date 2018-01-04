@@ -2,6 +2,8 @@
 body {
   position: relative;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 // Paddings
@@ -200,6 +202,14 @@ select {
 // Margins
 .mt-20 {
   margin-top: 20px;
+}
+
+.mt-40 {
+  margin-top: 40px;
+}
+
+.mt-60 {
+  margin-top: 60px;
 }
 
 // width
