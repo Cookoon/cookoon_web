@@ -1,5 +1,6 @@
 class ReservationMailer < ApplicationMailer
   helper :datetime
+  require 'icalendar/tzinfo'
 
   # ==== Mails for Users =====
   def new_request(reservation)
@@ -23,6 +24,28 @@ class ReservationMailer < ApplicationMailer
     @tenant = @reservation.user
     @cookoon = @reservation.cookoon
     @host = @cookoon.user
+
+    cal = Icalendar::Calendar.new
+
+    event_start = 1.hour.from_now
+    event_end = 2.hours.from_now
+
+    tzid = 'Europe/Paris'
+    tz = TZInfo::Timezone.get tzid
+    timezone = tz.ical_timezone event_start
+    cal.add_timezone timezone
+
+    cal.event do |e|
+      e.dtstart = Icalendar::Values::DateTime.new event_start, 'tzid' => tzid
+      e.dtend   = Icalendar::Values::DateTime.new event_end, 'tzid' => tzid
+      e.summary = "Meeting with the man."
+      e.description = "Have a long lunch meeting and decide nothing..."
+      e.organizer = "mailto:jsmith@example.com"
+      e.organizer = Icalendar::Values::CalAddress.new("mailto:jsmith@example.com", cn: 'John Smith')
+    end
+
+    mail.attachments['meeting.ics'] = { mime_type: 'application/ics',
+                                        content: cal.to_ical }
     mail(to: @tenant.full_email, subject: "Votre réservation Cookoon est confirmée : #{@cookoon.name}")
   end
 
