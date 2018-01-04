@@ -115,6 +115,10 @@
   background: $blue;
   padding: 20px;
   color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-grow: 1;
   a {
     color: white;
     &:focus {
@@ -210,13 +214,16 @@
     padding-bottom: 20px;
   }
   &-cta {
-    margin-top: 50px;
+    margin-top: 30px;
   }
 }
 
 @media (max-width: 320px) {
   .information-card {
     padding: 20px 30px;
+    &-cta {
+      margin-bottom: 20px;
+    }
   }
 }
 

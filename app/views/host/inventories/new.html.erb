@@ -1,4 +1,22 @@
 <div class="container">
+  <% unless @reservation.starts_soon? %>
+    <div class="information-card text-center">
+      <div class="information-card-picto">
+        <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+      </div>
+      <div class="information-card-title">
+        <h4>C'est encore trop tôt !</h4>
+      </div>
+      <div class="information-card-text">
+        <p>
+          La location ne pourra démarrer que 3 heures avant l'heure de la réservation !
+        </p>
+      </div>
+      <div class="information-card-cta">
+        <%= link_to "J'AI COMPRIS !", host_reservations_path, class: 'button button-white' %>
+      </div>
+    </div>
+  <% end %>
   <h4>Vous accueillez un nouveau locataire</h4>
   <p>Avant de démarrer la location vous devez :</p>
   <ol>
@@ -24,6 +42,4 @@
   <div class="container thin-padded">
     <%= render 'checkin_form' %>
   </div>
-<% else %>
-  <%= render 'too_soon_card' %>
 <% end %>
