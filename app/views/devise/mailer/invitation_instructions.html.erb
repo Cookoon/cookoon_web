@@ -1,16 +1,16 @@
 <p>Bonjour <%= @resource.first_name %>,</p>
-<p>Grâce à <%= @resource.invited_by.try(:first_name) %>, vous êtes invité(e) à rejoindre Cookoon, un réseau de confiance, exclusif.</p>
-<p>Pour rejoindre Cookoon :</p>
+<p>Grâce à <%= @resource.invited_by.try(:first_name) %>, vous êtes invité(e) à rejoindre <b>Cookoon, un réseau de confiance</b>, exclusif.</p>
+<p>Pour nous rejoindre :</p>
 
 <table border="0" cellpadding="0" cellspacing="10" class="info"><tbody>
   <tr>
     <td align="center">
       <%= image_tag('icon-one.png', alt: 'Un') %>
     </td>
-    <td>
-      <b>Téléchargez l’application Cookoon Inside :</b>
+    <td align="center">
+      <b>Téléchargez l’application Cookoon Inside</b>
       <table border="0" cellpadding="0" cellspacing="10" class="store-badge"><tbody><tr>
-        <td>
+        <td align="center">
           <a href="https://itunes.apple.com/fr/app/cookoon-inside/id1291943406?mt=8" target="_blank">
             <%= image_tag('app-store-badge.png', alt: 'App Store') %>
           </a>
@@ -26,11 +26,11 @@
     <td align="center">
       <%= image_tag('icon-two.png', alt: 'Deux') %>
     </td>
-    <td>
-      <b>Suivez-ce lien pour créer votre compte Cookoon !</b>
-      <table border="0" cellpadding="0" cellspacing="10" class="btn btn-primary"><tbody><tr>
-        <td>
-          <%= link_to "Accepter l'invitation", accept_invitation_url(@resource, :invitation_token => @token), target: :blank %>
+    <td align="center">
+      <b>puis créez votre compte Cookoon.</b>
+      <table border="0" cellpadding="0" cellspacing="10" class="btn btn-primary btn-pb-0"><tbody><tr>
+        <td align="center">
+          <%= link_to "J'accepte l'invitation", accept_invitation_url(@resource, :invitation_token => @token), target: :blank %>
         </td>
       </tr></tbody></table>
     </td>
@@ -39,9 +39,9 @@
 
 <p>Sur Cookoon, vous pouvez :</p>
 <ul>
-  <li>louer l'appartement d'autres membres et choisir des options pour tous vos besoins de courte durée, personnels ou professionnels (déjeuner d'affaires, réunion, rendez-vous, dîner entre amis, match de foot sur grand écran...),</li>
-  <li>rentabiliser votre appartement durant vos absences, sans contrainte grâce aux services concierge et ménage,</li>
-  <li>communiquer sur vos expériences Cookoon auprès des autres membres.</li>
+  <li><strong>organiser des micro-événements du quotidien, personnels ou professionnels,</strong> en louant l'appartement d'un autre membre et en réservant des services, traiteur, chef à domicile, joueur de harpe, pour une expérience Cookoon unique,</li>
+  <li><strong>rentabiliser votre appartement durant vos absences quotidiennes,</strong> sans contrainte grâce aux services concierge et ménage,</li>
+  <li><strong>rencontrer d'autres membres,</strong> communiquer auprès d'eux sur vos expériences Cookoon.</li>
 </ul>
 
 

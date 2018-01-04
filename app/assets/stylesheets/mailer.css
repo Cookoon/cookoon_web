@@ -129,6 +129,10 @@ ul {
   padding-left: 25px;
 }
 
+li {
+  margin-bottom: 15px;
+}
+
 a {
   color: #006f8b;
   text-decoration: underline;
@@ -144,6 +148,10 @@ a {
 .btn > tbody > tr > td {
   padding-bottom: 15px;
 }
+.btn-pb-0 > tbody > tr > td {
+  padding-bottom: 0;
+}
+
 .btn table {
   width: auto;
 }
@@ -164,7 +172,7 @@ a {
   font-size: 14px;
   font-weight: bold;
   margin: 0;
-  padding: 12px 25px;
+  padding: 10px 20px;
   text-decoration: none;
 }
 
@@ -288,9 +296,19 @@ hr {
   color: #fff;
 }
 .prefooter > b {
-  font-size: 24px;
+  font-size: 20px;
 }
 .prefooter > a {
   color: #fff;
   text-decoration: none;
+}
+
+.social-icons {
+  padding-top: 10px;
+}
+.social-icons > a {
+  margin: 0 10px;
+}
+.social-icons > a > img {
+  height: 25px;
 }
