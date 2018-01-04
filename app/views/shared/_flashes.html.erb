@@ -10,3 +10,9 @@
     <%= alert %>
   </div>
 <% end %>
+<% if flash[:payment_succeed] %>
+  <%= render 'payments/succeed' %>
+<% end %>
+<% if flash[:invitation_sent] %>
+  <%= render 'devise/invitations/sent' %>
+<% end %>
