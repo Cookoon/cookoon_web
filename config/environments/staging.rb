@@ -72,7 +72,8 @@ Rails.application.configure do
     :authentication => :cram_md5
   }
   config.action_mailer.default_url_options = { host: 'cookoon-staging.herokuapp.com' }
-  config.action_mailer.asset_host = 'https://cookoon-staging.herokuapp.com'
+  config.roadie.url_options = {host: 'cookoon-staging.herokuapp.com', scheme: 'https'}
+  config.action_mailer.asset_host = nil
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
