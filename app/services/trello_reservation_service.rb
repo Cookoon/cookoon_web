@@ -1,5 +1,7 @@
 class TrelloReservationService
   include MoneyRails::ActionViewExtension
+  include ActionView::Helpers::TranslationHelper
+  include DatetimeHelper
 
   TRELLO_LISTS_IDS = {
     reservation_board_id: '5a25793534f1ae1cfe4ee2f3',
@@ -70,7 +72,7 @@ class TrelloReservationService
   def create_card
     @card = Trello::Card.create(
       list_id: TRELLO_LISTS_IDS[:pending_list_id],
-      name: "#{cookoon.name} - #{reservation.date.strftime('%d/%m/%Y')}",
+      name: "#{cookoon.name} - #{display_datetime_for(reservation.date, join_expression: 'à', without_year: true)}",
       desc: description
     )
   rescue Trello::Error => e
