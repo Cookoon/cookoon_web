@@ -280,6 +280,7 @@ hr {
 }
 
 .store-badge a {
+  display: inline-block;
   padding: 0 5px;
   text-decoration: none;
 }
