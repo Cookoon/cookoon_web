@@ -33,7 +33,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 
 # Back
-gem 'attachinary'
+gem 'attachinary', github: 'Cookoon/attachinary'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise_invitable', '~> 1.7.0'
