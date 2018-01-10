@@ -6,7 +6,7 @@ class Cookoon < ApplicationRecord
   belongs_to :user
   has_many :reservations, dependent: :restrict_with_exception
 
-  has_attachments :photos, maximum: 5
+  has_attachments :photos, maximum: 5, order: 'id ASC'
 
   enum status: %i[under_review approved suspended]
   geocoded_by :address
