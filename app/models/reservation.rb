@@ -1,9 +1,12 @@
 class Reservation < ApplicationRecord
+  include TimeRange
+
   scope :displayable, -> { where.not(status: :pending).order(date: :asc) }
   scope :for_tenant, ->(user) { where(user: user) }
   scope :for_host, ->(user) { where(cookoon: user.cookoons) }
   scope :active, -> { where(status: %i[paid accepted ongoing]) }
   scope :inactive, -> { where(status: %i[refused cancelled passed]) }
+  scope :created_in_day_range_around, ->(date_time) { where created_at: day_range(date_time) }
   scope :in_hour_range_around, ->(date_time) { where date: date_time.beginning_of_hour..date_time.end_of_hour }
 
   belongs_to :cookoon
