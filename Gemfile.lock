@@ -297,6 +297,9 @@ GEM
     simple_form (3.5.0)
       actionpack (> 4, < 5.2)
       activemodel (> 4, < 5.2)
+    simple_scheduler (1.0.0)
+      rails (>= 4.2)
+      sidekiq (>= 4.2)
     slim (3.0.9)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 1.3.3, < 2.1)
@@ -389,6 +392,7 @@ DEPENDENCIES
   sidekiq
   sidekiq-failures (~> 1.0)
   simple_form
+  simple_scheduler
   slim
   spring
   spring-watcher-listen (~> 2.0.0)

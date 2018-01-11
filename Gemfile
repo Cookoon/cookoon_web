@@ -41,6 +41,7 @@ gem 'figaro'
 gem 'geocoder'
 gem 'money-rails', '~>1'
 gem 'pundit'
+gem 'simple_scheduler'
 
 # Front
 gem 'bootstrap-sass'
