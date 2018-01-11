@@ -4,6 +4,7 @@ class Reservation < ApplicationRecord
   scope :for_host, ->(user) { where(cookoon: user.cookoons) }
   scope :active, -> { where(status: %i[paid accepted ongoing]) }
   scope :inactive, -> { where(status: %i[refused cancelled passed]) }
+  scope :in_hour_range_around, ->(date_time) { where date: date_time.beginning_of_hour..date_time.end_of_hour }
 
   belongs_to :cookoon
   belongs_to :user
