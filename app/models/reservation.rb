@@ -7,7 +7,7 @@ class Reservation < ApplicationRecord
   scope :active, -> { where(status: %i[paid accepted ongoing]) }
   scope :inactive, -> { where(status: %i[refused cancelled passed]) }
   scope :created_in_day_range_around, ->(date_time) { where created_at: day_range(date_time) }
-  scope :in_hour_range_around, ->(date_time) { where date: date_time.beginning_of_hour..date_time.end_of_hour }
+  scope :in_hour_range_around, ->(date_time) { where date: hour_range(date_time) }
 
   belongs_to :cookoon
   belongs_to :user
