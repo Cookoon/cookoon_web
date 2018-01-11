@@ -38,7 +38,7 @@
     <td>
       <b>Pour contacter <%= @host.first_name %> :</b>
       <br><%= @host.phone_number %>
-      <br><%= mail_to @host.full_email, @host.email %>
+      <br><%= mail_to @host.full_email, @host.email, target: :blank %>
     </td>
   </tr>
 </tbody></table>
