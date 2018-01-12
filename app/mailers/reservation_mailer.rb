@@ -103,4 +103,14 @@ class ReservationMailer < ApplicationMailer
     mail(to: @host.full_email, subject: 'Comment s’est passée votre expérience Cookoon ?')
   end
   # ============================
+
+  # ==== Notifications =====
+  def notify_tenant_before_reservation(reservation)
+    @reservation = reservation
+    @tenant = @reservation.user
+    @cookoon = @reservation.cookoon
+    @host = @cookoon.user
+    mail(to: @tenant.full_email, subject: 'Votre location Cookoon se rapproche !')
+  end
+  # ============================
 end
