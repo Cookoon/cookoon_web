@@ -62,6 +62,7 @@ Rails.application.routes.draw do
   # ForestAdmin
   namespace :forest do
     post '/actions/award-invitations' => 'users#award_invitations'
+    post '/actions/cancel-by-host' => 'reservations#cancel_by_host'
   end
 
   mount ForestLiana::Engine => '/forest'

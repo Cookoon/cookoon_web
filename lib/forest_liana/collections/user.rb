@@ -22,8 +22,7 @@ module Forest
       type: 'Number',
       description: 'The number of invitations you want to award these users',
       isRequired: true,
-      defaultValue: '5',
-      widget: 'text input'
+      defaultValue: 5
     }]
   end
 end
