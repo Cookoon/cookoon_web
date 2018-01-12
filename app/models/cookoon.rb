@@ -22,7 +22,7 @@ class Cookoon < ApplicationRecord
 
   after_validation :geocode, if: :address_changed?
   after_create :create_trello_card
-  after_save :update_trello, if: :saved_change_to_status?
+  after_save :update_trello, :notify_approved, if: :saved_change_to_status?
 
   private
 
@@ -34,5 +34,10 @@ class Cookoon < ApplicationRecord
   def update_trello
     return unless Rails.env.production?
     UpdateCookoonTrelloCardJob.perform_later(id)
+  end
+
+  def notify_approved
+    return unless saved_change_to_status == %w[under_review approved]
+    CookoonMailer.notify_approved(self).deliver_later
   end
 end
