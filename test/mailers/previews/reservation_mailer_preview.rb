@@ -16,6 +16,10 @@ class ReservationMailerPreview < ActionMailer::Preview
     ReservationMailer.refused_by_host(Reservation.last)
   end
 
+  def cancelled_by_host
+    ReservationMailer.cancelled_by_host(Reservation.last)
+  end
+
   def ending_survey_for_user
     ReservationMailer.ending_survey_for_user(Reservation.last)
   end
@@ -32,6 +36,10 @@ class ReservationMailerPreview < ActionMailer::Preview
 
   def confirmation
     ReservationMailer.confirmation(Reservation.last)
+  end
+
+  def cancelled_reservation
+    ReservationMailer.cancelled_reservation(Reservation.last)
   end
 
   def ending_survey_for_host
