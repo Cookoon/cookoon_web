@@ -11,12 +11,12 @@
       <b>Téléchargez l’application Cookoon Inside</b>
       <table border="0" cellpadding="0" cellspacing="10" class="store-badge"><tbody><tr>
         <td align="center">
-          <a href="https://itunes.apple.com/fr/app/cookoon-inside/id1291943406?mt=8" target="_blank">
+          <%= link_to 'https://itunes.apple.com/fr/app/cookoon-inside/id1291943406', target: :_blank do %>
             <%= image_tag('app-store-badge.png', alt: 'App Store') %>
-          </a>
-          <a href="https://play.google.com/store/apps/details?id=cookoon.cookoonandroid" target="_blank">
+          <% end %>
+          <%= link_to 'https://play.google.com/store/apps/details?id=cookoon.cookoonandroid', target: :_blank do %>
             <%= image_tag('google-play-badge.png', alt: 'Google Play Store') %>
-          </a>
+          <% end %>
         </td>
       </tr></tbody></table>
     </td>
@@ -30,7 +30,7 @@
       <b>puis créez votre compte Cookoon.</b>
       <table border="0" cellpadding="0" cellspacing="10" class="btn btn-primary btn-pb-0"><tbody><tr>
         <td align="center">
-          <%= link_to "J'accepte l'invitation", accept_invitation_url(@resource, :invitation_token => @token), target: :blank %>
+          <%= link_to "J'accepte l'invitation", accept_invitation_url(@resource, :invitation_token => @token), target: :_blank %>
         </td>
       </tr></tbody></table>
     </td>
@@ -45,4 +45,4 @@
 </ul>
 
 
-<p>Une question ? Rendez-vous sur <%= link_to 'cookoon.fr/en-savoir-plus', en_savoir_plus_url, target: :blank %>.</p>
+<p>Une question ? Rendez-vous sur <%= link_to 'cookoon.fr/en-savoir-plus', en_savoir_plus_url, target: :_blank %>.</p>

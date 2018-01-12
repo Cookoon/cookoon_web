@@ -6,7 +6,7 @@
   <%= f.input :phone_number %>
   <%= f.input :password %>
   <%= f.input :password_confirmation %>
-  <%= f.input :terms_of_service, as: :boolean, label: "J'accepte les #{link_to('conditions générales d\'utilisation', cgu_path, target: :blank)}".html_safe %>
+  <%= f.input :terms_of_service, as: :boolean, label: "J'accepte les #{link_to('conditions générales d\'utilisation', cgu_path, target: :_blank)}".html_safe %>
 
   <%= f.button :submit, t("devise.invitations.edit.submit_button"), class: 'button button-blue' %>
 <% end %>

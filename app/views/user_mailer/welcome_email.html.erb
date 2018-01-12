@@ -7,7 +7,7 @@
   <li><strong>Rentabiliser votre appartement durant vos absences quotidiennes,</strong> sans contrainte grâce aux services concierge et ménage,</li>
   <li><strong>Rencontrer d'autres membres,</strong> communiquer auprès d'eux sur vos expériences Cookoon.</li>
 </ul>
-<p>Une question ? Contactez votre <%= mail_to 'concierge@cookoon.fr', 'concierge Cookoon', target: :blank %> ou rendez-vous sur <a href="https://aide.cookoon.fr" target="_blank">aide.cookoon.fr</a></p>
+<p>Une question ? Contactez votre <%= mail_to 'concierge@cookoon.fr', 'concierge Cookoon', target: :_blank %> ou rendez-vous sur <%= link_to 'aide.cookoon.fr', 'https://aide.cookoon.fr', target: :_blank %></p>
 
 <%= content_for :post_scriptum do %>
   <table border="0" cellpadding="0" cellspacing="10" class="info"><tbody>
@@ -17,7 +17,7 @@
       </td>
       <td>
         <b>Parrainer vos proches ?</b>
-        <br>Pour préserver la confiance, seuls les membres invités peuvent rejoindre la communauté Cookoon : découvrez comment <%= link_to 'obtenir des invitations', new_user_invitation_url, target: :blank %>.
+        <br>Pour préserver la confiance, seuls les membres invités peuvent rejoindre la communauté Cookoon : découvrez comment <%= link_to 'obtenir des invitations', new_user_invitation_url, target: :_blank %>.
       </td>
     </tr>
     <tr>
@@ -26,7 +26,7 @@
       </td>
       <td>
         <b>Vous souhaitez proposer votre appartement ?</b>
-        <br>Proposez votre appartement dans <%= link_to 'Mon Espace Hôte', host_dashboard_url, target: :blank %> dans l'application Cookoon. Nous prendrons rendez-vous ensemble.
+        <br>Proposez votre appartement dans <%= link_to 'Mon Espace Hôte', host_dashboard_url, target: :_blank %> dans l'application Cookoon. Nous prendrons rendez-vous ensemble.
       </td>
     </tr>
   </tbody></table>
