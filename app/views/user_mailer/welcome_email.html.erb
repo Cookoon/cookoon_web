@@ -8,3 +8,26 @@
   <li><strong>Rencontrer d'autres membres,</strong> communiquer auprès d'eux sur vos expériences Cookoon.</li>
 </ul>
 <p>Une question ? Contactez votre <%= mail_to 'concierge@cookoon.fr', 'concierge Cookoon', target: :blank %> ou rendez-vous sur <a href="https://aide.cookoon.fr" target="_blank">aide.cookoon.fr</a></p>
+
+<%= content_for :post_scriptum do %>
+  <table border="0" cellpadding="0" cellspacing="10" class="info"><tbody>
+    <tr>
+      <td align="center">
+        <%= image_tag('icon-user.png', alt: 'Parrainage') %>
+      </td>
+      <td>
+        <b>Parrainer vos proches ?</b>
+        <br>Pour préserver la confiance, seuls les membres invités peuvent rejoindre la communauté Cookoon : découvrez comment obtenir des invitations ici.
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <%= image_tag('icon-home.png', alt: 'Cookoon') %>
+      </td>
+      <td>
+        <b>Vous souhaitez proposer votre appartement ?</b>
+        <br>Proposez votre appartement dans Mon Espace Hôte dans l'application Cookoon. Nous prendrons rendez-vous ensemble.
+      </td>
+    </tr>
+  </tbody></table>
+<% end %>
