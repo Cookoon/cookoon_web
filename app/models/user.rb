@@ -1,4 +1,14 @@
 class User < ApplicationRecord
+  include TimeRange
+
+  scope :pending_invitation, -> { where.not(invitation_token: nil) }
+  scope :invited_in_day_range_around, ->(date_time) { pending_invitation.where invitation_sent_at: day_range(date_time) }
+  scope :joined_in_day_range_around, ->(date_time) { where invitation_accepted_at: day_range(date_time) }
+  scope :missing_stripe_account, -> { where(stripe_account_id: nil) }
+  scope :with_cookoon_created_in_day_range_around, ->(date_time) { joins(:cookoons).merge(Cookoon.created_in_day_range_around(date_time)).distinct }
+  scope :with_reservation_in_day_range_around, ->(date_time) { joins(:reservations).merge(Reservation.created_in_day_range_around(date_time)).distinct }
+  scope :with_reservation_finished_in_day_range_around, ->(date_time) { joins(:reservations).merge(Reservation.finished_in_day_range_around(date_time)).distinct }
+
   PHONE_REGEXP = /\A(\+\d+)?([\s\-\.]?\(?\d+\)?)+\z/
 
   devise :invitable, :database_authenticatable, :recoverable,
@@ -23,9 +33,11 @@ class User < ApplicationRecord
             }
   validates :terms_of_service, acceptance: { message: 'Vous devez accepter les conditions générales pour continuer' }
 
+  after_invitation_accepted :send_welcome_email
+
   def full_name
     if first_name.present? && last_name.present?
-      "#{first_name.capitalize} #{last_name.capitalize}"
+      "#{first_name} #{last_name}"
     else
       'Membre Cookoon'
     end
@@ -58,5 +70,11 @@ class User < ApplicationRecord
 
   def total_payouts_for_dashboard_cents
     reservation_requests.passed.includes(:cookoon).sum(&:payout_price_for_host_cents)
+  end
+
+  private
+
+  def send_welcome_email
+    UserMailer.welcome_email(self).deliver_later
   end
 end

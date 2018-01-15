@@ -1,0 +1,21 @@
+<p>Bonjour <%= @host.first_name %>,</p>
+<p>Suite à votre demande, la location de votre Cookoon par <%= @tenant.first_name %> a bien été annulée. </p>
+
+<table border="0" cellpadding="0" cellspacing="10" class="info"><tbody>
+  <tr>
+    <td align="center">
+      <%= image_tag('icon-home.png', alt: 'Cookoon') %>
+    </td>
+    <td>
+      <b><%= @cookoon.name %></b>
+      <br>le <%= display_date_for(@reservation.date) %>
+      <br>à <%= display_time_for(@reservation.date) %> pour <%= display_duration_for(@reservation.duration) %>
+    </td>
+  </tr>
+</tbody></table>
+
+<p>Attention : l’annulation des réservations a des conséquences pour la communauté et ses membres. A utiliser avec modération !</p>
+
+<% content_for :post_scriptum do %>
+  <p>PS : Une question ? Rendez-vous sur <%= link_to 'aide.cookoon.fr', 'https://aide.cookoon.fr', target: :_blank %>.</p>
+<% end %>

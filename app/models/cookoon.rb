@@ -1,5 +1,8 @@
 class Cookoon < ApplicationRecord
+  include TimeRange
+
   scope :displayable_on_index, -> { joins(:user).where.not(users: { stripe_account_id: nil }) }
+  scope :created_in_day_range_around, ->(date_time) { where created_at: day_range(date_time) }
 
   CATEGORIES = %w[Appartement Maison Jardin Loft Terrasse Toit Villa].freeze
 
@@ -22,7 +25,7 @@ class Cookoon < ApplicationRecord
 
   after_validation :geocode, if: :address_changed?
   after_create :create_trello_card
-  after_save :update_trello, if: :saved_change_to_status?
+  after_save :update_trello, :notify_approved, if: :saved_change_to_status?
 
   private
 
@@ -34,5 +37,10 @@ class Cookoon < ApplicationRecord
   def update_trello
     return unless Rails.env.production?
     UpdateCookoonTrelloCardJob.perform_later(id)
+  end
+
+  def notify_approved
+    return unless saved_change_to_status == %w[under_review approved]
+    CookoonMailer.notify_approved(self).deliver_later
   end
 end

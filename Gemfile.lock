@@ -103,7 +103,7 @@ GEM
       thor (~> 0.14)
     font-awesome-sass (4.7.0)
       sass (>= 3.2)
-    forest_liana (2.0.3)
+    forest_liana (2.1.0)
       arel-helpers
       bcrypt
       groupdate
@@ -297,6 +297,9 @@ GEM
     simple_form (3.5.0)
       actionpack (> 4, < 5.2)
       activemodel (> 4, < 5.2)
+    simple_scheduler (1.0.0)
+      rails (>= 4.2)
+      sidekiq (>= 4.2)
     slim (3.0.9)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 1.3.3, < 2.1)
@@ -330,7 +333,7 @@ GEM
     unf_ext (0.0.7.4)
     unicode-display_width (1.3.0)
     uniform_notifier (1.10.0)
-    useragent (0.16.8)
+    useragent (0.16.9)
     warden (1.2.7)
       rack (>= 1.0)
     web-console (3.5.1)
@@ -376,6 +379,7 @@ DEPENDENCIES
   pretender
   puma (~> 3.7)
   pundit
+  rack-cors
   rails (~> 5.1.4)
   rails-assets-smalot-bootstrap-datetimepicker!
   rails-assets-underscore!
@@ -389,6 +393,7 @@ DEPENDENCIES
   sidekiq
   sidekiq-failures (~> 1.0)
   simple_form
+  simple_scheduler
   slim
   spring
   spring-watcher-listen (~> 2.0.0)
@@ -402,4 +407,4 @@ RUBY VERSION
    ruby 2.4.3p205
 
 BUNDLED WITH
-   1.16.0
+   1.16.1

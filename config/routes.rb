@@ -1,14 +1,12 @@
 Rails.application.routes.draw do
-  mount ForestLiana::Engine => '/forest'
   mount Attachinary::Engine => '/attachinary'
 
-  # Sidekiq Web UI, only for admins.
-  require "sidekiq/web"
-  authenticate :user, lambda { |u| u.admin } do
-    mount Sidekiq::Web => '/sidekiq'
-  end
-
-  devise_for :users, controllers: { registrations: 'users/registrations', sessions: 'users/sessions', invitations: 'users/invitations' }
+  devise_for :users, controllers: {
+    invitations: 'users/invitations',
+    passwords: 'users/passwords',
+    registrations: 'users/registrations',
+    sessions: 'users/sessions'
+  }
 
   # Different root for authenticated users
   authenticated do
@@ -43,7 +41,6 @@ Rails.application.routes.draw do
     get 'dashboard', to: 'users#dashboard'
   end
 
-  # -------- CUSTOM ROUTES ---------
   get 'setcookies', to: 'pages#setcookies'
   get 'apple-app-site-association', to: 'pages#apple_app_site_association'
   get '.well-known/apple-app-site-association', to: 'pages#apple_app_site_association'
@@ -54,4 +51,19 @@ Rails.application.routes.draw do
   get 'en-savoir-plus/louer-un-cookoon', to: 'pages#about_rent'
   get 'en-savoir-plus/devenir-hote', to: 'pages#about_hosting'
   get 'en-savoir-plus/garanties-cookoon', to: 'pages#about_warranties'
+
+  # -------- ADMIN ROUTES ---------
+  # Sidekiq Web UI, only for admins.
+  require "sidekiq/web"
+  authenticate :user, lambda { |u| u.admin } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
+  # ForestAdmin
+  namespace :forest do
+    post '/actions/award-invitations' => 'users#award_invitations'
+    post '/actions/cancel-by-host' => 'reservations#cancel_by_host'
+  end
+
+  mount ForestLiana::Engine => '/forest'
 end

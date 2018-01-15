@@ -22,7 +22,14 @@ module CookoonWeb
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
 
-    config.time_zone = 'Paris'
+    config.middleware.insert_before 0, Rack::Cors do
+      allow do
+        origins 'app.forestadmin.com'
+        resource '*', headers: :any, methods: :any
+      end
+    end
+
+    config.time_zone = 'Europe/Paris'
     config.i18n.default_locale = :fr
     config.i18n.available_locales = [:fr]
 

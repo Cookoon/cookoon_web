@@ -1,4 +1,7 @@
 class Users::PasswordsController < Devise::PasswordsController
+  respond_to :html, :js
+  responders :turbolinks
+
   # GET /resource/password/new
   # def new
   #   super
