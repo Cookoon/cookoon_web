@@ -34,6 +34,10 @@ class ReservationMailerPreview < ActionMailer::Preview
     ReservationMailer.pending_request(Reservation.last)
   end
 
+  def waiting_host_answer_for_one_day
+    ReservationMailer.waiting_host_answer_for_one_day(Reservation.last)
+  end
+
   def cancelled_by_tenant
     ReservationMailer.cancelled_by_tenant(Reservation.last)
   end

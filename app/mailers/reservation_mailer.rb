@@ -65,6 +65,14 @@ class ReservationMailer < ApplicationMailer
     mail(to: @host.full_email, subject: "#{@tenant.first_name} souhaite louer votre Cookoon !")
   end
 
+  def waiting_host_answer_for_one_day(reservation)
+    @reservation = reservation
+    @tenant = @reservation.user
+    @cookoon = @reservation.cookoon
+    @host = @cookoon.user
+    mail(to: @host.full_email, subject: "Rappel: #{@tenant.first_name} souhaite louer votre Cookoon !")
+  end
+
   def cancelled_by_tenant(reservation)
     @reservation = reservation
     @tenant = @reservation.user
