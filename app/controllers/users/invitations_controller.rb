@@ -3,10 +3,6 @@ class Users::InvitationsController < Devise::InvitationsController
 
   private
 
-  def after_accept_path_for(_resource)
-    edit_users_path
-  end
-
   def update_resource_params
     params.require(:user).permit(
       :invitation_token,
