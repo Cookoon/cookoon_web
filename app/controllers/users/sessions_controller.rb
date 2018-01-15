@@ -1,5 +1,6 @@
 class Users::SessionsController < Devise::SessionsController
   respond_to :html, :js
+  responders :turbolinks
 
   # before_action :configure_sign_in_params, only: [:create]
 
@@ -9,13 +10,9 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   # POST /resource/sign_in
-  def create
-    super do |resource|
-      return respond_with(resource, location: after_sign_in_path_for(resource)) do |format|
-        format.js { redirect_to after_sign_in_path_for(resource) }
-      end
-    end
-  end
+  # def create
+  #   super
+  # end
 
   # DELETE /resource/sign_out
   # def destroy

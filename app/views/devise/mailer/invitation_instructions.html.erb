@@ -1,4 +1,4 @@
-<p>Bonjour <%= @resource.first_name %>,</p>
+<p>Bonjour<%= " #{@resource.first_name}" if @resource.first_name.present? %>,</p>
 <p><%= @resource.invited_by&.first_name %> vous a invité à rejoindre <b>Cookoon : un réseau de confiance exclusif</b> pour organiser vos événements.</p>
 <p>Pour nous rejoindre :</p>
 
