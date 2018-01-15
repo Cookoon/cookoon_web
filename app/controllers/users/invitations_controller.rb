@@ -1,12 +1,5 @@
 class Users::InvitationsController < Devise::InvitationsController
-  def create
-    self.resource = invite_resource
-    resource_invited = resource.errors.empty?
-
-    respond_with_navigational(resource) { return render :new } unless resource_invited
-
-    redirect_to cookoons_path, flash: { invitation_sent: true }
-  end
+  responders :invitations
 
   private
 
