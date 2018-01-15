@@ -17,18 +17,18 @@ class ApplicationController < ActionController::Base
     redirect_to(root_path)
   end
 
-  def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:invite, keys: [:first_name, :last_name])
-  end
-
   def current_search
     return unless current_user
     @current_search ||= current_user.last_recent_search
   end
 
-  # disable devises flashes
+  # Devise
   def is_flashing_format?
-    false
+    controller_name == 'passwords'
+  end
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:invite, keys: [:first_name, :last_name])
   end
 
   private
