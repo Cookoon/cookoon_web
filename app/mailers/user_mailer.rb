@@ -9,4 +9,9 @@ class UserMailer < ApplicationMailer
     @invitation_quantity = invitation_quantity
     mail(to: @user.full_email, subject: "Nous venons de vous offrir #{invitation_quantity} invitations")
   end
+
+  def notify_two_days_after_join(user)
+    @user = user
+    mail(to: @user.full_email, subject: 'Vous êtes membre de Cookoon ? Devenez Hôte !')
+  end
 end
