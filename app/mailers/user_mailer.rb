@@ -9,4 +9,9 @@ class UserMailer < ApplicationMailer
     @invitation_quantity = invitation_quantity
     mail(to: @user.full_email, subject: "Nous venons de vous offrir #{invitation_quantity} invitations")
   end
+
+  def notify_cookoon_pending_for_missing_stripe_account(user)
+    @user = user
+    mail(to: @user.full_email, subject: '')
+  end
 end

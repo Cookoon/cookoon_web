@@ -10,6 +10,12 @@ notify_reservation_in_three_hours:
   at: '*:00'
   expires_after: '3.hours'
 
+notify_cookoon_pending_for_missing_stripe_account:
+  class: 'NotifyCookoonPendingForMissingStripeAccountJob'
+  every: '1.days'
+  at: '14:00'
+  expires_after: '23.hours'
+
 # # Runs once every 2 minutes
 # simple_task:
 #   class: "SomeActiveJob"

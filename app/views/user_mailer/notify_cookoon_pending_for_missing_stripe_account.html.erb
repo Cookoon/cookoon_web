@@ -1,0 +1,6 @@
+<p>Bonjour <%= @user.first_name %>,</p>
+<p>Vous avez proposé un Cookoon, mais pas encore renseigné votre compte bancaire.</p>
+
+<%= content_for :post_scriptum do %>
+  <p>PS : une question ? Rendez-vous sur <%= link_to 'aide.cookoon.fr', 'https://aide.cookoon.fr', target: :_blank %></p>
+<% end %>
