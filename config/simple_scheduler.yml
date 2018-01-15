@@ -28,6 +28,12 @@ notify_user_ten_days_after_invite:
   at: '14:00'
   expires_after: '23.hours'
 
+notify_user_six_days_after_reservation:
+  class: 'NotifyUserSixDaysAfterReservationJob'
+  every: '1.days'
+  at: '14:00'
+  expires_after: '23.hours'
+
 # # Runs once every 2 minutes
 # simple_task:
 #   class: "SomeActiveJob"

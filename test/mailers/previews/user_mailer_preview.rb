@@ -18,4 +18,8 @@ class UserMailerPreview < ActionMailer::Preview
   def notify_ten_days_after_invite
     UserMailer.notify_ten_days_after_invite(User.last, 'fakeToken')
   end
+
+  def notify_six_days_after_reservation
+    UserMailer.notify_six_days_after_reservation(User.last)
+  end
 end

@@ -26,4 +26,9 @@ class UserMailer < ApplicationMailer
     @token = token
     mail(to: @user.full_email, subject: 'Dernière chance pour rejoindre Cookoon !')
   end
+
+  def notify_six_days_after_reservation(user)
+    @user = user
+    mail(to: @user.full_email, subject: 'Et si vous louiez un nouveau Cookoon ?')
+  end
 end
