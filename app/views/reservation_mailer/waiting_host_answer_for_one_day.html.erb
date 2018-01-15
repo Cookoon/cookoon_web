@@ -1,5 +1,5 @@
 <p>Bonjour <%= @host.first_name %>,</p>
-<p>Vous avez reçu une nouvelle demande de location :</p>
+<p>Vous avez reçu une demande location de <%= @tenant.first_name %> : encore 24h pour y répondre, dépéchez-vous :</p>
 
 <table border="0" cellpadding="0" cellspacing="10" class="info"><tbody>
   <tr>
@@ -35,7 +35,7 @@
     <td>
       <b>Découvrez le locataire</b>
       <br><%= @tenant.full_name %>
-      <br><%= @tenant.phone_number %> - <%= mail_to @tenant.full_email, @tenant.email, target: :_blank %>
+      <br><%= @tenant.phone_number %> - <%= mail_to @tenant.full_email, @tenant.email %>
       <br><small>membre depuis le <%= display_date_for(@host.invitation_accepted_at || @host.created_at) %></small>
     </td>
   </tr>
@@ -47,10 +47,8 @@
   </td>
 </tr></tbody></table>
 
-<h3>Besoin de services supplémentaires ?</h3>
-<p>Nous mettons nos concierges et aides-ménagères à votre disposition pour vous simplifier la vie, vous pouvez sélectionner ces services en même temps que vous acceptez la demande.</p>
-<p>Vous souhaitez enrichir votre expérience de réception ? Ecrivez-nous à <%= mail_to 'concierge@cookoon.fr', 'concierge@cookoon.fr', target: :_blank %></p>
-<p>Nous serons heureux de vous accompagner.</p>
+<h3>Nous nous occupons de tout</h3>
+<p>Vous avez finalement besoin d’un concierge ou du service ménage? Faites une demande à <%= mail_to 'concierge@cookoon.fr', 'concierge@cookoon.fr', target: :_blank %></p>
 
 <% content_for :post_scriptum do %>
   <p>PS : Une question ? Rendez-vous sur <%= link_to 'aide.cookoon.fr', 'https://aide.cookoon.fr', target: :_blank %>.</p>

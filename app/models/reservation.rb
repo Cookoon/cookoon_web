@@ -8,6 +8,7 @@ class Reservation < ApplicationRecord
   scope :inactive, -> { where(status: %i[refused cancelled passed]) }
   scope :created_in_day_range_around, ->(date_time) { where created_at: day_range(date_time) }
   scope :in_hour_range_around, ->(date_time) { where date: hour_range(date_time) }
+  scope :finished_in_day_range_around, ->(date_time) { joins(:inventory).merge(Inventory.checked_out_in_day_range_around(date_time)) }
 
   belongs_to :cookoon
   belongs_to :user
