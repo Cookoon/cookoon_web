@@ -1,6 +1,6 @@
 class StripeAccount::UserPolicy < ApplicationPolicy
   def create?
-    record == user
+    record.stripe_account_id.nil? && record == user
   end
 
   class Scope < Scope
