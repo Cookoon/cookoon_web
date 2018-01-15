@@ -16,6 +16,18 @@ notify_user_two_days_after_join:
   at: '14:00'
   expires_after: '23.hours'
 
+notify_user_five_days_after_invite:
+  class: 'NotifyUserFiveDaysAfterInviteJob'
+  every: '1.days'
+  at: '14:00'
+  expires_after: '23.hours'
+
+notify_user_ten_days_after_invite:
+  class: 'NotifyUserTenDaysAfterInviteJob'
+  every: '1.days'
+  at: '14:00'
+  expires_after: '23.hours'
+
 # # Runs once every 2 minutes
 # simple_task:
 #   class: "SomeActiveJob"

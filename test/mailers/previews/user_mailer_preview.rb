@@ -10,4 +10,12 @@ class UserMailerPreview < ActionMailer::Preview
   def notify_two_days_after_join
     UserMailer.notify_two_days_after_join(User.last)
   end
+
+  def notify_five_days_after_invite
+    UserMailer.notify_five_days_after_invite(User.last, 'fakeToken')
+  end
+
+  def notify_ten_days_after_invite
+    UserMailer.notify_ten_days_after_invite(User.last, 'fakeToken')
+  end
 end
