@@ -1,0 +1,19 @@
+<p>Bonjour <%= @user.first_name %>,</p>
+<p>Bravo : votre Cookoon en ligne !</p>
+
+<table border="0" cellpadding="0" cellspacing="10" class="info"><tbody>
+  <tr>
+    <td align="center">
+      <%= image_tag('icon-home.png', alt: 'Cookoon') %>
+    </td>
+    <td>
+      <b><%= @cookoon.name %></b>
+      <br><%= @cookoon.address %>
+      <br><i>Ce Cookoon dispose d'un espace de réception de <b><%= @cookoon.surface %> m²</b>, il est idéal pour <b><%= @cookoon.capacity %></b> personnes.</i>
+    </td>
+  </tr>
+</tbody></table>
+
+<p>Vous devriez bientôt recevoir vos premières demandes de locations ! Pour y répondre, rendez-vous dans votre espace Hôte, rubrique <%= link_to 'Vos Réservations', host_reservations_url, target: :_blank %>.</p>
+
+<p>Une question ? Vous pouvez consulter le <%= link_to 'Guide Hôte', 'https://drive.google.com/open?id=1pTWonZU6ufaxriceOSZFvFJuiXyK6SsL', target: :_blank %> ou vous rendre directement sur <%= link_to 'aide.cookoon.fr', 'https://aide.cookoon.fr', target: :_blank %></p>

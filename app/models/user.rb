@@ -30,9 +30,11 @@ class User < ApplicationRecord
             }
   validates :terms_of_service, acceptance: { message: 'Vous devez accepter les conditions générales pour continuer' }
 
+  after_invitation_accepted :send_welcome_email
+
   def full_name
     if first_name.present? && last_name.present?
-      "#{first_name.capitalize} #{last_name.capitalize}"
+      "#{first_name} #{last_name}"
     else
       'Membre Cookoon'
     end
@@ -65,5 +67,11 @@ class User < ApplicationRecord
 
   def total_payouts_for_dashboard_cents
     reservation_requests.passed.includes(:cookoon).sum(&:payout_price_for_host_cents)
+  end
+
+  private
+
+  def send_welcome_email
+    UserMailer.welcome_email(self).deliver_later
   end
 end

@@ -1,0 +1,6 @@
+<p>Bonjour <%= @user.first_name %>,</p>
+<p>Vous participez activement et positivement à la vie de la communauté. Pour vous remercier, nous vous offrons <%= link_to "#{@invitation_quantity} invitations", new_user_invitation_url, target: :_blank %> pour convier vos proches, choisissez les biens 😁</p>
+
+<%= content_for :post_scriptum do %>
+  <p>PS : une question ? Rendez-vous sur <%= link_to 'aide.cookoon.fr', 'https://aide.cookoon.fr', target: :_blank %></p>
+<% end %>

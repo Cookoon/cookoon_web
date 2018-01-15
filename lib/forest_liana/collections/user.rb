@@ -11,5 +11,18 @@ module Forest
     field :invited_by_full_name, type: 'String' do
       object.invited_by&.full_name
     end
+    #
+    # TODO: FC 12jan17 report this as not working to ForestAdmin team
+    # belongs_to :invited_by, reference: 'users.id' do
+    #   object.invited_by
+    # end
+
+    action 'Award invitations', fields: [{
+      field: 'quantity',
+      type: 'Number',
+      description: 'The number of invitations you want to award these users',
+      isRequired: true,
+      defaultValue: 5
+    }]
   end
 end

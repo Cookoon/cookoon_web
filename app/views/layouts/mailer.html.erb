@@ -131,10 +131,14 @@
               <tr>
                 <td align="center" class="prefooter">
                   <b>COOKOON</b>
-                  <br>Partagez vos expériences avec <a href="https://twitter.com/search?f=tweets&q=%23cookoonlife" target="_blank">#cookoonlife</a>
+                  <br>Partagez vos expériences avec <%= link_to '#cookoonlife', 'https://twitter.com/search?f=tweets&q=%23cookoonlife', target: :_blank %>
                   <div class="social-icons">
-                    <a href="https://www.facebook.com/groups/378511112571275" target="_blank"><%= image_tag 'facebook-negative.png', alt: 'Facebook' %></a>
-                    <a href="https://fr.linkedin.com/company/cookoon" target="_blank"><%= image_tag 'linkedin-negative.png', alt: 'LinkedIn' %></a>
+                    <%= link_to 'https://www.facebook.com/groups/378511112571275', target: :_blank do %>
+                      <%= image_tag 'facebook-negative.png', alt: 'Facebook' %>
+                    <% end %>
+                    <%= link_to 'https://fr.linkedin.com/company/cookoon', target: :_blank do %>
+                      <%= image_tag 'linkedin-negative.png', alt: 'LinkedIn' %>
+                    <% end %>
                   </div>
                 </td>
               </tr>
@@ -146,7 +150,7 @@
                 <tr>
                   <td class="content-block">
                     <span class="apple-link">Réceptions Nouvelles SAS, 12 rue Lincoln, 75008 Paris</span>
-                    <br>Vous ne souhaitez plus recevoir nos emails ? <a href="mailto:concierge@cookoon.fr">Dites-le nous</a>
+                    <br>Vous ne souhaitez plus recevoir nos emails ? <%= mail_to 'concierge@cookoon.fr', 'Dites-le nous', target: :_blank %>
                   </td>
                 </tr>
               </table>

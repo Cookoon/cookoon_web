@@ -3,5 +3,9 @@ module Devise
     def invitation_instructions
       Devise::Mailer.invitation_instructions(User.last, 'faketoken')
     end
+
+    def reset_password_instructions
+      Devise::Mailer.reset_password_instructions(User.first, 'faketoken')
+    end
   end
 end

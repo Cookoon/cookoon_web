@@ -10,7 +10,7 @@ class Users::InvitationsController < Devise::InvitationsController
 
   private
 
-  def after_accept_path_for(resource)
+  def after_accept_path_for(_resource)
     edit_users_path
   end
 

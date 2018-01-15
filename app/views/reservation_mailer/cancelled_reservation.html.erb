@@ -1,5 +1,5 @@
-<p>Bonjour <%= @tenant.first_name %>,</p>
-<p>Votre location Cookoon a bien été annulée.</p>
+<p>Bonjour <%= @host.first_name %>,</p>
+<p>Suite à votre demande, la location de votre Cookoon par <%= @tenant.first_name %> a bien été annulée. </p>
 
 <table border="0" cellpadding="0" cellspacing="10" class="info"><tbody>
   <tr>
@@ -14,10 +14,7 @@
   </tr>
 </tbody></table>
 
-<ul>
-  <li>Si vous avez annulé cette réservation avant la confirmation de l’Hôte, votre carte ne sera pas débitée.</li>
-  <li>Si vous avez annulé cette réservation après la confirmation, vous serez remboursé en totalité ou en partie par nos soins : <%= link_to 'voir les conditions d\'annulation', cgu_url, target: :_blank %>.</li>
-</ul>
+<p>Attention : l’annulation des réservations a des conséquences pour la communauté et ses membres. A utiliser avec modération !</p>
 
 <% content_for :post_scriptum do %>
   <p>PS : Une question ? Rendez-vous sur <%= link_to 'aide.cookoon.fr', 'https://aide.cookoon.fr', target: :_blank %>.</p>

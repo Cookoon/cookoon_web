@@ -1,0 +1,9 @@
+<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), method: :post, remote: true) do |f| %>
+  <div class="form-inputs">
+    <%= f.input :email, required: true, autofocus: true, label: 'Votre adresse email' %>
+  </div>
+
+  <div class="form-actions text-center">
+    <%= f.button :submit, "ENVOYER LES INSTRUCTIONS", class: 'button button-blue' %>
+  </div>
+<% end %>

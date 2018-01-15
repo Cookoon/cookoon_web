@@ -1,3 +1,7 @@
+<% content_for :navbar do %>
+  <%= render 'shared/navbar_light', url: new_user_session_path %>
+<% end %>
+
 <div class="container">
   <h2><%= t 'devise.invitations.edit.header' %></h2>
   <%= render 'edit_form' %>
