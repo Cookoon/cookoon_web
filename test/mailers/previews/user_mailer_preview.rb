@@ -22,4 +22,8 @@ class UserMailerPreview < ActionMailer::Preview
   def notify_six_days_after_reservation
     UserMailer.notify_six_days_after_reservation(User.last)
   end
+
+  def notify_cookoon_pending_for_missing_stripe_account
+    UserMailer.notify_cookoon_pending_for_missing_stripe_account(User.joins(:cookoons).last)
+  end
 end

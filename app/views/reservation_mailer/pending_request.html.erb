@@ -35,7 +35,7 @@
     <td>
       <b>Découvrez le locataire</b>
       <br><%= @tenant.full_name %>
-      <br><%= @tenant.phone_number %> - <%= mail_to @tenant.full_email, @tenant.email %>
+      <br><%= @tenant.phone_number %> - <%= mail_to @tenant.full_email, @tenant.email, target: :_blank %>
       <br><small>membre depuis le <%= display_date_for(@host.invitation_accepted_at || @host.created_at) %></small>
     </td>
   </tr>

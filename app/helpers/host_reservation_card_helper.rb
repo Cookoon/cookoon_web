@@ -112,7 +112,8 @@ module HostReservationCardHelper
         'contactez notre équipe',
         class: 'no-button no-button-white',
         subject: 'Annulation de réservation',
-        body: cancel_mailer_body
+        body: cancel_mailer_body,
+        target: :_blank
       )
     end
 
