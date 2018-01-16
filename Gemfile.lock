@@ -69,6 +69,7 @@ GEM
     cloudinary (1.8.2)
       aws_cf_signer
       rest-client
+    coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -197,6 +198,14 @@ GEM
     powerpack (0.1.1)
     pretender (0.3.1)
       actionpack
+    pry (0.11.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
+    pry-byebug (3.5.1)
+      byebug (~> 9.1)
+      pry (~> 0.10)
+    pry-rails (0.3.6)
+      pry (>= 0.10.4)
     public_suffix (3.0.1)
     puma (3.11.0)
     pundit (1.1.0)
@@ -377,6 +386,8 @@ DEPENDENCIES
   pg (~> 0.18)
   postmark-rails
   pretender
+  pry-byebug
+  pry-rails
   puma (~> 3.7)
   pundit
   rack-cors
