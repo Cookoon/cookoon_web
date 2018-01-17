@@ -1,7 +1,3 @@
-<div class="text-center" style="padding: 30px">
-  <%= link_to 'ACCÈS MEMBRE', new_user_session_path, class: 'button button-blue' %>
-</div>
-
 <header>
   <div class="home-wrapper text-center">
     <div class="home-container">
@@ -79,35 +75,33 @@ dîner entre amis, réunions & moments de calme.</span></p>
       </div>
 </section>
 
-  <section id="warranty">
-    <div class="container" style="margin: 20px 0px; padding: 15px">
-      <div class="row">
-          <div class="col-xs-8">
-            <h4>Tous les Cookoons sont assurés par notre partenaire AXA</h4>
-          </div>
-          <div class="col-xs-4">
-            <%= image_tag("axa_logo_solid_rgb.png", class: "img-responsive", style: "max-width: 100%; margin: 0 auto;") %>
-          </div>
-          <div class="col-xs-12" style="text-align: right; margin-top : 15px">
-            <h4><%= link_to 'En savoir plus >', en_savoir_plus_garanties_cookoon_path, class: 'no-button' %></h4>
-          </div>
-        </div>
-    </div>
-  </section>
+<section id="warranty" class="flex-container container light-padded">
+  <div>
+    <h4>Tous les Cookoons sont assurés par notre partenaire AXA</h4>
+  </div>
+  <div>
+    <%= image_tag("axa_logo_solid_rgb.png", class: "img-responsive", style: "max-width: 100px; margin: 0 auto;") %>
+    <h4><%= link_to 'En savoir plus >', en_savoir_plus_garanties_cookoon_path, class: 'no-button' %></h4>
+  </div>
+</section>
 
-  <section id="community" style="background: #006F8B;">
-      <div class="container">
-        <div class="row" style="margin: 20px 0px; color: white">
-            <h4>Rejoindre la communauté ?</h4>
-            <b>Vos proches sont membres de la communauté Cookoon ?
-              <br>
-              Demandez leur une invitation !</b>
-        </div>
-        <div class="text-center" style="margin-bottom: 20px">
-              <%= link_to raw("En savoir +"), 'https://aide.cookoon.fr/hc/fr/articles/115002653231-Comment-rejoindre-la-communaut%C3%A9-', target: "_blank", class: 'btn btn-default button button-white'%>
-        </div>
+<section id="community" style="background: #006F8B;">
+    <div class="container">
+      <div class="row" style="margin: 20px 0px; color: white">
+          <h4>Rejoindre la communauté ?</h4>
+          <b>Vos proches sont membres de la communauté Cookoon ?
+            <br>
+            Demandez leur une invitation !</b>
       </div>
-  </section>
+      <div class="text-center" style="margin-bottom: 20px">
+            <%= link_to raw("En savoir +"), 'https://aide.cookoon.fr/hc/fr/articles/115002653231-Comment-rejoindre-la-communaut%C3%A9-', target: "_blank", class: 'btn btn-default button button-white'%>
+      </div>
+    </div>
+</section>
+
+<div class="text-center" style="padding: 30px">
+  <%= link_to 'ACCÈS MEMBRE', new_user_session_path, class: 'button button-blue' %>
+</div>
 
 <footer>
     <div class="container text-center" style="padding: 20px">
