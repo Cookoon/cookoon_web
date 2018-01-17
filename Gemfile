@@ -98,6 +98,8 @@ group :development do
   gem 'bullet'
   gem 'i18n-debug'
   gem 'letter_opener'
+  gem 'pry-byebug'
+  gem 'pry-rails'
   gem 'rubocop', '~> 0.51.0', require: false
 end
 
