@@ -1,45 +1,56 @@
 class StripeAccountService
-  attr_reader :params, :user, :request_ip, :errors, :account
+  attr_reader :params, :user, :errors, :account
 
   def initialize(attributes)
     @params = attributes[:params]
     @user = attributes[:user]
-    @request_ip = attributes[:request_ip] || '127.0.0.1'
-    @account = false
     @errors = []
-    check_params
   end
 
-  def retrieve_or_create_user_account
-    if user.stripe_account_id.nil?
-      @account = create_stripe_account
-      user.update(stripe_account_id: account.id) if account
-    else
-      @account = retrieve_stripe_account
-    end
-
-    @account
+  def create_and_link_account
+    return false unless params_valid?
+    @account = retrieve_or_create_account
+    account_updated = link_bank_account
+    user.update(stripe_account_id: account.id) if account_updated
   end
 
-  def enrich_account
+  def error_messages
+    build_errors
+  end
+
+  def retrieve_stripe_account
+    retrieve_account
+  end
+
+  private
+
+  def retrieve_or_create_account
+    user&.stripe_account_id.nil? ? create_account : retrieve_account
+  end
+
+  def create_account
+    return false unless user
+    Stripe::Account.create(prepare_account)
+  rescue Stripe::InvalidRequestError => e
+    Rails.logger.error('Failed to create Stripe account')
+    Rails.logger.error(e.message)
+    @errors << e.message
+    false
+  end
+
+  def retrieve_account
+    return false unless user&.stripe_account_id
+    Stripe::Account.retrieve(user.stripe_account_id)
+  rescue Stripe::PermissionError => e
+    Rails.logger.error('Failed to retrieve Stripe account')
+    Rails.logger.error(e.message)
+    @errors << e.message
+    false
+  end
+
+  def link_bank_account
     return false unless account
-
-    account.external_account = {
-    	object: 'bank_account',
-    	account_holder_name: user.full_name,
-    	currency: 'eur',
-    	country: 'FR',
-    	account_holder_type: 'individual',
-      account_number: params[:iban]
-    }
-
-    account.legal_entity.address.city = params[:address][:city]
-    account.legal_entity.address.line1 = params[:address][:street]
-    account.legal_entity.address.postal_code = params[:address][:post_code]
-    account.legal_entity.dob.day = params['dob(3i)'].to_i
-    account.legal_entity.dob.month = params['dob(2i)'].to_i
-    account.legal_entity.dob.year = params['dob(1i)'].to_i
-
+    account.external_account = prepare_external_account
     account.save
   rescue Stripe::InvalidRequestError => e
     Rails.logger.error('Failed to enrich Stripe account')
@@ -48,57 +59,49 @@ class StripeAccountService
     false
   end
 
-  def error_messages
-    if errors.any?
-      errors.join(', ')
-    else
-      'Une erreur est survenue avec notre partenaire de paiement veuillez retenter ultérieurement, pour des raisons de sécurité nous ne conservons pas vos données bancaires veuillez les saisir à nouveau.'
-    end
-  end
-
-  def retrieve_stripe_account
-    return false unless user && user.stripe_account_id
-    begin
-      Stripe::Account.retrieve(user.stripe_account_id)
-    rescue Stripe::PermissionError => e
-      Rails.logger.error('Failed to retrieve Stripe account')
-      Rails.logger.error(e.message)
-      @errors << e.message
-      false
-    end
-  end
-
-  private
-
-  def create_stripe_account
-    return false unless user && request_ip
-    Stripe::Account.create(
-      type: 'custom',
-      country: 'FR',
-      email: user.email,
-      legal_entity: {
-        first_name: user.first_name,
-        last_name: user.last_name,
-        type: 'individual'
-      },
-      tos_acceptance: {
-        date: Time.zone.now.to_i,
-        ip: request_ip
-      }
-    )
-  rescue Stripe::InvalidRequestError => e
-    Rails.logger.error('Failed to create Stripe account')
-    Rails.logger.error(e.message)
-    @errors << e.message
-    false
+  def params_valid?
+    check_params
+    @errors.none?
   end
 
   def check_params
-    return false unless params
-    address_params = [params['address']['city'], params['address']['street'], params['address']['post_code']]
+    name_params = [params['first_name'], params['last_name']]
+    address_params = [params.dig('address', 'street_address1'), params.dig('address', 'city'), params.dig('address', 'post_code')]
     dob_params = [params['dob(1i)'], params['dob(2i)'], params['dob(2i)']]
+    @errors << 'Votre nom complet est obligatoire' if name_params.any?(&:blank?)
     @errors << 'Votre adresse est obligatoire' if address_params.any?(&:blank?)
     @errors << 'Votre date de naissance est obligatoire' if dob_params.any?(&:blank?)
     @errors << 'Votre IBAN est obligatoire' if params['iban'].blank?
+  end
+
+  def prepare_account
+    {
+      type: 'custom',
+      country: 'FR',
+      email: user.email,
+      account_token: params[:token]
+    }
+  end
+
+  def prepare_external_account
+    {
+      object: 'bank_account',
+      account_holder_name: user.full_name,
+      currency: 'eur',
+      country: 'FR',
+      account_holder_type: 'individual',
+      account_number: params[:iban]
+    }
+  end
+
+  def build_errors
+    if errors.any?
+      errors.join(', ')
+    else
+      <<~ERROR
+        Une erreur est survenue avec notre partenaire de paiement veuillez retenter ultérieurement,
+        pour des raisons de sécurité nous ne conservons pas vos données bancaires veuillez les saisir à nouveau.
+      ERROR
+    end
   end
 end
