@@ -2,7 +2,7 @@ async function handleForm(event) {
   event.stopPropagation();
   event.preventDefault();
 
-  const result = await stripe.createToken('account', {
+  var result = await stripe.createToken('account', {
     legal_entity: {
       first_name: document.querySelector('.inp-first-name').value,
       last_name: document.querySelector('.inp-last-name').value,

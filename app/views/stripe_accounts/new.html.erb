@@ -9,7 +9,7 @@
 </div>
 
 <script type="text/javascript">
-  const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
-  const $myForm = $('.stripe');
+  var stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
+  var $myForm = $('.stripe');
   $myForm.submit(handleForm);
 </script>
