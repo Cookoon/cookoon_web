@@ -7,7 +7,7 @@ fr:
       no_invitations_remaining: "Il n'y a plus d'invitations restantes"
       invitation_removed: 'Votre invitation a été supprimée.'
       count:
-        zero: 'Vous pourrez les parrainer dès que vous disposerez d’invitations. Choisissez les biens!'
+        zero: 'Vous pourrez les parrainer dès que vous disposerez d’invitations. Choisissez les bien !'
         one: 'Vous pouvez les parrainer, il vous reste une seule invitation, choisissez bien !'
         other: 'Vous pouvez les parrainer, vous disposez actuellement de %{count} invitations, choisissez-les bien.'
       new:
