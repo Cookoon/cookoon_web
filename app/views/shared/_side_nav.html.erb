@@ -28,7 +28,7 @@
         <li><i class="fa fa-send-o" aria-hidden="true"></i>&nbsp; <%= link_to 'MES INVITATIONS', new_user_invitation_path %></li>
         <li><i class="fa fa-question-circle-o" aria-hidden="true"></i>&nbsp; <%= link_to 'MES CONTACTS UTILES', support_path %></li>
       </ul>
-      <p><%= link_to 'Conditions Générales', cgu_path %></p>
+      <p><%= link_to 'Conditions Générales', 'https://cookoon.fr/conditions-generales/', target: :_blank %></p>
       <div class="side-nav-fixedbot">
         <% if notifiable_reservation_requests? %>
           <span class="notif notif-inline"></span>
