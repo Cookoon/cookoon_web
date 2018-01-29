@@ -97,6 +97,7 @@ group :development do
   # Custom
   gem 'bullet'
   gem 'i18n-debug'
+  gem 'i18n-tasks', require: false
   gem 'letter_opener'
   gem 'pry-byebug'
   gem 'pry-rails'
