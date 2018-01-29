@@ -1,5 +1,5 @@
 <p>Bonjour <%= @user.first_name %>,</p>
-<p><%= @user.invited_by&.first_name %> vous a invité à rejoindre Cookoon il y a quelques jours, mais vous n’avez pas accepté son invitation, dépêchez-vous de nous rejoindre !</p>
+<p><%= @user.invited_by&.first_name %> vous a invité à rejoindre Cookoon il y a quelques jours, mais vous n'avez pas accepté son invitation, dépêchez-vous de nous rejoindre !</p>
 <p>Pour rejoindre Cookoon :</p>
 
 <table border="0" cellpadding="0" cellspacing="10" class="info"><tbody>
@@ -8,7 +8,7 @@
       <%= image_tag('icon-one.png', alt: 'Un') %>
     </td>
     <td align="center">
-      <b>Téléchargez l’application Cookoon Inside</b>
+      <b>Téléchargez l'application Cookoon Inside</b>
       <table border="0" cellpadding="0" cellspacing="10" class="store-badge"><tbody><tr>
         <td align="center">
           <%= link_to 'https://itunes.apple.com/fr/app/cookoon-inside/id1291943406', target: :_blank do %>
@@ -39,12 +39,12 @@
 
 <p>Vous rencontrez une difficulté? faites en part à notre concierge en répondant directement à cet email !</p>
 
-<p><strong>Cookoon, qu’est ce que c’est ?</strong></p>
+<p><strong>Cookoon, qu'est ce que c'est ?</strong></p>
 <p>Un réseau de confiance, exclusif qui vous permettra de :</p>
 <ul>
-  <li>louer l’appartement d’autres membres et choisir des options pour tous vos besoins de courte durée, personnels ou professionnels (déjeuner d’affaires, réunion, rendez-vous, dîner entre amis, match de foot sur grand écran...) ;</li>
+  <li>louer l'appartement d'autres membres et choisir des options pour tous vos besoins de courte durée, personnels ou professionnels (déjeuner d'affaires, réunion, rendez-vous, dîner entre amis, match de foot sur grand écran...) ;</li>
   <li>rentabiliser votre appartement durant vos absences, sans contrainte grâce aux services concierge et ménage ;</li>
-  <li>rencontrer d’autres membres, communiquer auprès d’eux sur vos expériences Cookoon.</li>
+  <li>rencontrer d'autres membres, communiquer auprès d'eux sur vos expériences Cookoon.</li>
 </ul>
 
 <% content_for :post_scriptum do %>

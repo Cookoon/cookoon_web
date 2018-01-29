@@ -18,15 +18,16 @@ data:
     ## Default:
     # - config/locales/%{locale}.yml
     ## More files:
-    # - config/locales/**/*.%{locale}.yml
+    - config/locales/**/*.%{locale}.yml
 
   # Locale files to write new keys to, based on a list of key pattern => file rules. Matched from top to bottom:
   # `i18n-tasks normalize -p` will force move the keys according to these rules
   write:
     ## For example, write devise and simple form keys to their respective files:
-    # - ['{devise, simple_form}.*', 'config/locales/\1.%{locale}.yml']
+    - ['{activerecord}.*', 'config/locales/\1.%{locale}.yml']
+    - ['{devise, simple_form}.*', 'config/locales/\1.%{locale}.yml']
     ## Catch-all default:
-    # - config/locales/%{locale}.yml
+    - config/locales/%{locale}.yml
 
   # External locale data (e.g. gems).
   # This data is not considered unused and is never written to.
@@ -35,7 +36,7 @@ data:
     # - "<%#= %x[bundle show vagrant].chomp %>/templates/locales/%{locale}.yml"
 
   ## Specify the router (see Readme for details). Valid values: conservative_router, pattern_router, or a custom class.
-  # router: conservative_router
+  router: conservative_router
 
   yaml:
     write:
@@ -93,12 +94,14 @@ search:
 # - '{devise,simple_form}.*'
 
 ## Consider these keys used:
-# ignore_unused:
-# - 'activerecord.attributes.*'
-# - '{devise,kaminari,will_paginate}.*'
-# - 'simple_form.{yes,no}'
+ignore_unused:
+- 'activerecord.attributes.*'
+- 'activerecord.errors.*'
+- 'activerecord.models.*'
+- '{devise,helpers, time}.*'
+- 'simple_form.{yes,no}'
 # - 'simple_form.{placeholders,hints,labels}.*'
-# - 'simple_form.{error_notification,required}.:'
+- 'simple_form.{error_notification,required}.:'
 
 ## Exclude these keys from the `i18n-tasks eq-base' report:
 # ignore_eq_base:
