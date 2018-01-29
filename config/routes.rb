@@ -41,16 +41,14 @@ Rails.application.routes.draw do
     get 'dashboard', to: 'users#dashboard'
   end
 
+  # -------- STATIC PAGES ---------
+  get 'support', to: 'pages#support'
   get 'setcookies', to: 'pages#setcookies'
+
+  # -------- UNIVERSAL LINKS ---------
   get 'apple-app-site-association', to: 'pages#apple_app_site_association'
   get '.well-known/apple-app-site-association', to: 'pages#apple_app_site_association'
   get '.well-known/assetlinks.json', to: 'pages#android_assetlinks'
-  get 'support', to: 'pages#support'
-  get 'conditions-generales', to: 'pages#cgu', as: :cgu
-  get 'en-savoir-plus', to: 'pages#about'
-  get 'en-savoir-plus/louer-un-cookoon', to: 'pages#about_rent'
-  get 'en-savoir-plus/devenir-hote', to: 'pages#about_hosting'
-  get 'en-savoir-plus/garanties-cookoon', to: 'pages#about_warranties'
 
   # -------- ADMIN ROUTES ---------
   # Sidekiq Web UI, only for admins.
