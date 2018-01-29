@@ -10,6 +10,10 @@
     <%= javascript_include_tag 'application' %>
   </head>
   <body>
+    <div id="flash">
+      <%= render 'shared/flashes' %>
+    </div>
+
     <%= yield %>
   </body>
 </html>

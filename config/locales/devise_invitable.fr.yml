@@ -10,7 +10,7 @@ fr:
         header: Vous rejoignez la communauté ?
         submit_button: Je m'inscris
       invitation_removed: Votre invitation a été supprimée.
-      invitation_token_invalid: Le jeton d'invitation fourni n'est pas valide!
+      invitation_token_invalid: Oups, votre invitation n'est plus valide - contactez votre parrain pour qu'il vous en envoie une nouvelle
       new:
         header: Envoyer une invitation
         submit_button: Envoyer une invitation
