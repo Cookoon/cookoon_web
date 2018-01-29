@@ -18,7 +18,7 @@ class UserMailer < ApplicationMailer
   def notify_five_days_after_invite(user, token)
     @user = user
     @token = token
-    mail(to: @user.full_email, subject: 'Vous n’avez pas encore rejoint Cookoon ?')
+    mail(to: @user.full_email, subject: "Vous n'avez pas encore rejoint Cookoon ?")
   end
 
   def notify_ten_days_after_invite(user, token)

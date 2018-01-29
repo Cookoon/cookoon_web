@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
 
   # Devise
   def is_flashing_format?
-    controller_name == 'passwords'
+    controller_name.in? %w(invitations passwords)
   end
 
   def configure_permitted_parameters

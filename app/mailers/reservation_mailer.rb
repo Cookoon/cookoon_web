@@ -52,7 +52,7 @@ class ReservationMailer < ApplicationMailer
     @tenant = @reservation.user
     @cookoon = @reservation.cookoon
     @host = @cookoon.user
-    mail(to: @tenant.full_email, subject: 'Comment s’est passée votre expérience Cookoon ?')
+    mail(to: @tenant.full_email, subject: "Comment s'est passée votre expérience Cookoon ?")
   end
   # ============================
 
@@ -108,7 +108,7 @@ class ReservationMailer < ApplicationMailer
     @tenant = @reservation.user
     @cookoon = @reservation.cookoon
     @host = @cookoon.user
-    mail(to: @host.full_email, subject: 'Comment s’est passée votre expérience Cookoon ?')
+    mail(to: @host.full_email, subject: "Comment s'est passée votre expérience Cookoon ?")
   end
   # ============================
 

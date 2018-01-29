@@ -1,25 +1,24 @@
+---
 fr:
   activerecord:
-    models:
-      user: Utilisateur
     attributes:
-      user:
-        first_name: Prénom
-        last_name: Nom
-        phone_number: Téléphone portable
-        description: Description
-        photo: Photo
       inventory:
         checkin_photos: Photos à l'entrée des lieux
         checkout_photos: Photos à la sortie des lieux
+      user:
+        description: Description
+        first_name: Prénom
+        last_name: Nom
+        phone_number: Téléphone portable
+        photo: Photo
     errors:
       models:
         reservation:
           attributes:
-            date:
-              not_after_48_hours: Un minimum de 48h est requis.
             cookoon:
               cannot_book_mine: Vous ne pouvez pas réserver votre propre Cookoon !
+            date:
+              not_after_48_hours: Un minimum de 48h est requis.
         user:
           attributes:
             email:
@@ -27,3 +26,5 @@ fr:
               taken: Cet utilisateur est déjà membre !
             phone_number:
               not_a_valid_phone_number: vérifiez le format de votre numéro de téléphone
+    models:
+      user: Utilisateur
