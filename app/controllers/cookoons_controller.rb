@@ -2,7 +2,8 @@ class CookoonsController < ApplicationController
   include DatetimeHelper
 
   def index
-    @user_search = current_search || new_search
+    @new_search = build_search
+    @user_search = current_search || @new_search
     @cookoons = filter_cookoons(@user_search)
 
     prepare_infos
@@ -46,7 +47,7 @@ class CookoonsController < ApplicationController
     params.require(:cookoon).permit(:name, :surface, :price, :address, :capacity, :category, photos: [])
   end
 
-  def new_search
+  def build_search
     UserSearch.new(number: 2, duration: 2, date: (Time.zone.now + 3.days).beginning_of_hour)
   end
 
