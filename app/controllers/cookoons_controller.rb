@@ -2,10 +2,10 @@ class CookoonsController < ApplicationController
   include DatetimeHelper
 
   def index
-    @lat_lng = cookies[:lat_lng].try(:split, "|")
-    @new_search = UserSearch.new(number: 2, duration: 2, date: (Time.zone.now + 3.days).beginning_of_hour)
-    @last_search = current_search || @new_search
-    @cookoons = policy_scope(Cookoon).near(@last_search.address.presence || 'Paris' || @lat_lng, 10) # revert back Paris and @lat_lng to use user position
+    @new_search = build_search
+    @user_search = current_search || @new_search
+    @cookoons = filter_cookoons(@user_search)
+
     prepare_infos
     build_markers
   end
@@ -47,11 +47,26 @@ class CookoonsController < ApplicationController
     params.require(:cookoon).permit(:name, :surface, :price, :address, :capacity, :category, photos: [])
   end
 
+  def build_search
+    UserSearch.new(number: 2, duration: 2, date: (Time.zone.now + 3.days).beginning_of_hour)
+  end
+
+  def filter_cookoons(user_search)
+    # Here we can use @lat_lng to get user position
+    # @lat_lng = cookies[:lat_lng].try(:split, "|")
+    # requires to turn on scripts on pages
+    if user_search.address.present?
+      policy_scope(Cookoon).near(user_search.address, 10)
+    else
+      policy_scope(Cookoon).shuffled
+    end
+  end
+
   def prepare_infos
     @search_infos = {
-      position: @last_search.address.try(:split, " - ").try(:first) || 'Adresse',
-      time_slot: display_datetime_for(@last_search.date, join_expression: 'à', without_year: true, time_separator: ':') || 'Tout de suite',
-      people_number: @last_search.number || 4
+      position: @user_search.address.try(:split, " - ").try(:first) || 'Adresse',
+      time_slot: display_datetime_for(@user_search.date, join_expression: 'à', without_year: true, time_separator: ':') || 'Tout de suite',
+      people_number: @user_search.number || 4
     }
   end
 

@@ -7,8 +7,7 @@
 <div class="container">
   <div class="block-presentation">
     <h3><%= @cookoon.name %></h3>
-    <p>Appartement à <span class="text-gray"><%= @cookoon.address %></span></p>
-    <i>par <span class="text-gray"><%= @cookoon.user.first_name %></span></i>
+    <p><%= @cookoon.category %> <i>de <span class="text-gray"><%= @cookoon.user.first_name %></span></i></p>
   </div>
   <div>
     <p>
