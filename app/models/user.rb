@@ -8,6 +8,8 @@ class User < ApplicationRecord
   scope :with_cookoon_created_in_day_range_around, ->(date_time) { joins(:cookoons).merge(Cookoon.created_in_day_range_around(date_time)).distinct }
   scope :with_reservation_in_day_range_around, ->(date_time) { joins(:reservations).merge(Reservation.created_in_day_range_around(date_time)).distinct }
   scope :with_reservation_finished_in_day_range_around, ->(date_time) { joins(:reservations).merge(Reservation.finished_in_day_range_around(date_time)).distinct }
+  scope :has_cookoon, -> { joins(:cookoons).distinct }
+  scope :has_no_cookoon, -> { left_outer_joins(:cookoons).where(cookoons: {id: nil}) }
 
   PHONE_REGEXP = /\A(\+\d+)?([\s\-\.]?\(?\d+\)?)+\z/
 
