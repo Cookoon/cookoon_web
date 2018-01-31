@@ -3,9 +3,9 @@ class CookoonsController < ApplicationController
 
   def index
     @lat_lng = cookies[:lat_lng].try(:split, "|")
-    @new_search = UserSearch.new(number: 2, duration: 2, date: (Time.zone.now + 3.days).beginning_of_hour)
-    @last_search = current_search || @new_search
-    @cookoons = policy_scope(Cookoon).near(@last_search.address.presence || 'Paris' || @lat_lng, 10) # revert back Paris and @lat_lng to use user position
+    @last_search = current_search || new_search
+    @cookoons = filter_cookoons(@last_search)
+
     prepare_infos
     build_markers
   end
@@ -45,6 +45,19 @@ class CookoonsController < ApplicationController
 
   def cookoon_params
     params.require(:cookoon).permit(:name, :surface, :price, :address, :capacity, :category, photos: [])
+  end
+
+  def new_search
+    UserSearch.new(number: 2, duration: 2, date: (Time.zone.now + 3.days).beginning_of_hour)
+  end
+
+  def filter_cookoons(last_user_search)
+    # Here we can use @lat_lng to get user position
+    if last_user_search.address.present?
+      policy_scope(Cookoon).near(@last_search.address, 10)
+    else
+      policy_scope(Cookoon).shuffled
+    end
   end
 
   def prepare_infos
