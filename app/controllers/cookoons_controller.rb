@@ -2,7 +2,6 @@ class CookoonsController < ApplicationController
   include DatetimeHelper
 
   def index
-    @lat_lng = cookies[:lat_lng].try(:split, "|")
     @user_search = current_search || new_search
     @cookoons = filter_cookoons(@user_search)
 
@@ -53,6 +52,8 @@ class CookoonsController < ApplicationController
 
   def filter_cookoons(user_search)
     # Here we can use @lat_lng to get user position
+    # @lat_lng = cookies[:lat_lng].try(:split, "|")
+    # requires to turn on scripts on pages
     if user_search.address.present?
       policy_scope(Cookoon).near(user_search.address, 10)
     else
