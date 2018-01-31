@@ -3,8 +3,8 @@ class CookoonsController < ApplicationController
 
   def index
     @lat_lng = cookies[:lat_lng].try(:split, "|")
-    @last_search = current_search || new_search
-    @cookoons = filter_cookoons(@last_search)
+    @user_search = current_search || new_search
+    @cookoons = filter_cookoons(@user_search)
 
     prepare_infos
     build_markers
@@ -51,10 +51,10 @@ class CookoonsController < ApplicationController
     UserSearch.new(number: 2, duration: 2, date: (Time.zone.now + 3.days).beginning_of_hour)
   end
 
-  def filter_cookoons(last_user_search)
+  def filter_cookoons(user_search)
     # Here we can use @lat_lng to get user position
-    if last_user_search.address.present?
-      policy_scope(Cookoon).near(@last_search.address, 10)
+    if user_search.address.present?
+      policy_scope(Cookoon).near(user_search.address, 10)
     else
       policy_scope(Cookoon).shuffled
     end
@@ -62,9 +62,9 @@ class CookoonsController < ApplicationController
 
   def prepare_infos
     @search_infos = {
-      position: @last_search.address.try(:split, " - ").try(:first) || 'Adresse',
-      time_slot: display_datetime_for(@last_search.date, join_expression: 'à', without_year: true, time_separator: ':') || 'Tout de suite',
-      people_number: @last_search.number || 4
+      position: @user_search.address.try(:split, " - ").try(:first) || 'Adresse',
+      time_slot: display_datetime_for(@user_search.date, join_expression: 'à', without_year: true, time_separator: ':') || 'Tout de suite',
+      people_number: @user_search.number || 4
     }
   end
 
