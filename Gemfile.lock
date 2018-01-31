@@ -82,6 +82,8 @@ GEM
     crass (1.0.3)
     css_parser (1.6.0)
       addressable
+    delocalize (1.2.0)
+      rails (>= 2)
     devise (4.4.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -385,6 +387,7 @@ DEPENDENCIES
   byebug
   cloudinary
   coffee-rails (~> 4.2)
+  delocalize
   devise
   devise-i18n
   devise_invitable (~> 1.7.0)

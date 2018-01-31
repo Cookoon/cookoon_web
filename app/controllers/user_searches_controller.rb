@@ -9,6 +9,8 @@ class UserSearchesController < ApplicationController
   private
 
   def search_params
-    params.require(:user_search).permit(:address, :date, :number, :duration)
+    params.require(:user_search)
+          .permit(:address, :date, :number, :duration)
+          .delocalize(date: :time)
   end
 end
