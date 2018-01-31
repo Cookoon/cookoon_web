@@ -1,11 +1,11 @@
 module Devise
   class MailerPreview < ActionMailer::Preview
     def invitation_instructions
-      Devise::Mailer.invitation_instructions(User.last, 'faketoken')
+      DeviseCustomMailer.invitation_instructions(User.last, 'faketoken')
     end
 
     def reset_password_instructions
-      Devise::Mailer.reset_password_instructions(User.first, 'faketoken')
+      DeviseCustomMailer.reset_password_instructions(User.first, 'faketoken')
     end
   end
 end
