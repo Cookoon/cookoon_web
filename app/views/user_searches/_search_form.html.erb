@@ -7,7 +7,7 @@
         <div id='infos-time-slot'><%= @search_infos[:time_slot] %></div>
         <div>Pour <span id='infos-number'><%= @search_infos[:people_number] %></span></div>
       </div>
-      <%= link_to '#' do %>
+      <%= link_to user_searches_path, method: :patch, remote: true do %>
         <div class="flex align-center">
           <p class="hidden-xs">Annuler la recherche</p>
           <i class="fa fa-times-circle left-mar-10"></i>
