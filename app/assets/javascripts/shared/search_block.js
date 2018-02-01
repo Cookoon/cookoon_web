@@ -1,7 +1,7 @@
 $(document).on('turbolinks:load ajaxComplete', function() {
   // Show / Hide search
   $('.search-body').hide();
-  $('.search-header').click(function() {
+  $('.search-header-clickable').click(function() {
     $('.search-body').slideToggle();
   });
 
