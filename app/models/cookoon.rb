@@ -3,6 +3,7 @@ class Cookoon < ApplicationRecord
 
   scope :displayable_on_index, -> { joins(:user).where.not(users: { stripe_account_id: nil }) }
   scope :created_in_day_range_around, ->(date_time) { where created_at: day_range(date_time) }
+  scope :capacity_greater_than, ->(number) { where("capacity >= ?", number) }
 
   CATEGORIES = %w[Appartement Maison Jardin Loft Terrasse Toit Villa].freeze
 
