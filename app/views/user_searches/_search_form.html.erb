@@ -1,10 +1,18 @@
 <div class="search">
   <div class="container">
     <div class="search-header">
-      <i class="fa fa-search"></i>
-      <div id='infos-address'><%= @search_infos[:position] %></div>
-      <div id='infos-time-slot'><%= @search_infos[:time_slot] %></div>
-      <div>Pour <span id='infos-number'><%= @search_infos[:people_number] %></span></div>
+      <div class="search-header-clickable">
+        <i class="fa fa-search"></i>
+        <div id='infos-address'><%= @search_infos[:position] %></div>
+        <div id='infos-time-slot'><%= @search_infos[:time_slot] %></div>
+        <div>Pour <span id='infos-number'><%= @search_infos[:people_number] %></span></div>
+      </div>
+      <%= link_to user_searches_path, method: :patch, remote: true do %>
+        <div class="flex align-center">
+          <p class="hidden-xs">Annuler la recherche</p>
+          <i class="fa fa-times-circle left-mar-10"></i>
+        </div>
+      <% end %>
     </div>
     <div class="search-body">
       <div class="container">

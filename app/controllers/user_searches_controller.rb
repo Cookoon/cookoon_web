@@ -6,6 +6,15 @@ class UserSearchesController < ApplicationController
     redirect_to cookoons_path
   end
 
+  def update
+    @new_search = @user_search = UserSearch.new(number: 2, duration: 2, date: (Time.zone.now + 3.days).beginning_of_hour)
+    @cookoons = policy_scope(Cookoon).shuffled
+    @search_infos = { position: 'Adresse', time_slot: 'Tout de suite', people_number: 2 }
+    searches = current_user.active_recent_searches
+    authorize searches
+    searches.update_all(status: :inactive)
+  end
+
   private
 
   def search_params

@@ -11,6 +11,17 @@
     justify-content: space-between;
     padding: 10px;
     margin-top: 10px;
+    align-items: baseline;
+    &-clickable {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      width: 250px;
+      cursor: pointer;
+    }
+  }
+  a {
+    color: white;
   }
   p {
     margin: 0;
@@ -98,6 +109,13 @@
     max-width: 70px;
     overflow: hidden;
     white-space: nowrap;
+  }
+}
+
+// Iphone 5 Query
+@media (max-width: 320px) {
+  .search-header-clickable {
+    width: 220px;
   }
 }
 
