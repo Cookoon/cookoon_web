@@ -1,10 +1,10 @@
-<div class="search">
+<div data-controller="user-searches" class="search">
   <div class="container">
     <div class="search-header">
       <div class="search-header-clickable">
         <i class="fa fa-search"></i>
         <div id='infos-address'><%= @search_infos[:position] %></div>
-        <div id='infos-time-slot'><%= @search_infos[:time_slot] %></div>
+        <div data-target="user-searches.date" id='infos-time-slot'><%= @search_infos[:time_slot] %></div>
         <div>Pour <span id='infos-number'><%= @search_infos[:people_number] %></span></div>
       </div>
       <%= link_to user_searches_path, method: :patch, remote: true do %>
@@ -25,7 +25,7 @@
               </div>
             </div>
             <div class="col-xs-12">
-              <%= f.input :date, label: false, placeholder: 'Date & heure', input_html: { value: display_datetime_for(@user_search.date, join_expression: 'à', without_year: true, time_separator: ':') }, as: :string, readonly: true  %>
+              <%= f.input :date, label: false, placeholder: 'Date & heure', input_html: { data: { action: 'click->user-searches#updateDateTarget', target: 'user-searches.dateInput' }, value: display_datetime_for(@user_search.date, join_expression: 'à', without_year: true, time_separator: ':') }, as: :string, readonly: true  %>
             </div>
             <div class="col-xs-12 col-md-6">
               <!-- Nombre d'heures -->

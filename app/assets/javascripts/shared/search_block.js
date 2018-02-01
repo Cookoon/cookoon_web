@@ -6,10 +6,6 @@ $(document).on('turbolinks:load ajaxComplete', function() {
   });
 
   // Fill header on change
-  $('#user_search_date').change(function() {
-    $('#infos-time-slot').text($(this).val());
-  });
-
   $('#user_search_number').change(function() {
     $('#infos-number').text($(this).val());
   });
