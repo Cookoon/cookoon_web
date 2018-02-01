@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     post :stop_impersonating, on: :collection
   end
   resources :user_searches, only: :create
+  resource :user_searches, only: :update
   resources :stripe_accounts, only: [:new, :create]
   resources :credit_cards, only: [:index, :create, :destroy]
 
