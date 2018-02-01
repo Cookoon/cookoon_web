@@ -7,7 +7,12 @@
         <div id='infos-time-slot'><%= @search_infos[:time_slot] %></div>
         <div>Pour <span id='infos-number'><%= @search_infos[:people_number] %></span></div>
       </div>
-      <i class="fa fa-times-circle"></i>
+      <%= link_to '#' do %>
+        <div class="flex align-center">
+          <p class="hidden-xs">Annuler la recherche</p>
+          <i class="fa fa-times-circle left-mar-10"></i>
+        </div>
+      <% end %>
     </div>
     <div class="search-body">
       <div class="container">
