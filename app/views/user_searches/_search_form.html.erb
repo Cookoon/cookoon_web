@@ -42,7 +42,7 @@
                 <div><span data-target="user-searches.duration"><%= @user_search.duration %></span> heure(s)</div>
                 <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-action="click->user-searches#incrementDuration"></i>
               </div>
-              <%= f.input :duration, input_html: { value: @user_search.duration, data: { min: 1, max: 5, target: 'user-searches.durationInput' } }, as: :hidden %>
+              <%= f.input :duration, input_html: { value: @user_search.duration, data: { target: 'user-searches.durationInput' } }, as: :hidden %>
             </div>
 
             <!-- Nombre de participants -->
@@ -52,7 +52,7 @@
                 <div><span data-target="user-searches.people"><%= @user_search.number %></span> personne(s)</div>
                 <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-action="click->user-searches#incrementPeople"></i>
               </div>
-              <%= f.input :number, input_html: {value: @user_search.number, data: { min: 1, max: 20, target: 'user-searches.peopleInput' } }, as: :hidden %>
+              <%= f.input :number, input_html: {value: @user_search.number, data: { target: 'user-searches.peopleInput' } }, as: :hidden %>
             </div>
           </div>
           <div class="text-center">
