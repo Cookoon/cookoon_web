@@ -2,6 +2,10 @@ import { Controller } from 'stimulus';
 
 export default class extends Controller {
   static targets = [
+    'address',
+    'addressClear',
+    'addressInput',
+    'body',
     'date',
     'dateInput',
     'duration',
@@ -9,6 +13,29 @@ export default class extends Controller {
     'people',
     'peopleInput'
   ];
+
+  connect() {
+    this.updateAddressClearVisibility();
+  }
+
+  toggleBodyVisibility() {
+    $(this.bodyTarget).slideToggle();
+  }
+
+  clearAddress() {
+    this.addressTarget.innerHTML = 'Adresse';
+    this.addressInputTarget.value = '';
+    this.updateAddressClearVisibility();
+    this.addressInputTarget.focus();
+  }
+
+  updateAddressClearVisibility() {
+    if (this.addressInputTarget.value) {
+      this.addressClearTarget.classList.add('d-initial');
+    } else {
+      this.addressClearTarget.classList.remove('d-initial');
+    }
+  }
 
   updateDateTarget() {
     this.dateTarget.innerHTML = this.dateInputTarget.value;

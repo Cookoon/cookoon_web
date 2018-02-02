@@ -8,9 +8,9 @@
 >
   <div class="container">
     <div class="search-header">
-      <div class="search-header-clickable">
+      <div class="search-header-clickable" data-action="click->user-searches#toggleBodyVisibility">
         <i class="fa fa-search"></i>
-        <div id='infos-address'><%= @search_infos[:position] %></div>
+        <div id='infos-address' data-target="user-searches.address"><%= @search_infos[:position] %></div>
         <div data-target="user-searches.date"><%= @search_infos[:time_slot] %></div>
         <div>Pour <span data-target="user-searches.people"><%= @search_infos[:people_number] %></span></div>
       </div>
@@ -21,18 +21,51 @@
         </div>
       <% end %>
     </div>
-    <div class="search-body">
+    <div class="search-body" data-target="user-searches.body">
       <div class="container">
         <%= simple_form_for @new_search, remote: true do |f| %>
           <div class="row">
             <div class="col-xs-12">
               <div class="btn-group width-100">
-                <%= f.input :address, label: false, placeholder: 'Ville, adresse ...', input_html: { value: @user_search.address } %>
-                <i id="user_search_address_clear" class="fa fa-times"></i>
+                <%= f.input :address,
+                            label: false,
+                            placeholder: 'Ville, adresse ...',
+                            input_html: {
+                              value: @user_search.address,
+                              data: {
+                                action: 'keyup->user-searches#updateAddressClearVisibility',
+                                target: 'user-searches.addressInput'
+                              }
+                            }
+                %>
+                <i
+                  id="user_search_address_clear"
+                  class="fa fa-times"
+                  aria-hidden="true"
+                  data-action="click->user-searches#clearAddress"
+                  data-target="user-searches.addressClear"                    
+                ></i>
               </div>
             </div>
             <div class="col-xs-12">
-              <%= f.input :date, label: false, placeholder: 'Date & heure', input_html: { data: { action: 'click->user-searches#updateDateTarget', target: 'user-searches.dateInput' }, value: display_datetime_for(@user_search.date, join_expression: 'à', without_year: true, time_separator: ':') }, as: :string, readonly: true  %>
+              <%= f.input :date,
+                          label: false,
+                          placeholder: 'Date & heure',
+                          as: :string,
+                          readonly: true,
+                          input_html: {
+                            value: display_datetime_for(
+                              @user_search.date,
+                              join_expression: 'à',
+                              without_year: true,
+                              time_separator: ':'
+                            ),
+                            data: {
+                              action: 'click->user-searches#updateDateTarget',
+                              target: 'user-searches.dateInput'
+                            }
+                          }
+            %>
             </div>
 
             <!-- Nombre d'heures -->

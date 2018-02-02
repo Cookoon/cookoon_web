@@ -220,15 +220,20 @@ select {
 }
 
 /*Displays*/
+.d-initial {
+  display: initial !important;
+}
 .block {
   display: block;
 }
 .inline {
   display: inline;
 }
+.d-flex,
 .flex {
   display: flex;
 }
+.d-none,
 .invisible {
   display: none;
 }
