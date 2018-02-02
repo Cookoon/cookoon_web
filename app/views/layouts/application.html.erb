@@ -18,7 +18,7 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': :reload %>
     <%= cloudinary_js_config %>
   </head>
-  <body class="<%= controller_name %> <%= action_name %> bg-cream">
+  <body class="<%= controller_name %> <%= action_name %>">
     <%= render 'shared/loader' %>
     <% if content_for?(:navbar) %>
       <%= yield(:navbar) %>
