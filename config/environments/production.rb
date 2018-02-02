@@ -1,5 +1,7 @@
 Rails.application.configure do
-  config.webpacker.check_yarn_integrity = false  # Settings specified here will take precedence over those in config/application.rb.
+  # Settings specified here will take precedence over those in config/application.rb.
+
+  config.webpacker.check_yarn_integrity = false
 
   # Code is not reloaded between requests.
   config.cache_classes = true
