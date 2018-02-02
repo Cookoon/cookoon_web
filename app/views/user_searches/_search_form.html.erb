@@ -1,11 +1,18 @@
-<div data-controller="user-searches" class="search">
+<div
+  class="search"
+  data-controller="user-searches"
+  data-user-searches-min-duration="1"
+  data-user-searches-max-duration="5"
+  data-user-searches-min-people="1"
+  data-user-searches-max-people="20"
+>
   <div class="container">
     <div class="search-header">
       <div class="search-header-clickable">
         <i class="fa fa-search"></i>
         <div id='infos-address'><%= @search_infos[:position] %></div>
-        <div data-target="user-searches.date" id='infos-time-slot'><%= @search_infos[:time_slot] %></div>
-        <div>Pour <span id='infos-number'><%= @search_infos[:people_number] %></span></div>
+        <div data-target="user-searches.date"><%= @search_infos[:time_slot] %></div>
+        <div>Pour <span data-target="user-searches.people"><%= @search_infos[:people_number] %></span></div>
       </div>
       <%= link_to user_searches_path, method: :patch, remote: true do %>
         <div class="flex align-center">
@@ -27,23 +34,25 @@
             <div class="col-xs-12">
               <%= f.input :date, label: false, placeholder: 'Date & heure', input_html: { data: { action: 'click->user-searches#updateDateTarget', target: 'user-searches.dateInput' }, value: display_datetime_for(@user_search.date, join_expression: 'à', without_year: true, time_separator: ':') }, as: :string, readonly: true  %>
             </div>
+
+            <!-- Nombre d'heures -->
             <div class="col-xs-12 col-md-6">
-              <!-- Nombre d'heures -->
-              <div class="increment-block" data-input="#user_search_duration" data-field="#duration">
-                <i class="fa fa-minus-circle control" aria-hidden="true" data-action="minus"></i>
-                <div id="hours"><span id="duration"><%= @user_search.duration %></span> Heure(s)</div>
-                <i class="fa fa-plus-circle control" aria-hidden="true" data-action="plus"></i>
+              <div class="increment-block">
+                <i class="fa fa-minus-circle fa-2x" aria-hidden="true" data-action="click->user-searches#decrementDuration"></i>
+                <div><span data-target="user-searches.duration"><%= @user_search.duration %></span> heure(s)</div>
+                <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-action="click->user-searches#incrementDuration"></i>
               </div>
-              <%= f.input :duration, input_html: {value: @user_search.duration, data: {min: 1, max: 5}}, as: :hidden %>
+              <%= f.input :duration, input_html: { value: @user_search.duration, data: { min: 1, max: 5, target: 'user-searches.durationInput' } }, as: :hidden %>
             </div>
+
+            <!-- Nombre de participants -->
             <div class="col-xs-12 col-md-6">
-              <!-- Nombre de participants -->
-              <div class="increment-block" data-input="#user_search_number" data-field="#number">
-                <i class="fa fa-minus-circle control" aria-hidden="true" data-action="minus"></i>
-                <div id="participants"><span id="number"><%= @user_search.number %></span> Personne(s)</div>
-                <i class="fa fa-plus-circle control" aria-hidden="true" data-action="plus"></i>
+              <div class="increment-block">
+                <i class="fa fa-minus-circle fa-2x" aria-hidden="true" data-action="click->user-searches#decrementPeople"></i>
+                <div><span data-target="user-searches.people"><%= @user_search.number %></span> personne(s)</div>
+                <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-action="click->user-searches#incrementPeople"></i>
               </div>
-              <%= f.input :number, input_html: {value: @user_search.number, data: {min: 1, max: 20}}, as: :hidden %>
+              <%= f.input :number, input_html: {value: @user_search.number, data: { min: 1, max: 20, target: 'user-searches.peopleInput' } }, as: :hidden %>
             </div>
           </div>
           <div class="text-center">
