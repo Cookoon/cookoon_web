@@ -10,3 +10,6 @@ fr:
         instruction_2: Et laissez-vous guider !
         instruction_3: Si vous n'avez pas demandé le renouvellement de votre mot de passe - changez-le vite, quelqu'un essaye peut-être d'utiliser votre compte.
         subject: 'Cookoon : changez votre mot de passe !'
+  errors:
+    messages:
+      expired: est expiré, veuillez cliquer à nouveau sur le lien "j'ai perdu mes identifiants"
