@@ -1,27 +1,26 @@
 .search {
-  background: #006f8b;
-  color: white;
-  margin-bottom: 10px;
-  padding-bottom: 10px;
+  background: $blue;
+  color: $white;
   margin: 15px;
+  padding-bottom: 10px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 1px 1px rgba(0, 0, 0, 0.24);
   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
   &-header {
+    margin-top: 10px;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
-    padding: 10px;
-    margin-top: 10px;
     align-items: baseline;
     &-clickable {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
       width: 250px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
       cursor: pointer;
     }
   }
   a {
-    color: white;
+    color: $white;
   }
   p {
     margin: 0;
@@ -38,28 +37,24 @@
 
 .search-body input,
 .search-body select {
-  border-bottom: 2px solid white;
-  background: #006f8b;
-  color: white;
+  border-bottom: 2px solid $white;
+  background: $blue;
+  color: $white;
   margin-bottom: 10px;
 }
 
 .search-body input:focus,
 .search-body select:focus {
   border: none;
-  border-bottom: 2px solid white;
-}
-
-.control {
-  font-size: 22px;
+  border-bottom: 2px solid $white;
 }
 
 .increment-block {
   display: flex;
   justify-content: space-between;
-  background: #006f8b;
+  background: $blue;
   align-items: center;
-  color: white;
+  color: $white;
   padding: 25px;
 }
 
@@ -79,8 +74,9 @@
 
 #user_search_address_clear {
   position: absolute;
-  right: 5px;
+  display: none;
   top: 7px;
+  right: 5px;
   height: 16px;
   font-size: 16px;
   cursor: pointer;
@@ -88,7 +84,7 @@
 
 .datetimepicker {
   background: $blue;
-  color: white;
+  color: $white;
   table tr th:hover,
   table tr td.day:hover,
   table tr td span:hover {
@@ -120,17 +116,17 @@
 }
 
 .search .form-control::-webkit-input-placeholder {
-  color: white;
+  color: $white;
 } /* WebKit, Blink, Edge */
 .search .form-control:-moz-placeholder {
-  color: white;
+  color: $white;
 } /* Mozilla Firefox 4 to 18 */
 .search .form-control::-moz-placeholder {
-  color: white;
+  color: $white;
 } /* Mozilla Firefox 19+ */
 .search .form-control:-ms-input-placeholder {
-  color: white;
+  color: $white;
 } /* Internet Explorer 10-11 */
 .search .form-control::-ms-input-placeholder {
-  color: white;
+  color: $white;
 } /* Microsoft Edge */
