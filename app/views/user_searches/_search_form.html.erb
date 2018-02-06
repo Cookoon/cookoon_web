@@ -43,7 +43,7 @@
                   class="fa fa-times"
                   aria-hidden="true"
                   data-action="click->user-searches#clearAddress"
-                  data-target="user-searches.addressClear"                    
+                  data-target="user-searches.addressClear"
                 ></i>
               </div>
             </div>
@@ -62,7 +62,8 @@
                             ),
                             data: {
                               action: 'click->user-searches#updateDateTarget',
-                              target: 'user-searches.dateInput'
+                              controller: 'datetimepickers',
+                              target: 'datetimepickers.dateInput user-searches.dateInput'
                             }
                           }
             %>
