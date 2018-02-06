@@ -11,6 +11,7 @@ fr:
         last_name: Nom
         phone_number: Téléphone portable
         photo: Photo
+        reset_password_token: Votre lien de réinitialisation
     errors:
       models:
         reservation:

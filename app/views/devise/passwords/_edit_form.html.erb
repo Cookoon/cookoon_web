@@ -1,5 +1,6 @@
 <%= simple_form_for resource, as: resource_name, url: password_path(resource_name), method: :put, remote: true do |f| %>
   <%= f.hidden_field :reset_password_token %>
+  <%= f.full_error :reset_password_token %>
 
   <%= f.input :password, autocomplete: 'off' %>
   <%= f.input :password_confirmation, autocomplete: 'off' %>
