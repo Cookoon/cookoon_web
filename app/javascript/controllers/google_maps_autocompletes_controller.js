@@ -40,11 +40,12 @@ export default class extends Controller {
 
   fillInAddress = () => {
     const place = this.autocomplete.getPlace();
-    const addressComponents = this.buildAddressComponents(place);
 
     if (this.hasFormattedAddressTarget) {
-      this.formattedAddressTarget.value = place.formatted_address;
+      return (this.formattedAddressTarget.value = place.formatted_address);
     }
+
+    const addressComponents = this.buildAddressComponents(place);
 
     if (this.hasInputAddressTarget) {
       this.inputAddressTarget.value = addressComponents.inputAddress;
