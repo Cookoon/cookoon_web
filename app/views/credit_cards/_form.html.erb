@@ -1,34 +1,36 @@
-<%= simple_form_for :credit_card,
-                    url: credit_cards_path,
-                    remote: true,
-                    authenticity_token: true,
-                    html: {
-                      data: {
-                        target: 'stripe-payments.form'
-                      }
-                    } do |f| %>
-  <div data-target="stripe-payments.cardElement"></div>
-  <div class="text-danger thin-padded" data-target='stripe-payments.cardError' role="alert"></div>
-  <%= f.input :stripe_token, as: :hidden, input_html: { data: { target: 'stripe-payments.tokenInput' } } %>
+<div data-controller="stripe-payments">
+  <%= simple_form_for :credit_card,
+                      url: credit_cards_path,
+                      remote: true,
+                      authenticity_token: true,
+                      html: {
+                        data: {
+                          target: 'stripe-payments.form'
+                        }
+                      } do |f| %>
+    <div data-target="stripe-payments.cardElement"></div>
+    <div class="text-danger thin-padded" data-target='stripe-payments.cardError' role="alert"></div>
+    <%= f.input :stripe_token, as: :hidden, input_html: { data: { target: 'stripe-payments.tokenInput' } } %>
 
-  <div class="flex-container thin-padded">
-    <p>Utiliser comme carte principale</p>
-    <div class="form-group boolean optional">
-      <input value="0" type="hidden" name="credit_card[default]">
-      <input class="boolean optional hidden" type="checkbox" value="1" name="credit_card[default]" id="credit_card_default">
-      <label class="boolean optional toggle" for="credit_card_default">
-        <span class="toggle-handler"></span>
-      </label>
+    <div class="flex-container thin-padded">
+      <p>Utiliser comme carte principale</p>
+      <div class="form-group boolean optional">
+        <input value="0" type="hidden" name="credit_card[default]">
+        <input class="boolean optional hidden" type="checkbox" value="1" name="credit_card[default]" id="credit_card_default">
+        <label class="boolean optional toggle" for="credit_card_default">
+          <span class="toggle-handler"></span>
+        </label>
+      </div>
     </div>
-  </div>
-  <div class="thin-padded text-center">
-    <%= f.button :button,
-                 'Ajouter une carte',
-                 type: :submit,
-                 class: 'button button-white',
-                 data: {
-                   disable_with: '<i class="fa fa-spinner fa-spin" style="margin-right: 10px;"></i>Chargement'.html_safe
-                 }
-    %>
-  </div>
-<% end %>
+    <div class="thin-padded text-center">
+      <%= f.button :button,
+                   'Ajouter une carte',
+                   type: :submit,
+                   class: 'button button-white',
+                   data: {
+                     disable_with: '<i class="fa fa-spinner fa-spin" style="margin-right: 10px;"></i>Chargement'.html_safe
+                   }
+      %>
+    </div>
+  <% end %>  
+</div>
