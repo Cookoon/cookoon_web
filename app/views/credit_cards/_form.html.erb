@@ -1,5 +1,13 @@
-<%= simple_form_for :credit_card, url: credit_cards_path, remote: true, authenticity_token: true, html: { id: 'card-form' } do |f| %>
-  <div id="card-element"></div>
+<%= simple_form_for :credit_card,
+                    url: credit_cards_path,
+                    remote: true,
+                    authenticity_token: true,
+                    html: {
+                      data: {
+                        target: 'stripe-payments.form'
+                      }
+                    } do |f| %>
+  <div data-target="stripe-payments.cardElement"></div>
   <div class="flex-container light-padded">
     <p>Utiliser comme carte principale</p>
     <div class="form-group boolean optional">
@@ -10,9 +18,16 @@
       </label>
     </div>
   </div>
-  <div id="card-errors" role="alert"></div>
-  <%= f.input :stripe_token, as: :hidden %>
+  <div data-target='stripe-payments.cardError' role="alert"></div>
+  <%= f.input :stripe_token, as: :hidden, input_html: { data: { target: 'stripe-payments.tokenInput' } } %>
   <div class="light-padded text-center">
-    <%= f.button :button, 'Ajouter une carte', type: :submit, class: 'button button-white', id: 'add-card' %>
+    <%= f.button :button,
+                 'Ajouter une carte',
+                 type: :submit,
+                 class: 'button button-white',
+                 data: {
+                   disable_with: '<i class="fa fa-spinner fa-spin" style="margin-right: 10px;"></i>Chargement'.html_safe
+                 }
+    %>
   </div>
 <% end %>
