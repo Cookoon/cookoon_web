@@ -1,6 +1,6 @@
 <div
   class="search"
-  data-controller="user-searches"
+  data-controller="user-searches google-maps-autocompletes"
   data-user-searches-min-duration="1"
   data-user-searches-max-duration="5"
   data-user-searches-min-people="1"
@@ -10,7 +10,7 @@
     <div class="search-header">
       <div class="search-header-clickable" data-action="click->user-searches#toggleBodyVisibility">
         <i class="fa fa-search"></i>
-        <div id='infos-address' data-target="user-searches.address"><%= @search_infos[:position] %></div>
+        <div id='infos-address' data-target="google-maps-autocompletes.shortAddress user-searches.address"><%= @search_infos[:position] %></div>
         <div data-target="user-searches.date"><%= @search_infos[:time_slot] %></div>
         <div>Pour <span data-target="user-searches.people"><%= @search_infos[:people_number] %></span></div>
       </div>
@@ -34,7 +34,7 @@
                               value: @user_search.address,
                               data: {
                                 action: 'keyup->user-searches#updateAddressClearVisibility',
-                                target: 'user-searches.addressInput'
+                                target: 'google-maps-autocompletes.addressInput google-maps-autocompletes.inputAddress user-searches.addressInput'
                               }
                             }
                 %>
