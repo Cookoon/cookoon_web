@@ -32,13 +32,13 @@ export default class extends Controller {
     if (this.addressInputTarget.value) {
       this.addressClearTarget.classList.add('d-initial');
     } else {
-      this.addressTarget.innerHTML = 'Adresse';
+      this.addressTarget.textContent = 'Adresse';
       this.addressClearTarget.classList.remove('d-initial');
     }
   }
 
   updateDateTarget() {
-    this.dateTarget.innerHTML = this.dateInputTarget.value;
+    this.dateTarget.textContent = this.dateInputTarget.value;
   }
 
   decrementDuration(event) {
@@ -90,7 +90,7 @@ export default class extends Controller {
     ) {
       params.input.value = params.inputValue + params.updateValue;
       params.targets.forEach(function(target) {
-        target.innerHTML = params.input.value;
+        target.textContent = params.input.value;
       });
       this.bump(params.event.currentTarget);
     }

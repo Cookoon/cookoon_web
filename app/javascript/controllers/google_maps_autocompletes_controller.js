@@ -52,7 +52,7 @@ export default class extends Controller {
     }
 
     if (this.hasShortAddressTarget) {
-      this.shortAddressTarget.innerHTML = addressComponents.shortAddress;
+      this.shortAddressTarget.textContent = addressComponents.shortAddress;
     }
   };
 
