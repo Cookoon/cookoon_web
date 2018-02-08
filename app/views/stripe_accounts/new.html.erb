@@ -7,9 +7,3 @@
 
   <%= render 'form' %>
 </div>
-
-<script type="text/javascript">
-  var stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
-  var $myForm = $('.stripe');
-  $myForm.submit(handleForm);
-</script>
