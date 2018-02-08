@@ -1,8 +1,22 @@
-<%= simple_form_for @cookoon, remote: true do |f| %>
+<%= simple_form_for @cookoon,
+                    remote: true,
+                    html: {
+                      data: {
+                        controller: 'google-maps-autocompletes'
+                      }
+                    } do |f| %>
   <%= f.input :name, label: 'Nom du Cookoon', placeholder: 'Ex: Aux Abbesses chez Noémie et Thomas' %>
   <%= f.input :surface, label: 'Surface de réception en m²' %>
   <%= f.input :price, label: 'Prix / heure' %>
-  <%= f.input :address, label: 'Adresse', placeholder: '' %>
+  <%= f.input :address,
+              label: 'Adresse',
+              placeholder: '',
+              input_html: {
+                data: {
+                  target: 'google-maps-autocompletes.addressInput google-maps-autocompletes.formattedAddress'
+                }
+              }
+  %>
   <%= f.input :capacity, label: "Capacité d'accueil" %>
   <%= f.input :category, label: 'Categorie', collection: Cookoon::CATEGORIES %>
   <%= f.input :photos, as: :attachinary %>

@@ -15,7 +15,7 @@ export default class extends Controller {
   ];
 
   connect() {
-    this.updateAddressClearVisibility();
+    this.updateAddressAndClearVisibility();
   }
 
   toggleBodyVisibility() {
@@ -23,16 +23,16 @@ export default class extends Controller {
   }
 
   clearAddress() {
-    this.addressTarget.innerHTML = 'Adresse';
     this.addressInputTarget.value = '';
-    this.updateAddressClearVisibility();
+    this.updateAddressAndClearVisibility();
     this.addressInputTarget.focus();
   }
 
-  updateAddressClearVisibility() {
+  updateAddressAndClearVisibility() {
     if (this.addressInputTarget.value) {
       this.addressClearTarget.classList.add('d-initial');
     } else {
+      this.addressTarget.innerHTML = 'Adresse';
       this.addressClearTarget.classList.remove('d-initial');
     }
   }
