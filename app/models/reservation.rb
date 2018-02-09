@@ -87,7 +87,7 @@ class Reservation < ApplicationRecord
   end
 
   def starts_soon?
-    date.between?(Time.zone.now, (Time.zone.now + 3.hours))
+    date.past? || date.between?(Time.zone.now, (Time.zone.now + 3.hours))
   end
 
   def base_option_price_cents
