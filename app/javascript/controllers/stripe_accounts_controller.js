@@ -4,9 +4,10 @@ import Rails from 'rails-ujs';
 export default class extends Controller {
   static targets = ['accountError', 'form', 'tokenInput'];
 
-  stripe = Stripe('pk_test_FSVbYboTFsYGkHZKX3jMm9sQ');
+  stripe = Stripe(process.env.STRIPE_PUBLISHABLE_KEY);
 
   connect() {
+    console.log(process.env.STRIPE_PUBLISHABLE_KEY);
     if (this.hasFormTarget) {
       this.formTarget.addEventListener('submit', this.handleSubmit);
     } // TODO: FC 08feb18 configure Turbolinks cache to remove this?

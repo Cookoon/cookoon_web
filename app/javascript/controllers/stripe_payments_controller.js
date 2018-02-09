@@ -5,7 +5,7 @@ export default class extends Controller {
   static targets = ['cardElement', 'cardError', 'form', 'tokenInput'];
 
   card = null;
-  stripe = Stripe('pk_test_FSVbYboTFsYGkHZKX3jMm9sQ');
+  stripe = Stripe(process.env.STRIPE_PUBLISHABLE_KEY);
   style = {
     base: {
       fontSize: '16px',
