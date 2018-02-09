@@ -68,7 +68,7 @@ class User < ApplicationRecord
   end
 
   def active_recent_searches
-    user_searches.recents.active
+    user_searches.active_recents
   end
 
   def last_recent_search
