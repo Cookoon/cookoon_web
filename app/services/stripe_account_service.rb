@@ -66,12 +66,12 @@ class StripeAccountService
 
   def check_params
     name_params = [params['first_name'], params['last_name']]
-    address_params = [params.dig('address', 'street_address1'), params.dig('address', 'city'), params.dig('address', 'post_code')]
-    dob_params = [params['dob(1i)'], params['dob(2i)'], params['dob(2i)']]
+    address_params = [params.dig('address', 'line1'), params.dig('address', 'postal_code'), params.dig('address', 'city')]
+    dob_params = [params['dob(3i)'], params['dob(2i)'], params['dob(1i)']]
     @errors << 'Votre nom complet est obligatoire' if name_params.any?(&:blank?)
     @errors << 'Votre adresse est obligatoire' if address_params.any?(&:blank?)
     @errors << 'Votre date de naissance est obligatoire' if dob_params.any?(&:blank?)
-    @errors << 'Votre IBAN est obligatoire' if params['iban'].blank?
+    @errors << 'Votre IBAN est obligatoire' if params['bank_account_number'].blank?
   end
 
   def prepare_account
@@ -79,18 +79,18 @@ class StripeAccountService
       type: 'custom',
       country: 'FR',
       email: user.email,
-      account_token: params[:token]
+      account_token: params[:account_token]
     }
   end
 
   def prepare_external_account
     {
       object: 'bank_account',
-      account_holder_name: user.full_name,
-      currency: 'eur',
-      country: 'FR',
       account_holder_type: 'individual',
-      account_number: params[:iban]
+      account_holder_name: user.full_name,
+      country: 'FR',
+      currency: 'eur',
+      account_number: params[:bank_account_number].delete(' ') # TODO: FC 09feb18 refactor in model?
     }
   end
 

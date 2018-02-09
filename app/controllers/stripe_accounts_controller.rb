@@ -17,7 +17,7 @@ class StripeAccountsController < ApplicationController
   private
 
   def stripe_service
-    @service = StripeAccountService.new(params: params[:stripe], user: current_user)
+    @service = StripeAccountService.new(params: params[:stripe_account], user: current_user)
   end
 
   def pundit_authorize
