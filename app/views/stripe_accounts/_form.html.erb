@@ -1,20 +1,31 @@
-<%= simple_form_for :stripe, url: stripe_accounts_path, remote: true, authenticity_token: true do |f| %>
-  <%= f.input :token, as: :hidden %>
-  <%= f.input :first_name, input_html: { value: current_user.first_name, class: 'inp-first-name' } %>
-  <%= f.input :last_name, input_html: { value: current_user.last_name, class: 'inp-last-name' } %>
-  <%= f.input :dob, as: :date, start_year: Date.today.year - 90, end_year: Date.today.year - 12, selected: { year: 1965, day: 1, month: 1 }, label: "Votre date de naissance"  %>
+<div data-controller="stripe-accounts">
+  <%= simple_form_for :stripe_account,
+                      url: stripe_accounts_path,
+                      remote: true,
+                      authenticity_token: true,
+                      data: {
+                        target: 'stripe-accounts.form'
+                      } do |f| %>
+    <%= f.input :first_name, input_html: { value: current_user.first_name, data: { target: 'stripe-accounts.firstNameInput' } } %>
+    <%= f.input :last_name, input_html: { value: current_user.last_name, data: { target: 'stripe-accounts.lastNameInput' } } %>
+    <%= f.input :dob, as: :date, start_year: Date.today.year - 90, end_year: Date.today.year - 12, selected: { year: 1965, day: 1, month: 1 }, label: 'Votre date de naissance'  %>
 
-  <%= f.simple_fields_for :address do |a| %>
-  <%= a.input :street_address1, label: "Votre addresse de résidence", input_html: { class: 'inp-street-address1' } %>
-    <%= a.input :city, label: "Votre ville de résidence", input_html: { class: 'inp-city' } %>
-    <%= a.input :post_code, label: "Votre code postal", input_html: { class: 'inp-zip' } %>
+    <%= f.simple_fields_for :address do |a| %>
+      <%= a.input :line1, label: 'Votre addresse de résidence (numéro et rue)', input_html: { data: { target: 'stripe-accounts.addressInput' } } %>
+      <%= a.input :postal_code, label: 'Votre code postal', input_html: { data: { target: 'stripe-accounts.postalCodeInput' } } %>
+      <%= a.input :city, label: 'Votre ville de résidence', input_html: { data: { target: 'stripe-accounts.cityInput' } } %>
+    <% end %>
+    <%= f.input :account_token, as: :hidden, input_html: { data: { target: 'stripe-accounts.accountTokenInput' } } %>
+
+    <%= f.input :bank_gsaccount_number, label: 'Votre IBAN' %>
+    <div class="text-danger thin-padded" data-target='stripe-accounts.accountError' role="alert"></div>
+
+    <p>
+      En cliquant sur ce bouton, vous acceptez nos <%= link_to "Conditions Générales d'Utilisation", 'https://cookoon.fr/conditions-generales/', target: '_blank' %>
+      ainsi que les <%= link_to "Conditions d'Utilisation des Comptes Connectés Stripe", 'https://stripe.com/fr/connect-account/legal#translation', target: '_blank' %>
+    </p>
+    <div class="bottom-padded">
+      <%= f.button :submit, 'Connecter mon compte', class: 'button button-blue slowLoad' %>
+    </div>
   <% end %>
-  <%= f.input :iban %>
-  <p>
-    En cliquant sur ce bouton, vous acceptez nos <%= link_to "Conditions Générales d'Utilisation", 'https://cookoon.fr/conditions-generales/', target: '_blank' %>
-    ainsi que les <%= link_to "Conditions d'Utilisation des Comptes Connectés Stripe", 'https://stripe.com/fr/connect-account/legal#translation', target: '_blank', data: { turbolinks: false } %>
-  </p>
-  <div class="bottom-padded">
-    <%= f.button :submit, "Connecter mon compte", class: 'button button-blue slowLoad' %>
-  </div>
-<% end %>
+</div>

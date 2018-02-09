@@ -3,6 +3,8 @@
   "private": true,
   "dependencies": {
     "@rails/webpacker": "^3.2.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "rails-ujs": "^5.1.4",
     "stimulus": "^1.0.0",
     "turbolinks": "^5.1.1"
   },

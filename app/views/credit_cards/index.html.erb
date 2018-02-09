@@ -59,78 +59,9 @@
 </div>
 
 <script>
-  // iOS keyboard fix
+  // iOS keyboard fix TODO: FC 08feb18 still needed if integrated with Stimulus?
   $('#credit-card-modal').on('hide.bs.modal', function () {
     $('#invisible-input').focus();
     $('#invisible-input').blur();
   })
-</script>
-
-<script>
-  var stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
-  var elements = stripe.elements();
-
-  var style = {
-    base: {
-      fontSize: '16px',
-      lineHeight: '24px',
-      color: '#FFFFFF',
-      iconColor: '#FFFFFF',
-      '::placeholder': {
-        color: '#c9c9c9',
-      }
-    }
-  };
-
-  var card = elements.create('card', {style: style});
-  var form = document.getElementById('card-form');
-  var $form = $('#card-form');
-
-  function stripeTokenHandler(token) {
-    // Insert the token ID into the form so it gets submitted to the server
-    var form = document.getElementById('card-form');
-    var hiddenInput = document.getElementById('credit_card_stripe_token');
-    hiddenInput.setAttribute('value', token.id);
-
-    // Submit the form
-    $form.trigger('submit.rails');
-  }
-
-  function stripeSubmit() {
-    var $button = $('#add-card');
-    event.stopPropagation();
-    event.preventDefault();
-    $button.prop("disabled", true);
-    $button.html('<i class="fa fa-spinner fa-spin" style="margin-right: 10px;"></i>Chargement');
-
-    stripe.createToken(card).then(function(result) {
-      if (result.error) {
-        // Inform the user if there was an error
-        $button.prop("disabled", false);
-        $button.html('Ajouter une carte');
-        var errorElement = document.getElementById('card-errors');
-        errorElement.textContent = result.error.message;
-      } else {
-        // Send the token to your server
-        stripeTokenHandler(result.token);
-      }
-    });
-  }
-
-  $(document).on('turbolinks:load ajaxComplete', function() {
-    if ($('.credit_cards.index').length) {
-      card.mount('#card-element');
-
-      card.addEventListener('change', function(event) {
-        var displayError = document.getElementById('card-errors');
-        if (event.error) {
-          displayError.textContent = event.error.message;
-        } else {
-          displayError.textContent = '';
-        }
-      });
-
-      form.addEventListener('submit', stripeSubmit);
-    }
-  });
 </script>
