@@ -31,14 +31,14 @@
                   }
     %>
     </div>
-    <div class="recap-duration">
+    <div data-controller='increments' data-increments-min="1" data-increments-max="5">
       <p>Pour une durée de :</p>
-      <div class="increment-block" data-input="#reservation_duration" data-field="#duration">
-        <i class="fa fa-minus-circle control" aria-hidden="true" data-action="minus"></i>
-        <div id="hours"><span id="duration"><%= @reservation.duration %></span> Heure(s)</div>
-        <i class="fa fa-plus-circle control" aria-hidden="true" data-action="plus"></i>
+      <div class="increment-block">
+        <i class="fa fa-minus-circle fa-2x" aria-hidden="true" data-action="click->increments#decrement"></i>
+        <div><span data-target="increments.display"><%= @reservation.duration %></span> Heure(s)</div>
+        <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-action="click->increments#increment"></i>
       </div>
-      <%= f.input :duration, input_html: {value: @reservation.duration, data: {min: 1, max: 5}}, as: :hidden %>
+      <%= f.input :duration, input_html: {value: @reservation.duration, data: { target: 'increments.input' } }, as: :hidden %>
     </div>
   </div>
   <div class="recap-catering">

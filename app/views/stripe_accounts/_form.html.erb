@@ -17,7 +17,7 @@
     <% end %>
     <%= f.input :account_token, as: :hidden, input_html: { data: { target: 'stripe-accounts.accountTokenInput' } } %>
 
-    <%= f.input :bank_gsaccount_number, label: 'Votre IBAN' %>
+    <%= f.input :bank_account_number, label: 'Votre IBAN' %>
     <div class="text-danger thin-padded" data-target='stripe-accounts.accountError' role="alert"></div>
 
     <p>
