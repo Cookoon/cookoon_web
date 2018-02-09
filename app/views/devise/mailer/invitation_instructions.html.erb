@@ -1,5 +1,6 @@
 <p>Bonjour<%= " #{@resource.first_name}" if @resource.first_name.present? %>,</p>
 <p><b><%= @resource.invited_by&.full_name %></b> vous a invité à rejoindre <b>Cookoon : un réseau de confiance exclusif</b> pour organiser vos événements.</p>
+<p>Votre adresse pour vous connecter : <b><%= @resource.email %></b></p>
 <p>Pour nous rejoindre :</p>
 
 <table border="0" cellpadding="0" cellspacing="10" class="info"><tbody>
