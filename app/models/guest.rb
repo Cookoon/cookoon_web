@@ -8,4 +8,8 @@ class Guest < ApplicationRecord
                     uniqueness: { scope: :user }
   validates :first_name, presence: true
   validates :last_name, presence: true
+
+  def to_s
+    "#{first_name} #{last_name} · #{email}"
+  end
 end

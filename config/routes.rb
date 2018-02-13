@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   resources :reservations, only: [:index, :show, :edit, :update] do
     resources :payments, only: [:new, :create]
     resources :invoices, only: [:create]
+    resources :reservation_guests, only: [:index, :create]
   end
 
   # -------- HOST NAMESPACE ---------
