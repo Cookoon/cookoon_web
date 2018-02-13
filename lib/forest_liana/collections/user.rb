@@ -24,5 +24,11 @@ module Forest
       isRequired: true,
       defaultValue: 5
     }]
+
+    action 'Change e-mailing preferences', fields: [{
+    field: 'emailing_preferences',
+    type: 'Enum',
+    enums: ['Aucun e-mail', 'Tous les emails']
+  }]
   end
 end
