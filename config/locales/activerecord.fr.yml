@@ -19,7 +19,7 @@ fr:
             cookoon:
               cannot_book_mine: Vous ne pouvez pas réserver votre propre Cookoon !
             date:
-              not_after_48_hours: Un minimum de 48h est requis.
+              not_after_decent_time: Un minimum de 10h est requis.
         user:
           attributes:
             email:

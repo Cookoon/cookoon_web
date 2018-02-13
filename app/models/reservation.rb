@@ -29,7 +29,7 @@ class Reservation < ApplicationRecord
   validates :price_cents, presence: true
   validates :duration, presence: true
   validates :date, presence: true
-  validate :date_after_48_hours, on: :create
+  validate :date_after_decent_time, on: :create
   validate :not_my_cookoon
 
   after_create :create_trello_card
@@ -127,9 +127,9 @@ class Reservation < ApplicationRecord
     CreateReservationTrelloCardJob.perform_later(id)
   end
 
-  def date_after_48_hours
+  def date_after_decent_time
     return unless date
-    errors.add(:date, :not_after_48_hours) if date < (Time.zone.now + 48.hours)
+    errors.add(:date, :not_after_decent_time) if date < (Time.zone.now + 10.hours)
   end
 
   def not_my_cookoon
