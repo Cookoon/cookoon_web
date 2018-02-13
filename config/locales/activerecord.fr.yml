@@ -7,8 +7,6 @@ fr:
         checkout_photos: Photos à la sortie des lieux
       user:
         description: Description
-        first_name: Prénom
-        last_name: Nom
         phone_number: Téléphone portable
         photo: Photo
         reset_password_token: Votre lien de réinitialisation
@@ -28,6 +26,7 @@ fr:
         reservation_guest:
           attributes:
             guest:
+              required: choisissez un contact ou ajoutez en un nouveau
               taken: a déjà été convié
         user:
           attributes:
@@ -38,3 +37,7 @@ fr:
               not_a_valid_phone_number: vérifiez le format de votre numéro de téléphone
     models:
       user: Utilisateur
+  attributes:
+    email: Email
+    first_name: Prénom
+    last_name: Nom
