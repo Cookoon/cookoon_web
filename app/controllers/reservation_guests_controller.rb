@@ -4,6 +4,7 @@ class ReservationGuestsController < ApplicationController
   def index
     set_reservation_guests
     @reservation_guest = ReservationGuest.new
+    set_guests
   end
 
   def create
@@ -15,6 +16,7 @@ class ReservationGuestsController < ApplicationController
                   notice: 'Votre invité a bien été convié'
     else
       set_reservation_guests
+      set_guests
       render :index
     end
   end
@@ -25,12 +27,23 @@ class ReservationGuestsController < ApplicationController
     @reservation_guests = policy_scope(@reservation.reservation_guests).includes(:guest)
   end
 
+  def set_guests
+    @guests = current_user.guests - @reservation.guests
+  end
+
   def set_reservation
     @reservation = Reservation.find(params[:reservation_id])
     authorize @reservation, :update?
   end
 
   def reservation_guest_params
-    params.require(:reservation_guest).permit(:guest_id)
+    permitted_params = params.require(:reservation_guest).permit(
+      :guest_id,
+      guest_attributes: %i[id user_id first_name last_name email _destroy]
+    )
+
+    return permitted_params unless permitted_params.dig(:reservation_guest, :guest_attributes)
+
+    permitted_params.to_h.deep_merge(guest_attributes: { user_id: current_user.id })
   end
 end

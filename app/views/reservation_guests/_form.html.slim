@@ -1,3 +1,6 @@
-= simple_form_for [@reservation, @reservation_guest], html: { class: 'form-inline'} do |f|
-  = f.association :guest, collection: current_user.guests, label: false, prompt: 'Choisissez un de vos contacts'
+= simple_form_for [@reservation, @reservation_guest] do |f|
+  #guest
+    #guest_from_list
+      = f.association :guest, collection: @guests, label: false, prompt: 'Choisissez un de vos contacts'
+    = link_to_add_association 'ou ajoutez en un nouveau', f, :guest
   = f.submit class: 'btn btn-primary'

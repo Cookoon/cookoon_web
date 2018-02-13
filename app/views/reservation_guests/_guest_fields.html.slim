@@ -1,0 +1,6 @@
+.nested-fields
+  = f.input :user_id, input_html: { value: current_user.id }, as: :hidden
+  = f.input :first_name, label: false, placeholder: t('attributes.first_name')
+  = f.input :last_name, label: false, placeholder: t('attributes.last_name')
+  = f.input :email, label: false, placeholder: t('attributes.email')
+  = link_to_remove_association 'annuler', f
