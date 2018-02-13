@@ -1,7 +1,7 @@
 //= require jquery
 //= require jquery-ui
 //= require bootstrap-sprockets
-//= require smalot-bootstrap-datetimepicke
+//= require smalot-bootstrap-datetimepicker
 //= require cocoon
 //= require underscore
 //= require jquery-fileupload/basic
