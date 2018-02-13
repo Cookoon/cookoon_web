@@ -1,13 +1,14 @@
 //= require jquery
 //= require jquery-ui
 //= require bootstrap-sprockets
-//= require smalot-bootstrap-datetimepicker
+//= require smalot-bootstrap-datetimepicke
+//= require cocoon
 //= require underscore
 //= require jquery-fileupload/basic
 //= require cloudinary/jquery.cloudinary
-//= require delete-pointer-event
-//= require hammer
 //= require attachinary
 //= require gmaps/google
+//= require delete-pointer-event
+//= require hammer
 //= require_tree ./shared
 //= require_tree ./locale
