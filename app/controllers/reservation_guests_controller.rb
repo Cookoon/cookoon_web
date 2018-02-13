@@ -39,10 +39,10 @@ class ReservationGuestsController < ApplicationController
   def reservation_guest_params
     permitted_params = params.require(:reservation_guest).permit(
       :guest_id,
-      guest_attributes: %i[id user_id first_name last_name email _destroy]
+      guest_attributes: %i[id first_name last_name email _destroy]
     )
 
-    return permitted_params unless permitted_params.dig(:reservation_guest, :guest_attributes)
+    return permitted_params unless permitted_params[:guest_attributes]
 
     permitted_params.to_h.deep_merge(guest_attributes: { user_id: current_user.id })
   end
