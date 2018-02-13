@@ -20,6 +20,7 @@ class User < ApplicationRecord
   has_many :cookoons, dependent: :restrict_with_exception
   has_many :reservations, dependent: :restrict_with_exception
   has_many :reservation_requests, through: :cookoons, source: :reservations
+  has_many :guests, -> { order(last_name: :asc) }, inverse_of: :user, dependent: :destroy
   has_many :user_searches, dependent: :destroy
 
   has_attachment :photo
