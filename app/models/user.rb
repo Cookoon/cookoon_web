@@ -80,6 +80,10 @@ class User < ApplicationRecord
     reservation_requests.passed.includes(:cookoon).sum(&:payout_price_for_host_cents)
   end
 
+  def available_discount?
+    discount_balance_cents > 0
+  end
+
   private
 
   def send_welcome_email
