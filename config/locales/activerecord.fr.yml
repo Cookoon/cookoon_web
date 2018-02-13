@@ -14,12 +14,21 @@ fr:
         reset_password_token: Votre lien de réinitialisation
     errors:
       models:
+        guest:
+          attributes:
+            email:
+              invalid: n'est pas un email valide
+              taken: est déjà dans votre liste
         reservation:
           attributes:
             cookoon:
               cannot_book_mine: Vous ne pouvez pas réserver votre propre Cookoon !
             date:
               not_after_48_hours: Un minimum de 48h est requis.
+        reservation_guest:
+          attributes:
+            guest:
+              taken: a déjà été convié
         user:
           attributes:
             email:
