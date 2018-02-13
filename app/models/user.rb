@@ -25,6 +25,7 @@ class User < ApplicationRecord
   has_attachment :photo
 
   monetize :total_payouts_for_dashboard_cents
+  monetize :discount_balance_cents
 
   validates :first_name, presence: true
   validates :last_name, presence: true
