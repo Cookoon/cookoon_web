@@ -131,7 +131,8 @@ class StripePaymentService
     {
       amount: reservation.payout_price_cents,
       currency: 'eur',
-      source_transaction: charge.id,
+      # try without source_transaction can safely remove before merge if no problem
+      # source_transaction: charge.id,
       destination: user.stripe_account_id
     }
   end
