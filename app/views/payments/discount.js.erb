@@ -1,0 +1,4 @@
+document.getElementById('total-text').innerHTML = 'TOTAL AVEC RÉDUCTION';
+document.getElementById('reservation-price').innerHTML = '<%= humanized_money_with_symbol @computed_prices[:discounted_price] %>';
+document.getElementById('discount-balance').innerHTML = 'Nouveau Solde : <%= humanized_money_with_symbol @computed_prices[:new_available_discount] %>';
+document.getElementById('payment_use_discount').value = 'true';
