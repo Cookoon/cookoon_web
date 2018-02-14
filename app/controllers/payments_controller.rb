@@ -11,13 +11,15 @@ class PaymentsController < ApplicationController
 
   def create
     payment_service = StripePaymentService.new(
-      user: @reservation.user,
-      source: params[:payment][:source],
-      reservation: @reservation,
-      use_discount: params[:payment][:use_discount]
+      {
+        user: @reservation.user,
+        source: params[:payment][:source],
+        reservation: @reservation
+      },
+      discount: params[:payment][:use_discount]
     )
     @user_cards = payment_service.user_sources.try(:data)
-    if payment_service.create_charge_and_update_reservation
+    if payment_service.handle_payment_and_update_reservation
       ReservationMailer.new_request(@reservation).deliver_later
       ReservationMailer.pending_request(@reservation).deliver_later
       redirect_to cookoons_path, flash: { payment_succeed: true }
