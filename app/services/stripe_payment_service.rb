@@ -1,18 +1,19 @@
 class StripePaymentService
   attr_accessor :user, :token, :reservation, :customer, :charge, :sources, :source
 
-  def initialize(attributes)
+  def initialize(attributes, options = {})
     @user = attributes[:user]
     @token = attributes[:token]
     @source = attributes[:source]
     @reservation = attributes[:reservation]
-    @use_discount = attributes[:use_discount] || false
+    @options = options
     @errors = []
   end
 
-  def create_charge_and_update_reservation
+  def handle_payment_and_update_reservation
     retrieve_customer
-    create_charge
+    handle_discount
+    create_charge if charge_needed?
     update_reservation
   end
 
@@ -59,6 +60,29 @@ class StripePaymentService
   end
 
   private
+
+  def handle_discount
+    return unless ActiveModel::Type::Boolean.new.cast(@options[:discount])
+    discount_amount = compute_discount
+    reservation.discount_amount_cents = discount_amount
+    update_user_balance if discount_amount.positive?
+  end
+
+  def compute_discount
+    return 0 unless user.available_discount?
+    user_discount = user.discount_balance_cents
+    reservation_price = reservation.price_with_fees_cents
+    user_discount <= reservation_price ? user_discount : reservation_price
+  end
+
+  def update_user_balance
+    user.discount_balance_cents -= reservation.discount_amount_cents
+    user.save
+  end
+
+  def charge_needed?
+    reservation&.charge_amount_cents&.positive?
+  end
 
   def retrieve_or_create_customer
     create_customer unless retrieve_customer
@@ -113,8 +137,9 @@ class StripePaymentService
   end
 
   def update_reservation
-    return false unless charge
-    reservation.update(status: :paid, stripe_charge_id: charge.id)
+    reservation.status = :paid
+    reservation.stripe_charge_id = charge.id if charge
+    reservation.save
   end
 
   def capture_charge
@@ -148,7 +173,7 @@ class StripePaymentService
 
   def charge_options
     {
-      amount: reservation.price_with_fees_cents,
+      amount: reservation.charge_amount_cents,
       currency: 'eur',
       customer: @customer.id,
       source: @source,
