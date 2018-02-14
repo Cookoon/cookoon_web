@@ -22,6 +22,8 @@ class Reservation < ApplicationRecord
   monetize :price_with_fees_cents
   monetize :price_for_services_cents
   monetize :payout_price_cents
+  monetize :charge_amount_cents
+  monetize :discount_amount_cents
   monetize :total_fees_with_services_for_host_cents
   monetize :base_option_price_cents
 
@@ -81,6 +83,10 @@ class Reservation < ApplicationRecord
 
   def payout_price_cents
     price_for_rent_cents - total_fees_with_services_for_host_cents
+  end
+
+  def charge_amount_cents
+    price_with_fees_cents - discount_amount_cents
   end
 
   def total_fees_with_services_for_host_cents
