@@ -20,8 +20,8 @@
     </div>
     <hr>
     <div class="flex-container">
-      <b>TOTAL</b>
-      <b><%= humanized_money_with_symbol @reservation.price_for_rent_with_fees %></b>
+      <b id='total-text'>TOTAL</b>
+      <b id='reservation-price'><%= humanized_money_with_symbol @reservation.price_for_rent_with_fees %></b>
     </div>
   </div>
 
