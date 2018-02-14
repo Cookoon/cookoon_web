@@ -15,7 +15,6 @@ class Reservation < ApplicationRecord
   has_one :inventory, dependent: :destroy
 
   monetize :price_cents
-  monetize :price_with_discount_cents
   monetize :price_for_rent_cents
   monetize :cookoon_fees_cents
   monetize :host_cookoon_fees_cents
