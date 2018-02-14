@@ -1,6 +1,11 @@
-= simple_form_for [@reservation, @reservation_guest] do |f|
-  #guest
-    #guest_from_list
-      = f.association :guest, collection: @guests, label: false, prompt: 'Choisissez un de vos contacts'
-    = link_to_add_association 'ou ajoutez en un nouveau', f, :guest
+= simple_form_for [@reservation, @reservation_guest], remote: true do |f|
+  - if @guests.any?
+    #guest
+      #guest_from_list
+        = f.association :guest, collection: @guests, label: false, prompt: 'Choisissez un de vos contacts'
+      = link_to_add_association f, :guest
+  - else
+    = f.simple_fields_for :guest do |g|
+      = render 'guest_fields', f: g
+        
   = f.submit class: 'btn btn-primary'

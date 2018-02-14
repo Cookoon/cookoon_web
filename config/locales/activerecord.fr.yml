@@ -5,6 +5,8 @@ fr:
       inventory:
         checkin_photos: Photos à l'entrée des lieux
         checkout_photos: Photos à la sortie des lieux
+      reservation_guest:
+        guest: 'Invité(e) :'
       user:
         description: Description
         phone_number: Téléphone portable
@@ -15,7 +17,6 @@ fr:
         guest:
           attributes:
             email:
-              invalid: n'est pas un email valide
               taken: est déjà dans votre liste
         reservation:
           attributes:
@@ -26,7 +27,7 @@ fr:
         reservation_guest:
           attributes:
             guest:
-              required: choisissez un contact ou ajoutez en un nouveau
+              required: choisissez un de vos contacts ou ajoutez en un nouveau
               taken: a déjà été convié
         user:
           attributes:
@@ -41,3 +42,12 @@ fr:
     email: Email
     first_name: Prénom
     last_name: Nom
+  errors:
+    attributes:
+      email:
+        blank: doit être renseigné
+        invalid: n'est pas un email valide
+      first_name:
+        blank: doit être renseigné
+      last_name:
+        blank: doit être renseigné

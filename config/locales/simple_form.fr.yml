@@ -1,5 +1,13 @@
 ---
 fr:
+  cocoon:
+    defaults:
+      add: Ajouter un élément
+      remove: Retirer cet élément
+    guest:
+      add: ou ajoutez en un nouveau
+    guests:
+      remove: revenir à la liste
   helpers:
     submit:
       reservation_guest:

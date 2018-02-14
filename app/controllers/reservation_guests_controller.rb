@@ -2,9 +2,9 @@ class ReservationGuestsController < ApplicationController
   before_action :set_reservation
 
   def index
-    set_reservation_guests
-    @reservation_guest = ReservationGuest.new
-    set_guests
+    @reservation_guests = policy_scope(@reservation.reservation_guests).includes(:guest)
+    @reservation_guest = ReservationGuest.new(guest: Guest.new)
+    @guests = current_user.guests - @reservation.guests
   end
 
   def create
@@ -13,23 +13,15 @@ class ReservationGuestsController < ApplicationController
 
     if @reservation_guest.save
       redirect_to reservation_reservation_guests_path(@reservation),
+                  action: 'replace',
                   notice: 'Votre invité a bien été convié'
     else
-      set_reservation_guests
-      set_guests
+      flash.now.alert = @reservation_guest.errors.full_messages.join(' · ')
       render :index
     end
   end
 
   private
-
-  def set_reservation_guests
-    @reservation_guests = policy_scope(@reservation.reservation_guests).includes(:guest)
-  end
-
-  def set_guests
-    @guests = current_user.guests - @reservation.guests
-  end
 
   def set_reservation
     @reservation = Reservation.find(params[:reservation_id])
