@@ -1,11 +1,9 @@
-= simple_form_for [@reservation, @reservation_guest], remote: true do |f|
-  - if @guests.any?
-    #guest
-      #guest_from_list
-        = f.association :guest, collection: @guests, label: false, prompt: 'Choisissez un de vos contacts'
-      = link_to_add_association f, :guest
-  - else
-    = f.simple_fields_for :guest do |g|
-      = render 'guest_fields', f: g
-        
-  = f.submit class: 'btn btn-primary'
+= simple_form_for @reservation, url: reservation_reservation_guests_path(@reservation), method: :post, data: { controller: 'reservation-guests' }, remote: true do |f|
+  = f.association :guests, as: :check_boxes
+
+  #guests
+    = link_to_add_association f, :guests
+
+  #form-flash
+
+  = f.button :submit, 'Envoyer les invitations', class: 'btn btn-primary'

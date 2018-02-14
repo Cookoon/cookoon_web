@@ -4,14 +4,10 @@ fr:
     defaults:
       add: Ajouter un élément
       remove: Retirer cet élément
-    guest:
-      add: ou ajoutez en un nouveau
     guests:
-      remove: revenir à la liste
+      add: Ajouter un autre invité
   helpers:
     submit:
-      reservation_guest:
-        create: Conviez-le !
       user:
         update: Mettre à jour
   simple_form:

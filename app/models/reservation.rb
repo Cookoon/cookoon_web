@@ -13,8 +13,10 @@ class Reservation < ApplicationRecord
   belongs_to :cookoon
   belongs_to :user
   has_one :inventory, dependent: :destroy
-  has_many :reservation_guests, dependent: :destroy
-  has_many :guests, through: :reservation_guests
+  has_many :reservation_guests, -> { order('guests.last_name ASC') }, inverse_of: :reservation, dependent: :destroy
+  has_many :guests, -> { order(last_name: :asc) }, through: :reservation_guests
+
+  accepts_nested_attributes_for :guests
 
   monetize :price_cents
   monetize :price_for_rent_cents

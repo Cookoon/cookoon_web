@@ -3,7 +3,7 @@
 
   p Conviez vos invités en renseignant les champs ci-dessous, nous leur envoyons un mail d'invitation de votre part :
 
-  - @reservation_guests.select(&:persisted?).each do |reservation_guest|
+  - @reservation_guests.each do |reservation_guest|
     ul
       li = reservation_guest.guest
 

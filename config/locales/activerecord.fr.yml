@@ -24,11 +24,6 @@ fr:
               cannot_book_mine: Vous ne pouvez pas réserver votre propre Cookoon !
             date:
               not_after_48_hours: Un minimum de 48h est requis.
-        reservation_guest:
-          attributes:
-            guest:
-              required: choisissez un de vos contacts ou ajoutez en un nouveau
-              taken: a déjà été convié
         user:
           attributes:
             email:
@@ -40,6 +35,7 @@ fr:
       user: Utilisateur
   attributes:
     email: Email
+    guests: Invités
     first_name: Prénom
     last_name: Nom
   errors:
