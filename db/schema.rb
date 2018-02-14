@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180213151057) do
+ActiveRecord::Schema.define(version: 20180214143142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 20180213151057) do
     t.string "stripe_charge_id"
     t.boolean "catering", default: false
     t.string "trello_card_id"
+    t.integer "discount_amount_cents", default: 0, null: false
     t.index ["cookoon_id"], name: "index_reservations_on_cookoon_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
