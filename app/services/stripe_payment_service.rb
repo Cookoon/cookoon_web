@@ -6,6 +6,7 @@ class StripePaymentService
     @token = attributes[:token]
     @source = attributes[:source]
     @reservation = attributes[:reservation]
+    @use_discount = attributes[:use_discount] || false
     @errors = []
   end
 
