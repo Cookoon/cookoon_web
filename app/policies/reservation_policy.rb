@@ -12,6 +12,10 @@ class ReservationPolicy < ApplicationPolicy
     record.user == user
   end
 
+  def discount?
+    record.user == user
+  end
+
   class Scope < Scope
     def resolve
       scope.for_tenant(user).displayable
