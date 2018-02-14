@@ -76,7 +76,7 @@ module HostReservationCardHelper
     end
 
     def price
-      content_tag(:p, "#{reservation.payout_price_for_host}  €", class: 'price')
+      content_tag(:p, "#{reservation.payout_price}  €", class: 'price')
     end
 
     def button

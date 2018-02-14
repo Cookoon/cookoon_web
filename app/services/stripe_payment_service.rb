@@ -105,7 +105,7 @@ class StripePaymentService
 
   def transfer_options
     {
-      amount: reservation.payout_price_for_host_cents,
+      amount: reservation.payout_price_cents,
       currency: 'eur',
       source_transaction: charge.id,
       destination: user.stripe_account_id

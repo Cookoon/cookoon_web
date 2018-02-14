@@ -77,7 +77,7 @@ class User < ApplicationRecord
   end
 
   def total_payouts_for_dashboard_cents
-    reservation_requests.passed.includes(:cookoon).sum(&:payout_price_for_host_cents)
+    reservation_requests.passed.includes(:cookoon).sum(&:payout_price_cents)
   end
 
   def available_discount?

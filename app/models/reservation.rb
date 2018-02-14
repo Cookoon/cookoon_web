@@ -21,7 +21,7 @@ class Reservation < ApplicationRecord
   monetize :host_cookoon_fees_cents
   monetize :price_with_fees_cents
   monetize :price_for_services_cents
-  monetize :payout_price_for_host_cents
+  monetize :payout_price_cents
   monetize :total_fees_with_services_for_host_cents
   monetize :base_option_price_cents
 
@@ -79,7 +79,7 @@ class Reservation < ApplicationRecord
     amount_cents
   end
 
-  def payout_price_for_host_cents
+  def payout_price_cents
     price_for_rent_cents - total_fees_with_services_for_host_cents
   end
 
