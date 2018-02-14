@@ -28,7 +28,7 @@ class PaymentsController < ApplicationController
   end
 
   def discount
-    base_price = @reservation.price_for_rent_with_fees
+    base_price = @reservation.price_with_fees
     user_discount = @reservation.user.discount_balance
     @computed_prices = compute_discount(base_price, user_discount)
   end

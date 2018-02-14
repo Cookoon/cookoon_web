@@ -15,10 +15,11 @@ class Reservation < ApplicationRecord
   has_one :inventory, dependent: :destroy
 
   monetize :price_cents
+  monetize :price_with_discount_cents
   monetize :price_for_rent_cents
   monetize :cookoon_fees_cents
   monetize :host_cookoon_fees_cents
-  monetize :price_for_rent_with_fees_cents
+  monetize :price_with_fees_cents
   monetize :price_for_services_cents
   monetize :payout_price_for_host_cents
   monetize :total_fees_with_services_for_host_cents
@@ -63,7 +64,7 @@ class Reservation < ApplicationRecord
     (price_for_rent_cents * host_cookoon_fee_rate).round
   end
 
-  def price_for_rent_with_fees_cents
+  def price_with_fees_cents
     price_for_rent_cents + cookoon_fees_cents
   end
 

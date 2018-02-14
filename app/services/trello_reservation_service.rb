@@ -89,7 +89,7 @@ class TrelloReservationService
     desc_string << "email: #{host.email} \n"
     desc_string << "téléphone: #{host.phone_number} \n"
     desc_string << "\n"
-    desc_string << "**prix payé par le locataire :** #{humanized_money_with_symbol reservation.price_for_rent_with_fees} \n"
+    desc_string << "**prix payé par le locataire :** #{humanized_money_with_symbol reservation.price_with_fees} \n"
     desc_string << "**somme versée à l'hôte :** #{humanized_money_with_symbol reservation.payout_price_for_host} \n"
 
     if reservation.catering

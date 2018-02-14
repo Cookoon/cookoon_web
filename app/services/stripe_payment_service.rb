@@ -148,7 +148,7 @@ class StripePaymentService
 
   def charge_options
     {
-      amount: reservation.price_for_rent_with_fees_cents,
+      amount: reservation.price_with_fees_cents,
       currency: 'eur',
       customer: @customer.id,
       source: @source,
