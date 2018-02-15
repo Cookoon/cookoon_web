@@ -90,7 +90,7 @@ class User < ApplicationRecord
 
   def set_discount_expires_at
     return if discount_balance_cents < discount_balance_cents_was
-    self.discount_expires_at = Time.zone.now + 2.months
+    self.discount_expires_at = 2.months.from_now
   end
 
   def send_welcome_email
