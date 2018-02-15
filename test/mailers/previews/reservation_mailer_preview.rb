@@ -20,12 +20,14 @@ class ReservationMailerPreview < ActionMailer::Preview
     ReservationMailer.cancelled_by_host(Reservation.last)
   end
 
-  def cancelled_by_host
-    ReservationMailer.cancelled_by_host(Reservation.last)
-  end
-
   def ending_survey_for_user
     ReservationMailer.ending_survey_for_user(Reservation.last)
+  end
+  # ============================
+
+  # ==== Mails for Tenant Guests =====
+  def invited_by_tenant
+    ReservationMailer.invited_by_tenant(Reservation.last, Guest.last)
   end
   # ============================
 

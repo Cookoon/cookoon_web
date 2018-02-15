@@ -1,4 +1,5 @@
 class ReservationMailer < ApplicationMailer
+  include DatetimeHelper
   helper :datetime
 
   # ==== Mails for Users =====
