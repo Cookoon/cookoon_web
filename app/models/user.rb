@@ -38,6 +38,7 @@ class User < ApplicationRecord
   validates :terms_of_service, acceptance: { message: 'Vous devez accepter les conditions générales pour continuer' }
 
   after_invitation_accepted :send_welcome_email
+  before_update :set_discount_expires_at, if: :discount_balance_cents_changed?
 
   def full_name
     if first_name.present? && last_name.present?
@@ -81,10 +82,14 @@ class User < ApplicationRecord
   end
 
   def available_discount?
-    discount_balance_cents > 0
+    discount_balance_cents.positive?
   end
 
   private
+
+  def set_discount_expires_at
+    self.discount_expires_at = Time.zone.now + 2.months
+  end
 
   def send_welcome_email
     UserMailer.welcome_email(self).deliver_later
