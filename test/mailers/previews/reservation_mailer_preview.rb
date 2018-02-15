@@ -23,6 +23,10 @@ class ReservationMailerPreview < ActionMailer::Preview
   def ending_survey_for_user
     ReservationMailer.ending_survey_for_user(Reservation.last)
   end
+
+  def invitations_sent
+    ReservationMailer.invitations_sent(Reservation.last, Guest.last(5))
+  end
   # ============================
 
   # ==== Mails for Tenant Guests =====

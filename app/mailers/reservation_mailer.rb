@@ -55,6 +55,15 @@ class ReservationMailer < ApplicationMailer
     @host = @cookoon.user
     mail(to: @tenant.full_email, subject: "Comment s'est passée votre expérience Cookoon ?")
   end
+
+  def invitations_sent(reservation, guests)
+    @reservation = reservation
+    @guests = guests
+    @tenant = @reservation.user
+    @cookoon = @reservation.cookoon
+    @host = @cookoon.user
+    mail(to: @tenant.full_email, subject: 'Vos convives ont bien été invités')
+  end
   # ============================
 
   # ==== Mails for Tenant Guests =====

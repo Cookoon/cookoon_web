@@ -1,0 +1,10 @@
+<p>Bonjour <%= @tenant.first_name %>,</p>
+<p>Vos convives ont bien été invités à votre événement du <%= display_date_for(@reservation.date) %> : </p>
+
+<ul>
+  <% @guests.each do |guest| %>
+    <li><%= guest %></li>
+  <% end %>
+</ul>
+
+<p>L’adresse du Cookoon leur a également été communiquée.</p>
