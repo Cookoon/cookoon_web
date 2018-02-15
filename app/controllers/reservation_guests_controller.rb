@@ -7,8 +7,13 @@ class ReservationGuestsController < ApplicationController
   end
 
   def create
+    reservation_guests_was = @reservation.guests.to_a
+
     if @reservation.update(reservation_params)
       redirect_to edit_reservation_path(@reservation), notice: 'Vos invités ont bien été conviés'
+
+      new_reservation_guests = @reservation.guests - reservation_guests_was
+      ReservationMailer.invitations_sent(@reservation, new_reservation_guests).deliver_later
     else
       flash.now.alert = @reservation.errors.full_messages.join(' · ')
     end
