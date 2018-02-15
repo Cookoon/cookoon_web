@@ -18,6 +18,7 @@ class StripePaymentService
   end
 
   def capture_payment
+    return true unless charge_needed?
     retrieve_charge
     capture_charge
   end
@@ -118,10 +119,9 @@ class StripePaymentService
   end
 
   def trigger_transfer
-    return false unless charge
     Stripe::Transfer.create(transfer_options)
   rescue Stripe::InvalidRequestError => e
-    Rails.logger.error("Failed to trigger transfer for #{charge.id}")
+    Rails.logger.error("Failed to trigger transfer for reservation : #{reservation.id}")
     Rails.logger.error(e.message)
     @errors << e.message
     false
