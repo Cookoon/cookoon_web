@@ -56,6 +56,26 @@ class ReservationMailer < ApplicationMailer
   end
   # ============================
 
+  # ==== Mails for Tenant Guests =====
+  def invited_by_tenant(reservation, guest)
+    @reservation = reservation
+    @guest = guest
+    @tenant = @reservation.user
+    @cookoon = @reservation.cookoon
+    @host = @cookoon.user
+
+    attachments[@reservation.ical_file_name] = {
+      mime_type: 'application/ics',
+      content: @reservation.ical.to_ical
+    }
+
+    mail(
+      to: @guest.full_email,
+      subject: "#{@tenant.full_name} vous convie le #{display_date_for(@reservation.date)} à son événement !"
+    )
+  end
+  # ============================
+
   # ==== Mails for Host =====
   def pending_request(reservation)
     @reservation = reservation
