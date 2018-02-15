@@ -1,6 +1,6 @@
 <%= simple_form_for :payment, url: reservation_payments_path(@reservation), remote: true, html: { id: 'pay-form' } do |f| %>
   <% if current_user.available_discount? %>
-    Cliquez pour utiliser votre crédit sur cette location.
+    Cliquez pour utiliser votre crédit sur cette location (disponible jusqu'au : <%= display_date_for(current_user.discount_expires_at) %>)
     <%= link_to discount_new_reservation_payment_path(@reservation.id), remote: true, method: :post do %>
       <div class="payment-block">
         <b id='discount-balance'>Crédit disponible : <%= humanized_money_with_symbol current_user.discount_balance %></b>
