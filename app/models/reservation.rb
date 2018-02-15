@@ -78,7 +78,7 @@ class Reservation < ApplicationRecord
   end
 
   def refund_discount_to_user
-    return unless discount_amount_cents.positive?
+    return unless discount_used?
     user.discount_balance_cents += discount_amount_cents
     user.save
   end
