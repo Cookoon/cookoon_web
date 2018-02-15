@@ -38,22 +38,10 @@ class PaymentsController < ApplicationController
   private
 
   def compute_discount(base_price, user_discount)
-    if user_discount <= 0
-      {
-        discounted_price: base_price,
-        new_available_discount: user_discount
-      }
-    elsif base_price > user_discount
-      {
-        discounted_price: base_price - user_discount,
-        new_available_discount: Money.new(0, 'EUR')
-      }
-    else
-      {
-        discounted_price: Money.new(0, 'EUR'),
-        new_available_discount: user_discount - base_price
-      }
-    end
+    {
+      discounted_price: [Money.new(0, 'EUR'), (base_price - user_discount)].max,
+      available_discount: [Money.new(0, 'EUR'), (user_discount - base_price)].max
+    }
   end
 
   def set_reservation
