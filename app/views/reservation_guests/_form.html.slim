@@ -1,9 +1,10 @@
 = simple_form_for @reservation, url: reservation_reservation_guests_path(@reservation), method: :post, remote: true do |f|
   = f.association :guests, collection: @guests, as: :check_boxes, label: false
 
-  #guests
-    = link_to_add_association f, :guests
+  #guests.text-center
+    = link_to_add_association f, :guests, class: 'no-button'
+
+  .text-center.thin-padded
+    = f.button :submit, 'Envoyer les invitations', class: 'btn btn-primary'
 
   #form-flash
-
-  = f.button :submit, 'Envoyer les invitations', class: 'btn btn-primary'

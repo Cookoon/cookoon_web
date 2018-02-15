@@ -1,10 +1,15 @@
 .container
   h4 Convier mes invités
 
-  p Conviez vos invités en renseignant les champs ci-dessous, nous leur envoyons un mail d'invitation de votre part :
+  p Mes invités
 
   - @reservation_guests.each do |reservation_guest|
     ul
       li = reservation_guest.guest
 
+  p Conviez vos invités en renseignant les champs ci-dessous, nous leur envoyons un mail d'invitation de votre part :
+
   = render 'form'
+
+  .text-center
+    = link_to 'Annuler', :back, class: 'no-button'
