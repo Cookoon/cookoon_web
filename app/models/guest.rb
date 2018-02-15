@@ -10,6 +10,19 @@ class Guest < ApplicationRecord
   validates :last_name, presence: true
 
   def to_s
-    "#{first_name} #{last_name} · #{email}"
+    "#{full_name} · #{email}"
   end
+
+  def full_name
+    if first_name.present? && last_name.present?
+      "#{first_name} #{last_name}"
+    else
+      'Convive Cookoon'
+    end
+  end
+
+  def full_email
+    Mail::Address.new("#{full_name} <#{email}>")
+  end
+
 end
