@@ -10,7 +10,7 @@ class User < ApplicationRecord
   scope :with_reservation_finished_in_day_range_around, ->(date_time) { joins(:reservations).merge(Reservation.finished_in_day_range_around(date_time)).distinct }
   scope :has_cookoon, -> { joins(:cookoons).distinct }
   scope :has_no_cookoon, -> { left_outer_joins(:cookoons).where(cookoons: {id: nil}) }
-  scope :discount_expired, -> { where("discount_expires_at < ?", Time.zone.now) }
+  scope :discount_expired, -> { where('discount_expires_at < ?', Time.zone.now) }
   enum emailing_preferences: { no_emails: 0, all_emails: 1 }
 
   PHONE_REGEXP = /\A(\+\d+)?([\s\-\.]?\(?\d+\)?)+\z/
