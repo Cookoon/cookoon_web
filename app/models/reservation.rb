@@ -73,6 +73,16 @@ class Reservation < ApplicationRecord
     cookoon.user
   end
 
+  def discount_used?
+    discount_amount_cents&.positive?
+  end
+
+  def refund_discount_to_user
+    return unless discount_amount_cents.positive?
+    user.discount_balance_cents += discount_amount_cents
+    user.save
+  end
+
   def price_for_services_cents
     amount_cents = 0
     amount_cents += base_option_price_cents if janitor
