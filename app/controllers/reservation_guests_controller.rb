@@ -43,5 +43,4 @@ class ReservationGuestsController < ApplicationController
                         end
     permitted_params.merge(guests_attributes: guests_attributes)
   end
-
 end
