@@ -73,7 +73,7 @@ class StripePaymentService
     return 0 unless user.available_discount?
     user_discount = user.discount_balance_cents
     reservation_price = reservation.price_with_fees_cents
-    user_discount <= reservation_price ? user_discount : reservation_price
+    [user_discount, reservation_price].min
   end
 
   def update_user_balance
