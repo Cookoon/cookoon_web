@@ -3,6 +3,7 @@ class ReservationGuestsController < ApplicationController
 
   def index
     @reservation_guests = policy_scope(@reservation.reservation_guests).includes(:guest)
+    @guests = current_user.guests - @reservation.guests # TODO: FC 15feb18 refactor with Arel query
   end
 
   def create
@@ -29,7 +30,10 @@ class ReservationGuestsController < ApplicationController
                          guest_ids: [],
                          guests_attributes: %i[user_id first_name last_name email]
                        )
-                       .delocalize(date: :time)
+                       .to_h
+                       .merge(guest_ids: @reservation.guest_ids) do |_key, old_val, new_val|
+                         old_val | new_val
+                       end
     return permitted_params unless permitted_params[:guests_attributes]
     enrich_guest_attributes(permitted_params)
   end
