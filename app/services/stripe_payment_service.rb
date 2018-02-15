@@ -64,12 +64,12 @@ class StripePaymentService
 
   def handle_discount
     return unless ActiveModel::Type::Boolean.new.cast(@options[:discount])
-    discount_amount = compute_discount
-    reservation.discount_amount_cents = discount_amount
-    update_user_balance if discount_amount.positive?
+    discount_amount_cents = compute_discount_cents
+    reservation.discount_amount_cents = discount_amount_cents
+    update_user_balance if discount_amount_cents.positive?
   end
 
-  def compute_discount
+  def compute_discount_cents
     return 0 unless user.available_discount?
     user_discount = user.discount_balance_cents
     reservation_price = reservation.price_with_fees_cents
