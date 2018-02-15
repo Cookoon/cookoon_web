@@ -138,9 +138,7 @@ class StripePaymentService
   end
 
   def update_reservation
-    reservation.status = :paid
-    reservation.stripe_charge_id = charge.id if charge
-    reservation.save
+    reservation.update(status: :paid, stripe_charge_id: charge&.id)
   end
 
   def capture_charge
