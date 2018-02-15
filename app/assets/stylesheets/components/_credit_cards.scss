@@ -4,10 +4,14 @@
   align-items: center;
   .payment_source {
     flex: 10;
+    margin-bottom: 1px;
   }
   i {
     flex: 1;
-    font-size: 24px;
-    margin: 0 10px 8px;
+    font-size: 20px;
   }
+}
+
+#payment_source {
+  border-bottom: none;
 }

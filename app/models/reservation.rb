@@ -18,9 +18,11 @@ class Reservation < ApplicationRecord
   monetize :price_for_rent_cents
   monetize :cookoon_fees_cents
   monetize :host_cookoon_fees_cents
-  monetize :price_for_rent_with_fees_cents
+  monetize :price_with_fees_cents
   monetize :price_for_services_cents
-  monetize :payout_price_for_host_cents
+  monetize :payout_price_cents
+  monetize :charge_amount_cents
+  monetize :discount_amount_cents
   monetize :total_fees_with_services_for_host_cents
   monetize :base_option_price_cents
 
@@ -63,12 +65,22 @@ class Reservation < ApplicationRecord
     (price_for_rent_cents * host_cookoon_fee_rate).round
   end
 
-  def price_for_rent_with_fees_cents
+  def price_with_fees_cents
     price_for_rent_cents + cookoon_fees_cents
   end
 
   def cookoon_owner
     cookoon.user
+  end
+
+  def discount_used?
+    discount_amount_cents&.positive?
+  end
+
+  def refund_discount_to_user
+    return unless discount_used?
+    user.discount_balance_cents += discount_amount_cents
+    user.save
   end
 
   def price_for_services_cents
@@ -78,8 +90,12 @@ class Reservation < ApplicationRecord
     amount_cents
   end
 
-  def payout_price_for_host_cents
+  def payout_price_cents
     price_for_rent_cents - total_fees_with_services_for_host_cents
+  end
+
+  def charge_amount_cents
+    price_with_fees_cents - discount_amount_cents
   end
 
   def total_fees_with_services_for_host_cents

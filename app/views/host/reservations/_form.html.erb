@@ -39,7 +39,7 @@
   </div>
   <hr style="border-top: 1px solid white">
   <div class="text-right">
-    <p>Vous recevrez : <span id="display-price" data-reservation-price-cents="<%= @reservation.payout_price_for_host_cents %>"><%= humanized_money_with_symbol @reservation.payout_price_for_host %></span></p>
+    <p>Vous recevrez : <span id="display-price" data-reservation-price-cents="<%= @reservation.payout_price_cents %>"><%= humanized_money_with_symbol @reservation.payout_price %></span></p>
   </div>
   <% if @reservation.pending_or_paid? %>
     <div class="flex-container">

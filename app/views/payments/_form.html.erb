@@ -1,5 +1,16 @@
 <%= simple_form_for :payment, url: reservation_payments_path(@reservation), remote: true, html: { id: 'pay-form' } do |f| %>
-  <div class="credit-card-select">
+  <% if current_user.available_discount? %>
+    Cliquez pour utiliser votre crédit sur cette location (disponible jusqu'au : <%= display_date_for(current_user.discount_expires_at) %>)
+    <%= link_to discount_new_reservation_payment_path(@reservation.id), remote: true, method: :post do %>
+      <div class="payment-block">
+        <b id='discount-balance'>Crédit disponible : <%= humanized_money_with_symbol current_user.discount_balance %></b>
+        <i class='co co-check'></i>
+      </div>
+    <% end %>
+  <% end %>
+  <%= f.input :use_discount, as: :hidden, input_html: { value: 'false' } %>
+  <hr>
+  <div class="credit-card-select payment-block">
     <i class="fa fa-credit-card" aria-hidden="true"></i>
     <%= f.input :source, collection: @user_cards, selected: :first, label: false, label_method: ->(card){ "#{card.brand.upcase} XXXX-XXXX-XXXX-#{card.last4}" }, value_method: ->(card){ card.id } %>
   </div>
