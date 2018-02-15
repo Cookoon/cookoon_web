@@ -1,25 +1,41 @@
 import { Controller } from 'stimulus';
 
 export default class extends Controller {
-  static targets = ['display', 'input'];
+  static targets = ['displayPrice', 'duration', 'durationInput'];
 
-  decrement(event) {
-    this.updateNumberAttribute({
-      updateValue: -1,
-      min: this.data.get('min'),
-      input: this.inputTarget,
-      targets: this.displayTargets,
-      event
-    });
+  updatePrice() {
+    const price_cents =
+      this.data.get('cookoonPriceCents') * this.durationInputTarget.value;
+    const price_with_fees_cents = price_cents * 1.05;
+    this.renderPrice(price_with_fees_cents);
   }
 
-  increment(event) {
+  renderPrice(price_cents) {
+    const displayPrice = `${(price_cents / 100)
+      .toFixed(2)
+      .replace('.', ',')} €`;
+    this.displayPriceTarget.textContent = displayPrice;
+  }
+
+  decrementDuration(event) {
     this.updateNumberAttribute({
-      max: this.data.get('max'),
-      input: this.inputTarget,
-      targets: this.displayTargets,
+      updateValue: -1,
+      min: this.data.get('minDuration'),
+      input: this.durationInputTarget,
+      targets: this.durationTargets,
       event
     });
+    this.updatePrice();
+  }
+
+  incrementDuration(event) {
+    this.updateNumberAttribute({
+      max: this.data.get('maxDuration'),
+      input: this.durationInputTarget,
+      targets: this.durationTargets,
+      event
+    });
+    this.updatePrice();
   }
 
   updateNumberAttribute(params) {
