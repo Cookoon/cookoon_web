@@ -207,6 +207,14 @@ select {
 }
 
 // Paddings
+.p-10 {
+  padding: 10px;
+}
+
+.pt-10 {
+  padding-top: 10px;
+}
+
 .pt-20 {
   padding-top: 20px;
 }
@@ -263,11 +271,15 @@ select {
 .space-around {
   justify-content: space-around;
 }
+.align-items-center,
 .align-center {
   align-items: center;
 }
 .shrink-none {
   flex-shrink: 0;
+}
+.flex-1 {
+  flex: 1;
 }
 
 // placeholders style

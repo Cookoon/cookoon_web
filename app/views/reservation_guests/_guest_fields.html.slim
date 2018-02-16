@@ -1,8 +1,10 @@
-.nested-fields.form-inline class=(defined?(first_guest) ? 'pb-10': 'pt-20')
-  = f.input :first_name, label: false, placeholder: t('attributes.first_name')
-  = f.input :last_name, label: false, placeholder: t('attributes.last_name')
-  = f.input :email, label: false, placeholder: t('attributes.email')
+.nested-fields.d-flex.align-items-center.pb-10 class=('pt-10' unless defined?(first_guest))
+  div.flex-1
+    = f.input :first_name, label: false, placeholder: t('attributes.first_name')
+    = f.input :last_name, label: false, placeholder: t('attributes.last_name')
+    = f.input :email, label: false, placeholder: t('attributes.email')
 
-  - unless defined? first_guest
-    = link_to_remove_association f, class: 'remove-guest btn btn-primary btn-xs' do
-      .fa.fa-times
+  div.p-10
+    - unless defined? first_guest
+      = link_to_remove_association f, class: 'remove-guest btn btn-primary btn-xs' do
+        .fa.fa-times
