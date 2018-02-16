@@ -4,7 +4,7 @@ class ReservationGuest < ApplicationRecord
 
   validates :guest, uniqueness: { scope: :reservation }
 
-  after_create :notify_guest
+  after_create_commit :notify_guest
 
   private
 
