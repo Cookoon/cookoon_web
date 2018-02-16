@@ -29,7 +29,9 @@ Rails.application.routes.draw do
   end
 
   resources :reservations, only: [:index, :show, :edit, :update] do
-    resources :payments, only: [:new, :create]
+    resources :payments, only: [:new, :create] do
+      post 'discount', on: :new
+    end
     resources :invoices, only: [:create]
     resources :reservation_guests, only: [:index, :create]
   end
@@ -62,6 +64,7 @@ Rails.application.routes.draw do
   # ForestAdmin
   namespace :forest do
     post '/actions/award-invitations' => 'users#award_invitations'
+    post '/actions/change-e-mailing-preferences' => 'users#change_emailing_preferences'
     post '/actions/cancel-by-host' => 'reservations#cancel_by_host'
   end
 

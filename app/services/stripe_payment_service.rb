@@ -1,21 +1,24 @@
 class StripePaymentService
   attr_accessor :user, :token, :reservation, :customer, :charge, :sources, :source
 
-  def initialize(attributes)
+  def initialize(attributes, options = {})
     @user = attributes[:user]
     @token = attributes[:token]
     @source = attributes[:source]
     @reservation = attributes[:reservation]
+    @options = options
     @errors = []
   end
 
-  def create_charge_and_update_reservation
+  def handle_payment_and_update_reservation
     retrieve_customer
-    create_charge
+    handle_discount
+    create_charge if charge_needed?
     update_reservation
   end
 
   def capture_payment
+    return true unless charge_needed?
     retrieve_charge
     capture_charge
   end
@@ -59,6 +62,29 @@ class StripePaymentService
 
   private
 
+  def handle_discount
+    return unless ActiveModel::Type::Boolean.new.cast(@options[:discount])
+    discount_amount_cents = compute_discount_cents
+    reservation.discount_amount_cents = discount_amount_cents
+    update_user_balance if discount_amount_cents.positive?
+  end
+
+  def compute_discount_cents
+    return 0 unless user.available_discount?
+    user_discount = user.discount_balance_cents
+    reservation_price = reservation.price_with_fees_cents
+    [user_discount, reservation_price].min
+  end
+
+  def update_user_balance
+    user.discount_balance_cents -= reservation.discount_amount_cents
+    user.save
+  end
+
+  def charge_needed?
+    reservation&.charge_amount_cents&.positive?
+  end
+
   def retrieve_or_create_customer
     create_customer unless retrieve_customer
   end
@@ -93,10 +119,9 @@ class StripePaymentService
   end
 
   def trigger_transfer
-    return false unless charge
     Stripe::Transfer.create(transfer_options)
   rescue Stripe::InvalidRequestError => e
-    Rails.logger.error("Failed to trigger transfer for #{charge.id}")
+    Rails.logger.error("Failed to trigger transfer for reservation : #{reservation.id}")
     Rails.logger.error(e.message)
     @errors << e.message
     false
@@ -104,16 +129,16 @@ class StripePaymentService
 
   def transfer_options
     {
-      amount: reservation.payout_price_for_host_cents,
+      amount: reservation.payout_price_cents,
       currency: 'eur',
-      source_transaction: charge.id,
+      # try without source_transaction can safely remove before merge if no problem
+      # source_transaction: charge.id,
       destination: user.stripe_account_id
     }
   end
 
   def update_reservation
-    return false unless charge
-    reservation.update(status: :paid, stripe_charge_id: charge.id)
+    reservation.update(status: :paid, stripe_charge_id: charge&.id)
   end
 
   def capture_charge
@@ -147,7 +172,7 @@ class StripePaymentService
 
   def charge_options
     {
-      amount: reservation.price_for_rent_with_fees_cents,
+      amount: reservation.charge_amount_cents,
       currency: 'eur',
       customer: @customer.id,
       source: @source,

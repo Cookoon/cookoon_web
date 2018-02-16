@@ -10,6 +10,7 @@ class User < ApplicationRecord
   scope :with_reservation_finished_in_day_range_around, ->(date_time) { joins(:reservations).merge(Reservation.finished_in_day_range_around(date_time)).distinct }
   scope :has_cookoon, -> { joins(:cookoons).distinct }
   scope :has_no_cookoon, -> { left_outer_joins(:cookoons).where(cookoons: { id: nil }) }
+  scope :discount_expired, -> { where('discount_expires_at < ?', Time.zone.now) }
   enum emailing_preferences: { no_emails: 0, all_emails: 1 }
 
   PHONE_REGEXP = /\A(\+\d+)?([\s\-\.]?\(?\d+\)?)+\z/
@@ -26,6 +27,7 @@ class User < ApplicationRecord
   has_attachment :photo
 
   monetize :total_payouts_for_dashboard_cents
+  monetize :discount_balance_cents
 
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -38,6 +40,7 @@ class User < ApplicationRecord
   validates :terms_of_service, acceptance: { message: 'Vous devez accepter les conditions générales pour continuer' }
 
   after_invitation_accepted :send_welcome_email
+  before_update :set_discount_expires_at, if: :discount_balance_cents_changed?
 
   def full_name
     if first_name.present? && last_name.present?
@@ -77,10 +80,19 @@ class User < ApplicationRecord
   end
 
   def total_payouts_for_dashboard_cents
-    reservation_requests.passed.includes(:cookoon).sum(&:payout_price_for_host_cents)
+    reservation_requests.passed.includes(:cookoon).sum(&:payout_price_cents)
+  end
+
+  def available_discount?
+    discount_balance_cents.positive? && discount_expires_at&.future?
   end
 
   private
+
+  def set_discount_expires_at
+    return if discount_balance_cents < discount_balance_cents_was
+    self.discount_expires_at = 2.months.from_now
+  end
 
   def send_welcome_email
     UserMailer.welcome_email(self).deliver_later

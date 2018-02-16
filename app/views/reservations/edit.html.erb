@@ -35,7 +35,7 @@
       <hr class='hr-white'>
       <div class="flex-container">
         <p>TOTAL</p>
-        <p><%= humanized_money_with_symbol @reservation.price_for_rent_with_fees %></p>
+        <p><%= humanized_money_with_symbol @reservation.price_with_fees %></p>
       </div>
 
       <% if @reservation.accepted? %>
