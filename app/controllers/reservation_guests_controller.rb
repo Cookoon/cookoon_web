@@ -1,5 +1,6 @@
 class ReservationGuestsController < ApplicationController
   before_action :set_reservation
+  before_action :disable_turbolinks_preview_cache, only: :index
 
   def index
     @reservation_guests = policy_scope(@reservation.reservation_guests).includes(:guest)
