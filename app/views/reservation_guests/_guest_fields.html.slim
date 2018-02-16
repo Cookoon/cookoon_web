@@ -1,6 +1,8 @@
-.nested-fields.form-inline
+.nested-fields.form-inline class=(defined?(first_guest) ? 'pb-10': 'pt-20')
   = f.input :first_name, label: false, placeholder: t('attributes.first_name')
   = f.input :last_name, label: false, placeholder: t('attributes.last_name')
   = f.input :email, label: false, placeholder: t('attributes.email')
-  = link_to_remove_association f, class: 'remove-guest btn btn-default btn-xs' do
-    .fa.fa-times
+
+  - unless defined? first_guest
+    = link_to_remove_association f, class: 'remove-guest btn btn-primary btn-xs' do
+      .fa.fa-times
