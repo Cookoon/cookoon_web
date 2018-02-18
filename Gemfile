@@ -48,7 +48,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'simple_scheduler'
 
 # Front
-gem 'bootstrap-sass'
+gem 'bootstrap', '~> 4.0.0'
 gem 'font-awesome-sass'
 gem 'gmaps4rails'
 gem 'hammerjs-rails'
