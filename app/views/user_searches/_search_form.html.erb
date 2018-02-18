@@ -16,9 +16,9 @@
       </div>
       <% if @current_search %>
         <%= link_to user_searches_path, method: :patch, remote: true do %>
-          <div class="flex align-center">
+          <div class="d-flex align-items-center">
             <p class="hidden-xs">Annuler la recherche</p>
-            <i class="fa fa-times-circle left-mar-10"></i>
+            <i class="fa fa-times-circle ml-10"></i>
           </div>
         <% end %>
       <% end %>
@@ -28,7 +28,7 @@
         <%= simple_form_for @new_search, remote: true do |f| %>
           <div class="row">
             <div class="col-xs-12">
-              <div class="btn-group width-100">
+              <div class="btn-group w-100">
                 <%= f.input :address,
                             label: false,
                             placeholder: 'Ville, adresse ...',

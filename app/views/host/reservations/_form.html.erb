@@ -1,5 +1,5 @@
 <%= simple_form_for [:host, @reservation], remote: true do |f| %>
-  <div class="flex-container">
+  <div class="container-flex">
     <div class='service-presentation'>
       <p>
         Ajouter une aide ménagère - <%= humanized_money_with_symbol @reservation.base_option_price %> ?
@@ -18,7 +18,7 @@
       </div>
     </div>
   </div>
-  <div class="flex-container">
+  <div class="container-flex">
     <div class='service-presentation'>
       <p>
         Ajouter un concierge - <%= humanized_money_with_symbol @reservation.base_option_price %> ?
@@ -42,7 +42,7 @@
     <p>Vous recevrez : <span id="display-price" data-reservation-price-cents="<%= @reservation.payout_price_cents %>"><%= humanized_money_with_symbol @reservation.payout_price %></span></p>
   </div>
   <% if @reservation.pending_or_paid? %>
-    <div class="flex-container">
+    <div class="container-flex">
       <%= f.submit 'Refuser', name: "refuse", class: 'button button-white' %>
       <%= f.submit 'Accepter', name: "accept", class: 'button button-white slowLoad' %>
     </div>

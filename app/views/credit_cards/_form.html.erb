@@ -9,10 +9,10 @@
                         }
                       } do |f| %>
     <div data-target="stripe-payments.cardElement"></div>
-    <div class="text-danger thin-padded" data-target='stripe-payments.cardError' role="alert"></div>
+    <div class="text-danger py-3" data-target='stripe-payments.cardError' role="alert"></div>
     <%= f.input :stripe_token, as: :hidden, input_html: { data: { target: 'stripe-payments.tokenInput' } } %>
 
-    <div class="flex-container thin-padded">
+    <div class="container-flex py-3">
       <p>Utiliser comme carte principale</p>
       <div class="form-group boolean optional">
         <input value="0" type="hidden" name="credit_card[default]">
@@ -22,7 +22,7 @@
         </label>
       </div>
     </div>
-    <div class="thin-padded text-center">
+    <div class="py-3 text-center">
       <%= f.button :button,
                    'Ajouter une carte',
                    type: :submit,

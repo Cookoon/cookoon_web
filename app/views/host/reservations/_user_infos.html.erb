@@ -1,4 +1,4 @@
-<div class="flex-container reservation">
+<div class="container-flex reservation">
   <div class="reservation-image">
     <% if current_user.photo? %>
       <%= cl_image_tag(current_user.photo.path, { size: '50x50', crop: :thumb, gravity: :face, class: 'avatar-large' }) %>

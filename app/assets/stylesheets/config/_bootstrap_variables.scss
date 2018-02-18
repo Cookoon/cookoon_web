@@ -1,27 +1,23 @@
-/* -------------------------------------
- * Bootstrap sass variable
- * (see http://getbootstrap.com/customize/#less-variables)
- * ------------------------------------- */
-
 // General style
-$font-family-sans-serif: $base-font;
+// $font-family-sans-serif: $body-font;
+// $headings-font-family: $headers-font;
+$font-size-base: 13px;
 $body-bg: $cream;
-$font-size-base: $base-size;
-$line-height-base: $base-height;
-$headings-font-family: $header-font;
 
-// Semantic color scheme
-// => http://getbootstrap.com/customize/#colors
-$gray-base: $black;
+// Colors
 $brand-primary: $blue;
-$brand-success: $green;
-$brand-info: $yellow;
-$brand-danger: $red;
-$brand-warning: $orange;
+$brand-secondary: #6c757c;
+$brand-success: #30a64a;
+$brand-danger: #da3849;
+$brand-warning: #fdc02f;
+$brand-info: #25a2b7;
+$gray-base: $black;
 
 $state-danger-text: $brand-danger;
+// Contrasting text color on btn-light
+$yiq-text-dark: $blue;
 
-// Buttons / inputs radius
-$border-radius-base: 2px;
-$border-radius-large: 2px;
-$border-radius-small: 2px;
+// Buttons & inputs' radius
+$btn-border-radius: 2rem;
+$btn-border-radius-lg: 2.4rem;
+$btn-border-radius-sm: 1.6rem;

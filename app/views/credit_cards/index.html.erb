@@ -20,7 +20,7 @@
     <ul class="fa-ul fs-16">
       <% @stripe_sources.data.each_with_index do |card_data, index| %>
         <li><i class="fa-li co co-cb"></i>
-          <div class="flex space-between">
+          <div class="d-flex justify-content-between">
             <div>
               <%= "(Principale)" if index.zero? %>
               <%= display_credit_card_for card_data %>
@@ -35,7 +35,7 @@
   <% end %>
 
   <!-- Trigger modal with cb form -->
-  <div class="padded text-center">
+  <div class="py-5 text-center">
     <button type="button" class="button button-blue" data-toggle="modal" data-target="#credit-card-modal">
       Ajouter une carte
     </button>

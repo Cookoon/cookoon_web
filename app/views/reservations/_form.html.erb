@@ -50,7 +50,7 @@
     </div>
   </div>
   <div class="recap-catering">
-    <div class="flex-container">
+    <div class="container-flex">
       <div class='service-presentation'>
         <p class="service-description">
           Je souhaite être contacté par le service traiteur
@@ -77,8 +77,8 @@
   <% if current_user.stripe_customer_id %>
     <%= f.button :button, 'RESERVER', type: :submit, class: "button button-white", data: { disable_with: '<i class="fa fa-spinner fa-spin" style="margin-right: 10px;"></i>Chargement'.html_safe } %>
   <% else %>
-  <div class="text-center thin-padded">
-    <div class="thin-padded">
+  <div class="text-center py-3">
+    <div class="py-3">
       <p>Vous n'avez aucun moyen de paiement</p>
       <p>Vous devez en ajouter un avant de pouvoir faire une demande de réservation</p>
     </div>

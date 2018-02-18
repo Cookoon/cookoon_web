@@ -4,167 +4,139 @@ body {
   min-height: 100vh;
 }
 
-// Paddings
-.padded {
-  padding-top: 5em;
-  padding-bottom: 5em;
-}
-
-.italic {
+// Bootstrap 4 compatible
+.font-italic {
   font-style: italic;
-  font-size: 13px;
+}
+.pb-3 {
+  padding-bottom: 1rem;
+}
+.py-3 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.pt-5 {
+  padding-top: 3rem;
+}
+.pb-3 {
+  padding-bottom: 1rem;
+}
+.py-5 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
 }
 
-.light-padded {
-  padding-top: 3em;
-  padding-bottom: 1em;
+.text-secondary {
+  color: $brand-secondary;
+}
+.text-white {
+  color: $white;
 }
 
-.thin-padded {
-  padding-top: 1em;
-  padding-bottom: 1em;
+.position-fixed {
+  position: fixed;
 }
 
-.bottom-padded {
-  padding-bottom: 1em;
+.w-100 {
+  width: 100%;
 }
 
-// Forms
+.d-initial {
+  display: initial !important;
+}
+.d-flex {
+  display: flex;
+}
+.d-none {
+  display: none;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+.justify-content-around {
+  justify-content: space-around;
+}
+.align-items-center {
+  align-items: center;
+}
+
+// Custom Bootstrap 4 utilities
+.b-0 {
+  bottom: 0;
+}
+
+// Specific to Bootstrap 3 simple_form ?
 .help-block {
-  color: #ff5853 !important;
+  color: $brand-danger !important;
   font-size: 16px;
   font-weight: bold;
 }
 
 // Containers
-.flex-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.container-flex {
+  @extend .d-flex;
+  @extend .justify-content-between;
+  @extend .align-items-center;
 }
 
-// Backgrounds
-.bg-gray {
-  background: #4a4a4a;
-}
-.bg-grey {
-  background: #aeaeae;
-}
-.bg-blue {
-  background: #006f8b;
-}
-.bg-dark-blue {
-  background: #3b5998;
-}
-.bg-cream {
-  background: $cream;
-}
-
-.text-gray {
-  color: gray;
-}
-
-.text-blue {
-  color: $blue;
-}
-
-.text-white {
-  color: white;
-}
-
-#error_messages {
-  color: red;
-}
-
-.pinned-bottom {
-  position: absolute;
-  bottom: 10px;
-  padding-left: 20px;
-  font-size: small;
-}
-
-.fixed-bottom {
-  position: fixed;
-  bottom: 10px;
-}
-
-// Links
-a {
-  color: black;
+// Links - needed after Bootstrap 4 migration?
+a,
+a:focus,
+a:hover,
+a:visited {
   text-decoration: none;
-  &:hover {
-    color: black;
-    text-decoration: none;
-  }
-  &:visited {
-    text-decoration: none;
-  }
-  &:focus {
-    color: black;
-    text-decoration: none;
-  }
 }
 
 // Horizontal Rules
 hr {
   margin-top: 22px;
   margin-bottom: 22px;
-  border-top: 1px solid black;
-}
-
-.hr-white {
-  margin-top: 22px;
-  margin-bottom: 22px;
-  border-top: 1px solid white;
+  border-top: 1px solid $gray;
+  &.hr-white {
+    border-top: 1px solid $white;
+  }
 }
 
 // Fonts
-h2 {
-  margin-bottom: 22px;
-  font-size: 24px;
-}
+// h2 {
+//   margin-bottom: 22px;
+//   font-size: 24px;
+// }
 
-h3 {
-  font-size: 20px;
-}
-
-.fat-text {
-  font-size: 17px;
-}
+// h3 {
+//   font-size: 20px;
+// }
 
 // Trick to disable zoom on Ios mobile devices
-input[type='color'],
-input[type='date'],
-input[type='datetime'],
-input[type='datetime-local'],
-input[type='email'],
-input[type='month'],
-input[type='number'],
-input[type='password'],
-input[type='search'],
-input[type='tel'],
-input[type='text'],
-input[type='time'],
-input[type='url'],
-input[type='week'],
-select:focus,
-select,
-textarea {
-  font-size: 16px !important;
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  select,
+  textarea,
+  input {
+    font-size: 16px !important;
+  }
 }
+//
+// select {
+//   -webkit-appearance: none;
+// }
 
-select {
-  -webkit-appearance: none;
-}
-
-// Font Awesome UL
+// Font Awesome
 .fa-ul > li,
 .fa-ul > li > i.fa-li {
   padding: 1em 0;
 }
+.fs-16 {
+  font-size: 16px;
+}
+.fs-20 {
+  font-size: 20px;
+}
+.fs-24 {
+  font-size: 24px;
+}
 
-// Opacity
-
+// Atomic classes
 .op-90 {
   opacity: 0.9;
 }
@@ -173,92 +145,15 @@ select {
   text-shadow: none;
 }
 
-// Atomic classes
-
-// Z-indexes
 .zi-20 {
   z-index: 20;
 }
 
-// Font sizes
-.fs-16 {
-  font-size: 16px;
-}
-
-.fs-20 {
-  font-size: 20px;
-}
-
-.fs-24 {
-  font-size: 24px;
-}
-
-// Margins
 .mt-20 {
   margin-top: 20px;
 }
-
-.mt-40 {
-  margin-top: 40px;
-}
-
-.mt-60 {
-  margin-top: 60px;
-}
-
-.left-mar-10 {
+.ml-10 {
   margin-left: 10px;
-}
-
-.right-mar-10 {
-  margin-right: 10px;
-}
-
-// width
-.width-100 {
-  width: 100%;
-}
-
-/*Displays*/
-.d-initial {
-  display: initial !important;
-}
-.block {
-  display: block;
-}
-.inline {
-  display: inline;
-}
-.d-flex,
-.flex {
-  display: flex;
-}
-.d-none,
-.invisible {
-  display: none;
-}
-.inline-block {
-  display: inline-block;
-}
-
-/*Flexbox*/
-.flex-row {
-  flex-direction: row;
-}
-.flex-column {
-  flex-direction: column;
-}
-.space-between {
-  justify-content: space-between;
-}
-.space-around {
-  justify-content: space-around;
-}
-.align-center {
-  align-items: center;
-}
-.shrink-none {
-  flex-shrink: 0;
 }
 
 // placeholders style

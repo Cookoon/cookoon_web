@@ -9,17 +9,17 @@
   <br><br>
   <p>le <b><%= display_datetime_for(@reservation.date) %></b> pour <b><%= display_duration_for(@reservation) %></b></p>
 
-  <div class="light-padded">
-    <div class="flex-container">
+  <div class="pt-5 pb-3">
+    <div class="container-flex">
       <p>Prix de la location</p>
       <p><%= humanized_money_with_symbol @reservation.price %></p>
     </div>
-    <div class="flex-container">
+    <div class="container-flex">
       <p>Frais de services</p>
       <p><%= humanized_money_with_symbol @reservation.cookoon_fees %></p>
     </div>
     <hr>
-    <div class="flex-container">
+    <div class="container-flex">
       <b id='total-text'>TOTAL</b>
       <b id='reservation-price'><%= humanized_money_with_symbol @reservation.price_with_fees %></b>
     </div>
@@ -27,8 +27,8 @@
 
   <!-- ========= CARD SELECTION ============= -->
   <% if @user_cards.blank? %>
-    <div class="text-center thin-padded">
-      <div class="thin-padded">
+    <div class="text-center py-3">
+      <div class="py-3">
         <p>Vous n'avez aucun moyen de paiement</p>
         <p>Vous devez en ajouter un avant de pouvoir faire une demande de réservation</p>
       </div>

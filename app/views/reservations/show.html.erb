@@ -10,12 +10,12 @@
     <div class="text-center">
       <i class="fa fa-circle" aria-hidden="true"></i>
     </div>
-    <div class="host-details thin-padded">
-      <div class="flex-container">
+    <div class="host-details py-3">
+      <div class="container-flex">
         <p>Numéro de téléphone : </p>
         <p><%= @reservation.cookoon.user.phone_number %></p>
       </div>
-      <div class="flex-container">
+      <div class="container-flex">
         <p>E-mail : </p>
         <p><%= @reservation.cookoon.user.email %></p>
       </div>
@@ -23,22 +23,22 @@
     <div class="text-center">
       <i class="fa fa-circle" aria-hidden="true"></i>
     </div>
-    <div class="light-padded">
-      <div class="flex-container">
+    <div class="pt-5 pb-3">
+      <div class="container-flex">
         <p>Prix de la location</p>
         <p><%= humanized_money_with_symbol @reservation.price %></p>
       </div>
-      <div class="flex-container">
+      <div class="container-flex">
         <p>Frais de services</p>
         <p><%= humanized_money_with_symbol @reservation.cookoon_fees %></p>
       </div>
       <hr class='hr-white'>
-      <div class="flex-container">
+      <div class="container-flex">
         <p>TOTAL</p>
         <p><%= humanized_money_with_symbol @reservation.price_with_fees %></p>
       </div>
       <% if @reservation.passed? %>
-        <div class="text-center light-padded">
+        <div class="text-center pt-5 pb-3">
           <%= link_to 'Demander une facture', reservation_invoices_path(@reservation), class: 'button button-white', method: :post %>
         </div>
       <% else %>
