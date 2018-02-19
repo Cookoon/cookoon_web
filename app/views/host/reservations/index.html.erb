@@ -1,16 +1,20 @@
 <div class="container">
-  <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#active" aria-controls="active" role="tab" data-toggle="tab">À traiter</a></li>
-    <li role="presentation"><a href="#inactive" aria-controls="inactive" role="tab" data-toggle="tab">Passées</a></li>
+  <ul class="nav nav-pills mb-2">
+    <li class="nav-item">
+      <a href="#active" class="nav-link active" data-toggle="pill" role="tab">À traiter</a>
+    </li>
+
+    <li class="nav-item">
+      <a href="#inactive" class="nav-link" data-toggle="pill" role="tab">Passées</a>
+    </li>
   </ul>
 
-  <!-- Tab panes -->
   <div class="tab-content py-3">
-    <div role="tabpanel" class="tab-pane active" id="active">
+    <div class="tab-pane fade show active" id="active" role="tabpanel" >
       <%= reservations_list_or_empty_card(@active_reservations) %>
     </div>
-    <div role="tabpanel" class="tab-pane" id="inactive">
+
+    <div class="tab-pane fade" id="inactive" role="tabpanel" >
       <%= reservations_list_or_empty_card(@inactive_reservations) %>
     </div>
   </div>
