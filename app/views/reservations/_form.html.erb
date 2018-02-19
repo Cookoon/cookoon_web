@@ -72,7 +72,7 @@
     <%= f.error :cookoon %>
 
     <div class="d-flex flex-column align-items-center">
-      <h4>TOTAL : <span data-target="reservations.displayPrice"><%= humanized_money_with_symbol @reservation.price_with_fees %></span></h4>
+      <h5>TOTAL : <span data-target="reservations.displayPrice"><%= humanized_money_with_symbol @reservation.price_with_fees %></span></h5>
       <small class="mb-3">Ce montant comprend les frais de services de la plateforme Cookoon</small>
       <% if current_user.stripe_customer_id %>
       <%= f.button :submit, 'Réserver', class: 'btn-light px-5 py-3 text-uppercase' %>
