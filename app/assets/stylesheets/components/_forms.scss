@@ -5,13 +5,10 @@ select.form-control {
   border-right: none;
   border-top: none;
   padding-bottom: 1px;
-}
-
-input.form-control:focus,
-textarea.form-control:focus,
-select.form-control:focus {
-  border-width: ($input-border-width * 2);
-  padding-bottom: 0;
+  &:focus {
+    border-width: ($input-border-width * 2);
+    padding-bottom: 0;
+  }
 }
 
 .form-control.is-invalid:focus {
