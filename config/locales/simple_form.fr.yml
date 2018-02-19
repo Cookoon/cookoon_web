@@ -2,6 +2,8 @@
 fr:
   helpers:
     submit:
+      guest:
+        create: Ajouter un nouveau contact
       user:
         update: Mettre à jour
   simple_form:

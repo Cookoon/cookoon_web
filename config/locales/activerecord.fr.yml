@@ -5,8 +5,6 @@ fr:
       inventory:
         checkin_photos: Photos à l'entrée des lieux
         checkout_photos: Photos à la sortie des lieux
-      reservation_guest:
-        guest: 'Invité(e) :'
       user:
         description: Description
         phone_number: Téléphone portable
