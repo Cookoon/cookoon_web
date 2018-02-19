@@ -8,6 +8,15 @@ body {
   bottom: 0;
 }
 
+.btn-action {
+  padding-left: 3rem;
+  padding-right: 3rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-radius: 2rem;
+  text-transform: uppercase;
+}
+
 .child-mx-2 {
   & > * {
     margin-left: 0.25rem;
