@@ -16,8 +16,6 @@ class Reservation < ApplicationRecord
   has_many :reservation_guests, dependent: :destroy
   has_many :guests, through: :reservation_guests
 
-  accepts_nested_attributes_for :guests
-
   monetize :price_cents
   monetize :price_for_rent_cents
   monetize :cookoon_fees_cents
