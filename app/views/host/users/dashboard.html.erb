@@ -14,20 +14,22 @@
   <p>Vos Cookoons</p>
   <div class="row">
     <% @cookoons.each do |cookoon| %>
-      <div class="col-xs-12 col-md-6">
-        <div class="card">
-          <div class="card-picture" style="background-image: url(<%= cookoon_safe_picture(cookoon) %>)"></div>
-          <div class="card-data">
-            <div class="card-text">
-              <%= cookoon.name %>
-            </div>
-            <div class="card-infos">
-              <%= category_display_for(cookoon) %>
-              <%= price_display_for(cookoon) %>
+      <%= link_to cookoon do %>
+        <div class="col-xs-12 col-md-6">
+          <div class="card">
+            <div class="card-picture" style="background-image: url(<%= cookoon_safe_picture(cookoon) %>)"></div>
+            <div class="card-data">
+              <div class="card-text">
+                <%= cookoon.name %>
+              </div>
+              <div class="card-infos">
+                <%= category_display_for(cookoon) %>
+                <%= price_display_for(cookoon) %>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
   </div>
   <div class="thin-padded text-center">
