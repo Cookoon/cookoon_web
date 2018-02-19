@@ -39,13 +39,13 @@
       </div>
 
       <% if @reservation.accepted? %>
-        <div class="text-center light-padded">
-          <%= link_to 'Convier mes invités', reservation_reservation_guests_path(@reservation), class: 'button button-white' %>
+        <div class="text-center py-3">
+          <%= link_to 'Convier mes invités', reservation_guests_path(@reservation), class: 'btn btn-light btn-action' %>
         </div>
       <% end %>
 
-      <div class="text-center pt-5 pb-3">
-        <%= link_to 'Annuler la réservation', reservation_path(@reservation), method: :patch, remote: true, class: 'button button-white' %>
+      <div class="text-center py-3">
+        <%= link_to 'Annuler la réservation', reservation_path(@reservation), method: :patch, remote: true, class: 'btn btn-light btn-action' %>
       </div>
     </div>
   </div>

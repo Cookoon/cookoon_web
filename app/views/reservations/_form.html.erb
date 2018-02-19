@@ -75,14 +75,14 @@
       <h5>TOTAL : <span data-target="reservations.displayPrice"><%= humanized_money_with_symbol @reservation.price_with_fees %></span></h5>
       <small class="mb-3">Ce montant comprend les frais de services de la plateforme Cookoon</small>
       <% if current_user.stripe_customer_id %>
-      <%= f.button :submit, 'Réserver', class: 'btn-light px-5 py-3 text-uppercase' %>
+      <%= f.button :submit, 'Réserver', class: 'btn-light btn-action' %>
       <% else %>
       <div class="text-center py-3">
         <div class="py-3">
           <p>Vous n'avez aucun moyen de paiement</p>
           <p>Vous devez en ajouter un avant de pouvoir faire une demande de réservation</p>
         </div>
-        <%= link_to 'Ajouter une carte', credit_cards_path, class: 'button button-white' %>
+        <%= link_to 'Ajouter une carte', credit_cards_path, class: 'btn btn-light btn-action' %>
       </div>
       <% end %>
     </div>

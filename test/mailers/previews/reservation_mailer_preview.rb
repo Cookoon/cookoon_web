@@ -25,7 +25,7 @@ class ReservationMailerPreview < ActionMailer::Preview
   end
 
   def invitations_sent
-    ReservationMailer.invitations_sent(Reservation.last, Guest.last(5))
+    ReservationMailer.invitations_sent(Reservation.last)
   end
   # ============================
 

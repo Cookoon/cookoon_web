@@ -33,7 +33,11 @@ Rails.application.routes.draw do
       post 'discount', on: :new
     end
     resources :invoices, only: [:create]
-    resources :reservation_guests, only: [:index, :create]
+    resources :guests, controller: 'reservations/guests', only: [:index, :create] do
+      collection do
+        post 'all', to: 'reservations/guests#create_all'
+      end
+    end
   end
 
   # -------- HOST NAMESPACE ---------

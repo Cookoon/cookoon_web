@@ -1,4 +1,6 @@
 class Guest < ApplicationRecord
+  default_scope { order('LOWER(last_name) ASC') }
+
   belongs_to :user
 
   validates :email, presence: true,
