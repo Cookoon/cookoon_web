@@ -80,7 +80,7 @@ module HostReservationCardHelper
     end
 
     def button
-      content_tag(:div, button_tag, class: 'text-center light-padded')
+      content_tag(:div, button_tag, class: 'text-center pt-5 pb-3')
     end
 
     def button_tag
@@ -99,7 +99,7 @@ module HostReservationCardHelper
     def cancel_instructions
       return unless reservation.accepted?
       content = safe_join([cancel_text, cancel_link])
-      content_tag(:div, content, class: 'text-center mt-20')
+      content_tag(:div, content, class: 'text-center mt-3')
     end
 
     def cancel_text

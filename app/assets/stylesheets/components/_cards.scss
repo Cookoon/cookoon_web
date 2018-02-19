@@ -80,7 +80,7 @@
     color: $blue;
   }
   &-grey {
-    background: $grey;
+    background: $secondary;
     color: white;
   }
   &-infos {
@@ -144,7 +144,7 @@
     margin-bottom: 3px;
   }
   &-grey {
-    background-color: $grey;
+    background-color: $secondary;
     color: white;
   }
   &-white {
@@ -189,7 +189,7 @@
     color: white;
   }
   &-grey {
-    background: $grey;
+    background: $secondary;
     color: white;
   }
   i {
@@ -232,6 +232,7 @@
   padding: 25px;
   color: white;
   margin: 0 15px;
+  width: 100%;
   #cookoon-error {
     width: 80px;
     margin-bottom: 25px;

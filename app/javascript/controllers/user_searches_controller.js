@@ -30,10 +30,10 @@ export default class extends Controller {
 
   updateAddressAndClearVisibility() {
     if (this.addressInputTarget.value) {
-      this.addressClearTarget.classList.add('d-initial');
+      this.addressClearTarget.classList.add('d-block');
     } else {
       this.addressTarget.textContent = 'Adresse';
-      this.addressClearTarget.classList.remove('d-initial');
+      this.addressClearTarget.classList.remove('d-block');
     }
   }
 

@@ -1,5 +1,6 @@
 //= require jquery
 //= require jquery-ui
+//= require popper
 //= require bootstrap-sprockets
 //= require smalot-bootstrap-datetimepicker
 //= require cocoon

@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'cookoon';
-  src:  font-url('cookoon.eot?imayd7');
-  src:  font-url('cookoon.eot?imayd7#iefix') format('embedded-opentype'),
-    font-url('cookoon.ttf?imayd7') format('truetype'),
-    font-url('cookoon.woff?imayd7') format('woff'),
-    font-url('cookoon.svg?imayd7#cookoon') format('svg');
+  src: font-url('cookoon.eot?qvcsj');
+  src: font-url('cookoon.eot?qvcsj#iefix') format('embedded-opentype'),
+    font-url('cookoon.ttf?qvcsj') format('truetype'),
+    font-url('cookoon.woff?qvcsj') format('woff'),
+    font-url('cookoon.svg?qvcsj#cookoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,171 +24,150 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.co-addcookoon .path1:before {
+  content: '\e900';
+}
+.co-addcookoon .path2:before {
+  content: '\e901';
+  margin-left: -1em;
+}
 .co-bank:before {
-  content: "\e900";
-  color: #006f8c;
+  content: '\e902';
+}
+.co-broken-door:before {
+  content: '\e903';
 }
 .co-camera:before {
-  content: "\e901";
-  color: #006f8c;
+  content: '\e904';
 }
 .co-cb:before {
-  content: "\e902";
-  color: #006f8c;
+  content: '\e905';
 }
 .co-check:before {
-  content: "\e903";
-  color: #006f8c;
+  content: '\e906';
 }
 .co-cleaning .path1:before {
-  content: "\e904";
-  color: rgb(0, 111, 140);
+  content: '\e907';
 }
 .co-cleaning .path2:before {
-  content: "\e905";
+  content: '\e908';
   margin-left: -1em;
-  color: rgb(255, 255, 255);
 }
 .co-cleaning .path3:before {
-  content: "\e906";
+  content: '\e909';
   margin-left: -1em;
-  color: rgb(255, 255, 255);
 }
 .co-cleaning .path4:before {
-  content: "\e907";
+  content: '\e90a';
   margin-left: -1em;
-  color: rgb(255, 255, 255);
 }
 .co-cleaning .path5:before {
-  content: "\e908";
+  content: '\e90b';
   margin-left: -1em;
-  color: rgb(255, 255, 255);
 }
 .co-cleaning .path6:before {
-  content: "\e909";
+  content: '\e90c';
   margin-left: -1em;
-  color: rgb(255, 255, 255);
 }
 .co-cleaning .path7:before {
-  content: "\e90a";
+  content: '\e90d';
   margin-left: -1em;
-  color: rgb(255, 255, 255);
 }
 .co-cleaning .path8:before {
-  content: "\e90b";
+  content: '\e90e';
   margin-left: -1em;
-  color: rgb(255, 255, 255);
 }
 .co-concierge:before {
-  content: "\e90c";
-  color: #006f8c;
+  content: '\e90f';
 }
 .co-email:before {
-  content: "\e90d";
-  color: #006f8c;
+  content: '\e910';
+}
+.co-fire:before {
+  content: '\e911';
 }
 .co-home:before {
-  content: "\e90e";
-  color: #006f8c;
+  content: '\e912';
 }
 .co-logo:before {
-  content: "\e90f";
-  color: #006f8c;
+  content: '\e913';
+}
+.co-lost:before {
+  content: '\e914';
 }
 .co-meeting:before {
-  content: "\e910";
-  color: #006f8c;
+  content: '\e915';
 }
 .co-minus .path1:before {
-  content: "\e911";
-  color: rgb(255, 255, 255);
+  content: '\e916';
 }
 .co-minus .path2:before {
-  content: "\e912";
+  content: '\e917';
   margin-left: -1em;
-  color: rgb(0, 111, 140);
 }
 .co-notifications:before {
-  content: "\e913";
-  color: #006f8c;
+  content: '\e918';
 }
 .co-plus:before {
-  content: "\e914";
-  color: #006f8c;
+  content: '\e919';
 }
 .co-reversed--camera:before {
-  content: "\e915";
-  color: #006f8c;
+  content: '\e91a';
 }
 .co-reversed-addcookoon:before {
-  content: "\e916";
-  color: #006f8c;
+  content: '\e91b';
 }
 .co-reversed-bank:before {
-  content: "\e917";
-  color: #006f8c;
+  content: '\e91c';
 }
 .co-reversed-cb:before {
-  content: "\e918";
-  color: #006f8c;
+  content: '\e91d';
 }
 .co-reversed-check:before {
-  content: "\e919";
-  color: #006f8c;
+  content: '\e91e';
 }
 .co-reversed-cleaning:before {
-  content: "\e91a";
-  color: #006f8c;
+  content: '\e91f';
 }
 .co-reversed-concierge:before {
-  content: "\e91b";
-  color: #006f8c;
+  content: '\e920';
 }
 .co-reversed-email:before {
-  content: "\e91c";
-  color: #006f8c;
+  content: '\e921';
 }
 .co-reversed-home:before {
-  content: "\e91d";
-  color: #006f8c;
+  content: '\e922';
 }
 .co-reversed-logo:before {
-  content: "\e91e";
-  color: #006f8c;
+  content: '\e923';
 }
 .co-reversed-meeting:before {
-  content: "\e91f";
-  color: #006f8c;
+  content: '\e924';
 }
 .co-reversed-minus:before {
-  content: "\e920";
-  color: #006f8c;
+  content: '\e925';
 }
 .co-reversed-notifications:before {
-  content: "\e921";
-  color: #006f8c;
+  content: '\e926';
 }
 .co-reversed-plus:before {
-  content: "\e922";
-  color: #006f8c;
+  content: '\e927';
 }
 .co-reversed-sad:before {
-  content: "\e923";
-  color: #006f8c;
+  content: '\e928';
 }
 .co-reversed-success:before {
-  content: "\e924";
-  color: #006f8c;
+  content: '\e929';
 }
 .co-reversed-user:before {
-  content: "\e925";
-  color: #006f8c;
+  content: '\e92a';
+}
+.co-stain:before {
+  content: '\e92b';
 }
 .co-success:before {
-  content: "\e926";
-  color: #006f8c;
+  content: '\e92c';
 }
 .co-user:before {
-  content: "\e927";
-  color: #006f8c;
+  content: '\e92d';
 }
