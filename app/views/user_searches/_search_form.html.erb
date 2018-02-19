@@ -7,19 +7,17 @@
   data-user-searches-max-people="20"
 >
   <div class="container">
-    <div class="search-header">
-      <div class="search-header-clickable" data-action="click->user-searches#toggleBodyVisibility">
+    <div class="d-flex-default child-mx-2 my-2 text-center">
+      <div class="d-flex-default child-mx-2 pointer" data-action="click->user-searches#toggleBodyVisibility">
         <i class="fa fa-search"></i>
         <div id='infos-address' data-target="google-maps-autocompletes.shortAddress user-searches.address"><%= @search_infos[:position] %></div>
         <div data-target="user-searches.date"><%= @search_infos[:time_slot] %></div>
         <div>Pour <span data-target="user-searches.people"><%= @search_infos[:people_number] %></span></div>
       </div>
       <% if @current_search %>
-        <%= link_to user_searches_path, method: :patch, remote: true do %>
-          <div class="d-flex align-items-center">
-            <p class="hidden-xs">Annuler la recherche</p>
-            <i class="fa fa-times-circle ml-10"></i>
-          </div>
+        <%= link_to user_searches_path, class: 'd-flex-default text-white opacity-hover', method: :patch, remote: true do %>
+          <span class="d-none d-sm-block mr-2">Annuler la recherche</span>
+          <i class="fa fa-times fa-lg"></i>
         <% end %>
       <% end %>
     </div>
@@ -27,13 +25,14 @@
       <div class="container">
         <%= simple_form_for @new_search, remote: true do |f| %>
           <div class="row">
-            <div class="col-xs-12">
-              <div class="btn-group w-100">
+            <div class="col-12">
+              <div class="w-100">
                 <%= f.input :address,
                             label: false,
                             placeholder: 'Ville, adresse ...',
                             input_html: {
                               value: @user_search.address,
+                              class: 'w-100',
                               data: {
                                 action: 'keyup->user-searches#updateAddressAndClearVisibility',
                                 target: 'google-maps-autocompletes.addressInput google-maps-autocompletes.inputAddress user-searches.addressInput'
@@ -49,7 +48,7 @@
                 ></i>
               </div>
             </div>
-            <div class="col-xs-12">
+            <div class="col-12">
               <%= f.input :date,
                           label: false,
                           placeholder: 'Date & heure',
@@ -72,8 +71,8 @@
             </div>
 
             <!-- Nombre d'heures -->
-            <div class="col-xs-12 col-md-6">
-              <div class="increment-block">
+            <div class="col-12 col-md-6">
+              <div class="d-flex-default my-3">
                 <i class="fa fa-minus-circle fa-2x" aria-hidden="true" data-action="click->user-searches#decrementDuration"></i>
                 <div><span data-target="user-searches.duration"><%= @user_search.duration %></span> heure(s)</div>
                 <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-action="click->user-searches#incrementDuration"></i>
@@ -82,8 +81,8 @@
             </div>
 
             <!-- Nombre de participants -->
-            <div class="col-xs-12 col-md-6">
-              <div class="increment-block">
+            <div class="col-12 col-md-6">
+              <div class="d-flex-default my-3">
                 <i class="fa fa-minus-circle fa-2x" aria-hidden="true" data-action="click->user-searches#decrementPeople"></i>
                 <div><span data-target="user-searches.people"><%= @user_search.number %></span> personne(s)</div>
                 <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-action="click->user-searches#incrementPeople"></i>

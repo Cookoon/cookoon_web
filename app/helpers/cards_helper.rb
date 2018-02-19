@@ -1,7 +1,7 @@
 module CardsHelper
   def price_display_for(cookoon)
     content = get_price_rank(cookoon.price_cents)
-    content_tag(:div, content, class: ["hexagon", "ml-10"])
+    content_tag(:div, content, class: ["hexagon", "ml-2"])
   end
 
   def category_display_for(cookoon)

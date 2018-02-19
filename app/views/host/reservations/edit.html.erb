@@ -2,13 +2,13 @@
   <div class="reservation-card">
     <%= render 'user_infos', reservation: @reservation %>
     <%= render 'form' %>
-    <div class="container-flex pt-5 pb-3">
+    <div class="d-flex-default pt-5 pb-3">
       <b>Informations sur le locataire</b>
     </div>
-    <div class="container-flex">
+    <div class="d-flex-default">
       <p><%= @reservation.user.full_name %></p>
     </div>
-    <div class="container-flex">
+    <div class="d-flex-default">
       <p><%= @reservation.user.description %></p>
     </div>
   </div>

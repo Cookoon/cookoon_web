@@ -12,11 +12,11 @@
     <div class="text-danger py-3" data-target='stripe-payments.cardError' role="alert"></div>
     <%= f.input :stripe_token, as: :hidden, input_html: { data: { target: 'stripe-payments.tokenInput' } } %>
 
-    <div class="container-flex py-3">
+    <div class="d-flex-default py-3">
       <p>Utiliser comme carte principale</p>
       <div class="form-group boolean optional">
         <input value="0" type="hidden" name="credit_card[default]">
-        <input class="boolean optional hidden" type="checkbox" value="1" name="credit_card[default]" id="credit_card_default">
+        <input class="boolean optional d-none" type="checkbox" value="1" name="credit_card[default]" id="credit_card_default">
         <label class="boolean optional toggle" for="credit_card_default">
           <span class="toggle-handler"></span>
         </label>
@@ -32,5 +32,5 @@
                    }
       %>
     </div>
-  <% end %>  
+  <% end %>
 </div>

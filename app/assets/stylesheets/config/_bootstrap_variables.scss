@@ -1,23 +1,30 @@
-// General style
-// $font-family-sans-serif: $body-font;
-// $headings-font-family: $headers-font;
-$font-size-base: 0.8125rem;
+// variables.scss
+$font-size-base: 0.875rem;
+
+$blue: #006f8b;
+$cream: #fafeef;
+
 $body-bg: $cream;
 
-// Colors
-$brand-primary: $blue;
-$brand-secondary: #6c757c;
-$brand-success: #30a64a;
-$brand-danger: #da3849;
-$brand-warning: #fdc02f;
-$brand-info: #25a2b7;
-$gray-base: $black;
-
-$state-danger-text: $brand-danger;
-// Contrasting text color on btn-light
+// Customize the dark text colors for use in our YIQ color contrast function.
 $yiq-text-dark: $blue;
 
-// Buttons & inputs' radius
+$link-hover-decoration: none;
+
+// buttons
 $btn-border-radius: 2rem;
 $btn-border-radius-lg: 2.4rem;
 $btn-border-radius-sm: 1.6rem;
+
+// forms
+$input-bg: $body-bg;
+$input-border-color: #000;
+$input-border-radius: 0;
+$input-border-width: 1px;
+$input-focus-border-color: lighten($blue, 10%);
+$input-focus-box-shadow: none;
+
+$form-feedback-font-size: $font-size-base;
+
+$close-color: #fff;
+$close-text-shadow: none;

@@ -99,7 +99,7 @@ module HostReservationCardHelper
     def cancel_instructions
       return unless reservation.accepted?
       content = safe_join([cancel_text, cancel_link])
-      content_tag(:div, content, class: 'text-center mt-20')
+      content_tag(:div, content, class: 'text-center mt-3')
     end
 
     def cancel_text

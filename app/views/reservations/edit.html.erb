@@ -11,11 +11,11 @@
       <i class="fa fa-circle" aria-hidden="true"></i>
     </div>
     <div class="host-details py-3">
-      <div class="container-flex">
+      <div class="d-flex-default">
         <p>Numéro de téléphone : </p>
         <p><%= @reservation.cookoon.user.phone_number %></p>
       </div>
-      <div class="container-flex">
+      <div class="d-flex-default">
         <p>E-mail : </p>
         <p><%= @reservation.cookoon.user.email %></p>
       </div>
@@ -24,16 +24,16 @@
       <i class="fa fa-circle" aria-hidden="true"></i>
     </div>
     <div class="pt-5 pb-3">
-      <div class="container-flex">
+      <div class="d-flex-default">
         <p>Prix de la location</p>
         <p><%= humanized_money_with_symbol @reservation.price %></p>
       </div>
-      <div class="container-flex">
+      <div class="d-flex-default">
         <p>Frais de services</p>
         <p><%= humanized_money_with_symbol @reservation.cookoon_fees %></p>
       </div>
-      <hr class='hr-white'>
-      <div class="container-flex">
+      <hr class='white'>
+      <div class="d-flex-default">
         <p>TOTAL</p>
         <p><%= humanized_money_with_symbol @reservation.price_with_fees %></p>
       </div>

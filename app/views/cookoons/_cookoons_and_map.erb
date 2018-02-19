@@ -1,7 +1,7 @@
-<div class="col-xs-12 col-md-8">
+<div class="col-12 col-md-8">
   <div class="row">
     <% @cookoons.each do |cookoon| %>
-      <div class="col-xs-12 col-md-6">
+      <div class="col-12 col-md-6">
         <%= link_to cookoon do %>
           <div class="card">
             <div class="card-picture" style="background-image: url(<%= cookoon_safe_picture(cookoon) %>)"></div>
@@ -20,7 +20,7 @@
     <% end %>
   </div>
 </div>
-<div class="col-xs-12 col-md-4 hidden-xs">
+<div class="col-12 col-md-4 d-none d-sm-block">
   <script>
   var markers_json = <%=raw @hash.to_json %>
   </script>

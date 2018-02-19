@@ -1,64 +1,6 @@
-// body settings
 body {
   position: relative;
   min-height: 100vh;
-}
-
-// Bootstrap 4 compatible
-.font-italic {
-  font-style: italic;
-}
-.pb-3 {
-  padding-bottom: 1rem;
-}
-.py-3 {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-}
-.pt-5 {
-  padding-top: 3rem;
-}
-.pb-3 {
-  padding-bottom: 1rem;
-}
-.py-5 {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-}
-
-.text-secondary {
-  color: $brand-secondary;
-}
-.text-white {
-  color: $white;
-}
-
-.position-fixed {
-  position: fixed;
-}
-
-.w-100 {
-  width: 100%;
-}
-
-.d-initial {
-  display: initial !important;
-}
-.d-flex {
-  display: flex;
-}
-.d-none {
-  display: none;
-}
-
-.justify-content-between {
-  justify-content: space-between;
-}
-.justify-content-around {
-  justify-content: space-around;
-}
-.align-items-center {
-  align-items: center;
 }
 
 // Custom Bootstrap 4 utilities
@@ -66,103 +8,97 @@ body {
   bottom: 0;
 }
 
-// Specific to Bootstrap 3 simple_form ?
-.help-block {
-  color: $brand-danger !important;
-  font-size: 16px;
-  font-weight: bold;
+.child-mx-2 {
+  & > * {
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+.child-mx-3 {
+  & > * {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    &:first-child {
+      margin-left: 0;
+    }
+    &:last-child {
+      margin-right: 0;
+    }
+  }
 }
 
-// Containers
-.container-flex {
-  @extend .d-flex;
-  @extend .justify-content-between;
-  @extend .align-items-center;
+.d-flex-default {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-// Links - needed after Bootstrap 4 migration?
-a,
-a:focus,
-a:hover,
-a:visited {
-  text-decoration: none;
+.pointer {
+  cursor: pointer;
+}
+
+.opacity-hover {
+  opacity: 1;
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+// Animation
+.bump {
+  animation: bump 200ms;
+}
+@keyframes bump {
+  30% {
+    transform: scale(1.2);
+  }
 }
 
 // Horizontal Rules
 hr {
-  margin-top: 22px;
-  margin-bottom: 22px;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   border-top: 1px solid $gray-800;
-  &.hr-white {
-    border-top: 1px solid $white;
+  &.white {
+    border-top-color: $white;
   }
 }
-
-// Fonts
-// h2 {
-//   margin-bottom: 22px;
-//   font-size: 24px;
-// }
-
-// h3 {
-//   font-size: 20px;
-// }
-
-// Trick to disable zoom on Ios mobile devices
-@media screen and (-webkit-min-device-pixel-ratio: 0) {
-  select,
-  textarea,
-  input {
-    font-size: 16px !important;
-  }
-}
-//
-// select {
-//   -webkit-appearance: none;
-// }
 
 // Font Awesome
 .fa-ul > li,
 .fa-ul > li > i.fa-li {
-  padding: 1em 0;
-}
-.fs-16 {
-  font-size: 16px;
-}
-.fs-20 {
-  font-size: 20px;
-}
-.fs-24 {
-  font-size: 24px;
+  padding: 1rem 0;
 }
 
-// Atomic classes
-.op-90 {
-  opacity: 0.9;
-}
+// Trick to disable zoom on iOS mobile devices
+@include media-breakpoint-down(sm) {
+  input[type='color'],
+  input[type='date'],
+  input[type='datetime'],
+  input[type='datetime-local'],
+  input[type='email'],
+  input[type='month'],
+  input[type='number'],
+  input[type='password'],
+  input[type='search'],
+  input[type='tel'],
+  input[type='text'],
+  input[type='time'],
+  input[type='url'],
+  input[type='week'],
+  select,
+  select:focus,
+  textarea {
+    font-size: 16px !important;
+  }
 
-.text-shadow-none {
-  text-shadow: none;
-}
-
-.zi-20 {
-  z-index: 20;
-}
-
-.mt-20 {
-  margin-top: 20px;
-}
-.ml-10 {
-  margin-left: 10px;
-}
-
-// placeholders style
-::-webkit-input-placeholder {
-  font-style: italic;
-}
-
-@media (max-width: 320px) {
-  ::-webkit-input-placeholder {
-    font-size: 14px;
+  select {
+    -webkit-appearance: none;
   }
 }
