@@ -70,7 +70,6 @@ GEM
     cloudinary (1.8.2)
       aws_cf_signer
       rest-client
-    cocoon (1.2.11)
     coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
@@ -395,7 +394,6 @@ DEPENDENCIES
   bullet
   byebug
   cloudinary
-  cocoon
   coffee-rails (~> 4.2)
   delocalize
   devise

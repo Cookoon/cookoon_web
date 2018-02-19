@@ -1,11 +1,5 @@
 ---
 fr:
-  cocoon:
-    defaults:
-      add: Ajouter un élément
-      remove: Retirer cet élément
-    guests:
-      add: Ajouter un autre invité
   helpers:
     submit:
       user:

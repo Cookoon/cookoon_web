@@ -3,7 +3,6 @@
 //= require popper
 //= require bootstrap-sprockets
 //= require smalot-bootstrap-datetimepicker
-//= require cocoon
 //= require underscore
 //= require jquery-fileupload/basic
 //= require cloudinary/jquery.cloudinary
