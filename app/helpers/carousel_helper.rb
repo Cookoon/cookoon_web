@@ -44,10 +44,10 @@ module CarouselHelper
 
     def slide_tag(image, is_active)
       options = {
-        class: (is_active ? 'item active' : 'item'),
+        class: (is_active ? 'carousel-item active' : 'carousel-item'),
       }
 
-      content_tag(:div, cl_image_tag(image.path, height: 400, width: :auto, crop: :lpad, background: "black"), options)
+      content_tag(:div, cl_image_tag(image.path, height: 400, width: :auto, crop: :lpad, background: 'black', class: 'img-fluid'), options)
     end
 
     def controls

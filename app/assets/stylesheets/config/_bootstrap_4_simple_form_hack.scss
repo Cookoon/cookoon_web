@@ -1,0 +1,19 @@
+.has-invalid {
+  .invalid-feedback {
+    display: block;
+  }
+
+  label {
+    color: $form-feedback-invalid-color;
+  }
+
+  .form-control {
+    // background: rgba($form-feedback-invalid-color, 0.8);
+    border-color: $form-feedback-invalid-color;
+  }
+}
+
+// for f.input :terms_of_service
+.form-check .invalid-feedback {
+  display: block;
+}

@@ -1,27 +1,30 @@
-/* -------------------------------------
- * Bootstrap sass variable
- * (see http://getbootstrap.com/customize/#less-variables)
- * ------------------------------------- */
+// variables.scss
+$font-size-base: 0.875rem;
 
-// General style
-$font-family-sans-serif: $base-font;
+$blue: #006f8b;
+$cream: #fafeef;
+
 $body-bg: $cream;
-$font-size-base: $base-size;
-$line-height-base: $base-height;
-$headings-font-family: $header-font;
 
-// Semantic color scheme
-// => http://getbootstrap.com/customize/#colors
-$gray-base: $black;
-$brand-primary: $blue;
-$brand-success: $green;
-$brand-info: $yellow;
-$brand-danger: $red;
-$brand-warning: $orange;
+// Customize the dark text colors for use in our YIQ color contrast function.
+$yiq-text-dark: $blue;
 
-$state-danger-text: $brand-danger;
+$link-hover-decoration: none;
 
-// Buttons / inputs radius
-$border-radius-base: 2px;
-$border-radius-large: 2px;
-$border-radius-small: 2px;
+// buttons
+$btn-border-radius: 2rem;
+$btn-border-radius-lg: 2.4rem;
+$btn-border-radius-sm: 1.6rem;
+
+// forms
+$input-bg: $body-bg;
+$input-border-color: #000;
+$input-border-radius: 0;
+$input-border-width: 1px;
+$input-focus-border-color: lighten($blue, 10%);
+$input-focus-box-shadow: none;
+
+$form-feedback-font-size: $font-size-base;
+
+$close-color: #fff;
+$close-text-shadow: none;

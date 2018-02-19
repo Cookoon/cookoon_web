@@ -6,17 +6,23 @@
   }
   &-datetime {
     margin-top: 40px;
+    input[readonly] {
+      margin-bottom: 10px;
+      background: inherit;
+    }
   }
 }
 
-.recap input, .recap select {
-  background: #006F8B;
+.recap input,
+.recap select {
+  background: #006f8b;
   color: white;
   text-decoration: underline;
   border: none;
   transition: none;
 }
 
-.recap input:focus, .recap select:focus {
+.recap input:focus,
+.recap select:focus {
   border: none;
 }

@@ -1,20 +1,20 @@
 <% unless @user.stripe_verified? %>
   <%= render 'stripe_connection_card' %>
 <% end %>
-<div class="container light-padded">
+<div class="container pt-5 pb-3">
   <p>Votre activité</p>
-  <b>Historique des revenus : <span class="text-blue"><%= humanized_money_with_symbol current_user.total_payouts_for_dashboard %></span></b>
+  <b>Historique des revenus : <span class="text-primary"><%= humanized_money_with_symbol current_user.total_payouts_for_dashboard %></span></b>
   <hr>
   <p>Vos dernières demandes de réservation</p>
-  <b>Vous avez <span class="text-blue"><%= @pending_reservations_count %> demande(s) de réservation</span> en attente</b>
-  <div class="text-center light-padded">
+  <b>Vous avez <span class="text-primary"><%= @pending_reservations_count %> demande(s) de réservation</span> en attente</b>
+  <div class="text-center pt-5 pb-3">
     <%= link_to 'Voir mes Réservations', host_reservations_path, class: 'button button-blue' %>
   </div>
   <hr>
   <p>Vos Cookoons</p>
   <div class="row">
     <% @cookoons.each do |cookoon| %>
-      <div class="col-xs-12 col-md-6">
+      <div class="col-12 col-md-6">
         <div class="card">
           <div class="card-picture" style="background-image: url(<%= cookoon_safe_picture(cookoon) %>)"></div>
           <div class="card-data">
@@ -30,7 +30,7 @@
       </div>
     <% end %>
   </div>
-  <div class="thin-padded text-center">
+  <div class="py-3 text-center">
     <%= link_to "Proposer mon appartement", new_cookoon_path, class: 'button button-blue' %>
   </div>
 </div>

@@ -6,15 +6,15 @@
   <%= render 'user_searches/search_form' %>
 </div>
 
-<% if @cookoons.empty? %>
-  <%= render 'no_cookoon' %>
-<% else %>
-  <div class="container">
-    <div id="cookoons_and_map" class="row">
+<div class="container">
+  <div id="cookoons_and_map" class="row">
+    <% if @cookoons.empty? %>
+      <%= render 'no_cookoon' %>
+    <% else %>
       <%= render 'cookoons_and_map' %>
-    </div>
+    <% end %>
   </div>
-<% end %>
+</div>
 
 <!-- unless @lat_lng -->
 <!-- can add this script to set cookie[:lat_lng] -->
