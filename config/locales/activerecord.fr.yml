@@ -6,9 +6,7 @@ fr:
         checkin_photos: Photos à l'entrée des lieux
         checkout_photos: Photos à la sortie des lieux
       user:
-        description: Description
-        phone_number: Téléphone portable
-        photo: Photo
+        phone_number: Téléphone portable        
         reset_password_token: Votre lien de réinitialisation
     errors:
       models:
@@ -32,10 +30,12 @@ fr:
     models:
       user: Utilisateur
   attributes:
+    description: Description
     email: Email
     guests: Invités
     first_name: Prénom
     last_name: Nom
+    photo: Photo
   errors:
     attributes:
       email:
