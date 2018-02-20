@@ -1,0 +1,26 @@
+<p>Bonjour <%= @guest.first_name %>,</p>
+<p><%= @tenant.full_name %> a réservé un Cookoon :</p>
+
+<table border="0" cellpadding="0" cellspacing="10" class="info"><tbody>
+  <tr>
+    <td align="center">
+      <%= image_tag('icon-home.png', alt: 'Cookoon') %>
+    </td>
+    <td>
+      <b><%= @cookoon.name %></b>
+      <br><%= @cookoon.address %>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <%= image_tag('icon-meeting.png', alt: 'Rendez-vous') %>
+    </td>
+    <td>
+      <b>Vous êtes invité à le rejoindre</b>
+      <br>le <%= display_date_for(@reservation.date) %> à <%= display_time_for(@reservation.date) %>
+    </td>
+  </tr>
+</tbody></table>
+
+<h3>Qu'est-ce que Cookoon ?</h3>
+<p>Découvrez la communauté, les membres et les services sur <%= link_to 'cookoon.fr', 'https://cookoon.fr', target: :_blank %>.</p>

@@ -6,9 +6,9 @@
 //= require underscore
 //= require jquery-fileupload/basic
 //= require cloudinary/jquery.cloudinary
-//= require delete-pointer-event
-//= require hammer
 //= require attachinary
 //= require gmaps/google
+//= require delete-pointer-event
+//= require hammer
 //= require_tree ./shared
 //= require_tree ./locale
