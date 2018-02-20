@@ -13,9 +13,8 @@
       p Conviez vos invités ci-dessous, nous leur envoyons un mail d'invitation de votre part :
       = render 'reservation_form'
 
-    - if @user_guests.empty?
-      p.pt-4 Ajoutez un nouveau contact à votre liste afin de pouvoir l'inviter.
-    - else
       p.pt-4 Votre invité n'est pas encore dans votre liste de contacts ?
+    - else
+      p.pt-4 Ajoutez un nouveau contact à votre liste afin de pouvoir l'inviter.
 
     = render 'new_modal'
