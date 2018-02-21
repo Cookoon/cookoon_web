@@ -37,14 +37,14 @@
       </div>
     </div>
   </div>
-  <hr style="border-top: 1px solid white">
+  <hr class="white">
   <div class="text-right">
     <p>Vous recevrez : <span id="display-price" data-reservation-price-cents="<%= @reservation.payout_price_cents %>"><%= humanized_money_with_symbol @reservation.payout_price %></span></p>
   </div>
   <% if @reservation.pending_or_paid? %>
     <div class="d-flex-default">
-      <%= f.submit 'Refuser', name: "refuse", class: 'button button-white' %>
-      <%= f.submit 'Accepter', name: "accept", class: 'button button-white slowLoad' %>
+      <%= f.submit 'Refuser', name: "refuse", class: 'btn btn-light btn-action-sm' %>
+      <%= f.submit 'Accepter', name: "accept", class: 'btn btn-light btn-action-sm slowLoad' %>
     </div>
   <% end %>
 <% end %>
