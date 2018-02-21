@@ -2,7 +2,9 @@
   <%= render 'shared/navbar_transparent', url: cookoons_path %>
 <% end %>
 
-<%= carousel_for(@cookoon.photos) %>
+<div class="bg-dark">
+  <%= carousel_for(@cookoon.photos) %>
+</div>
 
 <div class="container">
   <div class="block-presentation">
