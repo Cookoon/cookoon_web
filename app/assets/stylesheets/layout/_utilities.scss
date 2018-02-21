@@ -15,6 +15,14 @@ body {
   padding-bottom: 1rem;
   border-radius: 2rem;
   text-transform: uppercase;
+  &-sm {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-radius: 2rem;
+    text-transform: uppercase;
+  }
 }
 
 .child-mx-2 {
