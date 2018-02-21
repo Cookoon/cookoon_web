@@ -123,7 +123,6 @@ GEM
     geocoder (1.4.5)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
-    gmaps4rails (2.1.2)
     groupdate (3.2.0)
       activesupport (>= 3)
     highline (1.7.10)
@@ -250,7 +249,6 @@ GEM
       railties (= 5.1.4)
       sprockets-rails (>= 2.0.0)
     rails-assets-smalot-bootstrap-datetimepicker (2.4.4)
-    rails-assets-underscore (1.8.3)
     rails-dom-testing (2.0.3)
       activesupport (>= 4.2.0)
       nokogiri (>= 1.6)
@@ -402,7 +400,6 @@ DEPENDENCIES
   font-awesome-sass
   forest_liana
   geocoder
-  gmaps4rails
   i18n-debug
   i18n-tasks
   icalendar
@@ -424,7 +421,6 @@ DEPENDENCIES
   rack-cors
   rails (~> 5.1.4)
   rails-assets-smalot-bootstrap-datetimepicker!
-  rails-assets-underscore!
   rails-i18n (~> 5.0.0)
   raygun4ruby
   roadie-rails
