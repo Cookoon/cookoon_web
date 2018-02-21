@@ -1,2 +1,0 @@
-delete window.PointerEvent;
-

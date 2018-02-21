@@ -126,7 +126,6 @@ GEM
     gmaps4rails (2.1.2)
     groupdate (3.2.0)
       activesupport (>= 3)
-    hammerjs-rails (2.0.8)
     highline (1.7.10)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
@@ -404,7 +403,6 @@ DEPENDENCIES
   forest_liana
   geocoder
   gmaps4rails
-  hammerjs-rails
   i18n-debug
   i18n-tasks
   icalendar
