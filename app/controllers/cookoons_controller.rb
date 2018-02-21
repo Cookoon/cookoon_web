@@ -39,6 +39,7 @@ class CookoonsController < ApplicationController
       date: current_search.try(:date) || Time.zone.now + 3.days,
       duration: current_search.try(:duration) || 2
     )
+    @marker = { lat: @cookoon.latitude, lng: @cookoon.longitude }
   end
 
   private
@@ -72,9 +73,11 @@ class CookoonsController < ApplicationController
   end
 
   def build_markers
-    @hash = Gmaps4rails.build_markers(@cookoons) do |cookoon, marker|
-      marker.lat cookoon.latitude
-      marker.lng cookoon.longitude
+    @markers = @cookoons.map do |cookoon|
+      {
+        lat: cookoon.latitude,
+        lng: cookoon.longitude
+      }
     end
   end
 end

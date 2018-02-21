@@ -1,4 +1,5 @@
 import { Controller } from 'stimulus';
+import GMaps from 'gmaps/gmaps.js';
 
 export default class extends Controller {
   static targets = ['cookoonIndexMap', 'cookoonShowMap'];
@@ -21,7 +22,10 @@ export default class extends Controller {
   };
 
   connect() {
-    if (this.hasCookoonIndexMapTarget) {
+    if (
+      this.hasCookoonIndexMapTarget &&
+      $(this.cookoonIndexMapTarget).is(':visible')
+    ) {
       this.renderCookoonIndexMap();
     }
 
@@ -31,30 +35,26 @@ export default class extends Controller {
   }
 
   renderCookoonIndexMap() {
-    const handler = Gmaps.build('Google');
-    handler.buildMap(
-      {
-        provider: this.mapOptions,
-        internal: {
-          id: 'cookoon-index-map'
-        }
-      },
-      function() {
-        const markers = handler.addMarkers(markers_json);
-        handler.bounds.extendWith(markers);
-        handler.fitMapToBounds();
-      }
-    );
+    const markers = JSON.parse(this.data.get('markers'));
+    const map = new GMaps({
+      div: this.cookoonIndexMapTarget,
+      ...this.mapOptions
+    });
+    map.addMarkers(markers);
+    map.fitLatLngBounds(markers);
   }
 
   renderCookoonShowMap() {
+    const marker = JSON.parse(this.data.get('marker'));
+
     const map = new google.maps.Map(this.cookoonShowMapTarget, {
       zoom: 15,
-      center: markerObject,
+      center: marker,
       ...this.mapOptions
     });
+
     new google.maps.Marker({
-      position: markerObject,
+      position: marker,
       map: map
     });
   }
