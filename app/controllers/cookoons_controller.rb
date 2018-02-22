@@ -1,5 +1,6 @@
 class CookoonsController < ApplicationController
   include DatetimeHelper
+  before_action :find_cookoon, only: %i[edit update]
 
   def index
     @new_search = build_search
@@ -41,7 +42,21 @@ class CookoonsController < ApplicationController
     )
   end
 
+  def edit; end
+
+  def update
+    if @cookoon.update(cookoon_params)
+      redirect_to
+    else
+      render :new
+    end
+  end
+
   private
+
+  def find_cookoon
+    @cookoon = Cookoon.find(params[:id])
+  end
 
   def cookoon_params
     params.require(:cookoon).permit(:name, :surface, :price, :address, :capacity, :category, photos: [])
