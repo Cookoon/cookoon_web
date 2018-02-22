@@ -56,6 +56,7 @@ class CookoonsController < ApplicationController
 
   def find_cookoon
     @cookoon = Cookoon.find(params[:id])
+    authorize @cookoon
   end
 
   def cookoon_params
