@@ -6,15 +6,15 @@
     <p>Se souvenir de moi ?</p>
     <div class="form-group boolean optional user_remember_me">
       <input value="0" type="hidden" name="user[remember_me]">
-      <input class="boolean optional hidden" type="checkbox" value="1" name="user[remember_me]" id="user_remember_me">
+      <input class="boolean optional d-none" type="checkbox" value="1" name="user[remember_me]" id="user_remember_me">
       <label class="boolean optional toggle" for="user_remember_me">
         <span class="toggle-handler"></span>
       </label>
     </div>
     <!-- ==== FIN CUSTOM CHECKBOX ==== -->
 
-    <%= link_to "J'ai perdu mes idenfiants", new_password_path(resource_name), class: 'italic' %>
-    <div class="home-links links-block light-padded">
+    <%= link_to "J'ai perdu mes idenfiants", new_password_path(resource_name), class: 'font-italic' %>
+    <div class="home-links links-block pt-5 pb-3">
       <%= f.button :submit, "Se Connecter", class: 'button button-blue' %>
     </div>
   </div>

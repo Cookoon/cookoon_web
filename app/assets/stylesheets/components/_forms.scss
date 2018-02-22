@@ -1,24 +1,16 @@
-.form-group input, .form-group textarea, .form-group select {
-  text-color : black;
-  border: none;
-  border-bottom: 1px solid #6c6c6c;
-  transition: border-bottom 0.2s ease;
-  border-radius: 0;
-  background: $cream;
-  box-shadow: none;
+input.form-control,
+textarea.form-control,
+select.form-control {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  padding-bottom: 1px;
+  &:focus {
+    border-width: ($input-border-width * 2);
+    padding-bottom: 0;
+  }
 }
 
-.form-group label {
-  color: #6c6c6c;
-}
-
-.form-group input:focus, .form-group textarea:focus, .form-group select:focus, {
-  outline: none;
-  border-bottom: 2px solid #006F8B;
+.form-control.is-invalid:focus {
   box-shadow: none;
-  transition: border-bottom 0.2s all-ease;
-    -webkit-transition: all 0.2s all-ease;
-    -moz-transition: all 0.2s all-ease;
-    -ms-transition: all 0.2s all-ease;
-    -o-transition: all 0.2s all-ease;
 }

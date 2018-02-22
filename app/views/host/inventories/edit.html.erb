@@ -17,7 +17,7 @@
       En cas de soucis, soyez rassurés notre équipe prendra contact avec vous.
     </p>
   </ol>
-  <div class="thin-padded">
+  <div class="py-3">
     <% if @inventory.checkin_photos.any? %>
       <h5 >Photos réalisées à l'entrée des lieux</h5>
       <%= carousel_for @inventory.checkin_photos %>

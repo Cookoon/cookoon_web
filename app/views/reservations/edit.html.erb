@@ -5,17 +5,17 @@
 <div class="container">
   <div class="reservation-details-card reservation-details-card-blue">
     <p><%= @reservation.cookoon.name.upcase %></p>
-    <p><%= "#{display_datetime_for(@reservation.date, join_expression: '. à')} . pour #{@reservation.duration}h" %></p>
+    <p><%= "#{display_datetime_for(@reservation.date, join_expression: '· à')} · pour #{@reservation.duration}h" %></p>
     <p><%= "#{@reservation.cookoon.category} - #{@reservation.cookoon.address} chez #{@reservation.cookoon.user.full_name}" %></p>
     <div class="text-center">
       <i class="fa fa-circle" aria-hidden="true"></i>
     </div>
-    <div class="host-details thin-padded">
-      <div class="flex-container">
+    <div class="host-details py-3">
+      <div class="d-flex-default">
         <p>Numéro de téléphone : </p>
         <p><%= @reservation.cookoon.user.phone_number %></p>
       </div>
-      <div class="flex-container">
+      <div class="d-flex-default">
         <p>E-mail : </p>
         <p><%= @reservation.cookoon.user.email %></p>
       </div>
@@ -23,22 +23,29 @@
     <div class="text-center">
       <i class="fa fa-circle" aria-hidden="true"></i>
     </div>
-    <div class="light-padded">
-      <div class="flex-container">
+    <div class="pt-5 pb-3">
+      <div class="d-flex-default">
         <p>Prix de la location</p>
         <p><%= humanized_money_with_symbol @reservation.price %></p>
       </div>
-      <div class="flex-container">
+      <div class="d-flex-default">
         <p>Frais de services</p>
         <p><%= humanized_money_with_symbol @reservation.cookoon_fees %></p>
       </div>
-      <hr class='hr-white'>
-      <div class="flex-container">
+      <hr class='white'>
+      <div class="d-flex-default">
         <p>TOTAL</p>
         <p><%= humanized_money_with_symbol @reservation.price_with_fees %></p>
       </div>
-      <div class="text-center light-padded">
-        <%= link_to 'Annuler la réservation', reservation_path(@reservation), method: :patch, remote: true, class: 'button button-white' %>
+
+      <% if @reservation.accepted? %>
+        <div class="text-center py-3">
+          <%= link_to 'Convier mes invités', reservation_guests_path(@reservation), class: 'btn btn-light btn-action' %>
+        </div>
+      <% end %>
+
+      <div class="text-center py-3">
+        <%= link_to 'Annuler la réservation', reservation_path(@reservation), method: :patch, remote: true, class: 'btn btn-light btn-action' %>
       </div>
     </div>
   </div>

@@ -1781,6 +1781,12 @@ dns-txt@^2.0.2:
   dependencies:
     buffer-indexof "^1.0.0"
 
+dom7@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/dom7/-/dom7-2.0.2.tgz#b0259ddab4c06228ddb2e6007f9ef6f0448bcf9d"
+  dependencies:
+    ssr-window "^1.0.0"
+
 domain-browser@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/domain-browser/-/domain-browser-1.2.0.tgz#3d31f50191a6749dd1375a7f522e823d42e54eda"
@@ -3036,6 +3042,14 @@ isobject@^3.0.0, isobject@^3.0.1:
 isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
+
+jquery-touchswipe@^1.6.7:
+  version "1.6.18"
+  resolved "https://registry.yarnpkg.com/jquery-touchswipe/-/jquery-touchswipe-1.6.18.tgz#fd65a09611edc3fece8ef480ae48569d42f984e2"
+
+jquery@~1:
+  version "1.12.4"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-1.12.4.tgz#01e1dfba290fe73deba77ceeacb0f9ba2fec9e0c"
 
 js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.4.3"
@@ -5174,6 +5188,13 @@ slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
 
+slide-and-swipe-menu@^1.2.6:
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/slide-and-swipe-menu/-/slide-and-swipe-menu-1.2.6.tgz#330ebc51e74ccf65181fcbaeaccda8c4f7420abc"
+  dependencies:
+    jquery "~1"
+    jquery-touchswipe "^1.6.7"
+
 snapdragon-node@^2.0.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/snapdragon-node/-/snapdragon-node-2.1.1.tgz#6c175f86ff14bdb0724563e8f3c1b021a286853b"
@@ -5335,6 +5356,10 @@ sshpk@^1.7.0:
     ecc-jsbn "~0.1.1"
     jsbn "~0.1.0"
     tweetnacl "~0.14.0"
+
+ssr-window@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ssr-window/-/ssr-window-1.0.0.tgz#8ed1b6beaa0a371ba7e74d6515d584c3f1cf973c"
 
 ssri@^5.0.0:
   version "5.2.1"
@@ -5503,6 +5528,13 @@ svgo@^0.7.0:
     mkdirp "~0.5.1"
     sax "~1.2.1"
     whet.extend "~0.9.9"
+
+swiper@^4.1.6:
+  version "4.1.6"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-4.1.6.tgz#8e426a741f211a38a3713c8fa0d5c0152c8a6a87"
+  dependencies:
+    dom7 "^2.0.2"
+    ssr-window "^1.0.0"
 
 tapable@^0.2.7:
   version "0.2.8"

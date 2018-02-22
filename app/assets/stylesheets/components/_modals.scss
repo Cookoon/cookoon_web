@@ -1,24 +1,23 @@
 .modal {
-  &-content {
-    background: $blue;
-    color: white;
+  .modal-content {
+    background: $primary;
+    color: $white;
+    .modal-header,
+    .modal-footer {
+      border: none;
+    }
+    input.form-control,
+    textarea.form-control,
+    select.form-control {
+      background-color: inherit;
+      color: inherit;
+      border-color: $white;
+    }
+    .close {
+      opacity: 1;
+      &:hover {
+        opacity: 0.75;
+      }
+    }
   }
-  &-body {
-    padding: 40px;
-    padding-bottom: 10px;
-  }
-  &-header {
-    border: none;
-  }
-  &-footer {
-    text-align: center;
-    border: none;
-  }
-  &-dialog {
-    margin: 20px;
-  }
-}
-
-.close {
-  color: white;
 }

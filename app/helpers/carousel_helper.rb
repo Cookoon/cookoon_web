@@ -6,62 +6,52 @@ module CarouselHelper
   class Carousel
     def initialize(view, images)
       @view, @images = view, images
-      @uid = SecureRandom.hex(6)
     end
 
     def html
-      # controls disabled just add controls in array to reactivate
-      content = safe_join([indicators, slides])
-      content_tag(:div, content, id: uid, class: 'carousel slide')
+      content = safe_join [wrapper, pagination, navigation_buttons]
+      content_tag(
+        :div,
+        content,
+        class: 'swiper-container',
+        data: { controller: 'swipers', target: 'swipers.swiperContainer' }
+      )
     end
 
     private
 
-    attr_accessor :view, :images, :uid
-    delegate :link_to, :content_tag, :cl_image_tag, :safe_join, to: :view
+    attr_accessor :view, :images
+    delegate :content_tag, :cl_image_path, :safe_join, to: :view
 
-    def indicators
-      items = images.count.times.map { |index| indicator_tag(index) }
-      content_tag(:ol, safe_join(items), class: 'carousel-indicators')
+    def wrapper
+      slides = images.map { |image| slide(image) }
+      content_tag(:div, safe_join(slides), class: 'swiper-wrapper')
     end
 
-    def indicator_tag(index)
-      options = {
-        class: (index.zero? ? 'active' : ''),
-        data: {
-          target: "##{uid}",
-          slide_to: index
-        }
-      }
+    def slide(image)
+      image_url = cl_image_path(
+        image.path,
+        height: 600, width: 800, crop: :fill
+      )
 
-      content_tag(:li, '', options)
+      content_tag(
+        :div,
+        nil,
+        class: 'swiper-slide',
+        style: "background-image:url(#{image_url})"
+      )
     end
 
-    def slides
-      items = images.map.with_index { |image, index| slide_tag(image, index.zero?) }
-      content_tag(:div, safe_join(items), class: 'carousel-inner')
+    def pagination
+      content_tag(:div, nil, class: 'swiper-pagination')
     end
 
-    def slide_tag(image, is_active)
-      options = {
-        class: (is_active ? 'item active' : 'item'),
-      }
-
-      content_tag(:div, cl_image_tag(image.path, height: 400, width: :auto, crop: :lpad, background: "black"), options)
+    def navigation_buttons
+      safe_join [button('prev'), button('next')]
     end
 
-    def controls
-      safe_join([control_tag('left'), control_tag('right')])
-    end
-
-    def control_tag(direction)
-      options = {
-        class: "#{direction} carousel-control",
-        data: { slide: direction == 'left' ? 'prev' : 'next' }
-      }
-
-      icon = content_tag(:i, nil, class: "glyphicon glyphicon-chevron-#{direction}")
-      control = link_to(icon, "##{uid}", options)
+    def button(navigation)
+      content_tag(:div, nil, class: "swiper-button-#{navigation} swiper-button-cookoon-blue d-none d-sm-block")
     end
   end
 end

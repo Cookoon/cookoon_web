@@ -1,16 +1,17 @@
 // Graphical variables
-@import "config/variables";
-@import "config/bootstrap_variables";
+@import 'config/bootstrap_variables';
 
 // External libraries
-@import "bootstrap-sprockets";
-@import "bootstrap";
-@import "smalot-bootstrap-datetimepicker";
-@import "font-awesome-sprockets";
-@import "font-awesome";
-@import "vendor/index";
+@import 'bootstrap';
+@import 'smalot-bootstrap-datetimepicker';
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
+@import 'vendor/index';
+
+// Bootstrap 4 Simple Form Hack
+@import 'config/bootstrap_4_simple_form_hack';
 
 // Your CSS
-@import "layout/index";
-@import "components/index";
-@import "pages/index";
+@import 'layout/index';
+@import 'components/index';
+@import 'pages/index';

@@ -13,6 +13,8 @@ class Reservation < ApplicationRecord
   belongs_to :cookoon
   belongs_to :user
   has_one :inventory, dependent: :destroy
+  has_many :reservation_guests, dependent: :destroy
+  has_many :guests, through: :reservation_guests
 
   monetize :price_cents
   monetize :price_for_rent_cents
@@ -110,17 +112,17 @@ class Reservation < ApplicationRecord
     2000
   end
 
-  def ical
+  def ical_for(role)
     cal = Icalendar::Calendar.new
     cal.event do |e|
       e.dtstart = Icalendar::Values::DateTime.new date, tzid: date.zone
       e.dtend = Icalendar::Values::DateTime.new date + duration.hours, tzid: date.zone
-      e.summary = "COOKOON #{cookoon.name}"
+      e.summary = ical_params.dig(role, :summary)
       e.location = cookoon.address
       e.description = <<~DESCRIPTION
-        Hôte : #{cookoon.user.full_name} - #{cookoon.user.phone_number} - #{cookoon.user.email}
-        Locataire : #{user.full_name} - #{user.phone_number} - #{user.email}
-        #{cookoon.description}
+        #{ical_params.dig(role, :description)}
+
+        Une question ? Rendez-vous sur https://aide.cookoon.fr
       DESCRIPTION
       e.organizer = "mailto:#{Rails.configuration.action_mailer.default_options[:from]}"
     end
@@ -128,10 +130,44 @@ class Reservation < ApplicationRecord
   end
 
   def ical_file_name
-    "#{cookoon.name.underscore}_#{date.strftime('%d%b%y').downcase}.ics"
+    "#{cookoon.name.parameterize(separator: '_')}_#{date.strftime('%d%b%y').downcase}.ics"
   end
 
   private
+
+  def ical_params
+    {
+      host: {
+        summary: "Location de votre Cookoon : #{cookoon.name}",
+        description: <<~DESCRIPTION
+          Location de votre Cookoon : #{cookoon.name}
+
+          Locataire :
+          #{user.full_name}
+          #{user.phone_number} - #{user.email}
+        DESCRIPTION
+      },
+      tenant: {
+        summary: "Réservation Cookoon : #{cookoon.name}",
+        description: <<~DESCRIPTION
+          Réservation Cookoon : #{cookoon.name}
+
+          Hôte :
+          #{cookoon.user.full_name}
+          #{cookoon.user.phone_number} - #{cookoon.user.email}
+        DESCRIPTION
+      },
+      guest: {
+        summary: "#{user.full_name} via Cookoon",
+        description: <<~DESCRIPTION
+          Vous avez été invité à un événement Cookoon par
+
+          #{user.full_name}
+          #{user.phone_number} - #{user.email}
+        DESCRIPTION
+      }
+    }
+  end
 
   def update_trello
     return unless Rails.env.production?

@@ -6,14 +6,14 @@ fr:
         checkin_photos: Photos à l'entrée des lieux
         checkout_photos: Photos à la sortie des lieux
       user:
-        description: Description
-        first_name: Prénom
-        last_name: Nom
-        phone_number: Téléphone portable
-        photo: Photo
+        phone_number: Téléphone portable        
         reset_password_token: Votre lien de réinitialisation
     errors:
       models:
+        guest:
+          attributes:
+            email:
+              taken: est déjà dans votre liste
         reservation:
           attributes:
             cookoon:
@@ -29,3 +29,19 @@ fr:
               not_a_valid_phone_number: vérifiez le format de votre numéro de téléphone
     models:
       user: Utilisateur
+  attributes:
+    description: Description
+    email: Email
+    guests: Invités
+    first_name: Prénom
+    last_name: Nom
+    photo: Photo
+  errors:
+    attributes:
+      email:
+        blank: doit être renseigné
+        invalid: n'est pas un email valide
+      first_name:
+        blank: doit être renseigné
+      last_name:
+        blank: doit être renseigné

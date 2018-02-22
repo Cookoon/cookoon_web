@@ -1,11 +1,10 @@
 $(document).on('turbolinks:load ajaxComplete', function() {
-  $('#side-nav-clicker').click(function() {
-    $('.overlay').fadeIn();
-    $('.side-nav').show('slide', { direction: 'left' }, 500);
-  });
+  $('.side-nav').slideAndSwipe();
+});
 
-  $('#side-nav-closer, .overlay').click(function() {
-    $('.overlay').fadeOut();
-    $('.side-nav').hide('slide', { direction: 'left' }, 500);
-  });
+document.addEventListener('turbolinks:before-cache', function() {
+  $('.side-nav').css('transform', 'translate(-280px, 0px)');
+  $('.ssm-overlay').hide();
+  $('html').removeClass('is-navOpen');
+  $('.side-nav').removeClass('ssm-nav-visible');
 });

@@ -18,13 +18,13 @@
     <%= f.input :account_token, as: :hidden, input_html: { data: { target: 'stripe-accounts.accountTokenInput' } } %>
 
     <%= f.input :bank_account_number, label: 'Votre IBAN' %>
-    <div class="text-danger thin-padded" data-target='stripe-accounts.accountError' role="alert"></div>
+    <div class="text-danger py-3" data-target='stripe-accounts.accountError' role="alert"></div>
 
     <p>
       En cliquant sur ce bouton, vous acceptez nos <%= link_to "Conditions Générales d'Utilisation", 'https://cookoon.fr/conditions-generales/', target: '_blank' %>
       ainsi que les <%= link_to "Conditions d'Utilisation des Comptes Connectés Stripe", 'https://stripe.com/fr/connect-account/legal#translation', target: '_blank' %>
     </p>
-    <div class="bottom-padded">
+    <div class="pb-3">
       <%= f.button :submit, 'Connecter mon compte', class: 'button button-blue slowLoad' %>
     </div>
   <% end %>

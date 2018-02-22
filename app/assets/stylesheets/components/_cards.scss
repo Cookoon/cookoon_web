@@ -6,11 +6,18 @@
   &-edit {
     background: $blue;
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     right: 10px;
     top: 10px;
+    i {
+      position: inherit;
+      top: 11px;
+      right: 12px;
+      font-size: 18px;
+      color: white;
+    }
   }
   &-picture {
     height: 200px;
@@ -89,7 +96,7 @@
     color: $blue;
   }
   &-grey {
-    background: $grey;
+    background: $secondary;
     color: white;
   }
   &-infos {
@@ -153,7 +160,7 @@
     margin-bottom: 3px;
   }
   &-grey {
-    background-color: $grey;
+    background-color: $secondary;
     color: white;
   }
   &-white {
@@ -198,7 +205,7 @@
     color: white;
   }
   &-grey {
-    background: $grey;
+    background: $secondary;
     color: white;
   }
   i {
@@ -241,6 +248,7 @@
   padding: 25px;
   color: white;
   margin: 0 15px;
+  width: 100%;
   #cookoon-error {
     width: 80px;
     margin-bottom: 25px;

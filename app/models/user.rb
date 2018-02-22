@@ -9,7 +9,7 @@ class User < ApplicationRecord
   scope :with_reservation_in_day_range_around, ->(date_time) { joins(:reservations).merge(Reservation.created_in_day_range_around(date_time)).distinct }
   scope :with_reservation_finished_in_day_range_around, ->(date_time) { joins(:reservations).merge(Reservation.finished_in_day_range_around(date_time)).distinct }
   scope :has_cookoon, -> { joins(:cookoons).distinct }
-  scope :has_no_cookoon, -> { left_outer_joins(:cookoons).where(cookoons: {id: nil}) }
+  scope :has_no_cookoon, -> { left_outer_joins(:cookoons).where(cookoons: { id: nil }) }
   scope :discount_expired, -> { where('discount_expires_at < ?', Time.zone.now) }
   enum emailing_preferences: { no_emails: 0, all_emails: 1 }
 
@@ -21,6 +21,7 @@ class User < ApplicationRecord
   has_many :cookoons, dependent: :restrict_with_exception
   has_many :reservations, dependent: :restrict_with_exception
   has_many :reservation_requests, through: :cookoons, source: :reservations
+  has_many :guests, dependent: :destroy
   has_many :user_searches, dependent: :destroy
 
   has_attachment :photo
