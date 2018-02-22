@@ -46,7 +46,7 @@ class CookoonsController < ApplicationController
 
   def update
     if @cookoon.update(cookoon_params)
-      redirect_to
+      redirect_to host_dashboard_path, notice: 'Votre Cookoon a été édité !'
     else
       render :new
     end
