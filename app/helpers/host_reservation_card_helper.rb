@@ -107,13 +107,16 @@ module HostReservationCardHelper
     end
 
     def cancel_link
-      mail_to(
-        'concierge@cookoon.fr',
-        'contactez notre équipe',
-        class: 'no-button no-button-white',
-        subject: 'Annulation de réservation',
-        body: cancel_mailer_body,
-        target: :_blank
+      content_tag(
+        :u,
+        mail_to(
+          'concierge@cookoon.fr',
+          'Contactez notre équipe',
+          class: 'text-white opacity-hover',
+          subject: 'Annulation de réservation',
+          body: cancel_mailer_body,
+          target: :_blank
+        )
       )
     end
 
