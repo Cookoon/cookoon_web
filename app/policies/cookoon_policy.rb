@@ -7,6 +7,10 @@ class CookoonPolicy < ApplicationPolicy
     true
   end
 
+  def update?
+    record.user == user
+  end
+
   class Scope < Scope
     def resolve
       scope.includes(:photo_files).approved.displayable_on_index
