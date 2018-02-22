@@ -21,14 +21,11 @@
 </div>
 
 <!-- Map -->
-<script>
-  var markerObject = {
-    lat: <%= @cookoon.latitude %>,
-    lng: <%= @cookoon.longitude %>
-  }
-</script>
-
-<div class="map-cookoon-show" data-controller='google-maps' data-target="google-maps.cookoonShowMap"></div>
+<div class="map-cookoon-show"
+     data-controller='google-maps'
+     data-target="google-maps.cookoonShowMap"
+     data-google-maps-marker="<%= @marker.to_json %>"
+></div>
 
 <!-- Booking / review block -->
 <%= booking_button_or_review_block_for(@cookoon) %>

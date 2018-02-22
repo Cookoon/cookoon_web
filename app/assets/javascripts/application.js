@@ -5,10 +5,8 @@
 //= require jquery-touchswipe/jquery.touchSwipe
 //= require slide-and-swipe-menu/jquery.slideandswipe
 //= require smalot-bootstrap-datetimepicker
-//= require underscore
 //= require jquery-fileupload/basic
 //= require cloudinary/jquery.cloudinary
 //= require attachinary
-//= require gmaps/google
 //= require_tree ./shared
 //= require_tree ./locale

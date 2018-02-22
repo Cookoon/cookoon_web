@@ -50,7 +50,6 @@ gem 'simple_scheduler'
 # Front
 gem 'bootstrap', '~> 4.0.0'
 gem 'font-awesome-sass'
-gem 'gmaps4rails'
 gem 'icalendar'
 gem 'jquery-fileupload-rails'
 gem 'jquery-rails'
@@ -64,7 +63,6 @@ gem 'slim'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-smalot-bootstrap-datetimepicker'
-  gem 'rails-assets-underscore'
 end
 
 # Admin

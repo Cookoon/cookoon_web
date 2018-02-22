@@ -20,14 +20,11 @@
     <% end %>
   </div>
 </div>
+
 <div class="col-12 col-md-4 d-none d-sm-block">
-  <script>
-  var markers_json = <%=raw @hash.to_json %>
-  </script>
-  
-  <div id="cookoon-index-map"
-       class="map-cookoon-index"
+  <div class="map-cookoon-index d-none d-sm-block"
        data-controller='google-maps'
        data-target="google-maps.cookoonIndexMap"
+       data-google-maps-markers="<%= @markers.to_json %>"
   ></div>
 </div>
