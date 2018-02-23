@@ -131,9 +131,10 @@ class StripePaymentService
     {
       amount: reservation.payout_price_cents,
       currency: 'eur',
-      # try without source_transaction can safely remove before merge if no problem
-      # source_transaction: charge.id,
-      destination: user.stripe_account_id
+      destination: user.stripe_account_id,
+      metadata: {
+        discount_amount: ActionController::Base.helpers.humanized_money_with_symbol(reservation.discount_amount)
+      }
     }
   end
 
