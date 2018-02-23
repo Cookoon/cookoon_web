@@ -32,10 +32,13 @@
         <p>Vous n'avez aucun moyen de paiement</p>
         <p>Vous devez en ajouter un avant de pouvoir faire une demande de réservation</p>
       </div>
-      <%= link_to 'Ajouter une carte', credit_cards_path, class: 'button button-blue' %>
+      <%= link_to 'Ajouter une carte', "#", class: 'button button-blue', data: {toggle: "modal", target: "#credit-card-modal"} %>
     </div>
   <% else %>
     <%= render 'form' %>
+    <div class="text-center py-3">
+      <%= link_to 'Ajouter une carte', "#", data: {toggle: "modal", target: "#credit-card-modal"} %>
+    </div>
     <div class="text-center">
       <div style="font-size:12px; margin-top: 15px">
         <p>
@@ -49,6 +52,8 @@
   <% end %>
   <!-- ========= END CARD SELECTION ============= -->
 </div>
+
+<%= render 'credit_cards/modal', form_path: reservation_payments_credit_cards_path(@reservation) %>
 
 <script>
   var form = document.getElementById('pay-form');
