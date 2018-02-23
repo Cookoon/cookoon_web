@@ -42,6 +42,25 @@
   </div>
 </div>
 
+
+<% if @stripe_sources.any? && current_user.available_discount? %>
+  <div class="card-bottom mt-3">
+    <div class="card-bottom-content">
+      <div class="text-center">
+        <i class="fa fa-question-circle-o fa-2x" aria-hidden="true"></i>
+      </div>
+      <p class='mt-3'>
+        Votre crédit disponible :
+      </p>
+      <p>
+        Vous avez <%= humanized_money_with_symbol current_user.discount_balance %> à dépenser chez Cookoon !
+        Vous pouvez en profiter jusqu'au <%= display_datetime_for current_user.discount_expires_at, join_expression: 'à' %>, dépéchez-vous !
+      </p>
+    </div>
+  </div>
+<% end %>
+
+
 <%= render 'modal', form_path: credit_cards_path %>
 
 <script>
