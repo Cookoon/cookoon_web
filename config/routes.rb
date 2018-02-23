@@ -29,6 +29,9 @@ Rails.application.routes.draw do
   end
 
   resources :reservations, only: [:index, :show, :edit, :update] do
+    namespace :payments do
+      resources :credit_cards, only: :create
+    end
     resources :payments, only: [:new, :create] do
       post 'discount', on: :new
     end
