@@ -16,7 +16,14 @@
     <% @cookoons.each do |cookoon| %>
       <div class="col-12 col-md-6">
         <div class="card">
-          <div class="card-picture" style="background-image: url(<%= cookoon_safe_picture(cookoon) %>)"></div>
+          <%= link_to edit_cookoon_path(cookoon) do %>
+            <div class="card-edit">
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+            </div>
+          <% end %>
+          <%= link_to cookoon do %>
+            <div class="card-picture" style="background-image: url(<%= cookoon_safe_picture(cookoon) %>)"></div>
+          <% end %>
           <div class="card-data">
             <div class="card-text">
               <%= cookoon.name %>
