@@ -11,13 +11,7 @@ class CreditCardsController < ApplicationController
   def create
     card = @payment_service.add_source_to_customer
     @payment_service.default_card(card) if params[:credit_card][:default] == '1'
-    if card
-      redirect_to credit_cards_path
-    else
-      @stripe_sources = @payment_service.user_sources
-      flash.now[:alert] = @payment_service.displayable_errors
-      render :index
-    end
+    handle_redirection(card)
   end
 
   def destroy
@@ -26,6 +20,16 @@ class CreditCardsController < ApplicationController
   end
 
   private
+
+  def handle_redirection(card)
+    if card
+      redirect_to credit_cards_path
+    else
+      @stripe_sources = @payment_service.user_sources
+      flash.now[:alert] = @payment_service.displayable_errors
+      render :index
+    end
+  end
 
   def set_payment_service
     @payment_service = StripePaymentService.new(
