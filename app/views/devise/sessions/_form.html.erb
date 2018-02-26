@@ -13,8 +13,9 @@
     </div>
     <!-- ==== FIN CUSTOM CHECKBOX ==== -->
 
-    <%= link_to "J'ai perdu mes idenfiants", new_password_path(resource_name), class: 'font-italic' %>
-    <div class="home-links links-block pt-5 pb-3">
+    <p><%= link_to "J'ai perdu mes idenfiants", new_password_path(resource_name), class: 'font-italic' %></p>
+    <i data-toggle='modal' data-target='#first-signin' class='text-primary'>Première Connexion ?</i>
+    <div class="home-links links-block pt-3 pb-3">
       <%= f.button :submit, "Se Connecter", class: 'button button-blue' %>
     </div>
   </div>
