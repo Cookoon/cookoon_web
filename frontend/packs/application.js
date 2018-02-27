@@ -1,7 +1,8 @@
 import Rails from 'rails-ujs';
 import Turbolinks from 'turbolinks';
-import { Application } from 'stimulus';
+import application from 'stimulus_application';
 import { definitionsFromContext } from 'stimulus/webpack-helpers';
+import 'components';
 
 // Rails UJS
 Rails.start();
@@ -10,6 +11,5 @@ Rails.start();
 Turbolinks.start();
 
 // Stimulus
-const application = Application.start();
 const context = require.context('../controllers', true, /\.js$/);
 application.load(definitionsFromContext(context));
