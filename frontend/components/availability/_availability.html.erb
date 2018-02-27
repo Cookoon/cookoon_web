@@ -1,3 +1,10 @@
-<div data-controller="availability" class="availability">
-  availability_component
+<div class="availability"
+     data-controller="availability"
+     data-availability-date="<%= @date %>"
+     data-availability-time-slot="<%= @time_slot %>"
+     data-availability-available="<%= @available %>"
+     data-availability-url="<%= @url %>"
+     data-availability-method="<%= @method %>"
+     data-action="click->availability#update"
+>
 </div>
