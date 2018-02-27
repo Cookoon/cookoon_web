@@ -1,0 +1,8 @@
+<% @weeks.each do |days| %>
+  Semaine du x au x
+  <% days.each do |time_slots| %>
+    <% time_slots.each do |time_slot_data| %>
+      <p><%= time_slot_data %></p>
+    <% end %>
+  <% end %>
+<% end %>
