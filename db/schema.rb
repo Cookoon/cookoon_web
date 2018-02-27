@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180214143142) do
+ActiveRecord::Schema.define(version: 20180227102905) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,17 @@ ActiveRecord::Schema.define(version: 20180214143142) do
     t.datetime "updated_at", null: false
     t.index ["attachinariable_type", "attachinariable_id", "scope"], name: "by_scoped_parent"
     t.index ["attachinariable_type", "attachinariable_id"], name: "index_attachinary_files_on_attachinariable_type"
+  end
+
+  create_table "availabilities", force: :cascade do |t|
+    t.boolean "available", default: false
+    t.bigint "cookoon_id"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.integer "time_slot"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cookoon_id"], name: "index_availabilities_on_cookoon_id"
   end
 
   create_table "cookoons", force: :cascade do |t|
@@ -147,6 +158,7 @@ ActiveRecord::Schema.define(version: 20180214143142) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "availabilities", "cookoons"
   add_foreign_key "cookoons", "users"
   add_foreign_key "guests", "users"
   add_foreign_key "inventories", "reservations"

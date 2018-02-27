@@ -9,6 +9,7 @@ class Cookoon < ApplicationRecord
 
   belongs_to :user
   has_many :reservations, dependent: :restrict_with_exception
+  has_many :availabilities, dependent: :destroy
 
   has_attachments :photos, maximum: 5, order: 'id ASC'
 
