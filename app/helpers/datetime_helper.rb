@@ -8,7 +8,7 @@ module DatetimeHelper
 
   def display_date_for(datetime, attrs = {})
     format = attrs[:without_year] ? '%-d %B' : '%-d %B %Y'
-    format = "%A #{format}" if attrs[:with_weekday]
+    format = "%a #{format}" if attrs[:with_weekday]
     l(datetime, format: format)
   end
 
