@@ -47,7 +47,7 @@ export default class extends Controller {
   }
 
   renderFA(keyword) {
-    this.element.innerHTML = `<i class="fa fa-${keyword} fa-lg" aria-hidden="true"></i>`;
+    this.element.innerHTML = `<i class="fa fa-${keyword} fa-lg pointer" aria-hidden="true"></i>`;
   }
 
   render() {
