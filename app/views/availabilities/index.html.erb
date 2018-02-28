@@ -1,8 +1,13 @@
 <% @weeks.each do |week| %>
-  <%= week[:display] %>
+  <h3><%= week[:display] %></h3>
+  
   <% week[:days].each do |day| %>
-    <% day[:time_slots].each do |time_slot| %>
-      <p><%= day[:display] %> <%= c 'availability', time_slot %></p>
-    <% end %>
+    <div class="d-flex-default">
+      <h4><%= day[:display] %></h4>
+
+      <% day[:time_slots].each do |time_slot| %>
+        <%= c 'availability', time_slot %>
+      <% end %>
+    </div>
   <% end %>
 <% end %>
