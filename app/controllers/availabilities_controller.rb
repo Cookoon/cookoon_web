@@ -1,23 +1,23 @@
 class AvailabilitiesController < ApplicationController
   include DatetimeHelper
+  skip_after_action :verify_policy_scoped
   before_action :find_cookoon, only: %i[index create]
 
-  # TODO: remove after implementation
-  skip_before_action :authenticate_user!
-  skip_after_action :verify_authorized
-  skip_after_action :verify_policy_scoped
-
   def index
+    authorize(@cookoon, :update?)
     @weeks = build_weeks(3)
   end
 
   def create
-    @availability = @cookoon.availabilities.create(availability_params)
+    @availability = @cookoon.availabilities.new(availability_params)
+    authorize @availability
+    @availability.save
     render json: build_time_slot
   end
 
   def update
     @availability = Availability.find(params[:id])
+    authorize @availability
     @availability.update(available: !@availability.available)
     render json: build_time_slot
   end
@@ -59,7 +59,7 @@ class AvailabilitiesController < ApplicationController
   def build_days(first_day, last_day)
     (first_day..last_day).to_a.map do |day|
       {
-        display: display_date_for(day, without_year: true, with_weekday: true).capitalize,
+        display: display_date_for(day, without_year: true, with_weekda: true).capitalize,
         time_slots: build_time_slots(day)
       }
     end
