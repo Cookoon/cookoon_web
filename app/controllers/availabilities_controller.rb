@@ -7,6 +7,7 @@ class AvailabilitiesController < ApplicationController
   def index
     authorize(@cookoon, :update?)
     @weeks = build_weeks(3)
+    @cookoons = current_user.cookoons
   end
 
   def create
