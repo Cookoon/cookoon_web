@@ -3,18 +3,26 @@
   .offset-sm-1.col-sm-10.offset-md-2.col-md-8.offset-lg-3.col-lg-6
     h4 Convier mes invités
 
+    p
+      |
+        Cookoon convie pour vous vos invités ! Suivez les instructions ci-dessous :
+        nous enverrons un e-mail d'invitation à rejoindre votre événement.
+
     - if @guests.any?
-      p Mes invités déjà conviés :
+      p Vos invités déjà conviés :
       - @guests.each do |guest|
         ul
           li = guest
 
     - if @user_guests.any?
-      p Conviez vos invités ci-dessous, nous leur envoyons un mail d'invitation de votre part :
+      p Vos contacts Cookoon : sélectionnez-ceux à qui nous devons envoyer une invitation de votre part
       = render 'reservation_form'
 
-      p.mt-4.mb-0 Votre invité n'est pas encore dans votre liste de contacts ?
+      p.mt-4.mb-0 Votre invité n'est pas la liste ?
     - else
-      p.mt-4.mb-0 Ajoutez un nouveau contact à votre liste afin de pouvoir l'inviter.
+      p.mt-4.mb-0
+        |
+          Pour convier vos invités, vous devez les ajouter à votre liste de contacts Cookoon.
+          Nous ne nous permettrons que de les inviter de votre part, sans jamais les forcer à nous rejoindre.
 
     = render 'new_modal'
