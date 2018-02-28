@@ -1,6 +1,9 @@
 class AvailabilitiesController < ApplicationController
   before_action :find_cookoon, only: %i[index create]
+
+  # TODO: remove after implementation
   skip_before_action :authenticate_user!
+  skip_after_action :verify_authorized
   skip_after_action :verify_policy_scoped
 
   def index
@@ -8,6 +11,13 @@ class AvailabilitiesController < ApplicationController
   end
 
   def create
+    @availability = @cookoon.availabilities.new(availability_params)
+
+    if @availability.save
+      render json: @availability.slice(:date, :time_slot, :available)
+    else
+      # TODO
+    end
   end
 
   def update
@@ -17,6 +27,10 @@ class AvailabilitiesController < ApplicationController
 
   def find_cookoon
     @cookoon = Cookoon.find(params[:cookoon_id])
+  end
+
+  def availability_params
+    params.require(:availability).permit(:date, :time_slot)
   end
 
   def build_weeks(nb_of_weeks = 1)
@@ -44,7 +58,7 @@ class AvailabilitiesController < ApplicationController
 
   def build_url(date, time_slot)
     # availability = @cookoon.availabilities.match_date_and_slot(date, time_slot).first
-    if true # availability
+    if false # availability
       # { url: availability_path(availability), method: :patch, available: availability.available}
       { url: '/availabilities/1', method: :patch, available: false}
     else
