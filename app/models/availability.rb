@@ -15,7 +15,7 @@ class Availability < ApplicationRecord
     afternoon: {
       start_time: 14.hours,
       end_time: 19.hours,
-      display: '14h_19h'
+      display: '14h-19h'
     },
     evening: {
       start_time: 19.hours,
