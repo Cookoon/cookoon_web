@@ -1,4 +1,5 @@
 import { Controller } from 'stimulus';
+import Rails from 'rails-ujs';
 
 export default class extends Controller {
   static dataAttributes = ['date', 'timeSlot', 'available', 'url', 'method'];
@@ -8,29 +9,26 @@ export default class extends Controller {
   }
 
   update() {
-    // Example (remove after implementation)
-    this.data.set('available', this.data.get('available') !== 'true');
-    this.render();
+    // TODO: WIP
+    const data = new FormData();
+    data.append('availability[date]', this.data.get('date'));
+    data.append('availability[time_slot]', this.data.get('timeSlot'));
 
-    // // Implementation;
-    // const body = {
-    //   availability: {
-    //     date: this.data.get('date'),
-    //     time_slot: this.data.get('timeSlot')
-    //   }
-    // };
-    //
-    // fetch(this.data.get('url'), {
-    //   method: this.data.get('method'),
-    //   body: JSON.stringify(body)
-    // })
-    //   .then(response => response.json())
-    //   .then(data => {
-    //     this.data.set('available', data.available);
-    //     this.data.set('url', data.url);
-    //     this.data.set('method', data.method);
-    //     this.render();
-    //   });
+    Rails.ajax({
+      url: this.data.get('url'),
+      type: this.data.get('method'),
+      data,
+      success: data => {
+        console.log(data);
+        this.data.set('available', data.available);
+        this.data.set('url', data.url);
+        this.data.set('method', data.method);
+        this.render();
+      },
+      error: (_jqXHR, _textStatus, errorThrown) => {
+        console.log(errorThrown);
+      }
+    });
   }
 
   isMissingDataAttributes() {
