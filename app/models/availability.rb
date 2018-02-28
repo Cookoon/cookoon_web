@@ -1,30 +1,40 @@
 class Availability < ApplicationRecord
   enum time_slot: %i[morning noon afternoon evening]
 
-  TIMES = {
+  TIME_SLOTS = {
     morning: {
       start_time: 7.hours,
-      end_time: 12.hours
+      end_time: 12.hours,
+      display: '7h-12h'
     },
     noon: {
       start_time: 12.hours,
-      end_time: 14.hours
+      end_time: 14.hours,
+      display: '12h-14h'
     },
     afternoon: {
       start_time: 14.hours,
-      end_time: 19.hours
+      end_time: 19.hours,
+      display: '14h-19h'
     },
     evening: {
       start_time: 19.hours,
-      end_time: 26.hours
+      end_time: 26.hours,
+      display: '19h-02h'
     }
   }.freeze
 
   belongs_to :cookoon
 
-  before_validation :set_datetimes, if: :datetimes_need_update?
+  validates :date, presence: true
+  validates :time_slot, presence: true
+  validates :cookoon,
+            uniqueness: {
+              scope: %i[time_slot date],
+              message: 'Une disponibilité existe déja sur ce créneau pour ce Cookoon'
+            }
 
-  # TODO: validation on unicity of availability on time_slot?
+  after_validation :set_datetimes, if: :datetimes_need_update?
 
   private
 
@@ -33,7 +43,8 @@ class Availability < ApplicationRecord
   end
 
   def set_datetimes
-    self.start_at = date + TIMES.dig(time_slot.to_sym, :start_time)
-    self.end_at = date + TIMES.dig(time_slot.to_sym, :end_time)
+    return unless date && time_slot
+    self.start_at = date + TIME_SLOTS.dig(time_slot.to_sym, :start_time)
+    self.end_at = date + TIME_SLOTS.dig(time_slot.to_sym, :end_time)
   end
 end
