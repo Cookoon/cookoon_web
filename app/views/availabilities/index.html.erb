@@ -1,8 +1,8 @@
-<% @weeks.each do |days| %>
-  Semaine du x au x
-  <% days.each do |time_slots| %>
-    <% time_slots.each do |time_slot_data| %>
-      <p><%= c 'availability', time_slot_data %></p>
+<% @weeks.each do |week| %>
+  <%= week[:display] %>
+  <% week[:days].each do |day| %>
+    <% day[:time_slots].each do |time_slot| %>
+      <p><%= day[:display] %> <%= c 'availability', time_slot %></p>
     <% end %>
   <% end %>
 <% end %>
