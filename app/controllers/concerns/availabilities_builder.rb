@@ -25,15 +25,9 @@ module AvailabilitiesBuilder
     last_day = day_of_week.end_of_week
 
     {
-      display: "Semaine du #{build_display_week(first_day, last_day)}",
+      display: "Semaine du #{display_date_for(first_day)}",
       days: build_days(first_day, last_day)
     }
-  end
-
-  def build_display_week(first_day, last_day)
-    [first_day, last_day].map do |day|
-      display_date_for(day, without_year: true)
-    end.join(' au ')
   end
 
   def build_days(first_day, last_day)
