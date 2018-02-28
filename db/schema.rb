@@ -34,9 +34,10 @@ ActiveRecord::Schema.define(version: 20180227102905) do
   create_table "availabilities", force: :cascade do |t|
     t.boolean "available", default: false
     t.bigint "cookoon_id"
+    t.date "date"
+    t.integer "time_slot"
     t.datetime "start_at"
     t.datetime "end_at"
-    t.integer "time_slot"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cookoon_id"], name: "index_availabilities_on_cookoon_id"
