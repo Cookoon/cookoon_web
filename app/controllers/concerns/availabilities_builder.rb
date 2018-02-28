@@ -24,7 +24,7 @@ module AvailabilitiesBuilder
   def build_days(first_day, last_day)
     (first_day..last_day).to_a.map do |day|
       {
-        display: display_date_for(day, without_year: true, with_weekda: true).capitalize,
+        display: l(day, format: '%a %-d %b').capitalize,
         time_slots: build_time_slots(day)
       }
     end
@@ -35,7 +35,7 @@ module AvailabilitiesBuilder
       build_time_slot(date: day, time_slot: time_slot)
     end
   end
-  
+
   def build_time_slot(attrs = {})
     availability = @availability || @cookoon.availabilities.find_by(attrs)
     if availability
