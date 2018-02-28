@@ -12,16 +12,14 @@ class AvailabilitiesController < ApplicationController
   end
 
   def create
-    @availability = @cookoon.availabilities.new(availability_params)
-
-    if @availability.save
-      render json: @availability.slice(:date, :time_slot, :available)
-    else
-      # TODO
-    end
+    @availability = @cookoon.availabilities.create(availability_params)
+    render json: build_time_slot
   end
 
   def update
+    @availability = Availability.find(params[:id])
+    @availability.update(available: !@availability.available)
+    render json: build_time_slot
   end
 
   private
