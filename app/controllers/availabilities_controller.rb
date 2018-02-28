@@ -69,20 +69,16 @@ class AvailabilitiesController < ApplicationController
 
   def build_time_slots(day)
     Availability.time_slots.keys.map do |time_slot|
-      {
-        date: day,
-        time_slot: time_slot
-      }.merge(build_url(day, time_slot))
+      build_time_slot(date: day, time_slot: time_slot)
     end
   end
 
-  def build_url(day, time_slot)
-    # availability = @cookoon.availabilities.match_date_and_slot(day, time_slot).first
-    if true # availability
-      # { url: availability_path(availability), method: :patch, available: availability.available}
-      { url: '/availabilities/1', method: :patch, available: false}
+  def build_time_slot(attrs = {})
+    availability = @availability || @cookoon.availabilities.find_by(attrs)
+    if availability
+      { url: availability_path(availability), method: :patch, available: availability.available }
     else
-      { url: cookoon_availabilities_path(@cookoon), method: :post, available: true}
-    end
+      { url: cookoon_availabilities_path(@cookoon), method: :post, available: true }
+    end.merge(attrs)
   end
 end
