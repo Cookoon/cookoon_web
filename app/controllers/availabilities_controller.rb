@@ -59,7 +59,7 @@ class AvailabilitiesController < ApplicationController
   def build_days(first_day, last_day)
     (first_day..last_day).to_a.map do |day|
       {
-        display: display_date_for(day, without_year: true),
+        display: display_date_for(day, without_year: true, with_weekday: true).capitalize,
         time_slots: build_time_slots(day)
       }
     end
