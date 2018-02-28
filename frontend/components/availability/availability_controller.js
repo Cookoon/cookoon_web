@@ -9,7 +9,6 @@ export default class extends Controller {
   }
 
   update() {
-    // TODO: WIP
     const data = new FormData();
     data.append('availability[date]', this.data.get('date'));
     data.append('availability[time_slot]', this.data.get('timeSlot'));
@@ -18,16 +17,21 @@ export default class extends Controller {
       url: this.data.get('url'),
       type: this.data.get('method'),
       data,
-      success: data => {
-        console.log(data);
-        this.data.set('available', data.available);
-        this.data.set('url', data.url);
-        this.data.set('method', data.method);
-        this.render();
+      success: ({ available, url, method }) => {
+        if (
+          available !== undefined &&
+          url !== undefined &&
+          method !== undefined
+        ) {
+          this.data.set('available', available);
+          this.data.set('url', url);
+          this.data.set('method', method);
+          this.render();
+        } // TODO: else case
       },
       error: (_jqXHR, _textStatus, errorThrown) => {
         console.log(errorThrown);
-      }
+      } // TODO: handle Error better, use async/await and try/catch?
     });
   }
 
