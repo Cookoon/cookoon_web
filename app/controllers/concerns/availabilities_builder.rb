@@ -11,15 +11,6 @@ module AvailabilitiesBuilder
     weeks
   end
 
-  def build_time_slot(attrs = {})
-    availability = @availability || @cookoon.availabilities.find_by(attrs)
-    if availability
-      { url: availability_path(availability), method: :patch, available: availability.available }
-    else
-      { url: cookoon_availabilities_path(@cookoon), method: :post, available: true }
-    end.merge(attrs)
-  end
-
   def build_week(day_of_week)
     first_day = day_of_week.beginning_of_week
     last_day = day_of_week.end_of_week
@@ -43,5 +34,14 @@ module AvailabilitiesBuilder
     Availability.time_slots.keys.map do |time_slot|
       build_time_slot(date: day, time_slot: time_slot)
     end
+  end
+  
+  def build_time_slot(attrs = {})
+    availability = @availability || @cookoon.availabilities.find_by(attrs)
+    if availability
+      { url: availability_path(availability), method: :patch, available: availability.available }
+    else
+      { url: cookoon_availabilities_path(@cookoon), method: :post, available: true }
+    end.merge(attrs)
   end
 end
