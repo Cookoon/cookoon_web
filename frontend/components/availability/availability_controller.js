@@ -27,11 +27,11 @@ export default class extends Controller {
           this.data.set('url', url);
           this.data.set('method', method);
           this.render();
-        } // TODO: else case
+        }
       },
       error: (_jqXHR, _textStatus, errorThrown) => {
         console.log(errorThrown);
-      } // TODO: handle Error better, use async/await and try/catch?
+      }
     });
   }
 

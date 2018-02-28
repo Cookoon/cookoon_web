@@ -1,7 +1,6 @@
 class AvailabilitiesController < ApplicationController
   include DatetimeHelper
   before_action :find_cookoon, only: %i[index create]
-  before_action :find_availability, only: :update
 
   # TODO: remove after implementation
   skip_before_action :authenticate_user!
@@ -13,28 +12,17 @@ class AvailabilitiesController < ApplicationController
   end
 
   def create
-    @availability = @cookoon.availabilities.new(availability_params)
-
-    if @availability.save
-      render json: build_time_slot
-    else
-      # TODO
-    end
+    @availability = @cookoon.availabilities.create(availability_params)
+    render json: build_time_slot
   end
 
   def update
-    if @availability.update(available: !@availability.available)
-      render json: build_time_slot
-    else
-      # TODO
-    end
+    @availability = Availability.find(params[:id])
+    @availability.update(available: !@availability.available)
+    render json: build_time_slot
   end
 
   private
-
-  def find_availability
-    @availability = Availability.find(params[:id])
-  end
 
   def find_cookoon
     @cookoon = Cookoon.find(params[:cookoon_id])
