@@ -8,8 +8,6 @@ export default class extends Controller {
     'shortAddress'
   ];
 
-  autocomplete = null;
-
   connect() {
     this.autocomplete = new google.maps.places.Autocomplete(
       this.addressInputTarget,

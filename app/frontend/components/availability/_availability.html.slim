@@ -1,0 +1,9 @@
+.availability{
+  data-controller='availability'
+  data-availability-date=@date
+  data-availability-time-slot=@time_slot
+  data-availability-available=@available.to_s
+  data-availability-url=@url
+  data-availability-method=@method
+  data-action='click->availability#update'
+}

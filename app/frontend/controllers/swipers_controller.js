@@ -1,10 +1,8 @@
 import { Controller } from 'stimulus';
-import Swiper from '../components/swiper/index';
+import Swiper from '../vendor/swiper/index';
 
 export default class extends Controller {
   static targets = ['swiperContainer'];
-
-  swiper = null;
 
   connect() {
     this.swiper = new Swiper(this.swiperContainerTarget, {

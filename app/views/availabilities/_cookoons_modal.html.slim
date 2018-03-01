@@ -1,0 +1,15 @@
+.position-fixed.b-0.l-0.r-0.mb-3.text-center
+  button.btn.btn-primary type="button" data={toggle: "modal", target: "#cookoonsModal"}
+    | #{@cookoon.name} <i class='fa fa-exchange' aria-hidden="true"></i>
+
+.modal.fade#cookoonsModal tabindex="-1" role="dialog" aria-labelledby="cookoonsModalLabel" aria-hidden="true"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        h5.modal-title#cookoonsModalLabel Vos cookoons
+        button.close type="button" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+
+      .modal-body.text-center
+        - @cookoons.each do |cookoon|
+          = link_to cookoon.name, cookoon_availabilities_path(cookoon), class: 'btn btn-light my-2 d-block'

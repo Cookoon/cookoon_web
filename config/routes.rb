@@ -26,6 +26,7 @@ Rails.application.routes.draw do
 
   resources :cookoons do
     resources :reservations, only: [:create]
+    resources :availabilities, only: [:index, :create, :update], shallow: true
   end
 
   resources :reservations, only: [:index, :show, :edit, :update] do

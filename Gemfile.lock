@@ -162,6 +162,8 @@ GEM
     jsonapi-serializers (1.0.0)
       activesupport
     jwt (2.1.0)
+    komponent (1.1.3)
+      webpacker (>= 3.0.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     letter_opener (1.6.0)
@@ -330,6 +332,10 @@ GEM
     slim (3.0.9)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 1.3.3, < 2.1)
+    slim-rails (3.1.1)
+      actionpack (>= 3.1)
+      railties (>= 3.1)
+      slim (~> 3.0)
     spring (2.0.2)
       activesupport (>= 4.2)
     spring-watcher-listen (2.0.1)
@@ -407,6 +413,7 @@ DEPENDENCIES
   jquery-fileupload-rails
   jquery-rails
   jquery-ui-rails
+  komponent
   letter_opener
   listen (>= 3.0.5, < 3.2)
   momentjs-rails (>= 2.9.0)
@@ -432,7 +439,7 @@ DEPENDENCIES
   sidekiq-failures (~> 1.0)
   simple_form
   simple_scheduler
-  slim
+  slim-rails
   spring
   spring-watcher-listen (~> 2.0.0)
   stripe
