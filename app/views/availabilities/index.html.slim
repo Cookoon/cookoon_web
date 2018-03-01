@@ -1,0 +1,36 @@
+.container
+  h2.h4.mb-0 Gérer mes disponibilités
+
+  - @weeks.each do |week|
+    h3.h6.mt-3 = week[:display]
+
+    .row
+      .offset-4.col-8
+        .row.no-gutters.text-muted
+          - Availability.time_slots.keys.each do |time_slot|
+            .col.d-flex.justify-content-center.align-items-center.text-center
+              small = Availability::TIME_SLOTS.dig(time_slot.to_sym, :display)
+
+        - week[:days].each do |day|
+          .row
+            .col-4.d-flex.align-items-center
+              p.text-muted.m-0 = day[:display]
+
+            .col-8
+              .row.no-gutters.text-primary
+                - day[:time_slots].each do |time_slot|
+                  .col.d-flex.justify-content-center.align-items-center.text-center.my-2
+                    = c 'availability', time_slot
+
+  .mt-3.mb-5.pb-1
+    p
+      | Vous pouvez décider des disponibilités de votre Cookoon
+      span.font-weight-bold< jusqu’à 3 semaines à l’avance.
+
+    p Par défaut, votre Cookoon sera toujours disponible :
+      span.font-weight-bold
+        | pensez à les mettre à jour régulièrement
+      pour éviter de recevoir des demandes de locations qui ne vous intéressent pas.
+
+  - if @cookoons.size > 1
+    = render 'cookoons_modal'
