@@ -1,4 +1,6 @@
-<div data-controller="stripe-payments">
+<div data-controller="stripe-payments"
+     data-stripe-payments-publishable-key="<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>"
+>
   <%= simple_form_for :credit_card,
                       url: form_path,
                       remote: true,

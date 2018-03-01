@@ -13,7 +13,7 @@ export default class extends Controller {
     'cityInput'
   ];
 
-  stripe = Stripe(process.env.STRIPE_PUBLISHABLE_KEY);
+  stripe = Stripe(this.data.get('publishableKey'));
 
   connect() {
     if (this.hasFormTarget) {
