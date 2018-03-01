@@ -4,7 +4,7 @@ import Rails from 'rails-ujs';
 export default class extends Controller {
   static targets = ['cardElement', 'cardError', 'form', 'tokenInput'];
 
-  stripe = Stripe(process.env.STRIPE_PUBLISHABLE_KEY);
+  stripe = Stripe(this.data.get('publishableKey'));
   style = {
     base: {
       fontSize: '16px',

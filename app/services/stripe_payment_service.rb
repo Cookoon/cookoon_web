@@ -109,7 +109,7 @@ class StripePaymentService
   end
 
   def retrieve_sources
-    return false unless customer
+    return [] unless customer
     @sources = customer.sources.all(object: 'card')
   end
 

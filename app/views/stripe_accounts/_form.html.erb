@@ -1,4 +1,6 @@
-<div data-controller="stripe-accounts">
+<div data-controller="stripe-accounts"
+     data-stripe-accounts-publishable-key="<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>"
+>
   <%= simple_form_for :stripe_account,
                       url: stripe_accounts_path,
                       remote: true,
