@@ -60,7 +60,7 @@ gem 'roadie-rails'
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
 gem 'simple_form'
-gem 'slim'
+gem 'slim-rails'
 
 source 'https://rails-assets.org' do
   gem 'rails-assets-smalot-bootstrap-datetimepicker'
