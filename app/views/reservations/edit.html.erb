@@ -33,7 +33,7 @@
         <p><%= humanized_money_with_symbol @reservation.cookoon_fees %></p>
       </div>
       <hr class='white'>
-      <div class="d-flex-default">
+      <div class="d-flex-default font-weight-bold">
         <p>TOTAL</p>
         <p><%= humanized_money_with_symbol @reservation.price_with_fees %></p>
       </div>
@@ -44,8 +44,10 @@
         </div>
       <% end %>
 
-      <div class="text-center py-3">
-        <%= link_to 'Annuler la réservation', reservation_path(@reservation), method: :patch, remote: true, class: 'btn btn-light btn-action' %>
+      <div class="text-center pt-3">
+        <%= link_to reservation_path(@reservation), method: :patch, remote: true, class: 'text-white opacity-hover' do %>
+          <u>Annuler la réservation</u>
+        <% end %>
       </div>
     </div>
   </div>
