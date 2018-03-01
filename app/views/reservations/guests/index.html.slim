@@ -9,16 +9,17 @@
         nous enverrons un e-mail d'invitation à rejoindre votre événement.
 
     - if @guests.any?
-      p Vos invités déjà conviés :
+      p.font-weight-bold Vos invités déjà conviés :
       - @guests.each do |guest|
         ul
           li = guest
 
     - if @user_guests.any?
-      p Vos contacts Cookoon : sélectionnez-ceux à qui nous devons envoyer une invitation de votre part
+      p.font-weight-bold.mb-1 Vos contacts Cookoon :
+      p sélectionnez-ceux à qui nous devons envoyer une invitation de votre part
       = render 'reservation_form'
 
-      p.mt-4.mb-0 Votre invité n'est pas la liste ?
+      p.font-weight-bold.mt-4.mb-0 Votre invité n'est pas dans la liste ?
     - else
       p.mt-4.mb-0
         |
