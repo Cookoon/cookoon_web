@@ -62,11 +62,3 @@
 
 
 <%= render 'modal', form_path: credit_cards_path %>
-
-<script>
-  // iOS keyboard fix TODO: FC 08feb18 still needed if integrated with Stimulus?
-  $('#credit-card-modal').on('hide.bs.modal', function () {
-    $('#invisible-input').focus();
-    $('#invisible-input').blur();
-  })
-</script>
