@@ -1,5 +1,6 @@
 class Availability < ApplicationRecord
   enum time_slot: %i[morning noon afternoon evening]
+  scope :future, -> { where('date >= ?', Time.zone.today) }
 
   TIME_SLOTS = {
     morning: {

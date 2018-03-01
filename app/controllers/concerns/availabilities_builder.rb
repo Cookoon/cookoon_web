@@ -37,11 +37,18 @@ module AvailabilitiesBuilder
   end
 
   def build_time_slot(attrs = {})
-    availability = @availability || @cookoon.availabilities.find_by(attrs)
+    availability = @availability || find_availability(attrs)
     if availability
       { url: availability_path(availability), method: :patch, available: availability.available }
     else
       { url: cookoon_availabilities_path(@cookoon), method: :post, available: true }
     end.merge(attrs)
+  end
+
+  def find_availability(attrs)
+    @cookoon.future_availabilities.find do |availability|
+      availability.date == attrs[:date] &&
+        availability.time_slot == attrs[:time_slot]
+    end
   end
 end

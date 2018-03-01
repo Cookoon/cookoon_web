@@ -1,18 +1,18 @@
 class AvailabilitiesController < ApplicationController
   include AvailabilitiesBuilder
-
   skip_after_action :verify_policy_scoped
-  before_action :find_cookoon, only: %i[index create]
 
   def index
+    @cookoon = Cookoon.includes(:future_availabilities).find(params[:cookoon_id])
     authorize(@cookoon, :update?)
     @weeks = build_weeks(3)
     @cookoons = current_user.cookoons
   end
 
   def create
+    @cookoon = Cookoon.find(params[:cookoon_id])
+    authorize(@cookoon, :update?)
     @availability = @cookoon.availabilities.new(availability_params)
-    authorize @availability
     @availability.save
     render json: build_time_slot
   end
@@ -25,10 +25,6 @@ class AvailabilitiesController < ApplicationController
   end
 
   private
-
-  def find_cookoon
-    @cookoon = Cookoon.find(params[:cookoon_id])
-  end
 
   def availability_params
     params.require(:availability).permit(:date, :time_slot)
