@@ -5,9 +5,11 @@
   <p>Votre activité</p>
   <b>Historique des revenus : <span class="text-primary"><%= humanized_money_with_symbol current_user.total_payouts_for_dashboard %></span></b>
 
-  <div class="text-center pt-4 pb-3">
-    <%= link_to 'Mon calendrier', cookoon_availabilities_path(@cookoons.first), class: 'button button-blue' %>
-  </div>
+  <% if @cookoons.any? %>
+    <div class="text-center pt-4 pb-3">
+      <%= link_to 'Mon calendrier', cookoon_availabilities_path(@cookoons.first), class: 'button button-blue' %>
+    </div>
+  <% end %>
 
   <hr>
 
