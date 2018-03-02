@@ -63,7 +63,7 @@ export default class extends Controller {
   decrementPeopleCount(event) {
     this.updateNumberAttribute({
       updateValue: -1,
-      min: this.data.get('minPeople'),
+      min: this.data.get('minPeopleCount'),
       input: this.peopleCountInputTarget,
       targets: this.peopleCountTargets,
       event
@@ -72,7 +72,7 @@ export default class extends Controller {
 
   incrementPeopleCount(event) {
     this.updateNumberAttribute({
-      max: this.data.get('maxPeople'),
+      max: this.data.get('maxPeopleCount'),
       input: this.peopleInputTarget,
       targets: this.peopleCountTargets,
       event

@@ -72,7 +72,7 @@ class CookoonsController < ApplicationController
     # Here we can use @lat_lng to get user position
     # @lat_lng = cookies[:lat_lng].try(:split, "|")
     # requires to turn on scripts on pages
-    base_scope = policy_scope(Cookoon).capacity_greater_than(user_search.number)
+    base_scope = policy_scope(Cookoon).capacity_greater_than(user_search.people_count)
     if user_search.address.present?
       base_scope.near(user_search.address, 10)
     else
@@ -84,7 +84,7 @@ class CookoonsController < ApplicationController
     @search_infos = {
       position: @user_search.address.try(:split, " - ").try(:first) || 'Adresse',
       time_slot: display_datetime_for(@user_search.start_at, join_expression: 'à', without_year: true, time_separator: ':') || 'Tout de suite',
-      people_number: @user_search.people_count || 4
+      people_count: @user_search.people_count || 4
     }
   end
 

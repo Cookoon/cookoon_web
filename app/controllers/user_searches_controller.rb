@@ -11,7 +11,7 @@ class UserSearchesController < ApplicationController
     @cookoons = policy_scope(Cookoon).shuffled
     build_markers
 
-    @search_infos = { position: 'Adresse', time_slot: 'Tout de suite', people_number: 2 }
+    @search_infos = { position: 'Adresse', time_slot: 'Tout de suite', people_count: 2 }
     searches = current_user.active_recent_searches
     authorize searches
     searches.update_all(status: :inactive)

@@ -3,8 +3,8 @@
   data-controller="user-searches google-maps-autocompletes"
   data-user-searches-min-duration="1"
   data-user-searches-max-duration="5"
-  data-user-searches-min-people="1"
-  data-user-searches-max-people="20"
+  data-user-searches-min-people-count="1"
+  data-user-searches-max-people-count="20"
 >
   <div class="container">
     <div class="d-flex align-items-center justify-content-around justify-content-sm-between child-mx-2 my-2">
@@ -12,7 +12,7 @@
         <i class="fa fa-search"></i>
         <div id='infos-address' data-target="google-maps-autocompletes.shortAddress user-searches.address"><%= @search_infos[:position] %></div>
         <div data-target="user-searches.startAt"><%= @search_infos[:time_slot] %></div>
-        <div>Pour <span data-target="user-searches.people"><%= @search_infos[:people_number] %></span></div>
+        <div>Pour <span data-target="user-searches.peopleCount"><%= @search_infos[:people_count] %></span></div>
       </div>
       <% if @current_search %>
         <%= link_to user_searches_path, class: 'd-flex-default text-white opacity-hover', method: :patch, remote: true do %>
@@ -84,10 +84,10 @@
             <div class="col-12 col-md-6">
               <div class="d-flex-default my-3">
                 <i class="fa fa-minus-circle fa-2x" aria-hidden="true" data-action="click->user-searches#decrementPeopleCount"></i>
-                <div><span data-target="user-searches.people"><%= @user_search.number %></span> personne(s)</div>
+                <div><span data-target="user-searches.peopleCount"><%= @user_search.people_count %></span> personne(s)</div>
                 <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-action="click->user-searches#incrementPeopleCount"></i>
               </div>
-              <%= f.input :number, input_html: {value: @user_search.number, data: { target: 'user-searches.peopleInput' } }, as: :hidden %>
+              <%= f.input :people_count, input_html: {value: @user_search.people_count, data: { target: 'user-searches.peopleCountInput' } }, as: :hidden %>
             </div>
           </div>
           <div class="text-center">
