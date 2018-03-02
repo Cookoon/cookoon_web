@@ -45,7 +45,7 @@ class Availability < ApplicationRecord
 
   def set_datetimes
     return unless date && time_slot
-    self.start_at = date + TIME_SLOTS.dig(time_slot.to_sym, :start_time)
-    self.end_at = date + TIME_SLOTS.dig(time_slot.to_sym, :end_time)
+    self.start_at = date.in TIME_SLOTS.dig(time_slot.to_sym, :start_time)
+    self.end_at = date.in TIME_SLOTS.dig(time_slot.to_sym, :end_time)
   end
 end
