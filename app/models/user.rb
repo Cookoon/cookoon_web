@@ -71,12 +71,8 @@ class User < ApplicationRecord
     stripe_account.payouts_enabled
   end
 
-  def active_recent_searches
-    user_searches.active_recents
-  end
-
-  def last_recent_search
-    active_recent_searches.last
+  def current_search
+    user_searches.active_recents.last
   end
 
   def total_payouts_for_dashboard_cents

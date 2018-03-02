@@ -1,27 +1,34 @@
 class UserSearchesController < ApplicationController
+  before_action :find_user_search, only: [:update, :destroy]
+
   def create
-    @search = current_user.user_searches.build(search_params)
-    authorize @search
-    @search.save
+    @user_search = current_user.user_searches.build(user_search_params)
+    authorize @user_search
+
+    @user_search.save
     redirect_to cookoons_path
   end
 
   def update
-    @new_search = @user_search = UserSearch.new(people_count: 2, duration: 2, start_at: (Time.zone.now + 3.days).beginning_of_hour)
-    @cookoons = policy_scope(Cookoon).shuffled
-    build_markers
+    @user_search.update(user_search_params)
+    redirect_to cookoons_path
+  end
 
-    @search_infos = { position: 'Adresse', time_slot: 'Tout de suite', people_count: 2 }
-    searches = current_user.active_recent_searches
-    authorize searches
-    searches.update_all(status: :inactive)
+  def destroy
+    @user_search.inactive!
+    redirect_to cookoons_path
   end
 
   private
 
-  def search_params
+  def find_user_search
+    @user_search = UserSearch.find(params[:id])
+    authorize @user_search
+  end
+
+  def user_search_params
     params.require(:user_search)
-          .permit(:address, :start_at, :people_count, :duration)
+          .permit(:address, :start_at, :duration, :people_count)
           .delocalize(start_at: :time)
   end
 
