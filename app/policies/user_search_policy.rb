@@ -3,11 +3,7 @@ class UserSearchPolicy < ApplicationPolicy
     true
   end
 
-  def update?
-    true
-  end
-
-  def destroy?
+  def update_all?
     true
   end
 

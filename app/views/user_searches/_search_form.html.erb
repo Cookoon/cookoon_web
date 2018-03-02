@@ -21,7 +21,7 @@
       </div>
 
       <% if @user_search.persisted? %>
-        <%= link_to @user_search, class: 'd-flex-default text-white opacity-hover', method: :delete, remote: true do %>
+        <%= link_to update_all_user_searches_path, class: 'd-flex-default text-white opacity-hover', method: :patch, remote: true do %>
           <span class="d-none d-sm-block mr-2">Annuler la recherche</span>
           <i class="fa fa-times fa-lg"></i>
         <% end %>
@@ -29,7 +29,7 @@
     </div>
     <div class="search-body" data-target="user-searches.body">
       <div class="container">
-        <%= simple_form_for @user_search, remote: true do |f| %>
+        <%= simple_form_for @new_search, remote: true do |f| %>
           <div class="row">
             <div class="col-12">
               <div class="w-100">
@@ -96,7 +96,7 @@
             </div>
           </div>
           <div class="text-center">
-            <%= f.button :button, 'CHERCHER', as: :submit, class: 'button button-white' %>
+            <%= f.button :button, 'CHERCHER', type: :submit, class: 'button button-white' %>
           </div>
         <% end %>
       </div>

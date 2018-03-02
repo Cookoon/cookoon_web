@@ -5,6 +5,8 @@ class CookoonsController < ApplicationController
   before_action :find_user_search, only: %i[index show]
 
   def index
+    @new_search = @user_search.dup
+
     filtering_params = {
       near_default_radius: @user_search.address,
       available_in: (@user_search.start_at..@user_search.end_at),
