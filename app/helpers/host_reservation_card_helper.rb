@@ -38,9 +38,9 @@ module HostReservationCardHelper
 
     def user_infos
       user_name = content_tag(:p, user.full_name)
-      date = content_tag(:p, display_date_for(reservation.date))
-      duration = content_tag(:p, "#{display_time_for(reservation.date)} pour #{reservation.duration}h")
-      content = safe_join([user_name, date, duration])
+      start_at = content_tag(:p, display_date_for(reservation.start_at))
+      duration = content_tag(:p, "#{display_time_for(reservation.start_at)} pour #{reservation.duration}h")
+      content = safe_join([user_name, start_at, duration])
       content_tag(:div, content, class: 'infos-block')
     end
 
@@ -122,7 +122,7 @@ module HostReservationCardHelper
 
     def cancel_mailer_body
       str = "Demande d'annulation pour la réservation n°#{reservation.id} \n"
-      str << "Prévue pour le #{display_datetime_for(reservation.date, join_expression: 'à')}"
+      str << "Prévue pour le #{display_datetime_for(reservation.start_at, join_expression: 'à')}"
       str
     end
 

@@ -8,8 +8,8 @@
     </td>
     <td>
       <b><%= @cookoon.name %></b>
-      <br>le <%= display_date_for(@reservation.date) %>
-      <br>à <%= display_time_for(@reservation.date) %> pour <%= display_duration_for(@reservation.duration) %>
+      <br>le <%= display_date_for(@reservation.start_at) %>
+      <br>à <%= display_time_for(@reservation.start_at) %> pour <%= display_duration_for(@reservation.duration) %>
     </td>
   </tr>
 </tbody></table>

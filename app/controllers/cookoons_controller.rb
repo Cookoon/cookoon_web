@@ -37,7 +37,7 @@ class CookoonsController < ApplicationController
     authorize @cookoon
     @reservation = current_user.reservations.build(
       cookoon: @cookoon,
-      date: current_search.try(:date) || Time.zone.now + 3.days,
+      start_at: current_search.try(:date) || Time.zone.now + 3.days,
       duration: current_search.try(:duration) || 2
     )
     @marker = { lat: @cookoon.latitude, lng: @cookoon.longitude }

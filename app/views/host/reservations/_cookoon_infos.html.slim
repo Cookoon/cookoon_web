@@ -4,4 +4,4 @@
   .reservation-infos
     p
       span.reservation-title = "#{reservation.user.full_name} (status: #{reservation.status})"
-    p = "#{display_date_for(reservation.date)} - #{reservation.duration} H"
+    p = "#{display_date_for(reservation.start_at)} - #{reservation.duration} H"

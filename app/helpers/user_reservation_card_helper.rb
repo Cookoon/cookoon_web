@@ -39,7 +39,7 @@ module UserReservationCardHelper
     end
 
     def details
-      content_tag(:p, "#{display_datetime_for(reservation.date, join_expression: '. à')} . pour #{reservation.duration}h")
+      content_tag(:p, "#{display_datetime_for(reservation.start_at, join_expression: '. à')} . pour #{reservation.duration}h")
     end
 
     def header_status
