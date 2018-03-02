@@ -6,7 +6,7 @@ fr:
         checkin_photos: Photos à l'entrée des lieux
         checkout_photos: Photos à la sortie des lieux
       user:
-        phone_number: Téléphone portable        
+        phone_number: Téléphone portable
         reset_password_token: Votre lien de réinitialisation
     errors:
       models:
@@ -18,7 +18,7 @@ fr:
           attributes:
             cookoon:
               cannot_book_mine: Vous ne pouvez pas réserver votre propre Cookoon !
-            date:
+            start_at:
               not_after_decent_time: Un minimum de 10h est requis.
         user:
           attributes:

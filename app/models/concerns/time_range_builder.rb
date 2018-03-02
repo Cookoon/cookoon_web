@@ -1,5 +1,6 @@
-module TimeRange
+module TimeRangeBuilder
   extend ActiveSupport::Concern
+
   class_methods do
     def day_range(date_time)
       date_time.beginning_of_day..date_time.end_of_day
