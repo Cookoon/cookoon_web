@@ -1,4 +1,4 @@
-module TurbolinksCacheControl
+module TurbolinksCacheController
   extend ActiveSupport::Concern
 
   included do
