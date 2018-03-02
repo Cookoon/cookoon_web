@@ -1,12 +1,17 @@
 class CookoonsController < ApplicationController
   include DatetimeHelper
-  
+
   before_action :find_cookoon, only: %i[edit update]
   before_action :find_user_search, only: %i[index show]
 
   def index
     @cookoons = filter_cookoons(@user_search)
-    # @cookoons = Cookoon.filter()
+    # filtering_params = {
+    #   near_default_radius: @user_search.address,
+    #   available_in: @user_search.start_at..@user_search.end_at,
+    #   accomodates_for: @user_seach.people_count
+    # }
+    # @cookoons = Cookoon.filter(filtering_params)
     build_markers
   end
 
