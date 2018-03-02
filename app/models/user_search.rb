@@ -1,7 +1,8 @@
 class UserSearch < ApplicationRecord
   include EndAtSetter
 
-  scope :active_recents, -> { active.where('created_at > ?', DEFAULTS[:recent_days].ago) }
+  scope :active_recents, -> { active.where('created_at > ?', DEFAULTS[:recent_scope].ago) }
+
   enum status: %i[active inactive]
 
   DEFAULTS = {
@@ -9,7 +10,7 @@ class UserSearch < ApplicationRecord
     start_in_days: 1.day,
     duration: 2,
     people_count: 4,
-    recent_days: 3.days
+    recent_scope: 3.days
   }.freeze
 
   belongs_to :user
@@ -22,8 +23,10 @@ class UserSearch < ApplicationRecord
   end
 
   def self.default_params
+    start_at = Time.zone.now.beginning_of_hour.in(DEFAULTS[:start_in_days])
     {
-      start_at: Time.zone.now.beginning_of_hour.in(DEFAULTS[:start_in_days]),
+      start_at: start_at,
+      end_at: start_at.in(DEFAULTS[:duration].hours),
       duration: DEFAULTS[:duration],
       people_count: DEFAULTS[:people_count]
     }
