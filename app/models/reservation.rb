@@ -1,4 +1,5 @@
 class Reservation < ApplicationRecord
+  include DatesOverlapScope
   include EndAtSetter
   include TimeRangeBuilder
 
