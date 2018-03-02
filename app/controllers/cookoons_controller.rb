@@ -5,13 +5,12 @@ class CookoonsController < ApplicationController
   before_action :find_user_search, only: %i[index show]
 
   def index
-    @cookoons = filter_cookoons(@user_search)
-    # filtering_params = {
-    #   near_default_radius: @user_search.address,
-    #   available_in: @user_search.start_at..@user_search.end_at,
-    #   accomodates_for: @user_seach.people_count
-    # }
-    # @cookoons = Cookoon.filter(filtering_params)
+    filtering_params = {
+      near_default_radius: @user_search.address,
+      available_in: (@user_search.start_at..@user_search.end_at),
+      accomodates_for: @user_search.people_count
+    }
+    @cookoons = policy_scope(Cookoon).includes(:photo_files).filter(filtering_params)
     build_markers
   end
 
@@ -65,27 +64,15 @@ class CookoonsController < ApplicationController
   end
 
   def find_user_search
-    @user_search = current_user&.current_search || new_search
+    @user_search = current_user&.current_search || new_default_search
   end
 
   def cookoon_params
     params.require(:cookoon).permit(:name, :surface, :price, :address, :capacity, :category, photos: [])
   end
 
-  def new_search
+  def new_default_search
     UserSearch.new UserSearch.default_params
-  end
-
-  def filter_cookoons(user_search)
-    # Here we can use @lat_lng to get user position
-    # @lat_lng = cookies[:lat_lng].try(:split, "|")
-    # requires to turn on scripts on pages
-    base_scope = policy_scope(Cookoon).capacity_greater_than(user_search.people_count)
-    if user_search.address.present?
-      base_scope.near(user_search.address, UserSearch.default.radius)
-    else
-      base_scope.shuffled
-    end
   end
 
   def build_markers
