@@ -73,7 +73,7 @@ export default class extends Controller {
   incrementPeopleCount(event) {
     this.updateNumberAttribute({
       max: this.data.get('maxPeopleCount'),
-      input: this.peopleInputTarget,
+      input: this.peopleCountInputTarget,
       targets: this.peopleCountTargets,
       event
     });
