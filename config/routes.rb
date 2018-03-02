@@ -44,7 +44,7 @@ Rails.application.routes.draw do
     resources :invoices, only: [:create]
     resources :guests, controller: 'reservations/guests', only: [:index, :create] do
       collection do
-        post 'all', to: 'reservations/guests#create_all'
+        post 'create_all'
       end
     end
   end
