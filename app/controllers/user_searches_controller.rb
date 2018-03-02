@@ -8,10 +8,10 @@ class UserSearchesController < ApplicationController
   end
 
   def update_all
-    searches = current_user.active_recent_searches
-    authorize searches
+    user_searches = current_user.active_recent_searches
+    authorize user_searches
 
-    searches.update_all(status: :inactive)
+    user_searches.update_all(status: :inactive)
     redirect_to cookoons_path
   end
 
