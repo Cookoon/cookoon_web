@@ -1,6 +1,6 @@
 class Reservation < ApplicationRecord
   include EndAtSetter
-  include TimeRange
+  include TimeRangeBuilder
 
   scope :displayable, -> { where.not(status: :pending).order(start_at: :asc) }
   scope :for_tenant, ->(user) { where(user: user) }
