@@ -11,7 +11,7 @@
       <div class="d-flex-default child-mx-2 pointer" data-action="click->user-searches#toggleBodyVisibility">
         <i class="fa fa-search"></i>
         <div id='infos-address' data-target="google-maps-autocompletes.shortAddress user-searches.address"><%= @search_infos[:position] %></div>
-        <div data-target="user-searches.date"><%= @search_infos[:time_slot] %></div>
+        <div data-target="user-searches.startAt"><%= @search_infos[:time_slot] %></div>
         <div>Pour <span data-target="user-searches.people"><%= @search_infos[:people_number] %></span></div>
       </div>
       <% if @current_search %>
@@ -49,22 +49,22 @@
               </div>
             </div>
             <div class="col-12">
-              <%= f.input :date,
+              <%= f.input :start_at,
                           label: false,
                           placeholder: 'Date & heure',
                           as: :string,
                           readonly: true,
                           input_html: {
                             value: display_datetime_for(
-                              @user_search.date,
+                              @user_search.start_at,
                               join_expression: 'à',
                               without_year: true,
                               time_separator: ':'
                             ),
                             data: {
-                              action: 'click->user-searches#updateDateTarget',
+                              action: 'click->user-searches#updateStartAtTarget',
                               controller: 'datetimepickers',
-                              target: 'datetimepickers.dateInput user-searches.dateInput'
+                              target: 'datetimepickers.startAtInput user-searches.startAtInput'
                             }
                           }
             %>
@@ -83,9 +83,9 @@
             <!-- Nombre de participants -->
             <div class="col-12 col-md-6">
               <div class="d-flex-default my-3">
-                <i class="fa fa-minus-circle fa-2x" aria-hidden="true" data-action="click->user-searches#decrementPeople"></i>
+                <i class="fa fa-minus-circle fa-2x" aria-hidden="true" data-action="click->user-searches#decrementPeopleCount"></i>
                 <div><span data-target="user-searches.people"><%= @user_search.number %></span> personne(s)</div>
-                <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-action="click->user-searches#incrementPeople"></i>
+                <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-action="click->user-searches#incrementPeopleCount"></i>
               </div>
               <%= f.input :number, input_html: {value: @user_search.number, data: { target: 'user-searches.peopleInput' } }, as: :hidden %>
             </div>

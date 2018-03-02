@@ -1,10 +1,10 @@
 import { Controller } from 'stimulus';
 
 export default class extends Controller {
-  static targets = ['dateInput'];
+  static targets = ['startAtInput'];
 
   connect() {
-    $(this.dateInputTarget)
+    $(this.startAtInputTarget)
       .datetimepicker({
         autoclose: true,
         weekStart: 1,

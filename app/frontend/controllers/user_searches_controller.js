@@ -6,12 +6,12 @@ export default class extends Controller {
     'addressClear',
     'addressInput',
     'body',
-    'date',
-    'dateInput',
+    'startAt',
+    'startAtInput',
     'duration',
     'durationInput',
-    'people',
-    'peopleInput'
+    'peopleCount',
+    'peopleCountInput'
   ];
 
   connect() {
@@ -37,8 +37,8 @@ export default class extends Controller {
     }
   }
 
-  updateDateTarget() {
-    this.dateTarget.textContent = this.dateInputTarget.value;
+  updateStartAtTarget() {
+    this.startAtTarget.textContent = this.startAtInputTarget.value;
   }
 
   decrementDuration(event) {
@@ -60,21 +60,21 @@ export default class extends Controller {
     });
   }
 
-  decrementPeople(event) {
+  decrementPeopleCount(event) {
     this.updateNumberAttribute({
       updateValue: -1,
       min: this.data.get('minPeople'),
-      input: this.peopleInputTarget,
-      targets: this.peopleTargets,
+      input: this.peopleCountInputTarget,
+      targets: this.peopleCountTargets,
       event
     });
   }
 
-  incrementPeople(event) {
+  incrementPeopleCount(event) {
     this.updateNumberAttribute({
       max: this.data.get('maxPeople'),
       input: this.peopleInputTarget,
-      targets: this.peopleTargets,
+      targets: this.peopleCountTargets,
       event
     });
   }

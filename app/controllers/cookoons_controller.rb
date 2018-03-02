@@ -37,7 +37,7 @@ class CookoonsController < ApplicationController
     authorize @cookoon
     @reservation = current_user.reservations.build(
       cookoon: @cookoon,
-      date: current_search.try(:date) || Time.zone.now + 3.days,
+      date: current_search.try(:start_at) || Time.zone.now + 3.days,
       duration: current_search.try(:duration) || 2
     )
     @marker = { lat: @cookoon.latitude, lng: @cookoon.longitude }
@@ -65,7 +65,7 @@ class CookoonsController < ApplicationController
   end
 
   def build_search
-    UserSearch.new(number: 2, duration: 2, date: (Time.zone.now + 3.days).beginning_of_hour)
+    UserSearch.new(people_count: 2, duration: 2, start_at: (Time.zone.now + 3.days).beginning_of_hour)
   end
 
   def filter_cookoons(user_search)
@@ -83,8 +83,8 @@ class CookoonsController < ApplicationController
   def prepare_infos
     @search_infos = {
       position: @user_search.address.try(:split, " - ").try(:first) || 'Adresse',
-      time_slot: display_datetime_for(@user_search.date, join_expression: 'à', without_year: true, time_separator: ':') || 'Tout de suite',
-      people_number: @user_search.number || 4
+      time_slot: display_datetime_for(@user_search.start_at, join_expression: 'à', without_year: true, time_separator: ':') || 'Tout de suite',
+      people_number: @user_search.people_count || 4
     }
   end
 
