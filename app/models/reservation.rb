@@ -1,4 +1,5 @@
 class Reservation < ApplicationRecord
+  include EndAtSetter
   include TimeRange
 
   scope :displayable, -> { where.not(status: :pending).order(start_at: :asc) }
