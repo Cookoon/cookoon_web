@@ -1,5 +1,5 @@
 class Inventory < ApplicationRecord
-  include TimeRange
+  include TimeRangeBuilder
 
   scope :checked_out_in_day_range_around, ->(date_time) { checked_out.where checkout_at: day_range(date_time) }
 

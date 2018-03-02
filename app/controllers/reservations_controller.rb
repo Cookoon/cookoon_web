@@ -46,8 +46,8 @@ class ReservationsController < ApplicationController
 
   def reservation_params
     params.require(:reservation)
-          .permit(:duration, :date, :catering)
-          .delocalize(date: :time)
+          .permit(:start_at, :duration, :catering)
+          .delocalize(start_at: :time)
           .merge(cookoon: @cookoon)
   end
 end
