@@ -2,7 +2,7 @@ require 'turbolinks/redirection'
 
 class ApplicationController < ActionController::Base
   include Pundit
-  include TurbolinksCacheController
+  include TurbolinksCacheControl
   include Turbolinks::Redirection
 
   protect_from_forgery with: :exception, prepend: true
