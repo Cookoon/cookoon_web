@@ -8,9 +8,9 @@ class CookoonsController < ApplicationController
     @new_search = @user_search.dup
 
     filtering_params = {
+      accomodates_for: @user_search.people_count,
       near_default_radius: @user_search.address,
-      available_in: (@user_search.start_at..@user_search.end_at),
-      accomodates_for: @user_search.people_count
+      available_in: (@user_search.start_at..@user_search.end_at)
     }
     @cookoons = policy_scope(Cookoon).includes(:photo_files).filter(filtering_params)
     build_markers
