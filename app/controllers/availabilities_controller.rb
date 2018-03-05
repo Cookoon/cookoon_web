@@ -1,5 +1,6 @@
 class AvailabilitiesController < ApplicationController
-  include AvailabilitiesBuilder
+  include Cookoons::AvailabilitiesBuilder
+
   skip_after_action :verify_policy_scoped
 
   def index

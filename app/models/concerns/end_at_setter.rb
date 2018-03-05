@@ -6,7 +6,7 @@ module EndAtSetter
   end
 
   private
-  
+
   def end_at_needs_update?
     will_save_change_to_start_at? || will_save_change_to_duration?
   end
