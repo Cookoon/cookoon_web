@@ -38,10 +38,6 @@ export default class extends Controller {
       this.formattedAddressTarget.value = place.formatted_address;
     }
 
-    if (this.hasAddressInputTarget) {
-      this.addressInputTarget.value = place.formatted_address;
-    }
-
     if (this.hasShortAddressTarget) {
       this.shortAddressTarget.textContent = place.name;
     }
