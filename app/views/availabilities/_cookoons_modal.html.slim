@@ -1,6 +1,6 @@
 .position-fixed.b-0.l-0.r-0.mb-3.text-center
-  button.btn.btn-primary type="button" data={toggle: "modal", target: "#cookoonsModal"}
-    | #{@cookoon.name} <i class='fa fa-exchange' aria-hidden="true"></i>
+  button.btn.btn-primary.btn-action-sm.w-90.mw-400px.text-truncate type="button" data={toggle: "modal", target: "#cookoonsModal"}
+    | <i class='fa fa-exchange' aria-hidden="true"></i> #{@cookoon.name}
 
 .modal.fade#cookoonsModal tabindex="-1" role="dialog" aria-labelledby="cookoonsModalLabel" aria-hidden="true"
   .modal-dialog role="document"
@@ -12,4 +12,4 @@
 
       .modal-body.text-center
         - @cookoons.each do |cookoon|
-          = link_to cookoon.name, cookoon_availabilities_path(cookoon), class: 'btn btn-light my-2 d-block'
+          = link_to cookoon.name, cookoon_availabilities_path(cookoon), class: 'btn btn-light my-4 d-block'

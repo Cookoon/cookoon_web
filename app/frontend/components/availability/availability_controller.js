@@ -54,7 +54,7 @@ export default class extends Controller {
     if (this.isMissingDataAttributes()) {
       this.renderFA('square');
     } else if (this.data.get('available') === 'false') {
-      this.renderFA('times');
+      this.renderFA('times text-dark');
     } else {
       this.renderFA('check');
     }
