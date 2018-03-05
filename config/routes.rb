@@ -21,9 +21,7 @@ Rails.application.routes.draw do
   end
 
   resources :user_searches, only: :create do
-    collection do
-      patch 'update_all'
-    end
+    patch 'update_all', on: :collection
   end
 
   resources :stripe_accounts, only: [:new, :create]
@@ -43,9 +41,7 @@ Rails.application.routes.draw do
     end
     resources :invoices, only: [:create]
     resources :guests, controller: 'reservations/guests', only: [:index, :create] do
-      collection do
-        post 'create_all'
-      end
+      post 'create_all', on: :collection
     end
   end
 
