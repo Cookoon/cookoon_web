@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  include TimeRange
+  include TimeRangeBuilder
 
   scope :pending_invitation, -> { where.not(invitation_token: nil) }
   scope :invited_in_day_range_around, ->(date_time) { pending_invitation.where invitation_sent_at: day_range(date_time) }
@@ -75,7 +75,7 @@ class User < ApplicationRecord
     user_searches.active_recents
   end
 
-  def last_recent_search
+  def current_search
     active_recent_searches.last
   end
 

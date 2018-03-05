@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180227102905) do
+ActiveRecord::Schema.define(version: 20180302093244) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -91,7 +91,7 @@ ActiveRecord::Schema.define(version: 20180227102905) do
   create_table "reservations", force: :cascade do |t|
     t.bigint "cookoon_id"
     t.bigint "user_id"
-    t.datetime "date"
+    t.datetime "start_at"
     t.integer "duration"
     t.integer "price_cents"
     t.string "price_currency", default: "EUR", null: false
@@ -104,6 +104,7 @@ ActiveRecord::Schema.define(version: 20180227102905) do
     t.boolean "catering", default: false
     t.string "trello_card_id"
     t.integer "discount_amount_cents", default: 0, null: false
+    t.datetime "end_at"
     t.index ["cookoon_id"], name: "index_reservations_on_cookoon_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
@@ -111,12 +112,13 @@ ActiveRecord::Schema.define(version: 20180227102905) do
   create_table "user_searches", force: :cascade do |t|
     t.bigint "user_id"
     t.string "address"
-    t.datetime "date"
-    t.integer "number"
+    t.datetime "start_at"
+    t.integer "people_count"
     t.integer "duration"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "status", default: 0, null: false
+    t.datetime "end_at"
     t.index ["user_id"], name: "index_user_searches_on_user_id"
   end
 

@@ -3,19 +3,25 @@
   data-controller="user-searches google-maps-autocompletes"
   data-user-searches-min-duration="1"
   data-user-searches-max-duration="5"
-  data-user-searches-min-people="1"
-  data-user-searches-max-people="20"
+  data-user-searches-min-people-count="1"
+  data-user-searches-max-people-count="20"
 >
   <div class="container">
     <div class="d-flex align-items-center justify-content-around justify-content-sm-between child-mx-2 my-2">
       <div class="d-flex-default child-mx-2 pointer" data-action="click->user-searches#toggleBodyVisibility">
         <i class="fa fa-search"></i>
-        <div id='infos-address' data-target="google-maps-autocompletes.shortAddress user-searches.address"><%= @search_infos[:position] %></div>
-        <div data-target="user-searches.date"><%= @search_infos[:time_slot] %></div>
-        <div>Pour <span data-target="user-searches.people"><%= @search_infos[:people_number] %></span></div>
+        <div id='infos-address' data-target="google-maps-autocompletes.shortAddress user-searches.address"><%= @user_search.address %></div>
+        <div data-target="user-searches.startAt">
+          <%= display_datetime_for(@user_search.start_at,
+                                   join_expression: 'à',
+                                   without_year: true,
+                                   time_separator: ':') %>
+        </div>
+        <div>Pour <span data-target="user-searches.peopleCount"><%= @user_search.people_count %></span></div>
       </div>
-      <% if @current_search %>
-        <%= link_to user_searches_path, class: 'd-flex-default text-white opacity-hover', method: :patch, remote: true do %>
+
+      <% if @user_search.persisted? %>
+        <%= link_to update_all_user_searches_path, class: 'd-flex-default text-white opacity-hover', method: :patch, remote: true do %>
           <span class="d-none d-sm-block mr-2">Annuler la recherche</span>
           <i class="fa fa-times fa-lg"></i>
         <% end %>
@@ -31,7 +37,6 @@
                             label: false,
                             placeholder: 'Ville, adresse ...',
                             input_html: {
-                              value: @user_search.address,
                               class: 'w-100',
                               data: {
                                 action: 'keyup->user-searches#updateAddressAndClearVisibility',
@@ -49,22 +54,22 @@
               </div>
             </div>
             <div class="col-12">
-              <%= f.input :date,
+              <%= f.input :start_at,
                           label: false,
                           placeholder: 'Date & heure',
                           as: :string,
                           readonly: true,
                           input_html: {
                             value: display_datetime_for(
-                              @user_search.date,
+                              @user_search.start_at,
                               join_expression: 'à',
                               without_year: true,
                               time_separator: ':'
                             ),
                             data: {
-                              action: 'click->user-searches#updateDateTarget',
+                              action: 'click->user-searches#updateStartAtTarget',
                               controller: 'datetimepickers',
-                              target: 'datetimepickers.dateInput user-searches.dateInput'
+                              target: 'datetimepickers.startAtInput user-searches.startAtInput'
                             }
                           }
             %>
@@ -77,17 +82,17 @@
                 <div><span data-target="user-searches.duration"><%= @user_search.duration %></span> heure(s)</div>
                 <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-action="click->user-searches#incrementDuration"></i>
               </div>
-              <%= f.input :duration, input_html: { value: @user_search.duration, data: { target: 'user-searches.durationInput' } }, as: :hidden %>
+              <%= f.input :duration, input_html: { data: { target: 'user-searches.durationInput' } }, as: :hidden %>
             </div>
 
             <!-- Nombre de participants -->
             <div class="col-12 col-md-6">
               <div class="d-flex-default my-3">
-                <i class="fa fa-minus-circle fa-2x" aria-hidden="true" data-action="click->user-searches#decrementPeople"></i>
-                <div><span data-target="user-searches.people"><%= @user_search.number %></span> personne(s)</div>
-                <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-action="click->user-searches#incrementPeople"></i>
+                <i class="fa fa-minus-circle fa-2x" aria-hidden="true" data-action="click->user-searches#decrementPeopleCount"></i>
+                <div><span data-target="user-searches.peopleCount"><%= @user_search.people_count %></span> personne(s)</div>
+                <i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-action="click->user-searches#incrementPeopleCount"></i>
               </div>
-              <%= f.input :number, input_html: {value: @user_search.number, data: { target: 'user-searches.peopleInput' } }, as: :hidden %>
+              <%= f.input :people_count, input_html: { data: { target: 'user-searches.peopleCountInput' } }, as: :hidden %>
             </div>
           </div>
           <div class="text-center">

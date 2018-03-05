@@ -1,14 +1,16 @@
 class Reservation < ApplicationRecord
-  include TimeRange
+  include DatesOverlapScope
+  include EndAtSetter
+  include TimeRangeBuilder
 
-  scope :displayable, -> { where.not(status: :pending).order(date: :asc) }
+  scope :displayable, -> { where.not(status: :pending).order(start_at: :asc) }
   scope :for_tenant, ->(user) { where(user: user) }
   scope :for_host, ->(user) { where(cookoon: user.cookoons) }
   scope :active, -> { where(status: %i[paid accepted ongoing]) }
   scope :inactive, -> { where(status: %i[refused cancelled passed]) }
-  scope :created_in_day_range_around, ->(date_time) { where created_at: day_range(date_time) }
-  scope :in_hour_range_around, ->(date_time) { where date: hour_range(date_time) }
-  scope :finished_in_day_range_around, ->(date_time) { joins(:inventory).merge(Inventory.checked_out_in_day_range_around(date_time)) }
+  scope :created_in_day_range_around, ->(datetime) { where created_at: day_range(datetime) }
+  scope :in_hour_range_around, ->(datetime) { where start_at: hour_range(datetime) }
+  scope :finished_in_day_range_around, ->(datetime) { joins(:inventory).merge(Inventory.checked_out_in_day_range_around(datetime)) }
 
   belongs_to :cookoon
   belongs_to :user
@@ -30,10 +32,10 @@ class Reservation < ApplicationRecord
 
   enum status: %i[pending paid accepted refused cancelled ongoing passed]
 
-  validates :price_cents, presence: true
+  validates :start_at, presence: true
   validates :duration, presence: true
-  validates :date, presence: true
-  validate :date_after_decent_time, on: :create
+  validates :price_cents, presence: true
+  validate :start_after_decent_time, on: :create
   validate :not_my_cookoon
 
   after_create :create_trello_card
@@ -105,7 +107,7 @@ class Reservation < ApplicationRecord
   end
 
   def starts_soon?
-    date.past? || date.between?(Time.zone.now, (Time.zone.now + 3.hours))
+    start_at.past? || start_at.between?(Time.zone.now, (Time.zone.now + 3.hours))
   end
 
   def base_option_price_cents
@@ -115,8 +117,8 @@ class Reservation < ApplicationRecord
   def ical_for(role)
     cal = Icalendar::Calendar.new
     cal.event do |e|
-      e.dtstart = Icalendar::Values::DateTime.new date, tzid: date.zone
-      e.dtend = Icalendar::Values::DateTime.new date + duration.hours, tzid: date.zone
+      e.dtstart = Icalendar::Values::DateTime.new start_at, tzid: start_at.zone
+      e.dtend = Icalendar::Values::DateTime.new end_at, tzid: end_at.zone
       e.summary = ical_params.dig(role, :summary)
       e.location = cookoon.address
       e.description = <<~DESCRIPTION
@@ -130,7 +132,7 @@ class Reservation < ApplicationRecord
   end
 
   def ical_file_name
-    "#{cookoon.name.parameterize(separator: '_')}_#{date.strftime('%d%b%y').downcase}.ics"
+    "#{cookoon.name.parameterize(separator: '_')}_#{start_at.strftime('%d%b%y').downcase}.ics"
   end
 
   private
@@ -179,9 +181,9 @@ class Reservation < ApplicationRecord
     CreateReservationTrelloCardJob.perform_later(id)
   end
 
-  def date_after_decent_time
-    return unless date
-    errors.add(:date, :not_after_decent_time) if date < (Time.zone.now + 10.hours)
+  def start_after_decent_time
+    return unless start_at
+    errors.add(:start_at, :not_after_decent_time) if start_at < (Time.zone.now + 10.hours)
   end
 
   def not_my_cookoon

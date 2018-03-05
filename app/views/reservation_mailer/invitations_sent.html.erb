@@ -1,5 +1,5 @@
 <p>Bonjour <%= @tenant.first_name %>,</p>
-<p>Vos convives ont bien été invités à votre événement du <%= display_date_for(@reservation.date) %> : </p>
+<p>Vos convives ont bien été invités à votre événement du <%= display_date_for(@reservation.start_at) %> : </p>
 
 <ul>
   <% @guests.each do |guest| %>

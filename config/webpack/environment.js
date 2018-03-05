@@ -1,5 +1,5 @@
 const { environment } = require('@rails/webpacker');
-const swiperConfig = require('./swiper_config');
+const swiperConfig = require('./config/swiper');
 
 environment.config.merge(swiperConfig);
 

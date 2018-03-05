@@ -1,27 +1,31 @@
 class Availability < ApplicationRecord
+  include DatesOverlapScope
+
   enum time_slot: %i[morning noon afternoon evening]
+
   scope :future, -> { where('date >= ?', Time.zone.today) }
+  scope :unavailable, -> { where(available: false) }
 
   TIME_SLOTS = {
     morning: {
       start_time: 7.hours,
       end_time: 12.hours,
-      display: "7h-12h"
+      display: '7h-12h'
     },
     noon: {
       start_time: 12.hours,
       end_time: 14.hours,
-      display: "12h-14h"
+      display: '12h-14h'
     },
     afternoon: {
       start_time: 14.hours,
       end_time: 19.hours,
-      display: "14h-19h"
+      display: '14h-19h'
     },
     evening: {
       start_time: 19.hours,
       end_time: 26.hours,
-      display: "19h-02h"
+      display: '19h-02h'
     }
   }.freeze
 
@@ -45,7 +49,7 @@ class Availability < ApplicationRecord
 
   def set_datetimes
     return unless date && time_slot
-    self.start_at = date + TIME_SLOTS.dig(time_slot.to_sym, :start_time)
-    self.end_at = date + TIME_SLOTS.dig(time_slot.to_sym, :end_time)
+    self.start_at = date.in TIME_SLOTS.dig(time_slot.to_sym, :start_time)
+    self.end_at = date.in TIME_SLOTS.dig(time_slot.to_sym, :end_time)
   end
 end

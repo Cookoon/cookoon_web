@@ -20,20 +20,20 @@
       </div>
       <div class="recap-datetime">
         <p>Vous arrivez le:</p>
-        <%= f.input :date,
+        <%= f.input :start_at,
                     label: false,
                     as: :string,
                     readonly: true,
                     input_html: {
                       value: display_datetime_for(
-                        @reservation.date,
+                        @reservation.start_at,
                         join_expression: 'à',
                         without_year: true,
                         time_separator: ':'
                       ),
                       data: {
                         controller: 'datetimepickers',
-                        target: 'datetimepickers.dateInput'
+                        target: 'datetimepickers.startAtInput'
                       }
                     }
       %>

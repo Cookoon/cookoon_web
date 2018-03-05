@@ -72,7 +72,7 @@ class TrelloReservationService
   def create_card
     @card = Trello::Card.create(
       list_id: TRELLO_LISTS_IDS[:pending_list_id],
-      name: "#{cookoon.name} - #{display_datetime_for(reservation.date, join_expression: 'à', without_year: true)}",
+      name: "#{cookoon.name} - #{display_datetime_for(reservation.start_at, join_expression: 'à', without_year: true)}",
       desc: description
     )
   rescue Trello::Error => e
