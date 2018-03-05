@@ -14,7 +14,6 @@ class Reservations::GuestsController < ApplicationController
 
     if @guest.save
       redirect_to reservation_guests_path(@reservation),
-                  action: 'replace',
                   notice: 'Votre nouveau contact est prêt à être convié !'
     else
       render :new

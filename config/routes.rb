@@ -19,8 +19,11 @@ Rails.application.routes.draw do
     post :impersonate, on: :member
     post :stop_impersonating, on: :collection
   end
-  resources :user_searches, only: :create
-  resource :user_searches, only: :update
+
+  resources :user_searches, only: :create do
+    patch 'update_all', on: :collection
+  end
+
   resources :stripe_accounts, only: [:new, :create]
   resources :credit_cards, only: [:index, :create, :destroy]
 
@@ -38,9 +41,7 @@ Rails.application.routes.draw do
     end
     resources :invoices, only: [:create]
     resources :guests, controller: 'reservations/guests', only: [:index, :create] do
-      collection do
-        post 'all', to: 'reservations/guests#create_all'
-      end
+      post 'create_all', on: :collection
     end
   end
 

@@ -20,11 +20,6 @@ class ApplicationController < ActionController::Base
     redirect_to(root_path)
   end
 
-  def current_search
-    return unless current_user
-    @current_search ||= current_user.last_recent_search
-  end
-
   # Devise
   def is_flashing_format?
     controller_name.in? %w(invitations passwords)

@@ -1,11 +1,14 @@
 class Cookoon < ApplicationRecord
+  include Filterable
+  include Randomizeable
   include TimeRangeBuilder
 
   scope :displayable_on_index, -> { joins(:user).where.not(users: { stripe_account_id: nil }) }
   scope :accomodates_for, ->(people_count) { where('capacity >= ?', people_count) }
+  scope :near_default_radius, ->(address) { near(address, UserSearch.default.radius) }
   scope :available_in, ->(range) { without_reservation_in(range).without_availabilty_in(range) }
-  scope :without_reservation_in, ->(range) { where.not(id: Reservation.overlapping(range).pluck(:cookoon_id)) }
-  scope :without_availabilty_in, ->(range) { where.not(id: Availability.overlapping(range).unavailable.pluck(:cookoon_id)) }
+  scope :without_reservation_in, ->(range) { where.not(id: Reservation.accepted.overlapping(range).pluck(:cookoon_id).uniq) }
+  scope :without_availabilty_in, ->(range) { where.not(id: Availability.unavailable.overlapping(range).pluck(:cookoon_id).uniq) }
   scope :created_in_day_range_around, ->(date_time) { where created_at: day_range(date_time) }
 
   CATEGORIES = %w[Appartement Maison Jardin Loft Terrasse Toit Villa].freeze
