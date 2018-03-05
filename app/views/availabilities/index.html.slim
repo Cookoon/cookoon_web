@@ -17,7 +17,7 @@
           p.text-muted.m-0 = day[:display]
 
         .col-8
-          .row.no-gutters.text-primary
+          .row.no-gutters
             - day[:time_slots].each do |time_slot|
               .col.d-flex.justify-content-center.align-items-center.text-center.my-2
                 = c 'availability', time_slot

@@ -9,6 +9,10 @@ export default class extends Controller {
   }
 
   update() {
+    if (this.isMissingDataAttributes()) {
+      return null;
+    }
+
     const data = new FormData();
     data.append('availability[date]', this.data.get('date'));
     data.append('availability[time_slot]', this.data.get('timeSlot'));
@@ -52,11 +56,11 @@ export default class extends Controller {
 
   render() {
     if (this.isMissingDataAttributes()) {
-      this.renderFA('square');
+      this.renderFA('ban text-muted');
     } else if (this.data.get('available') === 'false') {
       this.renderFA('times text-dark');
     } else {
-      this.renderFA('check');
+      this.renderFA('check text-primary');
     }
   }
 }
