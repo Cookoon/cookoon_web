@@ -1,5 +1,5 @@
 class Guest < ApplicationRecord
-  default_scope { order('LOWER(last_name) ASC') }
+  default_scope { order('LOWER(guests.last_name) ASC') }
 
   belongs_to :user
 
