@@ -18,6 +18,7 @@ fr:
           attributes:
             cookoon:
               cannot_book_mine: Vous ne pouvez pas réserver votre propre Cookoon !
+              unavailable_on_dates: Ce cookoon est indisponible à ces dates.
             start_at:
               not_after_decent_time: Un minimum de 10h est requis.
         user:

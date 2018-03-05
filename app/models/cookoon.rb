@@ -36,7 +36,19 @@ class Cookoon < ApplicationRecord
   after_create :create_trello_card
   after_save :update_trello, :notify_approved, if: :saved_change_to_status?
 
+  def unavailabilites(date_range)
+    overlapping_reservations(date_range) + overlapping_availabilities(date_range)
+  end
+
   private
+
+  def overlapping_reservations(date_range)
+    reservations.accepted.overlapping(date_range)
+  end
+
+  def overlapping_availabilities(date_range)
+    availabilities.unavailable.overlapping(date_range)
+  end
 
   def create_trello_card
     return unless Rails.env.production?
