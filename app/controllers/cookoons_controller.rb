@@ -12,7 +12,7 @@ class CookoonsController < ApplicationController
       near_default_radius: @user_search.address,
       available_in: (@user_search.start_at..@user_search.end_at)
     }
-    @cookoons = policy_scope(Cookoon).includes(:photo_files).filter(filtering_params)
+    @cookoons = policy_scope(Cookoon).includes(:photo_files).filter(filtering_params).shuffled
     build_markers
   end
 
