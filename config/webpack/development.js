@@ -1,3 +1,6 @@
-const environment = require('./environment')
+const environment = require('./environment');
+const webpackBundleAnalyzerConfig = require('./config/webpackBundleAnalyzer');
 
-module.exports = environment.toWebpackConfig()
+environment.config.merge(webpackBundleAnalyzerConfig);
+
+module.exports = environment.toWebpackConfig();
