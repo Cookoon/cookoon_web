@@ -37,6 +37,7 @@ class Reservation < ApplicationRecord
   validates :price_cents, presence: true
   validate :start_after_decent_time, on: :create
   validate :not_my_cookoon
+  validate :available_on_dates
 
   after_create :create_trello_card
   after_save :update_trello, if: :saved_change_to_status?
@@ -189,5 +190,10 @@ class Reservation < ApplicationRecord
   def not_my_cookoon
     return unless cookoon && user
     errors.add(:cookoon, :cannot_book_mine) if cookoon.user == user
+  end
+
+  def available_on_dates
+    range = start_at..(start_at + duration.hours)
+    errors.add(:cookoon, :unavailable_on_dates) if cookoon.unavailabilites(range).any?
   end
 end
