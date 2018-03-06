@@ -41,7 +41,7 @@ Rails.application.configure do
   config.roadie.url_options = {host: 'localhost', scheme: 'http', port: 3000 }
   config.action_mailer.asset_host = nil
 
-  config.action_mailer.preview_path = 'test/mailers/previews'
+  config.action_mailer.preview_path = 'spec/mailers/previews'
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
