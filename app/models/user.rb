@@ -33,10 +33,7 @@ class User < ApplicationRecord
   validates :last_name, presence: true
   validates :phone_number,
             presence: true,
-            format: {
-              with: PHONE_REGEXP,
-              message: :not_a_valid_phone_number
-            }
+            format: { with: PHONE_REGEXP }
   validates :terms_of_service, acceptance: { message: 'Vous devez accepter les conditions générales pour continuer' }
 
   after_invitation_accepted :send_welcome_email
