@@ -49,5 +49,13 @@ module CookoonWeb
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    config.generators do |g|
+      g.test_framework :rspec,
+        view_specs: false,
+        helper_specs: false,
+        routing_specs: false,
+        controller_specs: false
+    end
   end
 end
