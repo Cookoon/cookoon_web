@@ -104,6 +104,7 @@ group :development do
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rubocop', '~> 0.52', require: false
+  gem 'spring-commands-rspec'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
