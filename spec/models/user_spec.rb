@@ -9,19 +9,25 @@ RSpec.describe User, type: :model do
   it 'is invalid without a first name' do
     user = build(:user, first_name: nil)
     user.valid?
-    expect(user.errors).to include(:first_name)
+    expect(user.errors[:first_name]).to include('doit être renseigné')
   end
 
   it 'is invalid without a last name' do
     user = build(:user, last_name: nil)
     user.valid?
-    expect(user.errors).to include(:last_name)
+    expect(user.errors[:last_name]).to include('doit être renseigné')
   end
 
   it 'is invalid without a phone number' do
     user = build(:user, phone_number: nil)
     user.valid?
-    expect(user.errors).to include(:phone_number)
+    expect(user.errors[:phone_number]).to include('doit être rempli(e)')
+  end
+
+  it 'is invalid with an invalid phone number' do
+    user = build(:user, phone_number: '06,2340')
+    user.valid?
+    expect(user.errors[:phone_number]).to include('vérifiez le format de votre numéro de téléphone')
   end
 
   it 'returns a full name' do
