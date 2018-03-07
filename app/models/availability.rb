@@ -33,7 +33,7 @@ class Availability < ApplicationRecord
 
   validates :date, presence: true
   validates :time_slot, presence: true
-  validates :cookoon, uniqueness: { scope: %i[time_slot date] }
+  validates :cookoon, uniqueness: { scope: %i[date time_slot] }
 
   after_validation :set_datetimes, if: :datetimes_need_update?
 
