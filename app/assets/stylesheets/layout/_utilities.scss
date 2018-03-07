@@ -3,6 +3,13 @@ body {
   min-height: 100vh;
 }
 
+.link-unstyled,
+.link-unstyled:link,
+.link-unstyled:hover {
+  color: inherit;
+  text-decoration: inherit;
+}
+
 // Custom Bootstrap 4 utilities
 .b-0 {
   bottom: 0;
