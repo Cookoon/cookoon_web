@@ -5,43 +5,50 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/cookoon_web
     docker:
-      # specify the version you desire here
       - image: circleci/ruby:2.5.0-node-browsers
         environment:
-        - RAILS_ENV: test
-        - PGHOST: 127.0.0.1
-        - POSTGRES_USER: root
-
-    # Service container image available at `host: localhost`
-
+          BUNDLE_JOBS: 3
+          BUNDLE_RETRY: 3
+          RAILS_ENV: test
+          PGHOST: 127.0.0.1
+          PGUSER: root
+          BUNDLE_PATH: vendor/bundle
       - image: circleci/postgres:9.6.2-alpine
         environment:
-        - POSTGRES_USER: root
-        - PGHOST: 127.0.0.1
-        - POSTGRES_DB: cookoon_web_test
-
-    working_directory: ~/repo
+          POSTGRES_USER: root
+          POSTGRES_DB: cookoon_web_test
+          POSTGRES_PASSWORD: ""
 
     steps:
       - checkout
 
-      # Download and cache dependencies
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "Gemfile.lock" }}
-          # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
       - run:
           name: install dependencies
-          command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
+          command: bundle check || bundle install
 
       - save_cache:
-          paths:
-            - ./vendor/bundle
+          paths: vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+
+      - restore_cache:
+          keys:
+            - cookoon-web-yarn-{{ checksum "yarn.lock" }}
+            - cookoon-web-yarn-
+
+      - run:
+          name: Yarn Install
+          command: yarn install --cache-folder ~/.cache/yarn
+
+      - save_cache:
+          key: cookoon-web-yarn-{{ checksum "yarn.lock" }}
+          paths: ~/.cache/yarn
 
       # Database setup
       - run: bundle exec rake db:create
