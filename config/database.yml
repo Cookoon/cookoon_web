@@ -11,4 +11,6 @@ development:
 
 test:
   <<: *default
+  username: root
+  host: localhost
   database: cookoon_web_test
