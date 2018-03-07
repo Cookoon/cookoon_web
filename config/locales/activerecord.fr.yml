@@ -10,6 +10,10 @@ fr:
         reset_password_token: Votre lien de réinitialisation
     errors:
       models:
+        availability:
+          attributes:
+            cookoon:
+              taken: Une disponibilité existe déja sur ce créneau pour ce Cookoon
         guest:
           attributes:
             email:

@@ -26,7 +26,7 @@ class Cookoon < ApplicationRecord
 
   validates :name,     presence: true
   validates :surface,  presence: true
-  validates :price,    presence: true
+  validates :price,    numericality: { greater_than: 0 }
   validates :address,  presence: true
   validates :capacity, presence: true
   validates :category, presence: true
