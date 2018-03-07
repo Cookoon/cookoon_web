@@ -3,7 +3,6 @@ require 'rails_helper'
 RSpec.describe Cookoon, type: :model do
   it 'is valid with a user, name, surface, price, address, capacity, category and photos' do
     cookoon = build(:cookoon)
-    allow(cookoon).to receive(:photos).and_return([nil])
     expect(cookoon).to be_valid
   end
 
