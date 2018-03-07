@@ -1,7 +1,22 @@
 <div class="container">
   <h2>Mes moyens de paiement</h2>
 
-  <% if @stripe_sources.blank? %>
+  <% if @stripe_sources.blank? && current_user.available_discount? %>
+    <div class="information-card text-center">
+      <div class="information-card-picto">
+        <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+      </div>
+      <div class="information-card-title">
+        <p>Aucune carte associée</p>
+      </div>
+      <div class="information-card-text">
+        <p>
+          Ajoutez une carte de paiement pour pouvoir réserver un Cookoon et bénéficier de <b><%= humanized_money_with_symbol current_user.discount_balance %> de crédit.</b>
+        </p>
+        <p>Allez-y en toute confiance : votre numéro de carte est crypté contre toute violation.</p>
+      </div>
+    </div>
+  <% elsif @stripe_sources.blank? %>
     <div class="information-card text-center">
       <div class="information-card-picto">
         <i class="fa fa-question-circle-o" aria-hidden="true"></i>
@@ -12,7 +27,7 @@
       <div class="information-card-text">
         <p>
           Vous pouvez ajouter votre carte de paiement en toute confiance : votre numéro de carte est crypté contre toute
-          violation, et vous ne serez pas débité quand votre Hôte n'accepte pas votre demande de location
+          violation, et vous serez débité uniquement si votre Hôte accepte votre demande de location.
         </p>
       </div>
     </div>
@@ -35,7 +50,7 @@
   <% end %>
 
   <!-- Trigger modal with cb form -->
-  <div class="py-5 text-center">
+  <div class="py-3 text-center">
     <button type="button" class="button button-blue" data-toggle="modal" data-target="#credit-card-modal">
       Ajouter une carte
     </button>
@@ -50,11 +65,8 @@
         <i class="fa fa-question-circle-o fa-2x" aria-hidden="true"></i>
       </div>
       <p class='mt-3'>
-        Votre crédit disponible :
-      </p>
-      <p>
-        Vous avez <%= humanized_money_with_symbol current_user.discount_balance %> à dépenser chez Cookoon !
-        Vous pouvez en profiter jusqu'au <%= display_datetime_for current_user.discount_expires_at, join_expression: 'à' %>, dépéchez-vous !
+        <b>Vous avez <%= humanized_money_with_symbol current_user.discount_balance %> à dépenser chez Cookoon !</b>
+        Vous pouvez en profiter jusqu'au <%= display_date_for current_user.discount_expires_at %>, dépéchez-vous !
       </p>
     </div>
   </div>
