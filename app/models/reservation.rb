@@ -35,9 +35,9 @@ class Reservation < ApplicationRecord
   validates :start_at, presence: true
   validates :duration, presence: true
   validates :price_cents, presence: true
+  validate :available_on_dates, on: :create
   validate :start_after_decent_time, on: :create
   validate :not_my_cookoon
-  validate :available_on_dates
 
   after_create :create_trello_card
   after_save :update_trello, if: :saved_change_to_status?
