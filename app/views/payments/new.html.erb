@@ -30,7 +30,14 @@
     <div class="text-center py-3">
       <div class="py-3">
         <p>Vous n'avez aucun moyen de paiement</p>
-        <p>Vous devez en ajouter un avant de pouvoir faire une demande de réservation</p>
+        <% if current_user.available_discount? %>
+          <p>
+            Vous devez en ajouter un afin de pouvoir <b>profiter de vos <%= humanized_money_with_symbol current_user.discount_balance %>
+            de crédit.</b>
+          </p>
+        <% else %>
+          <p>Vous devez en ajouter un avant de pouvoir faire une demande de réservation</p>
+        <% end %>
       </div>
       <%= link_to 'Ajouter une carte', "#", class: 'button button-blue', data: {toggle: "modal", target: "#credit-card-modal"} %>
     </div>
