@@ -1,5 +1,8 @@
 FactoryBot.define do
   factory :cookoon do
+    after(:build) { |cookoon| cookoon.define_singleton_method(:geocode) {} }
+    before(:create) { Attachinary::File.define_method(:remove_temporary_tag) {} }
+
     association :user
     name 'Grand Salon 1930 - Silicon Sentier'
     surface 100
