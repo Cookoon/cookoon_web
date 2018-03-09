@@ -1,0 +1,125 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/accounts
+    body:
+      encoding: UTF-8
+      string: type=custom&country=FR&email=tester3%40example.com&account_token=ct_1C3hTQJwSREaPZl4mtYYczWD
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/3.9.1
+      Authorization:
+      - Bearer sk_test_lHL6MqAWBqXebJkS7jgd1sMi
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"3.9.1","lang":"ruby","lang_version":"2.5.0 p0 (2017-12-25)","platform":"x86_64-darwin17","engine":"ruby","publisher":"stripe","uname":"Darwin
+        MBP-de-Charles 17.4.0 Darwin Kernel Version 17.4.0: Sun Dec 17 09:19:54 PST
+        2017; root:xnu-4570.41.2~1/RELEASE_X86_64 x86_64","hostname":"MBP-de-Charles"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 09 Mar 2018 10:43:20 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2156'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_6XYV6rP1DLlYsg
+      Stripe-Version:
+      - '2017-08-15'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJpZCI6ICJhY2N0XzFDM2loMUMyTHZBWExMZDAiLAogICJvYmplY3QiOiAiYWNjb3VudCIsCiAgImJ1c2luZXNzX2xvZ28iOiBudWxsLAogICJidXNpbmVzc19uYW1lIjogbnVsbCwKICAiYnVzaW5lc3NfdXJsIjogbnVsbCwKICAiY2hhcmdlc19lbmFibGVkIjogdHJ1ZSwKICAiY291bnRyeSI6ICJGUiIsCiAgImNyZWF0ZWQiOiAxNTIwNTkyMTk5LAogICJkZWJpdF9uZWdhdGl2ZV9iYWxhbmNlcyI6IGZhbHNlLAogICJkZWNsaW5lX2NoYXJnZV9vbiI6IHsKICAgICJhdnNfZmFpbHVyZSI6IGZhbHNlLAogICAgImN2Y19mYWlsdXJlIjogZmFsc2UKICB9LAogICJkZWZhdWx0X2N1cnJlbmN5IjogImV1ciIsCiAgImRldGFpbHNfc3VibWl0dGVkIjogZmFsc2UsCiAgImRpc3BsYXlfbmFtZSI6IG51bGwsCiAgImVtYWlsIjogInRlc3RlcjNAZXhhbXBsZS5jb20iLAogICJleHRlcm5hbF9hY2NvdW50cyI6IHsKICAgICJvYmplY3QiOiAibGlzdCIsCiAgICAiZGF0YSI6IFtdLAogICAgImhhc19tb3JlIjogZmFsc2UsCiAgICAidG90YWxfY291bnQiOiAwLAogICAgInVybCI6ICIvdjEvYWNjb3VudHMvYWNjdF8xQzNpaDFDMkx2QVhMTGQwL2V4dGVybmFsX2FjY291bnRzIgogIH0sCiAgImtleXMiOiB7CiAgICAic2VjcmV0IjogInNrX3Rlc3RfODlDakZ2bXdpVm1LVzBHV2RBV1NNRndaIiwKICAgICJwdWJsaXNoYWJsZSI6ICJwa190ZXN0X1huT004ZTNvd2VDR0ExNmxlU25aSHliSiIKICB9LAogICJsZWdhbF9lbnRpdHkiOiB7CiAgICAiYWRkaXRpb25hbF9vd25lcnMiOiBbXSwKICAgICJhZGRyZXNzIjogewogICAgICAiY2l0eSI6ICJQVVRFQVVYIiwKICAgICAgImNvdW50cnkiOiAiRlIiLAogICAgICAibGluZTEiOiAiMSBydWUgZXVnw6huZSBlaWNoZW5iZXJnZXIiLAogICAgICAibGluZTIiOiBudWxsLAogICAgICAicG9zdGFsX2NvZGUiOiAiOTI4MDAiLAogICAgICAic3RhdGUiOiBudWxsCiAgICB9LAogICAgImJ1c2luZXNzX25hbWUiOiBudWxsLAogICAgImJ1c2luZXNzX3RheF9pZF9wcm92aWRlZCI6IGZhbHNlLAogICAgImRvYiI6IHsKICAgICAgImRheSI6IDEsCiAgICAgICJtb250aCI6IDEsCiAgICAgICJ5ZWFyIjogMTk2NQogICAgfSwKICAgICJmaXJzdF9uYW1lIjogIkNoYXJsZXMiLAogICAgImxhc3RfbmFtZSI6ICJQZXJuZXQiLAogICAgInBlcnNvbmFsX2FkZHJlc3MiOiB7CiAgICAgICJjaXR5IjogbnVsbCwKICAgICAgImNvdW50cnkiOiAiRlIiLAogICAgICAibGluZTEiOiBudWxsLAogICAgICAibGluZTIiOiBudWxsLAogICAgICAicG9zdGFsX2NvZGUiOiBudWxsLAogICAgICAic3RhdGUiOiBudWxsCiAgICB9LAogICAgInR5cGUiOiAiaW5kaXZpZHVhbCIsCiAgICAidmVyaWZpY2F0aW9uIjogewogICAgICAiZGV0YWlscyI6IG51bGwsCiAgICAgICJkZXRhaWxzX2NvZGUiOiBudWxsLAogICAgICAiZG9jdW1lbnQiOiBudWxsLAogICAgICAic3RhdHVzIjogInBlbmRpbmciCiAgICB9CiAgfSwKICAibWV0YWRhdGEiOiB7fSwKICAicGF5b3V0X3NjaGVkdWxlIjogewogICAgImRlbGF5X2RheXMiOiA3LAogICAgImludGVydmFsIjogImRhaWx5IgogIH0sCiAgInBheW91dF9zdGF0ZW1lbnRfZGVzY3JpcHRvciI6IG51bGwsCiAgInBheW91dHNfZW5hYmxlZCI6IGZhbHNlLAogICJwcm9kdWN0X2Rlc2NyaXB0aW9uIjogbnVsbCwKICAic3RhdGVtZW50X2Rlc2NyaXB0b3IiOiAiIiwKICAic3VwcG9ydF9lbWFpbCI6IG51bGwsCiAgInN1cHBvcnRfcGhvbmUiOiBudWxsLAogICJ0aW1lem9uZSI6ICJFdGMvVVRDIiwKICAidG9zX2FjY2VwdGFuY2UiOiB7CiAgICAiZGF0ZSI6IDE1MjA1ODc1MTIsCiAgICAiaXAiOiAiOTIuMTU0LjYzLjE5IiwKICAgICJ1c2VyX2FnZW50IjogIk1vemlsbGEvNS4wIChNYWNpbnRvc2g7IEludGVsIE1hYyBPUyBYIDEwXzEzXzMpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vja28pIENocm9tZS82NC4wLjMyODIuMTg2IFNhZmFyaS81MzcuMzYiCiAgfSwKICAidHlwZSI6ICJjdXN0b20iLAogICJ2ZXJpZmljYXRpb24iOiB7CiAgICAiZGlzYWJsZWRfcmVhc29uIjogbnVsbCwKICAgICJkdWVfYnkiOiBudWxsLAogICAgImZpZWxkc19uZWVkZWQiOiBbCiAgICAgICJleHRlcm5hbF9hY2NvdW50IgogICAgXQogIH0KfQo=
+    http_version: 
+  recorded_at: Fri, 09 Mar 2018 10:43:20 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/accounts/acct_1C3ih1C2LvAXLLd0
+    body:
+      encoding: UTF-8
+      string: external_account[object]=bank_account&external_account[account_holder_type]=individual&external_account[account_holder_name]=Aaron+Sumner&external_account[country]=FR&external_account[currency]=eur&external_account[account_number]=FR89370400440532013000
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/3.9.1
+      Authorization:
+      - Bearer sk_test_lHL6MqAWBqXebJkS7jgd1sMi
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"3.9.1","lang":"ruby","lang_version":"2.5.0 p0 (2017-12-25)","platform":"x86_64-darwin17","engine":"ruby","publisher":"stripe","uname":"Darwin
+        MBP-de-Charles 17.4.0 Darwin Kernel Version 17.4.0: Sun Dec 17 09:19:54 PST
+        2017; root:xnu-4570.41.2~1/RELEASE_X86_64 x86_64","hostname":"MBP-de-Charles"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 09 Mar 2018 10:43:22 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2525'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_kQiAQTX8WIf4qk
+      Stripe-Account:
+      - acct_1C3ih1C2LvAXLLd0
+      Stripe-Version:
+      - '2017-08-15'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJpZCI6ICJhY2N0XzFDM2loMUMyTHZBWExMZDAiLAogICJvYmplY3QiOiAiYWNjb3VudCIsCiAgImJ1c2luZXNzX2xvZ28iOiBudWxsLAogICJidXNpbmVzc19uYW1lIjogbnVsbCwKICAiYnVzaW5lc3NfdXJsIjogbnVsbCwKICAiY2hhcmdlc19lbmFibGVkIjogdHJ1ZSwKICAiY291bnRyeSI6ICJGUiIsCiAgImNyZWF0ZWQiOiAxNTIwNTkyMTk5LAogICJkZWJpdF9uZWdhdGl2ZV9iYWxhbmNlcyI6IGZhbHNlLAogICJkZWNsaW5lX2NoYXJnZV9vbiI6IHsKICAgICJhdnNfZmFpbHVyZSI6IGZhbHNlLAogICAgImN2Y19mYWlsdXJlIjogZmFsc2UKICB9LAogICJkZWZhdWx0X2N1cnJlbmN5IjogImV1ciIsCiAgImRldGFpbHNfc3VibWl0dGVkIjogdHJ1ZSwKICAiZGlzcGxheV9uYW1lIjogbnVsbCwKICAiZW1haWwiOiAidGVzdGVyM0BleGFtcGxlLmNvbSIsCiAgImV4dGVybmFsX2FjY291bnRzIjogewogICAgIm9iamVjdCI6ICJsaXN0IiwKICAgICJkYXRhIjogWwogICAgICB7CiAgICAgICAgImlkIjogImJhXzFDM2loM0MyTHZBWExMZDB0anVWUVhYMiIsCiAgICAgICAgIm9iamVjdCI6ICJiYW5rX2FjY291bnQiLAogICAgICAgICJhY2NvdW50IjogImFjY3RfMUMzaWgxQzJMdkFYTExkMCIsCiAgICAgICAgImFjY291bnRfaG9sZGVyX25hbWUiOiAiQWFyb24gU3VtbmVyIiwKICAgICAgICAiYWNjb3VudF9ob2xkZXJfdHlwZSI6ICJpbmRpdmlkdWFsIiwKICAgICAgICAiYmFua19uYW1lIjogIlNUUklQRSBURVNUIEJBTksiLAogICAgICAgICJjb3VudHJ5IjogIkZSIiwKICAgICAgICAiY3VycmVuY3kiOiAiZXVyIiwKICAgICAgICAiZGVmYXVsdF9mb3JfY3VycmVuY3kiOiB0cnVlLAogICAgICAgICJmaW5nZXJwcmludCI6ICJCN2VOVzJrWFQwd2ExQ0RBIiwKICAgICAgICAibGFzdDQiOiAiMzAwMCIsCiAgICAgICAgIm1ldGFkYXRhIjoge30sCiAgICAgICAgInJvdXRpbmdfbnVtYmVyIjogIjExMDAwMDAwMCIsCiAgICAgICAgInN0YXR1cyI6ICJuZXciCiAgICAgIH0KICAgIF0sCiAgICAiaGFzX21vcmUiOiBmYWxzZSwKICAgICJ0b3RhbF9jb3VudCI6IDEsCiAgICAidXJsIjogIi92MS9hY2NvdW50cy9hY2N0XzFDM2loMUMyTHZBWExMZDAvZXh0ZXJuYWxfYWNjb3VudHMiCiAgfSwKICAibGVnYWxfZW50aXR5IjogewogICAgImFkZGl0aW9uYWxfb3duZXJzIjogW10sCiAgICAiYWRkcmVzcyI6IHsKICAgICAgImNpdHkiOiAiUFVURUFVWCIsCiAgICAgICJjb3VudHJ5IjogIkZSIiwKICAgICAgImxpbmUxIjogIjEgcnVlIGV1Z8OobmUgZWljaGVuYmVyZ2VyIiwKICAgICAgImxpbmUyIjogbnVsbCwKICAgICAgInBvc3RhbF9jb2RlIjogIjkyODAwIiwKICAgICAgInN0YXRlIjogbnVsbAogICAgfSwKICAgICJidXNpbmVzc19uYW1lIjogbnVsbCwKICAgICJidXNpbmVzc190YXhfaWRfcHJvdmlkZWQiOiBmYWxzZSwKICAgICJkb2IiOiB7CiAgICAgICJkYXkiOiAxLAogICAgICAibW9udGgiOiAxLAogICAgICAieWVhciI6IDE5NjUKICAgIH0sCiAgICAiZmlyc3RfbmFtZSI6ICJDaGFybGVzIiwKICAgICJsYXN0X25hbWUiOiAiUGVybmV0IiwKICAgICJwZXJzb25hbF9hZGRyZXNzIjogewogICAgICAiY2l0eSI6IG51bGwsCiAgICAgICJjb3VudHJ5IjogIkZSIiwKICAgICAgImxpbmUxIjogbnVsbCwKICAgICAgImxpbmUyIjogbnVsbCwKICAgICAgInBvc3RhbF9jb2RlIjogbnVsbCwKICAgICAgInN0YXRlIjogbnVsbAogICAgfSwKICAgICJ0eXBlIjogImluZGl2aWR1YWwiLAogICAgInZlcmlmaWNhdGlvbiI6IHsKICAgICAgImRldGFpbHMiOiBudWxsLAogICAgICAiZGV0YWlsc19jb2RlIjogbnVsbCwKICAgICAgImRvY3VtZW50IjogbnVsbCwKICAgICAgInN0YXR1cyI6ICJwZW5kaW5nIgogICAgfQogIH0sCiAgIm1ldGFkYXRhIjoge30sCiAgInBheW91dF9zY2hlZHVsZSI6IHsKICAgICJkZWxheV9kYXlzIjogNywKICAgICJpbnRlcnZhbCI6ICJkYWlseSIKICB9LAogICJwYXlvdXRfc3RhdGVtZW50X2Rlc2NyaXB0b3IiOiBudWxsLAogICJwYXlvdXRzX2VuYWJsZWQiOiB0cnVlLAogICJwcm9kdWN0X2Rlc2NyaXB0aW9uIjogbnVsbCwKICAic3RhdGVtZW50X2Rlc2NyaXB0b3IiOiAiIiwKICAic3VwcG9ydF9lbWFpbCI6IG51bGwsCiAgInN1cHBvcnRfcGhvbmUiOiBudWxsLAogICJ0aW1lem9uZSI6ICJFdGMvVVRDIiwKICAidG9zX2FjY2VwdGFuY2UiOiB7CiAgICAiZGF0ZSI6IDE1MjA1ODc1MTIsCiAgICAiaXAiOiAiOTIuMTU0LjYzLjE5IiwKICAgICJ1c2VyX2FnZW50IjogIk1vemlsbGEvNS4wIChNYWNpbnRvc2g7IEludGVsIE1hYyBPUyBYIDEwXzEzXzMpIEFwcGxlV2ViS2l0LzUzNy4zNiAoS0hUTUwsIGxpa2UgR2Vja28pIENocm9tZS82NC4wLjMyODIuMTg2IFNhZmFyaS81MzcuMzYiCiAgfSwKICAidHlwZSI6ICJjdXN0b20iLAogICJ2ZXJpZmljYXRpb24iOiB7CiAgICAiZGlzYWJsZWRfcmVhc29uIjogbnVsbCwKICAgICJkdWVfYnkiOiBudWxsLAogICAgImZpZWxkc19uZWVkZWQiOiBbXQogIH0KfQo=
+    http_version: 
+  recorded_at: Fri, 09 Mar 2018 10:43:22 GMT
+recorded_with: VCR 4.0.0

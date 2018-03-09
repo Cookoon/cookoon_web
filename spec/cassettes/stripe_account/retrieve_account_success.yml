@@ -1,0 +1,65 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.stripe.com/v1/accounts/acct_1BdgAdJBhuyFUZoA
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/3.9.1
+      Authorization:
+      - Bearer sk_test_lHL6MqAWBqXebJkS7jgd1sMi
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"3.9.1","lang":"ruby","lang_version":"2.5.0 p0 (2017-12-25)","platform":"x86_64-darwin17","engine":"ruby","publisher":"stripe","uname":"Darwin
+        MBP-de-Charles 17.4.0 Darwin Kernel Version 17.4.0: Sun Dec 17 09:19:54 PST
+        2017; root:xnu-4570.41.2~1/RELEASE_X86_64 x86_64","hostname":"MBP-de-Charles"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 09 Mar 2018 12:15:15 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '2456'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_PrXux4cKXucCYL
+      Stripe-Account:
+      - acct_1BdgAdJBhuyFUZoA
+      Stripe-Version:
+      - '2017-08-15'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        ewogICJpZCI6ICJhY2N0XzFCZGdBZEpCaHV5RlVab0EiLAogICJvYmplY3QiOiAiYWNjb3VudCIsCiAgImJ1c2luZXNzX2xvZ28iOiBudWxsLAogICJidXNpbmVzc19uYW1lIjogbnVsbCwKICAiYnVzaW5lc3NfdXJsIjogbnVsbCwKICAiY2hhcmdlc19lbmFibGVkIjogdHJ1ZSwKICAiY291bnRyeSI6ICJGUiIsCiAgImNyZWF0ZWQiOiAxNTE0Mzg1OTc1LAogICJkZWJpdF9uZWdhdGl2ZV9iYWxhbmNlcyI6IGZhbHNlLAogICJkZWNsaW5lX2NoYXJnZV9vbiI6IHsKICAgICJhdnNfZmFpbHVyZSI6IGZhbHNlLAogICAgImN2Y19mYWlsdXJlIjogZmFsc2UKICB9LAogICJkZWZhdWx0X2N1cnJlbmN5IjogImV1ciIsCiAgImRldGFpbHNfc3VibWl0dGVkIjogdHJ1ZSwKICAiZGlzcGxheV9uYW1lIjogbnVsbCwKICAiZW1haWwiOiAiY2hhcmxlc0Bjb29rb29uLmZyIiwKICAiZXh0ZXJuYWxfYWNjb3VudHMiOiB7CiAgICAib2JqZWN0IjogImxpc3QiLAogICAgImRhdGEiOiBbCiAgICAgIHsKICAgICAgICAiaWQiOiAiYmFfMUJkZ0FmSkJodXlGVVpvQWNuOXVxVlJFIiwKICAgICAgICAib2JqZWN0IjogImJhbmtfYWNjb3VudCIsCiAgICAgICAgImFjY291bnQiOiAiYWNjdF8xQmRnQWRKQmh1eUZVWm9BIiwKICAgICAgICAiYWNjb3VudF9ob2xkZXJfbmFtZSI6ICJDaGFybGVzIFBlcm5ldCIsCiAgICAgICAgImFjY291bnRfaG9sZGVyX3R5cGUiOiAiaW5kaXZpZHVhbCIsCiAgICAgICAgImJhbmtfbmFtZSI6ICJTVFJJUEUgVEVTVCBCQU5LIiwKICAgICAgICAiY291bnRyeSI6ICJGUiIsCiAgICAgICAgImN1cnJlbmN5IjogImV1ciIsCiAgICAgICAgImRlZmF1bHRfZm9yX2N1cnJlbmN5IjogdHJ1ZSwKICAgICAgICAiZmluZ2VycHJpbnQiOiAiM0RNcDQ5dmhMRVZqRzhGbSIsCiAgICAgICAgImxhc3Q0IjogIjMwMDAiLAogICAgICAgICJtZXRhZGF0YSI6IHt9LAogICAgICAgICJyb3V0aW5nX251bWJlciI6ICIxMTAwMDAwMDAiLAogICAgICAgICJzdGF0dXMiOiAibmV3IgogICAgICB9CiAgICBdLAogICAgImhhc19tb3JlIjogZmFsc2UsCiAgICAidG90YWxfY291bnQiOiAxLAogICAgInVybCI6ICIvdjEvYWNjb3VudHMvYWNjdF8xQmRnQWRKQmh1eUZVWm9BL2V4dGVybmFsX2FjY291bnRzIgogIH0sCiAgImxlZ2FsX2VudGl0eSI6IHsKICAgICJhZGRpdGlvbmFsX293bmVycyI6IFtdLAogICAgImFkZHJlc3MiOiB7CiAgICAgICJjaXR5IjogIlBhcmlzIiwKICAgICAgImNvdW50cnkiOiAiRlIiLAogICAgICAibGluZTEiOiAiMSBydWUgZXVnw6huZSBlaWNoZW5iZXJnZXIiLAogICAgICAibGluZTIiOiBudWxsLAogICAgICAicG9zdGFsX2NvZGUiOiAiOTI4MDAiLAogICAgICAic3RhdGUiOiBudWxsCiAgICB9LAogICAgImJ1c2luZXNzX25hbWUiOiBudWxsLAogICAgImJ1c2luZXNzX3RheF9pZF9wcm92aWRlZCI6IGZhbHNlLAogICAgImRvYiI6IHsKICAgICAgImRheSI6IDEsCiAgICAgICJtb250aCI6IDEsCiAgICAgICJ5ZWFyIjogMTk2MAogICAgfSwKICAgICJmaXJzdF9uYW1lIjogIkNoYXJsZXMiLAogICAgImxhc3RfbmFtZSI6ICJQZXJuZXQiLAogICAgInBlcnNvbmFsX2FkZHJlc3MiOiB7CiAgICAgICJjaXR5IjogbnVsbCwKICAgICAgImNvdW50cnkiOiAiRlIiLAogICAgICAibGluZTEiOiBudWxsLAogICAgICAibGluZTIiOiBudWxsLAogICAgICAicG9zdGFsX2NvZGUiOiBudWxsLAogICAgICAic3RhdGUiOiBudWxsCiAgICB9LAogICAgInR5cGUiOiAiaW5kaXZpZHVhbCIsCiAgICAidmVyaWZpY2F0aW9uIjogewogICAgICAiZGV0YWlscyI6IG51bGwsCiAgICAgICJkZXRhaWxzX2NvZGUiOiBudWxsLAogICAgICAiZG9jdW1lbnQiOiBudWxsLAogICAgICAic3RhdHVzIjogInVudmVyaWZpZWQiCiAgICB9CiAgfSwKICAibWV0YWRhdGEiOiB7fSwKICAicGF5b3V0X3NjaGVkdWxlIjogewogICAgImRlbGF5X2RheXMiOiA3LAogICAgImludGVydmFsIjogImRhaWx5IgogIH0sCiAgInBheW91dF9zdGF0ZW1lbnRfZGVzY3JpcHRvciI6IG51bGwsCiAgInBheW91dHNfZW5hYmxlZCI6IHRydWUsCiAgInByb2R1Y3RfZGVzY3JpcHRpb24iOiBudWxsLAogICJzdGF0ZW1lbnRfZGVzY3JpcHRvciI6ICIiLAogICJzdXBwb3J0X2VtYWlsIjogbnVsbCwKICAic3VwcG9ydF9waG9uZSI6IG51bGwsCiAgInRpbWV6b25lIjogIkV0Yy9VVEMiLAogICJ0b3NfYWNjZXB0YW5jZSI6IHsKICAgICJkYXRlIjogMTUxNDM4NTk3NCwKICAgICJpcCI6ICI5Mi4xNTQuNjMuMTkiLAogICAgInVzZXJfYWdlbnQiOiBudWxsCiAgfSwKICAidHlwZSI6ICJjdXN0b20iLAogICJ2ZXJpZmljYXRpb24iOiB7CiAgICAiZGlzYWJsZWRfcmVhc29uIjogbnVsbCwKICAgICJkdWVfYnkiOiBudWxsLAogICAgImZpZWxkc19uZWVkZWQiOiBbCiAgICAgICJsZWdhbF9lbnRpdHkudmVyaWZpY2F0aW9uLmRvY3VtZW50IgogICAgXQogIH0KfQo=
+    http_version: 
+  recorded_at: Fri, 09 Mar 2018 12:15:15 GMT
+recorded_with: VCR 4.0.0

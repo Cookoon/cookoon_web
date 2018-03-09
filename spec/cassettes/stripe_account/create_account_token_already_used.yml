@@ -1,0 +1,67 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/accounts
+    body:
+      encoding: UTF-8
+      string: type=custom&country=FR&email=tester1%40example.com&account_token=ct_1C3hTQJwSREaPZl4mtYYczWD
+    headers:
+      User-Agent:
+      - Stripe/v1 RubyBindings/3.9.1
+      Authorization:
+      - Bearer sk_test_lHL6MqAWBqXebJkS7jgd1sMi
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"3.9.1","lang":"ruby","lang_version":"2.5.0 p0 (2017-12-25)","platform":"x86_64-darwin17","engine":"ruby","publisher":"stripe","uname":"Darwin
+        MBP-de-Charles 17.4.0 Darwin Kernel Version 17.4.0: Sun Dec 17 09:19:54 PST
+        2017; root:xnu-4570.41.2~1/RELEASE_X86_64 x86_64","hostname":"MBP-de-Charles"}'
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+  response:
+    status:
+      code: 400
+      message: Bad Request
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Fri, 09 Mar 2018 11:54:23 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '239'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Expose-Headers:
+      - Request-Id, Stripe-Manage-Version, X-Stripe-External-Auth-Required, X-Stripe-Privileged-Session-Required
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_ZEyWrHSdbKfPjZ
+      Stripe-Version:
+      - '2017-08-15'
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "error": {
+            "type": "invalid_request_error",
+            "message": "The token ct_1C3hTQJwSREaPZl4mtYYczWD has already been used. Each account token can only be used once to create or update an account.",
+            "param": "account_token"
+          }
+        }
+    http_version: 
+  recorded_at: Fri, 09 Mar 2018 11:54:23 GMT
+recorded_with: VCR 4.0.0
