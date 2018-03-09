@@ -59,7 +59,7 @@ jobs:
           name: run tests
           command: |
             mkdir /tmp/test-results
-            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb"
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb)"
 
             bundle exec rspec --format progress \
                             --out /tmp/test-results/rspec.xml \
