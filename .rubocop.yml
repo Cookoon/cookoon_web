@@ -1,13 +1,16 @@
 AllCops:
-  Includes:
+  Include:
     - Rakefile
     - config.ru
-  Excludes:
+  Exclude:
     - db/**/**
-    - config/**/**
+    # - config/**/**
     - script/**/**
 Documentation:
   Enabled: false
+Metrics/BlockLength:
+  Exclude:
+    - config/**/**
 Metrics/LineLength:
   Max: 120
 Rails:
