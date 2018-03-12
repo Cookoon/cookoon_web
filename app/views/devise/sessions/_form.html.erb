@@ -2,21 +2,29 @@
   <div class="form-inputs">
     <%= f.input :email, label: "Adresse email", required: false, autofocus: true %>
     <%= f.input :password, required: false %>
-    <!-- ==== CUSTOM CHECKBOX ==== -->
-    <p>Se souvenir de moi ?</p>
-    <div class="form-group boolean optional user_remember_me">
-      <input value="0" type="hidden" name="user[remember_me]">
-      <input class="boolean optional d-none" type="checkbox" value="1" name="user[remember_me]" id="user_remember_me">
-      <label class="boolean optional toggle" for="user_remember_me">
-        <span class="toggle-handler"></span>
-      </label>
-    </div>
-    <!-- ==== FIN CUSTOM CHECKBOX ==== -->
 
-    <p><%= link_to "J'ai perdu mes idenfiants", new_password_path(resource_name), class: 'font-italic' %></p>
-    <i data-toggle='modal' data-target='#first-signin' class='text-primary pointer'>Première Connexion ?</i>
+    <% if @device == :inside %>
+      <%= f.input :remember_me, as: :hidden, input_html: { value: 1 } %>
+    <% else %>
+      <!-- ==== CUSTOM CHECKBOX ==== -->
+      <p>Se souvenir de moi ?</p>
+      <div class="form-group boolean optional user_remember_me">
+        <input value="0" type="hidden" name="user[remember_me]">
+        <input class="boolean optional d-none" type="checkbox" value="1" name="user[remember_me]" id="user_remember_me">
+        <label class="boolean optional toggle" for="user_remember_me">
+          <span class="toggle-handler"></span>
+        </label>
+      </div>
+      <!-- ==== FIN CUSTOM CHECKBOX ==== -->
+    <% end %>
+
     <div class="home-links links-block pt-3 pb-3">
       <%= f.button :submit, "Se Connecter", class: 'button button-blue' %>
+    </div>
+
+    <div class="my-3">
+      <p data-toggle='modal' data-target='#first-signin' class='text-primary font-italic pointer'>Première Connexion ?</p>
+      <i><%= link_to 'Vous avez perdu vos idenfiants ?', new_password_path(resource_name) %></i>
     </div>
   </div>
 <% end %>
