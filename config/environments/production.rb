@@ -54,20 +54,20 @@ Rails.application.configure do
   config.log_level = :debug
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
 
   # Use a real queuing backend for Active Job (and separate queues per environment)
-  config.active_job.queue_adapter     = :sidekiq
+  config.active_job.queue_adapter = :sidekiq
   # config.active_job.queue_name_prefix = "cookoon_web_#{Rails.env}"
   config.action_mailer.perform_caching = false
 
   config.action_mailer.delivery_method     = :postmark
   config.action_mailer.postmark_settings   = { api_token: ENV['POSTMARK_API_KEY'] }
   config.action_mailer.default_url_options = { host: 'app.cookoon.fr' }
-  config.roadie.url_options = {host: 'app.cookoon.fr', scheme: 'https'}
+  config.roadie.url_options = { host: 'app.cookoon.fr', scheme: 'https' }
   config.action_mailer.asset_host = nil
 
   # Ignore bad email addresses and do not raise email delivery errors.
@@ -88,7 +88,7 @@ Rails.application.configure do
   # require 'syslog/logger'
   # config.logger = ActiveSupport::TaggedLogging.new(Syslog::Logger.new 'app-name')
 
-  if ENV["RAILS_LOG_TO_STDOUT"].present?
+  if ENV['RAILS_LOG_TO_STDOUT'].present?
     logger           = ActiveSupport::Logger.new(STDOUT)
     logger.formatter = config.log_formatter
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
