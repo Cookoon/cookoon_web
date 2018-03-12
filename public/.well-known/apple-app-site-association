@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "D5P74M4HAK.Cookoon.cookoon-ios",
+        "paths": ["*"]
+      }
+    ]
+  }
+}
