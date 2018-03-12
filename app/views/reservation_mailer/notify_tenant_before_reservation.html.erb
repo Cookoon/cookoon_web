@@ -27,8 +27,8 @@
     </td>
     <td>
       <b>Le coût de votre location :</b>
-      <br><%= humanized_money_with_symbol @reservation.price_with_fees %>
-      <br><small>soit <%= humanized_money_with_symbol @reservation.price %> + <%= humanized_money_with_symbol @reservation.cookoon_fees %> de frais</small>
+      <br><%= humanized_money_with_symbol @reservation.price_with_tenant_fee %>
+      <br><small>soit <%= humanized_money_with_symbol @reservation.price %> + <%= humanized_money_with_symbol @reservation.tenant_fee %> de frais</small>
     </td>
   </tr>
   <tr>

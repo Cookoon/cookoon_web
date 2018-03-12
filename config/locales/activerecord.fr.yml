@@ -21,10 +21,10 @@ fr:
         reservation:
           attributes:
             cookoon:
-              cannot_book_mine: Vous ne pouvez pas réserver votre propre Cookoon !
-              unavailable_on_dates: Ce cookoon est indisponible à ces dates.
+              host_cannot_be_tenant: Vous ne pouvez pas réserver votre propre Cookoon !
+              unavailable_in_datetime_range: Ce cookoon est indisponible à ces dates.
             start_at:
-              not_after_decent_time: Un minimum de 10h est requis.
+              before_notice_period: Un minimum de 10h est requis.
         user:
           attributes:
             email:

@@ -12,6 +12,15 @@ class Reservation < ApplicationRecord
   scope :in_hour_range_around, ->(datetime) { where start_at: hour_range(datetime) }
   scope :finished_in_day_range_around, ->(datetime) { joins(:inventory).merge(Inventory.checked_out_in_day_range_around(datetime)) }
 
+  DEFAULTS = {
+    tenant_fee_rate: 0.05,
+    host_fee_rate: 0.07,
+    service_price_cents: 2000,
+    notice_period: 10.hours,
+    max_duration: 12,
+    max_people_count: 20
+  }.freeze
+
   belongs_to :cookoon
   belongs_to :user
   has_one :inventory, dependent: :destroy
@@ -19,100 +28,97 @@ class Reservation < ApplicationRecord
   has_many :guests, through: :reservation_guests
 
   monetize :price_cents
-  monetize :price_for_rent_cents
-  monetize :cookoon_fees_cents
-  monetize :host_cookoon_fees_cents
-  monetize :price_with_fees_cents
-  monetize :price_for_services_cents
-  monetize :payout_price_cents
-  monetize :charge_amount_cents
   monetize :discount_amount_cents
-  monetize :total_fees_with_services_for_host_cents
-  monetize :base_option_price_cents
+
+  monetize :base_price_cents
+  monetize :tenant_fee_cents
+  monetize :price_with_tenant_fee_cents
+  monetize :host_fee_cents
+  monetize :default_service_price_cents
+  monetize :host_services_price_cents
+  monetize :host_payout_price_cents
+  monetize :charge_amount_cents
 
   enum status: %i[pending paid accepted refused cancelled ongoing passed]
 
   validates :start_at, presence: true
   validates :duration, presence: true
-  validates :price_cents, presence: true
-  validate :available_on_dates, on: :create
-  validate :start_after_decent_time, on: :create
-  validate :not_my_cookoon
+  validate :tenant_is_not_host
+  validate :start_after_notice_period, on: :create
+  validate :possible_in_datetime_range, on: :create
 
+  before_validation :set_price_cents, if: :price_cents_needs_update?
   after_create :create_trello_card
   after_save :update_trello, if: :saved_change_to_status?
 
-  def host_cookoon_fee_rate
-    0.07
-  end
-
-  def rent_cookoon_fee_rate
-    0.05
-  end
-
-  def pending_or_paid?
-    pending? || paid?
-  end
-
-  def services?
-    janitor || cleaning
-  end
-
-  def price_for_rent_cents
-    duration * cookoon.price_cents
-  end
-
-  def cookoon_fees_cents
-    (price_for_rent_cents * rent_cookoon_fee_rate).round
-  end
-
-  def host_cookoon_fees_cents
-    (price_for_rent_cents * host_cookoon_fee_rate).round
-  end
-
-  def price_with_fees_cents
-    price_for_rent_cents + cookoon_fees_cents
+  def self.default
+    OpenStruct.new DEFAULTS.slice(:max_duration, :max_people_count)
   end
 
   def cookoon_owner
     cookoon.user
   end
 
-  def discount_used?
-    discount_amount_cents&.positive?
-  end
-
-  def refund_discount_to_user
-    return unless discount_used?
-    user.discount_balance_cents += discount_amount_cents
-    user.save
-  end
-
-  def price_for_services_cents
-    amount_cents = 0
-    amount_cents += base_option_price_cents if janitor
-    amount_cents += base_option_price_cents if cleaning
-    amount_cents
-  end
-
-  def payout_price_cents
-    price_for_rent_cents - total_fees_with_services_for_host_cents
-  end
-
-  def charge_amount_cents
-    price_with_fees_cents - discount_amount_cents
-  end
-
-  def total_fees_with_services_for_host_cents
-    host_cookoon_fees_cents + price_for_services_cents
+  def pending_or_paid?
+    pending? || paid?
   end
 
   def starts_soon?
     start_at.past? || start_at.between?(Time.zone.now, (Time.zone.now + 3.hours))
   end
 
-  def base_option_price_cents
-    2000
+  def host_services?
+    janitor || cleaning
+  end
+
+  def base_price_cents
+    duration * cookoon.price_cents
+  end
+
+  def tenant_fee_rate
+    DEFAULTS[:tenant_fee_rate]
+  end
+
+  def tenant_fee_cents
+    (base_price_cents * tenant_fee_rate).round
+  end
+
+  def price_with_tenant_fee_cents
+    base_price_cents + tenant_fee_cents
+  end
+
+  def host_fee_rate
+    DEFAULTS[:host_fee_rate]
+  end
+
+  def host_fee_cents
+    (base_price_cents * host_fee_rate).round
+  end
+
+  def default_service_price_cents
+    DEFAULTS[:service_price_cents]
+  end
+
+  def host_services_price_cents
+    [janitor, cleaning].count(true) * default_service_price_cents
+  end
+
+  def host_payout_price_cents
+    base_price_cents - host_fee_cents - host_services_price_cents
+  end
+
+  def charge_amount_cents
+    price_with_tenant_fee_cents - discount_amount_cents
+  end
+
+  def discount_used?
+    discount_amount_cents.positive?
+  end
+
+  def refund_discount_to_user
+    return unless discount_used?
+    user.discount_balance_cents += discount_amount_cents
+    user.save
   end
 
   def ical_for(role)
@@ -137,6 +143,14 @@ class Reservation < ApplicationRecord
   end
 
   private
+
+  def price_cents_needs_update?
+    will_save_change_to_duration? || will_save_change_to_cookoon_id?
+  end
+
+  def set_price_cents
+    self.price_cents = (duration && cookoon ? base_price_cents : 0)
+  end
 
   def ical_params
     {
@@ -182,18 +196,18 @@ class Reservation < ApplicationRecord
     CreateReservationTrelloCardJob.perform_later(id)
   end
 
-  def start_after_decent_time
-    return unless start_at
-    errors.add(:start_at, :not_after_decent_time) if start_at < (Time.zone.now + 10.hours)
-  end
-
-  def not_my_cookoon
+  def tenant_is_not_host
     return unless cookoon && user
-    errors.add(:cookoon, :cannot_book_mine) if cookoon.user == user
+    errors.add(:cookoon, :host_cannot_be_tenant) if cookoon.user == user
   end
 
-  def available_on_dates
+  def start_after_notice_period
+    return unless start_at
+    errors.add(:start_at, :before_notice_period) if start_at < DEFAULTS[:notice_period].from_now
+  end
+
+  def possible_in_datetime_range
     range = start_at..(start_at + duration.hours)
-    errors.add(:cookoon, :unavailable_on_dates) if cookoon.unavailabilites(range).any?
+    errors.add(:cookoon, :unavailable_in_datetime_range) if cookoon.unavailabilites(range).any?
   end
 end

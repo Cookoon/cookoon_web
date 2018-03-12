@@ -9,7 +9,7 @@
                         controller: 'reservations',
                         reservations_cookoon_price_cents: @cookoon.price_cents,
                         reservations_min_duration: 1,
-                        reservations_max_duration: 5
+                        reservations_max_duration: Reservation.default.max_duration
                       },
                       remote: true do |f| %>
     <div class="recap">
@@ -72,7 +72,7 @@
     <%= f.error :cookoon %>
 
     <div class="d-flex flex-column align-items-center">
-      <h5>TOTAL : <span data-target="reservations.displayPrice"><%= humanized_money_with_symbol @reservation.price_with_fees %></span></h5>
+      <h5>TOTAL : <span data-target="reservations.displayPrice"><%= humanized_money_with_symbol @reservation.price_with_tenant_fee %></span></h5>
       <small class="mb-3">Ce montant comprend les frais de services de la plateforme Cookoon</small>
       <%= f.button :submit, 'Réserver', class: 'btn-light btn-action' %>
     </div>

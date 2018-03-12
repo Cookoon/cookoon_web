@@ -72,7 +72,7 @@ class StripePaymentService
   def compute_discount_cents
     return 0 unless user.available_discount?
     user_discount = user.discount_balance_cents
-    reservation_price = reservation.price_with_fees_cents
+    reservation_price = reservation.price_with_tenant_fee_cents
     [user_discount, reservation_price].min
   end
 
@@ -129,7 +129,7 @@ class StripePaymentService
 
   def transfer_options
     {
-      amount: reservation.payout_price_cents,
+      amount: reservation.host_payout_price_cents,
       currency: 'eur',
       destination: user.stripe_account_id,
       metadata: {
