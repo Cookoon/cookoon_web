@@ -1,73 +1,69 @@
 class ReservationMailerPreview < ActionMailer::Preview
   # ==== Mails for Users =====
-  def new_request
-    ReservationMailer.new_request(Reservation.last)
+  def paid_request_to_tenant
+    ReservationMailer.paid_request_to_tenant(Reservation.last)
   end
 
-  def cancelled_request
-    ReservationMailer.cancelled_request(Reservation.last)
+  def cancelled_by_tenant_to_tenant
+    ReservationMailer.cancelled_by_tenant_to_tenant(Reservation.last)
   end
 
-  def confirmed_by_host
-    ReservationMailer.confirmed_by_host(Reservation.last)
+  def confirmed_to_tenant
+    ReservationMailer.confirmed_to_tenant(Reservation.last)
   end
 
-  def refused_by_host
-    ReservationMailer.refused_by_host(Reservation.last)
+  def refused_to_tenant
+    ReservationMailer.refused_to_tenant(Reservation.last)
   end
 
-  def cancelled_by_host
-    ReservationMailer.cancelled_by_host(Reservation.last)
+  def cancelled_by_host_to_tenant
+    ReservationMailer.cancelled_by_host_to_tenant(Reservation.last)
   end
 
-  def ending_survey_for_user
-    ReservationMailer.ending_survey_for_user(Reservation.last)
+  def ending_survey_to_tenant
+    ReservationMailer.ending_survey_to_tenant(Reservation.last)
   end
 
-  def invitations_sent
-    ReservationMailer.invitations_sent(Reservation.last)
+  def guests_overview_to_tenant
+    ReservationMailer.guests_overview_to_tenant(Reservation.last)
   end
   # ============================
 
   # ==== Mails for Tenant Guests =====
-  def invited_by_tenant
-    ReservationMailer.invited_by_tenant(Reservation.last, Guest.last)
+  def invitation_to_guest
+    ReservationMailer.invitation_to_guest(Reservation.last, Guest.last)
   end
   # ============================
 
   # ==== Mails for Host =====
-  def pending_request
-    ReservationMailer.pending_request(Reservation.last)
+  def paid_request_to_host
+    ReservationMailer.paid_request_to_host(Reservation.last)
   end
 
-  def waiting_host_answer_for_one_day
-    ReservationMailer.waiting_host_answer_for_one_day(Reservation.last)
+  def notify_awaiting_request_to_host
+    ReservationMailer.notify_awaiting_request_to_host(Reservation.last)
   end
 
-  def cancelled_by_tenant
-    ReservationMailer.cancelled_by_tenant(Reservation.last)
+  def cancelled_by_tenant_to_host
+    ReservationMailer.cancelled_by_tenant_to_host(Reservation.last)
   end
 
-  def confirmation
-    ReservationMailer.confirmation(Reservation.last)
+  def confirmed_to_host
+    ReservationMailer.confirmed_to_host(Reservation.last)
   end
 
-  def cancelled_reservation
-    ReservationMailer.cancelled_reservation(Reservation.last)
+  def cancelled_by_host_to_host
+    ReservationMailer.cancelled_by_host_to_host(Reservation.last)
   end
 
-  def cancelled_reservation
-    ReservationMailer.cancelled_reservation(Reservation.last)
-  end
-
-  def ending_survey_for_host
-    ReservationMailer.ending_survey_for_host(Reservation.last)
+  def ending_survey_to_host
+    ReservationMailer.ending_survey_to_host(Reservation.last)
   end
   # ============================
 
   # ==== Notifications =====
-  def notify_tenant_before_reservation
-    ReservationMailer.notify_tenant_before_reservation(Reservation.last)
+  def notify_approaching_reservation_to_tenant
+    ReservationMailer.notify_approaching_reservation_to_tenant(Reservation.last)
   end
   # ============================
 end

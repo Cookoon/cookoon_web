@@ -1,5 +1,5 @@
 class ReservationsController < ApplicationController
-  before_action :find_cookoon, :build_reservation, only: [:create]
+  before_action :find_cookoon, only: :create
   before_action :find_reservation, only: %i[edit update show]
 
   def index
@@ -11,7 +11,9 @@ class ReservationsController < ApplicationController
   def show; end
 
   def create
-    @reservation.price = @reservation.price_for_rent
+    @reservation = current_user.reservations.new(reservation_params)
+    authorize @reservation
+
     if @reservation.save
       redirect_to new_reservation_payment_path(@reservation)
     else
@@ -23,8 +25,8 @@ class ReservationsController < ApplicationController
 
   def update
     @reservation.cancelled!
-    ReservationMailer.cancelled_request(@reservation).deliver_later
-    ReservationMailer.cancelled_by_tenant(@reservation).deliver_later
+    ReservationMailer.cancelled_by_tenant_to_tenant(@reservation).deliver_later
+    ReservationMailer.cancelled_by_tenant_to_host(@reservation).deliver_later
     redirect_to reservations_path
   end
 
@@ -37,11 +39,6 @@ class ReservationsController < ApplicationController
 
   def find_cookoon
     @cookoon = Cookoon.find(params[:cookoon_id])
-  end
-
-  def build_reservation
-    @reservation = current_user.reservations.build(reservation_params)
-    authorize @reservation
   end
 
   def reservation_params

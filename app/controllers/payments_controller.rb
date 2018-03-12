@@ -20,8 +20,8 @@ class PaymentsController < ApplicationController
     )
     @user_cards = payment_service.user_sources.try(:data)
     if payment_service.handle_payment_and_update_reservation
-      ReservationMailer.new_request(@reservation).deliver_later
-      ReservationMailer.pending_request(@reservation).deliver_later
+      ReservationMailer.paid_request_to_tenant(@reservation).deliver_later
+      ReservationMailer.paid_request_to_host(@reservation).deliver_later
       redirect_to cookoons_path, flash: { payment_succeed: true }
     else
       flash.now.alert = payment_service.displayable_errors
@@ -30,7 +30,7 @@ class PaymentsController < ApplicationController
   end
 
   def discount
-    @base_price = @reservation.price_with_fees
+    @base_price = @reservation.price_with_tenant_fee
     @user_discount = @reservation.user.discount_balance
     @computed_prices = compute_discount(@base_price, @user_discount)
   end

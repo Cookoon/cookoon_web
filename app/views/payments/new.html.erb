@@ -16,12 +16,12 @@
     </div>
     <div class="d-flex-default">
       <p>Frais de services</p>
-      <p><%= humanized_money_with_symbol @reservation.cookoon_fees %></p>
+      <p><%= humanized_money_with_symbol @reservation.tenant_fee %></p>
     </div>
     <hr>
     <div class="d-flex-default">
       <b id='total-text'>TOTAL</b>
-      <b id='reservation-price'><%= humanized_money_with_symbol @reservation.price_with_fees %></b>
+      <b id='reservation-price'><%= humanized_money_with_symbol @reservation.price_with_tenant_fee %></b>
     </div>
   </div>
 

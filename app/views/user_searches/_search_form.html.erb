@@ -2,9 +2,9 @@
   class="search"
   data-controller="user-searches google-maps-autocompletes"
   data-user-searches-min-duration="1"
-  data-user-searches-max-duration="5"
+  data-user-searches-max-duration="<%= Reservation.default.max_duration %>"
   data-user-searches-min-people-count="1"
-  data-user-searches-max-people-count="20"
+  data-user-searches-max-people-count="<%= Reservation.default.max_people_count %>"
 >
   <div class="container">
     <div class="d-flex align-items-center justify-content-around justify-content-sm-between child-mx-2 my-2">

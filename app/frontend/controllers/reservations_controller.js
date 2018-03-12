@@ -6,8 +6,8 @@ export default class extends Controller {
   updatePrice() {
     const price_cents =
       this.data.get('cookoonPriceCents') * this.durationInputTarget.value;
-    const price_with_fees_cents = price_cents * 1.05;
-    this.renderPrice(price_with_fees_cents);
+    const price_with_tenant_fee_cents = price_cents * 1.05;
+    this.renderPrice(price_with_tenant_fee_cents);
   }
 
   renderPrice(price_cents) {
