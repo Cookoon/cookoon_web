@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount Attachinary::Engine => '/attachinary'
+  mount Attachinary::Engine, at: :attachinary
 
   devise_for :users, controllers: {
     invitations: 'users/invitations',
@@ -8,74 +8,71 @@ Rails.application.routes.draw do
     sessions: 'users/sessions'
   }
 
+  # -------- STATIC PAGES ---------
   # Different root for authenticated users
-  authenticated do
-    root 'cookoons#index'
-  end
+  authenticated { root 'cookoons#index' }
   root 'pages#home'
 
-  resource :users, only: [:edit, :update]
-  resources :users, only: [:index] do
+  controller :pages do
+    get :support
+    get :setcookies
+  end
+
+  # -------- RESOURCES ---------
+  resource :users, only: %i[edit update]
+  resources :users, only: :index do
     post :impersonate, on: :member
     post :stop_impersonating, on: :collection
   end
 
   resources :user_searches, only: :create do
-    patch 'update_all', on: :collection
+    patch :update_all, on: :collection
   end
 
-  resources :stripe_accounts, only: [:new, :create]
-  resources :credit_cards, only: [:index, :create, :destroy]
+  resources :credit_cards, only: %i[index create destroy]
+  resources :stripe_accounts, only: %i[new create]
 
   resources :cookoons do
-    resources :reservations, only: [:create]
-    resources :availabilities, only: [:index, :create, :update], shallow: true
+    resources :reservations, only: :create
+    resources :availabilities, only: %i[index create update], shallow: true
   end
 
-  resources :reservations, only: [:index, :show, :edit, :update] do
-    resources :payments, only: [:new, :create] do
-      post 'discount', on: :new
+  resources :reservations, only: %i[index show edit update] do
+    resources :payments, only: %i[new create] do
+      post :discount, on: :new
     end
     namespace :payments do
       resources :credit_cards, only: :create
     end
-    resources :invoices, only: [:create]
-    resources :guests, controller: 'reservations/guests', only: [:index, :create] do
-      post 'create_all', on: :collection
+    resources :invoices, only: :create
+    resources :guests, controller: 'reservations/guests', only: %i[index create] do
+      post :create_all, on: :collection
     end
   end
 
   # -------- HOST NAMESPACE ---------
   namespace :host do
-    resources :reservations, only: [:index, :edit, :update] do
-      resources :inventories, only: [:new, :create]
+    get :dashboard, to: 'users#dashboard'
+    resources :reservations, only: %i[index edit update] do
+      resources :inventories, only: %i[new create edit update], shallow: true
     end
-    resources :inventories, only: [:edit, :update]
-    get 'dashboard', to: 'users#dashboard'
   end
 
-  # -------- STATIC PAGES ---------
-  get 'support', to: 'pages#support'
-  get 'setcookies', to: 'pages#setcookies'
-
-  # -------- UNIVERSAL LINKS ---------
-  get 'apple-app-site-association', to: 'pages#apple_app_site_association'
-  get '.well-known/apple-app-site-association', to: 'pages#apple_app_site_association'
-  get '.well-known/assetlinks.json', to: 'pages#android_assetlinks'
-
   # -------- ADMIN ROUTES ---------
-  # Sidekiq Web UI, only for admins.
-  require "sidekiq/web"
-  authenticate :user, lambda { |u| u.admin } do
-    mount Sidekiq::Web => '/sidekiq'
+  # Sidekiq Web UI, only for admins
+  authenticate :user, ->(user) { user.admin } do
+    mount Sidekiq::Web, at: :sidekiq
   end
 
   # ForestAdmin
-  namespace :forest do
-    post '/actions/award-invitations' => 'users#award_invitations'
-    post '/actions/change-e-mailing-preferences' => 'users#change_emailing_preferences'
-    post '/actions/cancel-by-host' => 'reservations#cancel_by_host'
-  end
+  mount ForestLiana::Engine, at: :forest
 
-  mount ForestLiana::Engine => '/forest'
+  namespace :forest do
+    # User
+    post '/actions/award-invitations', to: 'users#award_invitations'
+    post '/actions/change-e-mailing-preferences', to: 'users#change_emailing_preferences'
+
+    # Reservation
+    post '/actions/cancel-by-host', to: 'reservations#cancel_by_host'
+  end
 end
