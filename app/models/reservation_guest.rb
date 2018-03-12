@@ -9,6 +9,6 @@ class ReservationGuest < ApplicationRecord
   private
 
   def notify_guest
-    ReservationMailer.invited_by_tenant(reservation, guest).deliver_later
+    ReservationMailer.invitation_to_guest(reservation, guest).deliver_later
   end
 end

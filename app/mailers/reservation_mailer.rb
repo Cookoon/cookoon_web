@@ -2,8 +2,8 @@ class ReservationMailer < ApplicationMailer
   include DatetimeHelper
   helper :datetime
 
-  # ==== Mails for Users =====
-  def new_request(reservation)
+  # ==== Tenant transaction =====
+  def paid_request_to_tenant(reservation)
     @reservation = reservation
     @tenant = @reservation.user
     @cookoon = @reservation.cookoon
@@ -11,15 +11,7 @@ class ReservationMailer < ApplicationMailer
     mail(to: @tenant.full_email, subject: 'Vous avez demandé un Cookoon !')
   end
 
-  def cancelled_request(reservation)
-    @reservation = reservation
-    @tenant = @reservation.user
-    @cookoon = @reservation.cookoon
-    @host = @cookoon.user
-    mail(to: @tenant.full_email, subject: 'Votre location Cookoon a bien été annulée')
-  end
-
-  def confirmed_by_host(reservation)
+  def confirmed_to_tenant(reservation)
     @reservation = reservation
     @tenant = @reservation.user
     @cookoon = @reservation.cookoon
@@ -32,7 +24,7 @@ class ReservationMailer < ApplicationMailer
     mail(to: @tenant.full_email, subject: "Votre réservation Cookoon est confirmée : #{@cookoon.name}")
   end
 
-  def refused_by_host(reservation)
+  def refused_to_tenant(reservation)
     @reservation = reservation
     @tenant = @reservation.user
     @cookoon = @reservation.cookoon
@@ -40,7 +32,15 @@ class ReservationMailer < ApplicationMailer
     mail(to: @tenant.full_email, subject: "Votre réservation Cookoon a été refusée : #{@cookoon.name}")
   end
 
-  def cancelled_by_host(reservation)
+  def cancelled_by_tenant_to_tenant(reservation)
+    @reservation = reservation
+    @tenant = @reservation.user
+    @cookoon = @reservation.cookoon
+    @host = @cookoon.user
+    mail(to: @tenant.full_email, subject: 'Votre location Cookoon a bien été annulée')
+  end
+
+  def cancelled_by_host_to_tenant(reservation)
     @reservation = reservation
     @tenant = @reservation.user
     @cookoon = @reservation.cookoon
@@ -48,15 +48,7 @@ class ReservationMailer < ApplicationMailer
     mail(to: @tenant.full_email, subject: 'Votre location de Cookoon a été annulée')
   end
 
-  def ending_survey_for_user(reservation)
-    @reservation = reservation
-    @tenant = @reservation.user
-    @cookoon = @reservation.cookoon
-    @host = @cookoon.user
-    mail(to: @tenant.full_email, subject: "Comment s'est passée votre expérience Cookoon ?")
-  end
-
-  def invitations_sent(reservation)
+  def guests_overview_to_tenant(reservation)
     @reservation = reservation
     @guests = @reservation.guests
     @tenant = @reservation.user
@@ -64,10 +56,27 @@ class ReservationMailer < ApplicationMailer
     @host = @cookoon.user
     mail(to: @tenant.full_email, subject: 'Vos convives ont bien été invités')
   end
-  # ============================
 
-  # ==== Mails for Tenant Guests =====
-  def invited_by_tenant(reservation, guest)
+  def ending_survey_to_tenant(reservation)
+    @reservation = reservation
+    @tenant = @reservation.user
+    @cookoon = @reservation.cookoon
+    @host = @cookoon.user
+    mail(to: @tenant.full_email, subject: "Comment s'est passée votre expérience Cookoon ?")
+  end
+
+  # ==== Tenant notification =====
+  def notify_approaching_reservation_to_tenant(reservation)
+    @reservation = reservation
+    @tenant = @reservation.user
+    @cookoon = @reservation.cookoon
+    @host = @cookoon.user
+    mail(to: @tenant.full_email, subject: 'Votre location Cookoon se rapproche !')
+  end
+
+
+  # ==== Tenant Guest transaction =====
+  def invitation_to_guest(reservation, guest)
     @reservation = reservation
     @guest = guest
     @tenant = @reservation.user
@@ -84,10 +93,10 @@ class ReservationMailer < ApplicationMailer
       subject: "#{@tenant.full_name} vous convie le #{display_date_for(@reservation.start_at)} à son événement !"
     )
   end
-  # ============================
 
-  # ==== Mails for Host =====
-  def pending_request(reservation)
+
+  # ==== Host transaction =====
+  def paid_request_to_host(reservation)
     @reservation = reservation
     @tenant = @reservation.user
     @cookoon = @reservation.cookoon
@@ -95,31 +104,7 @@ class ReservationMailer < ApplicationMailer
     mail(to: @host.full_email, subject: "#{@tenant.first_name} souhaite louer votre Cookoon !")
   end
 
-  def waiting_host_answer_for_one_day(reservation)
-    @reservation = reservation
-    @tenant = @reservation.user
-    @cookoon = @reservation.cookoon
-    @host = @cookoon.user
-    mail(to: @host.full_email, subject: "Rappel: #{@tenant.first_name} souhaite louer votre Cookoon !")
-  end
-
-  def cancelled_by_tenant(reservation)
-    @reservation = reservation
-    @tenant = @reservation.user
-    @cookoon = @reservation.cookoon
-    @host = @cookoon.user
-    mail(to: @host.full_email, subject: "La location Cookoon de #{@tenant.first_name} a été annulée")
-  end
-
-  def cancelled_reservation(reservation)
-    @reservation = reservation
-    @tenant = @reservation.user
-    @cookoon = @reservation.cookoon
-    @host = @cookoon.user
-    mail(to: @host.full_email, subject: 'La location Cookoon a bien été annulée')
-  end
-
-  def confirmation(reservation)
+  def confirmed_to_host(reservation)
     @reservation = reservation
     @tenant = @reservation.user
     @cookoon = @reservation.cookoon
@@ -133,22 +118,36 @@ class ReservationMailer < ApplicationMailer
     mail(to: @host.full_email, subject: 'Vous avez confirmé une demande de location !')
   end
 
-  def ending_survey_for_host(reservation)
+  def cancelled_by_tenant_to_host(reservation)
+    @reservation = reservation
+    @tenant = @reservation.user
+    @cookoon = @reservation.cookoon
+    @host = @cookoon.user
+    mail(to: @host.full_email, subject: "La location Cookoon de #{@tenant.first_name} a été annulée")
+  end
+
+  def cancelled_by_host_to_host(reservation)
+    @reservation = reservation
+    @tenant = @reservation.user
+    @cookoon = @reservation.cookoon
+    @host = @cookoon.user
+    mail(to: @host.full_email, subject: 'La location Cookoon a bien été annulée')
+  end
+
+  def ending_survey_to_host(reservation)
     @reservation = reservation
     @tenant = @reservation.user
     @cookoon = @reservation.cookoon
     @host = @cookoon.user
     mail(to: @host.full_email, subject: "Comment s'est passée votre expérience Cookoon ?")
   end
-  # ============================
 
-  # ==== Notifications =====
-  def notify_tenant_before_reservation(reservation)
+  # ==== Host notification =====
+  def notify_awaiting_request_to_host(reservation)
     @reservation = reservation
     @tenant = @reservation.user
     @cookoon = @reservation.cookoon
     @host = @cookoon.user
-    mail(to: @tenant.full_email, subject: 'Votre location Cookoon se rapproche !')
+    mail(to: @host.full_email, subject: "Rappel: #{@tenant.first_name} souhaite louer votre Cookoon !")
   end
-  # ============================
 end

@@ -25,8 +25,8 @@ class ReservationsController < ApplicationController
 
   def update
     @reservation.cancelled!
-    ReservationMailer.cancelled_request(@reservation).deliver_later
-    ReservationMailer.cancelled_by_tenant(@reservation).deliver_later
+    ReservationMailer.cancelled_by_tenant_to_tenant(@reservation).deliver_later
+    ReservationMailer.cancelled_by_tenant_to_host(@reservation).deliver_later
     redirect_to reservations_path
   end
 

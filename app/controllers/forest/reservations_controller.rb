@@ -9,8 +9,8 @@ module Forest
 
       reservations.each do |reservation|
         if reservation.cancelled!
-          ReservationMailer.cancelled_reservation(reservation).deliver_later
-          ReservationMailer.cancelled_by_host(reservation).deliver_later
+          ReservationMailer.cancelled_by_host_to_host(reservation).deliver_later
+          ReservationMailer.cancelled_by_host_to_tenant(reservation).deliver_later
         end
       end
 

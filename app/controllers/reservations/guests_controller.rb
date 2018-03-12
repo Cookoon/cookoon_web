@@ -22,7 +22,7 @@ class Reservations::GuestsController < ApplicationController
 
   def create_all
     if params.dig(:reservation, :guest_ids).any?(&:present?) && @reservation.update(reservation_params)
-      ReservationMailer.invitations_sent(@reservation).deliver_later
+      ReservationMailer.guests_overview_to_tenant(@reservation).deliver_later
       redirect_to edit_reservation_path(@reservation), notice: 'Vos invités ont bien été conviés'
     else
       flash.alert = "Vous n'avez sélectionné aucun contact"
