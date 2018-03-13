@@ -1,6 +1,6 @@
 <div
   class="search"
-  data-controller="user-searches google-maps-autocompletes"
+  data-controller="user-searches google-maps-autocomplete"
   data-user-searches-min-duration="1"
   data-user-searches-max-duration="<%= Reservation.default.max_duration %>"
   data-user-searches-min-people-count="1"
@@ -10,7 +10,7 @@
     <div class="d-flex align-items-center justify-content-around justify-content-sm-between child-mx-2 my-2">
       <div class="d-flex-default child-mx-2 pointer" data-action="click->user-searches#toggleBodyVisibility">
         <i class="fa fa-search"></i>
-        <div id='infos-address' data-target="google-maps-autocompletes.shortAddress user-searches.address"><%= @user_search.address %></div>
+        <div id='infos-address' data-target="google-maps-autocomplete.shortAddress user-searches.address"><%= @user_search.address %></div>
         <div data-target="user-searches.startAt">
           <%= display_datetime_for(@user_search.start_at,
                                    join_expression: 'à',
@@ -40,7 +40,7 @@
                               class: 'w-100',
                               data: {
                                 action: 'keyup->user-searches#updateAddressAndClearVisibility',
-                                target: 'google-maps-autocompletes.addressInput user-searches.addressInput'
+                                target: 'google-maps-autocomplete.addressInput user-searches.addressInput'
                               }
                             }
                 %>
@@ -68,8 +68,8 @@
                             ),
                             data: {
                               action: 'click->user-searches#updateStartAtTarget',
-                              controller: 'datetimepickers',
-                              target: 'datetimepickers.startAtInput user-searches.startAtInput'
+                              controller: 'datetime-picker',
+                              target: 'datetime-picker.startAtInput user-searches.startAtInput'
                             }
                           }
             %>
