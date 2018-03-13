@@ -10,9 +10,6 @@ export default class extends Controller {
   }
 
   popStoreMessage() {
-    console.log(
-      'https://cookoon.app.link?$deeplink_path='.concat(window.location.href)
-    );
     if (
       window.confirm(
         "L'application Cookoon est disponible pour votre mobile : souhaitez-vous l'installer ?"
