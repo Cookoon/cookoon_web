@@ -6,6 +6,7 @@ fr:
         checkin_photos: Photos à l'entrée des lieux
         checkout_photos: Photos à la sortie des lieux
       user:
+        email: Adresse email
         phone_number: Téléphone portable
         reset_password_token: Votre lien de réinitialisation
     errors:
