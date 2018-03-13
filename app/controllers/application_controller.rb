@@ -40,7 +40,7 @@ class ApplicationController < ActionController::Base
                 :android_inside
               ##################################################################
               # TODO: FC 13mar18 remove this section when all installed apps are
-              # at least version 1.4.1 (includes 'Cookoon Inside' user agent)
+              # at least version 1.4.2 (includes 'Cookoon Inside' user agent)
               when /iP(?:hone|od|ad).*AppleWebKit(?!.*(?:Version|CriOS))/i
                 :ios_inside
               when /Android(?:.*; wv)/i
