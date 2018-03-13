@@ -16,7 +16,7 @@ fr:
         submit_button: Envoyer une invitation
       no_invitations_remaining: Il n'y a plus d'invitations restantes
       send_instructions: Un e-mail d'invitation a été envoyé à %{email}.
-      updated: Votre mot de passe a été défini avec succès. Vous êtes maintenant connecté.
+      updated: Votre mot de passe a bien été défini. Bienvenue dans la communauté Cookoon !
     mailer:
       invitation_instructions:
         accept: Accepter l'invitation
