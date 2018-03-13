@@ -1,7 +1,7 @@
 class DeviseCustomMailer < Devise::Mailer
-  helper :application
   include Devise::Controllers::UrlHelpers
   default template_path: 'devise/mailer'
+  helper :branch_url
 
   def invitation_instructions(record, token, opts = {})
     opts[:subject] = t(
