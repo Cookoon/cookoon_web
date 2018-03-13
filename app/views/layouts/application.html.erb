@@ -8,30 +8,36 @@
     <%= action_cable_meta_tag %>
     <%= turbolinks_cache_control_meta_tag %>
     <%= favicon_link_tag %>
+
     <%= stylesheet_link_tag 'application', media: :all, 'data-turbolinks-track': :reload %>
-    <%= render 'shared/ga_global_site_tag' %>
-    <%= javascript_include_tag "https://maps.google.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_KEY']}" %>
-    <%= javascript_include_tag 'https://js.stripe.com/v3/' %>
-
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': :reload %>
-
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': :reload %>
     <%= stylesheet_pack_tag 'application', media: :all, 'data-turbolinks-track': :reload %>
 
-    <%= cloudinary_js_config %>
+    <%= render 'shared/ga_global_site_tag' %>
+
+    <%= javascript_include_tag "https://maps.google.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_KEY']}", async: true %>
+    <%= javascript_include_tag 'https://js.stripe.com/v3/', async: true %>
   </head>
   <body class="<%= controller_name %> <%= action_name %>">
     <%= render 'shared/loader' %>
+
     <% if content_for?(:navbar) %>
       <%= yield(:navbar) %>
     <% else %>
       <%= render 'shared/navbar' %>
     <% end %>
+
     <%= render 'shared/side_nav' %>
+
     <%= render 'shared/pretender_infos' %>
+
     <div id="flash">
       <%= render 'shared/flashes' %>
     </div>
+
     <%= yield %>
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': :reload, 'data-turbolinks-eval': false %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': :reload, 'data-turbolinks-eval': false, 'data-turbolinks-suppress-warning': true  %>
+    <%= cloudinary_js_config %>
   </body>
 </html>
