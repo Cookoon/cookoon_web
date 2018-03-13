@@ -2,7 +2,7 @@
                     remote: true,
                     html: {
                       data: {
-                        controller: 'google-maps-autocompletes'
+                        controller: 'google-maps-autocomplete'
                       }
                     } do |f| %>
   <%= f.input :name, label: 'Nom du Cookoon', placeholder: 'Ex: Aux Abbesses chez Noémie et Thomas' %>
@@ -13,7 +13,7 @@
               placeholder: '',
               input_html: {
                 data: {
-                  target: 'google-maps-autocompletes.addressInput google-maps-autocompletes.formattedAddress'
+                  target: 'google-maps-autocomplete.addressInput google-maps-autocomplete.formattedAddress'
                 }
               }
   %>

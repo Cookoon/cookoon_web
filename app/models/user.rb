@@ -84,6 +84,14 @@ class User < ApplicationRecord
     discount_balance_cents.positive? && discount_expires_at&.future?
   end
 
+  def send_reset_password_instructions
+    if invited_to_sign_up?
+      errors.add :email, :invitation_not_yet_accepted
+    else
+      super
+    end
+  end
+
   private
 
   def set_discount_expires_at

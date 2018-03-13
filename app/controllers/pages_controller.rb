@@ -1,6 +1,5 @@
 class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[home setcookies]
-  layout 'naked', only: %i[home setcookies]
 
   def home; end
 

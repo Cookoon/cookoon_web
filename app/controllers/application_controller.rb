@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   impersonates :user
 
   before_action :authenticate_user!
+  before_action :set_device
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
@@ -30,6 +31,29 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  def set_device
+    @device = case request.user_agent
+              when /Cookoon Inside iOS/
+                :ios_inside
+              when /Cookoon Inside Android/
+                :android_inside
+              ##################################################################
+              # TODO: FC 13mar18 remove this section when all installed apps are
+              # at least version 1.4.1 (includes 'Cookoon Inside' user agent)
+              when /iP(?:hone|od|ad).*AppleWebKit(?!.*(?:Version|CriOS))/i
+                :ios_inside
+              when /Android(?:.*; wv)/i
+                :android_inside
+              ##################################################################
+              when /iP(?:hone|od|ad)/
+                :ios_browser
+              when /Android/
+                :android_browser
+              else
+                :desktop
+              end
+  end
 
   def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(^pages$)/
