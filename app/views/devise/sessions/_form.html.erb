@@ -2,7 +2,7 @@
   <%= f.input :email, required: false, autofocus: true %>
   <%= f.input :password, required: false %>
 
-  <% if @device == :inside %>
+  <% if @device.in? %i[ios_inside android_inside] %>
     <%= f.input :remember_me, as: :hidden, input_html: { value: 1 } %>
   <% else %>
     <!-- ==== CUSTOM CHECKBOX ==== -->

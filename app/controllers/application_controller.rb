@@ -34,12 +34,22 @@ class ApplicationController < ActionController::Base
 
   def set_device
     @device = case request.user_agent
-              when /Cookoon Inside/
-                :inside
+              when /Cookoon Inside iOS/
+                :ios_inside
+              when /Cookoon Inside Android/
+                :android_inside
+              ##################################################################
+              # TODO: FC 13mar18 remove this section when all installed apps are
+              # at least version 1.4.1 (includes 'Cookoon Inside' user agent)
+              when /iP(?:hone|od|ad).*AppleWebKit(?!.*(?:Version|CriOS))/i
+                :ios_inside
+              when /Android(?:.*; wv)/i
+                :android_inside
+              ##################################################################
               when /iP(?:hone|od|ad)/
-                :ios
+                :ios_browser
               when /Android/
-                :android
+                :android_browser
               else
                 :desktop
               end
