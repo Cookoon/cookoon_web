@@ -48,12 +48,11 @@ fr:
         blank: doit être renseigné
         invalid: n'est pas un email valide
         invitation_not_yet_accepted:  |
-          Vous n'avez pas encore accepté votre invitation ! Retrouvez le message
-          d'invitation reçu de votre parrain et suivez le lien qu'il contient
-          pour devenir membre de la communauté Cookoon.
+          Vous n'avez pas encore créé votre compte Cookoon : retournez sur votre
+          invitation e-mail pour activer votre compte et choisir un mot de passe !
         not_found: |
-          Cette adresse email ne correspond pas à un membre de la communauté Cookoon.
-          Vérifiez votre invitation !
+          Cette adresse e-mail n'est pas associée à un membre Cookoon.
+          Avez-vous bien reçu votre invitation à cette adresse ?
       first_name:
         blank: doit être renseigné
       last_name:
