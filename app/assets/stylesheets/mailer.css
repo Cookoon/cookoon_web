@@ -247,6 +247,16 @@ hr {
 /* -------------------------------------
     COOKOON
 ------------------------------------- */
+.embedded-message > tbody > tr > td {
+  background-color: #f8f9fa;
+  border-radius: 7px;
+  padding: 10px;
+}
+.embedded-message > tbody > tr > td p {
+  margin-bottom: 0;
+  font-size: 16px;
+}
+
 .header {
   height: 50px;
   width: 100%;
@@ -277,15 +287,6 @@ hr {
 }
 .info b {
   color: #006f8b;
-}
-
-.store-badge a {
-  display: inline-block;
-  padding: 0 5px;
-  text-decoration: none;
-}
-.store-badge img {
-  height: 40px;
 }
 
 .prefooter {

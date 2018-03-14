@@ -1,6 +1,17 @@
 <p>Bonjour <%= @guest.first_name %>,</p>
 <p><%= @tenant.full_name %> a réservé un Cookoon :</p>
 
+<% if @reservation.guests_message.present? %>
+<table border="0" cellpadding="0" cellspacing="10" class="embedded-message"><tbody>
+  <tr>
+    <td>
+      <%= simple_format @reservation.guests_message %>
+    </td>
+  </tr>
+</tbody></table>
+
+<% end %>
+
 <table border="0" cellpadding="0" cellspacing="10" class="info"><tbody>
   <tr>
     <td align="center">

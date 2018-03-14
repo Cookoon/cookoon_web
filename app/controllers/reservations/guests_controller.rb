@@ -21,12 +21,14 @@ class Reservations::GuestsController < ApplicationController
   end
 
   def create_all
-    if params.dig(:reservation, :guest_ids).any?(&:present?) && @reservation.update(reservation_params)
+    @reservation.update_attributes(reservation_params)
+
+    if params.dig(:reservation, :guest_ids).any?(&:present?) && @reservation.save
       ReservationMailer.guests_overview_to_tenant(@reservation).deliver_later
       redirect_to edit_reservation_path(@reservation), notice: 'Vos invités ont bien été conviés'
     else
-      flash.alert = "Vous n'avez sélectionné aucun contact"
-      redirect_to reservation_guests_path(@reservation)
+      @reservation.errors.add(:guests, :blank)
+      @user_guests = current_user.guests.where.not(id: @reservation.guest_ids)
     end
   end
 
@@ -44,7 +46,7 @@ class Reservations::GuestsController < ApplicationController
   def reservation_params
     params
       .require(:reservation)
-      .permit(guest_ids: [])
+      .permit(:guests_message, guest_ids: [])
       .to_h
       .merge(guest_ids: @reservation.guest_ids) do |_key, old_val, new_val|
         old_val | new_val
