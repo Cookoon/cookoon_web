@@ -4,9 +4,10 @@ class UserMailer < ApplicationMailer
     mail(to: @user.full_email, subject: 'Bienvenue dans la communauté Cookoon !')
   end
 
-  def notify_invitations_awarded(user, invitation_quantity)
+  def notify_invitations_awarded(user, invitation_quantity, message)
     @user = user
     @invitation_quantity = invitation_quantity
+    @message = message
     mail(to: @user.full_email, subject: "Nous venons de vous offrir #{invitation_quantity} invitations")
   end
 
