@@ -2,7 +2,7 @@ module Forest
   class User
     include ForestLiana::Collection
 
-    collection 'User'
+    collection :User
 
     field :full_name, type: 'String' do
       object.full_name

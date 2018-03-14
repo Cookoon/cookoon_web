@@ -2,7 +2,7 @@ module Forest
   class Reservation
     include ForestLiana::Collection
 
-    collection 'Reservation'
+    collection :Reservation
 
     action 'Cancel by host', fields: [{
       field: 'confirmed',
