@@ -24,6 +24,8 @@ fr:
             cookoon:
               host_cannot_be_tenant: Vous ne pouvez pas réserver votre propre Cookoon !
               unavailable_in_datetime_range: Ce cookoon est indisponible à ces dates.
+            guests:
+              blank: Vous n'avez sélectionné aucun contact
             start_at:
               before_notice_period: Un minimum de 10h est requis.
         user:
