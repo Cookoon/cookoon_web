@@ -16,3 +16,6 @@
 <% if flash[:invitation_sent] %>
   <%= render 'devise/invitations/sent' %>
 <% end %>
+<% if flash[:invitation_accepted] %>
+  <%= render 'devise/invitations/accepted' %>
+<% end %>
