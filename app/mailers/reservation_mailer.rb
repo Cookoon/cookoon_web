@@ -50,7 +50,6 @@ class ReservationMailer < ApplicationMailer
 
   def guests_overview_to_tenant(reservation)
     @reservation = reservation
-    @guests = @reservation.guests
     @tenant = @reservation.user
     @cookoon = @reservation.cookoon
     @host = @cookoon.user
