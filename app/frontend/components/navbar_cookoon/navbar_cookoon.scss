@@ -1,26 +1,26 @@
 .navbar-cookoon {
-  padding: 2rem;
+  padding: 1rem 2rem 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-size: 1.5rem;
-  &-none {
-    display: none;
-  }
+  line-height: normal;
   &-back,
   &-fixed-back {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
   }
   &-fixed-back {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    // background-color: transparent;
     z-index: 2;
     a {
       color: white;
     }
+  }
+  &-none {
+    display: none;
   }
 }
