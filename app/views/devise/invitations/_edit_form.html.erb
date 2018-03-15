@@ -8,5 +8,7 @@
   <%= f.input :password_confirmation %>
   <%= f.input :terms_of_service, as: :boolean, label: "J'accepte les #{link_to('conditions générales d\'utilisation', 'https://cookoon.fr/conditions-generales/', target: :_blank)}".html_safe %>
 
-  <%= f.button :submit, t("devise.invitations.edit.submit_button"), class: 'button button-blue' %>
+  <div class="text-center my-3">
+    <%= f.button :submit, t('.submit'), class: 'btn btn-primary btn-action' %>
+  </div>
 <% end %>
