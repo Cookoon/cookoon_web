@@ -1,6 +1,4 @@
-<% content_for :navbar do %>
-  <%= render 'shared/navbar_light', url: cookoon_path(@reservation.cookoon) %>
-<% end %>
+<% content_for :navbar_back_url, cookoon_path(@reservation.cookoon) %>
 
 <div class="container">
   <h2>Payez votre réservation</h2>

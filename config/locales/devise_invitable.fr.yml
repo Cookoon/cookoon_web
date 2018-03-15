@@ -8,7 +8,8 @@ fr:
         zero: Vous pourrez les parrainer dès que vous disposerez d'invitations. Choisissez les bien !
       edit:
         header: Vous rejoignez la communauté ?
-        submit_button: Je m'inscris
+      edit_form:
+        submit: Je m'inscris
       invitation_removed: Votre invitation a été supprimée.
       invitation_token_invalid: Oups, votre invitation n'est plus valide - contactez votre parrain pour qu'il vous en envoie une nouvelle
       new:

@@ -1,6 +1,4 @@
-<% content_for :navbar do %>
-  <%= render 'shared/navbar_light', url: root_path %>
-<% end %>
+<% content_for :navbar_back_url, root_path %>
 
 <div class="container">
   <div class="home-title title-block text-center">
@@ -11,5 +9,7 @@
     <p id="devise-failure-invalid" class="text-danger"></p>
   </div>
 
-  <%= render 'form' %>
+  <div class="mb-4">
+    <%= render 'form' %>
+  </div>
 </div>
