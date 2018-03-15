@@ -20,11 +20,9 @@
   <body class="<%= controller_name %> <%= action_name %>">
     <%= render 'shared/loader' %>
 
-    <% if content_for?(:navbar) %>
-      <%= yield(:navbar) %>
-    <% else %>
-      <%= render 'shared/navbar' %>
-    <% end %>
+    <%= c 'navbar_cookoon',
+          type: content_for?(:navbar_type) ? yield(:navbar_type) : :menu,
+          back_url: content_for?(:navbar_back_url) ? yield(:navbar_back_url) : nil %>
 
     <%= render 'shared/side_nav' %>
 

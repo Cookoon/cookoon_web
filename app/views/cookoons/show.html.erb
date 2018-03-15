@@ -1,6 +1,5 @@
-<% content_for :navbar do %>
-  <%= render 'shared/navbar_transparent' %>
-<% end %>
+<% content_for :navbar_type, :fixed_back %>
+<% content_for :navbar_back_url, cookoons_path %>
 
 <div class="bg-dark">
   <%= carousel_for(@cookoon.photos) %>
