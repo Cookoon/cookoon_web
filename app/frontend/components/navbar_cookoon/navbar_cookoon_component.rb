@@ -1,6 +1,6 @@
 module NavbarCookoonComponent
   extend ComponentHelper
-  property :type, default: :menu # :back, :fixed_back
+  property :type, default: :menu # :back, :fixed_back, :none
   property :back_url
 
   def display_type
