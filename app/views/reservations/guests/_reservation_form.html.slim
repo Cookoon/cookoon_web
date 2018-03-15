@@ -1,7 +1,7 @@
 = simple_form_for @reservation, url: create_all_reservation_guests_path(@reservation), method: :post, remote: true do |f|
   = f.association :guests, collection: @user_guests, as: :check_boxes, label: false
 
-  = f.input :guests_message, label: 'rajoutez un message personnalisé si vous le souhaitez :', input_html: { rows: 5, class: 'bg-light' }
+  = f.input :guests_message, label: 'Vous pouvez ajouter un message personnalisé', input_html: { rows: 5, class: 'bg-light' }
 
   .text-center
     = f.button :submit, 'Envoyer les invitations', class: 'btn btn-primary btn-action-sm'
