@@ -1,7 +1,13 @@
 <p>Bonjour <%= @user.first_name %>,</p>
 
 <% if @message.present? %>
-  <%= simple_format @message %>
+  <table border="0" cellpadding="0" cellspacing="10" class="embedded-message"><tbody>
+    <tr>
+      <td>
+        <%= simple_format @message %>
+      </td>
+    </tr>
+  </tbody></table>
 <% else %>
   <p>Vous participez activement et positivement à la vie de la communauté.</p>
 <% end %>
