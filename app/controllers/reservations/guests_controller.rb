@@ -24,7 +24,7 @@ class Reservations::GuestsController < ApplicationController
     @reservation.update_attributes(reservation_params)
 
     if params.dig(:reservation, :guest_ids).any?(&:present?) && @reservation.save
-      ReservationMailer.guests_overview_to_tenant(@reservation).deliver_later
+      ReservationMailer.guests_overview_to_tenant(@reservation.id).deliver_later
       redirect_to edit_reservation_path(@reservation), notice: 'Vos invités ont bien été conviés'
     else
       @reservation.errors.add(:guests, :blank)

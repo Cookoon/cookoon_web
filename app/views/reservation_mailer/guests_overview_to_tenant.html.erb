@@ -1,9 +1,9 @@
 <p>Bonjour <%= @tenant.first_name %>,</p>
-<p>Vos convives ont bien été invités à votre événement du <%= display_date_for(@reservation.start_at) %> : </p>
+<p>Voici tous les convives que vous avez invité à votre événement du <%= display_date_for(@reservation.start_at) %> :</p>
 
 <ul>
-  <% @guests.each do |guest| %>
-    <li><%= guest %></li>
+  <% @reservation.reservation_guests.each do |reservation_guest| %>
+    <li><%= reservation_guest.guest %>, le <%= display_date_for(reservation_guest.created_at) %></li>
   <% end %>
 </ul>
 

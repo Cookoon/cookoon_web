@@ -48,12 +48,9 @@ class ReservationMailer < ApplicationMailer
     mail(to: @tenant.full_email, subject: 'Votre location de Cookoon a été annulée')
   end
 
-  def guests_overview_to_tenant(reservation)
-    @reservation = reservation
-    @guests = @reservation.guests
+  def guests_overview_to_tenant(reservation_id)
+    @reservation = Reservation.includes(reservation_guests: [:guest]).find(reservation_id)
     @tenant = @reservation.user
-    @cookoon = @reservation.cookoon
-    @host = @cookoon.user
     mail(to: @tenant.full_email, subject: 'Vos convives ont bien été invités')
   end
 
@@ -61,7 +58,6 @@ class ReservationMailer < ApplicationMailer
     @reservation = reservation
     @tenant = @reservation.user
     @cookoon = @reservation.cookoon
-    @host = @cookoon.user
     mail(to: @tenant.full_email, subject: "Comment s'est passée votre expérience Cookoon ?")
   end
 
@@ -81,7 +77,6 @@ class ReservationMailer < ApplicationMailer
     @guest = guest
     @tenant = @reservation.user
     @cookoon = @reservation.cookoon
-    @host = @cookoon.user
 
     attachments[@reservation.ical_file_name] = {
       mime_type: 'application/ics',
