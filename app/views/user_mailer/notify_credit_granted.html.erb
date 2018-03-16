@@ -1,0 +1,17 @@
+<p>Bonjour <%= @user.first_name %>,</p>
+
+<p>Pour vous remercier, nous vous offrons <%= link_to "#{humanized_money_with_symbol @credit_amount} de crédit", cookoons_url, target: :_blank %> pour organiser vos prochains événements Cookoon, ne le laissez pas expirer 😁</p>
+
+<% if @message.present? %>
+  <table border="0" cellpadding="0" cellspacing="10" class="embedded-message"><tbody>
+    <tr>
+      <td>
+        <%= simple_format @message %>
+      </td>
+    </tr>
+  </tbody></table>
+<% end %>
+
+<%= content_for :post_scriptum do %>
+  <p>PS : une question ? Rendez-vous sur <%= link_to 'aide.cookoon.fr', 'https://aide.cookoon.fr', target: :_blank %></p>
+<% end %>
