@@ -2,7 +2,7 @@
 
 <div class="container">
   <div class="reservation-details-card reservation-details-card-blue">
-    <p><%= @reservation.cookoon.name.upcase %></p>
+    <h5><%= @reservation.cookoon.name.upcase %></h5>
     <p><%= "#{display_datetime_for(@reservation.start_at, join_expression: '· à')} · pour #{@reservation.duration}h" %></p>
     <p><%= "#{@reservation.cookoon.category} - #{@reservation.cookoon.address} chez #{@reservation.cookoon.user.full_name}" %></p>
     <div class="text-center">

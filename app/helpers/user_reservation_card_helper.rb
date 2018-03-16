@@ -35,7 +35,7 @@ module UserReservationCardHelper
     end
 
     def title
-      content_tag(:h4, reservation.cookoon.name, class: 'user-reservation-card-title')
+      content_tag(:h5, reservation.cookoon.name, class: 'user-reservation-card-title')
     end
 
     def details
