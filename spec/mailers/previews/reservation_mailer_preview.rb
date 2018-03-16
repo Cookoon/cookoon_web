@@ -25,7 +25,7 @@ class ReservationMailerPreview < ActionMailer::Preview
   end
 
   def guests_overview_to_tenant
-    ReservationMailer.guests_overview_to_tenant(Reservation.last)
+    ReservationMailer.guests_overview_to_tenant(Reservation.last.id)
   end
   # ============================
 
