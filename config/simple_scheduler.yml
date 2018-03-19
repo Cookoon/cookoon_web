@@ -44,3 +44,9 @@ notify_cookoon_pending_for_missing_stripe_account:
   every: '1.days'
   at: '14:00'
   expires_after: '23.hours'
+
+reservations_cleanup:
+  class: 'ReservationsCleanupJob'
+  every: '1.days'
+  at: '01:00'
+  expires_after: '23.hours'
