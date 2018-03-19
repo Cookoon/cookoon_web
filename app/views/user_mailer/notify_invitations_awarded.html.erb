@@ -1,5 +1,23 @@
 <p>Bonjour <%= @user.first_name %>,</p>
-<p>Vous participez activement et positivement à la vie de la communauté. Pour vous remercier, nous vous offrons <%= link_to "#{@invitation_quantity} invitations", new_user_invitation_url, target: :_blank %> pour convier vos proches, choisissez les bien 😁</p>
+
+<% if @message.present? %>
+  <p class="mb-0">
+    Nous venons de vous offrir <%= link_to "#{@invitation_quantity} invitations supplémentaires", new_user_invitation_url, target: :_blank %> pour convier vos proches à rejoindre Cookoon.
+  </p>
+
+  <table border="0" cellpadding="0" cellspacing="10" class="embedded-message"><tbody>
+    <tr>
+      <td>
+        <%= simple_format @message %>
+      </td>
+    </tr>
+  </tbody></table>
+<% else %>
+  <p>
+    Vous participez activement et positivement à la vie de la communauté.
+    Pour vous remercier, nous vous offrons <%= link_to "#{@invitation_quantity} invitations", new_user_invitation_url, target: :_blank %> pour convier vos proches, choisissez les bien 😁
+  </p>
+<% end %>
 
 <%= content_for :post_scriptum do %>
   <p>PS : une question ? Rendez-vous sur <%= link_to 'aide.cookoon.fr', 'https://aide.cookoon.fr', target: :_blank %></p>

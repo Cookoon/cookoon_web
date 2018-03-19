@@ -1,13 +1,24 @@
 class UserMailer < ApplicationMailer
+  include MoneyRails::ActionViewExtension
+  helper :datetime
+
   def welcome_email(user)
     @user = user
     mail(to: @user.full_email, subject: 'Bienvenue dans la communauté Cookoon !')
   end
 
-  def notify_invitations_awarded(user, invitation_quantity)
+  def notify_invitations_awarded(user, invitation_quantity, message)
     @user = user
     @invitation_quantity = invitation_quantity
+    @message = message
     mail(to: @user.full_email, subject: "Nous venons de vous offrir #{invitation_quantity} invitations")
+  end
+
+  def notify_credit_granted(user, credit_amount_cents, message)
+    @user = user
+    @credit_amount = Money.new(credit_amount_cents)
+    @message = message
+    mail(to: @user.full_email, subject: "Nous venons de vous accorder #{humanized_money_with_symbol @credit_amount} de crédit")
   end
 
   def notify_two_days_after_join(user)

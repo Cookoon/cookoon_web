@@ -4,7 +4,11 @@ class UserMailerPreview < ActionMailer::Preview
   end
 
   def notify_invitations_awarded
-    UserMailer.notify_invitations_awarded(User.last, 5)
+    UserMailer.notify_invitations_awarded(User.last, 5, 'Message personnalisé')
+  end
+
+  def notify_credit_granted
+    UserMailer.notify_credit_granted(User.last, Money.new(10_000), 'Message personnalisé')
   end
 
   def notify_two_days_after_join

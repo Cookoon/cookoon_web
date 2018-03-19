@@ -2,7 +2,7 @@ module Forest
   class User
     include ForestLiana::Collection
 
-    collection 'User'
+    collection :User
 
     field :full_name, type: 'String' do
       object.full_name
@@ -17,18 +17,42 @@ module Forest
     #   object.invited_by
     # end
 
-    action 'Award invitations', fields: [{
-      field: 'quantity',
-      type: 'Number',
-      description: 'The number of invitations you want to award these users',
-      isRequired: true,
-      defaultValue: 5
-    }]
+    action 'Award invitations', fields: [
+      {
+        field: 'quantity',
+        type: 'Number',
+        description: 'The number of invitations you want to award these users',
+        isRequired: true,
+        defaultValue: 5
+      },
+      {
+        field: 'message',
+        type: 'String',
+        description: 'The specific message you want to embed in the email',
+        widget: 'text area'
+      }
+    ]
 
     action 'Change e-mailing preferences', fields: [{
-    field: 'emailing_preferences',
-    type: 'Enum',
-    enums: ['Aucun e-mail', 'Tous les emails']
-  }]
+      field: 'emailing_preferences',
+      type: 'Enum',
+      enums: ['Aucun e-mail', 'Tous les emails']
+    }]
+
+    action 'Grant credit', fields: [
+      {
+        field: 'amount',
+        type: 'Number',
+        description: 'The credit you want to grant, in euros (no cents)',
+        isRequired: true,
+        defaultValue: 100
+      },
+      {
+        field: 'message',
+        type: 'String',
+        description: 'The specific message you want to embed in the email',
+        widget: 'text area'
+      }
+    ]
   end
 end
