@@ -1,5 +1,6 @@
 class UserMailer < ApplicationMailer
   include MoneyRails::ActionViewExtension
+  helper :datetime
 
   def welcome_email(user)
     @user = user
