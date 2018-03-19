@@ -11,6 +11,8 @@ class Reservation < ApplicationRecord
   scope :created_in_day_range_around, ->(datetime) { where created_at: day_range(datetime) }
   scope :in_hour_range_around, ->(datetime) { where start_at: hour_range(datetime) }
   scope :finished_in_day_range_around, ->(datetime) { joins(:inventory).merge(Inventory.checked_out_in_day_range_around(datetime)) }
+  scope :past, -> { where('start_at < ?', Time.zone.now) }
+  scope :created_before, ->(date) { where('created_at < ?', date) }
 
   DEFAULTS = {
     tenant_fee_rate: 0.05,
