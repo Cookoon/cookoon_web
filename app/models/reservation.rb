@@ -13,6 +13,7 @@ class Reservation < ApplicationRecord
   scope :finished_in_day_range_around, ->(datetime) { joins(:inventory).merge(Inventory.checked_out_in_day_range_around(datetime)) }
   scope :past, -> { where('start_at < ?', Time.zone.now) }
   scope :created_before, ->(date) { where('created_at < ?', date) }
+  scope :to_cancel, -> { past.or(created_before(DEFAULTS[:automatic_cancel_period].ago)) }
 
   DEFAULTS = {
     tenant_fee_rate: 0.05,
@@ -20,7 +21,8 @@ class Reservation < ApplicationRecord
     service_price_cents: 2000,
     notice_period: 10.hours,
     max_duration: 12,
-    max_people_count: 20
+    max_people_count: 20,
+    automatic_cancel_period: 7.days
   }.freeze
 
   belongs_to :cookoon
