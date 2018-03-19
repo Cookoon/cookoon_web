@@ -8,7 +8,7 @@ module Forest
       users = ::User.where(id: ids)
       users.each do |user|
         user.invitation_limit += invitation_quantity
-        UserMailer.notify_invitations_awarded(user, invitation_quantity, message).deliver_later if user.valid?
+        UserMailer.notify_invitations_awarded(user, invitation_quantity, message).deliver_later if user.invitation_accepted?
         user.save(validate: false)
       end
 
@@ -42,7 +42,7 @@ module Forest
       users = ::User.where(id: ids)
       users.each do |user|
         user.discount_balance_cents += credit_amount_cents
-        UserMailer.notify_credit_granted(user, credit_amount_cents, message).deliver_later if user.valid?
+        UserMailer.notify_credit_granted(user, credit_amount_cents, message).deliver_later if user.invitation_accepted?
         user.save(validate: false)
       end
 
