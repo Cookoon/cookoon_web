@@ -11,9 +11,10 @@ class Reservation < ApplicationRecord
   scope :created_in_day_range_around, ->(datetime) { where created_at: day_range(datetime) }
   scope :in_hour_range_around, ->(datetime) { where start_at: hour_range(datetime) }
   scope :finished_in_day_range_around, ->(datetime) { joins(:inventory).merge(Inventory.checked_out_in_day_range_around(datetime)) }
-  scope :past, -> { where('start_at < ?', Time.zone.now) }
   scope :created_before, ->(date) { where('created_at < ?', date) }
-  scope :to_cancel, -> { past.or(created_before(DEFAULTS[:automatic_cancel_period].ago)) }
+  scope :pending_unpayable, -> { pending.created_before(DEFAULTS[:safety_period].ago) }
+  scope :short_notice, -> { paid.where('start_at < ?', Time.zone.now.in(DEFAULTS[:safety_period])) }
+  scope :stripe_will_not_capture, -> { paid.created_before(DEFAULTS[:stripe_validity_period].ago.in(DEFAULTS[:safety_period])) }
 
   DEFAULTS = {
     tenant_fee_rate: 0.05,
@@ -22,7 +23,8 @@ class Reservation < ApplicationRecord
     notice_period: 10.hours,
     max_duration: 12,
     max_people_count: 20,
-    automatic_cancel_period: 7.days
+    stripe_validity_period: 7.days,
+    safety_period: 2.hours
   }.freeze
 
   belongs_to :cookoon
@@ -43,7 +45,7 @@ class Reservation < ApplicationRecord
   monetize :host_payout_price_cents
   monetize :charge_amount_cents
 
-  enum status: %i[pending paid accepted refused cancelled ongoing passed]
+  enum status: %i[pending paid accepted refused cancelled ongoing passed dead]
 
   validates :start_at, presence: true
   validates :duration, presence: true
