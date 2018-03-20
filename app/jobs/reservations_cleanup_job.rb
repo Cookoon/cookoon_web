@@ -2,15 +2,15 @@ class ReservationsCleanupJob < ApplicationJob
   queue_as :default
 
   def perform
-    cleanup_pending_unpayable
+    cleanup_dropped_before_payment
     cleanup_short_notice
     cleanup_stripe_will_not_capture
   end
 
   private
 
-  def cleanup_pending_unpayable
-    Reservation.pending_unpayable.each(&:dead!)
+  def cleanup_dropped_before_payment
+    Reservation.dropped_before_payment.each(&:dead!)
   end
 
   def cleanup_short_notice

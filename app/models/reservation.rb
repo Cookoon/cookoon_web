@@ -12,7 +12,7 @@ class Reservation < ApplicationRecord
   scope :in_hour_range_around, ->(datetime) { where start_at: hour_range(datetime) }
   scope :finished_in_day_range_around, ->(datetime) { joins(:inventory).merge(Inventory.checked_out_in_day_range_around(datetime)) }
   scope :created_before, ->(date) { where('created_at < ?', date) }
-  scope :pending_unpayable, -> { pending.created_before(DEFAULTS[:safety_period].ago) }
+  scope :dropped_before_payment, -> { pending.created_before(DEFAULTS[:safety_period].ago) }
   scope :short_notice, -> { paid.where('start_at < ?', Time.zone.now.in(DEFAULTS[:safety_period])) }
   scope :stripe_will_not_capture, -> { paid.created_before(DEFAULTS[:stripe_validity_period].ago.in(DEFAULTS[:safety_period])) }
 
