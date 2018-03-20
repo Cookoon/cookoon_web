@@ -23,7 +23,8 @@ class ReservationsCleanupJob < ApplicationJob
   def cleanup_stripe_will_not_capture
     Reservation.stripe_will_not_capture.each do |reservation|
       reservation.cancelled!
-      # TODO : MAILER HOTE N'A PAS REAGI
+      # TODO : MAILER LOCATAIRE HOTE N'A PAS REAGI
+      # TODO : MAILER HOTE REMONTAGE BRETELLES
     end
   end
 end
