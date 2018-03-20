@@ -17,4 +17,9 @@ RSpec.describe Reservation, type: :model do
     reservation.valid?
     expect(reservation.errors[:duration]).to include('doit être rempli(e)')
   end
+
+  describe '.pending_unpayable' do
+    it 'returns pending reservations created more than few hours ago' do
+    end
+  end
 end

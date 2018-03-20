@@ -21,7 +21,7 @@ RSpec.describe Availability, type: :model do
     expect(availability.errors[:cookoon]).to include('Une disponibilité existe déja sur ce créneau pour ce Cookoon')
   end
 
-  context '#set_datetimes' do
+  describe '#set_datetimes' do
     it 'sets start_at and end_at after validation' do
       availability = build(:availability)
       availability.valid?
