@@ -78,6 +78,7 @@ class Reservation < ApplicationRecord
   end
 
   def base_price_cents
+    return 0 unless duration && cookoon
     duration * cookoon.price_cents
   end
 
@@ -155,7 +156,7 @@ class Reservation < ApplicationRecord
   end
 
   def set_price_cents
-    self.price_cents = (duration && cookoon ? base_price_cents : 0)
+    self.price_cents = base_price_cents
   end
 
   def ical_params
@@ -213,6 +214,7 @@ class Reservation < ApplicationRecord
   end
 
   def possible_in_datetime_range
+    return unless start_at && duration
     range = start_at..(start_at + duration.hours)
     errors.add(:cookoon, :unavailable_in_datetime_range) if cookoon.unavailabilites(range).any?
   end

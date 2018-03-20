@@ -8,6 +8,7 @@ module EndAtSetter
   private
 
   def end_at_needs_update?
+    return false unless start_at && duration
     will_save_change_to_start_at? || will_save_change_to_duration?
   end
 
