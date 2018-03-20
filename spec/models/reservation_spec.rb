@@ -18,8 +18,24 @@ RSpec.describe Reservation, type: :model do
     expect(reservation.errors[:duration]).to include('doit être rempli(e)')
   end
 
-  describe '.dropped_before_payment' do
-    it 'returns pending reservations created more than few hours ago' do
+  describe 'scopes' do
+    let(:two_days_ago) { create(:reservation, created_at: 2.days.ago) }
+    let(:paid) { create(:reservation, status: :paid) }
+    let(:classic) { create(:reservation) }
+    let(:short_notice) { create(:reservation, status: :paid, start_at: Time.zone.now.in(2.hours)) }
+
+    describe '.dropped_before_payment' do
+      it 'returns only pending reservations created more than few hours ago' do
+        expect(Reservation.dropped_before_payment).to include(two_days_ago)
+        expect(Reservation.dropped_before_payment).to_not include(paid, classic)
+      end
+    end
+
+    describe '.short_notice' do
+      it 'returns only paid reservations starting in less than few hours' do
+        expect(Reservation.short_notice).to include(short_notice)
+        expect(Reservation.short_notice).to_not include(paid, classic)
+      end
     end
   end
 end
