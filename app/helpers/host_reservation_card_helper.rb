@@ -9,7 +9,8 @@ module HostReservationCardHelper
     include DatetimeHelper
 
     def initialize(view, reservation)
-      @view, @reservation = view, reservation
+      @view = view
+      @reservation = reservation
       @user = @reservation.user
     end
 
@@ -30,7 +31,7 @@ module HostReservationCardHelper
 
     def user_picture
       if user.photo?
-        cl_image_tag(user.photo.path, { size: '80x80', crop: :thumb, gravity: :face, class: 'avatar-larger' })
+        cl_image_tag(user.photo.path, size: '80x80', crop: :thumb, gravity: :face, class: 'avatar-larger')
       else
         image_tag 'base_user.png', class: 'avatar-larger'
       end
@@ -47,10 +48,10 @@ module HostReservationCardHelper
     def status
       case reservation.status
       when 'paid'
-        content_tag(:i, nil, class: "co co-reversed-meeting")
+        content_tag(:i, nil, class: 'co co-reversed-meeting')
       when 'accepted', 'passed'
         content_tag(:i, nil, class: 'fa fa-check-circle-o')
-      when 'refused'
+      when 'refused', 'cancelled'
         content_tag(:i, nil, class: 'fa fa-ban')
       end
     end
@@ -66,9 +67,10 @@ module HostReservationCardHelper
     end
 
     def receive_text
-      if reservation.passed?
+      case reservation.status
+      when 'passed'
         content_tag(:p, 'Vous avez reçu :')
-      elsif reservation.refused?
+      when 'refused', 'cancelled'
         content_tag(:p, 'Vous auriez reçu :')
       else
         content_tag(:p, 'Vous recevrez :')
@@ -129,7 +131,7 @@ module HostReservationCardHelper
     def color
       case reservation.status
       when 'paid' then 'white'
-      when 'passed', 'refused' then 'grey'
+      when 'passed', 'refused', 'cancelled' then 'grey'
       else 'blue'
       end
     end
