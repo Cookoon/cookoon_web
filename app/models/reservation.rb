@@ -11,6 +11,10 @@ class Reservation < ApplicationRecord
   scope :created_in_day_range_around, ->(datetime) { where created_at: day_range(datetime) }
   scope :in_hour_range_around, ->(datetime) { where start_at: hour_range(datetime) }
   scope :finished_in_day_range_around, ->(datetime) { joins(:inventory).merge(Inventory.checked_out_in_day_range_around(datetime)) }
+  scope :created_before, ->(date) { where('created_at < ?', date) }
+  scope :dropped_before_payment, -> { pending.created_before(DEFAULTS[:safety_period].ago) }
+  scope :short_notice, -> { paid.where('start_at < ?', Time.zone.now.in(DEFAULTS[:safety_period])) }
+  scope :stripe_will_not_capture, -> { paid.created_before(DEFAULTS[:stripe_validity_period].ago.in(DEFAULTS[:safety_period])) }
 
   DEFAULTS = {
     tenant_fee_rate: 0.05,
@@ -18,7 +22,9 @@ class Reservation < ApplicationRecord
     service_price_cents: 2000,
     notice_period: 10.hours,
     max_duration: 12,
-    max_people_count: 20
+    max_people_count: 20,
+    stripe_validity_period: 7.days,
+    safety_period: 2.hours
   }.freeze
 
   belongs_to :cookoon
@@ -39,7 +45,7 @@ class Reservation < ApplicationRecord
   monetize :host_payout_price_cents
   monetize :charge_amount_cents
 
-  enum status: %i[pending paid accepted refused cancelled ongoing passed]
+  enum status: %i[pending paid accepted refused cancelled ongoing passed dead]
 
   validates :start_at, presence: true
   validates :duration, presence: true
@@ -72,6 +78,7 @@ class Reservation < ApplicationRecord
   end
 
   def base_price_cents
+    return 0 unless duration && cookoon
     duration * cookoon.price_cents
   end
 
@@ -149,7 +156,7 @@ class Reservation < ApplicationRecord
   end
 
   def set_price_cents
-    self.price_cents = (duration && cookoon ? base_price_cents : 0)
+    self.price_cents = base_price_cents
   end
 
   def ical_params
@@ -207,6 +214,7 @@ class Reservation < ApplicationRecord
   end
 
   def possible_in_datetime_range
+    return unless start_at && duration
     range = start_at..(start_at + duration.hours)
     errors.add(:cookoon, :unavailable_in_datetime_range) if cookoon.unavailabilites(range).any?
   end

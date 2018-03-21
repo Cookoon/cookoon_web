@@ -90,6 +90,7 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.7'
   gem 'vcr'
   gem 'webmock'
+  gem 'timecop'
 end
 
 group :development do
