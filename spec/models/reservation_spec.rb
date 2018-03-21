@@ -19,22 +19,39 @@ RSpec.describe Reservation, type: :model do
   end
 
   describe 'scopes' do
-    let(:two_days_ago) { create(:reservation, created_at: 2.days.ago) }
-    let(:paid) { create(:reservation, status: :paid) }
     let(:classic) { create(:reservation) }
-    let(:short_notice) { create(:reservation, status: :paid, start_at: Time.zone.now.in(2.hours)) }
+    let(:paid) { create(:reservation, :paid) }
+    let(:two_days_ago) { create(:reservation, :created_two_days_ago) }
+    let(:paid_ten_days_ago) { create(:reservation, :paid, :created_ten_days_ago) }
 
     describe '.dropped_before_payment' do
+      let(:tested_scope) { described_class.dropped_before_payment }
+
       it 'returns only pending reservations created more than few hours ago' do
-        expect(Reservation.dropped_before_payment).to include(two_days_ago)
-        expect(Reservation.dropped_before_payment).to_not include(paid, classic)
+        expect(tested_scope).to include(two_days_ago)
+        expect(tested_scope).to_not include(paid, classic)
       end
     end
 
     describe '.short_notice' do
+      let!(:paid) { create(:reservation, :paid) }
+
       it 'returns only paid reservations starting in less than few hours' do
-        expect(Reservation.short_notice).to include(short_notice)
-        expect(Reservation.short_notice).to_not include(paid, classic)
+        Timecop.freeze(10.days.from_now - 1.hour) do
+          expect(described_class.short_notice).to include(paid)
+        end
+        Timecop.freeze(8.days.from_now) do
+          expect(described_class.short_notice).to_not include(paid)
+        end
+      end
+    end
+
+    describe '.stripe_will_not_capture' do
+      let(:tested_scope) { described_class.stripe_will_not_capture }
+
+      it 'returns only paid reservation created more than 7 days ago' do
+        expect(tested_scope).to include(paid_ten_days_ago)
+        expect(tested_scope).to_not include(paid, classic)
       end
     end
   end
