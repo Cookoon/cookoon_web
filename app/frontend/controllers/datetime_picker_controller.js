@@ -9,6 +9,7 @@ export default class extends Controller {
         autoclose: true,
         weekStart: 1,
         minuteStep: 30,
+        fontAwesome: true,
         format: 'd MM à h:ii',
         language: 'fr',
         startDate: new Date()
