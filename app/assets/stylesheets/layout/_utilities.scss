@@ -13,6 +13,7 @@ body {
 // Custom Bootstrap 4 utilities
 .b-0 {
   bottom: 0;
+  bottom: env(safe-area-inset-top);
 }
 .l-0 {
   left: 0;
