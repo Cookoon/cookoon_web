@@ -1,0 +1,34 @@
+<p>Bonjour <%= @host.first_name %>,</p>
+<p>La demande de location a été annulée :</p>
+
+<table border="0" cellpadding="0" cellspacing="10" class="info"><tbody>
+  <tr>
+    <td align="center">
+      <%= image_tag('icon-home.png', alt: 'Cookoon') %>
+    </td>
+    <td>
+      <b><%= @cookoon.name %></b>
+      <br>le <%= display_date_for(@reservation.start_at) %>
+      <br>à <%= display_time_for(@reservation.start_at) %> pour <%= display_duration_for(@reservation.duration) %>
+    </td>
+  </tr>
+</tbody></table>
+
+<p>
+  Vous n’avez pas répondu à ce Membre : <%= @tenant.first_name %> et avons dû annuler sa demande de location !
+</p>
+
+<p>
+  Si les demandes de locations qui vous parviennent ne vous conviennent pas,
+  tâchez de mettre à jour votre calendrier afin de ne recevoir que celles que vous pourrez accepter.
+</p>
+
+<table border="0" cellpadding="0" cellspacing="10" class="btn btn-primary"><tbody><tr>
+  <td align="center">
+    <%= link_to 'Gérer mon calendrier', cookoon_availabilities_url(@cookoon), target: :_blank %>
+  </td>
+</tr></tbody></table>
+
+<% content_for :post_scriptum do %>
+  <p>PS : Une question ? Rendez-vous sur <%= link_to 'aide.cookoon.fr', 'https://aide.cookoon.fr', target: :_blank %>.</p>
+<% end %>

@@ -1,0 +1,26 @@
+<p>Bonjour <%= @tenant.first_name %>,</p>
+<p>Votre demande de location a été annulée :</p>
+
+<table border="0" cellpadding="0" cellspacing="10" class="info"><tbody>
+  <tr>
+    <td align="center">
+      <%= image_tag('icon-home.png', alt: 'Cookoon') %>
+    </td>
+    <td>
+      <b><%= @cookoon.name %></b>
+      <br>le <%= display_date_for(@reservation.start_at) %>
+      <br>à <%= display_time_for(@reservation.start_at) %> pour <%= display_duration_for(@reservation.duration) %>
+    </td>
+  </tr>
+</tbody></table>
+
+<p>
+  Nous sommes désolés pour ce dérangement; l’Hôte de ce Cookoon n’a pas répondu suffisamment rapidement.
+  Soyez rassuré(e), votre carte de paiement n’a pas été débitée.
+</p>
+
+<p>
+  Vous avez besoin d’un Cookoon en urgence pour votre événement ? Contactez le
+  concierge Cookoon, il vous apportera toute l’aide possible pour trouver une
+  solution rapide : <%= mail_to 'concierge@cookoon.fr', 'concierge@cookoon.fr', target: :_blank %>
+</p>
