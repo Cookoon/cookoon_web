@@ -70,6 +70,19 @@ class ReservationMailer < ApplicationMailer
     mail(to: @tenant.full_email, subject: 'Votre location Cookoon se rapproche !')
   end
 
+  def autocancel_short_notice_to_tenant(reservation)
+    @reservation = reservation
+    @tenant = @reservation.user
+    @cookoon = @reservation.cookoon
+    mail(to: @tenant.full_email, subject: 'Votre demande de location de Cookoon a été annulée')
+  end
+
+  def autocancel_stripe_period_to_tenant(reservation)
+    @reservation = reservation
+    @tenant = @reservation.user
+    @cookoon = @reservation.cookoon
+    mail(to: @tenant.full_email, subject: 'Votre demande de location de Cookoon a été annulée')
+  end
 
   # ==== Tenant Guest transaction =====
   def invitation_to_guest(reservation, guest)
@@ -144,5 +157,13 @@ class ReservationMailer < ApplicationMailer
     @cookoon = @reservation.cookoon
     @host = @cookoon.user
     mail(to: @host.full_email, subject: "Rappel: #{@tenant.first_name} souhaite louer votre Cookoon !")
+  end
+
+  def autocancel_stripe_period_to_host(reservation)
+    @reservation = reservation
+    @tenant = @reservation.user
+    @cookoon = @reservation.cookoon
+    @host = @cookoon.user
+    mail(to: @tenant.full_email, subject: 'Votre demande de location de Cookoon a été annulée')
   end
 end
