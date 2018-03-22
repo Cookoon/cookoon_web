@@ -65,5 +65,17 @@ class ReservationMailerPreview < ActionMailer::Preview
   def notify_approaching_reservation_to_tenant
     ReservationMailer.notify_approaching_reservation_to_tenant(Reservation.last)
   end
+
+  def autocancel_stripe_period_to_host
+    ReservationMailer.autocancel_stripe_period_to_host(Reservation.last)
+  end
+
+  def autocancel_stripe_period_to_tenant
+    ReservationMailer.autocancel_stripe_period_to_tenant(Reservation.last)
+  end
+
+  def autocancel_short_notice_to_tenant
+    ReservationMailer.autocancel_short_notice_to_tenant(Reservation.last)
+  end
   # ============================
 end

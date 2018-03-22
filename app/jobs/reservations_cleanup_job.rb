@@ -16,15 +16,15 @@ class ReservationsCleanupJob < ApplicationJob
   def cleanup_short_notice
     Reservation.short_notice.each do |reservation|
       reservation.cancelled!
-      # TODO : MAILER CONSEIL RESERVER PLUS TOT
+      ReservationMailer.autocancel_short_notice_to_tenant(reservation).deliver_later
     end
   end
 
   def cleanup_stripe_will_not_capture
     Reservation.stripe_will_not_capture.each do |reservation|
       reservation.cancelled!
-      # TODO : MAILER LOCATAIRE HOTE N'A PAS REAGI
-      # TODO : MAILER HOTE REMONTAGE BRETELLES
+      ReservationMailer.autocancel_stripe_period_to_tenant(reservation).deliver_later
+      ReservationMailer.autocancel_stripe_period_to_host(reservation).deliver_later
     end
   end
 end
