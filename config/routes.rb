@@ -81,5 +81,8 @@ Rails.application.routes.draw do
 
     # Reservation
     post '/actions/cancel-by-host', to: 'reservations#cancel_by_host'
+
+    # Service
+    post '/actions/create-service', to: 'services#create'
   end
 end
