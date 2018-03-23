@@ -15,7 +15,7 @@ class Services::PaymentsController < ApplicationController
     )
     @user_cards = payment_service.user_sources.try(:data)
     if payment_service.pay_service
-      redirect_to cookoons_path, flash: { payment_succeed: true }
+      redirect_to cookoons_path, flash: { service_payment_succeed: true }
     else
       flash.now.alert = payment_service.displayable_errors
       render :new
