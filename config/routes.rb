@@ -51,6 +51,11 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :services, only: [] do
+    post :payments, to: 'services/payments#create'
+    post :discount, to: 'services/payments#discount'
+  end
+
   # -------- HOST NAMESPACE ---------
   namespace :host do
     get :dashboard, to: 'users#dashboard'
