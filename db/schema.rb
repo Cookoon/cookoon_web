@@ -117,7 +117,8 @@ ActiveRecord::Schema.define(version: 20180323105931) do
   create_table "services", force: :cascade do |t|
     t.bigint "reservation_id"
     t.text "content"
-    t.integer "price_cents", default: 0, null: false
+    t.integer "price_cents"
+    t.string "price_currency", default: "EUR", null: false
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
