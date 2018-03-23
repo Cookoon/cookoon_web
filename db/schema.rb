@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180323105931) do
+ActiveRecord::Schema.define(version: 20180323161040) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -122,6 +122,8 @@ ActiveRecord::Schema.define(version: 20180323105931) do
     t.integer "status", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "stripe_charge_id"
+    t.integer "discount_amount_cents", default: 0
     t.index ["reservation_id"], name: "index_services_on_reservation_id"
   end
 
