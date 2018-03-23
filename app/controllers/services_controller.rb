@@ -2,7 +2,12 @@ class ServicesController < ApplicationController
   before_action :set_reservation
 
   def show
+    payment_service = StripePaymentService.new(
+      user: current_user,
+      reservation: @reservation
+    )
     @service = @reservation.services.last
+    @user_cards = payment_service.user_sources.try(:data)
   end
 
   private
