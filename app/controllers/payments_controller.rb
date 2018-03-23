@@ -22,7 +22,12 @@ class PaymentsController < ApplicationController
     if payment_service.handle_payment_and_update_reservation
       ReservationMailer.paid_request_to_tenant(@reservation).deliver_later
       ReservationMailer.paid_request_to_host(@reservation).deliver_later
-      redirect_to cookoons_path, flash: { payment_succeed: true }
+      # Duplicate redirect, will probably change soon
+      if @reservation.catering
+        redirect_to cookoons_path, flash: { catering_requested: true }
+      else
+        redirect_to cookoons_path, flash: { payment_succeed: true }
+      end
     else
       flash.now.alert = payment_service.displayable_errors
       render :new
