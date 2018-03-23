@@ -1,3 +1,19 @@
 - content_for :navbar_back_url, reservations_path(@reservation)
+- if @service
+    - content_for :navbar_back_url, cookoon_path(@reservation.cookoon)
 
-h2 = @service.content
+    .container
+      h2 Payez vos options de réservation
+
+      p Récapitulatif :
+
+      = @service.content.html_safe
+
+      = render 'payments/services_form'
+
+      .d-flex-default
+        b id='total-text' TOTAL
+        b id='reservation-price' = humanized_money_with_symbol @service.price
+
+- else
+    p Pas de service associé à cette réservation !
