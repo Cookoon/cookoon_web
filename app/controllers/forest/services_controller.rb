@@ -5,10 +5,12 @@ module Forest
     def create
       if params.dig(:data, :attributes, :ids).size != 1
         render_error 'More than 1 Reservation was selected, Service can only be created on a single Reservation'
+      elsif !@reservation.accepted?
+        render_error 'The Reservation is not accepted by Host yet'
       elsif @reservation.services.create(service_params)
         render json: { html: "<h1>Service created!</h1><p>URL:</p><br/><p>#{reservation_services_url(@reservation)}</p>" }
       else
-        render_error 'Your service could not be created'
+        render_error 'Your Service could not be created'
       end
     end
 
