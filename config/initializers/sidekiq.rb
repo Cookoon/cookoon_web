@@ -1,8 +1,8 @@
 class Cookoon::NonRetriableJobs
-  def call(worker, job, queue)
+  def call(worker, msg, queue)
     yield
   rescue Postmark::InvalidMessageError
-    job['retry'] = false
+    msg['retry'] = false
     raise
   end
 end
