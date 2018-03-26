@@ -128,6 +128,16 @@ class Reservation < ApplicationRecord
     user.save
   end
 
+  def pay_host
+    payment_service = StripePaymentService.new(user: cookoon_owner, reservation: self)
+    payment_service.pay_host
+  end
+
+  def send_ending_surveys
+    ReservationMailer.ending_survey_to_tenant(self).deliver_later
+    ReservationMailer.ending_survey_to_host(self).deliver_later
+  end
+
   def ical_for(role)
     cal = Icalendar::Calendar.new
     cal.event do |e|
