@@ -54,8 +54,7 @@ class Reservation < ApplicationRecord
   validate :possible_in_datetime_range, on: :create
 
   before_validation :set_price_cents, if: :price_cents_needs_update?
-  after_create :create_trello_card
-  after_save :update_trello, if: :saved_change_to_status?
+  after_save :report_to_trello, if: :saved_change_to_status?
 
   def self.default
     OpenStruct.new DEFAULTS.slice(:max_duration, :max_people_count)
@@ -193,14 +192,13 @@ class Reservation < ApplicationRecord
     }
   end
 
-  def update_trello
+  def report_to_trello
     return unless Rails.env.production?
-    UpdateReservationTrelloCardJob.perform_later(id)
-  end
-
-  def create_trello_card
-    return unless Rails.env.production?
-    CreateReservationTrelloCardJob.perform_later(id)
+    if paid?
+      CreateReservationTrelloCardJob.perform_later(id)
+    else
+      UpdateReservationTrelloCardJob.perform_later(id)
+    end
   end
 
   def tenant_is_not_host

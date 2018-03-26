@@ -1,4 +1,4 @@
-class NotifyUserTenDaysAfterInviteJob < ApplicationJob
+class NotifyUserTenDaysAfterInviteJob < NotifierJob
   queue_as :default
 
   def perform(scheduled_time)

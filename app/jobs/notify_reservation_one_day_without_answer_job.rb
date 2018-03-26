@@ -1,4 +1,4 @@
-class NotifyReservationOneDayWithoutAnswerJob < ApplicationJob
+class NotifyReservationOneDayWithoutAnswerJob < NotifierJob
   queue_as :default
 
   def perform(scheduled_time)

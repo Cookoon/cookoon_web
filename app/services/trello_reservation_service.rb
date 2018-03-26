@@ -5,7 +5,6 @@ class TrelloReservationService
 
   TRELLO_LISTS_IDS = {
     reservation_board_id: '5a25793534f1ae1cfe4ee2f3',
-    pending_list_id: '5a2579418ee80817fe7bc895',
     paid_list_id: '5a257963d78c51fb153efcc9',
     accepted_list_id: '5a257967cdb5c264f6b366b3',
     refused_list_id: '5a25796e043080a82bbb7d00',
@@ -52,14 +51,14 @@ class TrelloReservationService
     return unless card
     card.move_to_list(list_id)
   rescue Trello::Error
-    Rails.logger.error("Faild to move Trello Card to #{reservation.status}_list")
+    Rails.logger.error("Failed to move Trello Card to #{reservation.status}_list")
     false
   end
 
   def retrieve_card
     @card = Trello::Card.find(reservation.trello_card_id)
   rescue Trello::Error
-    Rails.logger.error('Faild to retrieve Trello Card')
+    Rails.logger.error('Failed to retrieve Trello Card')
     false
   end
 
@@ -71,7 +70,7 @@ class TrelloReservationService
 
   def create_card
     @card = Trello::Card.create(
-      list_id: TRELLO_LISTS_IDS[:pending_list_id],
+      list_id: TRELLO_LISTS_IDS[:paid_list_id],
       name: "#{cookoon.name} - #{display_datetime_for(reservation.start_at, join_expression: 'à', without_year: true)}",
       desc: description
     )

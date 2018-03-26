@@ -1,4 +1,4 @@
-class NotifyUserTwoDaysAfterJoinJob < ApplicationJob
+class NotifyUserTwoDaysAfterJoinJob < NotifierJob
   queue_as :default
 
   def perform(scheduled_time)
