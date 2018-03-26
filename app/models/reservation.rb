@@ -128,6 +128,12 @@ class Reservation < ApplicationRecord
     user.save
   end
 
+  def admin_close
+    pay_host
+    passed!
+    send_ending_surveys
+  end
+
   def pay_host
     payment_service = StripePaymentService.new(user: cookoon_owner, reservation: self)
     payment_service.pay_host
