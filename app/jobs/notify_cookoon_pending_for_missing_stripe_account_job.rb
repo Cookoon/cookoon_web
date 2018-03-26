@@ -1,4 +1,4 @@
-class NotifyCookoonPendingForMissingStripeAccountJob < NotifierJob
+class NotifyCookoonPendingForMissingStripeAccountJob < ApplicationJob
   queue_as :default
 
   def perform(scheduled_time)

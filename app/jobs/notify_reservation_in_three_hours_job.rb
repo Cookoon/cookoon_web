@@ -1,4 +1,4 @@
-class NotifyReservationInThreeHoursJob < NotifierJob
+class NotifyReservationInThreeHoursJob < ApplicationJob
   queue_as :default
 
   def perform(scheduled_time)
