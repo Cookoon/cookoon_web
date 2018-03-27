@@ -45,9 +45,15 @@ Rails.application.routes.draw do
       resources :credit_cards, only: :create
     end
     resources :invoices, only: :create
+    resource :services, only: :show
     resources :guests, controller: 'reservations/guests', only: %i[index create] do
       post :create_all, on: :collection
     end
+  end
+
+  resources :services, only: [] do
+    post :payments, to: 'services/payments#create'
+    post :discount, to: 'services/payments#discount'
   end
 
   # -------- HOST NAMESPACE ---------
@@ -75,5 +81,8 @@ Rails.application.routes.draw do
 
     # Reservation
     post '/actions/cancel-by-host', to: 'reservations#cancel_by_host'
+
+    # Service
+    post '/actions/create-service', to: 'services#create'
   end
 end

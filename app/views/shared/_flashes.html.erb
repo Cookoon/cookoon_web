@@ -13,6 +13,12 @@
 <% if flash[:payment_succeed] %>
   <%= render 'payments/succeed' %>
 <% end %>
+<% if flash[:service_payment_succeed] %>
+  <%= render 'services/payment_succeed' %>
+<% end %>
+<% if flash[:catering_requested] %>
+  <%= render 'reservations/catering_requested' %>
+<% end %>
 <% if flash[:invitation_sent] %>
   <%= render 'devise/invitations/sent' %>
 <% end %>
