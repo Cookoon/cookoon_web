@@ -8,6 +8,10 @@ module StripeChargeable
     persist_charge_and_status
   end
 
+  def capture; end
+
+  def refund; end
+
   def displayable_errors
     if errors.any?
       errors.join(' ')
@@ -41,7 +45,7 @@ module StripeChargeable
       amount: charge_amount_cents,
       currency: 'eur',
       customer: stripe_customer.id,
-      source: options[:payment][:source],
+      source: options[:source],
       description: "Paiement pour #{cookoon.name}",
       capture: should_capture?
     }

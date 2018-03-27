@@ -68,6 +68,10 @@ class Reservation < ApplicationRecord
     pending? || paid?
   end
 
+  def payment
+    @payment ||= Reservation::Payment.new(self)
+  end
+
   def starts_soon?
     start_at.past? || start_at.between?(Time.zone.now, (Time.zone.now + 3.hours))
   end

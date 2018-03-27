@@ -6,12 +6,12 @@ class PaymentsController < ApplicationController
   end
 
   def create
-    payment = Reservation::Payment.new(@reservation, params)
-    @user_cards = current_user.credit_cards
+    payment = Reservation::Payment.new(@reservation, payment_params)
     if payment.proceed
       @reservation.notify_users_after_payment
       redirect_to cookoons_path, flash: { payment_succeed: true }
     else
+      @user_cards = current_user.credit_cards
       flash.now.alert = payment.displayable_errors
       render :new
     end
@@ -35,5 +35,9 @@ class PaymentsController < ApplicationController
   def set_reservation
     @reservation = Reservation.where(status: :pending).find(params[:reservation_id])
     authorize @reservation
+  end
+
+  def payment_params
+    params.require(:payment)
   end
 end
