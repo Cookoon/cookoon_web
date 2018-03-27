@@ -6,6 +6,7 @@ class StripePaymentService
     @token = attributes[:token]
     @source = attributes[:source]
     @reservation = attributes[:reservation]
+    @service = attributes[:service]
     @options = options
     @errors = []
   end
@@ -26,6 +27,13 @@ class StripePaymentService
   def user_sources
     retrieve_customer
     retrieve_sources
+  end
+
+  def pay_service
+    retrieve_customer
+    handle_service_discount
+    create_service_charge if service_charge_needed?
+    update_service
   end
 
   def pay_host
@@ -66,7 +74,14 @@ class StripePaymentService
     return unless ActiveModel::Type::Boolean.new.cast(@options[:discount])
     discount_amount_cents = compute_discount_cents
     reservation.discount_amount_cents = discount_amount_cents
-    update_user_balance if discount_amount_cents.positive?
+    update_user_balance(reservation) if discount_amount_cents.positive?
+  end
+
+  def handle_service_discount
+    return unless ActiveModel::Type::Boolean.new.cast(@options[:discount])
+    discount_amount_cents = compute_service_discount_cents
+    @service.discount_amount_cents = discount_amount_cents
+    update_user_balance(@service) if discount_amount_cents.positive?
   end
 
   def compute_discount_cents
@@ -76,13 +91,24 @@ class StripePaymentService
     [user_discount, reservation_price].min
   end
 
-  def update_user_balance
-    user.discount_balance_cents -= reservation.discount_amount_cents
+  def compute_service_discount_cents
+    return 0 unless user.available_discount?
+    user_discount = user.discount_balance_cents
+    service_price = @service.price_cents
+    [user_discount, service_price].min
+  end
+
+  def update_user_balance(chargeable)
+    user.discount_balance_cents -= chargeable.discount_amount_cents
     user.save
   end
 
   def charge_needed?
     reservation&.charge_amount_cents&.positive?
+  end
+
+  def service_charge_needed?
+    @service&.charge_amount_cents&.positive?
   end
 
   def retrieve_or_create_customer
@@ -142,6 +168,10 @@ class StripePaymentService
     reservation.update(status: :paid, stripe_charge_id: charge&.id)
   end
 
+  def update_service
+    @service.update(status: :paid, stripe_charge_id: charge&.id)
+  end
+
   def capture_charge
     return false unless charge
     charge.capture
@@ -179,6 +209,26 @@ class StripePaymentService
       source: @source,
       description: "Paiement pour #{reservation.cookoon.name}",
       capture: false
+    }
+  end
+
+  def create_service_charge
+    return false unless customer
+    @charge = Stripe::Charge.create(service_charge_options)
+  rescue Stripe::CardError, Stripe::InvalidRequestError => e
+    Rails.logger.error('Failed to create Stripe Charge')
+    Rails.logger.error(e.message)
+    @errors << e.message
+    false
+  end
+
+  def service_charge_options
+    {
+      amount: @service.charge_amount_cents,
+      currency: 'eur',
+      customer: @customer.id,
+      source: @source,
+      description: "Paiement des services pour la réservation id #{reservation.id}"
     }
   end
 end

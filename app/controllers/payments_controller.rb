@@ -9,7 +9,7 @@ class PaymentsController < ApplicationController
     payment = Reservation::Payment.new(@reservation, payment_params)
     if payment.proceed
       @reservation.notify_users_after_payment
-      redirect_to cookoons_path, flash: { payment_succeed: true }
+      handle_redirection
     else
       @user_cards = current_user.credit_cards
       flash.now.alert = payment.displayable_errors
@@ -39,5 +39,13 @@ class PaymentsController < ApplicationController
 
   def payment_params
     params.require(:payment)
+  end
+
+  def handle_redirection
+    if @reservation.catering
+      redirect_to cookoons_path, flash: { catering_requested: true }
+    else
+      redirect_to cookoons_path, flash: { payment_succeed: true }
+    end
   end
 end
