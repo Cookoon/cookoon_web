@@ -101,6 +101,11 @@ class Reservation < ApplicationRecord
     (base_price_cents * host_fee_rate).round
   end
 
+  def notify_users_after_payment
+    ReservationMailer.paid_request_to_tenant(self).deliver_later
+    ReservationMailer.paid_request_to_host(self).deliver_later
+  end
+
   def default_service_price_cents
     DEFAULTS[:service_price_cents]
   end

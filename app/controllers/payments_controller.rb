@@ -2,29 +2,17 @@ class PaymentsController < ApplicationController
   before_action :set_reservation
 
   def new
-    payment_service = StripePaymentService.new(
-      user: current_user,
-      reservation: @reservation
-    )
-    @user_cards = payment_service.user_sources.try(:data)
+    @user_cards = current_user.credit_cards
   end
 
   def create
-    payment_service = StripePaymentService.new(
-      {
-        user: @reservation.user,
-        source: params[:payment][:source],
-        reservation: @reservation
-      },
-      discount: params[:payment][:use_discount]
-    )
-    @user_cards = payment_service.user_sources.try(:data)
-    if payment_service.handle_payment_and_update_reservation
-      ReservationMailer.paid_request_to_tenant(@reservation).deliver_later
-      ReservationMailer.paid_request_to_host(@reservation).deliver_later
+    payment = Reservation::Payment.new(@reservation, params)
+    @user_cards = current_user.credit_cards
+    if payment.proceed
+      @reservation.notify_users_after_payment
       redirect_to cookoons_path, flash: { payment_succeed: true }
     else
-      flash.now.alert = payment_service.displayable_errors
+      flash.now.alert = payment.displayable_errors
       render :new
     end
   end
