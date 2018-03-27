@@ -1,16 +1,17 @@
 class Reservation::Payment
-  include Chargeable
+  include StripeChargeable
 
-  attr_reader :chargeable, :options
-  delegate :user, :charge_amount_cents, :cookoon, to: :chargeable
+  attr_reader :reservation, :options
+  delegate :user, :charge_amount_cents, :cookoon, to: :reservation
+  delegate :stripe_customer, to: :user
+  alias_attribute :chargeable, :reservation
 
   def initialize(reservation, options)
-    @chargeable = reservation
+    @reservation = reservation
     @options = options
   end
 
   def should_capture?
     false
   end
-
 end

@@ -1,4 +1,4 @@
-module Chargeable
+module StripeChargeable
   attr_reader :charge, :customer
 
   def proceed
@@ -6,19 +6,6 @@ module Chargeable
     # handle_discount
     create_charge #if charge_needed?
     persist_charge_and_status
-  end
-
-  def authorize_charge
-    retrieve_customer
-    create_charge
-    persist_charge_and_status
-  end
-
-  def create_charge
-
-  end
-
-  def capture
   end
 
   def displayable_errors
@@ -40,10 +27,6 @@ module Chargeable
   end
 
   def create_charge
-    Stripe::Charge.create(charge_options)
-  end
-
-  def create_charge
     return false unless customer
     @charge = Stripe::Charge.create(charge_options)
   rescue Stripe::CardError, Stripe::InvalidRequestError => e
@@ -51,5 +34,16 @@ module Chargeable
     Rails.logger.error(e.message)
     errors << e.message
     false
+  end
+
+  def charge_options
+    {
+      amount: charge_amount_cents,
+      currency: 'eur',
+      customer: stripe_customer.id,
+      source: options[:payment][:source],
+      description: "Paiement pour #{cookoon.name}",
+      capture: should_capture?
+    }
   end
 end
