@@ -3,6 +3,7 @@ class UpdateReservationTrelloCardJob < ApplicationJob
 
   def perform(reservation_id)
     reservation = Reservation.find(reservation_id)
+    return if reservation.dead?
     service = TrelloReservationService.new(reservation: reservation)
     reservation.accepted? ? service.enrich_and_move_card : service.move_card
   end
