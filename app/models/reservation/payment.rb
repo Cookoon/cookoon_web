@@ -31,7 +31,7 @@ class Reservation
       capture_stripe_charge
     end
 
-    def transfer
+    def transfer_to_host
       trigger_stripe_transfer
     end
 

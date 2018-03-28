@@ -1,6 +1,5 @@
 module Stripe
   module Transferable
-
     def trigger_stripe_transfer
       trigger_transfer
     end
