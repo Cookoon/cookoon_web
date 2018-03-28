@@ -4,19 +4,20 @@ class Services::PaymentsController < ApplicationController
   skip_after_action :verify_authorized
 
   def create
-    payment_service = StripePaymentService.new(
-      {
-        user: @reservation.user,
-        source: params[:payment][:source],
-        reservation: @reservation,
-        service: @service
-      },
-      discount: params[:payment][:use_discount]
-    )
-    @user_cards = payment_service.user_sources.try(:data)
-    if payment_service.pay_service
+    # payment_service = StripePaymentService.new(
+    #   {
+    #     user: @reservation.user,
+    #     source: params[:payment][:source],
+    #     reservation: @reservation,
+    #     service: @service
+    #   },
+    #   discount: params[:payment][:use_discount]
+    # )
+    payment = Service::Payment.new(@service, service_params)
+    if payment.proceed
       redirect_to cookoons_path, flash: { service_payment_succeed: true }
     else
+      @user_cards = current_user.crredit_cardds
       flash.now.alert = payment_service.displayable_errors
       render :new
     end
@@ -42,5 +43,9 @@ class Services::PaymentsController < ApplicationController
     @service = Service.find(params[:service_id])
     @reservation = @service.reservation
     # authorize @service
+  end
+
+  def service_params
+    params.require(:payment)
   end
 end
