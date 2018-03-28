@@ -1,6 +1,7 @@
 class Reservation
   class Payment
     include Stripe::Chargeable
+    include Stripe::Transferable
     include Discountable
 
     attr_reader :reservation, :options
@@ -28,6 +29,10 @@ class Reservation
 
     def capture
       capture_stripe_charge
+    end
+
+    def transfer
+      trigger_stripe_transfer
     end
 
     def should_capture?

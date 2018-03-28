@@ -48,6 +48,7 @@ module Stripe
     end
 
     def create_charge
+      # keep rescue ?
       return false unless user&.stripe_customer
       @stripe_charge = Stripe::Charge.create(charge_options)
     rescue Stripe::CardError, Stripe::InvalidRequestError => e
