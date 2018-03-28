@@ -4,15 +4,6 @@ class Services::PaymentsController < ApplicationController
   skip_after_action :verify_authorized
 
   def create
-    # payment_service = StripePaymentService.new(
-    #   {
-    #     user: @reservation.user,
-    #     source: params[:payment][:source],
-    #     reservation: @reservation,
-    #     service: @service
-    #   },
-    #   discount: params[:payment][:use_discount]
-    # )
     payment = Service::Payment.new(@service, service_params)
     if payment.proceed
       redirect_to cookoons_path, flash: { service_payment_succeed: true }
@@ -24,18 +15,23 @@ class Services::PaymentsController < ApplicationController
   end
 
   def discount
-    @base_price = @service.price
-    @user_discount = @reservation.user.discount_balance
-    @computed_prices = compute_discount(@base_price, @user_discount)
+    @amounts = build_amounts
     render 'payments/discount'
   end
 
   private
 
-  def compute_discount(base_price, user_discount)
+  def build_amounts
+    payment_amount = @service.payment_amount
+    user_discount_balance = @service.user.discount_balance
+    charge_amount = @service.payment(discount: true).computed_charge_amount
+    discount_amount = @service.payment(discount: true).computed_discount_amount
+
     {
-      discounted_price: [Money.new(0, 'EUR'), (base_price - user_discount)].max,
-      available_discount: [Money.new(0, 'EUR'), (user_discount - base_price)].max
+      payment: payment_amount,
+      user_discount_balance: user_discount_balance,
+      charge: charge_amount,
+      remaining_user_discount_balance: (user_discount_balance - discount_amount)
     }
   end
 

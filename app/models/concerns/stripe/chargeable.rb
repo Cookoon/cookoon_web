@@ -1,16 +1,17 @@
 module Stripe
   module Chargeable
-    attr_reader :charge
-
-    def proceed
-      # handle_discount
-      create_charge #if charge_needed?
-      persist_charge_and_status
+    def create_stripe_charge
+      create_charge
+      persist_charge
     end
 
-    def capture; end
+    def capture_stripe_charge
+      capture_charge
+    end
 
-    def refund; end
+    def refund_stripe_charge
+      refund_charge
+    end
 
     def displayable_errors
       if errors.any?
@@ -22,17 +23,33 @@ module Stripe
 
     private
 
+    attr_reader :stripe_charge
+
     def errors
       @errors ||= []
     end
 
-    def persist_charge_and_status
-      chargeable.update(status: :paid, stripe_charge_id: charge&.id)
+    def refund_charge
+      return false unless charge
+      charge.refund
+    end
+
+    def capture_charge
+      return false unless charge
+      charge.capture
+    end
+
+    def charge
+      @charge ||= Stripe::Charge.retrieve(chargeable.stripe_charge_id)
+    end
+
+    def persist_charge
+      chargeable.update(stripe_charge_id: stripe_charge&.id)
     end
 
     def create_charge
-      return false unless stripe_customer
-      @charge = Stripe::Charge.create(charge_options)
+      return false unless user&.stripe_customer
+      @stripe_charge = Stripe::Charge.create(charge_options)
     rescue Stripe::CardError, Stripe::InvalidRequestError => e
       Rails.logger.error('Failed to create Stripe Charge')
       Rails.logger.error(e.message)
@@ -43,9 +60,9 @@ module Stripe
     def charge_options
       # add metadata ?
       {
-        amount: charge_amount_cents,
+        amount: computed_charge_amount_cents,
         currency: 'eur',
-        customer: stripe_customer.id,
+        customer: user.stripe_customer.id,
         source: options[:source],
         description: description,
         capture: should_capture?

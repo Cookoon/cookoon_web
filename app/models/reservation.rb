@@ -44,7 +44,7 @@ class Reservation < ApplicationRecord
   monetize :default_service_price_cents
   monetize :host_services_price_cents
   monetize :host_payout_price_cents
-  monetize :charge_amount_cents
+  monetize :payment_amount_cents
 
   enum status: %i[pending paid accepted refused cancelled ongoing passed dead]
 
@@ -69,8 +69,8 @@ class Reservation < ApplicationRecord
     pending? || paid?
   end
 
-  def payment
-    @payment ||= Reservation::Payment.new(self)
+  def payment(options = {})
+    @payment ||= Reservation::Payment.new(self, options)
   end
 
   def starts_soon?
@@ -123,18 +123,8 @@ class Reservation < ApplicationRecord
     base_price_cents - host_fee_cents - host_services_price_cents
   end
 
-  def charge_amount_cents
-    price_with_tenant_fee_cents - discount_amount_cents
-  end
-
-  def discount_used?
-    discount_amount_cents.positive?
-  end
-
-  def refund_discount_to_user
-    return unless discount_used?
-    user.discount_balance_cents += discount_amount_cents
-    user.save
+  def payment_amount_cents
+    price_with_tenant_fee_cents
   end
 
   def admin_close

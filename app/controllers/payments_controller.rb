@@ -18,17 +18,22 @@ class PaymentsController < ApplicationController
   end
 
   def discount
-    @base_price = @reservation.price_with_tenant_fee
-    @user_discount = @reservation.user.discount_balance
-    @computed_prices = compute_discount(@base_price, @user_discount)
+    @amounts = build_amounts
   end
 
   private
 
-  def compute_discount(base_price, user_discount)
+  def build_amounts
+    payment_amount = @reservation.payment_amount
+    user_discount_balance = @reservation.user.discount_balance
+    charge_amount = @reservation.payment(discount: true).computed_charge_amount
+    discount_amount = @reservation.payment(discount: true).computed_discount_amount
+
     {
-      discounted_price: [Money.new(0, 'EUR'), (base_price - user_discount)].max,
-      available_discount: [Money.new(0, 'EUR'), (user_discount - base_price)].max
+      payment: payment_amount,
+      user_discount_balance: user_discount_balance,
+      charge: charge_amount,
+      remaining_user_discount_balance: (user_discount_balance - discount_amount)
     }
   end
 
