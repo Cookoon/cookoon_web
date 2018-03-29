@@ -6,7 +6,7 @@ class Reservation
 
     attr_reader :reservation, :options
 
-    delegate :user, :payment_amount_cents, :cookoon, to: :reservation
+    delegate :user, :payment_amount_cents, to: :reservation
 
     alias_attribute :chargeable, :reservation
     alias_attribute :discountable, :reservation
@@ -40,7 +40,7 @@ class Reservation
     end
 
     def description
-      "Paiement pour #{cookoon.name}"
+      "Paiement pour #{reservation.cookoon.name}"
     end
   end
 end

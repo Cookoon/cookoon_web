@@ -30,7 +30,7 @@ class Service
     end
 
     def description
-      "Paiement des services pour #{cookoon.name}"
+      "Paiement des services pour #{service.cookoon.name}"
     end
   end
 end
