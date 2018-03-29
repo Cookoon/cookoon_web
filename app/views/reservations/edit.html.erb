@@ -38,6 +38,7 @@
 
       <% if @reservation.accepted? %>
         <div class="text-center py-3">
+          <p><b>Partagez adresses et horaires de votre location en conviant vos invités</b></p>
           <%= link_to 'Convier mes invités', reservation_guests_path(@reservation), class: 'btn btn-light btn-action' %>
         </div>
       <% end %>
