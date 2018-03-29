@@ -96,7 +96,15 @@
             </div>
           </div>
           <div class="text-center">
-            <%= f.button :button, 'CHERCHER', type: :submit, class: 'button button-white' %>
+            <%= f.button :button,
+                         'CHERCHER',
+                         type: :submit,
+                         class: 'button button-white',
+                         data: {
+                           controller: 'analytics-events',
+                           action: 'click->analytics-events#userSearchSubmit'
+                         }
+            %>
           </div>
         <% end %>
       </div>
