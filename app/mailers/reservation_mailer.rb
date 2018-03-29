@@ -29,7 +29,7 @@ class ReservationMailer < ApplicationMailer
     @tenant = @reservation.user
     @cookoon = @reservation.cookoon
     @host = @cookoon.user
-    mail(to: @tenant.full_email, subject: "Votre réservation Cookoon a été refusée : #{@cookoon.name}")
+    mail(to: @tenant.full_email, subject: "Votre demande de location n'a pas pu être validée, faites une autre réservation !")
   end
 
   def cancelled_by_tenant_to_tenant(reservation)
