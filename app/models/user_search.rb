@@ -6,7 +6,7 @@ class UserSearch < ApplicationRecord
   enum status: %i[active inactive]
 
   DEFAULTS = {
-    radius: 10,
+    radius: 30,
     start_in_days: 1.day,
     duration: 2,
     people_count: 4,
