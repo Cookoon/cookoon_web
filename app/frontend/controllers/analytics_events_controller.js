@@ -2,7 +2,7 @@ import { Controller } from 'stimulus';
 
 export default class extends Controller {
   userSearchSubmit() {
-    if (typeof gtag !== 'undefined') {
+    if (typeof gtag === 'function') {
       gtag('event', 'submit', {
         event_category: 'UserSearch'
       });
@@ -10,7 +10,7 @@ export default class extends Controller {
   }
 
   reservationModalOpen() {
-    if (typeof gtag !== 'undefined') {
+    if (typeof gtag === 'function') {
       gtag('event', 'open', {
         event_category: 'ReservationModal'
       });
@@ -18,7 +18,7 @@ export default class extends Controller {
   }
 
   reservationModalClose() {
-    if (typeof gtag !== 'undefined') {
+    if (typeof gtag === 'function') {
       gtag('event', 'close', {
         event_category: 'ReservationModal'
       });
@@ -26,7 +26,7 @@ export default class extends Controller {
   }
 
   reservationPaymentSubmit() {
-    if (typeof gtag !== 'undefined') {
+    if (typeof gtag === 'function') {
       gtag('event', 'submit', {
         event_category: 'ReservationPayment'
       });
