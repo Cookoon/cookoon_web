@@ -12,7 +12,12 @@
     <%= stylesheet_link_tag 'application', media: :all, 'data-turbolinks-track': :reload %>
     <%= stylesheet_pack_tag 'application', media: :all, 'data-turbolinks-track': :reload %>
 
-    <%= render 'shared/ga_global_site_tag' %>
+    <% if Rails.env.production? %>
+      <%= render 'shared/marketing/google_analytics' %>
+      <%= render 'shared/marketing/hotjar' %>
+      <%= render 'shared/marketing/facebook_sdk' %>
+      <%= render 'shared/marketing/linkedin_insight' %>
+    <% end %>
 
     <%= javascript_include_tag "https://maps.google.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_KEY']}", async: true %>
     <%= javascript_include_tag 'https://js.stripe.com/v3/', async: true %>

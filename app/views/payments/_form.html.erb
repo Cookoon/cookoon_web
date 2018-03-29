@@ -15,6 +15,13 @@
     <%= f.input :source, collection: @user_cards, selected: :first, label: false, label_method: ->(card){ "#{card.brand.upcase} XXXX-XXXX-XXXX-#{card.last4}" }, value_method: ->(card){ card.id } %>
   </div>
   <div class="text-center">
-    <%= f.button :submit, 'PAYER', class: 'button button-blue' %>
+    <%= f.button :submit,
+                 'PAYER',
+                 class: 'button button-blue',
+                 data: {
+                   controller: 'analytics-events',
+                   action: 'click->analytics-events#reservationPaymentSubmit'
+                 }
+    %>
   </div>
 <% end %>

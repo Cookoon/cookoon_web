@@ -1,5 +1,7 @@
 <div class="position-fixed b-0 l-0 r-0 mb-3 text-center">
-  <button type="button" class="btn btn-primary btn-action" data-toggle="modal" data-target="#reservation-new">
+  <button type="button" class="btn btn-primary btn-action" data-toggle="modal"
+    data-target="#reservation-new" data-controller="analytics-events"
+    data-action="click->analytics-events#reservationModalOpen">
     Réserver • <%= humanized_money_with_symbol @cookoon.price %> / heure
   </button>
 </div>
