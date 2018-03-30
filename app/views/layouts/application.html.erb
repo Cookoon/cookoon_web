@@ -37,5 +37,6 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': :reload, 'data-turbolinks-eval': false %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': :reload, 'data-turbolinks-eval': false, 'data-turbolinks-suppress-warning': true  %>
     <%= cloudinary_js_config %>
+    <%= yield(:after_js) %>
   </body>
 </html>
