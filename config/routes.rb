@@ -41,9 +41,6 @@ Rails.application.routes.draw do
     resources :payments, only: %i[new create] do
       post :discount, on: :new
     end
-    namespace :payments do
-      resources :credit_cards, only: :create
-    end
     resources :invoices, only: :create
     resource :services, only: :show
     resources :guests, controller: 'reservations/guests', only: %i[index create] do
