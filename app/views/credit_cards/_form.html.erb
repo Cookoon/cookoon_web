@@ -2,7 +2,7 @@
      data-stripe-payments-publishable-key="<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>"
 >
   <%= simple_form_for :credit_card,
-                      url: form_path,
+                      url: credit_cards_path,
                       remote: true,
                       authenticity_token: true,
                       html: {
