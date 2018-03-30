@@ -5,7 +5,7 @@
       .payment-block
         b id='discount-balance' Crédit disponible : #{humanized_money_with_symbol current_user.discount_balance}
         i.co.co-check
-  = f.input :use_discount, as: :hidden, input_html: { value: 'false' }
+  = f.input :discount, as: :hidden, input_html: { value: 'false' }
   hr
   .credit-card-select.payment-block
     i.fa.fa-credit-card aria-hidden="true"
