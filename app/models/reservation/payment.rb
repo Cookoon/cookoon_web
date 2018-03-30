@@ -1,37 +1,8 @@
 class Reservation
-  class Payment
-    include Stripe::Chargeable
+  class Payment < ::Payment
     include Stripe::Transferable
-    include Discountable
 
-    attr_reader :reservation, :options
-
-    delegate :user, :payment_amount_cents, to: :reservation
-
-    alias_attribute :chargeable, :reservation
-    alias_attribute :discountable, :reservation
-
-    def initialize(reservation, options = {})
-      @reservation = reservation
-      @options = options
-    end
-
-    def proceed
-      persist_discount if discount_asked?
-      create_stripe_charge if charge_needed?
-      reservation.paid!
-    end
-
-    def refund
-      refund_stripe_charge
-      refund_user_discount
-    end
-
-    def capture
-      capture_stripe_charge
-    end
-
-    def transfer_to_host
+    def transfer
       trigger_stripe_transfer
     end
 
@@ -40,7 +11,15 @@ class Reservation
     end
 
     def description
-      "Paiement pour #{reservation.cookoon.name}"
+      "Paiement pour #{payee.cookoon.name}"
+    end
+
+    def transfer_amount
+      payee.host_payout_price_cents
+    end
+
+    def transfer_destination
+      payee.cookoon.user.stripe_account_id
     end
   end
 end
