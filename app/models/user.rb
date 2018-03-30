@@ -64,8 +64,12 @@ class User < ApplicationRecord
     @stripe_account ||= StripeAccountService.new(user: self).retrieve_stripe_account
   end
 
+  def credit_card
+    @credit_card ||= User::CreditCards.new(self)
+  end
+
   def credit_cards
-    User::CreditCards.new(self).list
+    credit_card.list
   end
 
   def stripe_verified?
