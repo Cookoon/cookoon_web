@@ -5,7 +5,6 @@ class Service < ApplicationRecord
 
   monetize :price_cents
   monetize :discount_amount_cents
-  monetize :charge_amount_cents
   monetize :payment_amount_cents
 
   enum status: %i[quote paid]
