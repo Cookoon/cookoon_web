@@ -5,7 +5,7 @@ class CreditCardsController < ApplicationController
   before_action :set_payment_service
 
   def index
-    @stripe_sources = @payment_service.user_sources
+    @stripe_sources = current_user.credit_cards
   end
 
   def create
