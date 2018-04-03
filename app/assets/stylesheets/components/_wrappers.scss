@@ -1,6 +1,11 @@
 .home-wrapper {
-  background: $blue;  /* fallback for old browsers */
-  background: linear-gradient(-225deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 50%), image-url('cookoon_background.jpg');
+  background: $blue; /* fallback for old browsers */
+  background: linear-gradient(
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.8) 40%,
+      rgba(255, 255, 255, 0.1) 90%
+    ),
+    image-url('cookoon_background.jpg');
   background-size: cover;
   background-position: center;
   height: 100vh;
