@@ -70,6 +70,14 @@ class ReservationMailer < ApplicationMailer
     mail(to: @tenant.full_email, subject: 'Votre location Cookoon se rapproche !')
   end
 
+  def notify_approaching_reservation_to_host(reservation)
+    @reservation = reservation
+    @tenant = @reservation.user
+    @cookoon = @reservation.cookoon
+    @host = @cookoon.user
+    mail(to: @host.full_email, subject: 'La location de votre Cookoon se rapproche !')
+  end
+
   def autocancel_short_notice_to_tenant(reservation)
     @reservation = reservation
     @tenant = @reservation.user
