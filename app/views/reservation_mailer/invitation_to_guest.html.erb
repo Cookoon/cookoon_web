@@ -21,15 +21,6 @@
       <br><%= @cookoon.address %>
     </td>
   </tr>
-  <tr>
-    <td align="center">
-      <%= image_tag('icon-meeting.png', alt: 'Rendez-vous') %>
-    </td>
-    <td>
-      <b>Vous êtes invité à le rejoindre</b>
-      <br>le <%= display_date_for(@reservation.start_at) %> à <%= display_time_for(@reservation.start_at) %>
-    </td>
-  </tr>
 </tbody></table>
 
 <h3>Qu'est-ce que Cookoon ?</h3>

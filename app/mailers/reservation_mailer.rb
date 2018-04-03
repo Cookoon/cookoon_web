@@ -90,12 +90,6 @@ class ReservationMailer < ApplicationMailer
     @guest = guest
     @tenant = @reservation.user
     @cookoon = @reservation.cookoon
-
-    attachments[@reservation.ical_file_name] = {
-      mime_type: 'application/ics',
-      content: @reservation.ical_for(:guest).to_ical
-    }
-
     mail(
       to: @guest.full_email,
       subject: "#{@tenant.full_name} vous convie le #{display_date_for(@reservation.start_at)} à son événement !"
