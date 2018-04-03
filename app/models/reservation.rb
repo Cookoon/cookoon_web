@@ -196,15 +196,6 @@ class Reservation < ApplicationRecord
           #{cookoon.user.full_name}
           #{cookoon.user.phone_number} - #{cookoon.user.email}
         DESCRIPTION
-      },
-      guest: {
-        summary: "#{user.full_name} via Cookoon",
-        description: <<~DESCRIPTION
-          Vous avez été invité à un événement Cookoon par
-
-          #{user.full_name}
-          #{user.phone_number} - #{user.email}
-        DESCRIPTION
       }
     }
   end
