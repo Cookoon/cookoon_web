@@ -1,5 +1,5 @@
 <p>Bonjour<%= " #{@resource.first_name}" if @resource.first_name.present? %>,</p>
-<p><b><%= @resource.invited_by&.full_name %></b> vous a invité à rejoindre <b>Cookoon : un réseau de confiance exclusif</b> pour organiser vos événements.</p>
+<p><b><%= @resource.invited_by&.full_name %></b> vous a invité à rejoindre <b>Cookoon, un réseau sélectif fondé sur la confiance</b> pour organiser vos événements.</p>
 <p>Votre adresse pour vous connecter : <b><%= @resource.email %></b></p>
 <p>Pour créer votre compte, suivez le lien ci-dessous :</p>
 
@@ -12,9 +12,9 @@
 <p><strong>Qui sommes nous ?</strong></p>
 <p>Cookoon est un réseau bâti sur la confiance et l'implication de ses membres qui vous permettra de :</p>
 <ul>
-  <li><strong>organiser des micro-événements du quotidien, personnels ou professionnels,</strong> en louant l'appartement d'un autre membre et en réservant des services, traiteur, chef à domicile, joueur de harpe, pour une expérience Cookoon unique,</li>
-  <li><strong>rentabiliser votre appartement durant vos absences quotidiennes,</strong> sans contrainte grâce aux services concierge et ménage,</li>
-  <li><strong>rencontrer d'autres membres,</strong> communiquer auprès d'eux sur vos expériences Cookoon.</li>
+  <li><strong>louer l'appartement d'un autre membre et de choisir des services additionnels</strong> pour tous vos événements du quotidien, personnels ou professionnels</li>
+  <li>si vous le souhaitez, <strong>de rentabiliser votre appartement dès que vous n'y êtes pas</strong></li>
+  <li><strong>communiquer</strong> avec et auprès des autres membres</li>
 </ul>
 
 <p>Une question ? Rendez-vous sur <%= link_to 'cookoon.fr', 'https://cookoon.fr/', target: :_blank %>.</p>

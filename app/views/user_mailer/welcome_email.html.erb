@@ -1,11 +1,11 @@
 <p>Cher(e) <%= @user.first_name %>,</p>
 <p>Vous avez rejoint Cookoon, bienvenue parmi nous !</p>
 <p><%= @user.invited_by&.first_name %> vous a invité, faisons maintenant les présentations :</p>
-<p>Cookoon est un réseau de confiance, exclusif qui vous offre de nombreuses possibilités.</p>
+<p><strong>Cookoon est un réseau sélectif fondé sur la confiance</strong> qui vous permet de :</p>
 <ul>
-  <li><strong>Organiser des micro-événements du quotidien, personnels ou professionnels,</strong> en louant l'appartement d'un autre membre et en réservant des services, traiteur, chef à domicile, joueur de harpe, pour une expérience Cookoon unique,</li>
-  <li><strong>Rentabiliser votre appartement durant vos absences quotidiennes,</strong> sans contrainte grâce aux services concierge et ménage,</li>
-  <li><strong>Rencontrer d'autres membres,</strong> communiquer auprès d'eux sur vos expériences Cookoon.</li>
+  <li><strong>louer l'appartement d'un autre membre et de choisir des services additionnels</strong> pour tous vos événements du quotidien, personnels ou professionnels</li>
+  <li>si vous le souhaitez, <strong>de rentabiliser votre appartement dès que vous n'y êtes pas</strong></li>
+  <li><strong>communiquer</strong> avec et auprès des autres membres</li>
 </ul>
 <p>Une question ? Contactez votre <%= mail_to 'concierge@cookoon.fr', 'concierge Cookoon', target: :_blank %> ou rendez-vous sur <%= link_to 'aide.cookoon.fr', 'https://aide.cookoon.fr', target: :_blank %></p>
 
