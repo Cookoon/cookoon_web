@@ -2,12 +2,12 @@ class Payment
   include Stripe::Chargeable
   include Discountable
 
-  attr_reader :payee, :options, :errors
+  attr_reader :chargeable, :options, :errors
 
-  delegate :user, :payment_amount_cents, to: :payee
+  delegate :user, :payment_amount_cents, to: :chargeable
 
-  def initialize(payee, options = {})
-    @payee = payee
+  def initialize(chargeable, options = {})
+    @chargeable = chargeable
     @options = options
     @errors = []
   end
@@ -17,7 +17,7 @@ class Payment
     # when removing discountable need to override this method in other payments
     persist_discount if discount_asked?
     create_stripe_charge if charge_needed?
-    errors.empty? ? payee.paid! : false
+    errors.empty? ? chargeable.paid! : false
   end
 
   def refund

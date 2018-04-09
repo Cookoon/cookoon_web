@@ -25,19 +25,19 @@ module Discountable
   end
 
   def discount_used?
-    payee.discount_amount_cents.positive?
+    chargeable.discount_amount_cents.positive?
   end
 
   def refund_user_discount
     return unless discount_used?
-    user.discount_balance_cents += payee.discount_amount_cents
+    user.discount_balance_cents += chargeable.discount_amount_cents
     user.save
   end
 
   private
 
   def update_discountable
-    payee.update(discount_amount_cents: computed_discount_amount_cents)
+    chargeable.update(discount_amount_cents: computed_discount_amount_cents)
   end
 
   def update_user

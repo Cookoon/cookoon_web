@@ -11,15 +11,15 @@ class Reservation
     end
 
     def description
-      "Paiement pour #{payee.cookoon.name}"
+      "Paiement pour #{chargeable.cookoon.name}"
     end
 
     def transfer_amount
-      payee.host_payout_price_cents
+      chargeable.host_payout_price_cents
     end
 
     def transfer_destination
-      payee.cookoon.user.stripe_account_id
+      chargeable.cookoon.user.stripe_account_id
     end
   end
 end

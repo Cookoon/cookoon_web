@@ -28,11 +28,11 @@ module Stripe
     end
 
     def charge
-      @charge ||= Stripe::Charge.retrieve(payee.stripe_charge_id)
+      @charge ||= Stripe::Charge.retrieve(chargeable.stripe_charge_id)
     end
 
     def persist_charge
-      payee.update(stripe_charge_id: stripe_charge&.id)
+      chargeable.update(stripe_charge_id: stripe_charge&.id)
     end
 
     def create_charge
