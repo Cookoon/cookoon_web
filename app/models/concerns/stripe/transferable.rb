@@ -8,7 +8,7 @@ module Stripe
 
     def trigger_transfer
       # keep rescue ?
-      Stripe::Transfer.create(transfer_options)
+      Stripe::Transfer.create(transfer_attributes)
     rescue Stripe::InvalidRequestError => e
       Rails.logger.error("Failed to trigger transfer for reservation : #{reservation.id}")
       Rails.logger.error(e.message)
@@ -17,7 +17,7 @@ module Stripe
       false
     end
 
-    def transfer_options
+    def transfer_attributes
       {
         amount: transfer_amount,
         currency: 'eur',
