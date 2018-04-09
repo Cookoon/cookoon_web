@@ -50,11 +50,11 @@ module Stripe
     def charge_attributes
       # add metadata ?
       {
-        amount: computed_charge_amount_cents,
+        amount: charge_amount_cents,
         currency: 'eur',
         customer: user.stripe_customer.id,
         source: options[:source],
-        description: description,
+        description: charge_description,
         capture: should_capture?
       }
     end

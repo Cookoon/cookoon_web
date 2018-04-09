@@ -1,6 +1,5 @@
 class Payment
   include Stripe::Chargeable
-  include Discountable
 
   attr_reader :chargeable, :options, :errors
 
@@ -13,9 +12,7 @@ class Payment
   end
 
   def proceed
-    # #discount_asked? and #charge_needed? sit within #discountable
-    # when removing discountable need to override this method in other payments
-    persist_discount if discount_asked?
+    before_proceed
     create_stripe_charge if charge_needed?
     errors.empty? ? chargeable.paid! : false
   end
@@ -35,5 +32,19 @@ class Payment
     else
       "Une erreur est survenue avec notre prestataire de paiement, essayez à nouveau ou contactez notre service d'aide"
     end
+  end
+
+  private
+
+  def before_proceed; end
+
+  def charge_needed?
+    charge_amount_cents.positive?
+  end
+
+  def charge_amount_cents
+    # could raise a NotImplementedError because should never be called
+    # Each specific Payment Class needs to implement this method
+    payment_amount_cents
   end
 end

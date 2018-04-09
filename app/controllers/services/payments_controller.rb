@@ -24,8 +24,8 @@ class Services::PaymentsController < ApplicationController
   def build_amounts
     payment_amount = @service.payment_amount
     user_discount_balance = @service.user.discount_balance
-    charge_amount = @service.payment(discount: true).computed_charge_amount
-    discount_amount = @service.payment(discount: true).computed_discount_amount
+    charge_amount = @service.payment(discount: true).discountable_charge_amount
+    discount_amount = @service.payment(discount: true).discount_amount
 
     {
       payment: payment_amount,
