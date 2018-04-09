@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180323161040) do
+ActiveRecord::Schema.define(version: 20180409135516) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -59,6 +59,19 @@ ActiveRecord::Schema.define(version: 20180323161040) do
     t.text "description"
     t.integer "status", default: 0
     t.string "trello_card_id"
+    t.string "digicode"
+    t.string "building_number"
+    t.string "floor_number"
+    t.string "door_number"
+    t.string "wifi_network"
+    t.string "wifi_code"
+    t.boolean "display_device", default: false, null: false
+    t.boolean "sound_system", default: false, null: false
+    t.boolean "kitchen", default: false, null: false
+    t.boolean "elevator", default: false, null: false
+    t.boolean "barbecue", default: false, null: false
+    t.boolean "fireplace", default: false, null: false
+    t.text "caretaker_instructions"
     t.index ["user_id"], name: "index_cookoons_on_user_id"
   end
 
