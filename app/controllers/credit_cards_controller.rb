@@ -4,7 +4,7 @@ class CreditCardsController < ApplicationController
   skip_after_action :verify_authorized
 
   def index
-    @stripe_sources = current_user.credit_cards
+    @credit_cards = current_user.credit_cards
   end
 
   def create

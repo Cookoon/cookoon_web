@@ -1,7 +1,7 @@
 <div class="container">
   <h2>Mes moyens de paiement</h2>
 
-  <% if @stripe_sources.blank? && current_user.available_discount? %>
+  <% if @credit_cards.blank? && current_user.available_discount? %>
     <div class="information-card text-center">
       <div class="information-card-picto">
         <i class="fa fa-question-circle-o" aria-hidden="true"></i>
@@ -16,7 +16,7 @@
         <p>Allez-y en toute confiance : votre numéro de carte est crypté contre toute violation.</p>
       </div>
     </div>
-  <% elsif @stripe_sources.blank? %>
+  <% elsif @credit_cards.blank? %>
     <div class="information-card text-center">
       <div class="information-card-picto">
         <i class="fa fa-question-circle-o" aria-hidden="true"></i>
@@ -33,7 +33,7 @@
     </div>
   <% else %>
     <ul class="fa-ul h5">
-      <% @stripe_sources.data.each_with_index do |card_data, index| %>
+      <% @credit_cards.data.each_with_index do |card_data, index| %>
         <li><i class="fa-li co co-cb fa-lg"></i>
           <div class="d-flex-default pt-1">
             <div>
@@ -58,7 +58,7 @@
 </div>
 
 
-<% if @stripe_sources.any? && current_user.available_discount? %>
+<% if @credit_cards.any? && current_user.available_discount? %>
   <div class="card-bottom mt-3">
     <div class="card-bottom-content">
       <div class="text-center">
