@@ -38,7 +38,7 @@ module Stripe
     def create_charge
       # keep rescue ?
       return false unless user&.stripe_customer
-      @stripe_charge = Stripe::Charge.create(charge_options)
+      @stripe_charge = Stripe::Charge.create(charge_attributes)
     rescue Stripe::CardError, Stripe::InvalidRequestError => e
       Rails.logger.error('Failed to create Stripe Charge')
       Rails.logger.error(e.message)
@@ -47,7 +47,7 @@ module Stripe
       false
     end
 
-    def charge_options
+    def charge_attributes
       # add metadata ?
       {
         amount: computed_charge_amount_cents,
