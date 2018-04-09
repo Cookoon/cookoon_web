@@ -15,10 +15,9 @@ class Host::ReservationsController < ApplicationController
 
     if @reservation.update(merged_params)
       if @reservation.accepted?
-        payment_service = StripePaymentService.new(user: @reservation.cookoon_owner, reservation: @reservation)
-        if payment_service.capture_payment
-          ReservationMailer.confirmed_to_tenant(@reservation).deliver_later
-          ReservationMailer.confirmed_to_host(@reservation).deliver_later
+        payment = Reservation::Payment.new(@reservation)
+        if payment.capture
+          @reservation.notify_users_after_confirmation
           flash[:notice] = "Vous avez accepté la réservation"
         else
           # TODO : Essayer à nouveau de capturer la charge ou afficher une erreur.

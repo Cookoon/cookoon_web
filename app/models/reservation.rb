@@ -111,6 +111,11 @@ class Reservation < ApplicationRecord
     ReservationMailer.paid_request_to_host(self).deliver_later
   end
 
+  def notify_users_after_confirmation
+    ReservationMailer.confirmed_to_tenant(self).deliver_later
+    ReservationMailer.confirmed_to_host(self).deliver_later
+  end
+
   def default_service_price_cents
     DEFAULTS[:service_price_cents]
   end
