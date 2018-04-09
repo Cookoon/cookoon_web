@@ -2,7 +2,7 @@ class PaymentsController < ApplicationController
   before_action :set_reservation
 
   def new
-    @user_cards = current_user.credit_cards
+    @credit_cards = current_user.credit_cards
   end
 
   def create
@@ -11,7 +11,7 @@ class PaymentsController < ApplicationController
       @reservation.notify_users_after_payment
       handle_redirection
     else
-      @user_cards = current_user.credit_cards
+      @credit_cards = current_user.credit_cards
       flash.now.alert = payment.displayable_errors
       render :new
     end

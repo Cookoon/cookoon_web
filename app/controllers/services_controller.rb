@@ -7,7 +7,7 @@ class ServicesController < ApplicationController
       reservation: @reservation
     )
     @service = @reservation.services.last
-    @user_cards = payment_service.user_sources.try(:data)
+    @credit_cards = payment_service.user_sources.try(:data)
   end
 
   private

@@ -8,7 +8,7 @@ class Services::PaymentsController < ApplicationController
     if payment.proceed
       redirect_to cookoons_path, flash: { service_payment_succeed: true }
     else
-      @user_cards = current_user.crredit_cardds
+      @credit_cards = current_user.crredit_cardds
       flash.now.alert = payment_service.displayable_errors
       render :new
     end
