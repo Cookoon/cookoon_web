@@ -133,17 +133,13 @@ class Reservation < ApplicationRecord
   end
 
   def admin_close
-    pay_host
+    payment.transfer
     passed!
     send_ending_surveys
   end
 
   def full_discount?
     discount_amount_cents >= payment_amount_cents
-  end
-
-  def pay_host
-    payment.transfer
   end
 
   def send_ending_surveys

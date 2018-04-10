@@ -22,7 +22,7 @@ class Host::ReservationsController < ApplicationController
         flash[:alert] = payment.displayable_errors
       end
     else
-      payment.refund_user_discount
+      payment.refund
       @reservation.refused!
       ReservationMailer.refused_to_tenant(@reservation).deliver_later
       flash[:notice] = 'Vous avez refusé la réservation'
