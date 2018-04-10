@@ -139,8 +139,7 @@ class Reservation < ApplicationRecord
   end
 
   def pay_host
-    payment_service = StripePaymentService.new(user: cookoon_owner, reservation: self)
-    payment_service.pay_host
+    payment.transfer
   end
 
   def send_ending_surveys

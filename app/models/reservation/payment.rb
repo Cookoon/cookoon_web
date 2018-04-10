@@ -37,5 +37,9 @@ class Reservation
     def transfer_destination
       chargeable.cookoon.user.stripe_account_id
     end
+
+    def discount_amount_used
+      ActionController::Base.helpers.humanized_money_with_symbol(chargeable.discount_amount)
+    end
   end
 end

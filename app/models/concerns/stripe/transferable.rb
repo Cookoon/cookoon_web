@@ -23,7 +23,7 @@ module Stripe
         currency: 'eur',
         destination: transfer_destination,
         metadata: {
-          discount_amount: ActionController::Base.helpers.humanized_money_with_symbol(reservation.discount_amount)
+          discount_amount: discount_amount_used
         }
       }
     end

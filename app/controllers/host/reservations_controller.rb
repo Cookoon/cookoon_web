@@ -22,7 +22,7 @@ class Host::ReservationsController < ApplicationController
         else
           # TODO : Essayer a nouveau de capturer la charge ou afficher une erreur.
           # Attention au status de la reservation qui peut etre erronne si la charge n'est pas correctement capturee
-          flash[:alert] = payment_service.displayable_errors
+          flash[:alert] = payment.displayable_errors
         end
       else
         @reservation.refund_discount_to_user if @reservation.payment.discount_used?
