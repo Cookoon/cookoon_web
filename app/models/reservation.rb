@@ -138,6 +138,10 @@ class Reservation < ApplicationRecord
     send_ending_surveys
   end
 
+  def full_discount?
+    discount_amount_cents >= payment_amount_cents
+  end
+
   def pay_host
     payment.transfer
   end

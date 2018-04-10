@@ -27,7 +27,7 @@ class PaymentsController < ApplicationController
     payment_amount = @reservation.payment_amount
     user_discount_balance = @reservation.user.discount_balance
     charge_amount = @reservation.payment(discount: true).discountable_charge_amount
-    discount_amount = @reservation.payment(discount: true).discount_amount
+    discount_amount = @reservation.payment(discount: true).discountable_discount_amount
 
     {
       payment: payment_amount,

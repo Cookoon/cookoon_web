@@ -10,31 +10,24 @@ class Host::ReservationsController < ApplicationController
   def edit; end
 
   def update
-    status = params['accept'] ? :accepted : :refused
-    merged_params = reservation_params.merge(status: status)
-
-    if @reservation.update(merged_params)
-      if @reservation.accepted?
-        payment = Reservation::Payment.new(@reservation)
-        if payment.capture
-          @reservation.notify_users_after_confirmation
-          flash[:notice] = 'Vous avez accepté la réservation'
-        else
-          # TODO : Essayer a nouveau de capturer la charge ou afficher une erreur.
-          # Attention au status de la reservation qui peut etre erronne si la charge n'est pas correctement capturee
-          flash[:alert] = payment.displayable_errors
-        end
+    payment = @reservation.payment
+    if params['accept']
+      payment_captured = @reservation.full_discount? ? true : payment.capture
+      if payment_captured
+        @reservation.update(reservation_params.merge(status: :accepted))
+        @reservation.notify_users_after_confirmation
+        flash[:notice] = 'Vous avez accepté la réservation'
       else
-        @reservation.refund_discount_to_user if @reservation.payment.discount_used?
-        ReservationMailer.refused_to_tenant(@reservation).deliver_later
-        flash[:notice] = 'Vous avez refusé la réservation'
+        # TODO : Essayer a nouveau de capturer la charge ou afficher une erreur.
+        flash[:alert] = payment.displayable_errors
       end
-
-      redirect_to host_reservations_path
     else
-      flash[:alert] = 'Erreur'
-      render :edit
+      payment.refund_user_discount
+      @reservation.refused!
+      ReservationMailer.refused_to_tenant(@reservation).deliver_later
+      flash[:notice] = 'Vous avez refusé la réservation'
     end
+    redirect_to host_reservations_path
   end
 
   private

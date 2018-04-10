@@ -1,15 +1,15 @@
 module Discountable
-  def discount_amount_cents
+  def discountable_discount_amount_cents
     return 0 unless discount_asked?
-    @discount_amount_cents ||= compute_discount_amount_cents
+    @discountable_discount_amount_cents ||= compute_discount_amount_cents
   end
 
   def discountable_charge_amount_cents
     @discountable_charge_amount_cents ||= compute_charge_amount_cents
   end
 
-  def discount_amount
-    Money.new discount_amount_cents
+  def discountable_discount_amount
+    Money.new discountable_discount_amount_cents
   end
 
   def discountable_charge_amount
@@ -34,11 +34,11 @@ module Discountable
   private
 
   def update_discountable
-    chargeable.update(discount_amount_cents: discount_amount_cents)
+    chargeable.update(discount_amount_cents: discountable_discount_amount_cents)
   end
 
   def update_user
-    user.discount_balance_cents -= discount_amount_cents
+    user.discount_balance_cents -= discountable_discount_amount_cents
     user.save
   end
 
@@ -49,6 +49,6 @@ module Discountable
   end
 
   def compute_charge_amount_cents
-    payment_amount_cents - discount_amount_cents
+    payment_amount_cents - discountable_discount_amount_cents
   end
 end
