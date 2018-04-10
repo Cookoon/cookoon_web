@@ -54,7 +54,7 @@ module Stripe
 
     def create_source(token)
       stripe_customer.sources.create(source: token)
-    rescue Stripe::CardError => e
+    rescue Stripe::CardError, Stripe::InvalidRequestError => e
       Rails.logger.error("Failed to create credit_card for #{email}")
       Rails.logger.error(e.message)
       errors.add(:credit_card, e.message)
