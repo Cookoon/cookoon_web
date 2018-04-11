@@ -33,7 +33,7 @@ module Stripe
     private
 
     def update_user(customer)
-      user.update(stripe_customer_id: customer.id) if customer
+      update(stripe_customer_id: customer.id) if customer
     end
 
     def retrieve_customer
@@ -47,8 +47,8 @@ module Stripe
 
     def create_customer
       Stripe::Customer.create(
-        description: "Customer for #{user.email}",
-        email: user.email
+        description: "Customer for #{email}",
+        email: email
       )
     end
 
