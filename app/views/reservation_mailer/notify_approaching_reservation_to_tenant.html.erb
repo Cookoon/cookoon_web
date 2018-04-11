@@ -19,8 +19,46 @@
     <td>
       <b>Rendez-vous au :</b>
       <br><%= @cookoon.address %>
+
+      <% if @cookoon.digicode.present? || @cookoon.building_number.present? || @cookoon.floor_number.present? || @cookoon.door_number.present? %>
+        <ul>
+          <% if @cookoon.digicode.present? %>
+            <li>Code : <%= @cookoon.digicode %></li>
+          <% end %>
+          <% if @cookoon.building_number.present? %>
+            <li>Bâtiment : <%= @cookoon.building_number %></li>
+          <% end %>
+          <% if @cookoon.floor_number.present? && @cookoon.door_number.present? %>
+            <li>Etage <%= @cookoon.floor_number %> / Porte <%= @cookoon.door_number %></li>
+          <% elsif @cookoon.floor_number.present? %>
+          <li>Etage : <%= @cookoon.floor_number %></li>
+          <% elsif @cookoon.door_number.present? %>
+          <li>Porte : <%= @cookoon.door_number %></li>
+          <% end %>
+        </ul>
+      <% end %>
     </td>
   </tr>
+
+  <% if @cookoon.wifi_network.present? || @cookoon.wifi_code.present? %>
+    <tr>
+      <td align="center">
+        <%= image_tag('icon-success.png', alt: 'Informations pratiques') %>
+      </td>
+      <td>
+        <b>Quelques informations pratiques :</b>
+        <ul>
+          <% if @cookoon.wifi_network.present? %>
+            <li>Nom du Wifi : <%= @cookoon.wifi_network %></li>
+          <% end %>
+          <% if @cookoon.wifi_code.present? %>
+            <li>Code du Wifi : <%= @cookoon.wifi_code %></li>
+          <% end %>
+        </ul>
+      </td>
+    </tr>
+  <% end %>
+
   <tr>
     <td align="center">
       <%= image_tag('icon-euro.png', alt: 'Prix') %>
