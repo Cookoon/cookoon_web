@@ -3,10 +3,11 @@ fr:
   activerecord:
     attributes:
       cookoon:
-        digicode: Code(s) Immeuble
         building_number: Bâtiment
-        floor_number: Etage
+        caretaker_instructions: Instructions pour le concierge
+        digicode: Code(s) Immeuble
         door_number: Porte
+        floor_number: Etage
         wifi_network: Réseau Wifi
         wifi_code: Code Wifi
       inventory:
