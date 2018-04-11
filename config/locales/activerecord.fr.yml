@@ -2,6 +2,13 @@
 fr:
   activerecord:
     attributes:
+      cookoon:
+        digicode: Code(s) Immeuble
+        building_number: Bâtiment
+        floor_number: Etage
+        door_number: Porte
+        wifi_network: Réseau Wifi
+        wifi_code: Code Wifi
       inventory:
         checkin_photos: Photos à l'entrée des lieux
         checkout_photos: Photos à la sortie des lieux
