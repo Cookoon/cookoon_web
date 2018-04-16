@@ -73,7 +73,7 @@ ActiveRecord::Schema.define(version: 20180411102337) do
     t.boolean "fireplace", default: false, null: false
     t.text "caretaker_instructions"
     t.boolean "basic_cooking_ingredients", default: false, null: false
-    t.integer "crockery_quantity"
+    t.integer "tableware_quantity"
     t.index ["user_id"], name: "index_cookoons_on_user_id"
   end
 
