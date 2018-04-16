@@ -10,6 +10,9 @@ fr:
     error_notification:
       default_message: 'Merci de revoir les éléments ci-dessous :'
     'no': Non
+    placeholders:
+      cookoon:
+        caretaker_instructions: 'examples : emplacement du local poubelle, consigne de gestion des clés, etc.'
     required:
       mark: '*'
       text: requis

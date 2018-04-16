@@ -288,6 +288,11 @@ hr {
 .info b {
   color: #006f8b;
 }
+.info ul,
+.info ol,
+.info li {
+  margin-bottom: 0;
+}
 
 .prefooter {
   border-bottom-left-radius: 7px;
