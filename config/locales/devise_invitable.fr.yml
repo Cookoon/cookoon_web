@@ -23,8 +23,8 @@ fr:
         accept: Accepter l'invitation
         hello: Bonjour %{email}
         ignore: Si vous ne souhaitez pas accepter cette invitation, veuillez ignorer cet e-mail.<br />Votre compte ne sera pas créé tant que vous n'accéderez pas au lien ci-dessous et que vous n'aurez pas défini votre mot de passe.
-        someone_invited_you: Quelqu'un vous a invité à rejoindre %{url}, vous pouvez accepter cette invitation via le lien ci-dessous.
-        subject: "%{inviter} vous a invité a rejoindre Cookoon !"
+        someone_invited_you: Quelqu'un vous a invité(e) à rejoindre %{url}, vous pouvez accepter cette invitation via le lien ci-dessous.
+        subject: "%{inviter} vous a invité(e) a rejoindre Cookoon !"
   time:
     formats:
       devise:
