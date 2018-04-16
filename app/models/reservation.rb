@@ -17,7 +17,7 @@ class Reservation < ApplicationRecord
   scope :stripe_will_not_capture, -> { paid.created_before(DEFAULTS[:stripe_validity_period].ago.in(DEFAULTS[:safety_period])) }
 
   DEFAULTS = {
-    tenant_fee_rate: 0.05,
+    tenant_fee_rate: 0.07,
     host_fee_rate: 0.07,
     service_price_cents: 2000,
     notice_period: 10.hours,
