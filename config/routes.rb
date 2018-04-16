@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   # -------- STATIC PAGES ---------
   # Different root for authenticated users
   authenticated { root 'cookoons#index' }
-  root 'pages#home'
+  root 'pages#welcome'
 
   controller :pages do
     get :support

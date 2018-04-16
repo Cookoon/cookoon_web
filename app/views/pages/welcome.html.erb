@@ -8,16 +8,16 @@
     </div>
     <div class="home-description">
       <p>
-        Cookoon est un réseau de confiance, exclusif.
+        <b>
+          Cookoon vous permet de louer un espace privé à un autre membre de la communauté
+          pour quelques heures en quelques clics.
+        </b>
       </p>
-      <p>
-        Il permet à ses membres d'organiser des événements du quotidien chez d'autres membres
-        <br>et de rentabiliser leur appartement durant leurs absences.
-      </p>
+      <%= link_to 'ACCÈS MEMBRE', new_user_session_path, class: 'btn btn-action btn-primary btn-block' %>
     </div>
     <div class="home-links links-block">
       <%= link_to 'EN SAVOIR +', 'https://cookoon.fr/', target: :_blank, class: 'no-button' %>
-      <%= link_to 'ACCÈS MEMBRE', new_user_session_path, class: 'button button-blue' %>
+      <%= link_to "POSTULER AVEC MON APPARTEMENT", 'https://cookoon.typeform.com/to/iY7Heh', class: 'btn btn-action-sm btn-mw-66 btn-secondary' %>
     </div>
   </div>
 </div>

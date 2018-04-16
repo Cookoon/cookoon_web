@@ -39,6 +39,11 @@ body {
   }
 }
 
+.btn-mw-66 {
+  max-width: 66%;
+  white-space: normal;
+}
+
 .child-mx-2 {
   & > * {
     margin-left: 0.25rem;
