@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[home setcookies]
+  skip_before_action :authenticate_user!, only: %i[welcome setcookies]
 
-  def home; end
+  def welcome; end
 
   def support; end
 
