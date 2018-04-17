@@ -6,17 +6,19 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">×</button>
       </div>
       <div class="modal-body" style='padding: 15px;'>
-        <%= render 'credit_cards/form', form_path: form_path %>
+        <%= render 'credit_cards/form' %>
         <input type="text" id="invisible-input" style="position: absolute; cursor: default; width: 1px; height: 1px; opacity: 0;">
       </div>
     </div>
   </div>
 </div>
 
-<script>
-  // iOS keyboard fix
-  $('#credit-card-modal').on('hide.bs.modal', function () {
-    $('#invisible-input').focus();
-    $('#invisible-input').blur();
-  })
-</script>
+<% content_for :after_js do %>
+  <script>
+    // iOS keyboard fix
+    $('#credit-card-modal').on('hide.bs.modal', function () {
+      $('#invisible-input').focus();
+      $('#invisible-input').blur();
+    })
+  </script>
+<% end %>

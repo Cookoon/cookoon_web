@@ -44,7 +44,7 @@ class Reservation < ApplicationRecord
   monetize :default_service_price_cents
   monetize :host_services_price_cents
   monetize :host_payout_price_cents
-  monetize :charge_amount_cents
+  monetize :payment_amount_cents
 
   enum status: %i[pending paid accepted refused cancelled ongoing passed dead]
 
@@ -67,6 +67,10 @@ class Reservation < ApplicationRecord
 
   def pending_or_paid?
     pending? || paid?
+  end
+
+  def payment(options = {})
+    @payment ||= Reservation::Payment.new(self, options)
   end
 
   def starts_soon?
@@ -102,6 +106,16 @@ class Reservation < ApplicationRecord
     (base_price_cents * host_fee_rate).round
   end
 
+  def notify_users_after_payment
+    ReservationMailer.paid_request_to_tenant(self).deliver_later
+    ReservationMailer.paid_request_to_host(self).deliver_later
+  end
+
+  def notify_users_after_confirmation
+    ReservationMailer.confirmed_to_tenant(self).deliver_later
+    ReservationMailer.confirmed_to_host(self).deliver_later
+  end
+
   def default_service_price_cents
     DEFAULTS[:service_price_cents]
   end
@@ -114,29 +128,18 @@ class Reservation < ApplicationRecord
     base_price_cents - host_fee_cents - host_services_price_cents
   end
 
-  def charge_amount_cents
-    price_with_tenant_fee_cents - discount_amount_cents
-  end
-
-  def discount_used?
-    discount_amount_cents.positive?
-  end
-
-  def refund_discount_to_user
-    return unless discount_used?
-    user.discount_balance_cents += discount_amount_cents
-    user.save
+  def payment_amount_cents
+    price_with_tenant_fee_cents
   end
 
   def admin_close
-    pay_host
+    payment.transfer
     passed!
     send_ending_surveys
   end
 
-  def pay_host
-    payment_service = StripePaymentService.new(user: cookoon_owner, reservation: self)
-    payment_service.pay_host
+  def full_discount?
+    discount_amount_cents >= payment_amount_cents
   end
 
   def send_ending_surveys

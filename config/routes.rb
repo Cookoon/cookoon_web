@@ -32,7 +32,7 @@ Rails.application.routes.draw do
   resources :credit_cards, only: %i[index create destroy]
   resources :stripe_accounts, only: %i[new create]
 
-  resources :cookoons do
+  resources :cookoons, except: :destroy do
     resources :reservations, only: :create
     resources :availabilities, only: %i[index create update], shallow: true
   end
@@ -40,9 +40,6 @@ Rails.application.routes.draw do
   resources :reservations, only: %i[index show edit update] do
     resources :payments, only: %i[new create] do
       post :discount, on: :new
-    end
-    namespace :payments do
-      resources :credit_cards, only: :create
     end
     resources :invoices, only: :create
     resource :services, only: :show

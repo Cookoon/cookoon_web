@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   include TimeRangeBuilder
+  include Stripe::Customerable
 
   scope :pending_invitation, -> { where.not(invitation_token: nil) }
   scope :invited_in_day_range_around, ->(date_time) { pending_invitation.where invitation_sent_at: day_range(date_time) }
@@ -61,6 +62,14 @@ class User < ApplicationRecord
 
   def stripe_account
     @stripe_account ||= StripeAccountService.new(user: self).retrieve_stripe_account
+  end
+
+  def credit_card
+    @credit_card ||= User::CreditCards.new(self)
+  end
+
+  def credit_cards
+    credit_card.list
   end
 
   def stripe_verified?

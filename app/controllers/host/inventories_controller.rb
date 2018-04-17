@@ -12,10 +12,11 @@ class Host::InventoriesController < ApplicationController
     if @inventory.save && @reservation.ongoing!
       # Pas de test ici, il faut monitorer sur les premieres locations
       # Ajouter une transaction ? Ou poster sur Slack pour le declencher a la main.
-      @reservation.pay_host
+      @reservation.payment.transfer
       flash[:notice] = 'La reservation vient de démarrer'
       redirect_to host_reservations_path
     else
+      flash[:alert] = "Une erreur s'est produite, contactez votre concierge"
       render :new
     end
   end
@@ -24,12 +25,13 @@ class Host::InventoriesController < ApplicationController
 
   def update
     reservation = @inventory.reservation
-    full_params = inventory_params.merge(checkout_at: Time.zone.now, status: :checked_out)
-    if @inventory.update(full_params) && reservation.passed!
+    merged_params = inventory_params.merge(checkout_at: Time.zone.now, status: :checked_out)
+    if @inventory.update(merged_params) && reservation.passed!
       reservation.send_ending_surveys
       flash[:notice] = 'La réservation est maintenant terminée'
       redirect_to host_reservations_path
     else
+      flash[:alert] = "Une erreur s'est produite, contactez votre concierge"
       render :edit
     end
   end

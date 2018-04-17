@@ -7,13 +7,16 @@
 
       p Récapitulatif :
 
-      = @service.content.html_safe
+      .pt-5.pb-3
+        = @service.content.html_safe
+
+        hr
+
+        .d-flex-default
+          b id='total-text' TOTAL
+          b id='reservation-price' = humanized_money_with_symbol @service.price
 
       = render 'payments/services_form'
-
-      .d-flex-default
-        b id='total-text' TOTAL
-        b id='reservation-price' = humanized_money_with_symbol @service.price
 
 - else
     p Pas de service associé à cette réservation !

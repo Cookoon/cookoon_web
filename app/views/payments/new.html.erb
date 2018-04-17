@@ -24,7 +24,7 @@
   </div>
 
   <!-- ========= CARD SELECTION ============= -->
-  <% if @user_cards.blank? %>
+  <% if @credit_cards.blank? %>
     <div class="text-center py-3">
       <div class="py-3">
         <p>Vous n'avez aucun moyen de paiement</p>
@@ -58,4 +58,4 @@
   <!-- ========= END CARD SELECTION ============= -->
 </div>
 
-<%= render 'credit_cards/modal', form_path: reservation_payments_credit_cards_path(@reservation) %>
+<%= render 'credit_cards/modal' %>

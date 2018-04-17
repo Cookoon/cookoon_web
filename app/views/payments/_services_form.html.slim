@@ -5,10 +5,10 @@
       .payment-block
         b id='discount-balance' Crédit disponible : #{humanized_money_with_symbol current_user.discount_balance}
         i.co.co-check
-  = f.input :use_discount, as: :hidden, input_html: { value: 'false' }
+  = f.input :discount, as: :hidden, input_html: { value: 'false' }
   hr
   .credit-card-select.payment-block
     i.fa.fa-credit-card aria-hidden="true"
-    = f.input :source, collection: @user_cards, selected: :first, label: false, label_method: ->(card){ "#{card.brand.upcase} XXXX-XXXX-XXXX-#{card.last4}" }, value_method: ->(card){ card.id }
+    = f.input :source, collection: @credit_cards, selected: :first, label: false, label_method: ->(card){ "#{card.brand.upcase} XXXX-XXXX-XXXX-#{card.last4}" }, value_method: ->(card){ card.id }
   .text-center
     = f.button :submit, 'VALIDER CETTE OPTION', class: 'button button-blue'

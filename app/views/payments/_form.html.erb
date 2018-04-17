@@ -8,11 +8,11 @@
       </div>
     <% end %>
   <% end %>
-  <%= f.input :use_discount, as: :hidden, input_html: { value: 'false' } %>
+  <%= f.input :discount, as: :hidden, input_html: { value: 'false' } %>
   <hr>
   <div class="credit-card-select payment-block">
     <i class="fa fa-credit-card" aria-hidden="true"></i>
-    <%= f.input :source, collection: @user_cards, selected: :first, label: false, label_method: ->(card){ "#{card.brand.upcase} XXXX-XXXX-XXXX-#{card.last4}" }, value_method: ->(card){ card.id } %>
+    <%= f.input :source, collection: @credit_cards, selected: :first, label: false, label_method: ->(card){ "#{card.brand.upcase} XXXX-XXXX-XXXX-#{card.last4}" }, value_method: ->(card){ card.id } %>
   </div>
   <div class="text-center">
     <%= f.button :submit,
