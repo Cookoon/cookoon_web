@@ -6,10 +6,6 @@ export default class extends Controller {
     'example'
   ]
 
-  connect() {
-    console.log("Hello, Stimulus!", this.element);
-  }
-
   toggleBodyVisibility() {
     $(this.bodyTarget).slideToggle();
     $(this.exampleTarget).slideToggle();
