@@ -1,4 +1,4 @@
-class UserSearchPolicy < ApplicationPolicy
+class SearchPolicy < ApplicationPolicy
   def create?
     true
   end
