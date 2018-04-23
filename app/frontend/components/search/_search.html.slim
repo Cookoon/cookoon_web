@@ -1,0 +1,17 @@
+.search(data-controller="search")
+  .placeholder(data-action="click->search#toggleBodyVisibility")
+    div Chercher un Cookoon
+    div loupe
+  .body(data-target="search.body")
+    .main
+      .date
+        div 1. Quelle date ?
+        div le JJ/MM/AAAA à 00h
+      div
+        | 2. Quelle durée ?
+      div
+        | 3. Combien de convives ?
+    .footer
+      .cta Chercher
+  .example(data-target="search.example")
+    | Exemple : un dîner, samedi soir pour 8 personnes

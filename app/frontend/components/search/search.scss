@@ -1,0 +1,44 @@
+.search {
+  background-color: #004254;
+  color: white;
+  overflow: overlay;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  .placeholder {
+    background-color: white;
+    color: black;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  .body {
+    background-color: white;
+    color: #004254;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    display: none;
+    overflow: overlay;
+    .main {
+      margin-top: 2rem;
+      margin-bottom: 2rem;
+      .date {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+    .footer {
+      display: flex;
+      justify-content: flex-end;
+      .cta {
+        background-color: #004254;
+        color: white;
+        padding: 1rem;
+      }
+    }
+  }
+  .example {
+    text-align: center;
+  }
+}
