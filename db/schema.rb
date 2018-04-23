@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180411102337) do
+ActiveRecord::Schema.define(version: 20180423134417) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -77,6 +77,21 @@ ActiveRecord::Schema.define(version: 20180411102337) do
     t.index ["user_id"], name: "index_cookoons_on_user_id"
   end
 
+  create_table "ephemerals", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.bigint "cookoon_id"
+    t.datetime "start_at"
+    t.integer "duration"
+    t.integer "people_count"
+    t.integer "service_price_cents"
+    t.string "service_price_currency", default: "EUR", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cookoon_id"], name: "index_ephemerals_on_cookoon_id"
+  end
+
   create_table "guests", force: :cascade do |t|
     t.bigint "user_id"
     t.string "email"
@@ -125,8 +140,21 @@ ActiveRecord::Schema.define(version: 20180411102337) do
     t.integer "discount_amount_cents", default: 0, null: false
     t.datetime "end_at"
     t.text "guests_message"
+    t.integer "people_count"
     t.index ["cookoon_id"], name: "index_reservations_on_cookoon_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
+  end
+
+  create_table "searches", force: :cascade do |t|
+    t.bigint "user_id"
+    t.datetime "start_at"
+    t.integer "people_count"
+    t.integer "duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "end_at"
+    t.index ["user_id"], name: "index_searches_on_user_id"
   end
 
   create_table "services", force: :cascade do |t|
@@ -139,20 +167,8 @@ ActiveRecord::Schema.define(version: 20180411102337) do
     t.datetime "updated_at", null: false
     t.string "stripe_charge_id"
     t.integer "discount_amount_cents", default: 0
+    t.integer "category", default: 0, null: false
     t.index ["reservation_id"], name: "index_services_on_reservation_id"
-  end
-
-  create_table "user_searches", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "address"
-    t.datetime "start_at"
-    t.integer "people_count"
-    t.integer "duration"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "status", default: 0, null: false
-    t.datetime "end_at"
-    t.index ["user_id"], name: "index_user_searches_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -196,12 +212,13 @@ ActiveRecord::Schema.define(version: 20180411102337) do
 
   add_foreign_key "availabilities", "cookoons"
   add_foreign_key "cookoons", "users"
+  add_foreign_key "ephemerals", "cookoons"
   add_foreign_key "guests", "users"
   add_foreign_key "inventories", "reservations"
   add_foreign_key "reservation_guests", "guests"
   add_foreign_key "reservation_guests", "reservations"
   add_foreign_key "reservations", "cookoons"
   add_foreign_key "reservations", "users"
+  add_foreign_key "searches", "users"
   add_foreign_key "services", "reservations"
-  add_foreign_key "user_searches", "users"
 end
