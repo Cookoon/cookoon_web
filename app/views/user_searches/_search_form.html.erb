@@ -1,5 +1,5 @@
 <div
-  class="search"
+  class="search-block"
   data-controller="user-searches google-maps-autocomplete"
   data-user-searches-min-duration="1"
   data-user-searches-max-duration="<%= Reservation.default.max_duration %>"
@@ -27,7 +27,7 @@
         <% end %>
       <% end %>
     </div>
-    <div class="search-body" data-target="user-searches.body">
+    <div class="search-block-body" data-target="user-searches.body">
       <div class="container">
         <%= simple_form_for @new_search, remote: true do |f| %>
           <div class="row">

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   root 'pages#welcome'
 
   controller :pages do
+    get :home
     get :support
     get :setcookies
   end
