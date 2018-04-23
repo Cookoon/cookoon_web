@@ -1,4 +1,4 @@
-class UserSearch < ApplicationRecord
+class Search < ApplicationRecord
   include EndAtSetter
 
   scope :active_recents, -> { active.where('created_at > ?', DEFAULTS[:recent_scope].ago) }

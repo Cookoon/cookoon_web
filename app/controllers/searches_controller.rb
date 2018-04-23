@@ -1,24 +1,24 @@
-class UserSearchesController < ApplicationController
+class SearchesController < ApplicationController
   def create
-    @user_search = current_user.user_searches.build(user_search_params)
-    authorize @user_search
+    @search = current_user.searches.build(search_params)
+    authorize @search
 
-    @user_search.save
+    @search.save
     redirect_to cookoons_path
   end
 
   def update_all
-    user_searches = current_user.active_recent_searches
-    authorize user_searches
+    searches = current_user.active_recent_searches
+    authorize searches
 
-    user_searches.update_all(status: :inactive)
+    searches.update_all(status: :inactive)
     redirect_to cookoons_path
   end
 
   private
 
-  def user_search_params
-    params.require(:user_search)
+  def search_params
+    params.require(:search)
           .permit(:address, :start_at, :duration, :people_count)
           .delocalize(start_at: :time)
   end

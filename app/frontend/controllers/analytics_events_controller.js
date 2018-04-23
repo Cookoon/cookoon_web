@@ -4,7 +4,7 @@ export default class extends Controller {
   userSearchSubmit() {
     if (typeof gtag === 'function') {
       gtag('event', 'submit', {
-        event_category: 'UserSearch'
+        event_category: 'Search'
       });
     }
   }
