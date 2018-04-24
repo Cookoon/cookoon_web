@@ -4,11 +4,14 @@ module NavbarCookoonComponent
   property :back_url
 
   def display_type
-    if @back_url.blank?
-      @type
-    else
-      @type == :menu ? :back : @type
-    end.to_s
+    # TODO do we need the old ones ?
+
+    # if @back_url.blank?
+    #   @type
+    # else
+    #   @type == :menu ? :back : @type
+    # end.to_s
+    'new'
   end
 
   def back_link
@@ -18,5 +21,9 @@ module NavbarCookoonComponent
 
   def notifications?
     notifiable_reservations? || notifiable_reservation_requests?
+  end
+
+  def color_classes
+    @content.present? ? nil : 'bg-primary text-white'
   end
 end
