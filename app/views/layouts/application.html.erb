@@ -26,7 +26,8 @@
 
     <%= c 'navbar_cookoon',
           type: content_for?(:navbar_type) ? yield(:navbar_type) : :menu,
-          back_url: content_for?(:navbar_back_url) ? yield(:navbar_back_url) : nil %>
+          back_url: content_for?(:navbar_back_url) ? yield(:navbar_back_url) : nil,
+          content: content_for?(:navbar_content) ? yield(:navbar_content) : nil %>
 
     <%= render 'shared/side_nav' %>
 
