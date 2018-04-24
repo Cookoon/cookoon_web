@@ -19,7 +19,7 @@ class SearchesController < ApplicationController
 
   def search_params
     params.require(:search)
-          .permit(:address, :start_at, :duration, :people_count)
+          .permit(:start_at, :duration, :people_count)
           .delocalize(start_at: :time)
   end
 

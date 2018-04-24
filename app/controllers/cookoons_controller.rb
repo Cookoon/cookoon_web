@@ -5,11 +5,8 @@ class CookoonsController < ApplicationController
   before_action :find_search, only: %i[index show]
 
   def index
-    @new_search = @search.dup
-
     filtering_params = {
       accomodates_for: @search.people_count,
-      near_default_radius: @search.address,
       available_in: (@search.start_at..@search.end_at)
     }
     @cookoons = policy_scope(Cookoon).includes(:photo_files).filter(filtering_params).randomize
