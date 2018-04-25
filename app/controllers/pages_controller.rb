@@ -3,8 +3,7 @@ class PagesController < ApplicationController
 
   def welcome; end
 
-  def home  
-  end
+  def home; end
 
   def support; end
 
