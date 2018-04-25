@@ -48,8 +48,7 @@
 }
 
 .content-padded {
-  padding: 50px 0 80px 0;
-  position: relative;
+  padding: 50px 10px 80px 0;
 }
 
 @media (min-width: 576px) {
@@ -64,5 +63,8 @@ and (min-width : 1824px) {
     padding: 50px;
     max-width: 70%;
     margin: auto;
+  }
+  .navbar-cookoon-content {
+    left: 21%;
   }
 }

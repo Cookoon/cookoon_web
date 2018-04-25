@@ -22,7 +22,7 @@ module NavbarCookoonComponent
   end
 
   def not_fixed?
-    @type != :fixed_back
+    @type != 'fixed_back'
   end
 
   def back_url?
