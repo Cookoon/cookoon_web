@@ -954,6 +954,10 @@ boom@5.x.x:
   dependencies:
     hoek "4.x.x"
 
+bootstrap-slider@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/bootstrap-slider/-/bootstrap-slider-10.0.0.tgz#d4edd3a10af03197d020e3792d32ea6d37cb3b28"
+
 brace-expansion@^1.1.7:
   version "1.1.8"
   resolved "https://registry.yarnpkg.com/brace-expansion/-/brace-expansion-1.1.8.tgz#c07b211c7c952ec1f8efd51a77ef0d1d3990a292"
