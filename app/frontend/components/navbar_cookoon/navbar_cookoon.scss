@@ -10,19 +10,17 @@
     padding-left: 1rem;
     padding-right: 1rem;
   }
-  &-new {
-    padding: 50px 0 80px 0;
-    position: relative;
-  }
-  &-big-logo {
-    position: absolute;
-    font-size: 60px;
-    top: 35px;
-    left: 50%;
-    margin-left: -30px;
-  }
   &-logo {
-    margin-right: 5%;
+    background-color: #006f8b;
+    padding: 50px 0 80px 0;
+    color: white;
+    .co-logo {
+      position: absolute;
+      font-size: 60px;
+      top: 35px;
+      left: 50%;
+      margin-left: -30px;
+    }
   }
   &-content {
     width: 70%;
@@ -47,4 +45,9 @@
   &-none {
     display: none;
   }
+}
+
+.content-padded {
+  padding: 50px 0 80px 0;
+  position: relative;
 }
