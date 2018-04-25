@@ -1,12 +1,13 @@
 .search {
   background-color: #004254;
   color: white;
-  overflow: overlay;
   padding-top: 2rem;
   padding-bottom: 2rem;
+  position: relative;
   .placeholder {
     background-color: white;
     color: #004254;
+    z-index: 1;
     margin-left: 2rem;
     margin-right: 2rem;
     padding: 1rem;
@@ -15,46 +16,60 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-  .body {
-    background-color: white;
-    color: #004254;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    display: none;
-    overflow: overlay;
-    .main {
-      margin-top: 2rem;
-      margin-bottom: 2rem;
-      .date {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-      .duration {
-        .slider-container {
-          margin-left: 25px;
-          margin-right: 25px;
-        }
-      }
-      .people {
-        .slider-container {
-          margin-left: 25px;
-          margin-right: 25px;
-        }
-      }
-      .title {
-        font-family: 'GFS Didot', serif;
-        font-size: 1.09375rem;
-      }
+    div,
+    i,
+    svg {
+      z-index: 1;
     }
-    .footer {
-      display: flex;
-      justify-content: flex-end;
+  }
+  .body-wrapper {
+    border-bottom: 1px solid white;
+    position: absolute;
+    top: 4rem;
+    left: 0;
+    right: 0;
+    .body {
+      background-color: white;
+      color: #004254;
+      padding-left: 2rem;
+      padding-right: 2rem;
+      display: none;
+      overflow: overlay;
+      .main {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+        .date {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .duration {
+          .slider-container {
+            margin-left: 25px;
+            margin-right: 25px;
+          }
+        }
+        .people {
+          .slider-container {
+            margin-left: 25px;
+            margin-right: 25px;
+          }
+        }
+        .title {
+          font-family: 'GFS Didot', serif;
+          font-size: 1.09375rem;
+        }
+      }
       .cta {
+        display: none;
+        position: absolute;
+        bottom: -20px;
+        right: 2rem;
         background-color: #004254;
         color: white;
-        padding: 1rem;
+        padding: 0.25rem 2rem 0.25rem 2rem;
+        font-family: 'GFS Didot', serif;
+        font-size: 1.3125rem;
       }
     }
   }
