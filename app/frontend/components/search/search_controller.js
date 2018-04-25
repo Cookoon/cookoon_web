@@ -27,4 +27,11 @@ export default class extends Controller {
     this.peopleSlider.relayout();
     $(this.ctaTarget).slideToggle();
   }
+
+  snapDurationSlider() {
+    setTimeout(
+      () => this.durationSlider.setValue(this.durationInputTarget.value),
+      1
+    );
+  }
 }

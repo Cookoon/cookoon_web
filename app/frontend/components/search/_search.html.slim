@@ -10,7 +10,7 @@
           div le JJ/MM/AAAA à 00h
         .duration
           .title 2. Quelle durée ?
-          .slider-container
+          .slider-container(data-action="mouseup->search#snapDurationSlider")
             input(data-target="search.durationInput")
         .people
           .title 3. Combien de convives ?
