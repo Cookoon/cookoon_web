@@ -6,10 +6,12 @@
   padding-bottom: 2rem;
   .placeholder {
     background-color: white;
-    color: black;
+    color: #004254;
     margin-left: 2rem;
     margin-right: 2rem;
     padding: 1rem;
+    font-family: 'GFS Didot', serif;
+    font-size: 1.3125rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -27,6 +29,23 @@
       .date {
         display: flex;
         justify-content: space-between;
+        align-items: center;
+      }
+      .duration {
+        .slider-container {
+          margin-left: 25px;
+          margin-right: 25px;
+        }
+      }
+      .people {
+        .slider-container {
+          margin-left: 25px;
+          margin-right: 25px;
+        }
+      }
+      .title {
+        font-family: 'GFS Didot', serif;
+        font-size: 1.09375rem;
       }
     }
     .footer {

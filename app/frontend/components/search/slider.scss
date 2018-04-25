@@ -1,0 +1,37 @@
+.slider {
+  &.slider-horizontal {
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 0 !important;
+    .slider-track {
+      height: 2px;
+      top: 14px;
+      background-image: none;
+      background-color: #004254;
+      filter: none;
+      box-shadow: none;
+      border-radius: 0;
+      .slider-selection.tick-slider-selection {
+        background-image: none;
+        background-color: #004254;
+        filter: none;
+        box-shadow: none;
+        border-radius: 0;
+      }
+    }
+    .slider-handle {
+      background-image: none;
+      background-color: #004254;
+      filter: none;
+      box-shadow: none;
+      border: 0;
+    }
+    .slider-tick {
+      width: 0;
+      height: 0;
+    }
+    .slider-tick-label-container {
+      margin-top: -30px;
+    }
+  }
+}
