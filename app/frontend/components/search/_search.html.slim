@@ -2,20 +2,19 @@
   .placeholder(data-action="click->search#toggleBodyVisibility")
     div Chercher un Cookoon
     i.fas.fa-search.fa-lg
-  .body(data-target="search.body")
-    .main
-      .date
-        .title 1. Quelle date ?
-        div le JJ/MM/AAAA à 00h
-      .duration
-        .title 2. Quelle durée ?
-        .slider-container
-          input(data-target="search.durationInput")
-      .people
-        .title 3. Combien de convives ?
-        .slider-container
-          input(data-target="search.peopleInput")
-    .footer
-      .cta Chercher
-  .example(data-target="search.example")
-    | Exemple : un dîner, samedi soir pour 8 personnes
+  .body-wrapper
+    .body(data-target="search.body")
+      .main
+        .date
+          .title 1. Quelle date ?
+          div le JJ/MM/AAAA à 00h
+        .duration
+          .title 2. Quelle durée ?
+          .slider-container
+            input(data-target="search.durationInput")
+        .people
+          .title 3. Combien de convives ?
+          .slider-container
+            input(data-target="search.peopleInput")
+      .cta(data-target="search.cta") Chercher
+  .example Exemple : un dîner, samedi soir pour 8 personnes

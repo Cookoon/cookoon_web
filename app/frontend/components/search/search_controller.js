@@ -4,7 +4,7 @@ import 'bootstrap-slider/dist/css/bootstrap-slider';
 import './slider';
 
 export default class extends Controller {
-  static targets = ['body', 'durationInput', 'example', 'peopleInput'];
+  static targets = ['body', 'durationInput', 'cta', 'peopleInput'];
 
   connect() {
     this.durationSlider = new Slider(this.durationInputTarget, {
@@ -15,7 +15,7 @@ export default class extends Controller {
       ticks_snap_bounds: 5
     });
     this.peopleSlider = new Slider(this.peopleInputTarget, {
-      value: 2,
+      value: 4,
       ticks: [2, 4, 6, 8, 10, 12],
       ticks_labels: ['2', '4', '6', '8', '10', '12']
     });
@@ -25,6 +25,6 @@ export default class extends Controller {
     $(this.bodyTarget).slideToggle();
     this.durationSlider.relayout();
     this.peopleSlider.relayout();
-    $(this.exampleTarget).slideToggle();
+    $(this.ctaTarget).slideToggle();
   }
 }
