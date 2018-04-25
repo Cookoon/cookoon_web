@@ -10,6 +10,28 @@
     padding-left: 1rem;
     padding-right: 1rem;
   }
+  &-logo {
+    background-color: #006f8b;
+    padding: 50px 0 80px 0;
+    color: white;
+    .co-logo {
+      position: absolute;
+      font-size: 60px;
+      top: 35px;
+      left: 50%;
+      margin-left: -30px;
+    }
+  }
+  &-content {
+    width: 70%;
+    position: absolute;
+    top: 45px;
+    left: 12%;
+    p {
+      font-size: 13px;
+      margin: 1px;
+    }
+  }
   &-fixed-back {
     position: absolute;
     top: 0;
@@ -22,5 +44,27 @@
   }
   &-none {
     display: none;
+  }
+}
+
+.content-padded {
+  padding: 50px 10px 80px 0;
+}
+
+@media (min-width: 576px) {
+  .content-padded {
+    padding: 50px;
+  }
+}
+
+@media only screen
+and (min-width : 1824px) {
+  .content-padded {
+    padding: 50px;
+    max-width: 70%;
+    margin: auto;
+  }
+  .navbar-cookoon-content {
+    left: 21%;
   }
 }

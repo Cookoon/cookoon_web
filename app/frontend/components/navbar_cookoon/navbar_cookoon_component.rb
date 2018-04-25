@@ -1,14 +1,11 @@
 module NavbarCookoonComponent
   extend ComponentHelper
-  property :type, default: :menu # :back, :fixed_back, :none
+  property :type, default: :menu # :logo, :back, :fixed_back, :none
   property :back_url
 
   def display_type
-    if @back_url.blank?
-      @type
-    else
-      @type == :menu ? :back : @type
-    end.to_s
+    return 'back' if back_url? && not_fixed?
+    @type.to_s
   end
 
   def back_link
@@ -18,5 +15,17 @@ module NavbarCookoonComponent
 
   def notifications?
     notifiable_reservations? || notifiable_reservation_requests?
+  end
+
+  def content_classes
+    @content.present? ? 'content-padded' : nil
+  end
+
+  def not_fixed?
+    @type != 'fixed_back'
+  end
+
+  def back_url?
+    @back_url.present?
   end
 end
