@@ -11,13 +11,17 @@ class ReservationsController < ApplicationController
   def show; end
 
   def create
-    @reservation = current_user.reservations.new(reservation_params)
+    # TODO Handle erros when user has no search
+    search = current_user.current_search
+    params_from_search = search.to_reservation_attributes.merge(cookoon: @cookoon)
+    @reservation = Reservation.new params_from_search
     authorize @reservation
 
     if @reservation.save
       redirect_to new_reservation_payment_path(@reservation)
     else
-      render 'reservations/new'
+      flash.alert = @reservation.errors.full_messages.join(', ')
+      redirect_to @cookoon
     end
   end
 
@@ -39,12 +43,5 @@ class ReservationsController < ApplicationController
 
   def find_cookoon
     @cookoon = Cookoon.find(params[:cookoon_id])
-  end
-
-  def reservation_params
-    params.require(:reservation)
-          .permit(:start_at, :duration, :catering)
-          .delocalize(start_at: :time)
-          .merge(cookoon: @cookoon)
   end
 end
