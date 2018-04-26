@@ -6,17 +6,28 @@
     .body(data-target="search.body")
       = simple_form_for @search do |f|
         .main
-          .date
+          .start-at
             .title 1. Quelle date ?
-            div le JJ/MM/AAAA à 00h
-            input(type="text" data-target="search.dateInput")
+            div
+              | le&nbsp;
+              u.date-placeholder
+                span(data-target="search.dateDisplay") jj/mm/aaaa
+                input(type="text" class="date-input" data-target="search.dateInput" data-action="search#pickDate")
+              | &nbsp;à&nbsp;
+              u.time-placeholder
+                span(data-target="search.timeDisplay") XXh
+                select(class="time-select" data-target="search.timeSelect" data-action="search#selectTime")
+                  option(value)
+                  - (9..19).to_a.each do |hour|
+                    = raw "<option value='#{hour}:00'>#{hour}h</option>"
+                    = raw "<option value='#{hour}:30'>#{hour}h30</option>"
             = f.input :start_at, as: :hidden, input_html: { data: { target: 'search.startAtInput' } }
           .duration
             .title 2. Quelle durée ?
             .slider-container(data-action="mouseup->search#snapDurationSlider")
               = f.input :duration, label: false, input_html: { data: { target: 'search.durationInput' } }
             .description(data-target="search.durationDescription")
-          .people
+          .people-count
             .title 3. Combien de convives ?
             .slider-container
               = f.input :people_count, label: false, input_html: { data: { target: 'search.peopleInput'}}

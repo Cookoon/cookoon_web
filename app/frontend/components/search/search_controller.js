@@ -7,18 +7,22 @@ import './slider';
 export default class extends Controller {
   static targets = [
     'body',
+    'dateDisplay',
     'dateInput',
     'durationDescription',
     'durationInput',
     'cta',
     'peopleInput',
-    'startAtInput'
+    'startAtInput',
+    'timeDisplay',
+    'timeSelect'
   ];
 
   connect() {
     const device = this.data.get('device');
 
     flatpickr(this.dateInputTarget, {
+      dateFormat: 'd/m/Y',
       disableMobile: device === 'android_inside',
       weekNumbers: device === 'desktop'
     });
@@ -44,6 +48,32 @@ export default class extends Controller {
     this.durationSlider.relayout();
     this.peopleSlider.relayout();
     $(this.ctaTarget).slideToggle();
+  }
+
+  pickDate() {
+    this.updateStartAtInput();
+    this.dateDisplayTarget.textContent = this.dateInputTarget.value;
+    // this.timeSelectTarget.click();
+  }
+
+  selectTime() {
+    this.updateStartAtInput();
+    this.timeDisplayTarget.textContent = this.timeSelectTarget.selectedOptions[0].textContent;
+  }
+
+  updateStartAtInput() {
+    const dateEl = this.dateInputTarget.value.split('/');
+    const timeEl = this.timeSelectTarget.value.split(':');
+    const date = new Date(
+      dateEl[2],
+      dateEl[1] - 1,
+      dateEl[0],
+      timeEl[0],
+      timeEl[1]
+    );
+    if (date instanceof Date && isFinite(date)) {
+      this.startAtInputTarget.value = date;
+    }
   }
 
   snapDurationSlider() {

@@ -42,10 +42,35 @@
           margin-top: 2rem;
           margin-bottom: 2rem;
         }
-        .date {
+        .start-at {
           display: flex;
           justify-content: space-between;
           align-items: center;
+          .date-placeholder {
+            position: relative;
+            .date-input {
+              position: absolute;
+              top: 0;
+              height: 100%;
+              left: 0;
+              width: 100%;
+              opacity: 0;
+            }
+          }
+          .time-placeholder {
+            position: relative;
+            .time-select {
+              position: absolute;
+              top: 0;
+              height: 100%;
+              left: 0;
+              width: 100%;
+              opacity: 0;
+            }
+          }
+          .search_start_at {
+            display: none;
+          }
         }
         .duration {
           .slider-container {
@@ -58,7 +83,7 @@
             text-align: center;
           }
         }
-        .people {
+        .people-count {
           .slider-container {
             margin-left: 25px;
             margin-right: 25px;
