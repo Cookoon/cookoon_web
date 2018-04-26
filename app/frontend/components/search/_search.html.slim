@@ -4,19 +4,20 @@
     i.fas.fa-search.fa-lg
   .body-wrapper
     .body(data-target="search.body")
-      .main
-        .date
-          .title 1. Quelle date ?
-          div le JJ/MM/AAAA à 00h
-        .duration
-          .title 2. Quelle durée ?
-          .slider-container(data-action="mouseup->search#snapDurationSlider")
-            input(data-target="search.durationInput")
-          .description(data-target="search.durationDescription")
-        .people
-          .title 3. Combien de convives ?
-          .slider-container
-            input(data-target="search.peopleInput")
-      = link_to searches_path, method: :post, remote: true do
-        .cta(data-target="search.cta") Chercher
+      = simple_form_for @search do |f|
+        .main
+          .date
+            .title 1. Quelle date ?
+            div le JJ/MM/AAAA à 00h
+            = f.input :start_at, as: :hidden
+          .duration
+            .title 2. Quelle durée ?
+            .slider-container(data-action="mouseup->search#snapDurationSlider")
+              = f.input :duration, label: false, input_html: { data: { target: 'search.durationInput' } }
+            .description(data-target="search.durationDescription")
+          .people
+            .title 3. Combien de convives ?
+            .slider-container
+              = f.input :people_count, label: false, input_html: { data: { target: 'search.peopleInput'}}
+        = f.submit class: 'cta', data: { target: 'search.cta' }
   .example Exemple : un dîner, samedi soir pour 8 personnes

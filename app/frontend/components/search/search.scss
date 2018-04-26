@@ -79,6 +79,7 @@
         padding: 0.25rem 2rem 0.25rem 2rem;
         font-family: 'GFS Didot', serif;
         font-size: 1.3125rem;
+        border: none !important; // TODO: FC 26apr18 remove when bootstrap style globally overriden
       }
     }
   }
