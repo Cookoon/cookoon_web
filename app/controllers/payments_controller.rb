@@ -2,6 +2,7 @@ class PaymentsController < ApplicationController
   before_action :set_reservation
 
   def new
+    @service_categories = Service.categories.keys.reverse
     @credit_cards = current_user.credit_cards
   end
 
