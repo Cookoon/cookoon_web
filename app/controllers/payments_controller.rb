@@ -48,9 +48,9 @@ class PaymentsController < ApplicationController
 
   def handle_redirection
     if @reservation.catering
-      redirect_to cookoons_path, flash: { catering_requested: true }
+      redirect_to reservations_path, flash: { catering_requested: true }
     else
-      redirect_to cookoons_path, flash: { payment_succeed: true }
+      redirect_to reservations_path, flash: { payment_succeed: true }
     end
   end
 end
