@@ -10,6 +10,8 @@ class CookoonsController < ApplicationController
       available_in: (@search.start_at..@search.end_at)
     }
     @cookoons = policy_scope(Cookoon).includes(:photo_files).filter(filtering_params).randomize
+
+    # TODO : Will we keep markers when done ?
     build_markers
   end
 

@@ -1,7 +1,7 @@
 <%= content_for :navbar_content do %>
   <h4>Résultats <br/> de votre recherche</h4>
-  <p>le JJ/MM/AA, à 00h, </p>
-  <p>pour 0 heures et pour x personnes</p>
+  <p>le <%= display_datetime_for @search.start_at, join_expression: 'à' %></p>
+  <p>pour <%= @search.duration %> heures et pour <%= @search.people_count %> personnes</p>
 <% end %>
 
 <div class="container">
