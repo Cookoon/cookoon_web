@@ -31,4 +31,14 @@ class Search < ApplicationRecord
       people_count: DEFAULTS[:people_count]
     }
   end
+
+  def to_reservation_attributes
+    attributes.with_indifferent_access.slice(
+      :user_id,
+      :start_at,
+      :end_at,
+      :people_count,
+      :duration
+    )
+  end
 end

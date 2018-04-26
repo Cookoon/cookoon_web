@@ -16,5 +16,6 @@
           .title 3. Combien de convives ?
           .slider-container
             input(data-target="search.peopleInput")
-      .cta(data-target="search.cta") Chercher
+      = link_to searches_path, method: :post, remote: true do
+        .cta(data-target="search.cta") Chercher
   .example Exemple : un dîner, samedi soir pour 8 personnes
