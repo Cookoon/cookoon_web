@@ -1,15 +1,9 @@
-<div class="position-fixed b-0 l-0 r-0 mb-3 text-center">
-  <button type="button" class="btn btn-primary btn-action" data-toggle="modal"
-    data-target="#reservation-new" data-controller="analytics-events"
-    data-action="click->analytics-events#reservationModalOpen">
-    Réserver • <%= humanized_money_with_symbol @cookoon.price %> / heure
-  </button>
-</div>
-
-<div class="modal fade" id="reservation-new" tabindex="-1" role="dialog" aria-labelledby="reservationNewModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div id="reservationFormModalContent" class="modal-content">
-      <%= render 'reservations/form' %>
-    </div>
+<%= link_to cookoon_reservations_path(@cookoon), method: :post, remote: true do %>
+  <div class="position-fixed b-0 l-0 r-0 mb-3 text-center">
+    <button type="button" class="btn btn-primary btn-action"
+      data-target="#reservation-new" data-controller="analytics-events"
+      data-action="click->analytics-events#reservationModalOpen">
+      Réserver • <%= humanized_money_with_symbol @cookoon.price %> / heure
+    </button>
   </div>
-</div>
+<% end %>
