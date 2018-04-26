@@ -9,7 +9,8 @@ export default class extends Controller {
     'durationDescription',
     'durationInput',
     'cta',
-    'peopleInput'
+    'peopleInput',
+    'startAtInput'
   ];
 
   connect() {

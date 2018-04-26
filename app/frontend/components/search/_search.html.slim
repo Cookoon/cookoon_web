@@ -9,7 +9,7 @@
           .date
             .title 1. Quelle date ?
             div le JJ/MM/AAAA à 00h
-            = f.input :start_at, as: :hidden
+            = f.input :start_at, as: :hidden, input_html: { data: { target: 'search.startAtInput' } }
           .duration
             .title 2. Quelle durée ?
             .slider-container(data-action="mouseup->search#snapDurationSlider")
