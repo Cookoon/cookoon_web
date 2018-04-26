@@ -1,4 +1,5 @@
 import { Controller } from 'stimulus';
+import flatpickr from 'vendor/flatpickr';
 import Slider from 'bootstrap-slider';
 import 'bootstrap-slider/dist/css/bootstrap-slider';
 import './slider';
@@ -6,6 +7,7 @@ import './slider';
 export default class extends Controller {
   static targets = [
     'body',
+    'dateInput',
     'durationDescription',
     'durationInput',
     'cta',
@@ -14,6 +16,13 @@ export default class extends Controller {
   ];
 
   connect() {
+    const device = this.data.get('device');
+
+    flatpickr(this.dateInputTarget, {
+      disableMobile: device === 'android_inside',
+      weekNumbers: device === 'desktop'
+    });
+
     this.durationSlider = new Slider(this.durationInputTarget, {
       value: 2,
       ticks: [2, 3, 5, 10],

@@ -1,4 +1,4 @@
-.search(data-controller="search")
+.search(data-controller="search" data-search-device== @device)
   .placeholder(data-action="click->search#toggleBodyVisibility")
     div Chercher un Cookoon
     i.fas.fa-search.fa-lg
@@ -9,6 +9,7 @@
           .date
             .title 1. Quelle date ?
             div le JJ/MM/AAAA à 00h
+            input(type="text" data-target="search.dateInput")
             = f.input :start_at, as: :hidden, input_html: { data: { target: 'search.startAtInput' } }
           .duration
             .title 2. Quelle durée ?
