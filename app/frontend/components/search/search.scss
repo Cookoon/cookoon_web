@@ -38,6 +38,10 @@
       .main {
         margin-top: 3rem;
         margin-bottom: 3rem;
+        > * {
+          margin-top: 2rem;
+          margin-bottom: 2rem;
+        }
         .date {
           display: flex;
           justify-content: space-between;
@@ -47,6 +51,11 @@
           .slider-container {
             margin-left: 25px;
             margin-right: 25px;
+          }
+          .description {
+            margin-top: 1rem;
+            color: #343a40;
+            text-align: center;
           }
         }
         .people {
