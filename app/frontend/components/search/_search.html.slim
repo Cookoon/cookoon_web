@@ -4,7 +4,7 @@
     i.fas.fa-search.fa-lg
   .body-wrapper
     .body(data-target="search.body")
-      = simple_form_for @search do |f|
+      = simple_form_for @search, remote: true do |f|
         .main
           .start-at
             .title 1. Quelle date ?
