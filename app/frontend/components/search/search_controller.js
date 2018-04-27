@@ -92,19 +92,20 @@ export default class extends Controller {
         break;
       case '3':
         this.durationDescriptionTarget.textContent =
-          'Exemple : parfait pour 3h';
+          'Exemple : un déjeuner ou un brainstorming';
         break;
       case '4':
       case '5':
       case '6':
       case '7':
-        this.durationDescriptionTarget.textContent = 'Exemple : plutôt 5h';
+        this.durationDescriptionTarget.textContent =
+          'Exemple : un dîner ou une réunion d’équipe';
         break;
       case '8':
       case '9':
       case '10':
         this.durationDescriptionTarget.textContent =
-          'Exemple : une journée de séminaire';
+          'Exemple : un shooting ou une journée de séminaire';
         break;
       default:
         this.durationDescriptionTarget.textContent = '';
