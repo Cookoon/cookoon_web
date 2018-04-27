@@ -47,11 +47,11 @@ module UserReservationCardHelper
       when 'paid'
         content_tag(:i, nil, class: "co co-reversed-meeting")
       when 'accepted', 'passed'
-        content_tag(:i, nil, class: 'fa fa-check-circle-o')
+        content_tag(:i, nil, class: 'far fa-check-circle')
       when 'ongoing'
-        content_tag(:i, nil, class: 'fa fa-bullseye')
+        content_tag(:i, nil, class: 'fas fa-bullseye')
       when 'refused'
-        content_tag(:i, nil, class: 'fa fa-ban')
+        content_tag(:i, nil, class: 'fas fa-ban')
       end
     end
 

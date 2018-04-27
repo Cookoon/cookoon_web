@@ -2,7 +2,7 @@
   <div class="side-nav">
     <div class="side-nav-container">
       <div class="ssm-toggle-nav text-right">
-        <i class="fa fa-times fa-2x opacity-hover" aria-hidden="true"></i>
+        <i class="fas fa-times fa-2x opacity-hover" aria-hidden="true"></i>
       </div>
       <% if current_user %>
         <div class="side-nav-userblock">
@@ -12,27 +12,27 @@
             <%= image_tag 'base_user.png', class: 'avatar-large' %>
           <% end %>
           <%= link_to edit_users_path do %>
-            <strong><%= current_user.full_name %>&nbsp; <i class="fa fa-pencil" aria-hidden="true"></i></strong>
+            <strong><%= current_user.full_name %>&nbsp; <i class="fas fa-pencil-alt" aria-hidden="true"></i></strong>
           <% end %>
         </div>
       <% end %>
       <ul>
         <li class="notifiable">
-          <i class="fa fa-calendar-o" aria-hidden="true"></i>&nbsp; <%= link_to 'MES RÉSERVATIONS', reservations_path %>
+          <i class="far fa-calendar" aria-hidden="true"></i>&nbsp; <%= link_to 'MES RÉSERVATIONS', reservations_path %>
           <% if notifiable_reservations? %>
             <span class="notif notif-sidebar"></span>
           <% end %>
         </li>
-        <li><i class="fa fa-credit-card" aria-hidden="true"></i>&nbsp; <%= link_to 'MES MOYENS DE PAIEMENT', credit_cards_path %></li>
-        <li><i class="fa fa-send-o" aria-hidden="true"></i>&nbsp; <%= link_to 'MES INVITATIONS', new_user_invitation_path %></li>
-        <li><i class="fa fa-question-circle-o" aria-hidden="true"></i>&nbsp; <%= link_to 'MES CONTACTS UTILES', support_path %></li>
+        <li><i class="far fa-credit-card" aria-hidden="true"></i>&nbsp; <%= link_to 'MES MOYENS DE PAIEMENT', credit_cards_path %></li>
+        <li><i class="far fa-paper-plane" aria-hidden="true"></i>&nbsp; <%= link_to 'MES INVITATIONS', new_user_invitation_path %></li>
+        <li><i class="far fa-question-circle" aria-hidden="true"></i>&nbsp; <%= link_to 'MES CONTACTS UTILES', support_path %></li>
       </ul>
       <p><%= link_to 'Conditions Générales', 'https://cookoon.fr/conditions-generales/', target: :_blank %></p>
       <div class="side-nav-fixedbot">
         <% if notifiable_reservation_requests? %>
           <span class="notif notif-inline"></span>
         <% end %>
-        <i class="fa fa-exchange" aria-hidden="true"></i>&nbsp; <%= link_to 'MON ESPACE HÔTE', host_dashboard_path %>
+        <i class="fas fa-exchange-alt" aria-hidden="true"></i>&nbsp; <%= link_to 'MON ESPACE HÔTE', host_dashboard_path %>
       </div>
 
     </div>
