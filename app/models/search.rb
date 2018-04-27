@@ -15,8 +15,9 @@ class Search < ApplicationRecord
 
   belongs_to :user
 
-  validates :duration, presence: true
   validates :start_at, presence: true
+  validates :duration, presence: true
+  validates :people_count, presence: true
 
   def self.default
     OpenStruct.new DEFAULTS.slice(:radius)
