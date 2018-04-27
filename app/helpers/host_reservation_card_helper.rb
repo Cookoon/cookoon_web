@@ -50,9 +50,9 @@ module HostReservationCardHelper
       when 'paid'
         content_tag(:i, nil, class: 'co co-reversed-meeting')
       when 'accepted', 'passed'
-        content_tag(:i, nil, class: 'fa fa-check-circle-o')
+        content_tag(:i, nil, class: 'far fa-check-circle')
       when 'refused', 'cancelled'
-        content_tag(:i, nil, class: 'fa fa-ban')
+        content_tag(:i, nil, class: 'fas fa-ban')
       end
     end
 
