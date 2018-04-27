@@ -24,6 +24,7 @@ export default class extends Controller {
     flatpickr(this.dateInputTarget, {
       dateFormat: 'd/m/Y',
       disableMobile: device === 'android_inside',
+      minDate: 'today',
       weekNumbers: device === 'desktop'
     });
 
