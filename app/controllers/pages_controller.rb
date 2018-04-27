@@ -3,7 +3,9 @@ class PagesController < ApplicationController
 
   def welcome; end
 
-  def home; end
+  def home
+    @search = Search.new
+  end
 
   def support; end
 
