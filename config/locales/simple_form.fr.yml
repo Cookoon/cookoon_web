@@ -4,6 +4,8 @@ fr:
     submit:
       guest:
         create: Ajouter un nouveau contact
+      search:
+        create: Chercher
       user:
         update: Mettre à jour
   simple_form:

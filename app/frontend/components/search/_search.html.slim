@@ -1,21 +1,35 @@
-.search(data-controller="search")
+.search(data-controller="search" data-search-device== @device)
   .placeholder(data-action="click->search#toggleBodyVisibility")
     div Chercher un Cookoon
     i.fas.fa-search.fa-lg
   .body-wrapper
     .body(data-target="search.body")
-      .main
-        .date
-          .title 1. Quelle date ?
-          div le JJ/MM/AAAA à 00h
-        .duration
-          .title 2. Quelle durée ?
-          .slider-container(data-action="mouseup->search#snapDurationSlider")
-            input(data-target="search.durationInput")
-        .people
-          .title 3. Combien de convives ?
-          .slider-container
-            input(data-target="search.peopleInput")
-      = link_to searches_path, method: :post, remote: true do
-        .cta(data-target="search.cta") Chercher
+      = simple_form_for @search, remote: true do |f|
+        .main
+          .start-at
+            .title 1. Quelle date ?
+            div
+              | le&nbsp;
+              u.date-placeholder
+                span(data-target="search.dateDisplay") jj/mm/aaaa
+                input(type="text" class="date-input" data-target="search.dateInput" data-action="search#pickDate")
+              | &nbsp;à&nbsp;
+              u.time-placeholder
+                span(data-target="search.timeDisplay") XXh
+                select(class="time-select" data-target="search.timeSelect" data-action="search#selectTime")
+                  option(value)
+                  - (9..19).to_a.each do |hour|
+                    = raw "<option value='#{hour}:00'>#{hour}h</option>"
+                    = raw "<option value='#{hour}:30'>#{hour}h30</option>"
+            = f.input :start_at, as: :hidden, input_html: { data: { target: 'search.startAtInput' } }
+          .duration
+            .title 2. Quelle durée ?
+            .slider-container(data-action="mouseup->search#snapDurationSlider")
+              = f.input :duration, label: false, input_html: { data: { target: 'search.durationInput' } }
+            .description(data-target="search.durationDescription")
+          .people-count
+            .title 3. Combien de convives ?
+            .slider-container
+              = f.input :people_count, label: false, input_html: { data: { target: 'search.peopleInput'}}
+        = f.submit class: 'cta', data: { target: 'search.cta' }
   .example Exemple : un dîner, samedi soir pour 8 personnes
