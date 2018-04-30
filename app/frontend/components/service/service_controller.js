@@ -17,8 +17,11 @@ export default class extends Controller {
       error: { console.log('error') }
     });
 
+    this.data.set('selected', selected);
     const priceChangedEvent = new Event('serviceChanged');
     this.element.classList.toggle("service-icon-selected");
     document.dispatchEvent(priceChangedEvent);
+
+    console.log(this.data.get('selected'))
   }
 }

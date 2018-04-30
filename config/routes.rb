@@ -43,7 +43,7 @@ Rails.application.routes.draw do
       post :discount, on: :new
     end
     resources :invoices, only: :create
-    resource :services, only: :show
+    resource :services, only: %i[show create destroy]
     resources :guests, controller: 'reservations/guests', only: %i[index create] do
       post :create_all, on: :collection
     end

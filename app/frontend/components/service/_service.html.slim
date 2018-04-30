@@ -1,7 +1,7 @@
 .service(
   data-controller="service"
   data-service-category=@category
-  data-service-selected=false
+  data-service-selected=false.to_s
   data-action='click->service#toggle'
 )
   = render 'service_icon', category: @category
