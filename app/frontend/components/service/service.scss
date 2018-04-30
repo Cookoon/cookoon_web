@@ -1,14 +1,19 @@
 .service {
   &-icon {
+    padding-top: 10px;
     width: 70px;
     height: 70px;
     border-radius: 10px;
     border: 1px solid gray;
+    text-align: center;
     &-selected {
-      background: blue;
+      background: #006f8b;
       color: white;
       border: none;
       border-radius: 10px;
     }
+  }
+  i {
+    font-size: 30px;
   }
 }
