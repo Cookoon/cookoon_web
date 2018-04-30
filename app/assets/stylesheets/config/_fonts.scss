@@ -1,3 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=GFS+Didot');
 
-$gfs-didot: 'GFS Didot', serif;
+$gfs-didot: 'GFS Didot', 'serif';
+
+@font-face {
+  font-family: 'Tisa Sans Pro';
+  src: font-url('tisasanspro.eot');
+  src: font-url('tisasanspro.eot?#iefix') format('embedded-opentype'),
+    font-url('tisasanspro.woff') format('woff'),
+    font-url('tisasanspro.ttf') format('truetype');
+}
+$tisa-sans: 'Tisa Sans Pro', 'sans-serif';

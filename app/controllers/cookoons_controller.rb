@@ -66,7 +66,9 @@ class CookoonsController < ApplicationController
   end
 
   def find_search
-    @search = current_user&.current_search || new_default_search
+    @search = current_user.searches.last
+    # TODO: FC replace old way?
+    # @search = current_user&.current_search || new_default_search
   end
 
   def cookoon_params

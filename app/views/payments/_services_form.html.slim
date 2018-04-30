@@ -8,7 +8,7 @@
   = f.input :discount, as: :hidden, input_html: { value: 'false' }
   hr
   .credit-card-select.payment-block
-    i.fa.fa-credit-card aria-hidden="true"
+    i.fas.fa-credit-card
     = f.input :source, collection: @credit_cards, selected: :first, label: false, label_method: ->(card){ "#{card.brand.upcase} XXXX-XXXX-XXXX-#{card.last4}" }, value_method: ->(card){ card.id }
   .text-center
     = f.button :submit, 'VALIDER CETTE OPTION', class: 'button button-blue'

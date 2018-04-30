@@ -13,6 +13,10 @@ fr:
       inventory:
         checkin_photos: Photos à l'entrée des lieux
         checkout_photos: Photos à la sortie des lieux
+      search:
+        start_at: La date et l'heure
+        duration: La durée
+        people_count: Le nombre de convives
       user:
         email: Adresse email
         phone_number: Téléphone portable
@@ -36,6 +40,14 @@ fr:
               blank: Vous n'avez sélectionné aucun contact
             start_at:
               before_notice_period: Un minimum de 10h est requis.
+        search:
+          attributes:
+            start_at:
+              blank: doivent être renseignées
+            duration:
+              blank: doit être renseignée
+            people_count:
+              blank: doit être renseigné
         user:
           attributes:
             email:
