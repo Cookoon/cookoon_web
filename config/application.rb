@@ -52,7 +52,7 @@ module CookoonWeb
     config.generators.system_tests = nil
 
     config.generators do |g|
-      g.komponent stimulus: true, locale: false
+      g.komponent stimulus: false, locale: false
       g.test_framework :rspec,
                        view_specs: false,
                        helper_specs: false,
