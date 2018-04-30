@@ -14,7 +14,7 @@ module CarouselHelper
         :div,
         content,
         class: 'swiper-container',
-        data: { controller: 'swiper', target: 'swiper.swiperContainer' }
+        data: { controller: 'swipers', target: 'swipers.swiperContainer' }
       )
     end
 
