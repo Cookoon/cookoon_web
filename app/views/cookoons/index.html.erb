@@ -4,16 +4,10 @@
   <p>pour <%= @search.duration %> heures et pour <%= @search.people_count %> personnes</p>
 <% end %>
 
-<div class="container">
-  <div id="cookoons_and_map" class="row">
-    <% if @cookoons.empty? %>
-      <%= render 'no_cookoon' %>
-    <% else %>
-      <%= render 'cookoons_and_map' %>
-    <% end %>
-  </div>
+<div id="cookoons_and_map" class="row">
+  <% if @cookoons.empty? %>
+    <%= render 'no_cookoon' %>
+  <% else %>
+    <%= render 'cookoons_and_map' %>
+  <% end %>
 </div>
-
-<!-- unless @lat_lng -->
-<!-- can add this script to set cookie[:lat_lng] -->
-<!-- <script>getGeoLocation()</script> -->
