@@ -1,2 +1,7 @@
-.service(data-controller="service")
-  | service_component
+.service(
+  data-controller="service"
+  data-service-category=@category
+  data-service-selected=false
+  data-action='click->service#toggle'
+)
+  = render 'service_icon', category: @category

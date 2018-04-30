@@ -1,1 +1,12 @@
-.service {}
+.service-icon {
+  width: 70px;
+  height: 70px;
+  border-radius: 10px;
+  border: 1px solid gray;
+  &-selected {
+    background: blue;
+    color: white;
+    border: none;
+    border-radius: 10px;
+  }
+}

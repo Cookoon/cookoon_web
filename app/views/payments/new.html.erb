@@ -9,10 +9,10 @@
 
   <p>Vos services pour <%= @reservation.people_count %> personnes</p>
 
-  <div class='d-flex justify-content-between'>
+  <div class='d-flex justify-content-around'>
     <!-- TODO: icons + create link for each service -->
     <% @service_categories.each do |category| %>
-      <%= c 'service' %>
+      <%= c 'service', category: category %>
     <% end %>
   </div>
 
