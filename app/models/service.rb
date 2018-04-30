@@ -3,15 +3,13 @@ class Service < ApplicationRecord
 
   delegate :cookoon, :user, to: :reservation
 
-  monetize :price_cents
+  monetize :price_cents, disable_validation: true
+  monetize :payment_amount_cents, disable_validation: true
   monetize :discount_amount_cents
-  monetize :payment_amount_cents
 
   # can we fin a better name for tied_to_reservation ?
   enum status: %i[quote paid tied_to_reservation]
   enum category: %i[special catering chef corporate]
-
-  validates :content, presence: true
 
   # TODO: SET ACTUAL PRICES
   PRICES = {

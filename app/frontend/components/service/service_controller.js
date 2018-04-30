@@ -2,9 +2,7 @@ import { Controller } from "stimulus";
 import Rails from 'rails-ujs';
 
 export default class extends Controller {
-  connect() {
-
-  }
+  static priceChangedEvent = new Event('serviceChanged');
 
   toggle() {
     const data = new FormData();
@@ -14,15 +12,17 @@ export default class extends Controller {
       url: this.data.get('url'),
       type: this.data.get('method'),
       data,
-      success: () => {
+      success: ({url, method, selected}) => {
         this.element.classList.toggle("service-icon-selected");
-        this.data.set('selected', 'true');
-        // this.data.set('selected', selected);
+        this.data.set('url', url);
+        this.data.set('method', method);
+        this.data.set('selected', selected);
       },
-      error: () => { console.log('error') }
+      error: (_jqXHR, _textStatus, errorThrown) => {
+        console.log(errorThrown);
+      }
     });
 
-    const priceChangedEvent = new Event('serviceChanged');
-    document.dispatchEvent(priceChangedEvent);
+    document.dispatchEvent(this.constructor.priceChangedEvent);
   }
 }
