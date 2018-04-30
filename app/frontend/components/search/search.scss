@@ -42,30 +42,39 @@
           margin-top: 2rem;
           margin-bottom: 2rem;
         }
+        .title {
+          font-family: 'GFS Didot', serif;
+          font-size: 1.09375rem;
+        }
         .start-at {
           display: flex;
           justify-content: space-between;
           align-items: center;
-          .date-placeholder {
-            position: relative;
-            .date-input {
-              position: absolute;
-              top: 0;
-              height: 100%;
-              left: 0;
-              width: 100%;
-              opacity: 0;
+          .detail {
+            color: #6c757d;
+            .date-placeholder {
+              position: relative;
+              color: #004254;
+              .date-input {
+                position: absolute;
+                top: 0;
+                height: 100%;
+                left: 0;
+                width: 100%;
+                opacity: 0;
+              }
             }
-          }
-          .time-placeholder {
-            position: relative;
-            .time-select {
-              position: absolute;
-              top: 0;
-              height: 100%;
-              left: 0;
-              width: 100%;
-              opacity: 0;
+            .time-placeholder {
+              position: relative;
+              color: #004254;
+              .time-select {
+                position: absolute;
+                top: 0;
+                height: 100%;
+                left: 0;
+                width: 100%;
+                opacity: 0;
+              }
             }
           }
           .search_start_at {
@@ -79,7 +88,8 @@
           }
           .description {
             margin-top: 1rem;
-            color: #343a40;
+            color: #6c757d;
+            font-size: 0.765625rem;
             text-align: center;
           }
         }
@@ -89,9 +99,9 @@
             margin-right: 25px;
           }
         }
-        .title {
-          font-family: 'GFS Didot', serif;
-          font-size: 1.09375rem;
+        .errors_wrapper {
+          color: red;
+          font-weight: lighter;
         }
       }
       .cta {

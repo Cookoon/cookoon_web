@@ -8,7 +8,7 @@
         .main
           .start-at
             .title 1. Quelle date ?
-            div
+            .detail
               | le&nbsp;
               u.date-placeholder
                 span(data-target="search.dateDisplay") jj/mm/aaaa
@@ -31,5 +31,6 @@
             .title 3. Combien de convives ?
             .slider-container
               = f.input :people_count, label: false, input_html: { data: { target: 'search.peopleInput'}}
+          i#errors.errors_wrapper
         = f.submit class: 'cta', data: { target: 'search.cta' }
   .example Exemple : un dîner, samedi soir pour 8 personnes

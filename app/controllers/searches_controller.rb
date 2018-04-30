@@ -1,10 +1,13 @@
 class SearchesController < ApplicationController
   def create
-    @search = current_user.searches.build(search_params)
+    @search = current_user.searches.new(search_params)
     authorize @search
 
-    @search.save
-    redirect_to cookoons_path
+    if @search.save
+      redirect_to cookoons_path
+    else
+      render :new
+    end
   end
 
   def update_all
@@ -18,16 +21,6 @@ class SearchesController < ApplicationController
   private
 
   def search_params
-    params.require(:search)
-          .permit(:start_at, :duration, :people_count)
-  end
-
-  def build_markers
-    @markers = @cookoons.map do |cookoon|
-      {
-        lat: cookoon.latitude,
-        lng: cookoon.longitude
-      }
-    end
+    params.require(:search).permit(:start_at, :duration, :people_count)
   end
 end
