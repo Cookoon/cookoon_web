@@ -11,15 +11,20 @@
     padding-right: 1rem;
   }
   &-logo {
+    position: relative;
     background-color: var(--primary);
-    padding: 50px 0 80px 0;
+    padding: 3rem 0 3rem 0;
     color: white;
-    .co-logo {
+    .logo-wrapper {
       position: absolute;
-      font-size: 60px;
-      top: 35px;
-      left: 50%;
-      margin-left: -30px;
+      top: 0;
+      height: 100%;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 4rem;
     }
   }
   &-content {
