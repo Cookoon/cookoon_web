@@ -42,6 +42,7 @@ module CookoonWeb
     end
 
     config.komponent.root = Rails.root.join('app/frontend')
+    config.komponent.stylesheet_engine = :scss
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
