@@ -11,6 +11,10 @@ module CardCookoonComponent
     @title_style
   end
 
+  def cta?
+    @cta.present?
+  end
+
   def icons?
     @icons&.any?
   end
