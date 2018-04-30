@@ -13,7 +13,7 @@ module CarouselHelper
       content_tag(
         :div,
         content,
-        class: 'swiper-container',
+        class: 'swiper-container carousel',
         data: { controller: 'swipers', target: 'swipers.swiperContainer' }
       )
     end
