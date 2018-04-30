@@ -6,4 +6,12 @@ module CardCookoonComponent
   def image_url
     @image_url || 'https://lorempixel.com/800/450/city/'
   end
+
+  def title_class
+    @title_style
+  end
+
+  def icons?
+    @icons&.any?
+  end
 end

@@ -12,12 +12,18 @@
     left: 2rem;
     z-index: 1;
     max-width: calc(100% - 4rem);
+    background-color: var(--white);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    background-color: var(--primary);
-    color: var(--white);
     padding: 0rem 1rem;
+    &.multiline {
+      white-space: normal;
+    }
+    &.reverse {
+      background-color: var(--primary);
+      color: var(--white);
+    }
   }
   .image {
     position: relative;

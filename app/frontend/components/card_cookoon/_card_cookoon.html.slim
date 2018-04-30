@@ -1,6 +1,8 @@
 .card-cookoon
-  .title = @title
+  .title(class="#{title_class}") = @title
   .image(style="background-image: url(#{image_url})")
-  .icons
-    - @icons.each do |icon|
-      div = icon
+
+  - if icons?
+    .icons
+      - @icons.each do |icon|
+        div = icon
