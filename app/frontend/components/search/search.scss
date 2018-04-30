@@ -12,7 +12,7 @@
     margin-right: 2rem;
     padding: 1rem;
     font-family: 'GFS Didot', serif;
-    font-size: 1.3125rem;
+    font-size: 1.25rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -20,6 +20,9 @@
     i,
     svg {
       z-index: 1;
+    }
+    i {
+      font-size: 1rem;
     }
   }
   .body-wrapper {
@@ -55,6 +58,7 @@
             .date-placeholder {
               position: relative;
               color: var(--primary);
+              font-weight: bold;
               .date-input {
                 position: absolute;
                 top: 0;
@@ -67,6 +71,7 @@
             .time-placeholder {
               position: relative;
               color: var(--primary);
+              font-weight: bold;
               .time-select {
                 position: absolute;
                 top: 0;
@@ -89,7 +94,7 @@
           .description {
             margin-top: 1rem;
             color: var(--gray);
-            font-size: 0.765625rem;
+            font-size: 0.75rem;
             text-align: center;
           }
         }
@@ -111,13 +116,10 @@
         right: 2rem;
         background-color: var(--primary);
         color: var(--white);
-        box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2),
-          0px 2px 2px 0px rgba(0, 0, 0, 0.14),
-          0px 3px 1px -2px rgba(0, 0, 0, 0.12);
-        padding: 0.25rem 2rem 0.25rem 2rem;
+        padding: 0.25rem 2.5rem;
         font-family: 'GFS Didot', serif;
-        font-size: 1.3125rem;
-        border: none !important; // TODO: FC 26apr18 remove when bootstrap style globally overriden
+        font-size: 1.25rem;
+        border: 1px solid var(--white);
       }
     }
   }
