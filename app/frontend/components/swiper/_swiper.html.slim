@@ -1,0 +1,5 @@
+.swiper(data-controller="swiper" data-swiper-slide-component="#{@slide_component.camelize(:lower)}")
+  .swiper-container(class="#{@slide_component}" data-target="swiper.swiperContainer")
+    .swiper-wrapper
+      - @slides_locals.each do |slide_locals|
+        .swiper-slide = component @slide_component, slide_locals

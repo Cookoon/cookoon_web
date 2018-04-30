@@ -3,3 +3,4 @@ import 'components/card_cookoon/card_cookoon';
 import 'components/hr/hr';
 import 'components/navbar_cookoon/navbar_cookoon';
 import 'components/search/search';
+import 'components/swiper/swiper';
