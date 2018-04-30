@@ -11,12 +11,12 @@
 }
 
 .swiper-pagination-bullet {
-  background: #fff;
+  background: var(--white);
   opacity: 0.8;
 }
 
 .swiper-pagination-bullet-active {
-  background: #006f8b;
+  background: var(--primary);
 }
 
 .swiper-button-prev.swiper-button-cookoon-blue,
