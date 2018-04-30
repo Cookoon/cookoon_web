@@ -3,5 +3,7 @@
   data-service-category=@category
   data-service-selected=false.to_s
   data-action='click->service#toggle'
+  data-service-url=@url
+  data-service-method=@method
 )
   = render 'service_icon', category: @category

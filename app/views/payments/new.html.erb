@@ -12,7 +12,7 @@
   <div class='d-flex justify-content-around'>
     <!-- TODO: icons + create link for each service -->
     <% @service_categories.each do |category| %>
-      <%= c 'service', category: category, url: reservation_services_path(@reservation), method: :post %>
+      <%= c 'service', category: category, url: reservation_services_path(@reservation), method: 'post' %>
     <% end %>
   </div>
 

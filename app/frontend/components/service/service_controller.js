@@ -2,26 +2,27 @@ import { Controller } from "stimulus";
 import Rails from 'rails-ujs';
 
 export default class extends Controller {
-  static dataAttributes = ['category', 'selected'];
-
   connect() {
 
   }
 
   toggle() {
+    const data = new FormData();
+    data.append('service[category]', this.data.get('category'));
+
     Rails.ajax({
       url: this.data.get('url'),
       type: this.data.get('method'),
-      data: { category: this.data.get('category') },
-      success: { console.log('success') },
-      error: { console.log('error') }
+      data,
+      success: () => {
+        this.element.classList.toggle("service-icon-selected");
+        this.data.set('selected', 'true');
+        // this.data.set('selected', selected);
+      },
+      error: () => { console.log('error') }
     });
 
-    this.data.set('selected', selected);
     const priceChangedEvent = new Event('serviceChanged');
-    this.element.classList.toggle("service-icon-selected");
     document.dispatchEvent(priceChangedEvent);
-
-    console.log(this.data.get('selected'))
   }
 }

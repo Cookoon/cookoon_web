@@ -6,6 +6,12 @@ class ServicesController < ApplicationController
     @credit_cards = current_user.credit_cards
   end
 
+  def create
+    render json: {worked: params}
+  end
+
+  def destroy; end
+
   private
 
   def set_reservation
