@@ -1,12 +1,12 @@
 <% content_for :navbar_type, :none %>
 
-<div class="home-wrapper text-center" data-controller="store-message" data-store-message-device="<%= @device %>">
-  <div class="home-container">
-    <div class="home-title title-block">
+<div class="welcome-wrapper text-center" data-controller="store-message" data-store-message-device="<%= @device %>">
+  <div class="welcome-container">
+    <div class="welcome-title title-block">
       <h1>COOKOON</h1>
       <h3>RECEVONS PARTOUT !</h3>
     </div>
-    <div class="home-description">
+    <div class="welcome-description">
       <b>
         <p class='mb-5'>
           Cookoon est une communauté sélective fondée sur la confiance, le partage et l'implication de ses membres.
@@ -14,7 +14,7 @@
       </b>
       <%= link_to 'ACCÈS MEMBRE', new_user_session_path, class: 'btn btn-action btn-primary btn-block' %>
     </div>
-    <div class="home-links links-block">
+    <div class="welcome-links links-block">
       <%= link_to 'EN SAVOIR +', 'https://cookoon.fr/', target: :_blank, class: 'no-button small' %>
       <%= link_to "POSTULER", 'https://cookoon.typeform.com/to/iY7Heh', class: 'btn btn-action btn-outline-primary' %>
     </div>
