@@ -11,7 +11,7 @@
     padding-right: 1rem;
   }
   &-logo {
-    background-color: #006f8b;
+    background-color: var(--primary);
     padding: 50px 0 80px 0;
     color: white;
     .co-logo {
@@ -57,8 +57,7 @@
   }
 }
 
-@media only screen
-and (min-width : 1824px) {
+@media only screen and (min-width: 1824px) {
   .content-padded {
     padding: 50px;
     max-width: 70%;
