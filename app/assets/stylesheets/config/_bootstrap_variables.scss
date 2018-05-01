@@ -11,12 +11,14 @@ $yiq-text-dark: $blue;
 $link-hover-decoration: none;
 
 // forms
+$form-feedback-valid-color: $blue;
 // $input-bg: $white;
 $input-border-color: #000;
 $input-border-radius: 0;
 $input-border-width: 1px;
 $input-focus-border-color: lighten($blue, 10%);
 $input-focus-box-shadow: none;
+$input-focus-width: 0;
 
 // $custom-select-bg: $white;
 $custom-select-focus-box-shadow: none;
