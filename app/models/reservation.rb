@@ -63,6 +63,7 @@ class Reservation < ApplicationRecord
 
   before_validation :set_price_cents, if: :price_cents_needs_update?
   after_save :report_to_trello, if: :saved_change_to_status?
+  after_save :update_services, if: :services_need_update?
 
   def self.default
     OpenStruct.new DEFAULTS.slice(:max_duration, :max_people_count)
@@ -188,6 +189,15 @@ class Reservation < ApplicationRecord
 
   def price_cents_needs_update?
     will_save_change_to_duration? || will_save_change_to_cookoon_id?
+  end
+
+  def services_need_update?
+    return unless saved_change_to_status?
+    saved_change_to_status.last == 'paid'
+  end
+
+  def update_services
+    services.payment_tied_to_reservation.each(&:paid!)
   end
 
   def set_price_cents
