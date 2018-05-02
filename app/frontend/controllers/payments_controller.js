@@ -37,7 +37,7 @@ export default class extends Controller {
     });
   }
 
-  render({ discount, _discountAmount, chargeAmount, userDiscountBalance }) {
+  render({ discount, servicesPrice, _discountAmount, chargeAmount, userDiscountBalance }) {
     this.discountInputTarget.value = discount;
     this.data.set('discount', discount);
     if (discount === 'true') {
@@ -51,6 +51,6 @@ export default class extends Controller {
     }
     this.chargeAmountTarget.textContent = chargeAmount;
     this.userDiscountBalanceTarget.textContent = userDiscountBalance;
-    // this.servicesPriceTarget.textContent = ?;
+    this.servicesPriceTarget.textContent = servicesPrice;
   }
 }
