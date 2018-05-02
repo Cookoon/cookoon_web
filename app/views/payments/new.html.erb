@@ -14,9 +14,9 @@
   <p>Vos services pour <%= @reservation.people_count %> personnes</p>
 
   <div class='d-flex justify-content-around'>
-    <% @service_categories.each do |category| %>
+    <% @service_categories.each do |service_category| %>
       <div data-action="serviceChanged->payments#priceChanged">
-        <%= c 'service', category: category, url: reservation_services_path(@reservation), method: 'post' %>
+        <%= c 'service', service_category %>
       </div>
     <% end %>
   </div>

@@ -13,7 +13,7 @@ export default class extends Controller {
       type: this.data.get('method'),
       data,
       success: ({url, method, selected}) => {
-        this.element.classList.toggle("service-icon-selected");
+        this.element.classList.toggle("service-selected");
         this.data.set('url', url);
         this.data.set('method', method);
         this.data.set('selected', selected);
