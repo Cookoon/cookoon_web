@@ -18,23 +18,20 @@ class PaymentsController < ApplicationController
     end
   end
 
-  def discount
-    @amounts = build_amounts
+  def amounts
+    @amounts = build_amounts.merge(payment_params.to_h.symbolize_keys)
+    respond_to :json
   end
 
   private
 
   def build_amounts
-    payment_amount = @reservation.payment_amount
-    user_discount_balance = @reservation.user.discount_balance
-    charge_amount = @reservation.payment(discount: true).discountable_charge_amount
-    discount_amount = @reservation.payment(discount: true).discountable_discount_amount
+    discount_amount = @reservation.payment(payment_params).discountable_discount_amount
 
     {
-      payment: payment_amount,
-      user_discount_balance: user_discount_balance,
-      charge: charge_amount,
-      remaining_user_discount_balance: (user_discount_balance - discount_amount)
+      discount_amount: discount_amount,
+      charge_amount: @reservation.payment(payment_params).discountable_charge_amount,
+      user_discount_balance: @reservation.user.discount_balance - discount_amount
     }
   end
 
@@ -44,7 +41,7 @@ class PaymentsController < ApplicationController
   end
 
   def payment_params
-    params.require(:payment)
+    params.require(:payment).permit(:discount)
   end
 
   def handle_redirection

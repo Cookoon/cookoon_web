@@ -40,7 +40,7 @@ Rails.application.routes.draw do
 
   resources :reservations, only: %i[index show edit update] do
     resources :payments, only: %i[new create] do
-      post :discount, on: :new
+      post :amounts, on: :collection
     end
     resources :invoices, only: :create
     resource :services, only: %i[show create]
