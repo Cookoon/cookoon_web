@@ -1,20 +1,14 @@
 <div class="col-12 col-md-8">
   <div class="row">
     <% @cookoons.each do |cookoon| %>
-      <div class="col-12 col-md-6">
+      <div class="col-12 col-md-6 my-2">
         <%= link_to cookoon do %>
-          <div class="card">
-            <div class="card-picture" style="background-image: url(<%= cookoon_safe_picture(cookoon) %>)"></div>
-            <div class="card-data">
-              <div class="card-text">
-                <%= cookoon.name %>
-              </div>
-              <div class="card-infos">
-                <%= category_display_for(cookoon) %>
-                <%= price_display_for(cookoon) %>
-              </div>
-            </div>
-          </div>
+          <%= component 'card_cookoon',
+                        title: cookoon.name,
+                        title_style: :reverse,
+                        image_url: cl_image_path(cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
+                        icons: [get_cookoon_icon_for(cookoon.category), get_price_rank(cookoon.price_cents)]
+          %>
         <% end %>
       </div>
     <% end %>

@@ -1,0 +1,10 @@
+.swiper {
+  padding: 2rem 0;
+  .swiper-container {
+    &.card_cookoon {
+      .swiper-slide {
+        width: calc(100% - 4rem);
+      }
+    }
+  }
+}

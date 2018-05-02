@@ -63,7 +63,7 @@ table td {
     HEADER, FOOTER, MAIN
 ------------------------------------- */
 .main {
-  background: #fafeef;
+  background: #fff;
   border-radius: 7px;
   width: 100%;
 }
@@ -100,7 +100,7 @@ h1,
 h2,
 h3,
 h4 {
-  color: #006f8b;
+  color: #004254;
   font-family: sans-serif;
   font-weight: 400;
   line-height: 1.4;
@@ -134,7 +134,7 @@ li {
 }
 
 a {
-  color: #006f8b;
+  color: #004254;
   text-decoration: underline;
 }
 
@@ -162,10 +162,10 @@ a {
 }
 .btn a {
   background-color: #ffffff;
-  border: solid 1px #006f8b;
+  border: solid 1px #004254;
   border-radius: 25px;
   box-sizing: border-box;
-  color: #006f8b;
+  color: #004254;
   cursor: pointer;
   display: inline-block;
   text-align: center;
@@ -177,12 +177,12 @@ a {
 }
 
 .btn-primary table td {
-  background-color: #006f8b;
+  background-color: #004254;
 }
 
 .btn-primary a {
-  background-color: #006f8b;
-  border-color: #006f8b;
+  background-color: #004254;
+  border-color: #004254;
   color: #ffffff;
 }
 
@@ -262,13 +262,13 @@ hr {
   width: 100%;
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
-  background-color: #006f8b;
+  background-color: #004254;
 }
 .header img {
   display: block;
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
-  background-color: #006f8b;
+  background-color: #004254;
   color: #fff;
 }
 
@@ -286,7 +286,7 @@ hr {
   width: 70px;
 }
 .info b {
-  color: #006f8b;
+  color: #004254;
 }
 .info ul,
 .info ol,

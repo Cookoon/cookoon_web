@@ -7,13 +7,13 @@
       height: 2px;
       top: 14px;
       background-image: none;
-      background-color: #004254;
+      background-color: var(--primary);
       filter: none;
       box-shadow: none;
       border-radius: 0;
       .slider-selection.tick-slider-selection {
         background-image: none;
-        background-color: #004254;
+        background-color: var(--primary);
         filter: none;
         box-shadow: none;
         border-radius: 0;
@@ -21,7 +21,7 @@
     }
     .slider-handle {
       background-image: none;
-      background-color: #004254;
+      background-color: var(--primary);
       filter: none;
       box-shadow: none;
       border: 0;

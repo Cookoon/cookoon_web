@@ -53,11 +53,8 @@
 .reservation-card {
   background: $blue;
   padding: 15px;
-  color: white;
+  color: $white;
   border-radius: 10px;
-  .reservation-title {
-    color: $cream;
-  }
   p.service-description {
     font-size: 12px;
   }

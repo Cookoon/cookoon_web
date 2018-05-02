@@ -13,6 +13,7 @@ export default class extends Controller {
     'durationInput',
     'cta',
     'peopleInput',
+    'pusher',
     'startAtInput',
     'timeDisplay',
     'timeSelect'
@@ -49,6 +50,7 @@ export default class extends Controller {
     this.durationSlider.relayout();
     this.peopleSlider.relayout();
     $(this.ctaTarget).slideToggle();
+    $(this.pusherTarget).slideToggle();
   }
 
   pickDate() {
