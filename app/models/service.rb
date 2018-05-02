@@ -8,7 +8,7 @@ class Service < ApplicationRecord
   monetize :discount_amount_cents
 
   # can we fin a better name for tied_to_reservation ?
-  enum status: %i[quote paid tied_to_reservation]
+  enum status: %i[quote paid]
   enum category: %i[special catering chef corporate]
 
   # TODO: SET ACTUAL PRICES
