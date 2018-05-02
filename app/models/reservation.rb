@@ -31,8 +31,8 @@ class Reservation < ApplicationRecord
     2 => 1,
     3 => 1,
     5 => 0.85,
-    10 => 0.8 
-  }
+    10 => 0.8
+  }.freeze
 
   belongs_to :cookoon
   belongs_to :user
@@ -93,16 +93,25 @@ class Reservation < ApplicationRecord
     duration * cookoon.price_cents
   end
 
+  def degressive_price_cents
+    degressive_rate = DEGRESSION_RATES[duration] || 1
+    (base_price_cents * degressive_rate).round
+  end
+
+  def services_price_cents
+    100
+  end
+
   def tenant_fee_rate
     DEFAULTS[:tenant_fee_rate]
   end
 
   def tenant_fee_cents
-    (base_price_cents * tenant_fee_rate).round
+    (degressive_price_cents * tenant_fee_rate).round
   end
 
   def price_with_tenant_fee_cents
-    base_price_cents + tenant_fee_cents
+    degressive_price_cents + tenant_fee_cents
   end
 
   def host_fee_rate
@@ -110,7 +119,7 @@ class Reservation < ApplicationRecord
   end
 
   def host_fee_cents
-    (base_price_cents * host_fee_rate).round
+    (degressive_price_cents * host_fee_rate).round
   end
 
   def notify_users_after_payment
@@ -132,11 +141,11 @@ class Reservation < ApplicationRecord
   end
 
   def host_payout_price_cents
-    base_price_cents - host_fee_cents - host_services_price_cents
+    degressive_price_cents - host_fee_cents - host_services_price_cents
   end
 
   def payment_amount_cents
-    price_with_tenant_fee_cents
+    price_with_tenant_fee_cents + services_price_cents
   end
 
   def admin_close
@@ -182,7 +191,7 @@ class Reservation < ApplicationRecord
   end
 
   def set_price_cents
-    self.price_cents = base_price_cents
+    self.price_cents = degressive_price_cents
   end
 
   def ical_params
