@@ -2,7 +2,7 @@ class PaymentsController < ApplicationController
   before_action :set_reservation
 
   def new
-    @service_categories = Service.categories.keys.reverse
+    @service_categories = build_service_categories
     @credit_cards = current_user.credit_cards
   end
 
@@ -29,6 +29,7 @@ class PaymentsController < ApplicationController
     discount_amount = @reservation.payment(payment_params).discountable_discount_amount
 
     {
+      services_price: @reservation.services_price,
       discount_amount: discount_amount,
       charge_amount: @reservation.payment(payment_params).discountable_charge_amount,
       user_discount_balance: @reservation.user.discount_balance - discount_amount
@@ -49,6 +50,19 @@ class PaymentsController < ApplicationController
       redirect_to reservations_path, flash: { catering_requested: true }
     else
       redirect_to reservations_path, flash: { payment_succeed: true }
+    end
+  end
+
+  # TODO: CP 2may2018 Try to refactor this
+  def build_service_categories
+    reservation_service_categories = @reservation.services.pluck(:category)
+    Service.categories.keys.reverse.map do |category|
+      if reservation_service_categories.exclude? category
+        { url: reservation_services_path(@reservation), method: 'post', selected: 'false' }
+      else
+        reservation_service = @reservation.services.find_by(category: category)
+        { url: service_path(reservation_service), method: 'delete', selected: 'true' }
+      end.merge(category: category)
     end
   end
 end

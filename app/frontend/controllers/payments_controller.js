@@ -13,12 +13,16 @@ export default class extends Controller {
   ];
 
   priceChanged() {
-    console.log('priceChanged');
+    this.fetchPaymentAmounts(this.data.get('discount'));
   }
 
   toggleDiscount() {
+    this.fetchPaymentAmounts(!(this.data.get('discount') === 'true'));
+  }
+
+  fetchPaymentAmounts(discount) {
     const data = new FormData();
-    data.append('payment[discount]', !(this.data.get('discount') === 'true'));
+    data.append('payment[discount]', discount);
 
     Rails.ajax({
       url: this.data.get('amountsUrl'),
@@ -33,7 +37,7 @@ export default class extends Controller {
     });
   }
 
-  render({ discount, _discountAmount, chargeAmount, userDiscountBalance }) {
+  render({ discount, servicesPrice, _discountAmount, chargeAmount, userDiscountBalance }) {
     this.discountInputTarget.value = discount;
     this.data.set('discount', discount);
     if (discount === 'true') {
@@ -47,5 +51,6 @@ export default class extends Controller {
     }
     this.chargeAmountTarget.textContent = chargeAmount;
     this.userDiscountBalanceTarget.textContent = userDiscountBalance;
+    this.servicesPriceTarget.textContent = servicesPrice;
   }
 }
