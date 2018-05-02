@@ -1,21 +1,13 @@
-<div class="container">
-  <b>Trouvez le Cookoon dont vous avez besoin</b>
-</div>
+<%= content_for :navbar_content do %>
+  <h4>Résultats <br/> de votre recherche</h4>
+  <p>le <%= display_datetime_for @search.start_at, join_expression: 'à' %></p>
+  <p>pour <%= @search.duration %> heures et pour <%= @search.people_count %> personnes</p>
+<% end %>
 
-<div id="search">
-  <%= render 'user_searches/search_form' %>
+<div id="cookoons_and_map" class="row">
+  <% if @cookoons.empty? %>
+    <%= render 'no_cookoon' %>
+  <% else %>
+    <%= render 'cookoons_and_map' %>
+  <% end %>
 </div>
-
-<div class="container">
-  <div id="cookoons_and_map" class="row">
-    <% if @cookoons.empty? %>
-      <%= render 'no_cookoon' %>
-    <% else %>
-      <%= render 'cookoons_and_map' %>
-    <% end %>
-  </div>
-</div>
-
-<!-- unless @lat_lng -->
-<!-- can add this script to set cookie[:lat_lng] -->
-<!-- <script>getGeoLocation()</script> -->

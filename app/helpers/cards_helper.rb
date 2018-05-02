@@ -14,11 +14,11 @@ module CardsHelper
   def get_cookoon_icon_for(category)
     case category
     when 'Appartement'
-      content_tag(:i, nil, class: 'fa fa-building-o', aria: { hidden: true })
+      content_tag(:i, nil, class: 'far fa-building', aria: { hidden: true })
     when 'Jardin'
-      content_tag(:i, nil, class: 'fa fa-tree', aria: { hidden: true })
+      content_tag(:i, nil, class: 'fas fa-tree', aria: { hidden: true })
     else
-      content_tag(:i, nil, class: 'fa fa-home', aria: { hidden: true })
+      content_tag(:i, nil, class: 'fas fa-home', aria: { hidden: true })
     end
   end
 

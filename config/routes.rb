@@ -10,10 +10,11 @@ Rails.application.routes.draw do
 
   # -------- STATIC PAGES ---------
   # Different root for authenticated users
-  authenticated { root 'cookoons#index' }
+  authenticated { root 'pages#home' }
   root 'pages#welcome'
 
   controller :pages do
+    get :home
     get :support
     get :setcookies
   end
@@ -25,7 +26,7 @@ Rails.application.routes.draw do
     post :stop_impersonating, on: :collection
   end
 
-  resources :user_searches, only: :create do
+  resources :searches, only: :create do
     patch :update_all, on: :collection
   end
 
@@ -39,16 +40,16 @@ Rails.application.routes.draw do
 
   resources :reservations, only: %i[index show edit update] do
     resources :payments, only: %i[new create] do
-      post :discount, on: :new
+      post :amounts, on: :collection
     end
     resources :invoices, only: :create
-    resource :services, only: :show
+    resource :services, only: %i[show create]
     resources :guests, controller: 'reservations/guests', only: %i[index create] do
       post :create_all, on: :collection
     end
   end
 
-  resources :services, only: [] do
+  resources :services, only: [:destroy] do
     post :payments, to: 'services/payments#create'
     post :discount, to: 'services/payments#discount'
   end

@@ -42,6 +42,9 @@ module CookoonWeb
     end
 
     config.komponent.root = Rails.root.join('app/frontend')
+    config.komponent.stylesheet_engine = :scss
+
+    Jbuilder.key_format camelize: :lower
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
@@ -51,11 +54,12 @@ module CookoonWeb
     config.generators.system_tests = nil
 
     config.generators do |g|
+      g.komponent stimulus: false, locale: false
       g.test_framework :rspec,
-        view_specs: false,
-        helper_specs: false,
-        routing_specs: false,
-        controller_specs: false
+                       view_specs: false,
+                       helper_specs: false,
+                       routing_specs: false,
+                       controller_specs: false
     end
   end
 end

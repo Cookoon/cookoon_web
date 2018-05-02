@@ -1,0 +1,62 @@
+.card-cookoon {
+  max-width: 100%;
+  width: 400px;
+  height: 257px;
+  position: relative;
+  font-family: 'GFS Didot', 'serif';
+  font-size: 1.125rem;
+  line-height: normal;
+  color: var(--primary);
+  .title {
+    position: absolute;
+    top: 0;
+    left: 2rem;
+    z-index: 1;
+    max-width: calc(100% - 4rem);
+    background-color: var(--white);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0.3125rem 1rem;
+    &.multiline {
+      white-space: normal;
+    }
+    &.reverse {
+      background-color: var(--primary);
+      color: var(--white);
+    }
+  }
+  .image {
+    position: relative;
+    top: 1rem;
+    height: calc(100% - 2rem);
+    left: 0;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+  .cta > a {
+    position: absolute;
+    bottom: 0;
+    right: 2rem;
+    z-index: 1;
+    background-color: var(--white);
+    max-width: calc(75% - 2rem);
+    padding: 0.25rem 2.5rem;
+  }
+  .icons {
+    position: absolute;
+    bottom: 0;
+    right: 2rem;
+    z-index: 1;
+    background-color: var(--white);
+    border: 1px solid var(--primary);
+    max-width: calc(75% - 2rem);
+    padding: 0.25rem;
+    display: flex;
+    align-items: center;
+    > * {
+      padding: 0rem 0.5rem;
+    }
+  }
+}

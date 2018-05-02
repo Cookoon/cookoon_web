@@ -1,4 +1,5 @@
 // Graphical variables
+@import 'config/fonts';
 @import 'config/bootstrap_variables';
 
 // External libraries
@@ -7,9 +8,6 @@
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
 @import 'vendor/index';
-
-// Bootstrap 4 Simple Form Hack
-@import 'config/bootstrap_4_simple_form_hack';
 
 // Your CSS
 @import 'layout/index';

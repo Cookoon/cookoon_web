@@ -1,0 +1,37 @@
+/* -------------------------------------
+ * CSS code specific to home page
+ * (margin/padding adjustments)
+ * ------------------------------------- */
+
+.welcome {
+  &-wrapper {
+    background: $blue; /* fallback for old browsers */
+    background: linear-gradient(
+        rgba(255, 255, 255, 0.6) 0%,
+        rgba(255, 255, 255, 0.6) 100%
+      ),
+      image-url('cookoon_background.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+  }
+  &-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    height: 100%;
+  }
+  &-title {
+    flex: 2;
+    padding: 40px 0;
+  }
+  &-description {
+    flex: 5;
+    max-width: 500px;
+  }
+  &-links {
+    flex: 1;
+  }
+}

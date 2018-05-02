@@ -1,4 +1,4 @@
-class UserSearch < ApplicationRecord
+class Search < ApplicationRecord
   include EndAtSetter
 
   scope :active_recents, -> { active.where('created_at > ?', DEFAULTS[:recent_scope].ago) }
@@ -15,8 +15,9 @@ class UserSearch < ApplicationRecord
 
   belongs_to :user
 
-  validates :duration, presence: true
   validates :start_at, presence: true
+  validates :duration, presence: true
+  validates :people_count, presence: true
 
   def self.default
     OpenStruct.new DEFAULTS.slice(:radius)
@@ -30,5 +31,15 @@ class UserSearch < ApplicationRecord
       duration: DEFAULTS[:duration],
       people_count: DEFAULTS[:people_count]
     }
+  end
+
+  def to_reservation_attributes
+    attributes.with_indifferent_access.slice(
+      :user_id,
+      :start_at,
+      :end_at,
+      :people_count,
+      :duration
+    )
   end
 end

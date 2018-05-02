@@ -1,0 +1,11 @@
+.service(
+  class=('service-selected' if @selected == 'true')
+  data-controller="service"
+  data-service-category=@category
+  data-service-selected=@selected.to_s
+  data-service-url=@url
+  data-service-method=@method
+  data-action='click->service#toggle'
+)
+  i.fab.fa-microsoft
+  p = @category

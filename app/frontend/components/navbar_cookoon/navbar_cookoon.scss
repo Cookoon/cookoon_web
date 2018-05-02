@@ -1,5 +1,5 @@
 .navbar-cookoon {
-  padding: 1rem 2rem 1rem 2rem;
+  padding: 1rem 2rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -9,6 +9,33 @@
   &-fixed-back {
     padding-left: 1rem;
     padding-right: 1rem;
+  }
+  &-logo {
+    position: relative;
+    background-color: var(--primary);
+    padding: 3rem 0 3rem 0;
+    color: white;
+    .logo-wrapper {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 4rem;
+    }
+  }
+  &-content {
+    width: 70%;
+    position: absolute;
+    top: 45px;
+    left: 12%;
+    p {
+      font-size: 13px;
+      margin: 1px;
+    }
   }
   &-fixed-back {
     position: absolute;
@@ -22,5 +49,26 @@
   }
   &-none {
     display: none;
+  }
+}
+
+.content-padded {
+  padding: 50px 10px 80px 0;
+}
+
+@media (min-width: 576px) {
+  .content-padded {
+    padding: 50px;
+  }
+}
+
+@media only screen and (min-width: 1824px) {
+  .content-padded {
+    padding: 50px;
+    max-width: 70%;
+    margin: auto;
+  }
+  .navbar-cookoon-content {
+    left: 21%;
   }
 }

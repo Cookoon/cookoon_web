@@ -2,7 +2,7 @@ puts 'Destroying'
 Inventory.destroy_all
 Reservation.destroy_all
 Cookoon.destroy_all
-UserSearch.destroy_all
+Search.destroy_all
 User.destroy_all
 
 users_attributes = [

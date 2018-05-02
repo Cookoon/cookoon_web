@@ -12,7 +12,7 @@ class ReservationPolicy < ApplicationPolicy
     record.user == user
   end
 
-  def discount?
+  def amounts?
     record.user == user
   end
 

@@ -3,6 +3,10 @@ class PagesController < ApplicationController
 
   def welcome; end
 
+  def home
+    @search = Search.new
+  end
+
   def support; end
 
   def setcookies

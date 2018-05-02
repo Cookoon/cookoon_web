@@ -4,6 +4,8 @@
   "dependencies": {
     "@rails/webpacker": "^3.2.1",
     "babel-plugin-transform-runtime": "^6.23.0",
+    "bootstrap-slider": "^10.0.0",
+    "flatpickr": "^4.4.4",
     "gmaps": "^0.4.24",
     "rails-ujs": "^5.1.4",
     "slide-and-swipe-menu": "^1.2.6",
