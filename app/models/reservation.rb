@@ -99,7 +99,9 @@ class Reservation < ApplicationRecord
   end
 
   def services_price_cents
-    100
+    return 0 if services.none?
+    # TODO : CP 2may2018 le prix ne doit pas tenir des services speciaux, il faudra certainement persiter les prix...
+    services.map(&:payment_amount_cents).sum
   end
 
   def tenant_fee_rate

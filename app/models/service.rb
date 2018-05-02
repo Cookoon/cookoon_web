@@ -13,9 +13,9 @@ class Service < ApplicationRecord
 
   # TODO: SET ACTUAL PRICES
   PRICES = {
-    catering: { base_price: 0, unit_price: '?' },
-    chef: { base_price: 0, unit_price: '?' },
-    corporate: { base_price: '?', unit_price: '?' }
+    catering: { base_price: 0, unit_price: 100 },
+    chef: { base_price: 0, unit_price: 100 },
+    corporate: { base_price: 0, unit_price: 100 }
   }.freeze
 
   def compute_price
