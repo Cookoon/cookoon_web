@@ -24,8 +24,8 @@ export default class extends Controller {
       url: this.data.get('amountsUrl'),
       type: 'post',
       data,
-      success: data => {
-        this.render(data);
+      success: response => {
+        this.render(response);
       },
       error: (_jqXHR, _textStatus, errorThrown) => {
         console.log(errorThrown);
