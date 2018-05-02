@@ -7,7 +7,6 @@ class ServicesController < ApplicationController
   end
 
   def create
-    full_params = service_params.merge(status: :tied_to_reservation)
     @service = @reservation.services.new(full_params)
     @service.save
     render json: {url: service_path(@service), method: 'delete', selected: 'true'}
@@ -29,5 +28,13 @@ class ServicesController < ApplicationController
 
   def service_params
     params.require(:service).permit(:category)
+  end
+
+  def full_params
+    if service_params[:category] == 'special'
+      service_params
+    else
+      service_params.merge(payment_tied_to_reservation: true)
+    end
   end
 end
