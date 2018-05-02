@@ -27,6 +27,13 @@ class Reservation < ApplicationRecord
     safety_period: 2.hours
   }.freeze
 
+  DEGRESSION_RATES = {
+    2 => 1,
+    3 => 1,
+    5 => 0.85,
+    10 => 0.8
+  }.freeze
+
   belongs_to :cookoon
   belongs_to :user
   has_many :services, dependent: :destroy
@@ -45,6 +52,7 @@ class Reservation < ApplicationRecord
   monetize :host_services_price_cents
   monetize :host_payout_price_cents
   monetize :payment_amount_cents
+  monetize :services_price_cents
 
   enum status: %i[pending paid accepted refused cancelled ongoing passed dead]
 
@@ -56,6 +64,7 @@ class Reservation < ApplicationRecord
 
   before_validation :set_price_cents, if: :price_cents_needs_update?
   after_save :report_to_trello, if: :saved_change_to_status?
+  after_save :update_services, if: :services_need_update?
 
   def self.default
     OpenStruct.new DEFAULTS.slice(:max_duration, :max_people_count)
@@ -86,16 +95,25 @@ class Reservation < ApplicationRecord
     duration * cookoon.price_cents
   end
 
+  def degressive_price_cents
+    degressive_rate = DEGRESSION_RATES[duration] || 1
+    (base_price_cents * degressive_rate).round
+  end
+
+  def services_price_cents
+    services.payment_tied_to_reservation.sum(:price_cents)
+  end
+
   def tenant_fee_rate
     DEFAULTS[:tenant_fee_rate]
   end
 
   def tenant_fee_cents
-    (base_price_cents * tenant_fee_rate).round
+    (degressive_price_cents * tenant_fee_rate).round
   end
 
   def price_with_tenant_fee_cents
-    base_price_cents + tenant_fee_cents
+    degressive_price_cents + tenant_fee_cents
   end
 
   def host_fee_rate
@@ -103,7 +121,7 @@ class Reservation < ApplicationRecord
   end
 
   def host_fee_cents
-    (base_price_cents * host_fee_rate).round
+    (degressive_price_cents * host_fee_rate).round
   end
 
   def notify_users_after_payment
@@ -125,11 +143,11 @@ class Reservation < ApplicationRecord
   end
 
   def host_payout_price_cents
-    base_price_cents - host_fee_cents - host_services_price_cents
+    degressive_price_cents - host_fee_cents - host_services_price_cents
   end
 
   def payment_amount_cents
-    price_with_tenant_fee_cents
+    price_with_tenant_fee_cents + services_price_cents
   end
 
   def admin_close
@@ -174,8 +192,17 @@ class Reservation < ApplicationRecord
     will_save_change_to_duration? || will_save_change_to_cookoon_id?
   end
 
+  def services_need_update?
+    return unless saved_change_to_status?
+    saved_change_to_status.last == 'paid'
+  end
+
+  def update_services
+    services.payment_tied_to_reservation.each(&:paid!)
+  end
+
   def set_price_cents
-    self.price_cents = base_price_cents
+    self.price_cents = degressive_price_cents
   end
 
   def ical_params

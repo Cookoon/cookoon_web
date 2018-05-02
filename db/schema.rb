@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180423134417) do
+ActiveRecord::Schema.define(version: 20180502123233) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -168,6 +168,7 @@ ActiveRecord::Schema.define(version: 20180423134417) do
     t.string "stripe_charge_id"
     t.integer "discount_amount_cents", default: 0
     t.integer "category", default: 0, null: false
+    t.boolean "payment_tied_to_reservation", default: false
     t.index ["reservation_id"], name: "index_services_on_reservation_id"
   end
 
