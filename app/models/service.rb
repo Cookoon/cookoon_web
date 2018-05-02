@@ -14,6 +14,8 @@ class Service < ApplicationRecord
 
   before_create :set_price_cents
 
+  validates :category, presence: true
+
   # TODO: SET ACTUAL PRICES
   PRICES = {
     catering: { base_price: 0, unit_price: 100 },

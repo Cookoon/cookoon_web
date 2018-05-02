@@ -52,6 +52,7 @@ class Reservation < ApplicationRecord
   monetize :host_services_price_cents
   monetize :host_payout_price_cents
   monetize :payment_amount_cents
+  monetize :services_price_cents
 
   enum status: %i[pending paid accepted refused cancelled ongoing passed dead]
 
