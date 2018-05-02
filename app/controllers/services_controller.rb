@@ -10,14 +10,14 @@ class ServicesController < ApplicationController
     full_params = service_params.merge(status: :tied_to_reservation)
     @service = @reservation.services.new(full_params)
     @service.save
-    render json: {url: service_path(@service), method: 'delete', selected: 'true'}
+    render json: { url: service_path(@service), method: 'delete', selected: 'true' }
   end
 
   def destroy
     @service = Service.find(params[:id])
     authorize @service
     @service.destroy
-    render json: {url: reservation_services_path(@service.reservation), method: 'post', selected: 'false'}
+    render json: { url: reservation_services_path(@service.reservation), method: 'post', selected: 'false' }
   end
 
   private
