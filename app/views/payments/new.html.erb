@@ -7,7 +7,15 @@
   <br><br>
   <p>le <b><%= display_datetime_for(@reservation.start_at) %></b> pour <b><%= display_duration_for(@reservation) %></b></p>
 
-  <div class="pt-5 pb-3">
+  <p>Vos services pour <%= @reservation.people_count %> personnes</p>
+
+  <div class='d-flex justify-content-around'>
+    <% @service_categories.each do |category| %>
+      <%= c 'service', category: category, url: reservation_services_path(@reservation), method: 'post' %>
+    <% end %>
+  </div>
+
+  <div class="pt-4 pb-3">
     <div class="d-flex-default">
       <p>Prix de la location</p>
       <p><%= humanized_money_with_symbol @reservation.price %></p>
