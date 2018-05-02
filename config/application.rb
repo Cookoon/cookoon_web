@@ -44,6 +44,8 @@ module CookoonWeb
     config.komponent.root = Rails.root.join('app/frontend')
     config.komponent.stylesheet_engine = :scss
 
+    Jbuilder.key_format camelize: :lower
+
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
