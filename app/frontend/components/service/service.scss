@@ -7,7 +7,7 @@
     border: 1px solid gray;
     text-align: center;
     &-selected {
-      background: #006f8b;
+      background: var(--primary);
       color: white;
       border: none;
       border-radius: 10px;
