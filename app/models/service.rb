@@ -1,6 +1,8 @@
 class Service < ApplicationRecord
   belongs_to :reservation
 
+  scope :payment_tied_to_reservation, -> { where(payment_tied_to_reservation: true) }
+
   delegate :cookoon, :user, to: :reservation
 
   monetize :price_cents, disable_validation: true
