@@ -1,3 +1,21 @@
+- content_for :body_class, 'bg-primary'
 - content_for :navbar_type, :logo
 
 = component 'search'
+
+= component 'hr'
+
+= component 'swiper',
+            slide_component: 'card_cookoon',
+            slides_locals: [{ title: 'Un dîner, samedi soir avec chef à domicile',
+                              title_style: 'multiline',
+                              image_url: 'https://lorempixel.com/800/450/food/',
+                              cta: link_to('Bientôt disponible', root_path) },
+                            { title: 'Une journée de séminaire hors les murs',
+                              title_style: 'multiline',
+                              image_url: 'https://lorempixel.com/800/450/business/',
+                              cta: link_to('Réserver', root_path) },
+                            { title: 'Un vide dressing entre copines',
+                              title_style: 'multiline',
+                              image_url: 'https://lorempixel.com/800/450/city/',
+                              cta: link_to('Bientôt disponible', root_path) }]

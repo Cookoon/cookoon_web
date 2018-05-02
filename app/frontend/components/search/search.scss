@@ -1,18 +1,18 @@
 .search {
-  background-color: #004254;
-  color: white;
+  background-color: var(--primary);
+  color: var(--white);
   padding-top: 2rem;
   padding-bottom: 2rem;
   position: relative;
   .placeholder {
-    background-color: white;
-    color: #004254;
+    background-color: var(--white);
+    color: var(--primary);
     z-index: 1;
     margin-left: 2rem;
     margin-right: 2rem;
     padding: 1rem;
     font-family: 'GFS Didot', serif;
-    font-size: 1.3125rem;
+    font-size: 1.25rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -21,16 +21,19 @@
     svg {
       z-index: 1;
     }
+    i {
+      font-size: 1rem;
+    }
   }
   .body-wrapper {
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid var(--white);
     position: absolute;
     top: 4rem;
     left: 0;
     right: 0;
     .body {
-      background-color: white;
-      color: #004254;
+      background-color: var(--white);
+      color: var(--primary);
       padding-left: 2rem;
       padding-right: 2rem;
       display: none;
@@ -54,7 +57,8 @@
             color: #6c757d;
             .date-placeholder {
               position: relative;
-              color: #004254;
+              color: var(--primary);
+              font-weight: bold;
               .date-input {
                 position: absolute;
                 top: 0;
@@ -66,7 +70,8 @@
             }
             .time-placeholder {
               position: relative;
-              color: #004254;
+              color: var(--primary);
+              font-weight: bold;
               .time-select {
                 position: absolute;
                 top: 0;
@@ -88,8 +93,8 @@
           }
           .description {
             margin-top: 1rem;
-            color: #6c757d;
-            font-size: 0.765625rem;
+            color: var(--gray);
+            font-size: 0.75rem;
             text-align: center;
           }
         }
@@ -100,7 +105,7 @@
           }
         }
         .errors_wrapper {
-          color: red;
+          color: var(--red);
           font-weight: lighter;
         }
       }
@@ -109,16 +114,20 @@
         position: absolute;
         bottom: -20px;
         right: 2rem;
-        background-color: #004254;
-        color: white;
-        padding: 0.25rem 2rem 0.25rem 2rem;
+        background-color: var(--primary);
+        color: var(--white);
+        padding: 0.25rem 2.5rem;
         font-family: 'GFS Didot', serif;
-        font-size: 1.3125rem;
-        border: none !important; // TODO: FC 26apr18 remove when bootstrap style globally overriden
+        font-size: 1.25rem;
+        border: 1px solid var(--white);
       }
     }
   }
   .example {
     text-align: center;
+  }
+  .pusher {
+    height: 340px;
+    display: none;
   }
 }

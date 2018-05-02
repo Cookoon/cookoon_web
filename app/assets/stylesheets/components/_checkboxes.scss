@@ -4,7 +4,7 @@
   position: relative;
   width: 70px;
   height: 30px;
-  background-color: #494949;
+  background-color: $gray-600;
   border-radius: 90px;
   transition: background-color 200ms cubic-bezier(0.445, 0.05, 0.55, 0.95);
 
@@ -14,7 +14,7 @@
     left: 35px;
     top: 12%;
     font-size: 14px;
-    color: white;
+    color: $white;
     opacity: 1;
   }
 
@@ -36,7 +36,7 @@
   left: 4px;
   width: 25px;
   height: 25px;
-  background-color: white;
+  background-color: $white;
   border-radius: 50%;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
   transition: all 400ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
@@ -44,16 +44,16 @@
 
 input:checked {
   + .toggle {
-    background-color: white;
+    background-color: $gray-200;
     &:before {
       opacity: 0;
     }
     &:after {
-      color: #006f8b;
+      color: $primary;
       opacity: 1;
     }
     .toggle-handler {
-      background-color: #006f8b;
+      background-color: $primary;
       transform: translate3d(38px, 0, 0);
     }
   }

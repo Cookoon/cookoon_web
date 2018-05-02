@@ -2,10 +2,7 @@
 $font-size-base: 0.875rem;
 $headings-font-family: $gfs-didot;
 
-$blue: #006f8b;
-$cream: #fafeef;
-
-$body-bg: $cream;
+$blue: #004254;
 
 // Customize the dark text colors for use in our YIQ color contrast function.
 $yiq-text-dark: $blue;
@@ -14,17 +11,19 @@ $yiq-text-dark: $blue;
 $link-hover-decoration: none;
 
 // forms
-$input-bg: $body-bg;
+$form-feedback-valid-color: $blue;
+// $input-bg: $white;
 $input-border-color: #000;
 $input-border-radius: 0;
 $input-border-width: 1px;
 $input-focus-border-color: lighten($blue, 10%);
 $input-focus-box-shadow: none;
+$input-focus-width: 0;
 
-$custom-select-bg: $body-bg;
+// $custom-select-bg: $white;
 $custom-select-focus-box-shadow: none;
 
 $form-feedback-font-size: $font-size-base;
 
-$close-color: #fff;
+$close-color: #fff; // $white is not yet defined here
 $close-text-shadow: none;
