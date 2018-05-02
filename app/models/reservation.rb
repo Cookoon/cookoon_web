@@ -27,6 +27,13 @@ class Reservation < ApplicationRecord
     safety_period: 2.hours
   }.freeze
 
+  DEGRESSION_RATES = {
+    2 => 1,
+    3 => 1,
+    5 => 0.85,
+    10 => 0.8 
+  }
+
   belongs_to :cookoon
   belongs_to :user
   has_many :services, dependent: :destroy
