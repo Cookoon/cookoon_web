@@ -6,6 +6,7 @@ class SearchesController < ApplicationController
     if @search.save
       redirect_to cookoons_path
     else
+      @error_message = "Attention : #{@search.errors.full_messages.join('. ')}."
       render :new
     end
   end
