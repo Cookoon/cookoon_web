@@ -46,22 +46,39 @@ export default class extends Controller {
   }
 
   toggleBodyVisibility() {
-    $(this.bodyTarget).slideToggle();
+    $(this.bodyTarget).slideToggle(600);
     this.durationSlider.relayout();
     this.peopleSlider.relayout();
-    $(this.ctaTarget).slideToggle();
-    $(this.pusherTarget).slideToggle();
+
+    $(this.pusherTarget).slideToggle(600);
+
+    setTimeout(() => $(this.ctaTarget).slideToggle(200), 200);
   }
 
   pickDate() {
     this.updateStartAtInput();
-    this.dateDisplayTarget.textContent = this.dateInputTarget.value;
-    // this.timeSelectTarget.click();
+    this.renderDateDisplay();
   }
 
   selectTime() {
     this.updateStartAtInput();
-    this.timeDisplayTarget.textContent = this.timeSelectTarget.selectedOptions[0].textContent;
+    this.renderTimeDisplay();
+  }
+
+  renderDateDisplay() {
+    if (/\d{2}\/\d{2}\/\d{4}/.test(this.dateInputTarget.value)) {
+      this.dateDisplayTarget.textContent = this.dateInputTarget.value;
+    } else {
+      this.dateDisplayTarget.textContent = 'JJ/MM/AAAA';
+    }
+  }
+
+  renderTimeDisplay() {
+    if (/\d{2}:\d{2}/.test(this.timeSelectTarget.selectedOptions[0].value)) {
+      this.timeDisplayTarget.textContent = this.timeSelectTarget.selectedOptions[0].textContent;
+    } else {
+      this.timeDisplayTarget.textContent = '00h';
+    }
   }
 
   updateStartAtInput() {
@@ -76,6 +93,8 @@ export default class extends Controller {
     );
     if (date instanceof Date && isFinite(date)) {
       this.startAtInputTarget.value = date;
+    } else {
+      this.startAtInputTarget.value = '';
     }
   }
 
@@ -90,24 +109,24 @@ export default class extends Controller {
     switch (this.durationInputTarget.value) {
       case '2':
         this.durationDescriptionTarget.textContent =
-          'Exemple : un rendez-vous ou une réunion rapide';
+          'Pour un rendez-vous ? une réunion rapide ?';
         break;
       case '3':
         this.durationDescriptionTarget.textContent =
-          'Exemple : un déjeuner ou un brainstorming';
+          'Pour un déjeuner ? un brainstorming ?';
         break;
       case '4':
       case '5':
       case '6':
       case '7':
         this.durationDescriptionTarget.textContent =
-          'Exemple : un dîner ou une réunion d’équipe';
+          'Pour un dîner ? une réunion d’équipe ?';
         break;
       case '8':
       case '9':
       case '10':
         this.durationDescriptionTarget.textContent =
-          'Exemple : un shooting ou une journée de séminaire';
+          'Pour un shooting ? une journée de séminaire ?';
         break;
       default:
         this.durationDescriptionTarget.textContent = '';

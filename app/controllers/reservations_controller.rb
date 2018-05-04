@@ -12,7 +12,9 @@ class ReservationsController < ApplicationController
 
   def create
     # TODO Handle erros when user has no search
-    search = current_user.current_search
+    search = current_user.searches.last
+    # TODO: FC replace old way?
+    # search = current_user.current_search
     params_from_search = search.to_reservation_attributes.merge(cookoon: @cookoon)
     @reservation = Reservation.new params_from_search
     authorize @reservation

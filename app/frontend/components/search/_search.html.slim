@@ -13,7 +13,7 @@
               u.date-placeholder
                 span(data-target="search.dateDisplay") JJ/MM/AAAA
                 input(type="text" class="date-input" data-target="search.dateInput" data-action="search#pickDate")
-              | &nbsp;, à&nbsp;
+              | , à&nbsp;
               u.time-placeholder
                 span(data-target="search.timeDisplay") 00h
                 select(class="time-select" data-target="search.timeSelect" data-action="search#selectTime")
@@ -31,7 +31,11 @@
             .title 3. Combien de convives ?
             .slider-container
               = f.input :people_count, label: false, input_html: { data: { target: 'search.peopleInput'}}
-          i#errors.errors_wrapper
+          i#errors.errors-wrapper
         = f.submit class: 'cta', data: { target: 'search.cta' }
   .example Exemple : un dîner, samedi soir pour 8 personnes
   .pusher(data-target="search.pusher")
+    .main
+    .errors-wrapper
+      i#pusher-errors
+    .margin-top-2rem

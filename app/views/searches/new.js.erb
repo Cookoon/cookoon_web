@@ -1,1 +1,2 @@
-document.getElementById('errors').innerHTML = "Attention : <%= @search.errors.full_messages.join('. ') %>."
+document.getElementById('errors').innerHTML = '<%= @error_message%>';
+document.getElementById('pusher-errors').innerHTML = '<%= @error_message%>';
