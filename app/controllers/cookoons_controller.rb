@@ -20,9 +20,9 @@ class CookoonsController < ApplicationController
     @cookoon = Cookoon.find(params[:id])
     authorize @cookoon
 
-    @reservation = current_user.reservations.new(
-      @search.slice(:start_at, :duration).merge(cookoon: @cookoon)
-    )
+    params_from_search = @search.to_reservation_attributes.merge(cookoon: @cookoon)
+    @reservation = Reservation.new params_from_search
+    
     @marker = { lat: @cookoon.latitude, lng: @cookoon.longitude }
   end
 
