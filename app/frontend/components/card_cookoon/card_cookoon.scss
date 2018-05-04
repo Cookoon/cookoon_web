@@ -17,7 +17,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 0.3125rem 1rem;
+    padding: 0.7rem;
     &.multiline {
       white-space: normal;
     }
@@ -28,7 +28,7 @@
   }
   .image {
     position: relative;
-    top: 1rem;
+    top: 1.4rem;
     height: calc(100% - 3rem);
     left: 0;
     width: 100%;
@@ -46,7 +46,7 @@
   }
   .icons {
     position: absolute;
-    bottom: 1rem;
+    bottom: 0.7rem;
     right: 2rem;
     z-index: 1;
     background-color: var(--white);
