@@ -49,8 +49,10 @@ export default class extends Controller {
     $(this.bodyTarget).slideToggle(600);
     this.durationSlider.relayout();
     this.peopleSlider.relayout();
-    $(this.ctaTarget).slideToggle(600);
+
     $(this.pusherTarget).slideToggle(600);
+
+    setTimeout(() => $(this.ctaTarget).slideToggle(200), 200);
   }
 
   pickDate() {
