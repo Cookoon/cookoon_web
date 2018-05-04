@@ -45,6 +45,11 @@ export default class extends Controller {
     });
   }
 
+  disconnect() {
+    this.durationSlider.destroy();
+    this.peopleSlider.destroy();
+  }
+
   toggleBodyVisibility() {
     $(this.bodyTarget).slideToggle(600);
     this.durationSlider.relayout();
