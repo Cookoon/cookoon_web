@@ -74,7 +74,7 @@ export default class extends Controller {
   }
 
   renderTimeDisplay() {
-    if (/\d{2}:\d{2}/.test(this.timeSelectTarget.selectedOptions[0].value)) {
+    if (/\d{1,2}:\d{2}/.test(this.timeSelectTarget.selectedOptions[0].value)) {
       this.timeDisplayTarget.textContent = this.timeSelectTarget.selectedOptions[0].textContent;
     } else {
       this.timeDisplayTarget.textContent = '00h';
