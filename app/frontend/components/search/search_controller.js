@@ -57,13 +57,28 @@ export default class extends Controller {
 
   pickDate() {
     this.updateStartAtInput();
-    this.dateDisplayTarget.textContent = this.dateInputTarget.value;
-    // this.timeSelectTarget.click();
+    this.renderDateDisplay();
   }
 
   selectTime() {
     this.updateStartAtInput();
-    this.timeDisplayTarget.textContent = this.timeSelectTarget.selectedOptions[0].textContent;
+    this.renderTimeDisplay();
+  }
+
+  renderDateDisplay() {
+    if (/\d{2}\/\d{2}\/\d{4}/.test(this.dateInputTarget.value)) {
+      this.dateDisplayTarget.textContent = this.dateInputTarget.value;
+    } else {
+      this.dateDisplayTarget.textContent = 'JJ/MM/AAAA';
+    }
+  }
+
+  renderTimeDisplay() {
+    if (/\d{2}:\d{2}/.test(this.timeSelectTarget.selectedOptions[0].value)) {
+      this.timeDisplayTarget.textContent = this.timeSelectTarget.selectedOptions[0].textContent;
+    } else {
+      this.timeDisplayTarget.textContent = '00h';
+    }
   }
 
   updateStartAtInput() {
@@ -78,6 +93,8 @@ export default class extends Controller {
     );
     if (date instanceof Date && isFinite(date)) {
       this.startAtInputTarget.value = date;
+    } else {
+      this.startAtInputTarget.value = '';
     }
   }
 
