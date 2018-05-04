@@ -24,150 +24,147 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.co-addcookoon .path1:before {
+.co-addcookoon:before {
   content: '\e900';
 }
-.co-addcookoon .path2:before {
-  content: '\e901';
-  margin-left: -1em;
-}
 .co-bank:before {
-  content: '\e902';
+  content: '\e901';
 }
 .co-broken-door:before {
-  content: '\e903';
+  content: '\e902';
 }
 .co-camera:before {
-  content: '\e904';
+  content: '\e903';
 }
 .co-cb:before {
-  content: '\e905';
+  content: '\e904';
 }
 .co-check:before {
+  content: '\e905';
+}
+.co-cleaning:before {
   content: '\e906';
 }
-.co-cleaning .path1:before {
+.co-concierge:before {
   content: '\e907';
 }
-.co-cleaning .path2:before {
+.co-cookoon-mark1:before {
   content: '\e908';
-  margin-left: -1em;
 }
-.co-cleaning .path3:before {
+.co-cookoon-mark2:before {
   content: '\e909';
-  margin-left: -1em;
 }
-.co-cleaning .path4:before {
+.co-cookoon-mark3:before {
   content: '\e90a';
-  margin-left: -1em;
-}
-.co-cleaning .path5:before {
-  content: '\e90b';
-  margin-left: -1em;
-}
-.co-cleaning .path6:before {
-  content: '\e90c';
-  margin-left: -1em;
-}
-.co-cleaning .path7:before {
-  content: '\e90d';
-  margin-left: -1em;
-}
-.co-cleaning .path8:before {
-  content: '\e90e';
-  margin-left: -1em;
-}
-.co-concierge:before {
-  content: '\e90f';
 }
 .co-email:before {
-  content: '\e910';
+  content: '\e90b';
 }
 .co-fire:before {
-  content: '\e911';
+  content: '\e90c';
+}
+.co-glasshole-search:before {
+  content: '\e90d';
 }
 .co-home:before {
-  content: '\e912';
+  content: '\e90e';
 }
 .co-logo:before {
-  content: '\e913';
+  content: '\e90f';
 }
 .co-lost:before {
-  content: '\e914';
+  content: '\e910';
 }
 .co-meeting:before {
-  content: '\e915';
+  content: '\e911';
 }
-.co-minus .path1:before {
-  content: '\e916';
-}
-.co-minus .path2:before {
-  content: '\e917';
-  margin-left: -1em;
+.co-minus:before {
+  content: '\e912';
 }
 .co-notifications:before {
-  content: '\e918';
+  content: '\e913';
 }
 .co-plus:before {
-  content: '\e919';
+  content: '\e914';
 }
 .co-reversed--camera:before {
-  content: '\e91a';
+  content: '\e915';
 }
 .co-reversed-addcookoon:before {
-  content: '\e91b';
+  content: '\e916';
 }
 .co-reversed-bank:before {
-  content: '\e91c';
+  content: '\e917';
 }
 .co-reversed-cb:before {
-  content: '\e91d';
+  content: '\e918';
 }
 .co-reversed-check:before {
-  content: '\e91e';
+  content: '\e919';
 }
 .co-reversed-cleaning:before {
-  content: '\e91f';
+  content: '\e91a';
 }
 .co-reversed-concierge:before {
-  content: '\e920';
+  content: '\e91b';
 }
 .co-reversed-email:before {
-  content: '\e921';
+  content: '\e91c';
 }
 .co-reversed-home:before {
-  content: '\e922';
+  content: '\e91d';
 }
 .co-reversed-logo:before {
-  content: '\e923';
+  content: '\e91e';
 }
 .co-reversed-meeting:before {
-  content: '\e924';
+  content: '\e91f';
 }
 .co-reversed-minus:before {
-  content: '\e925';
+  content: '\e920';
 }
 .co-reversed-notifications:before {
-  content: '\e926';
+  content: '\e921';
 }
 .co-reversed-plus:before {
-  content: '\e927';
+  content: '\e922';
 }
 .co-reversed-sad:before {
-  content: '\e928';
+  content: '\e923';
 }
 .co-reversed-success:before {
-  content: '\e929';
+  content: '\e924';
 }
 .co-reversed-user:before {
-  content: '\e92a';
+  content: '\e925';
+}
+.co-service-chef:before {
+  content: '\e926';
+}
+.co-service-concierge:before {
+  content: '\e927';
+}
+.co-service-food:before {
+  content: '\e928';
+}
+.co-service-pro:before {
+  content: '\e929';
 }
 .co-stain:before {
-  content: '\e92b';
+  content: '\e92a';
 }
 .co-success:before {
+  content: '\e92b';
+}
+.co-type-flat:before {
   content: '\e92c';
 }
-.co-user:before {
+.co-type-house:before {
   content: '\e92d';
+}
+.co-type-loft:before {
+  content: '\e92e';
+}
+.co-user:before {
+  content: '\e92f';
 }
