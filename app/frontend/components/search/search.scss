@@ -102,7 +102,7 @@
             margin: 5px 25px 0;
           }
         }
-        .errors_wrapper {
+        .errors-wrapper {
           color: var(--red);
           font-weight: lighter;
         }
@@ -128,7 +128,18 @@
     font-weight: lighter;
   }
   .pusher {
-    height: 340px;
     display: none;
+    .main {
+      margin-bottom: 2rem;
+      height: 308px;
+    }
+    .errors-wrapper {
+      margin: 0 2rem;
+      color: var(--primary);
+      font-weight: lighter;
+    }
+    .margin-top-2rem {
+      margin-top: 2rem;
+    }
   }
 }

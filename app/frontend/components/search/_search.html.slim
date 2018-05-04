@@ -31,7 +31,11 @@
             .title 3. Combien de convives ?
             .slider-container
               = f.input :people_count, label: false, input_html: { data: { target: 'search.peopleInput'}}
-          i#errors.errors_wrapper
+          i#errors.errors-wrapper
         = f.submit class: 'cta', data: { target: 'search.cta' }
   .example Exemple : un dîner, samedi soir pour 8 personnes
   .pusher(data-target="search.pusher")
+    .main
+    .errors-wrapper
+      i#pusher-errors
+    .margin-top-2rem
