@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[welcome setcookies]
+  before_action :disable_turbolinks_cache, only: :home
 
   def welcome; end
 
