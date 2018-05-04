@@ -20,6 +20,7 @@
       }
     }
     .slider-handle {
+      outline: transparent solid 20px;
       background-image: none;
       background-color: var(--primary);
       filter: none;

@@ -37,16 +37,16 @@
   }
   .cta > a {
     position: absolute;
-    bottom: 0;
+    bottom: 1.5rem;
     right: 2rem;
     z-index: 1;
     background-color: var(--white);
-    max-width: calc(75% - 2rem);
+    max-width: calc(75% - 1rem);
     padding: 0.25rem 2.5rem;
   }
   .icons {
     position: absolute;
-    bottom: 0;
+    bottom: 1rem;
     right: 2rem;
     z-index: 1;
     background-color: var(--white);
