@@ -1,6 +1,5 @@
 .swiper {
-  padding: 2rem 0;
-  .swiper-container {
+  &-container {
     &.card_cookoon {
       .swiper-slide {
         width: calc(100% - 4rem);

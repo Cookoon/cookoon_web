@@ -1,8 +1,7 @@
 .search {
   background-color: var(--primary);
   color: var(--white);
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding: 2rem 0;
   position: relative;
   .placeholder {
     background-color: var(--white);
@@ -47,7 +46,8 @@
         }
         .title {
           font-family: 'GFS Didot', serif;
-          font-size: 1.09375rem;
+          font-size: 1.1rem;
+          font-weight: bold;
         }
         .start-at {
           display: flex;
@@ -88,8 +88,7 @@
         }
         .duration {
           .slider-container {
-            margin-left: 25px;
-            margin-right: 25px;
+            margin: 5px 25px 0;
           }
           .description {
             margin-top: 1rem;
@@ -100,8 +99,7 @@
         }
         .people-count {
           .slider-container {
-            margin-left: 25px;
-            margin-right: 25px;
+            margin: 5px 25px 0;
           }
         }
         .errors_wrapper {
@@ -124,7 +122,10 @@
     }
   }
   .example {
+    margin: 0.5rem 2rem 0;
     text-align: center;
+    font-size: 0.75rem;
+    font-weight: lighter;
   }
   .pusher {
     height: 340px;

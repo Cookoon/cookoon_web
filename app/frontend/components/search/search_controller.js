@@ -46,11 +46,11 @@ export default class extends Controller {
   }
 
   toggleBodyVisibility() {
-    $(this.bodyTarget).slideToggle();
+    $(this.bodyTarget).slideToggle(600);
     this.durationSlider.relayout();
     this.peopleSlider.relayout();
-    $(this.ctaTarget).slideToggle();
-    $(this.pusherTarget).slideToggle();
+    $(this.ctaTarget).slideToggle(600);
+    $(this.pusherTarget).slideToggle(600);
   }
 
   pickDate() {
@@ -90,24 +90,24 @@ export default class extends Controller {
     switch (this.durationInputTarget.value) {
       case '2':
         this.durationDescriptionTarget.textContent =
-          'Exemple : un rendez-vous ou une réunion rapide';
+          'Pour un rendez-vous ? une réunion rapide ?';
         break;
       case '3':
         this.durationDescriptionTarget.textContent =
-          'Exemple : un déjeuner ou un brainstorming';
+          'Pour un déjeuner ? un brainstorming ?';
         break;
       case '4':
       case '5':
       case '6':
       case '7':
         this.durationDescriptionTarget.textContent =
-          'Exemple : un dîner ou une réunion d’équipe';
+          'Pour un dîner ? une réunion d’équipe ?';
         break;
       case '8':
       case '9':
       case '10':
         this.durationDescriptionTarget.textContent =
-          'Exemple : un shooting ou une journée de séminaire';
+          'Pour un shooting ? une journée de séminaire ?';
         break;
       default:
         this.durationDescriptionTarget.textContent = '';
