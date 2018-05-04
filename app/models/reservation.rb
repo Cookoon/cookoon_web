@@ -45,6 +45,7 @@ class Reservation < ApplicationRecord
   monetize :discount_amount_cents
 
   monetize :base_price_cents
+  monetize :degressive_price_cents
   monetize :tenant_fee_cents
   monetize :price_with_tenant_fee_cents
   monetize :host_fee_cents
