@@ -17,7 +17,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 0.3125rem 1rem;
+    padding: 0.7rem;
     &.multiline {
       white-space: normal;
     }
@@ -28,8 +28,8 @@
   }
   .image {
     position: relative;
-    top: 1rem;
-    height: calc(100% - 2rem);
+    top: 1.4rem;
+    height: calc(100% - 3rem);
     left: 0;
     width: 100%;
     background-size: cover;
@@ -37,20 +37,19 @@
   }
   .cta > a {
     position: absolute;
-    bottom: 0;
+    bottom: 1.5rem;
     right: 2rem;
     z-index: 1;
     background-color: var(--white);
-    max-width: calc(75% - 2rem);
+    max-width: calc(75% - 1rem);
     padding: 0.25rem 2.5rem;
   }
   .icons {
     position: absolute;
-    bottom: 0;
+    bottom: 0.7rem;
     right: 2rem;
     z-index: 1;
     background-color: var(--white);
-    border: 1px solid var(--primary);
     max-width: calc(75% - 2rem);
     padding: 0.25rem;
     display: flex;
