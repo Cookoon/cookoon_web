@@ -39,7 +39,7 @@
           <div class="d-flex-default pt-1">
             <div>
               <%= "(Principale)" if index.zero? %>
-              <%= display_credit_card_for card_data %>
+              <%= render_credit_card_for card_data %>
             </div>
             <%= link_to credit_card_path(card_data.id), remote: true, method: :delete, class: 'no-button slowLoad' do %>
               <i class="fas fa-times fa-lg"></i>
