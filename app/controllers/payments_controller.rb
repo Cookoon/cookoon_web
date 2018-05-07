@@ -62,7 +62,20 @@ class PaymentsController < ApplicationController
       else
         reservation_service = @reservation.services.find_by(category: category)
         { url: service_path(reservation_service), method: 'delete', selected: 'true' }
-      end.merge(category: category)
+      end.merge(display_options_for(category))
     end
+  end
+
+  def display_options_for(category)
+    case category
+    when 'corporate'
+      { icon_name: 'pro', display_name: 'Kit<br />professionnel' }
+    when 'chef'
+      { icon_name: 'chef', display_name: 'Chef à<br />domicile' }
+    when 'catering'
+      { icon_name: 'food', display_name: 'Plateaux<br />repas' }
+    when 'special'
+      { icon_name: 'concierge', display_name: 'Un besoin<br />special ?' }
+    end.merge(category: category)
   end
 end

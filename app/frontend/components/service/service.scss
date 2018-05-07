@@ -11,7 +11,11 @@
     border: none;
     border-radius: 10px;
   }
-  i {
+  &-category-name {
+    font-size: 9px;
+    line-height: 10px;
+  }
+  .co {
     font-size: 30px;
   }
 }

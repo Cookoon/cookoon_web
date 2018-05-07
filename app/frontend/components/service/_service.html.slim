@@ -7,5 +7,5 @@
   data-service-method=@method
   data-action='click->service#toggle'
 )
-  i.fab.fa-microsoft
-  p = @category
+  .co(class="co-service-#{@icon_name}")
+  p.service-category-name = @display_name.html_safe
