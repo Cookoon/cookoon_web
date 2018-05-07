@@ -4,7 +4,7 @@ class Services::PaymentsController < ApplicationController
   skip_after_action :verify_authorized
 
   def create
-    payment = Service::Payment.new(@service, service_params)
+    payment = Service::Payment.new(@service, payment_params)
     if payment.proceed
       redirect_to cookoons_path, flash: { service_payment_succeed: true }
     else
@@ -14,24 +14,20 @@ class Services::PaymentsController < ApplicationController
     end
   end
 
-  def discount
-    @amounts = build_amounts
-    render 'payments/discount'
+  def amounts
+    @amounts = build_amounts.merge(payment_params.to_h.symbolize_keys)
+    respond_to :json
   end
 
   private
 
   def build_amounts
-    payment_amount = @service.payment_amount
-    user_discount_balance = @service.user.discount_balance
-    charge_amount = @service.payment(discount: true).discountable_charge_amount
-    discount_amount = @service.payment(discount: true).discountable_discount_amount
+    discount_amount = @service.payment(payment_params).discountable_discount_amount
 
     {
-      payment: payment_amount,
-      user_discount_balance: user_discount_balance,
-      charge: charge_amount,
-      remaining_user_discount_balance: (user_discount_balance - discount_amount)
+      discount_amount: discount_amount,
+      charge_amount: @service.payment(payment_params).discountable_charge_amount,
+      user_discount_balance: @service.user.discount_balance - discount_amount
     }
   end
 
@@ -41,7 +37,7 @@ class Services::PaymentsController < ApplicationController
     # authorize @service
   end
 
-  def service_params
-    params.require(:payment)
+  def payment_params
+    params.require(:payment).permit(:discount)
   end
 end

@@ -1,22 +1,31 @@
-- content_for :navbar_back_url, reservations_path(@reservation)
+- content_for :navbar_back_url, reservation_path(@reservation)
 - if @service
-    - content_for :navbar_back_url, cookoon_path(@reservation.cookoon)
+  .container(
+    data-controller='payments'
+    data-payments-amounts-url=amounts_service_payments_path(@service)
+    data-payments-discount='false'
+  )
+    h2 Payez vos options de réservation
 
-    .container
-      h2 Payez vos options de réservation
+    p Récapitulatif :
 
-      p Récapitulatif :
+    .mb-4
+      = @service.content.html_safe
 
-      .pt-5.pb-3
-        = @service.content.html_safe
+      hr
 
-        hr
+      .d-flex-default
+        b(data-target="payments.chargeAmountLabel") TOTAL
+        b(data-target="payments.chargeAmount") = humanized_money_with_symbol @service.price
 
-        .d-flex-default
-          b id='total-text' TOTAL
-          b id='reservation-price' = humanized_money_with_symbol @service.price
+    - if current_user.available_discount?
+      p Cliquez pour utiliser votre crédit pour payer cette option.
+      .payment-block(data-action="click->payments#toggleDiscount" data-target="payments.discountButton")
+        b <span data-target="payments.userDiscountLabel">Crédit disponible</span> : <span data-target="payments.userDiscountBalance">#{humanized_money_with_symbol current_user.discount_balance}</span>
+        i.co.co-check
 
-      = render 'payments/services_form'
+      .text-center.my-3.text-primary •
 
+    = render 'services/payments/form'
 - else
-    p Pas de service associé à cette réservation !
+  p Pas de service associé à cette réservation !

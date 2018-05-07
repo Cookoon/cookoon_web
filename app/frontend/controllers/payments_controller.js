@@ -50,7 +50,9 @@ export default class extends Controller {
     chargeAmount,
     userDiscountBalance
   }) {
-    this.servicesPriceTarget.textContent = servicesPrice;
+    if (this.hasServicesPriceTarget) {
+      this.servicesPriceTarget.textContent = servicesPrice;
+    }
     this.chargeAmountTarget.textContent = chargeAmount;
 
     if (this.hasDiscountButtonTarget) {

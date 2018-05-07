@@ -2,13 +2,13 @@
 
 <div class="container"
      data-controller="payments"
-     data-payments-amounts-url = "<%= amounts_reservation_payments_path(@reservation.id) %>"
+     data-payments-amounts-url="<%= amounts_reservation_payments_path(@reservation) %>"
      data-payments-discount="false"
 >
   <h2>Payez votre réservation</h2>
 
-  <b>Votre location :</b>
-  <br><br>
+  <p><b>Votre location :</b></p>
+  
   <p>le <b><%= display_datetime_for(@reservation.start_at, join_expression: 'à') %></b> pour <b><%= display_duration_for(@reservation) %></b></p>
 
   <p>Vos services pour <%= @reservation.people_count %> personnes :</p>
@@ -69,15 +69,15 @@
     <% if current_user.available_discount? %>
       Cliquez pour utiliser votre crédit sur cette location (disponible jusqu'au : <%= display_date_for(current_user.discount_expires_at) %>)
 
-        <div class="payment-block" data-action="click->payments#toggleDiscount" data-target="payments.discountButton">
-          <b><span data-target="payments.userDiscountLabel">Crédit disponible</span> : <span data-target="payments.userDiscountBalance"><%= humanized_money_with_symbol current_user.discount_balance %></span></b>
-          <i class='co co-check'></i>
-        </div>
-    <% end %>
+      <div class="payment-block" data-action="click->payments#toggleDiscount" data-target="payments.discountButton">
+        <b><span data-target="payments.userDiscountLabel">Crédit disponible</span> : <span data-target="payments.userDiscountBalance"><%= humanized_money_with_symbol current_user.discount_balance %></span></b>
+        <i class='co co-check'></i>
+      </div>
 
-    <div class="text-center my-3 text-primary">
-      •
-    </div>
+      <div class="text-center my-3 text-primary">
+        •
+      </div>
+    <% end %>
 
     <%= render 'form' %>
     <div class="text-center">

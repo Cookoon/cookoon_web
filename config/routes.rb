@@ -50,8 +50,9 @@ Rails.application.routes.draw do
   end
 
   resources :services, only: [:destroy] do
-    post :payments, to: 'services/payments#create'
-    post :discount, to: 'services/payments#discount'
+    resources :payments, controller: 'services/payments', only: :create do
+      post :amounts, on: :collection
+    end
   end
 
   # -------- HOST NAMESPACE ---------
