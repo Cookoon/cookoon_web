@@ -7,7 +7,7 @@
                         title: cookoon.name,
                         title_style: :reverse,
                         image_url: cl_image_path(cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
-                        icons: [get_cookoon_icon_for(cookoon.category), get_price_rank(cookoon.price_cents)]
+                        icons: [cookoon.price_icon]
           %>
         <% end %>
       </div>

@@ -10,7 +10,11 @@ class CookoonsController < ApplicationController
       available_in: (@search.start_at..@search.end_at)
     }
     # TODO : Will probably have to remove Random Order here
-    @cookoons = policy_scope(Cookoon).includes(:photo_files).filter(filtering_params).randomize
+    @cookoons = policy_scope(Cookoon)
+                .includes(:photo_files)
+                .filter(filtering_params)
+                .randomize
+                .decorate
 
     # TODO : Will we keep markers when done ?
     build_markers
@@ -22,7 +26,7 @@ class CookoonsController < ApplicationController
 
     params_from_search = @search.to_reservation_attributes.merge(cookoon: @cookoon)
     @reservation = Reservation.new params_from_search
-    
+
     @marker = { lat: @cookoon.latitude, lng: @cookoon.longitude }
   end
 
