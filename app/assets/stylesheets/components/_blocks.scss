@@ -47,11 +47,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
   i {
     font-size: 24px;
   }
   &-clicked {
-    border: none;
+    border-color: $blue;
     background-color: $blue;
     color: white;
     a {
