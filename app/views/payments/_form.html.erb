@@ -1,13 +1,13 @@
 <%= simple_form_for :payment, url: reservation_payments_path(@reservation), remote: true do |f| %>
   <%= f.input :discount, as: :hidden, input_html: { value: 'false', data: { target: 'payments.discountInput' } } %>
-  <hr>
+
   <div class="credit-card-select payment-block">
-    <i class="fas fa-credit-card"></i>
-    <%= f.input :source, collection: @credit_cards, selected: :first, label: false, label_method: ->(card){ "#{card.brand.upcase} XXXX-XXXX-XXXX-#{card.last4}" }, value_method: ->(card){ card.id } %>
+    <i class="co co-cb"></i>
+    <%= f.input :source, collection: @credit_cards, selected: :first, label: false, label_method: ->(card){ credit_card_label_for card }, value_method: ->(card){ card.id } %>
   </div>
 
-  <div class="text-center pb-3">
-    <%= link_to 'Ajouter une carte', "#", data: {toggle: "modal", target: "#credit-card-modal"} %>
+  <div class="text-center mb-5 text-uppercase">
+    <%= link_to 'Ajouter une carte de paiement', "#", class: 'text-secondary', data: {toggle: "modal", target: "#credit-card-modal"} %>
   </div>
 
   <div class="text-center">
