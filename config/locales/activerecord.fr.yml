@@ -48,6 +48,10 @@ fr:
               blank: doit être renseignée
             people_count:
               blank: doit être renseigné
+        service:
+          attributes:
+            category:
+              taken: est déjà sélectionné
         user:
           attributes:
             email:

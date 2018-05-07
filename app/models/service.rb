@@ -15,6 +15,7 @@ class Service < ApplicationRecord
   before_create :set_price_cents
 
   validates :category, presence: true
+  validates :category, uniqueness: { scope: :reservation }
 
   # TODO: SET ACTUAL PRICES
   PRICES = {

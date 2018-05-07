@@ -10,6 +10,7 @@ class PagesController < ApplicationController
 
   def support; end
 
+  # TODO: FC 04may18 clean all gecolocation code
   def setcookies
     lat_lng = "#{params[:lat]}|#{params[:lng]}"
     cookies[:lat_lng] ||= { value: lat_lng, expires: 5.hours.from_now }
