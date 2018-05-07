@@ -29,6 +29,12 @@ export default class extends Controller {
       type: 'post',
       data,
       success: response => {
+        this.data.set('discount', response.discount);
+
+        if (this.hasDiscountInputTarget) {
+          this.discountInputTarget.value = response.discount;
+        }
+
         this.render(response);
       },
       error: (_jqXHR, _textStatus, errorThrown) => {
@@ -37,20 +43,27 @@ export default class extends Controller {
     });
   }
 
-  render({ discount, servicesPrice, _discountAmount, chargeAmount, userDiscountBalance }) {
-    this.discountInputTarget.value = discount;
-    this.data.set('discount', discount);
-    if (discount === 'true') {
-      this.discountButtonTarget.classList.add('payment-block-clicked');
-      this.chargeAmountLabelTarget.textContent = 'TOTAL AVEC RÉDUCTION';
-      this.userDiscountLabelTarget.textContent = 'Nouveau Crédit';
-    } else {
-      this.discountButtonTarget.classList.remove('payment-block-clicked');
-      this.chargeAmountLabelTarget.textContent = 'TOTAL';
-      this.userDiscountLabelTarget.textContent = 'Crédit disponible';
-    }
-    this.chargeAmountTarget.textContent = chargeAmount;
-    this.userDiscountBalanceTarget.textContent = userDiscountBalance;
+  render({
+    discount,
+    servicesPrice,
+    _discountAmount,
+    chargeAmount,
+    userDiscountBalance
+  }) {
     this.servicesPriceTarget.textContent = servicesPrice;
+    this.chargeAmountTarget.textContent = chargeAmount;
+
+    if (this.hasDiscountButtonTarget) {
+      if (discount === 'true') {
+        this.chargeAmountLabelTarget.textContent = 'TOTAL AVEC RÉDUCTION';
+        this.discountButtonTarget.classList.add('payment-block-clicked');
+        this.userDiscountLabelTarget.textContent = 'Nouveau Crédit';
+      } else {
+        this.chargeAmountLabelTarget.textContent = 'TOTAL';
+        this.discountButtonTarget.classList.remove('payment-block-clicked');
+        this.userDiscountLabelTarget.textContent = 'Crédit disponible';
+      }
+      this.userDiscountBalanceTarget.textContent = userDiscountBalance;
+    }
   }
 }
