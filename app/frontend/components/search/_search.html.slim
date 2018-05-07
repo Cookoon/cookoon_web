@@ -1,7 +1,7 @@
 .search(data-controller="search" data-search-device== @device)
   .placeholder(data-action="click->search#toggleBodyVisibility")
     div Chercher un Cookoon
-    i.fas.fa-search.fa-lg
+    i.co.co-glasshole-search
   .body-wrapper
     .body(data-target="search.body")
       = simple_form_for @search, remote: true do |f|
