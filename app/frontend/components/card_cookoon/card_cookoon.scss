@@ -1,6 +1,6 @@
 .card-cookoon {
-  width: 100vw;
-  height: calc(56.25vw + 3rem);
+  width: 100%;
+  height: calc(210.9375px + 2.3375rem);
   position: relative;
   font-family: 'GFS Didot', 'serif';
   font-size: 1.125rem;
@@ -26,35 +26,35 @@
     }
   }
   .image {
-    position: relative;
+    position: absolute;
     top: 1.4rem;
-    height: calc(100% - 3rem);
+    height: calc(100% - 2.3375rem);
     left: 0;
     width: 100%;
     background-size: cover;
     background-position: center;
-  }
-  .cta > a {
-    position: absolute;
-    bottom: 1.5rem;
-    right: 2rem;
-    z-index: 1;
-    background-color: var(--white);
-    max-width: calc(75% - 1rem);
-    padding: 0.25rem 2.5rem;
-  }
-  .icons {
-    position: absolute;
-    bottom: 0.7rem;
-    right: 2rem;
-    z-index: 1;
-    background-color: var(--white);
-    max-width: calc(75% - 2rem);
-    padding: 0.25rem;
-    display: flex;
-    align-items: center;
-    > * {
-      padding: 0rem 0.5rem;
+    .cta > a {
+      position: absolute;
+      bottom: -0.9375rem;
+      right: 2rem;
+      z-index: 1;
+      background-color: var(--white);
+      max-width: calc(75% - 1rem);
+      padding: 0.25rem 2.5rem;
+    }
+    .icons {
+      position: absolute;
+      bottom: -0.9375rem;
+      right: 2rem;
+      z-index: 1;
+      background-color: var(--white);
+      max-width: calc(75% - 2rem);
+      padding: 0.25rem;
+      display: flex;
+      align-items: center;
+      > * {
+        padding: 0rem 0.5rem;
+      }
     }
   }
 }
