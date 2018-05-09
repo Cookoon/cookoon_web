@@ -8,18 +8,19 @@
 
 .h4.ml-5.text-white Les éphémères Cookoon
 
+/ TODO FC 9may2018 Refacto this with actual Ephemerals
 .py-4
   = component 'swiper',
               slide_component: 'card_cookoon',
               slides_locals: [{ title: 'Un dîner, samedi soir avec chef à domicile',
                                 title_style: 'multiline',
                                 image_url: 'https://lorempixel.com/800/450/food/',
-                                cta: link_to('Bientôt disponible', root_path) },
+                                cta: link_to('Bientôt disponible', ephemeral_path(Ephemeral.first)) },
                               { title: 'Une journée de séminaire hors les murs',
                                 title_style: 'multiline',
                                 image_url: 'https://lorempixel.com/800/450/business/',
-                                cta: link_to('Réserver', root_path) },
+                                cta: link_to('Réserver', ephemeral_path(Ephemeral.first)) },
                               { title: 'Un vide dressing entre copines',
                                 title_style: 'multiline',
                                 image_url: 'https://lorempixel.com/800/450/city/',
-                                cta: link_to('Bientôt disponible', root_path) }]
+                                cta: link_to('Bientôt disponible', ephemeral_path(Ephemeral.first)) }]
