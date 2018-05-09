@@ -56,7 +56,9 @@ Rails.application.routes.draw do
   end
 
   resources :ephemerals, only: [:show] do
-    resources :payments, controller: 'ephemerals/payments', only: [:new, :create]
+    resources :payments, controller: 'ephemerals/payments', only: :create do
+      post :amounts, on: :collection
+    end
   end
 
   # -------- HOST NAMESPACE ---------
