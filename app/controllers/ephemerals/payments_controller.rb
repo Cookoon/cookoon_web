@@ -4,8 +4,9 @@ class Ephemerals::PaymentsController < ApplicationController
   skip_after_action :verify_authorized
 
   def create
+    # TODO CP 9may2018 we should check this part and maybe improve it
     if @ephemeral.unavailable?
-      redirect_to root_path, flash: { alert: "TROP TARD !" }
+      return redirect_to @ephemeral, flash: { alert: "Vous avez été devancé, l'offre n'est dejà plus disponible !" }
     end
 
     @reservation = Reservation.new(reservation_params)
@@ -54,7 +55,7 @@ class Ephemerals::PaymentsController < ApplicationController
       cookoon: @ephemeral.cookoon,
       start_at: @ephemeral.start_at,
       duration: @ephemeral.duration,
-      people_count: @ephemeral.people_count,
+      people_count: @ephemeral.people_count
     }
   end
 end
