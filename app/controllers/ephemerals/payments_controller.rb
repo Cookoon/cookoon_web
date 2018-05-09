@@ -4,10 +4,18 @@ class Ephemerals::PaymentsController < ApplicationController
   skip_after_action :verify_authorized
 
   def create
+    if @ephemeral.unavailable?
+      redirect_to root_path, flash: { alert: "TROP TARD !" }
+    end
+
     @reservation = Reservation.new(reservation_params)
+    @reservation.services.build(payment_tied_to_reservation: true, price_cents: @ephemeral.service_price_cents)
+    @reservation.save
     payment = Reservation::Payment.new(@reservation, payment_params)
     if payment.proceed
-      redirect_to cookoons_path, flash: { service_payment_succeed: true }
+      @reservation.accepted!
+      @ephemeral.unavailable!
+      redirect_to root_path, flash: { service_payment_succeed: true }
     else
       @credit_cards = current_user.credit_cards
       flash.now.alert = payment.displayable_errors
