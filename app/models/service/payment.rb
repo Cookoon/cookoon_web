@@ -4,8 +4,6 @@ class Service
 
     private
 
-    alias_attribute :chargeable, :service
-
     # can be removed along with Discoutable
     def before_proceed
       persist_discount if discount_asked?
