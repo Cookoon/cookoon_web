@@ -17,7 +17,6 @@ class Service < ApplicationRecord
   validates :category, presence: true
   validates :category, uniqueness: { scope: :reservation }
 
-  # TODO: SET ACTUAL PRICES
   PRICES = {
     catering: { base_price: 0, unit_price: 2000 },
     chef: { base_price: 0, unit_price: 4000 },
