@@ -29,13 +29,18 @@ class Ephemerals::PaymentsController < ApplicationController
   private
 
   def build_amounts
-    @reservation = Reservation.new(reservation_params)
-    byebug
-    discount_amount = @reservation.payment(payment_params).discountable_discount_amount
-    {
-      charge_amount: @reservation.payment(payment_params).discountable_charge_amount,
-      user_discount_balance: @reservation.user.discount_balance - discount_amount
-    }
+    if ActiveModel::Type::Boolean.new.cast(payment_params[:discount])
+      discount_amount = [current_user.discount_balance, @ephemeral.payment_amount].min
+      {
+        charge_amount: @ephemeral.payment_amount - discount_amount,
+        user_discount_balance: current_user.discount_balance - discount_amount
+      }
+    else
+      {
+        charge_amount: @ephemeral.payment_amount,
+        user_discount_balance: current_user.discount_balance
+      }
+    end
   end
 
   def find_ephemeral
