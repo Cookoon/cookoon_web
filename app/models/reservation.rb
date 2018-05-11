@@ -103,6 +103,10 @@ class Reservation < ApplicationRecord
     (base_price_cents * degressive_rate).round
   end
 
+  def has_tied_services?
+    services.payment_tied_to_reservation.any?
+  end
+
   def services_price_cents
     services.payment_tied_to_reservation.sum(:price_cents)
   end

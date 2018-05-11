@@ -2,4 +2,6 @@
 
 module HrComponent
   extend ComponentHelper
+  property :icon
+  property :style, default: :normal # :inverted
 end
