@@ -16,6 +16,7 @@ class Ephemerals::PaymentsController < ApplicationController
     if payment.proceed
       @reservation.accepted!
       @ephemeral.unavailable!
+      @reservation.notify_users_after_confirmation
       redirect_to root_path, flash: { service_payment_succeed: true }
     else
       @credit_cards = current_user.credit_cards
