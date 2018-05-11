@@ -14,9 +14,9 @@ fr:
         checkin_photos: Photos à l'entrée des lieux
         checkout_photos: Photos à la sortie des lieux
       search:
-        start_at: La date et l'heure
-        duration: La durée
-        people_count: Le nombre de convives
+        start_at: la date et l'heure
+        duration: la durée
+        people_count: le nombre de convives
       user:
         email: Adresse email
         phone_number: Téléphone portable
