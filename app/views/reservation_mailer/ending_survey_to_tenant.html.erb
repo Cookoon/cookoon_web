@@ -12,14 +12,33 @@
       <br>à <%= display_time_for(@reservation.start_at) %> pour <%= display_duration_for(@reservation.duration) %>
     </td>
   </tr>
+  <% if @reservation.has_tied_services? %>
+    <tr>
+      <td align="center">
+        <%= image_tag('icon-services.png', alt: 'Services') %>
+      </td>
+      <td>
+        <b>Vos services pour <%= @reservation.people_count %> personnes :</b>
+        <ul>
+          <% @reservation.services.payment_tied_to_reservation.each do |service| %>
+            <li><%= Service::DISPLAY.dig(service.category.to_sym, :mail_display_name) %></li>
+          <% end %>
+        </ul>
+      </td>
+    </tr>
+  <% end %>
   <tr>
     <td align="center">
       <%= image_tag('icon-euro.png', alt: 'Prix') %>
     </td>
     <td>
       <b>Le coût de votre location :</b>
-      <br><%= humanized_money_with_symbol @reservation.price_with_tenant_fee %>
-      <br><small>soit <%= humanized_money_with_symbol @reservation.price %> + <%= humanized_money_with_symbol @reservation.tenant_fee %> de frais</small>
+      <br><%= humanized_money_with_symbol @reservation.payment_amount %>
+      <% if @reservation.has_tied_services? %>
+        <br><small>soit <%= humanized_money_with_symbol @reservation.degressive_price %> + <%= humanized_money_with_symbol @reservation.services_price %> de services, ainsi que <%= humanized_money_with_symbol @reservation.tenant_fee %> de frais</small>
+      <% else %>
+        <br><small>soit <%= humanized_money_with_symbol @reservation.degressive_price %> + <%= humanized_money_with_symbol @reservation.tenant_fee %> de frais</small>
+      <% end %>
     </td>
   </tr>
 </tbody></table>

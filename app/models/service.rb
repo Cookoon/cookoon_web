@@ -17,6 +17,14 @@ class Service < ApplicationRecord
   validates :category, presence: true
   validates :category, uniqueness: { scope: :reservation }
 
+  # TODO: FC 09may18 refactor payments_controller#display_options_for(category) to use DISPLAY?
+  DISPLAY = {
+    corporate: { icon_name: 'pro', mail_display_name: 'Kit professionnel' },
+    chef: { icon_name: 'chef', mail_display_name: 'Chef à domicile' },
+    catering: { icon_name: 'food', mail_display_name: 'Plateaux repas' },
+    special: { icon_name: 'concierge', mail_display_name: 'Demande spéciale' }
+  }.freeze
+
   # TODO: SET ACTUAL PRICES
   PRICES = {
     catering: { base_price: 0, unit_price: 2000 },
