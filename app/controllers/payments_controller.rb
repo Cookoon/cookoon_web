@@ -75,7 +75,7 @@ class PaymentsController < ApplicationController
     when 'catering'
       { icon_name: 'food', display_name: 'Plateaux<br />repas' }
     when 'special'
-      { icon_name: 'concierge', display_name: 'Un besoin<br />special ?' }
+      { icon_name: 'concierge', display_name: 'Un besoin<br />particulier ?' }
     end.merge(category: category)
   end
 end
