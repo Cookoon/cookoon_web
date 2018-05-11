@@ -69,7 +69,7 @@ class PaymentsController < ApplicationController
   def display_options_for(category)
     case category
     when 'corporate'
-      { icon_name: 'pro', display_name: 'Kit<br />professionnel' }
+      { icon_name: 'pro', display_name: 'Écran, cahier<br />et tableau' }
     when 'chef'
       { icon_name: 'chef', display_name: 'Chef à<br />domicile' }
     when 'catering'
