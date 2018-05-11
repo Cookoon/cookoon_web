@@ -8,7 +8,7 @@
   <h2>Payez votre réservation</h2>
 
   <p><b>Votre location :</b></p>
-  
+
   <p>le <b><%= display_datetime_for(@reservation.start_at, join_expression: 'à') %></b> pour <b><%= display_duration_for(@reservation) %></b></p>
 
   <p>Vos services pour <%= @reservation.people_count %> personnes :</p>
@@ -20,6 +20,10 @@
       </div>
     <% end %>
   </div>
+
+  <p class='small text-secondary text-center mt-2'>
+    Sélectionnez un service en cliquant dessus, notre concierge vous recontactera rapidement pour affiner votre demande.
+  </p>
 
   <div class="text-center my-3 text-primary">
     •
