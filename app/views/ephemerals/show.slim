@@ -14,7 +14,7 @@
   .mb-4
     = @ephemeral.description
 
-  - if true # @ephemeral.available?
+  - if @ephemeral.available?
     p Récapitulatif :
 
     .mb-4
