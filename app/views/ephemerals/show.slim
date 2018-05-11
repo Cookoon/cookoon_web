@@ -9,7 +9,7 @@
   data-payments-amounts-url=amounts_ephemeral_payments_path(@ephemeral)
   data-payments-discount='false'
 )
-  h2.mt-2 L'ephemère Cookoon
+  h2.mt-2 = @ephemeral.title
 
   .mb-4
     = @ephemeral.description
@@ -44,6 +44,7 @@
 
       .text-center.my-3.text-primary •
 
-    = render 'ephemerals/payments/form'
+    .mb-3
+      = render 'ephemerals/payments/form'
   - else
     p Désolé il semblerait que cette offre ne soit déjà plus disponible, un autre utilisateur a été plus rapide !
