@@ -1,12 +1,18 @@
 .hr {
   margin: 1rem 0;
-  color: var(--white);
+  color: var(--primary);
   font-size: 1rem;
   display: flex;
   align-items: center;
   .rule {
     flex: 2;
-    border-top: 1px solid var(--white);
+    border-top: 1px solid var(--primary);
     margin: 0 2rem;
+  }
+  &.inverted {
+    color: var(--white);
+    .rule {
+      border-top-color: var(--white);
+    }
   }
 }

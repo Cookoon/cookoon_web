@@ -14,12 +14,13 @@
     background-size: cover;
     background-position: center;
     height: 100vh;
+    font-family: 'GFS Didot', serif;
   }
   &-container {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: center;
+    align-items: stretch;
     padding: 30px;
     height: 100%;
   }

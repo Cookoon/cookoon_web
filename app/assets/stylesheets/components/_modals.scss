@@ -21,3 +21,34 @@
     }
   }
 }
+
+.information {
+  font-family: 'GFS-Didot', 'serif';
+  .modal-dialog {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    .modal-content {
+      background-color: $body-bg;
+      color: $body-color;
+      .close {
+        color: $body-color;
+      }
+      .modal-body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: stretch;
+      }
+    }
+  }
+  &.modal.fade .modal-dialog {
+    transform: translate(0, 100%);
+  }
+  &.modal.show .modal-dialog {
+    transform: translate(0, 0);
+  }
+}
