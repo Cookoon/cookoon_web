@@ -9,4 +9,13 @@ class CookoonDecorator < Draper::Decorator
            end
     h.content_tag(:i, nil, class: "co co-cookoon-mark#{mark}")
   end
+
+  def category_icon
+    cat = case category
+          when 'Appartement' then 'building'
+          when 'Jardin' then 'tree'
+          else 'home'
+          end
+    h.content_tag(:i, nil, class: "fas fa-#{cat}", aria: { hidden: true })
+  end
 end
