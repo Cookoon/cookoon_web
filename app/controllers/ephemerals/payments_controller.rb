@@ -30,6 +30,7 @@ class Ephemerals::PaymentsController < ApplicationController
 
   def build_amounts
     @reservation = Reservation.new(reservation_params)
+    byebug
     discount_amount = @reservation.payment(payment_params).discountable_discount_amount
     {
       charge_amount: @reservation.payment(payment_params).discountable_charge_amount,

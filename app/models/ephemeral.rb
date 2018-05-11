@@ -5,26 +5,35 @@ class Ephemeral < ApplicationRecord
   validates :start_at, presence: true
   validates :duration, presence: true
   validates :people_count, presence: true
-  # TODO : CP 9may2018 should we monetize this instead ?
-  validates :service_price_cents, presence: true
 
   monetize :service_price_cents
-  monetize :price_cents, disable_validation: true
-  monetize :rental_price_cents, disable_validation: true
+  monetize :degressive_price_cents, disable_validation: true
   monetize :payment_amount_cents, disable_validation: true
 
   enum status: %i[inactive available unavailable]
 
-  # TODO CP 9may2018 Refacto?
-  def price_cents
-    rental_price_cents + service_price_cents
+  def base_price_cents
+    duration * cookoon.price_cents
   end
 
-  def rental_price_cents
-    cookoon.price_cents * duration
+  def degressive_price_cents
+    degressive_rate = Reservation::DEGRESSION_RATES[duration] || 1
+    (base_price_cents * degressive_rate).round
+  end
+
+  def tenant_fee_rate
+    Reservation::DEFAULTS[:tenant_fee_rate]
+  end
+
+  def tenant_fee_cents
+    (degressive_price_cents * tenant_fee_rate).round
+  end
+
+  def price_with_tenant_fee_cents
+    degressive_price_cents + tenant_fee_cents
   end
 
   def payment_amount_cents
-    price_cents + ((rental_price_cents * Reservation::DEFAULTS[:tenant_fee_rate]).round)
+    price_with_tenant_fee_cents + service_price_cents
   end
 end
