@@ -9,15 +9,11 @@ class Ephemeral < ApplicationRecord
   validates :service_price_cents, presence: true
 
   monetize :service_price_cents
-  monetize :price_cents
-  monetize :rental_price_cents
-  monetize :payment_amount_cents
+  monetize :price_cents, disable_validation: true
+  monetize :rental_price_cents, disable_validation: true
+  monetize :payment_amount_cents, disable_validation: true
 
   enum status: %i[inactive available unavailable]
-
-  def payment(options = {})
-    Ephemeral::Payment.new(self, options)
-  end
 
   # TODO CP 9may2018 Refacto?
   def price_cents
