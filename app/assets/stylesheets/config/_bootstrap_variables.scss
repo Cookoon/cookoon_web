@@ -10,11 +10,16 @@ $yiq-text-dark: $blue;
 // Links
 $link-hover-decoration: none;
 
-// forms
+// Components
+$border-radius: 0;
+$border-radius-lg: 0;
+$border-radius-sm: 0;
+
+// Forms
 $form-feedback-valid-color: $blue;
 // $input-bg: $white;
 $input-border-color: #000;
-$input-border-radius: 0;
+// $input-border-radius: 0;
 $input-border-width: 1px;
 $input-focus-border-color: lighten($blue, 10%);
 $input-focus-box-shadow: none;
