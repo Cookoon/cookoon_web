@@ -1,4 +1,7 @@
-.hr(data-controller="hr")
+.hr(class== "#{'inverted' if @style == :inverted}")
   .rule
-  i.co.co-logo
+  - if @icon.present?
+    = @icon.html_safe
+  - else
+    i.co.co-logo
   .rule
