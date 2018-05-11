@@ -11,15 +11,7 @@
 .py-4
   = component 'swiper',
               slide_component: 'card_cookoon',
-              slides_locals: [{ title: 'Un dîner, samedi soir avec chef à domicile',
+              slides_locals: [{ title: @ephemeral.title,
                                 title_style: 'multiline',
-                                image_url: 'https://lorempixel.com/800/450/food/',
-                                cta: link_to('Bientôt disponible', root_path) },
-                              { title: 'Une journée de séminaire hors les murs',
-                                title_style: 'multiline',
-                                image_url: 'https://lorempixel.com/800/450/business/',
-                                cta: link_to('Réserver', root_path) },
-                              { title: 'Un vide dressing entre copines',
-                                title_style: 'multiline',
-                                image_url: 'https://lorempixel.com/800/450/city/',
-                                cta: link_to('Bientôt disponible', root_path) }]
+                                image_url: cl_image_path(@ephemeral.cookoon.photos.first.path),
+                                cta: (link_to('Réserver', ephemeral_path(@ephemeral)) if @ephemeral.persisted?) }]

@@ -19,7 +19,7 @@ class Reservation
     end
 
     def should_capture?
-      false
+      ActiveModel::Type::Boolean.new.cast(options[:capture]) || false
     end
 
     def charge_amount_cents

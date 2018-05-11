@@ -41,6 +41,8 @@ class Reservation < ApplicationRecord
   has_many :reservation_guests, dependent: :destroy
   has_many :guests, through: :reservation_guests
 
+  accepts_nested_attributes_for :services
+
   monetize :price_cents
   monetize :discount_amount_cents
 

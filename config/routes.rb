@@ -55,6 +55,12 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :ephemerals, only: [:show] do
+    resources :payments, controller: 'ephemerals/payments', only: :create do
+      post :amounts, on: :collection
+    end
+  end
+
   # -------- HOST NAMESPACE ---------
   namespace :host do
     get :dashboard, to: 'users#dashboard'

@@ -25,7 +25,6 @@ class Service < ApplicationRecord
     special: { icon_name: 'concierge', mail_display_name: 'Demande spéciale' }
   }.freeze
 
-  # TODO: SET ACTUAL PRICES
   PRICES = {
     catering: { base_price: 0, unit_price: 2000 },
     chef: { base_price: 0, unit_price: 4000 },

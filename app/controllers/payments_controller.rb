@@ -1,5 +1,5 @@
 class PaymentsController < ApplicationController
-  before_action :set_reservation
+  before_action :find_reservation
 
   def new
     @service_categories = build_service_categories
@@ -36,7 +36,7 @@ class PaymentsController < ApplicationController
     }
   end
 
-  def set_reservation
+  def find_reservation
     @reservation = Reservation.where(status: :pending).find(params[:reservation_id])
     authorize @reservation
   end
