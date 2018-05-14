@@ -1,0 +1,12 @@
+fr:
+  user_mailer:
+    notify_invitations_awarded:
+      additional_invitations:
+        one: une invitation supplémentaire
+        other: "%{count} invitations supplémentaires"
+      invitations:
+        one: une invitation
+        other: "%{count} invitations"
+      subject:
+        one: Nous venons de vous offrir une invitation
+        other: Nous venons de vous offrir %{count} invitations
