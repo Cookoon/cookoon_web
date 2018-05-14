@@ -23,18 +23,25 @@
     </div>
     <div class="pt-5 pb-3">
       <div class="d-flex-default">
-        <p>Prix de la location</p>
-        <p><%= humanized_money_with_symbol @reservation.price %></p>
+        <p>Location Cookoon</p>
+        <p><%= humanized_money_with_symbol @reservation.degressive_price %></p>
       </div>
+      <% if @reservation.services_price > 0 %>
+        <div class="d-flex-default">
+          <p>Prestations</p>
+          <p><%= humanized_money_with_symbol @reservation.services_price %></p>
+        </div>
+      <% end %>
       <div class="d-flex-default">
         <p>Frais de services</p>
         <p><%= humanized_money_with_symbol @reservation.tenant_fee %></p>
       </div>
       <hr class='white'>
-      <div class="d-flex-default">
+      <div class="d-flex-default font-weight-bold">
         <p>TOTAL</p>
-        <p><%= humanized_money_with_symbol @reservation.price_with_tenant_fee %></p>
+        <p><%= humanized_money_with_symbol @reservation.payment_amount %></p>
       </div>
+
       <% if @reservation.passed? %>
         <div class="text-center pt-5 pb-3">
           <%= link_to 'Demander une facture', reservation_invoices_path(@reservation), class: 'button button-white', method: :post %>
