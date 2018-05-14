@@ -11,7 +11,7 @@ class UserMailer < ApplicationMailer
     @user = user
     @invitation_quantity = invitation_quantity
     @message = message
-    mail(to: @user.full_email, subject: "Nous venons de vous offrir #{invitation_quantity} invitations")
+    mail(to: @user.full_email, subject: t('.subject', count: @invitation_quantity))
   end
 
   def notify_credit_granted(user, credit_amount_cents, message)
