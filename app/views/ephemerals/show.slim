@@ -16,9 +16,11 @@
     = @ephemeral.description
 
   - if @ephemeral.available?
-    p.font-weight-bold Récapitulatif de cette location :
+    p.mb-2.font-weight-bold Récapitulatif de cette location :
 
     .mb-4
+      .text-secondary Coookoon : #{@ephemeral.cookoon.name}
+
       .d-flex-default.mb-2
         | Location Cookoon
         span = humanized_money_with_symbol @ephemeral.degressive_price
