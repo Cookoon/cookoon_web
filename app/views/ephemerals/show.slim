@@ -12,6 +12,7 @@
   h2.mt-3 = @ephemeral.title
 
   .mb-4
+    p.text-secondary Le #{display_datetime_for @ephemeral.start_at, join_expression: 'à'}, pour #{@ephemeral.duration} heures et pour #{@ephemeral.people_count} personnes.
     = @ephemeral.description
 
   - if @ephemeral.available?
@@ -19,11 +20,11 @@
 
     .mb-4
       .d-flex-default.mb-2
-        | Prix de la location
+        | Location Cookoon
         span = humanized_money_with_symbol @ephemeral.degressive_price
 
       .d-flex-default.mb-2
-        | Prix des services
+        | Prestations
         span = humanized_money_with_symbol @ephemeral.service_price
 
       .d-flex-default.mb-2
