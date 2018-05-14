@@ -23,7 +23,7 @@
 }
 
 .information {
-  font-family: 'GFS-Didot', 'serif';
+  font-family: 'Tisa Sans Pro', sans-serif;
   .modal-dialog {
     position: absolute;
     top: 0;
@@ -50,5 +50,14 @@
   }
   &.modal.show .modal-dialog {
     transform: translate(0, 0);
+  }
+}
+
+@media (max-width: 320px) {
+  .information {
+    font-size: 0.8rem;
+    .btn-action {
+      padding: 1rem;
+    }
   }
 }
