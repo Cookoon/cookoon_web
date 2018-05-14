@@ -35,7 +35,7 @@
       <span><%= humanized_money_with_symbol @reservation.price %></span>
     </div>
 
-    <div class="d-flex-default mb-2">
+    <div class="d-flex-default mb-2<%= ' d-none' if @reservation.services_price.zero? %>" data-target="payments.servicesPriceLine">
       Prix des services
       <span data-target="payments.servicesPrice"><%= humanized_money_with_symbol @reservation.services_price %></span>
     </div>
