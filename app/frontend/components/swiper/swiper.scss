@@ -3,6 +3,9 @@
     &.card_cookoon {
       .swiper-slide {
         width: calc(100% - 4rem);
+        .card-cookoon {
+          height: calc(174.9375px + 2.3375rem);
+        }
       }
     }
   }

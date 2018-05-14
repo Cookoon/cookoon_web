@@ -9,13 +9,13 @@
   data-payments-amounts-url=amounts_ephemeral_payments_path(@ephemeral)
   data-payments-discount='false'
 )
-  h2.mt-2 = @ephemeral.title
+  h2.mt-3 = @ephemeral.title
 
   .mb-4
     = @ephemeral.description
 
   - if @ephemeral.available?
-    p Récapitulatif :
+    p.font-weight-bold Récapitulatif de cette location :
 
     .mb-4
       .d-flex-default.mb-2

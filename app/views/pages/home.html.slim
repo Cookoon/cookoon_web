@@ -8,10 +8,12 @@
 
 .h4.ml-5.text-white Les éphémères Cookoon
 
+.p.small.mx-5.text-white.font-weight-light Ne vous occupez de rien : réservez des expériences Cookoons conçues par nos soins
+
 .py-4
   = component 'swiper',
               slide_component: 'card_cookoon',
               slides_locals: [{ title: @ephemeral.title,
                                 title_style: 'multiline',
-                                image_url: cl_image_path(@ephemeral.cookoon.photos.first.path),
+                                image_url: cl_image_path(@ephemeral.cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
                                 cta: (link_to('Réserver', ephemeral_path(@ephemeral)) if @ephemeral.persisted?) }]
