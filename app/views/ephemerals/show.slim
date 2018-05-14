@@ -9,21 +9,24 @@
   data-payments-amounts-url=amounts_ephemeral_payments_path(@ephemeral)
   data-payments-discount='false'
 )
-  h2.mt-2 = @ephemeral.title
+  h2.mt-3 = @ephemeral.title
 
   .mb-4
+    p.text-secondary Le #{display_datetime_for @ephemeral.start_at, join_expression: 'à'}, pour #{@ephemeral.duration} heures et pour #{@ephemeral.people_count} personnes.
     = @ephemeral.description
 
   - if @ephemeral.available?
-    p Récapitulatif :
+    p.mb-2.font-weight-bold Récapitulatif de cette location :
 
     .mb-4
+      .text-secondary Coookoon : #{@ephemeral.cookoon.name}
+
       .d-flex-default.mb-2
-        | Prix de la location
+        | Location Cookoon
         span = humanized_money_with_symbol @ephemeral.degressive_price
 
       .d-flex-default.mb-2
-        | Prix des services
+        | Prestations
         span = humanized_money_with_symbol @ephemeral.service_price
 
       .d-flex-default.mb-2

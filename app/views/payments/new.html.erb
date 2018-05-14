@@ -31,12 +31,12 @@
 
   <div class="mb-4">
     <div class="d-flex-default mb-2">
-      Prix de la location
+      Location Cookoon
       <span><%= humanized_money_with_symbol @reservation.price %></span>
     </div>
 
-    <div class="d-flex-default mb-2">
-      Prix des services
+    <div class="d-flex-default mb-2<%= ' d-none' if @reservation.services_price.zero? %>" data-target="payments.servicesPriceLine">
+      Prestations
       <span data-target="payments.servicesPrice"><%= humanized_money_with_symbol @reservation.services_price %></span>
     </div>
 
