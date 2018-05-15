@@ -1,0 +1,12 @@
+.modal.fade id="ephemeral_already_booked" tabindex="-1" role="dialog" aria-labelledby="paymentSucceedLabel" data-backdrop="static" data-keyboard="false"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-body.text-center
+        i.co.co-reversed-sad.fa-5x aria-hidden="true" style="-webkit-text-fill-color:white"
+        h4.mt-4 Vous avez été devancé(e) !
+        p L’offre n’est plus disponible : recherchez un Cookoon pour vous créer votre propre expérience
+      .modal-footer.justify-content-center
+        = link_to "Retour à la recherche", root_path, class: 'button button-white mb-4'
+
+javascript:
+  $('#ephemeral_already_booked').modal('show');
