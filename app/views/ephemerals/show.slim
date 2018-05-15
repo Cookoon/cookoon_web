@@ -15,39 +15,39 @@
     p.text-secondary Le #{display_datetime_for @ephemeral.start_at, join_expression: 'à'}, pour #{@ephemeral.duration} heures et pour #{@ephemeral.people_count} personnes.
     = @ephemeral.description
 
-  - if @ephemeral.available?
-    p.mb-2.font-weight-bold Récapitulatif de cette location :
+  p.mb-2.font-weight-bold Récapitulatif de cette location :
 
-    .mb-4
-      .text-secondary Coookoon : #{@ephemeral.cookoon.name}
+  .mb-4
+    .text-secondary Coookoon : #{@ephemeral.cookoon.name}
 
-      .d-flex-default.mb-2
-        | Location Cookoon
-        span = humanized_money_with_symbol @ephemeral.degressive_price
+    .d-flex-default.mb-2
+      | Location Cookoon
+      span = humanized_money_with_symbol @ephemeral.degressive_price
 
-      .d-flex-default.mb-2
-        | Prestations
-        span = humanized_money_with_symbol @ephemeral.service_price
+    .d-flex-default.mb-2
+      | Prestations
+      span = humanized_money_with_symbol @ephemeral.service_price
 
-      .d-flex-default.mb-2
-        | Frais de service
-        span = humanized_money_with_symbol @reservation.tenant_fee
+    .d-flex-default.mb-2
+      | Frais de service
+      span = humanized_money_with_symbol @reservation.tenant_fee
 
-      hr
+    hr
 
-      .d-flex-default.mb-2
-        b data-target="payments.chargeAmountLabel" TOTAL
-        b data-target="payments.chargeAmount" = humanized_money_with_symbol @ephemeral.payment_amount
+    .d-flex-default.mb-2
+      b data-target="payments.chargeAmountLabel" TOTAL
+      b data-target="payments.chargeAmount" = humanized_money_with_symbol @ephemeral.payment_amount
 
-    - if current_user.available_discount?
-      p Cliquez pour utiliser votre crédit pour payer cette option.
-      .payment-block(data-action="click->payments#toggleDiscount" data-target="payments.discountButton")
-        b <span data-target="payments.userDiscountLabel">Crédit disponible</span> : <span data-target="payments.userDiscountBalance">#{humanized_money_with_symbol current_user.discount_balance}</span>
-        i.co.co-check
+  - if current_user.available_discount?
+    p Cliquez pour utiliser votre crédit pour payer cette option.
+    .payment-block(data-action="click->payments#toggleDiscount" data-target="payments.discountButton")
+      b <span data-target="payments.userDiscountLabel">Crédit disponible</span> : <span data-target="payments.userDiscountBalance">#{humanized_money_with_symbol current_user.discount_balance}</span>
+      i.co.co-check
 
-      .text-center.my-3.text-primary •
+    .text-center.my-3.text-primary •
 
-    .mb-3
-      = render 'ephemerals/payments/form'
-  - else
-    p Désolé il semblerait que cette offre ne soit déjà plus disponible, un autre utilisateur a été plus rapide !
+  .mb-3
+    = render 'ephemerals/payments/form'
+    
+  - if flash[:ephemeral_already_booked]
+    = render 'ephemerals/already_booked'

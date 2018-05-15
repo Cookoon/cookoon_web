@@ -5,7 +5,7 @@ class Ephemerals::PaymentsController < ApplicationController
 
   def create
     if @ephemeral.unavailable?
-      return redirect_to @ephemeral, flash: { alert: "Vous avez été devancé, l'offre n'est dejà plus disponible !" }
+      return redirect_to @ephemeral, flash: { ephemeral_already_booked: true }
     end
 
     @reservation = Reservation.new(reservation_params)
