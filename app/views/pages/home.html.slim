@@ -15,5 +15,5 @@
               slide_component: 'card_cookoon',
               slides_locals: [{ title: @ephemeral.title,
                                 title_style: 'multiline',
-                                image_url: cl_image_path(@ephemeral.cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
+                                image_url: ephemeral_safe_picture(@ephemeral),
                                 cta: (link_to('Réserver', ephemeral_path(@ephemeral)) if @ephemeral.persisted?) }]
