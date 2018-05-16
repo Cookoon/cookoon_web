@@ -1,15 +1,12 @@
-/* -------------------------------------
- * Your CSS code for flash notices and alerts
-* ------------------------------------- */
-
 .alert {
   margin: 0;
+  border: none;
   text-align: center;
-  color: white;
-}
-.alert-info {
-  background: $success;
-}
-.alert-warning {
-  background: $danger;
+  color: $white;
+  &-success {
+    background: $success;
+  }
+  &-danger {
+    background: $danger;
+  }
 }
