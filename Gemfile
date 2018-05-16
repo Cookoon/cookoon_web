@@ -62,10 +62,6 @@ gem 'sidekiq-failures', '~> 1.0'
 gem 'simple_form'
 gem 'slim-rails'
 
-source 'https://rails-assets.org' do
-  gem 'rails-assets-smalot-bootstrap-datetimepicker'
-end
-
 # Admin
 gem 'forest_liana'
 gem 'pretender'
