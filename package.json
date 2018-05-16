@@ -7,7 +7,6 @@
     "bootstrap-slider": "^10.0.0",
     "flatpickr": "^4.4.4",
     "gmaps": "^0.4.24",
-    "node-sass": "^4.9.0",
     "rails-ujs": "^5.1.4",
     "slide-and-swipe-menu": "^1.2.6",
     "stimulus": "^1.0.0",
@@ -15,7 +14,6 @@
     "turbolinks": "^5.1.1"
   },
   "devDependencies": {
-    "sass-loader": "^7.0.1",
     "webpack-bundle-analyzer": "^2.11.1",
     "webpack-dev-server": "^2.11.1"
   }
