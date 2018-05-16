@@ -1,5 +1,6 @@
 class ServicesController < ApplicationController
   before_action :set_reservation, only: %i[show create]
+  skip_after_action :verify_authorized, only: :destroy
 
   def show
     @service = @reservation.services.last
@@ -8,8 +9,11 @@ class ServicesController < ApplicationController
 
   def create
     @service = @reservation.services.new(full_params)
-    @service.save
-    render json: { url: service_path(@service), method: 'delete', selected: 'true' }
+    if @service.save
+      render json: { url: service_path(@service), method: 'delete', selected: 'true' }
+    else
+      render json: { errors: @service.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -17,6 +21,8 @@ class ServicesController < ApplicationController
     authorize @service
     @service.destroy
     render json: { url: reservation_services_path(@service.reservation), method: 'post', selected: 'false' }
+  rescue ActiveRecord::RecordNotFound
+    render json: { errors: ["Ce service n'existe plus"] }, status: :unprocessable_entity
   end
 
   private

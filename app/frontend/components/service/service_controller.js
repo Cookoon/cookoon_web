@@ -19,8 +19,8 @@ export default class extends Controller {
         this.data.set('selected', selected);
         this.element.dispatchEvent(this.constructor.serviceChangedEvent);
       },
-      error: (_jqXHR, _textStatus, errorThrown) => {
-        console.log(errorThrown);
+      error: ({ errors }, _statusText, _request) => {
+        console.log(errors.join(', '));
       }
     });
   }
