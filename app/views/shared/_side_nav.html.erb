@@ -7,9 +7,9 @@
       <% if current_user %>
         <div class="side-nav-userblock">
           <% if current_user.photo? %>
-  	        <%= cl_image_tag(current_user.photo.path, { size: '50x50', crop: :thumb, gravity: :face, class: 'avatar-large' }) %>
+  	        <%= cl_image_tag(current_user.photo.path, { size: '50x50', crop: :thumb, gravity: :face, class: 'avatar-50' }) %>
           <% else %>
-            <%= image_tag 'base_user.png', class: 'avatar-large' %>
+            <%= image_tag 'base_user.png', class: 'avatar-50' %>
           <% end %>
           <%= link_to edit_users_path do %>
             <strong><%= current_user.full_name %>&nbsp; <i class="fas fa-pencil-alt" aria-hidden="true"></i></strong>

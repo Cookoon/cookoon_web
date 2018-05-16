@@ -31,9 +31,9 @@ module HostReservationCardHelper
 
     def user_picture
       if user.photo?
-        cl_image_tag(user.photo.path, size: '80x80', crop: :thumb, gravity: :face, class: 'avatar-larger')
+        cl_image_tag(user.photo.path, size: '80x80', crop: :thumb, gravity: :face, class: 'avatar-80')
       else
-        image_tag 'base_user.png', class: 'avatar-larger'
+        image_tag 'base_user.png', class: 'avatar-80'
       end
     end
 

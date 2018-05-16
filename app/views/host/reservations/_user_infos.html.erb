@@ -1,9 +1,9 @@
 <div class="d-flex-default reservation">
   <div class="reservation-image">
     <% if current_user.photo? %>
-      <%= cl_image_tag(current_user.photo.path, { size: '50x50', crop: :thumb, gravity: :face, class: 'avatar-large' }) %>
+      <%= cl_image_tag(current_user.photo.path, { size: '50x50', crop: :thumb, gravity: :face, class: 'avatar-50' }) %>
     <% else %>
-      <%= image_tag 'https://via.placeholder.com/50x50', class: 'avatar-large' %>
+      <%= image_tag 'https://via.placeholder.com/50x50', class: 'avatar-50' %>
     <% end %>
   </div>
   <div class="reservation-infos">
