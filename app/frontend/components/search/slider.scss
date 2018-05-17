@@ -21,6 +21,7 @@
     }
     .slider-handle {
       outline: transparent solid 20px;
+      cursor: pointer;
       background-image: none;
       background-color: var(--primary);
       filter: none;
