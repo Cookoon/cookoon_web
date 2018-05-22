@@ -6,7 +6,7 @@ class Services::PaymentsController < ApplicationController
   def create
     payment = Service::Payment.new(@service, payment_params)
     if payment.proceed
-      redirect_to cookoons_path, flash: { service_payment_succeed: true }
+      redirect_to reservations_path, flash: { service_payment_succeed: true }
     else
       @credit_cards = current_user.credit_cards
       flash.now.alert = payment.displayable_errors
