@@ -131,7 +131,7 @@ export default class extends Controller {
       case '9':
       case '10':
         this.durationDescriptionTarget.textContent =
-          'Pour un shooting ? une journée de séminaire ?';
+          'Pour une journée de séminaire ? un vide-dressing ?';
         break;
       default:
         this.durationDescriptionTarget.textContent = '';
