@@ -14,7 +14,7 @@ fr:
         checkin_photos: Photos à l'entrée des lieux
         checkout_photos: Photos à la sortie des lieux
       search:
-        start_at: la date et l'heure
+        start_at: la date et l'heure de début
         duration: la durée
         people_count: le nombre de convives
       user:
@@ -44,6 +44,7 @@ fr:
           attributes:
             start_at:
               blank: doivent être renseignées
+              before_notice_period: doivent être dans plus de 10 heures
             duration:
               blank: doit être renseignée
             people_count:

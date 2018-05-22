@@ -20,7 +20,6 @@ class Reservation < ApplicationRecord
     tenant_fee_rate: 0.07,
     host_fee_rate: 0.07,
     service_price_cents: 2000,
-    notice_period: 10.hours,
     max_duration: 12,
     max_people_count: 20,
     stripe_validity_period: 7.days,
@@ -62,7 +61,7 @@ class Reservation < ApplicationRecord
   validates :start_at, presence: true
   validates :duration, presence: true
   validate :tenant_is_not_host
-  validate :start_after_notice_period, on: :create
+  validates :start_at, after_notice_period: true, on: :create
   validate :possible_in_datetime_range, on: :create
 
   before_validation :set_price_cents, if: :price_cents_needs_update?
@@ -249,11 +248,6 @@ class Reservation < ApplicationRecord
   def tenant_is_not_host
     return unless cookoon && user
     errors.add(:cookoon, :host_cannot_be_tenant) if cookoon.user == user
-  end
-
-  def start_after_notice_period
-    return unless start_at
-    errors.add(:start_at, :before_notice_period) if start_at < DEFAULTS[:notice_period].from_now
   end
 
   def possible_in_datetime_range
