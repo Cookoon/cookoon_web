@@ -1,14 +1,13 @@
-@import 'alert';
 @import 'attachinary';
 @import 'avatar';
 @import 'hexagon';
+@import 'map';
+@import 'notification';
 @import 'payment';
 
+// TODO: FC 24may18 need further refactoring
 @import 'buttons';
-@import 'forms';
 @import 'cards';
-@import 'maps';
-@import 'modals';
-@import 'recap';
-@import 'notifs';
-@import 'checkboxes';
+@import 'checkbox';
+@import 'loader';
+@import 'side_nav';
