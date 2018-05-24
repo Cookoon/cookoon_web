@@ -17,10 +17,10 @@
     <!-- ==== FIN CUSTOM CHECKBOX ==== -->
   <% end %>
 
-  <div class="text-center mt-3 mb-5">
-    <%= f.button :submit, t('.sign_in'), class: 'btn btn-primary btn-action-sm' %>
-  </div>
+  <%= f.button :submit, t('.sign_in'), class: 'btn btn-primary btn-action-sm btn-block' %>
 
-  <%= render 'first_signin_modal' %>
-  <i><%= link_to t('.forgot_your_password'), new_password_path(resource_name) %></i>
+  <div class="mt-5">
+    <%= render 'first_signin_modal' %>
+    <i><%= link_to t('.forgot_your_password'), new_password_path(resource_name) %></i>  
+  </div>
 <% end %>

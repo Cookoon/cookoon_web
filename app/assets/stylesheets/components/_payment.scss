@@ -1,0 +1,37 @@
+.credit-card-select {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  .payment_source {
+    flex: 10;
+    margin-bottom: 1px;
+  }
+}
+
+#payment_source {
+  padding-top: 1px;
+  border-bottom: none;
+}
+
+.payment-block {
+  border: 1px solid black;
+  padding: 15px 25px;
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  i {
+    font-size: 24px;
+  }
+  &-clicked {
+    border-color: $blue;
+    background-color: $blue;
+    color: white;
+    a {
+      color: white;
+    }
+  }
+}

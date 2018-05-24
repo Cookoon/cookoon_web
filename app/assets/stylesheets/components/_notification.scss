@@ -1,0 +1,23 @@
+.notifiable {
+  position: relative;
+  .notification {
+    background: #ff6161;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    &-topbar {
+      position: absolute;
+      top: 0;
+      right: -5px;
+    }
+    &-sidebar {
+      position: absolute;
+      top: 24px;
+      left: -15px;
+    }
+    &-inline {
+      display: inline-block;
+      margin: 0 10px;
+    }
+  }
+}

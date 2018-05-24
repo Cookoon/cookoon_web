@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[welcome setcookies]
+  skip_before_action :authenticate_user!, only: :welcome
   before_action :disable_turbolinks_cache, only: :home
 
   def welcome; end
@@ -10,10 +10,4 @@ class PagesController < ApplicationController
   end
 
   def support; end
-
-  # TODO: FC 04may18 clean all gecolocation code
-  def setcookies
-    lat_lng = "#{params[:lat]}|#{params[:lng]}"
-    cookies[:lat_lng] ||= { value: lat_lng, expires: 5.hours.from_now }
-  end
 end

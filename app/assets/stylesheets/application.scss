@@ -1,14 +1,13 @@
-// Graphical variables
+// Variables
 @import 'config/fonts';
 @import 'config/bootstrap_variables';
 
 // External libraries
 @import 'bootstrap';
-@import 'smalot-bootstrap-datetimepicker';
 @import 'font-awesome-sprockets';
 @import 'font-awesome';
-@import 'vendor/index';
+@import 'vendor/icon_fonts';
 
-// Your CSS
-@import 'layout/index';
+// CSS
+@import 'bootstrap_override/index';
 @import 'components/index';
