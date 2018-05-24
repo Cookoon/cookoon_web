@@ -52,7 +52,6 @@ gem 'simple_scheduler'
 # Front
 gem 'bootstrap', '~> 4.0.0'
 gem 'draper'
-gem 'font-awesome-sass'
 gem 'icalendar'
 gem 'jquery-fileupload-rails'
 gem 'jquery-rails'
