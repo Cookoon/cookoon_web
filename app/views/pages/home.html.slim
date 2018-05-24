@@ -8,7 +8,7 @@
 
 .mx-5
   .h4.text-white Les éphémères Cookoon
-  .p.text-white.font-weight-light(style="font-size: 72%") Réservez des expériences Cookoon conçues par nos soins
+  .p.text-white.font-weight-light(style="font-size: 0.75rem;") Réservez des expériences Cookoon conçues par nos soins
 
 .py-4
   = component 'swiper',
@@ -17,6 +17,3 @@
                                 title_style: 'multiline',
                                 image_url: ephemeral_safe_picture(@ephemeral),
                                 cta: (link_to('Réserver', ephemeral_path(@ephemeral)) if @ephemeral.persisted?) }]
-
-.mb-5
-  = component 'hr', style: :inverted

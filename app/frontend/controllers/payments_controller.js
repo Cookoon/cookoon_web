@@ -9,8 +9,7 @@ export default class extends Controller {
     'discountInput',
     'userDiscountBalance',
     'userDiscountLabel',
-    'servicesPrice',
-    'servicesPriceLine'
+    'servicesPrices'
   ];
 
   priceChanged() {
@@ -46,20 +45,20 @@ export default class extends Controller {
 
   render({
     discount,
-    servicesPrice,
     _discountAmount,
     chargeAmount,
-    userDiscountBalance
+    userDiscountBalance,
+    servicesCount,
+    html
   }) {
-    if (this.hasServicesPriceTarget) {
-      this.servicesPriceTarget.textContent = servicesPrice;
-      if (servicesPrice === '0,00 €') {
-        this.servicesPriceLineTarget.classList.add('d-none');
-      } else {
-        this.servicesPriceLineTarget.classList.remove('d-none');
-      }
+    if (servicesCount === 0) {
+      this.servicesPricesTarget.classList.add('d-none');
+    } else {
+      this.servicesPricesTarget.classList.remove('d-none');
     }
     this.chargeAmountTarget.textContent = chargeAmount;
+
+    this.servicesPricesTarget.innerHTML = html;
 
     if (this.hasDiscountButtonTarget) {
       if (discount === 'true') {
