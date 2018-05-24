@@ -12,10 +12,11 @@ class CookoonDecorator < Draper::Decorator
 
   def category_icon
     cat = case category
-          when 'Appartement' then 'building'
-          when 'Jardin' then 'tree'
-          else 'home'
+          when 'Terrasse', 'Appartement', 'Toit' then 'flat'
+          when 'Maison', 'Jardin', 'Villa' then 'house'
+          when 'Loft' then 'loft'
+          else 'flat'
           end
-    h.content_tag(:i, nil, class: "fas fa-#{cat}", aria: { hidden: true })
+    h.content_tag(:i, nil, class: "co co-type-#{cat}", aria: { hidden: true })
   end
 end
