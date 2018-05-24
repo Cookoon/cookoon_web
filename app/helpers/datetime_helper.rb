@@ -16,8 +16,7 @@ module DatetimeHelper
     l(datetime, format: "%k#{time_separator}%M")
   end
 
-  # TODO: FC 24mamy18 conflict with display_dururation_for(reservation) ReservationHelper
-  # def display_duration_for(duration)
-  #   duration == 1 ? "#{duration} heure" : "#{duration} heures"
-  # end
+  def display_duration_for(duration)
+    duration == 1 ? "#{duration} heure" : "#{duration} heures"
+  end
 end

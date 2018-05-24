@@ -1,8 +1,4 @@
 module ReservationsHelper
-  def display_duration_for(reservation)
-    reservation.duration == 1 ? "#{reservation.duration} heure" : "#{reservation.duration} heures"
-  end
-
   def notifiable_reservations?
     return false unless current_user
     current_user.notifiable_reservations.any?
