@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'cookoon';
-  src: font-url('cookoon.eot?qvcsj');
-  src: font-url('cookoon.eot?qvcsj#iefix') format('embedded-opentype'),
-    font-url('cookoon.ttf?qvcsj') format('truetype'),
-    font-url('cookoon.woff?qvcsj') format('woff'),
-    font-url('cookoon.svg?qvcsj#cookoon') format('svg');
+  src: url('fonts/cookoon.eot?qvcsj');
+  src: url('fonts/cookoon.eot?qvcsj#iefix') format('embedded-opentype'),
+    url('fonts/cookoon.ttf?qvcsj') format('truetype'),
+    url('fonts/cookoon.woff?qvcsj') format('woff'),
+    url('fonts/cookoon.svg?qvcsj#cookoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
