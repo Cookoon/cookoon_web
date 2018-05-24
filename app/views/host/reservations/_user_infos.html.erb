@@ -8,6 +8,6 @@
   </div>
   <div class="flex-3">
     <p class="font-weight-bold"><%= reservation.user.full_name %></p>
-    <p class="mb-0"><%= "#{display_datetime_for(reservation.start_at)} - #{display_duration_for reservation}" %></p>
+    <p class="mb-0"><%= "#{display_datetime_for(reservation.start_at)} - #{display_duration_for reservation.duration}" %></p>
   </div>
 </div>
