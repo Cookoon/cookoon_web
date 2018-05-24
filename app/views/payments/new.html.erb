@@ -22,27 +22,27 @@
   </div>
 
   <p class='small text-secondary text-center mt-2'>
-    Choisissez une des options suivantes ou faites-vous recontacter par le concierge pour adapter les services (nombre de personnes, menus spéciaux, demandes sur-mesure ...)
+    Cliquez pour ajouter des options à votre réservation
   </p>
 
   <div class="text-center my-3 text-primary">
     •
   </div>
 
-  <div class="mb-4">
-    <div class="d-flex-default mb-2">
-      Location Cookoon
-      <span><%= humanized_money_with_symbol @reservation.price %></span>
+  <div class="mb-4" data-target="payments.servicesPricesPartial">
+    <b>Location</b>
+    <div class="d-flex-default ml-3">
+      Cookoon
+      <span><%= humanized_money_with_symbol @reservation.degressive_price %></span>
     </div>
 
-    <div class="d-flex-default mb-2<%= ' d-none' if @reservation.services_price.zero? %>" data-target="payments.servicesPriceLine">
-      Prestations
-      <span data-target="payments.servicesPrice"><%= humanized_money_with_symbol @reservation.services_price %></span>
-    </div>
-
-    <div class="d-flex-default mb-2">
+    <div class="d-flex-default mb-2 ml-3">
       Frais de service
       <span><%= humanized_money_with_symbol @reservation.tenant_fee %></span>
+    </div>
+
+    <div class="mb-2<%= ' d-none' if @reservation.services.none? %>" data-target="payments.servicesPriceLine">
+      <%= render 'reservations/services_prices_details' %>
     </div>
 
     <hr>
