@@ -5,6 +5,8 @@ class CookoonsController < ApplicationController
   before_action :find_search, only: %i[index show]
 
   def index
+    skip_policy_scope && (return redirect_to root_path) unless @search
+
     filtering_params = {
       accomodates_for: @search.people_count,
       available_in: (@search.start_at..@search.end_at)

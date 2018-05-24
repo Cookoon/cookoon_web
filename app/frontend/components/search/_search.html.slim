@@ -28,12 +28,12 @@
               = f.input :duration, label: false, input_html: { data: { target: 'search.durationInput' } }
             .description(data-target="search.durationDescription")
           .people-count
-            .title 3. Combien de convives ?
+            .title 3. Combien de participants ?
             .slider-container
               = f.input :people_count, label: false, input_html: { data: { target: 'search.peopleInput'}}
           i#errors.errors-wrapper
         = f.submit class: 'cta', data: { target: 'search.cta' }
-  .example Exemple : un dîner, samedi soir pour 8 personnes
+  .subtitle Trouvez d'abord le lieu adapté à votre besoin,<br/>vous pourrez ensuite choisir vos services
   .pusher(data-target="search.pusher")
     .main
     .errors-wrapper

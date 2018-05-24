@@ -1,0 +1,19 @@
+<button type="button" class="btn btn-outline-primary py-2 font-didot text-uppercase" data-toggle="modal" data-target="#janitorModal">
+  <u>Sonner le portier</u>
+</button>
+
+<div class="modal fade information" id="janitorModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">
+          <i class="fas fa-chevron-down"></i>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <%= render 'pages/welcome/janitor_modal_body' %>
+      </div>
+    </div>
+  </div>
+</div>
