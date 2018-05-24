@@ -29,7 +29,7 @@
     •
   </div>
 
-  <div class="mb-4" data-target="payments.servicesPricesPartial">
+  <div class="mb-4">
     <b>Location</b>
     <div class="d-flex-default ml-3">
       Cookoon
@@ -41,7 +41,7 @@
       <span><%= humanized_money_with_symbol @reservation.tenant_fee %></span>
     </div>
 
-    <div class="mb-2<%= ' d-none' if @reservation.services.none? %>" data-target="payments.servicesPriceLine">
+    <div class="mb-2<%= ' d-none' if @reservation.services.none? %>" data-target="payments.servicesPrices">
       <%= render 'reservations/services_prices_details' %>
     </div>
 
