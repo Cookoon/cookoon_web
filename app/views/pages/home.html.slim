@@ -17,6 +17,3 @@
                                 title_style: 'multiline',
                                 image_url: ephemeral_safe_picture(@ephemeral),
                                 cta: (link_to('Réserver', ephemeral_path(@ephemeral)) if @ephemeral.persisted?) }]
-
-.mb-5
-  = component 'hr', style: :inverted
