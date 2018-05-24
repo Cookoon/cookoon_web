@@ -9,9 +9,9 @@
 
   <p><b>Votre location :</b></p>
 
-  <p>le <b><%= display_datetime_for(@reservation.start_at, join_expression: 'à') %></b> pour <b><%= display_duration_for(@reservation) %></b></p>
+  <p>le <b><%= display_datetime_for(@reservation.start_at, join_expression: 'à') %></b> pour <b><%= display_duration_for(@reservation) %></b>, pour <b><%= @reservation.people_count %> personnes.</b></p>
 
-  <p>Vos services pour <%= @reservation.people_count %> personnes :</p>
+  <p>Vos services</p>
 
   <div class='d-flex justify-content-around'>
     <% @service_categories.each do |service_category| %>
