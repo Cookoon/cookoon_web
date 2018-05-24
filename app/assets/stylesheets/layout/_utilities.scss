@@ -76,6 +76,15 @@ body {
   align-items: center;
 }
 
+.flex {
+  &-1 {
+    flex: 1;
+  }
+  &-3 {
+    flex: 3;
+  }
+}
+
 .font {
   &-didot {
     font-family: 'GFS Didot', serif;

@@ -1,29 +1,18 @@
-.links-block {
+.credit-card-select {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: space-around;
-  width: 100%;
-}
-
-.block-presentation {
-  padding: 20px 0;
-  p {
-    margin: 0;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  .payment_source {
+    flex: 10;
+    margin-bottom: 1px;
   }
 }
 
-.reservation {
-  margin-bottom: 10px;
-  &-image {
-    flex: 1;
-  }
-  &-infos {
-    padding: 0 15px;
-    flex: 3;
-  }
-  &-title {
-    font-weight: bold;
-  }
+#payment_source {
+  padding-top: 1px;
+  border-bottom: none;
 }
 
 .payment-block {

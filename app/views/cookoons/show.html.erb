@@ -5,16 +5,11 @@
   <%= carousel_for(@cookoon.photos) %>
 </div>
 
-<div class="container">
-  <div class="block-presentation">
-    <h3><%= @cookoon.name %></h3>
-    <p><%= @cookoon.category %> <i>de <span class="text-secondary"><%= @cookoon.user.first_name %></span></i></p>
-  </div>
-  <div>
-    <p>
-      <%= @cookoon.description %>
-    </p>
-  </div>
+<div class="container mt-3">
+  <h3><%= @cookoon.name %></h3>
+  <p><%= @cookoon.category %> <i>de <span class="text-secondary"><%= @cookoon.user.first_name %></span></i></p>
+
+  <p><%= @cookoon.description %></p>
 
   <i class="text-secondary">Ce Cookoon dispose d'un espace de réception de <b><%= @cookoon.surface %> m²</b>, il est idéal pour <b><%= @cookoon.capacity %></b> personnes.</i>
 </div>
@@ -26,7 +21,7 @@
      data-google-maps-marker="<%= @marker.to_json %>"
 ></div>
 
+<div style='padding: 45px;'></div>
+
 <!-- Booking / review block -->
 <%= booking_button_or_review_block_for(@cookoon) %>
-
-<div style='padding: 45px;'></div>

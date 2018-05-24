@@ -1,17 +1,13 @@
-<div class="d-flex-default reservation">
-  <div class="reservation-image">
+<div class="d-flex-default mb-3">
+  <div class="flex-1 px-3">
     <% if current_user.photo? %>
       <%= cl_image_tag(current_user.photo.path, { size: '50x50', crop: :thumb, gravity: :face, class: 'avatar-50' }) %>
     <% else %>
-      <%= image_tag 'https://via.placeholder.com/50x50', class: 'avatar-50' %>
+      <%= image_tag 'base_user.png', class: 'avatar-50' %>
     <% end %>
   </div>
-  <div class="reservation-infos">
-    <p>
-      <span class="reservation-title">
-        <%= reservation.user.full_name %>
-      </span>
-    </p>
-    <p><%= "#{display_datetime_for(reservation.start_at)} - #{reservation.duration} H" %></p>
+  <div class="flex-3">
+    <p class="font-weight-bold"><%= reservation.user.full_name %></p>
+    <p class="mb-0"><%= "#{display_datetime_for(reservation.start_at)} - #{display_duration_for reservation}" %></p>
   </div>
 </div>
