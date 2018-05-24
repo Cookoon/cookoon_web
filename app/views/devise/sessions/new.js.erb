@@ -1,2 +1,2 @@
-$("#devise-failure-invalid").html("<%= t('devise.failure.invalid') %>");
-$("form").replaceWith("<%=j render 'form' %>");
+document.getElementById('devise-failure-invalid').innerHTML = "<%= t('devise.failure.invalid') %>";
+document.forms[0].innerHTML = "<%=j render 'form' %>"

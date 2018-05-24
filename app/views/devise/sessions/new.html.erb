@@ -1,15 +1,10 @@
 <% content_for :navbar_back_url, root_path %>
 
-<div class="container">
-  <div class="home-title title-block text-center">
-    <h1>COOKOON</h1>
-    <h3>RECEVONS PARTOUT !</h3>
-  </div>
+<div class="container mb-4">
   <div class="text-center">
+    <h1><%= image_tag 'logo-home.png', alt: 'COOKOON - RECEVONS PARTOUT !', class: 'w-15rem' %></h1>
     <p id="devise-failure-invalid" class="text-danger"></p>
   </div>
 
-  <div class="mb-4">
-    <%= render 'form' %>
-  </div>
+  <%= render 'form' %>
 </div>
