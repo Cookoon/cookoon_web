@@ -38,16 +38,24 @@
       b data-target="payments.chargeAmountLabel" TOTAL
       b data-target="payments.chargeAmount" = humanized_money_with_symbol @ephemeral.payment_amount
 
-  - if current_user.available_discount?
-    p Cliquez pour utiliser votre crédit pour payer cette option.
-    .payment-block(data-action="click->payments#toggleDiscount" data-target="payments.discountButton")
-      b <span data-target="payments.userDiscountLabel">Crédit disponible</span> : <span data-target="payments.userDiscountBalance">#{humanized_money_with_symbol current_user.discount_balance}</span>
-      i.co.co-check
+  - if @credit_cards.blank?
+    .text-center.py-3.mb-3
+      .py-3
+        p Vous n'avez aucun moyen de paiement
+        p Vous devez en ajouter un avant de pouvoir faire une demande de réservation
 
-    .text-center.my-3.text-primary •
+      = link_to 'Ajouter une carte', credit_cards_path, class: 'button button-blue'
+  - else
+    - if current_user.available_discount?
+      p Cliquez pour utiliser votre crédit pour payer cette option.
+      .payment-block(data-action="click->payments#toggleDiscount" data-target="payments.discountButton")
+        b <span data-target="payments.userDiscountLabel">Crédit disponible</span> : <span data-target="payments.userDiscountBalance">#{humanized_money_with_symbol current_user.discount_balance}</span>
+        i.co.co-check
 
-  .mb-3
-    = render 'ephemerals/payments/form'
+      .text-center.my-3.text-primary •
+
+    .mb-3
+      = render 'ephemerals/payments/form'
 
   - if flash[:ephemeral_already_booked]
     = render 'ephemerals/already_booked'
