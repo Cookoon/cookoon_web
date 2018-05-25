@@ -1,6 +1,5 @@
 class Cookoon < ApplicationRecord
   include Filterable
-  include Randomizeable
   include TimeRangeBuilder
 
   scope :displayable_on_index, -> { joins(:user).where.not(users: { stripe_account_id: nil }) }
