@@ -1,4 +1,5 @@
 const { environment } = require('@rails/webpacker');
+const webpack = require('webpack');
 
 const swiperConfig = require('./config/swiper');
 
