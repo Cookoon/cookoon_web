@@ -51,14 +51,18 @@ export default class extends Controller {
     servicesCount,
     html
   }) {
-    if (servicesCount === 0) {
-      this.servicesPricesTarget.classList.add('d-none');
-    } else {
-      this.servicesPricesTarget.classList.remove('d-none');
-    }
+
     this.chargeAmountTarget.textContent = chargeAmount;
 
-    this.servicesPricesTarget.innerHTML = html;
+    if (this.hasServicesPricesTarget) {
+      if (servicesCount === 0) {
+        this.servicesPricesTarget.classList.add('d-none');
+      } else {
+        this.servicesPricesTarget.classList.remove('d-none');
+      }
+
+      this.servicesPricesTarget.innerHTML = html;
+    }
 
     if (this.hasDiscountButtonTarget) {
       if (discount === 'true') {
