@@ -18,7 +18,7 @@
                 span(data-target="search.timeDisplay") 00h
                 select(class="time-select" data-target="search.timeSelect" data-action="search#selectTime")
                   option(value)
-                  - @time_slots.each do |time_slot|
+                  - @search.time_slots.each do |time_slot|
                     = raw "<option value='#{time_slot[:value]}'>#{time_slot[:display]}</option>"
             = f.input :start_at, as: :hidden, input_html: { data: { target: 'search.startAtInput' } }
           .duration
