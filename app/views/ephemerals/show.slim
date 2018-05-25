@@ -13,7 +13,7 @@
 
   .mb-4
     p.text-secondary Le #{display_datetime_for @ephemeral.start_at, join_expression: 'à'}, pour #{@ephemeral.duration} heures et pour #{@ephemeral.people_count} personnes.
-    = @ephemeral.description
+    = simple_format @ephemeral.description
 
   p.mb-2.font-weight-bold Récapitulatif de cette location :
 
@@ -48,6 +48,6 @@
 
   .mb-3
     = render 'ephemerals/payments/form'
-    
+
   - if flash[:ephemeral_already_booked]
     = render 'ephemerals/already_booked'
