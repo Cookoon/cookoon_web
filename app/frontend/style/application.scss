@@ -3,9 +3,7 @@
 @import 'config/bootstrap_variables';
 
 // External libraries
-@import 'bootstrap';
-@import 'font-awesome-sprockets';
-@import 'font-awesome';
+@import '~bootstrap/scss/bootstrap';
 @import 'vendor/icon_fonts';
 
 // CSS

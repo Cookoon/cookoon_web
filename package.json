@@ -2,8 +2,10 @@
   "name": "cookoon_web",
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.1.0-4",
     "@rails/webpacker": "^3.2.1",
     "babel-plugin-transform-runtime": "^6.23.0",
+    "bootstrap": "^4.1.1",
     "bootstrap-slider": "^10.0.0",
     "flatpickr": "^4.4.4",
     "gmaps": "^0.4.24",
