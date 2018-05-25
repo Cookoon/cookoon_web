@@ -3102,13 +3102,13 @@ isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
-jquery-touchswipe@^1.6.7:
+jquery-touchswipe@^1.6.18:
   version "1.6.18"
   resolved "https://registry.yarnpkg.com/jquery-touchswipe/-/jquery-touchswipe-1.6.18.tgz#fd65a09611edc3fece8ef480ae48569d42f984e2"
 
-jquery@~1:
-  version "1.12.4"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-1.12.4.tgz#01e1dfba290fe73deba77ceeacb0f9ba2fec9e0c"
+jquery@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.3.1.tgz#958ce29e81c9790f31be7792df5d4d95fc57fbca"
 
 js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.4.3"
@@ -4066,6 +4066,10 @@ pleeease-filters@^4.0.0:
   dependencies:
     onecolor "^3.0.4"
     postcss "^6.0.1"
+
+popper.js@^1.14.3:
+  version "1.14.3"
+  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.3.tgz#1438f98d046acf7b4d78cd502bf418ac64d4f095"
 
 portfinder@^1.0.9:
   version "1.0.13"
@@ -5250,13 +5254,6 @@ simple-swizzle@^0.2.2:
 slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
-
-slide-and-swipe-menu@^1.2.6:
-  version "1.2.6"
-  resolved "https://registry.yarnpkg.com/slide-and-swipe-menu/-/slide-and-swipe-menu-1.2.6.tgz#330ebc51e74ccf65181fcbaeaccda8c4f7420abc"
-  dependencies:
-    jquery "~1"
-    jquery-touchswipe "^1.6.7"
 
 snapdragon-node@^2.0.1:
   version "2.1.1"

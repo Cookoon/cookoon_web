@@ -1,9 +1,4 @@
-//= require jquery
 //= require jquery-ui
-//= require popper
-//= require bootstrap-sprockets
-//= require jquery-touchswipe/jquery.touchSwipe
-//= require slide-and-swipe-menu/jquery.slideandswipe
 //= require jquery-fileupload/basic
 //= require cloudinary/jquery.cloudinary
 //= require attachinary

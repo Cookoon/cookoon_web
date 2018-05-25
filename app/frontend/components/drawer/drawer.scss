@@ -1,4 +1,4 @@
-.side-nav {
+.drawer {
   width: 280px;
   position: fixed;
   top: 0;
@@ -6,7 +6,7 @@
   bottom: env(safe-area-inset-top);
   left: 0;
   z-index: 1120;
-  background-color: $primary;
+  background-color: var(--primary);
   overflow-x: visible;
   overflow-y: auto;
   transform: translate(-280px, 0);
@@ -24,14 +24,15 @@
 
   a {
     color: white;
-    &:focus {
+    &:focus,
+    &:hover {
       color: white;
     }
   }
 
-  &-fixedbot {
+  .fixed-bottom {
     background: white;
-    color: $blue;
+    color: var(--primary);
     position: absolute;
     left: 0;
     bottom: 0;
@@ -39,10 +40,11 @@
     padding: 20px;
     text-align: center;
     a {
-      color: $blue;
-    }
-    & a:focus {
-      color: $blue;
+      color: var(--primary);
+      &:focus,
+      &:hover {
+        color: var(--primary);
+      }
     }
   }
 

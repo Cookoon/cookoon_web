@@ -29,7 +29,7 @@
           back_url: content_for?(:navbar_back_url) ? yield(:navbar_back_url) : nil,
           content: content_for?(:navbar_content) ? yield(:navbar_content) : nil %>
 
-    <%= render 'shared/side_nav' %>
+    <%= c 'drawer' %>
 
     <%= render 'shared/pretender_infos' %>
 
@@ -39,8 +39,8 @@
 
     <%= yield %>
 
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': :reload, 'data-turbolinks-eval': false %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': :reload, 'data-turbolinks-eval': false, 'data-turbolinks-suppress-warning': true  %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': :reload, 'data-turbolinks-eval': false %>
     <%= cloudinary_js_config %>
     <%= yield(:js) %>
   </body>

@@ -1,0 +1,38 @@
+.drawer(data-controller="drawer")
+  .drawer-container
+    .ssm-toggle-nav.text-right
+      i.fas.fa-times.fa-2x.opacity-hover aria-hidden="true"
+    - if current_user
+      .drawer-userblock
+        - if current_user.photo?
+          = cl_image_tag(current_user.photo.path, { size: '50x50', crop: :thumb, gravity: :face, class: 'avatar-50' })
+        - else
+          = image_tag 'base_user.png', class: 'avatar-50'
+        = link_to edit_users_path do
+          strong
+            = current_user.full_name
+            |  
+            i.fas.fa-pencil-alt aria-hidden="true"
+    ul
+      li.notifiable
+        i.far.fa-calendar aria-hidden="true"
+        |   #{link_to 'MES RÉSERVATIONS', reservations_path}
+        - if notifiable_reservations?
+          span.notification.notification-sidebar
+      li
+        i.far.fa-credit-card aria-hidden="true"
+        |   #{link_to 'MES MOYENS DE PAIEMENT', credit_cards_path}
+      li
+        i.far.fa-paper-plane aria-hidden="true"
+        |   #{link_to 'MES INVITATIONS', new_user_invitation_path}
+      li
+        i.far.fa-question-circle aria-hidden="true"
+        |   #{link_to 'MES CONTACTS UTILES', support_path}
+    p= link_to 'Conditions Générales', 'https://cookoon.fr/conditions-generales/', target: :_blank
+    .fixed-bottom
+      = link_to host_dashboard_path do
+        - if notifiable_reservation_requests?
+          span.notif.notif-inline
+        i.fas.fa-exchange-alt
+        span  MON ESPACE HÔTE
+.ssm-overlay.ssm-toggle-nav
