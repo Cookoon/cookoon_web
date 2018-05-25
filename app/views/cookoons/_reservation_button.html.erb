@@ -3,7 +3,7 @@
     <button type="button" class="btn btn-primary btn-action btn-block"
       data-target="#reservation-new" data-controller="analytics-events"
       data-action="click->analytics-events#reservationModalOpen">
-      Réserver • <%= humanized_money_with_symbol @reservation.degressive_price %>
+      Réserver <%= display_duration_for(@reservation) %> • <%= humanized_money_with_symbol @reservation.degressive_price %>
     </button>
   </div>
 <% end %>
