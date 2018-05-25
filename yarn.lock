@@ -5584,6 +5584,10 @@ svgo@^0.7.0:
     sax "~1.2.1"
     whet.extend "~0.9.9"
 
+sweetalert2@^7.20.10:
+  version "7.20.10"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-7.20.10.tgz#83d6f5aee40c7b1582bd01e99fd9f81b76cdccbb"
+
 swiper@^4.1.6:
   version "4.1.6"
   resolved "https://registry.yarnpkg.com/swiper/-/swiper-4.1.6.tgz#8e426a741f211a38a3713c8fa0d5c0152c8a6a87"
