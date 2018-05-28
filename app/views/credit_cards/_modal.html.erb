@@ -12,13 +12,3 @@
     </div>
   </div>
 </div>
-
-<% content_for :js do %>
-  <script>
-    // iOS keyboard fix
-    $('#credit-card-modal').on('hide.bs.modal', function () {
-      $('#invisible-input').focus();
-      $('#invisible-input').blur();
-    })
-  </script>
-<% end %>

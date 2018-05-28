@@ -3,7 +3,7 @@ import Turbolinks from 'turbolinks';
 import application from 'stimulus_application';
 import { definitionsFromContext } from 'stimulus/webpack-helpers';
 
-// TODO: remove when removing Sprockets
+// TODO: remove when removing jQuery
 window.$ = window.jQuery = require('jquery');
 
 import 'bootstrap';
