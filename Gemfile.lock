@@ -70,13 +70,6 @@ GEM
       aws_cf_signer
       rest-client
     coderay (1.1.2)
-    coffee-rails (4.2.2)
-      coffee-script (>= 2.2.0)
-      railties (>= 4.0.0)
-    coffee-script (2.4.1)
-      coffee-script-source
-      execjs
-    coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     connection_pool (2.2.1)
     crack (0.4.3)
@@ -108,7 +101,6 @@ GEM
       thread
       thread_safe
     erubi (1.7.1)
-    execjs (2.7.0)
     factory_bot (4.8.2)
       activesupport (>= 3.0.0)
     factory_bot_rails (4.8.2)
@@ -323,17 +315,6 @@ GEM
       rest-client (>= 1.8.0)
     ruby_dep (1.5.0)
     safe_yaml (1.0.4)
-    sass (3.5.6)
-      sass-listen (~> 4.0.0)
-    sass-listen (4.0.0)
-      rb-fsevent (~> 0.9, >= 0.9.4)
-      rb-inotify (~> 0.9, >= 0.9.7)
-    sass-rails (5.0.7)
-      railties (>= 4.0.0, < 6)
-      sass (~> 3.1)
-      sprockets (>= 2.8, < 4.0)
-      sprockets-rails (>= 2.0, < 4.0)
-      tilt (>= 1.1, < 3)
     scout_apm (2.4.11)
     sidekiq (5.1.3)
       concurrent-ruby (~> 1.0)
@@ -384,8 +365,6 @@ GEM
     turbolinks-source (5.1.0)
     tzinfo (1.2.5)
       thread_safe (~> 0.1)
-    uglifier (4.1.10)
-      execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.5)
@@ -421,7 +400,6 @@ DEPENDENCIES
   bullet
   byebug
   cloudinary
-  coffee-rails (~> 4.2)
   devise
   devise-i18n
   devise_invitable (~> 1.7.0)
@@ -453,7 +431,6 @@ DEPENDENCIES
   rspec-rails (~> 3.7)
   rubocop (~> 0.52)
   ruby-trello
-  sass-rails (~> 5.0)
   scout_apm
   sidekiq
   sidekiq-failures (~> 1.0)
@@ -467,7 +444,6 @@ DEPENDENCIES
   timecop
   turbolinks (~> 5)
   tzinfo-data
-  uglifier (>= 1.3.0)
   vcr
   web-console (>= 3.3.0)
   webmock
