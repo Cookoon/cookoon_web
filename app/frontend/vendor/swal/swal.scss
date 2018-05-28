@@ -1,0 +1,12 @@
+.swal2 {
+  &-icon.swal2-question {
+    color: var(--primary) !important;
+    border-color: var(--primary) !important;
+  }
+  &-popup .swal2-styled.swal2-confirm {
+    background-color: var(--primary) !important;
+  }
+  &-popup .swal2-styled:focus {
+    box-shadow: none !important;
+  }
+}

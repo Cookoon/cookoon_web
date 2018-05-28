@@ -50,7 +50,7 @@
       <% end %>
 
       <div class="text-center pt-3">
-        <%= link_to reservation_path(@reservation), method: :patch, remote: true, class: 'text-white opacity-hover' do %>
+        <%= link_to reservation_path(@reservation), method: :patch, remote: true, class: 'text-white opacity-hover', data: { 'confirm-swal': "Êtes vous sûr ?", text: "Vous êtes sur le point d'annuler la réservation" } do %>
           <u>Annuler la réservation</u>
         <% end %>
       </div>

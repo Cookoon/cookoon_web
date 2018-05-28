@@ -18,9 +18,8 @@
                 span(data-target="search.timeDisplay") 00h
                 select(class="time-select" data-target="search.timeSelect" data-action="search#selectTime")
                   option(value)
-                  - (9..19).to_a.each do |hour|
-                    = raw "<option value='#{hour}:00'>#{hour}h</option>"
-                    = raw "<option value='#{hour}:30'>#{hour}h30</option>"
+                  - @search.time_slots.each do |time_slot|
+                    = raw "<option value='#{time_slot[:value]}'>#{time_slot[:display]}</option>"
             = f.input :start_at, as: :hidden, input_html: { data: { target: 'search.startAtInput' } }
           .duration
             .title 2. Quelle durée ?

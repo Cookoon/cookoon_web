@@ -15,6 +15,7 @@
     "popper.js": "^1.14.3",
     "rails-ujs": "^5.1.4",
     "stimulus": "^1.0.0",
+    "sweetalert2": "^7.20.10",
     "swiper": "^4.1.6",
     "turbolinks": "^5.1.1"
   },

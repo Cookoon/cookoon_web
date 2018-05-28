@@ -15,7 +15,6 @@ class CookoonsController < ApplicationController
     @cookoons = policy_scope(Cookoon)
                 .includes(:photo_files)
                 .filter(filtering_params)
-                .randomize
                 .decorate
 
     # TODO : Will we keep markers when done ?

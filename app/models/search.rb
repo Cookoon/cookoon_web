@@ -10,7 +10,8 @@ class Search < ApplicationRecord
     start_in_days: 1.day,
     duration: 2,
     people_count: 4,
-    recent_scope: 3.days
+    recent_scope: 3.days,
+    hour_range: (7..21)
   }.freeze
 
   belongs_to :user
@@ -41,5 +42,11 @@ class Search < ApplicationRecord
       :people_count,
       :duration
     )
+  end
+
+  def time_slots
+    DEFAULTS[:hour_range].to_a.flat_map do |hour|
+      [{ value: "#{hour}:00", display: "#{hour}h00"}, { value: "#{hour}:30", display: "#{hour}h30"}]
+    end.tap(&:pop)
   end
 end

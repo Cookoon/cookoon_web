@@ -29,10 +29,10 @@ class PaymentsController < ApplicationController
     discount_amount = @reservation.payment(payment_params).discountable_discount_amount
 
     {
-      services_price: @reservation.services_price,
       discount_amount: discount_amount,
       charge_amount: @reservation.payment(payment_params).discountable_charge_amount,
-      user_discount_balance: @reservation.user.discount_balance - discount_amount
+      user_discount_balance: @reservation.user.discount_balance - discount_amount,
+      services_count: @reservation.services.count
     }
   end
 
@@ -69,7 +69,7 @@ class PaymentsController < ApplicationController
   def display_options_for(category)
     case category
     when 'corporate'
-      { icon_name: 'pro', display_name: 'Écran, cahier<br />et tableau' }
+      { icon_name: 'pro', display_name: "Carnets,<br />eau, etc." }
     when 'chef'
       { icon_name: 'chef', display_name: 'Chef à<br />domicile' }
     when 'catering'
