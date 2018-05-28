@@ -1,5 +1,5 @@
 <%= simple_form_for [:host, @inventory], html: { class: 'pt-5 pb-3' }, remote: true do |f| %>
-  <%= f.input :checkout_photos, as: :attachinary %>
+  <%= f.input :checkout_photos, as: :attachinary, input_html: { data: { controller: 'attachinary' } } %>
   <%= f.input :remark, label: false, placeholder: 'Ajoutez ici les remarques que vous voulez partager à notre équipe (Ce champs peut rester vide)', input_html: { rows: 3 }  %>
   <div class="pt-5 pb-3">
     <%= f.submit 'TERMINER LA LOCATION', class: 'button button-blue' %>
