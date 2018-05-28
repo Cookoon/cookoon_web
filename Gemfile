@@ -50,13 +50,9 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'simple_scheduler'
 
 # Front
-gem 'bootstrap', '~> 4.0.0'
 gem 'draper'
 gem 'icalendar'
-gem 'jquery-fileupload-rails'
-gem 'jquery-rails'
 gem 'komponent'
-gem 'momentjs-rails', '>= 2.9.0'
 gem 'roadie-rails'
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
