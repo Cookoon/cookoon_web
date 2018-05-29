@@ -14,7 +14,7 @@ fr:
     'no': Non
     placeholders:
       cookoon:
-        caretaker_instructions: 'examples : emplacement du local poubelle, consigne de gestion des clés, etc.'
+        caretaker_instructions: 'exemples : emplacement du local poubelle, consigne de gestion des clés, etc.'
     required:
       mark: '*'
       text: requis

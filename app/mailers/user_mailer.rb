@@ -45,6 +45,6 @@ class UserMailer < ApplicationMailer
 
   def notify_cookoon_pending_for_missing_stripe_account(user)
     @user = user
-    mail(to: @user.full_email, subject: 'Renseignez-vite vos informations bancaires pour recevoir vos paiements Cookoon !')
+    mail(to: @user.full_email, subject: 'Renseignez vite vos informations bancaires pour recevoir vos paiements Cookoon !')
   end
 end
