@@ -29,9 +29,7 @@
               <i class="fas fa-pencil-alt" aria-hidden="true"></i>
             </div>
           <% end %>
-          <%= link_to cookoon do %>
-            <div class="card-picture" style="background-image: url(<%= cookoon_safe_picture(cookoon) %>)"></div>
-          <% end %>
+          <div class="card-picture" style="background-image: url(<%= cookoon_safe_picture(cookoon) %>)"></div>
           <div class="card-data">
             <div class="card-text">
               <%= cookoon.name %>
