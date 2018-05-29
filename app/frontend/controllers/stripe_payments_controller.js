@@ -28,6 +28,12 @@ export default class extends Controller {
 
     // Create a token or display an error when the form is submitted.
     this.formTarget.addEventListener('submit', this.handleSubmit);
+
+    // iOS keyboard fix
+    $('#credit-card-modal').on('hide.bs.modal', function() {
+      $('#invisible-input').focus();
+      $('#invisible-input').blur();
+    });
   }
 
   disconnect() {

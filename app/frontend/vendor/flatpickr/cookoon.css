@@ -155,6 +155,11 @@
   height: 28px;
   padding: 10px;
   z-index: 3;
+  color: #fff;
+}
+.flatpickr-prev-month svg,
+.flatpickr-next-month svg {
+  fill: #fff;
 }
 .flatpickr-prev-month i,
 .flatpickr-next-month i {

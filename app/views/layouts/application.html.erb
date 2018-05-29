@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html data-controller="application"
+      data-application-cloudinary-config-params="<%= cloudinary_config_params %>"
+>
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
@@ -17,11 +19,12 @@
       <%= render 'shared/marketing/linkedin_insight' %>
     <% end %>
 
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': :reload, async: true  %>
     <%= javascript_include_tag "https://maps.google.com/maps/api/js?libraries=places&key=#{ENV['GOOGLE_API_KEY']}", async: true %>
     <%= javascript_include_tag 'https://js.stripe.com/v3/', async: true %>
   </head>
 
-  <body class="<%= yield(:body_class) %>">
+  <body class="<%= yield(:body_class) %>" data-controller="application-navigation" >
     <%= render 'shared/loader' %>
 
     <%= c 'navbar_cookoon',
@@ -29,7 +32,7 @@
           back_url: content_for?(:navbar_back_url) ? yield(:navbar_back_url) : nil,
           content: content_for?(:navbar_content) ? yield(:navbar_content) : nil %>
 
-    <%= render 'shared/side_nav' %>
+    <%= c 'drawer' %>
 
     <%= render 'shared/pretender_infos' %>
 
@@ -38,10 +41,5 @@
     </div>
 
     <%= yield %>
-
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': :reload, 'data-turbolinks-eval': false %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': :reload, 'data-turbolinks-eval': false, 'data-turbolinks-suppress-warning': true  %>
-    <%= cloudinary_js_config %>
-    <%= yield(:js) %>
   </body>
 </html>

@@ -3,6 +3,11 @@ import Turbolinks from 'turbolinks';
 import application from 'stimulus_application';
 import { definitionsFromContext } from 'stimulus/webpack-helpers';
 
+// TODO: remove when removing jQuery
+window.$ = window.jQuery = require('jquery');
+
+import 'bootstrap';
+
 import 'components';
 import 'style';
 

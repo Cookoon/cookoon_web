@@ -20,7 +20,7 @@
   %>
   <%= f.input :capacity, label: "Capacité d'accueil" %>
   <%= f.input :category, label: 'Categorie', collection: Cookoon::CATEGORIES %>
-  <%= f.input :photos, as: :attachinary %>
+  <%= f.input :photos, as: :attachinary, input_html: { data: { controller: 'attachinary' } } %>
 
   <h5 class="mt-3">Informations pratiques</h5>
   <%= f.input :digicode %>
