@@ -31,7 +31,7 @@ module CarouselHelper
     def slide(image)
       image_url = cl_image_path(
         image.path,
-        height: 600, width: 800, crop: :fill
+        width: 800, height: 450, crop: :fill
       )
 
       content_tag(
