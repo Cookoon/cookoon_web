@@ -3,7 +3,7 @@
 
 = component 'search'
 
-.mb-5
+.mb-4
   = component 'hr', style: :inverted
 
 .mx-5
@@ -16,4 +16,5 @@
               slides_locals: [{ title: @ephemeral.title,
                                 title_style: 'multiline',
                                 image_url: ephemeral_safe_picture(@ephemeral),
-                                cta: (link_to('Réserver', ephemeral_path(@ephemeral)) if @ephemeral.persisted?) }]
+                                link_url: (@ephemeral if @ephemeral.persisted?),
+                                cta: ('Réserver' if @ephemeral.persisted?) }]

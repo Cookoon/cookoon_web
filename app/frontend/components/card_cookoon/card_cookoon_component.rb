@@ -11,6 +11,10 @@ module CardCookoonComponent
     @title_style
   end
 
+  def link_url?
+    @link_url.present?
+  end
+
   def cta?
     @cta.present?
   end

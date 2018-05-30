@@ -100,7 +100,7 @@ class ReservationMailer < ApplicationMailer
     @cookoon = @reservation.cookoon
     mail(
       to: @guest.full_email,
-      subject: "#{@tenant.full_name} vous convie le #{display_date_for(@reservation.start_at)} à son événement !"
+      subject: "#{@tenant.full_name} vous convie le #{display_date_for(@reservation.start_at)} à son évènement !"
     )
   end
 
