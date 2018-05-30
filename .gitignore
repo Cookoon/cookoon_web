@@ -29,8 +29,3 @@ yarn-error.log*
 # Ignore application configuration
 /config/application.yml
 .env
-/public/packs
-/public/packs-test
-/node_modules
-yarn-debug.log*
-.yarn-integrity
