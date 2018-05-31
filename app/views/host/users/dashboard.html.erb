@@ -17,13 +17,13 @@
 
   <hr>
 
-  <p>Vos dernières demandes de réservation</p>
-  <b>Vous avez <span class="text-primary"><%= @pending_reservations_count %> demande(s) de réservation</span> en attente</b>
+  <p><b>Vos dernières demandes de réservation</b></p>
+  Vous avez <span class="text-primary"><%= @pending_reservations_count %> demande(s) de réservation</span> en attente
   <div class="text-center pt-5 pb-3">
-    <%= link_to 'Voir mes Réservations', host_reservations_path, class: 'button button-blue' %>
+    <%= link_to 'Voir mes Réservations', host_reservations_path, class: 'btn btn-primary btn-action btn-block' %>
   </div>
   <hr>
-  <p>Vos Cookoons</p>
+  <p><b>Vos Cookoons</b></p>
   <div class="row">
     <% @cookoons.each do |cookoon| %>
       <div class="col-12 col-md-6">
