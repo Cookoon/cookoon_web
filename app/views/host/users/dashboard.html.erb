@@ -2,12 +2,16 @@
   <%= render 'stripe_connection_card' %>
 <% end %>
 <div class="container pt-5 pb-3">
-  <p>Votre activité</p>
-  <b>Historique des revenus : <span class="text-primary"><%= humanized_money_with_symbol current_user.total_payouts_for_dashboard %></span></b>
+  <p><b>Votre activité</b></p>
+  <p>Historique des revenus : <span class="text-primary"><%= humanized_money_with_symbol current_user.total_payouts_for_dashboard %></span></p>
 
   <% if @cookoons.any? %>
+    <p>
+      Optimisez vos revenus, recevez des demandes de locations au bon moment en
+      mettant à jour les disponibilités de votre Cookoon:
+    </p>
     <div class="text-center pt-4 pb-3">
-      <%= link_to 'Mon calendrier', cookoon_availabilities_path(@cookoons.first), class: 'button button-blue' %>
+      <%= link_to 'Mon calendrier', cookoon_availabilities_path(@cookoons.first), class: 'btn btn-primary btn-action btn-block' %>
     </div>
   <% end %>
 
