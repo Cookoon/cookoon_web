@@ -1,0 +1,55 @@
+= content_for :navbar_back_url, reservations_path
+
+= component 'card_cookoon',
+              title: @cookoon.name,
+              title_style: :reverse,
+              image_url: cl_image_path(@cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
+              cta: date_and_duration_display_for(@reservation).html_safe
+
+/ TODO CP 01.06 Probably not the best use of slim syntax...
+.container.pt-2
+  p
+    | Address:
+    '
+    strong = @cookoon.address
+    br
+    | Chez:
+    '
+    strong = @cookoon.user.full_name
+
+  p
+    strong Contactez l'hôte :
+
+  p
+    | Téléphone:
+    '
+    strong = @cookoon.user.phone_number
+
+  p
+    | E-mail:
+    '
+    strong = @cookoon.user.email
+
+  hr
+
+  p
+    strong Récapitulatif :
+
+  .mb-4
+    strong Location
+
+    d-flex-default.ml-3
+    | Cookoon
+    span = humanized_money_with_symbol @reservation.degressive_price
+
+    .d-flex-default.mb-2.ml-3 Frais de service
+      span = humanized_money_with_symbol @reservation.tenant_fee
+
+    .mb-2 class=(' d-none' if @reservation.services.none?)
+      = render 'reservations/services_prices'
+
+    hr
+
+    .d-flex-default.mb-2
+      strong TOTAL
+      strong = humanized_money_with_symbol @reservation.payment_amount
