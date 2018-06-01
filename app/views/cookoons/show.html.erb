@@ -5,8 +5,11 @@
   <%= carousel_for(@cookoon.photos) %>
 </div>
 
+<div class="cookoon-title">
+  <h3 class='text-white'><%= @cookoon.name %></h3>
+</div>
+
 <div class="container mt-3">
-  <h3><%= @cookoon.name %></h3>
   <p><%= @cookoon.category %> <i>de <span class="text-secondary"><%= @cookoon.user.first_name %></span></i></p>
 
   <p><%= @cookoon.description %></p>
