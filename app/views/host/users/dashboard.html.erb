@@ -2,50 +2,43 @@
   <%= render 'stripe_connection_card' %>
 <% end %>
 <div class="container pt-5 pb-3">
-  <p>Votre activité</p>
-  <b>Historique des revenus : <span class="text-primary"><%= humanized_money_with_symbol current_user.total_payouts_for_dashboard %></span></b>
+  <p><b>Votre activité</b></p>
+  <p>Historique des revenus : <span class="text-primary"><%= humanized_money_with_symbol current_user.total_payouts_for_dashboard %></span></p>
 
   <% if @cookoons.any? %>
+    <p>
+      Optimisez vos revenus, recevez des demandes de locations au bon moment en
+      mettant à jour les disponibilités de votre Cookoon:
+    </p>
     <div class="text-center pt-4 pb-3">
-      <%= link_to 'Mon calendrier', cookoon_availabilities_path(@cookoons.first), class: 'button button-blue' %>
+      <%= link_to 'Mon calendrier', cookoon_availabilities_path(@cookoons.first), class: 'btn btn-primary btn-action btn-block' %>
     </div>
   <% end %>
 
   <hr>
 
-  <p>Vos dernières demandes de réservation</p>
-  <b>Vous avez <span class="text-primary"><%= @pending_reservations_count %> demande(s) de réservation</span> en attente</b>
+  <p><b>Vos dernières demandes de réservation</b></p>
+  Vous avez <span class="text-primary"><%= @pending_reservations_count %> demande(s) de réservation</span> en attente
   <div class="text-center pt-5 pb-3">
-    <%= link_to 'Voir mes Réservations', host_reservations_path, class: 'button button-blue' %>
+    <%= link_to 'Voir mes Réservations', host_reservations_path, class: 'btn btn-primary btn-action btn-block' %>
   </div>
   <hr>
-  <p>Vos Cookoons</p>
+  <p><b>Vos Cookoons</b></p>
   <div class="row">
     <% @cookoons.each do |cookoon| %>
-      <div class="col-12 col-md-6">
-        <div class="card">
-          <%= link_to edit_cookoon_path(cookoon) do %>
-            <div class="card-edit">
-              <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-            </div>
-          <% end %>
-          <%= link_to edit_cookoon_path(cookoon) do %>
-            <div class="card-picture" style="background-image: url(<%= cookoon_safe_picture(cookoon) %>)"></div>
-          <% end %>
-          <div class="card-data">
-            <div class="card-text">
-              <%= cookoon.name %>
-            </div>
-            <div class="card-infos">
-              <%= category_display_for(cookoon) %>
-              <%= price_display_for(cookoon) %>
-            </div>
-          </div>
-        </div>
+      <div class="col-12 col-md-6 mb-3">
+        <%= component 'card_cookoon',
+                      title: cookoon.name,
+                      title_style: :reverse,
+                      image_url: cl_image_path(cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
+                      link_url: edit_cookoon_path(cookoon),
+                      cta: "Modifier"
+        %>
       </div>
     <% end %>
   </div>
   <div class="py-3 text-center">
-    <%= link_to "Proposer mon appartement", new_cookoon_path, class: 'button button-blue' %>
+    <% button_text = @cookoons.any? ? 'Ajouter un autre Cookoon' : 'Proposer mon appartement' %>
+    <%= link_to button_text, new_cookoon_path, class: 'btn btn-action btn-block btn-outline-primary' %>
   </div>
 </div>
