@@ -26,7 +26,7 @@
   <p><b>Vos Cookoons</b></p>
   <div class="row">
     <% @cookoons.each do |cookoon| %>
-      <div class="col-12 col-md-6 mb-2">
+      <div class="col-12 col-md-6 mb-3">
         <%= component 'card_cookoon',
                       title: cookoon.name,
                       title_style: :reverse,
@@ -38,10 +38,7 @@
     <% end %>
   </div>
   <div class="py-3 text-center">
-    <% if @cookoons.any? %>
-      <%= link_to "Ajouter un autre Cookoon", new_cookoon_path, class: 'btn btn-action btn-block' %>
-    <% else %>
-      <%= link_to "Proposer mon appartement", new_cookoon_path, class: 'btn btn-action btn-block' %>
-    <% end %>
+    <% button_text = @cookoons.any? ? 'Ajouter un autre Cookoon' : 'Proposer mon appartement' %>
+    <%= link_to button_text, new_cookoon_path, class: 'btn btn-action btn-block btn-outline-primary' %>
   </div>
 </div>
