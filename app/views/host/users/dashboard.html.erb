@@ -26,30 +26,22 @@
   <p><b>Vos Cookoons</b></p>
   <div class="row">
     <% @cookoons.each do |cookoon| %>
-      <div class="col-12 col-md-6">
-        <div class="card">
-          <%= link_to edit_cookoon_path(cookoon) do %>
-            <div class="card-edit">
-              <i class="fas fa-pencil-alt" aria-hidden="true"></i>
-            </div>
-          <% end %>
-          <%= link_to edit_cookoon_path(cookoon) do %>
-            <div class="card-picture" style="background-image: url(<%= cookoon_safe_picture(cookoon) %>)"></div>
-          <% end %>
-          <div class="card-data">
-            <div class="card-text">
-              <%= cookoon.name %>
-            </div>
-            <div class="card-infos">
-              <%= category_display_for(cookoon) %>
-              <%= price_display_for(cookoon) %>
-            </div>
-          </div>
-        </div>
+      <div class="col-12 col-md-6 mb-2">
+        <%= component 'card_cookoon',
+                      title: cookoon.name,
+                      title_style: :reverse,
+                      image_url: cl_image_path(cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
+                      link_url: edit_cookoon_path(cookoon),
+                      cta: "Modifier"
+        %>
       </div>
     <% end %>
   </div>
   <div class="py-3 text-center">
-    <%= link_to "Proposer mon appartement", new_cookoon_path, class: 'button button-blue' %>
+    <% if @cookoons.any? %>
+      <%= link_to "Ajouter un autre Cookoon", new_cookoon_path, class: 'btn btn-action btn-block' %>
+    <% else %>
+      <%= link_to "Proposer mon appartement", new_cookoon_path, class: 'btn btn-action btn-block' %>
+    <% end %>
   </div>
 </div>
