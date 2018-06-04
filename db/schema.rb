@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_04_092928) do
+ActiveRecord::Schema.define(version: 2018_06_04_094904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -135,7 +135,6 @@ ActiveRecord::Schema.define(version: 2018_06_04_092928) do
     t.boolean "cleaning", default: false
     t.boolean "janitor", default: false
     t.string "stripe_charge_id"
-    t.boolean "catering", default: false
     t.string "trello_card_id"
     t.integer "discount_amount_cents", default: 0, null: false
     t.datetime "end_at"
