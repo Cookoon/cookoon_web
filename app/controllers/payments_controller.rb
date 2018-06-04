@@ -10,7 +10,7 @@ class PaymentsController < ApplicationController
     payment = Reservation::Payment.new(@reservation, payment_params)
     if payment.proceed
       @reservation.notify_users_after_payment
-      handle_redirection
+      redirect_to reservations_path, flash: { payment_succeed: true }
     else
       @credit_cards = current_user.credit_cards
       flash.now.alert = payment.displayable_errors
@@ -43,14 +43,6 @@ class PaymentsController < ApplicationController
 
   def payment_params
     params.require(:payment).permit(:discount)
-  end
-
-  def handle_redirection
-    if @reservation.catering
-      redirect_to reservations_path, flash: { catering_requested: true }
-    else
-      redirect_to reservations_path, flash: { payment_succeed: true }
-    end
   end
 
   # TODO: CP 2may2018 Try to refactor this
