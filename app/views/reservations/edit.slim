@@ -8,41 +8,28 @@
 
 / TODO CP 01.06 Probably not the best use of slim syntax...
 .container.pt-2
-  p
-    | Address:
-    '
-    strong = @cookoon.address
-    br
-    | Chez:
-    '
-    strong = @cookoon.user.full_name
+  p Adresse: <strong>#{@cookoon.address}</strong>
+    <br>Chez: <strong>#{@cookoon.user.full_name}</strong>
 
-  p
-    strong Contactez l'hôte :
+  p <strong>Contactez l'hôte :</strong>
 
-  p
-    | Téléphone:
-    '
-    strong = @cookoon.user.phone_number
+  p Téléphone: <strong>#{@cookoon.user.phone_number}</strong>
 
-  p
-    | E-mail:
-    '
-    strong = @cookoon.user.email
+  p E-mail: <strong>#{@cookoon.user.email}</strong>
 
   hr
 
-  p
-    strong Récapitulatif :
+  p <strong>Récapitulatif :</strong>
 
   .mb-4
     strong Location
 
-    d-flex-default.ml-3
-    | Cookoon
-    span = humanized_money_with_symbol @reservation.degressive_price
+    .d-flex-default.ml-3
+      | Cookoon
+      span = humanized_money_with_symbol @reservation.degressive_price
 
-    .d-flex-default.mb-2.ml-3 Frais de service
+    .d-flex-default.mb-2.ml-3
+      | Frais de service
       span = humanized_money_with_symbol @reservation.tenant_fee
 
     .mb-2 class=(' d-none' if @reservation.services.none?)
