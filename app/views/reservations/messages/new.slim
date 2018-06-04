@@ -1,2 +1,7 @@
-h4 Confirmation de demande de location
-p Ajoutez un message pour votre hôte
+.container
+  h4 Confirmation de demande de location
+  p Ajoutez un message pour votre hôte
+
+  = simple_form_for @reservation, url: reservation_messages_path(@reservation), method: :post, remote: true do |f|
+    = f.input :message_for_host
+    = f.submit
