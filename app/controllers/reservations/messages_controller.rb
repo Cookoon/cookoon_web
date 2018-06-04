@@ -5,7 +5,7 @@ class Reservations::MessagesController < ApplicationController
 
   def create
     @reservation.update(reservation_params)
-    redirect_to home_path
+    redirect_to home_path, flash: { reservation_completed: true }
   end
 
   private
