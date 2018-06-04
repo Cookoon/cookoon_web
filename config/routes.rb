@@ -46,6 +46,7 @@ Rails.application.routes.draw do
     resources :guests, controller: 'reservations/guests', only: %i[index create] do
       post :create_all, on: :collection
     end
+    resources :messages, controller: 'reservations/messages', only: %i[new create]
   end
 
   resources :services, only: [:destroy] do

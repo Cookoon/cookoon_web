@@ -1,0 +1,16 @@
+.container
+  h3.text-center Confirmation de demande de location
+
+  .p-4.d-flex.align-items-center
+    i.co.co-check.fa-2x.text-primary.mr-3 aria-hidden="true"
+    strong Votre demande de location a bien été envoyée.
+  p.pt-4
+    | Un message pour l’hôte ? N’hésitez pas à vous présenter et à lui expliquer
+      pourquoi vous souhaitez louer son Cookoon sur cette carte.
+
+  = simple_form_for @reservation,
+                    url: reservation_messages_path(@reservation),
+                    method: :post,
+                    remote: true do |f|
+    = f.input :message_for_host, label: false, placeholder: 'Envoyer un message'
+    = f.submit 'ENVOYER', class: 'btn btn-primary btn-action btn-block'

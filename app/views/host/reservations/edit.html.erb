@@ -3,15 +3,15 @@
 <div class="container">
   <div class="reservation-card">
     <%= render 'user_infos', reservation: @reservation %>
+
+    <% unless @reservation.message_for_host.blank? %>
+      <div class="reservation-card-message py-4">
+        <p><strong>Le message de votre locataire : </strong></p>
+        <em><%= simple_format @reservation.message_for_host %></em>
+      </div>
+    <% end %>
+
+    <h4>Choisissez vos options personnalisés</h4>
     <%= render 'form' %>
-    <div class="d-flex-default pt-5 pb-3">
-      <b>Informations sur le locataire</b>
-    </div>
-    <div class="d-flex-default">
-      <p><%= @reservation.user.full_name %></p>
-    </div>
-    <div class="d-flex-default">
-      <p><%= @reservation.user.description %></p>
-    </div>
   </div>
 </div>
