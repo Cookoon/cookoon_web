@@ -2,6 +2,9 @@
   h4 Confirmation de demande de location
   p Ajoutez un message pour votre hôte
 
-  = simple_form_for @reservation, url: reservation_messages_path(@reservation), method: :post, remote: true do |f|
-    = f.input :message_for_host
-    = f.submit
+  = simple_form_for @reservation,
+                    url: reservation_messages_path(@reservation),
+                    method: :post,
+                    remote: true do |f|
+    = f.input :message_for_host, label: false, placeholder: 'Envoyer un message'
+    = f.submit 'ENVOYER LE MESSAGE', class: 'btn btn-primary btn-action btn-block'
