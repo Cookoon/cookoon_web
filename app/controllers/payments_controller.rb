@@ -10,7 +10,7 @@ class PaymentsController < ApplicationController
     payment = Reservation::Payment.new(@reservation, payment_params)
     if payment.proceed
       @reservation.notify_users_after_payment
-      redirect_to reservations_path, flash: { payment_succeed: true }
+      redirect_to new_reservation_message_path(@reservation)
     else
       @credit_cards = current_user.credit_cards
       flash.now.alert = payment.displayable_errors
