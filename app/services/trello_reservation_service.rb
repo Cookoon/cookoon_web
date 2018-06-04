@@ -91,11 +91,6 @@ class TrelloReservationService
     desc_string << "**prix payé par le locataire :** #{humanized_money_with_symbol reservation.price_with_tenant_fee} \n"
     desc_string << "**somme versée à l'hôte :** #{humanized_money_with_symbol reservation.host_payout_price} \n"
 
-    if reservation.catering
-      desc_string << "\n"
-      desc_string << "**SERVICE TRAITEUR À PRÉVOIR** \n"
-    end
-
     if reservation.cleaning
       desc_string << "\n"
       desc_string << "**SERVICE MENAGE À PRÉVOIR** \n"
