@@ -40,3 +40,12 @@
     .d-flex-default.mb-2
       strong TOTAL
       strong = humanized_money_with_symbol @reservation.payment_amount
+
+    - if @reservation.accepted?
+      .text-center.py-3
+        p <strong>Partagez adresses et horaires de votre location en conviant vos invités</strong>
+        = link_to 'Convier mes invités', reservation_guests_path(@reservation), class: 'btn btn-light btn-action'
+
+    .text-center.pt-3
+      p Un imprévu ? Vous devez annuler votre réservation ?
+      = link_to "Annuler la réservation", reservation_path(@reservation), method: :patch, remote: true, class: 'btn btn-primary btn-action btn-block', data: { 'confirm-swal': "Êtes vous sûr ?", text: "Vous êtes sur le point d'annuler la réservation" }
