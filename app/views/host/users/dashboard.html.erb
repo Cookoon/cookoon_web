@@ -1,7 +1,11 @@
+<%= content_for :navbar_content do %>
+  <h4 class='text-primary'>Mon espace hôte</h4>
+<% end %>
+
 <% unless @user.stripe_verified? %>
   <%= render 'stripe_connection_card' %>
 <% end %>
-<div class="container pt-5 pb-3">
+<div class="container pb-3">
   <p><b>Votre activité</b></p>
   <p>Historique des revenus : <span class="text-primary"><%= humanized_money_with_symbol current_user.total_payouts_for_dashboard %></span></p>
 
