@@ -4,6 +4,7 @@ module NavbarCookoonComponent
   property :back_url
 
   def display_type
+    return 'back_with_content' if back_url? && content?
     return 'back' if back_url? && not_fixed?
     @type.to_s
   end
@@ -18,7 +19,8 @@ module NavbarCookoonComponent
   end
 
   def content_classes
-    @content.present? ? 'content-padded' : nil
+    return 'content-padded-backlink' if back_url? && content?
+    content? ? 'content-padded' : nil
   end
 
   def not_fixed?
@@ -27,5 +29,9 @@ module NavbarCookoonComponent
 
   def back_url?
     @back_url.present?
+  end
+
+  def content?
+    @content.present?
   end
 end

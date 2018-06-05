@@ -5,6 +5,9 @@
   align-items: center;
   font-size: 1.5rem;
   line-height: normal;
+  .fas {
+    flex: 1;
+  }
   &-back,
   &-fixed-back {
     padding-left: 1rem;
@@ -28,13 +31,13 @@
     }
   }
   &-content {
-    width: 70%;
-    position: absolute;
-    top: 45px;
-    left: 12%;
+    flex: 6;
     p {
       font-size: 13px;
       margin: 1px;
+    }
+    h4 {
+      margin: 0;
     }
   }
   &-fixed-back {
@@ -53,7 +56,13 @@
 }
 
 .content-padded {
-  padding: 50px 10px 80px 0;
+  padding: 50px 10px 50px 0;
+}
+
+.content-padded-backlink {
+  display: flex;
+  margin: auto;
+  align-items: center;
 }
 
 @media (min-width: 576px) {
@@ -67,6 +76,9 @@
     padding: 50px;
     max-width: 70%;
     margin: auto;
+  }
+  .content-padded-backlink {
+    max-width: 60%;
   }
   .navbar-cookoon-content {
     left: 21%;
