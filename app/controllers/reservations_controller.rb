@@ -27,7 +27,9 @@ class ReservationsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    @cookoon = @reservation.cookoon
+  end
 
   def update
     @reservation.cancelled!

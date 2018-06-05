@@ -8,4 +8,11 @@ module ReservationsHelper
     return false unless current_user
     current_user.notifiable_reservation_requests.any?
   end
+
+  # TODO CP 01/06 not the best approach here, foced to call html_safe in view
+  def date_and_duration_display_for(reservation)
+    date = reservation.start_at.strftime('%d/%m')
+    time = reservation.start_at.strftime('%H')
+    "<b>#{date}</b>, à <b>#{time}h</b> pour <b>#{reservation.duration}h</b>"
+  end
 end

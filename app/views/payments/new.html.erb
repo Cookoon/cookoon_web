@@ -43,6 +43,9 @@
 
     <div class="mb-2<%= ' d-none' if @reservation.services.none? %>" data-target="payments.servicesPrices">
       <%= render 'reservations/services_prices' %>
+      <p class='small text-secondary text-center mt-2'>
+        Notre concierge vous recontactera pour adapter les services (nombre de personnes, menus spéciaux, demandes sur-mesure, etc...)
+      </p>
     </div>
 
     <hr>
