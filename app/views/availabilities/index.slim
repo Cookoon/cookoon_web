@@ -1,8 +1,8 @@
 - content_for :navbar_back_url, host_dashboard_path
+= content_for :navbar_content do
+  h4.text-primary Gérer mes disponibilités
 
 .container
-  h2.h4.mb-0 Gérer mes disponibilités
-
   - @weeks.each do |week|
     h3.h6.mt-5 = week[:display]
 
