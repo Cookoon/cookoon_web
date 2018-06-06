@@ -1,5 +1,9 @@
+<%= content_for :navbar_content do %>
+  <h4 class='text-primary'>Mes invitations</h4>
+<% end %>
+
+
 <div class="container">
-  <h2>Mes invitations</h2>
   <p>Des proches souhaitent rejoindre Cookoon ?</p>
   <p><%= t 'devise.invitations.count', count: current_user.invitation_limit %></p>
 
