@@ -15,9 +15,9 @@
 
   p <strong>Contactez l'hôte :</strong>
 
-  p Téléphone: <strong>#{@cookoon.user.phone_number}</strong>
+  p Téléphone: <strong>#{tel_to(@cookoon.user.phone_number)}</strong>
 
-  p E-mail: <strong>#{@cookoon.user.email}</strong>
+  p E-mail: <strong>#{mail_to @cookoon.user.email, @cookoon.user.email, target: :_blank, data: { turbolinks: false }}</strong>
 
   hr.half
 
