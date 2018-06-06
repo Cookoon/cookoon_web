@@ -19,7 +19,7 @@
 
   p E-mail: <strong>#{@cookoon.user.email}</strong>
 
-  hr
+  hr.half
 
   p <strong>Récapitulatif :</strong>
 
@@ -37,18 +37,21 @@
     .mb-2 class=(' d-none' if @reservation.services.none?)
       = render 'reservations/services_prices'
 
-    hr
+    hr.half
 
-    .d-flex-default.mb-2
+    .d-flex-default.mb-4
       strong TOTAL
       strong = humanized_money_with_symbol @reservation.payment_amount
 
-    = mail_to 'concierge@cookoon.fr', 'Demander une facture', class: 'btn btn-primary btn-action btn-block', target: :_blank, data: { turbolinks: false }
+    .py-4
+      = mail_to 'concierge@cookoon.fr', 'Demander une facture', class: 'btn btn-primary btn-action btn-block', target: :_blank, data: { turbolinks: false }
+
+    = component 'hr'
 
     - if @reservation.accepted?
       .text-center.py-3
         p <strong>Partagez adresses et horaires de votre location en conviant vos invités</strong>
-        = link_to 'Convier mes invités', reservation_guests_path(@reservation), class: 'btn btn-light btn-action'
+        = link_to 'Convier mes invités', reservation_guests_path(@reservation), class: 'btn btn-primary btn-action btn-block'
 
     .text-center.pt-3
       p Un imprévu ? Vous devez annuler votre réservation ?
