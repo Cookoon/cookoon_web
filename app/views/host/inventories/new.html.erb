@@ -1,3 +1,8 @@
+<%= content_for :navbar_back_url, host_reservations_path %>
+<%= content_for :navbar_content do %>
+  <h4 class='text-primary'>Check-in</h4>
+<% end %>
+
 <div class="container">
   <% unless @reservation.starts_soon? %>
     <div class="information-card text-center">

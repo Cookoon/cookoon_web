@@ -1,6 +1,9 @@
-<div class="container">
-  <h2>Mes moyens de paiement</h2>
+<%= content_for :navbar_content do %>
+  <h4 class='text-primary'>Mes moyens de paiement</h4>
+<% end %>
 
+
+<div class="container">
   <% if @credit_cards.blank? && current_user.available_discount? %>
     <div class="information-card text-center">
       <div class="information-card-picto">

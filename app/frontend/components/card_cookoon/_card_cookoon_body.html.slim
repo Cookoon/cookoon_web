@@ -3,6 +3,9 @@
   - if cta?
     .cta
       = @cta
+  - if infos?
+    .cta.infos
+      = @infos
   - if icons?
     .icons
       - @icons.each do |icon|

@@ -6,7 +6,7 @@
               title: @cookoon.name,
               title_style: :reverse,
               image_url: cl_image_path(@cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
-              cta: date_and_duration_display_for(@reservation).html_safe
+              infos: date_and_duration_display_for(@reservation).html_safe
 
 / TODO CP 01.06 Probably not the best use of slim syntax...
 .container.pt-2
@@ -19,7 +19,7 @@
 
   p E-mail: <strong>#{@cookoon.user.email}</strong>
 
-  hr
+  hr.half
 
   p <strong>Récapitulatif :</strong>
 
@@ -37,20 +37,23 @@
     .mb-2 class=(' d-none' if @reservation.services.none?)
       = render 'reservations/services_prices'
 
-    hr
+    hr.half
 
-    .d-flex-default.mb-2
+    .d-flex-default.mb-4
       strong TOTAL
       strong = humanized_money_with_symbol @reservation.payment_amount
 
-    = mail_to 'concierge@cookoon.fr', 'Demander une facture', class: 'btn btn-primary btn-action btn-block', target: :_blank, data: { turbolinks: false }
+    .py-4
+      = mail_to 'concierge@cookoon.fr', 'Demander une facture', class: 'btn btn-primary btn-action btn-block', target: :_blank, data: { turbolinks: false }
+
+    = component 'hr'
 
     - if @reservation.accepted?
       .text-center.py-3
         p <strong>Partagez adresses et horaires de votre location en conviant vos invités</strong>
-        = link_to 'Convier mes invités', reservation_guests_path(@reservation), class: 'btn btn-light btn-action'
+        = link_to 'Convier mes invités', reservation_guests_path(@reservation), class: 'btn btn-primary btn-action btn-block'
 
     .text-center.pt-3
-      p Un imprévu ? Vous devez annuler votre réservation ?
+      p Attention : si vous annulez 48h avant votre location, vous risquez de ne pas être remboursé de l'intégralité du montant de la location
       = link_to reservation_path(@reservation), method: :patch, remote: true, class: 'text-primary opacity-hover', data: { 'confirm-swal': "Êtes vous sûr ?", text: "Vous êtes sur le point d'annuler la réservation" } do
         <u>Annuler la réservation</u>
