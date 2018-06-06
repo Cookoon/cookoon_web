@@ -6,7 +6,7 @@
               title: @cookoon.name,
               title_style: :reverse,
               image_url: cl_image_path(@cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
-              cta: date_and_duration_display_for(@reservation).html_safe
+              infos: date_and_duration_display_for(@reservation).html_safe
 
 / TODO CP 01.06 Probably not the best use of slim syntax...
 .container.pt-2

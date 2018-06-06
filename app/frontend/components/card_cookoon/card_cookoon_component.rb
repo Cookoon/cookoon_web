@@ -22,4 +22,8 @@ module CardCookoonComponent
   def icons?
     @icons&.any?
   end
+
+  def infos?
+    @infos.present?
+  end
 end
