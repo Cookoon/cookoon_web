@@ -1,11 +1,13 @@
 <% content_for :navbar_back_url, cookoon_path(@reservation.cookoon) %>
+<%= content_for :navbar_content do %>
+  <h4 class='text-primary'>Payez votre réservation</h4>
+<% end %>
 
 <div class="container"
      data-controller="payments"
      data-payments-amounts-url="<%= amounts_reservation_payments_path(@reservation) %>"
      data-payments-discount="false"
 >
-  <h2>Payez votre réservation</h2>
 
   <p><b>Votre location :</b></p>
 

@@ -29,6 +29,7 @@
   }
   &-content {
     flex: 6;
+    padding-left: 25px;
     p {
       font-size: 13px;
       margin: 1px;
@@ -57,9 +58,7 @@
 }
 
 .content-padded-backlink {
-  display: flex;
-  margin: auto;
-  align-items: center;
+  padding: 30px 20px;
 }
 
 @media (min-width: 576px) {

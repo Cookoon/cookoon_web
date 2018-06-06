@@ -4,7 +4,6 @@ module NavbarCookoonComponent
   property :back_url
 
   def display_type
-    return 'back_with_content' if back_url? && content?
     return 'back' if back_url? && not_fixed?
     @type.to_s
   end
