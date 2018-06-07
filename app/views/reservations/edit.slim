@@ -44,7 +44,7 @@
       strong = humanized_money_with_symbol @reservation.payment_amount
 
     .py-4
-      = mail_to 'concierge@cookoon.fr', 'Demander une facture', class: 'btn btn-primary btn-action btn-block', target: :_blank, data: { turbolinks: false }
+      = link_to 'Demander une facture', reservation_invoices_path(@reservation), class: 'btn btn-primary btn-action btn-block', method: :post
 
     = component 'hr'
 
