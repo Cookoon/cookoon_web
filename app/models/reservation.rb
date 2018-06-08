@@ -30,6 +30,7 @@ class Reservation < ApplicationRecord
     2 => 1,
     3 => 1,
     5 => 0.85,
+    7 => 0.85,
     10 => 0.8
   }.freeze
 
