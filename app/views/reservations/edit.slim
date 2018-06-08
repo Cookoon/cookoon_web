@@ -44,7 +44,7 @@
       strong = humanized_money_with_symbol @reservation.payment_amount
 
     .py-4
-      = link_to 'Demander une facture', reservation_invoices_path(@reservation), class: 'btn btn-primary btn-action btn-block', method: :post
+      = link_to 'Demander une facture', reservation_invoices_path(@reservation), class: 'btn btn-primary btn-action btn-block', method: :post, remote: true
 
     = component 'hr'
 
