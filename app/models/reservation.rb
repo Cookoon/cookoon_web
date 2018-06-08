@@ -29,7 +29,12 @@ class Reservation < ApplicationRecord
   DEGRESSION_RATES = {
     2 => 1,
     3 => 1,
+    4 => 1,
     5 => 0.85,
+    6 => 0.85,
+    7 => 0.85,
+    8 => 0.85,
+    9 => 0.85,
     10 => 0.8
   }.freeze
 
