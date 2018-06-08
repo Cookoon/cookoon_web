@@ -31,9 +31,9 @@ export default class extends Controller {
 
     this.durationSlider = new Slider(this.durationInputTarget, {
       value: 2,
-      ticks: [2, 3, 5, 10],
-      ticks_labels: ['2h', '3h', '5h', '10h'],
-      ticks_positions: [0, 33.33, 66.66, 100],
+      ticks: [2, 3, 5, 7, 10],
+      ticks_labels: ['2h', '3h', '5h', '7h', '10h'],
+      ticks_positions: [0, 25, 50, 75, 100],
       ticks_snap_bounds: 5
     }).on('change', this.renderDurationDescription);
     this.renderDurationDescription();
@@ -122,10 +122,13 @@ export default class extends Controller {
         break;
       case '4':
       case '5':
+        this.durationDescriptionTarget.textContent =
+          'Pour un dîner ? une réunion d’équipe ?';
+        break;
       case '6':
       case '7':
         this.durationDescriptionTarget.textContent =
-          'Pour un dîner ? une réunion d’équipe ?';
+          "Un grand dîner ? Un comité d'entreprise ?";
         break;
       case '8':
       case '9':
