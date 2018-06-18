@@ -5,12 +5,15 @@
   }
   &-content {
     position: absolute;
-    top: -25px;
+    top: -10px;
     left: 17px;
     z-index: 1;
     background: var(--primary);
     color: var(--white);
     width: 280px;
     padding: 10px 15px;
+    p {
+      margin: 0;
+    }
   }
 }
