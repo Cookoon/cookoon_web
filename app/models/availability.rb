@@ -9,13 +9,13 @@ class Availability < ApplicationRecord
   TIME_SLOTS = {
     morning: {
       start_time: 7.hours,
-      end_time: 12.hours,
-      display: '7h-12h'
+      end_time: 9.hours,
+      display: '7h-9h'
     },
     noon: {
-      start_time: 12.hours,
+      start_time: 9.hours,
       end_time: 14.hours,
-      display: '12h-14h'
+      display: '9h-14h'
     },
     afternoon: {
       start_time: 14.hours,
