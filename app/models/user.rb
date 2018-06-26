@@ -120,8 +120,8 @@ class User < ApplicationRecord
     merge_fields = {
       FIRST_NAME: first_name,
       LAST_NAME: last_name,
-      BORN_ON: born_on.to_s,
-      BIRTHDAY: born_on.strftime('%m/%d')
+      BORN_ON: born_on&.to_s,
+      BIRTHDAY: born_on&.strftime('%m/%d')
     }
     UpsertMailchimpSubscriptionJob.perform_later(email, ENV['MAILCHIMP_LIST_ID'], merge_fields)
   end
