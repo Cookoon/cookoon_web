@@ -3,6 +3,7 @@
 
   <%= f.input :first_name %>
   <%= f.input :last_name %>
+  <%= f.input :born_on, start_year: Date.today.year - 90, end_year: Date.today.year - 12, selected: { year: 1965, day: 1, month: 1 } %>
   <%= f.input :phone_number %>
   <%= f.input :password %>
   <%= f.input :password_confirmation %>
