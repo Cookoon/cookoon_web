@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_06_092106) do
+ActiveRecord::Schema.define(version: 2018_06_26_135950) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -204,6 +204,7 @@ ActiveRecord::Schema.define(version: 2018_06_06_092106) do
     t.integer "emailing_preferences", default: 1
     t.integer "discount_balance_cents", default: 0
     t.datetime "discount_expires_at"
+    t.date "born_on"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"

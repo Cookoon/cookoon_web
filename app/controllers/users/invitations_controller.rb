@@ -11,6 +11,7 @@ class Users::InvitationsController < Devise::InvitationsController
       :first_name,
       :last_name,
       :phone_number,
+      :born_on,
       :terms_of_service
     )
   end

@@ -20,6 +20,7 @@ fr:
       user:
         email: Adresse email
         phone_number: Téléphone portable
+        born_on: Date de naissance
         reset_password_token: Votre lien de réinitialisation
     errors:
       models:

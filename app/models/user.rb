@@ -35,9 +35,13 @@ class User < ApplicationRecord
   validates :phone_number,
             presence: true,
             format: { with: PHONE_REGEXP }
+  validates :born_on, presence: true, if: :invited_to_sign_up?
   validates :terms_of_service, acceptance: { message: 'Vous devez accepter les conditions générales pour continuer' }
 
   after_invitation_accepted :send_welcome_email
+
+  after_save :upsert_mailchimp_subscription, if: :saved_change_to_born_on?
+
   before_update :set_discount_expires_at, if: :discount_balance_cents_changed?
 
   def full_name
@@ -110,5 +114,15 @@ class User < ApplicationRecord
 
   def send_welcome_email
     UserMailer.welcome_email(self).deliver_later
+  end
+
+  def upsert_mailchimp_subscription
+    merge_fields = {
+      FIRST_NAME: first_name,
+      LAST_NAME: last_name,
+      BORN_ON: born_on&.to_s,
+      BIRTHDAY: born_on&.strftime('%m/%d')
+    }
+    UpsertMailchimpSubscriptionJob.perform_later(email, ENV['MAILCHIMP_LIST_ID'], merge_fields)
   end
 end

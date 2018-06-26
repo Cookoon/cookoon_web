@@ -3,6 +3,7 @@
     <%= f.input :photo, as: :attachinary, input_html: { data: { controller: 'attachinary' } } %>
     <%= f.input :first_name %>
     <%= f.input :last_name %>
+    <%= f.input :born_on, start_year: Date.today.year - 90, end_year: Date.today.year - 12 %>
     <%= f.input :phone_number %>
     <%= f.input :description, input_html: { rows: 3 } %>
   </div>
