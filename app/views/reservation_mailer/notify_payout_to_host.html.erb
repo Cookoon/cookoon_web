@@ -1,0 +1,8 @@
+<p>Bonjour <%= @host.first_name %>,</p>
+
+<p>Le paiement de la location de <%= @tenant.first_name %> a bien été effectué.
+<br>Vous recevrez <%= humanized_money_with_symbol @reservation.host_payout_price %> directement sur votre compte d'ici quelques jours.</p>
+
+<% content_for :post_scriptum do %>
+  <p>PS : Une question ? Rendez-vous sur <%= link_to 'aide.cookoon.fr', 'https://aide.cookoon.fr', target: :_blank %>.</p>
+<% end %>

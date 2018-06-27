@@ -163,6 +163,8 @@ class Reservation < ApplicationRecord
 
   def admin_close
     payment.transfer
+    ReservationMailer.notify_payout_to_host(self).deliver_later
+
     passed!
     send_ending_surveys
   end

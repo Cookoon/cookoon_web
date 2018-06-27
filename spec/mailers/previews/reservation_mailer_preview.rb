@@ -59,6 +59,10 @@ class ReservationMailerPreview < ActionMailer::Preview
   def ending_survey_to_host
     ReservationMailer.ending_survey_to_host(Reservation.last)
   end
+
+  def notify_payout_to_host
+    ReservationMailer.notify_payout_to_host(Reservation.last)
+  end
   # ============================
 
   # ==== Notifications =====
