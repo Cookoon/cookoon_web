@@ -11,6 +11,7 @@ class Cookoon < ApplicationRecord
   scope :created_in_day_range_around, ->(date_time) { where created_at: day_range(date_time) }
 
   CATEGORIES = %w[Appartement Maison Jardin Loft Terrasse Toit Villa].freeze
+  MAX_PER_USER = 2
 
   belongs_to :user
   has_many :reservations, dependent: :restrict_with_exception
