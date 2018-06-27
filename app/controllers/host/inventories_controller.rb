@@ -13,6 +13,8 @@ class Host::InventoriesController < ApplicationController
       # Pas de test ici, il faut monitorer sur les premieres locations
       # Ajouter une transaction ? Ou poster sur Slack pour le declencher a la main.
       @reservation.payment.transfer
+      ReservationMailer.notify_payout_to_host(@reservation).deliver_later
+
       flash[:notice] = 'La reservation vient de démarrer'
       redirect_to host_reservations_path
     else

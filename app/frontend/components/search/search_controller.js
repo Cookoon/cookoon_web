@@ -123,7 +123,7 @@ export default class extends Controller {
       case '4':
       case '5':
         this.durationDescriptionTarget.textContent =
-          'Pour un dîner ? une réunion d’équipe ?';
+          "Pour un dîner ? une réunion d'équipe ?";
         break;
       case '6':
       case '7':

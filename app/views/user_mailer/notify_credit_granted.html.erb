@@ -12,7 +12,7 @@
   </tbody></table>
 <% else %>
   <p>Pour vous remercier de votre implication sur Cookoon, nous venons de créditer votre compte Cookoon de <%= humanized_money_with_symbol @credit_amount %>.</p>
-  <p>Utilisez-les pour organiser vos évènements ou simplement profiter d’un appartement unique pour quelques heures.</p>
+  <p>Utilisez-les pour organiser vos évènements ou simplement profiter d'un appartement unique pour quelques heures.</p>
 <% end %>
 
 <table border="0" cellpadding="0" cellspacing="10" class="btn btn-primary"><tbody><tr>
@@ -21,7 +21,7 @@
   </td>
 </tr></tbody></table>
 
-<p>Dépéchez-vous : votre crédit est disponible jusqu’au <%= display_date_for(@user.discount_expires_at) %> ; vous ne pourrez plus en profiter après.</p>
+<p>Dépéchez-vous : votre crédit est disponible jusqu'au <%= display_date_for(@user.discount_expires_at) %> ; vous ne pourrez plus en profiter après.</p>
 
 <%= content_for :post_scriptum do %>
   <p>PS : une question ? Rendez-vous sur <%= link_to 'aide.cookoon.fr', 'https://aide.cookoon.fr', target: :_blank %></p>

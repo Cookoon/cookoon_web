@@ -152,6 +152,14 @@ class ReservationMailer < ApplicationMailer
     mail(to: @host.full_email, subject: "Comment s'est passée votre expérience Cookoon ?")
   end
 
+  def notify_payout_to_host(reservation)
+    @reservation = reservation
+    @tenant = @reservation.user
+    @cookoon = @reservation.cookoon
+    @host = @cookoon.user
+    mail(to: @host.full_email, subject: 'Votre paiement Cookoon a bien été effectué')
+  end
+
   # ==== Host notification =====
   def notify_awaiting_request_to_host(reservation)
     @reservation = reservation
