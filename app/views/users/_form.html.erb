@@ -1,4 +1,4 @@
-<%= simple_form_for @user, url: users_path, method: :patch, remote: true do |f| %>
+<%= simple_form_for @user, url: users_path, remote: true do |f| %>
   <div class="form-inputs">
     <%= f.input :photo, as: :attachinary, input_html: { data: { controller: 'attachinary' } } %>
     <%= f.input :first_name %>
