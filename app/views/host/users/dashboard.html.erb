@@ -41,7 +41,7 @@
       </div>
     <% end %>
   </div>
-  <% if current_user.cookoons.count < Cookoon::MAX_PER_USER %>
+  <% unless current_user.reached_max_cookoons_count? %>
     <div class="py-3 text-center">
       <% button_text = @cookoons.any? ? 'Ajouter un autre Cookoon' : 'Proposer mon appartement' %>
       <%= link_to button_text, new_cookoon_path, class: 'btn btn-action btn-block btn-outline-primary' %>
