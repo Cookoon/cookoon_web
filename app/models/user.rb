@@ -105,8 +105,8 @@ class User < ApplicationRecord
     end
   end
 
-  def has_less_than_max_cookoons?
-    cookoons.count < Cookoon::MAX_PER_USER
+  def reached_max_cookoons_count?
+    cookoons.count >= Cookoon::MAX_PER_USER
   end
 
   private

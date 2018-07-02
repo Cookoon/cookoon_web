@@ -44,7 +44,7 @@ fr:
         cookoon:
           attributes:
             user:
-              too_many_cookoons: "Un maximum de deux cookoons par utilisateur est autorisé sur notre plateforme"      
+              max_cookoons_count: "Un maximum de deux cookoons par utilisateur est autorisé sur notre plateforme"      
         search:
           attributes:
             start_at:
