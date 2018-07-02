@@ -41,6 +41,10 @@ fr:
               blank: Vous n'avez sélectionné aucun contact
             start_at:
               before_notice_period: Un minimum de 10h est requis.
+        cookoon:
+          attributes:
+            user:
+              too_many_cookoons: "Un maximum de deux cookoons par utilisateur est autorisé sur notre plateforme"      
         search:
           attributes:
             start_at:

@@ -31,6 +31,7 @@ class Cookoon < ApplicationRecord
   validates :capacity, presence: true
   validates :category, presence: true
   validates :photos,   presence: true
+  validate :count_per_user, on: :create
 
   after_validation :geocode, if: :address_changed?
   after_create :create_trello_card
@@ -63,5 +64,11 @@ class Cookoon < ApplicationRecord
   def notify_approved
     return unless saved_change_to_status == %w[under_review approved]
     CookoonMailer.notify_approved(self).deliver_later
+  end
+
+  def count_per_user
+    unless user.has_less_than_max_cookoons?
+      errors.add(:user, :too_many_cookoons)
+    end
   end
 end
