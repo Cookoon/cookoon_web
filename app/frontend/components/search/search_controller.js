@@ -145,7 +145,7 @@ export default class extends Controller {
 
   decreasePeopleSlider() {
     this.peopleSliderDecreaserTarget.style.display = 'none';
-    this.peopleSliderIncreaserTarget.style.display = 'initial';
+    this.peopleSliderIncreaserTarget.style.display = 'flex';
 
     this.peopleSlider.destroy();
     this.peopleSlider = new Slider(this.peopleInputTarget, {
@@ -157,7 +157,7 @@ export default class extends Controller {
 
   increasePeopleSlider() {
     this.peopleSliderIncreaserTarget.style.display = 'none';
-    this.peopleSliderDecreaserTarget.style.display = 'initial';
+    this.peopleSliderDecreaserTarget.style.display = 'flex';
 
     this.peopleSlider.destroy();
     this.peopleSlider = new Slider(this.peopleInputTarget, {

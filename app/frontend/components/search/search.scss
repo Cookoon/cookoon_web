@@ -103,27 +103,32 @@
         .people-count {
           .flex-container {
             display: flex;
-            align-items: flex-end;
+            align-items: stretch;
             padding: 0 0.5rem;
             .slider {
               &-decreaser {
                 display: none;
                 flex-grow: 1;
                 cursor: pointer;
-                text-align: center;
-                font-size: 2rem;
-                margin-bottom: 0.3rem;
+                justify-content: center;
+                align-items: center;
+                background-color: var(--primary);
+                color: var(--white);
+                margin: 0.8rem 0.5rem 0.7em 0;
               }
               &-container {
-                width: calc(100vw - 9rem);
+                width: calc(100vw - 9.5rem);
                 margin: 0.4rem 1rem 0;
               }
               &-increaser {
                 flex-grow: 1;
                 cursor: pointer;
-                text-align: center;
-                font-size: 2rem;
-                margin-bottom: 0.3rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: var(--primary);
+                color: var(--white);
+                margin: 0.8rem 0 0.7rem 0.5rem;
               }
             }
           }
