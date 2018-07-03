@@ -41,8 +41,15 @@
       </div>
     <% end %>
   </div>
-  <div class="py-3 text-center">
-    <% button_text = @cookoons.any? ? 'Ajouter un autre Cookoon' : 'Proposer mon appartement' %>
-    <%= link_to button_text, new_cookoon_path, class: 'btn btn-action btn-block btn-outline-primary' %>
-  </div>
+  <% unless current_user.reached_max_cookoons_count? %>
+    <div class="py-3 text-center">
+      <% button_text = @cookoons.any? ? 'Ajouter un autre Cookoon' : 'Proposer mon appartement' %>
+      <%= link_to button_text, new_cookoon_path, class: 'btn btn-action btn-block btn-outline-primary' %>
+    </div>
+  <% end %>
+  <p>
+    Cookoon s'inscrit dans une démarche responsable, à ce titre nous n'acceptons
+    pas plus deux espaces par hôte afin de ne pas participer à l'inflation des
+    prix de l'immobilier.
+  </p>
 </div>

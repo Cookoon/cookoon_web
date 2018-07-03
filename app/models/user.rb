@@ -105,6 +105,10 @@ class User < ApplicationRecord
     end
   end
 
+  def reached_max_cookoons_count?
+    cookoons.count >= Cookoon::MAX_PER_USER
+  end
+
   private
 
   def set_discount_expires_at

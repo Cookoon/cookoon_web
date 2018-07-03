@@ -49,6 +49,8 @@ class CookoonsController < ApplicationController
         redirect_to new_stripe_account_path
       end
     else
+      # other error messages are already displayed on form
+      flash.now.alert = @cookoon.errors.messages[:user].join
       render :new
     end
   end
