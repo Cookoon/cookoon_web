@@ -6,7 +6,6 @@ import 'vendor/attachinary';
 
 export default class extends Controller {
   connect() {
-    console.log('connected')
     $('.attachinary-input').attachinary();
 
     // Display upload-zone if attachinary-input is not disabled
@@ -14,17 +13,15 @@ export default class extends Controller {
       $('label.attachinary').addClass('upload-zone');
     }
 
-    // Remore upload-zone if last uploaded picture disables attachinary-input
-    $('.attachinary-input').bind('fileuploaddone', function(event) {
+    // Remove upload-zone if last uploaded picture disables attachinary-input
+    $('.attachinary-input').on('fileuploaddone', function(event) {
       if (event.result[0].disabled) {
         $('label.attachinary').removeClass('upload-zone');
       }
     });
-
-    // Display upload-zone on image removal
-    $('.attachinary_container a').click(function() {
+  
+    $(document).on('attachinary:fileremoved', function() {
       $('label.attachinary').addClass('upload-zone');
-    });
-    // document.addEventListener()
+    })
   }
 }
