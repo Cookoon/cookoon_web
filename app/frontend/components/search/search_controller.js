@@ -13,6 +13,8 @@ export default class extends Controller {
     'durationInput',
     'cta',
     'peopleInput',
+    'peopleSliderDecreaser',
+    'peopleSliderIncreaser',
     'pusher',
     'startAtInput',
     'timeDisplay',
@@ -140,4 +142,28 @@ export default class extends Controller {
         this.durationDescriptionTarget.textContent = '';
     }
   };
+
+  decreasePeopleSlider() {
+    this.peopleSliderDecreaserTarget.style.display = 'none';
+    this.peopleSliderIncreaserTarget.style.display = 'flex';
+
+    this.peopleSlider.destroy();
+    this.peopleSlider = new Slider(this.peopleInputTarget, {
+      value: 12,
+      ticks: [2, 4, 6, 8, 10, 12],
+      ticks_labels: ['2', '4', '6', '8', '10', '12']
+    });
+  }
+
+  increasePeopleSlider() {
+    this.peopleSliderIncreaserTarget.style.display = 'none';
+    this.peopleSliderDecreaserTarget.style.display = 'flex';
+
+    this.peopleSlider.destroy();
+    this.peopleSlider = new Slider(this.peopleInputTarget, {
+      value: 12,
+      ticks: [12, 14, 16, 18, 20],
+      ticks_labels: ['12', '14', '16', '18', '20']
+    });
+  }
 }

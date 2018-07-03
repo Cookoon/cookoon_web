@@ -28,8 +28,15 @@
             .description(data-target="search.durationDescription")
           .people-count
             .title 3. Combien de participants ?
-            .slider-container
-              = f.input :people_count, label: false, input_html: { data: { target: 'search.peopleInput'}}
+            .flex-container
+              .slider-decreaser(data-target="search.peopleSliderDecreaser" data-action="click->search#decreasePeopleSlider")
+                i.fas.fa-minus
+
+              .slider-container
+                = f.input :people_count, label: false, input_html: { data: { target: 'search.peopleInput'}}
+              .slider-increaser(data-target="search.peopleSliderIncreaser" data-action="click->search#increasePeopleSlider")
+                i.fas.fa-plus
+
           i#errors.errors-wrapper
         = f.submit class: 'cta', data: { target: 'search.cta' }
   .subtitle Trouvez d'abord le lieu adapté à votre besoin,<br/>vous pourrez ensuite choisir vos services
