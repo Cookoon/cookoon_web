@@ -61,4 +61,21 @@ RSpec.describe Cookoon, type: :model do
       expect(cookoon.errors[:price]).to include('doit être supérieur à 0')
     end
   end
+
+  context 'user already has cookoons' do
+    let(:user) { create(:user)}
+
+    it 'is valid when user has one cookoon' do 
+      create(:cookoon, user: user)
+      cookoon = build(:cookoon, user: user)
+      expect(cookoon).to be_valid
+    end
+
+    it 'is invalid when user has two cookoons' do
+      2.times { create(:cookoon, user: user) }
+      cookoon = build(:cookoon, user: user)
+      cookoon.valid?
+      expect(cookoon.errors[:user].first).to include('maximum')
+    end
+  end
 end

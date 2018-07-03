@@ -67,7 +67,7 @@ class Cookoon < ApplicationRecord
   end
 
   def count_per_user
-    if user.reached_max_cookoons_count?
+    if user&.reached_max_cookoons_count?
       errors.add(:user, :max_cookoons_count)
     end
   end
