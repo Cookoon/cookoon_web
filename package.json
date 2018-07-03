@@ -3,14 +3,15 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.1.0-4",
-    "@rails/webpacker": "3.5",
+    "@rails/webpacker": "4.0.0-pre.2",
     "babel-plugin-transform-runtime": "^6.23.0",
+    "blueimp-file-upload": "^9.22.0",
     "bootstrap": "^4.1.1",
     "bootstrap-slider": "^10.0.0",
-    "cloudinary-jquery-file-upload": "^2.5.0",
+    "cloudinary-jquery-file-upload": "cloudinary/pkg-cloudinary-jquery-file-upload",
     "flatpickr": "^4.4.4",
     "gmaps": "^0.4.24",
-    "jquery": "^2.2.4",
+    "jquery": "^3.3.1",
     "jquery-touchswipe": "^1.6.18",
     "jquery-ui": "^1.12.1",
     "popper.js": "^1.14.3",
@@ -22,6 +23,7 @@
   },
   "devDependencies": {
     "webpack-bundle-analyzer": "^2.11.1",
-    "webpack-dev-server": "2.11.2"
+    "webpack-cli": "^3.0.8",
+    "webpack-dev-server": "^3.1.4"
   }
 }
