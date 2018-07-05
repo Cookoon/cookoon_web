@@ -17,7 +17,7 @@ class SlackNotifierService
     notifier.ping message
   end
 
-  # private
+  private
 
   attr_reader :reservation, :cookoon, :host, :tenant
 
