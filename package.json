@@ -3,7 +3,7 @@
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.1.0-4",
-    "@rails/webpacker": "4.0.0-pre.2",
+    "@rails/webpacker": "3.5",
     "babel-plugin-transform-runtime": "^6.23.0",
     "blueimp-file-upload": "^9.22.0",
     "bootstrap": "^4.1.1",
@@ -24,6 +24,6 @@
   "devDependencies": {
     "webpack-bundle-analyzer": "^2.11.1",
     "webpack-cli": "^3.0.8",
-    "webpack-dev-server": "^3.1.4"
+    "webpack-dev-server": "2.11.2"
   }
 }
