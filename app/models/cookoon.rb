@@ -34,8 +34,6 @@ class Cookoon < ApplicationRecord
   validate :count_per_user, on: :create
 
   after_validation :geocode, if: :address_changed?
-  after_create :create_trello_card
-  after_save :update_trello, :notify_approved, if: :saved_change_to_status?
 
   def unavailabilites(date_range)
     overlapping_reservations(date_range) + overlapping_availabilities(date_range)
@@ -49,16 +47,6 @@ class Cookoon < ApplicationRecord
 
   def overlapping_availabilities(date_range)
     availabilities.unavailable.overlapping(date_range)
-  end
-
-  def create_trello_card
-    return unless Rails.env.production?
-    CreateCookoonTrelloCardJob.perform_later(id)
-  end
-
-  def update_trello
-    return unless Rails.env.production?
-    UpdateCookoonTrelloCardJob.perform_later(id)
   end
 
   def notify_approved
