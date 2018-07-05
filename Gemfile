@@ -74,6 +74,7 @@ gem 'cloudinary'
 gem 'gibbon'
 gem 'postmark-rails'
 gem 'ruby-trello'
+gem 'slack-notifier'
 gem 'stripe'
 
 # Tracking
