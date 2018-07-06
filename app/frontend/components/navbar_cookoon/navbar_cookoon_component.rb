@@ -4,7 +4,7 @@ module NavbarCookoonComponent
   property :back_url
 
   def display_type
-    @type
+    @type.to_s
   end
 
   def back_link
