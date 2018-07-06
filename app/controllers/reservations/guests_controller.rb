@@ -25,7 +25,7 @@ class Reservations::GuestsController < ApplicationController
 
     if params.dig(:reservation, :guest_ids).any?(&:present?) && @reservation.save
       ReservationMailer.guests_overview_to_tenant(@reservation.id).deliver_later
-      redirect_to edit_reservation_path(@reservation), notice: 'Vos invités ont bien été conviés'
+      redirect_to reservations_path, notice: 'Vos invités ont bien été conviés'
     else
       @reservation.errors.add(:guests, :blank)
       @user_guests = current_user.guests.where.not(id: @reservation.guest_ids)
