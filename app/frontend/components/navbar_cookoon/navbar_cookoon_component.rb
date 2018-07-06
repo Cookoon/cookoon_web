@@ -3,6 +3,10 @@ module NavbarCookoonComponent
   property :type, default: :menu # :logo, :back, :fixed_back, :none
   property :back_url
 
+  def display_type
+    @type
+  end
+
   def back_link
     back_url? ? @back_url : 'javascript:history.back()'
   end
