@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_09_083220) do
+ActiveRecord::Schema.define(version: 2018_07_09_131052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,7 +70,6 @@ ActiveRecord::Schema.define(version: 2018_07_09_083220) do
     t.string "category"
     t.text "description"
     t.integer "status", default: 0
-    t.string "trello_card_id"
     t.string "digicode"
     t.string "building_number"
     t.string "floor_number"
@@ -148,7 +147,6 @@ ActiveRecord::Schema.define(version: 2018_07_09_083220) do
     t.boolean "cleaning", default: false
     t.boolean "janitor", default: false
     t.string "stripe_charge_id"
-    t.string "trello_card_id"
     t.integer "discount_amount_cents", default: 0, null: false
     t.datetime "end_at"
     t.text "guests_message"

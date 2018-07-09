@@ -70,7 +70,7 @@ class Reservation < ApplicationRecord
   validate :possible_in_datetime_range, on: :create
 
   before_validation :set_price_cents, if: :price_cents_needs_update?
-  after_save :report_to_trello, if: :saved_change_to_status?
+  after_save :report_to_slack, if: :saved_change_to_status?
   after_save :update_services, if: :services_need_update?
 
   def self.default
@@ -243,13 +243,13 @@ class Reservation < ApplicationRecord
     }
   end
 
-  def report_to_trello
+  def report_to_slack
     return unless Rails.env.production?
-    if paid?
-      CreateReservationTrelloCardJob.perform_later(id)
-    else
-      UpdateReservationTrelloCardJob.perform_later(id)
-    end
+    PingSlackReservationJob.perform_later(id) if notification_needed?
+  end
+
+  def notification_needed?
+    %w(paid accepted refused ongoing passed cancelled).include? status
   end
 
   def tenant_is_not_host

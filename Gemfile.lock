@@ -206,7 +206,6 @@ GEM
     nio4r (2.3.1)
     nokogiri (1.8.4)
       mini_portile2 (~> 2.3.0)
-    oauth (0.5.4)
     orm_adapter (0.5.0)
     parallel (1.12.1)
     parser (2.5.1.0)
@@ -320,12 +319,6 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.9.0)
-    ruby-trello (2.0.1)
-      activemodel (>= 3.2.0)
-      addressable (~> 2.3)
-      json
-      oauth (>= 0.4.5)
-      rest-client (>= 1.8.0)
     ruby_dep (1.5.0)
     safe_yaml (1.0.4)
     scout_apm (2.4.14)
@@ -342,6 +335,7 @@ GEM
     simple_scheduler (1.0.0)
       rails (>= 4.2)
       sidekiq (>= 4.2)
+    slack-notifier (2.3.2)
     slim (3.0.9)
       temple (>= 0.7.6, < 0.9)
       tilt (>= 1.3.3, < 2.1)
@@ -444,12 +438,12 @@ DEPENDENCIES
   roadie-rails
   rspec-rails
   rubocop
-  ruby-trello
   scout_apm
   sidekiq
   sidekiq-failures
   simple_form
   simple_scheduler
+  slack-notifier
   slim-rails
   spring
   spring-commands-rspec
