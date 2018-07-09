@@ -1,4 +1,4 @@
-class Search < ApplicationRecord
+class CookoonSearch < ApplicationRecord
   include EndAtSetter
 
   scope :active_recents, -> { active.where('created_at > ?', DEFAULTS[:recent_scope].ago) }

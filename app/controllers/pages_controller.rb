@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   def welcome; end
 
   def home
-    @search = Search.new
+    @search = CookoonSearch.new
     @ephemeral = Ephemeral.available.first || Ephemeral.new(title: 'Bientôt disponible', cookoon: Cookoon.first)
   end
 
