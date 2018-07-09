@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_26_135950) do
+ActiveRecord::Schema.define(version: 2018_07_09_131052) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,18 @@ ActiveRecord::Schema.define(version: 2018_06_26_135950) do
     t.index ["cookoon_id"], name: "index_availabilities_on_cookoon_id"
   end
 
+  create_table "cookoon_searches", force: :cascade do |t|
+    t.bigint "user_id"
+    t.datetime "start_at"
+    t.integer "people_count"
+    t.integer "duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "status", default: 0, null: false
+    t.datetime "end_at"
+    t.index ["user_id"], name: "index_cookoon_searches_on_user_id"
+  end
+
   create_table "cookoons", force: :cascade do |t|
     t.bigint "user_id"
     t.string "name"
@@ -58,7 +70,6 @@ ActiveRecord::Schema.define(version: 2018_06_26_135950) do
     t.string "category"
     t.text "description"
     t.integer "status", default: 0
-    t.string "trello_card_id"
     t.string "digicode"
     t.string "building_number"
     t.string "floor_number"
@@ -136,7 +147,6 @@ ActiveRecord::Schema.define(version: 2018_06_26_135950) do
     t.boolean "cleaning", default: false
     t.boolean "janitor", default: false
     t.string "stripe_charge_id"
-    t.string "trello_card_id"
     t.integer "discount_amount_cents", default: 0, null: false
     t.datetime "end_at"
     t.text "guests_message"
@@ -144,18 +154,6 @@ ActiveRecord::Schema.define(version: 2018_06_26_135950) do
     t.text "message_for_host"
     t.index ["cookoon_id"], name: "index_reservations_on_cookoon_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
-  end
-
-  create_table "searches", force: :cascade do |t|
-    t.bigint "user_id"
-    t.datetime "start_at"
-    t.integer "people_count"
-    t.integer "duration"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "status", default: 0, null: false
-    t.datetime "end_at"
-    t.index ["user_id"], name: "index_searches_on_user_id"
   end
 
   create_table "services", force: :cascade do |t|
@@ -214,6 +212,7 @@ ActiveRecord::Schema.define(version: 2018_06_26_135950) do
   end
 
   add_foreign_key "availabilities", "cookoons"
+  add_foreign_key "cookoon_searches", "users"
   add_foreign_key "cookoons", "users"
   add_foreign_key "ephemerals", "cookoons"
   add_foreign_key "guests", "users"
@@ -222,6 +221,5 @@ ActiveRecord::Schema.define(version: 2018_06_26_135950) do
   add_foreign_key "reservation_guests", "reservations"
   add_foreign_key "reservations", "cookoons"
   add_foreign_key "reservations", "users"
-  add_foreign_key "searches", "users"
   add_foreign_key "services", "reservations"
 end
