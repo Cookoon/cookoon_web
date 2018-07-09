@@ -13,7 +13,7 @@ fr:
       inventory:
         checkin_photos: Photos à l'entrée des lieux
         checkout_photos: Photos à la sortie des lieux
-      search:
+      cookoon_search:
         start_at: la date et l'heure de début
         duration: la durée
         people_count: le nombre de convives
@@ -44,8 +44,8 @@ fr:
         cookoon:
           attributes:
             user:
-              max_cookoons_count: "Un maximum de deux cookoons par utilisateur est autorisé sur notre plateforme"      
-        search:
+              max_cookoons_count: "Un maximum de deux cookoons par utilisateur est autorisé sur notre plateforme"
+        cookoon_search:
           attributes:
             start_at:
               blank: doivent être renseignées
