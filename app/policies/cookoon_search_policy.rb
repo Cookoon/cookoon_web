@@ -1,4 +1,4 @@
-class SearchPolicy < ApplicationPolicy
+class CookoonSearchPolicy < ApplicationPolicy
   def create?
     true
   end

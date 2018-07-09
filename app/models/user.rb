@@ -23,7 +23,7 @@ class User < ApplicationRecord
   has_many :reservations, dependent: :restrict_with_exception
   has_many :reservation_requests, through: :cookoons, source: :reservations
   has_many :guests, dependent: :destroy
-  has_many :searches, dependent: :destroy
+  has_many :cookoon_searches, dependent: :destroy
 
   has_attachment :photo
 
@@ -82,7 +82,7 @@ class User < ApplicationRecord
   end
 
   def active_recent_searches
-    searches.active_recents
+    cookoon_searches.active_recents
   end
 
   def current_search
