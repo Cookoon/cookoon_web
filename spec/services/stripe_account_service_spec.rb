@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe StripeAccountService do
   let(:user) { create(:user) }
-  let(:params) { ActionController::Parameters.new('first_name' => user.first_name, 'last_name' => user.last_name, 'dob(3i)' => '1', 'dob(2i)' => '1', 'dob(1i)' => '1965', 'address' => { 'line1' => '1 rue eugène eichenberger', 'postal_code' => '92800', 'city' => 'PUTEAUX' }, 'account_token' => 'ct_1C3hTQJwSREaPZl4mtYYczWD', 'bank_account_number' => 'FR89370400440532013000') }
+  let(:params) { ActionController::Parameters.new('first_name' => user.first_name, 'last_name' => user.last_name, 'dob(3i)' => '1', 'dob(2i)' => '1', 'dob(1i)' => '1965', 'address' => { 'line1' => '1 rue eugène eichenberger', 'postal_code' => '92800', 'city' => 'PUTEAUX' }, 'account_token' => 'ct_1ClzG4JwSREaPZl4WsUkeOtl', 'bank_account_token' => 'btok_1ClzG4JwSREaPZl4jINzAaeE') }
   let(:invalid_params) { params.slice(:first_name, :last_name) }
 
   describe '#create_and_link_account' do
@@ -29,6 +29,13 @@ RSpec.describe StripeAccountService do
       end
 
       it 'creates an account' do
+        expect(service.account).to_not be_nil
+      end
+
+      it 'creates a bank account on that account' do
+        VCR.use_cassette 'stripe_account/retrieve_account' do
+          service.retrieve_stripe_account
+        end
         expect(service.account.external_accounts.total_count).to eq 1
       end
 
