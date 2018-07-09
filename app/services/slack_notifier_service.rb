@@ -2,8 +2,6 @@ class SlackNotifierService
   include DatetimeHelper
   include ActionView::Helpers::TranslationHelper
 
-  WEBHOOK_URL = 'https://hooks.slack.com/services/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'
-
   def initialize(attributes)
     @reservation = attributes[:reservation]
     @tenant = @reservation.user
@@ -13,7 +11,7 @@ class SlackNotifierService
 
   def notify
     return unless message
-    notifier = Slack::Notifier.new WEBHOOK_URL, notifier_options
+    notifier = Slack::Notifier.new ENV['SLACK_WEBHOOK_URL'], notifier_options
     notifier.ping message
   end
 
