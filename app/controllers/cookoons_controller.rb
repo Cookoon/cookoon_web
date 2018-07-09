@@ -88,7 +88,7 @@ class CookoonsController < ApplicationController
   end
 
   def new_default_search
-    Search.new Search.default_params
+    CookoonSearch.new CookoonSearch.default_params
   end
 
   def build_markers
