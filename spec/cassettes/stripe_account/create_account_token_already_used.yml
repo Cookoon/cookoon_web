@@ -5,18 +5,18 @@ http_interactions:
     uri: https://api.stripe.com/v1/accounts
     body:
       encoding: UTF-8
-      string: type=custom&country=FR&email=tester1%40example.com&account_token=ct_1C3hTQJwSREaPZl4mtYYczWD
+      string: type=custom&country=FR&email=tester49%40example.com&account_token=ct_1ClzCbJwSREaPZl4jGnvdTZK
     headers:
       User-Agent:
-      - Stripe/v1 RubyBindings/3.9.1
+      - Stripe/v1 RubyBindings/3.17.0
       Authorization:
       - Bearer sk_test_lHL6MqAWBqXebJkS7jgd1sMi
       Content-Type:
       - application/x-www-form-urlencoded
       X-Stripe-Client-User-Agent:
-      - '{"bindings_version":"3.9.1","lang":"ruby","lang_version":"2.5.0 p0 (2017-12-25)","platform":"x86_64-darwin17","engine":"ruby","publisher":"stripe","uname":"Darwin
-        MBP-de-Charles 17.4.0 Darwin Kernel Version 17.4.0: Sun Dec 17 09:19:54 PST
-        2017; root:xnu-4570.41.2~1/RELEASE_X86_64 x86_64","hostname":"MBP-de-Charles"}'
+      - '{"bindings_version":"3.17.0","lang":"ruby","lang_version":"2.5.1 p57 (2018-03-29)","platform":"x86_64-darwin17","engine":"ruby","publisher":"stripe","uname":"Darwin
+        MacBook-Pro-de-Francois.local 17.6.0 Darwin Kernel Version 17.6.0: Tue May  8
+        15:22:16 PDT 2018; root:xnu-4570.61.1~1/RELEASE_X86_64 x86_64","hostname":"MacBook-Pro-de-Francois.local"}'
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -29,7 +29,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Fri, 09 Mar 2018 11:54:23 GMT
+      - Mon, 09 Jul 2018 13:16:00 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -49,19 +49,21 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_ZEyWrHSdbKfPjZ
+      - req_YtqXHoPVHFRxqW
       Stripe-Version:
-      - '2017-08-15'
+      - '2018-05-21'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains; preload
     body:
       encoding: UTF-8
       string: |
         {
           "error": {
-            "type": "invalid_request_error",
-            "message": "The token ct_1C3hTQJwSREaPZl4mtYYczWD has already been used. Each account token can only be used once to create or update an account.",
-            "param": "account_token"
+            "message": "The token ct_1ClzCbJwSREaPZl4jGnvdTZK has already been used. Each account token can only be used once to create or update an account.",
+            "param": "account_token",
+            "type": "invalid_request_error"
           }
         }
     http_version: 
-  recorded_at: Fri, 09 Mar 2018 11:54:23 GMT
+  recorded_at: Mon, 09 Jul 2018 13:16:01 GMT
 recorded_with: VCR 4.0.0

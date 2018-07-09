@@ -9,7 +9,7 @@ class StripeAccountService
 
   def create_and_link_account
     return false unless params_valid?
-    @account = retrieve_or_create_account
+    retrieve_or_create_account
     account_updated = link_bank_account
     user.update(stripe_account_id: account.id) if account_updated
   end
@@ -30,7 +30,7 @@ class StripeAccountService
 
   def create_account
     return false unless user
-    Stripe::Account.create(prepare_account)
+    @account = Stripe::Account.create(prepare_account)
   rescue Stripe::InvalidRequestError => e
     Rails.logger.error('Failed to create Stripe account')
     Rails.logger.error(e.message)
@@ -40,7 +40,7 @@ class StripeAccountService
 
   def retrieve_account
     return false unless user&.stripe_account_id
-    Stripe::Account.retrieve(user.stripe_account_id)
+    @account = Stripe::Account.retrieve(user.stripe_account_id)
   rescue Stripe::PermissionError => e
     Rails.logger.error('Failed to retrieve Stripe account')
     Rails.logger.error(e.message)
@@ -50,8 +50,7 @@ class StripeAccountService
 
   def link_bank_account
     return false unless account
-    account.external_account = prepare_external_account
-    account.save
+    account.external_accounts.create(external_account: params['bank_account_token'])
   rescue Stripe::InvalidRequestError => e
     Rails.logger.error('Failed to enrich Stripe account')
     Rails.logger.error(e.message)
@@ -71,7 +70,7 @@ class StripeAccountService
     @errors << 'Votre nom complet est obligatoire' if name_params.any?(&:blank?)
     @errors << 'Votre adresse est obligatoire' if address_params.any?(&:blank?)
     @errors << 'Votre date de naissance est obligatoire' if dob_params.any?(&:blank?)
-    @errors << 'Votre IBAN est obligatoire' if params['bank_account_number'].blank?
+    @errors << 'Votre IBAN est obligatoire' if params['bank_account_token'].blank?
   end
 
   def prepare_account
@@ -80,17 +79,6 @@ class StripeAccountService
       country: 'FR',
       email: user.email,
       account_token: params[:account_token]
-    }
-  end
-
-  def prepare_external_account
-    {
-      object: 'bank_account',
-      account_holder_type: 'individual',
-      account_holder_name: user.full_name,
-      country: 'FR',
-      currency: 'eur',
-      account_number: params[:bank_account_number].delete(' ') # TODO: FC 09feb18 refactor in model?
     }
   end
 

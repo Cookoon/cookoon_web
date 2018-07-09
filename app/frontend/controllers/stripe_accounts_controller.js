@@ -4,13 +4,16 @@ import Rails from 'rails-ujs';
 export default class extends Controller {
   static targets = [
     'form',
-    'accountError',
-    'accountTokenInput',
     'firstNameInput',
     'lastNameInput',
     'addressInput',
     'postalCodeInput',
-    'cityInput'
+    'cityInput',
+    'accountError',
+    'accountTokenInput',
+    'ibanElement',
+    'ibanElementError',
+    'bankAccountTokenInput'
   ];
 
   stripe = Stripe(this.data.get('publishableKey'));
@@ -19,6 +22,8 @@ export default class extends Controller {
     if (this.hasFormTarget) {
       this.formTarget.addEventListener('submit', this.handleSubmit);
     } // TODO: FC 08feb18 configure Turbolinks cache to remove this?
+
+    this.mountIbanElement();
   }
 
   disconnect() {
@@ -27,11 +32,42 @@ export default class extends Controller {
     } // TODO: FC 08feb18 configure Turbolinks cache to remove this?
   }
 
+  mountIbanElement() {
+    const style = {
+      base: {
+        fontSize: '16px',
+        color: '#495057'
+      }
+    };
+
+    const options = {
+      style,
+      supportedCountries: ['SEPA'],
+      placeholderCountry: 'FR'
+    };
+
+    this.iban = this.stripe.elements().create('iban', options);
+
+    this.iban.mount(this.ibanElementTarget);
+
+    this.iban.on('change', ({ error }) => {
+      const displayError = this.ibanElementErrorTarget;
+      if (error) {
+        displayError.textContent = error.message;
+      } else {
+        displayError.textContent = '';
+      }
+    });
+  }
+
   handleSubmit = async event => {
     event.preventDefault();
     event.stopPropagation();
 
-    const { token, error } = await this.stripe.createToken('account', {
+    const {
+      token: accountToken,
+      error: accountError
+    } = await this.stripe.createToken('account', {
       legal_entity: {
         type: 'individual',
         first_name: this.firstNameInputTarget.value,
@@ -52,15 +88,32 @@ export default class extends Controller {
       tos_shown_and_accepted: true
     });
 
-    if (error) {
-      this.accountErrorTarget.textContent = error.message;
+    const {
+      token: bankAccountToken,
+      error: bankAccountError
+    } = await this.stripe.createToken(this.iban, {
+      currency: 'eur',
+      account_holder_name: `${this.firstNameInputTarget.value} ${
+        this.lastNameInputTarget.value
+      }`,
+      account_holder_type: 'individual'
+    });
+
+    if (accountError || bankAccountError) {
+      document.getElementById('loader').style = null;
+
+      this.accountErrorTarget.textContent =
+        accountError && accountError.message;
+      this.ibanElementErrorTarget.textContent =
+        bankAccountError && bankAccountError.message;
     } else {
-      this.handleStripeToken(token);
+      this.handleStripeTokensSubmit(accountToken, bankAccountToken);
     }
   };
 
-  handleStripeToken = token => {
-    this.accountTokenInputTarget.value = token.id;
+  handleStripeTokensSubmit = (accountToken, bankAccountToken) => {
+    this.accountTokenInputTarget.value = accountToken.id;
+    this.bankAccountTokenInputTarget.value = bankAccountToken.id;
 
     this.formTarget.removeEventListener('submit', this.handleSubmit);
     Rails.fire(this.formTarget, 'submit');
