@@ -29,6 +29,8 @@ class Availability < ApplicationRecord
     }
   }.freeze
 
+  SETTABLE_WEEKS_AHEAD = 5
+
   belongs_to :cookoon
 
   validates :date, presence: true

@@ -6,7 +6,7 @@ class AvailabilitiesController < ApplicationController
   def index
     @cookoon = Cookoon.includes(:future_availabilities).find(params[:cookoon_id])
     authorize(@cookoon, :update?)
-    @weeks = build_weeks(3)
+    @weeks = build_weeks(Availability::SETTABLE_WEEKS_AHEAD)
     @cookoons = current_user.cookoons
   end
 
