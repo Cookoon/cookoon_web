@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_09_131052) do
+ActiveRecord::Schema.define(version: 2018_07_10_093754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,6 +125,23 @@ ActiveRecord::Schema.define(version: 2018_07_09_131052) do
     t.index ["reservation_id"], name: "index_inventories_on_reservation_id"
   end
 
+  create_table "perk_specifications", force: :cascade do |t|
+    t.string "name"
+    t.string "icon_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "perks", force: :cascade do |t|
+    t.bigint "cookoon_id"
+    t.bigint "perk_specification_id"
+    t.integer "quantity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cookoon_id"], name: "index_perks_on_cookoon_id"
+    t.index ["perk_specification_id"], name: "index_perks_on_perk_specification_id"
+  end
+
   create_table "reservation_guests", force: :cascade do |t|
     t.bigint "reservation_id"
     t.bigint "guest_id"
@@ -217,6 +234,8 @@ ActiveRecord::Schema.define(version: 2018_07_09_131052) do
   add_foreign_key "ephemerals", "cookoons"
   add_foreign_key "guests", "users"
   add_foreign_key "inventories", "reservations"
+  add_foreign_key "perks", "cookoons"
+  add_foreign_key "perks", "perk_specifications"
   add_foreign_key "reservation_guests", "guests"
   add_foreign_key "reservation_guests", "reservations"
   add_foreign_key "reservations", "cookoons"
