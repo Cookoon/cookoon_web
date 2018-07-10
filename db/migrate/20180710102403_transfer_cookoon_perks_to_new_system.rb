@@ -42,18 +42,22 @@ class TransferCookoonPerksToNewSystem < ActiveRecord::Migration[5.2]
       Cookoon.all.each do |cookoon|
         cookoon.perks.each do |perk|
           case perk.name
-          when 'Écran' then cookoon.display_device = true
-          when 'Système son' then cookoon.sound_system = true
-          when 'Cuisine équipée' then cookoon.kitchen = true
-          when 'Ascenseur' then cookoon.elevator = true
-          when 'Barbecue' then cookoon.barbecue = true
-          when 'Cheminée' then cookoon.fireplace = true
-          when 'Vaisselle' then cookoon.tableware_quantity = perk.quantity
+          when 'Écran' then cookoon.update(display_device: true)
+          when 'Système son' then cookoon.update(sound_system: true)
+          when 'Cuisine équipée' then cookoon.update(kitchen: true)
+          when 'Ascenseur' then cookoon.update(elevator: true)
+          when 'Barbecue' then cookoon.update(barbecue: true)
+          when 'Cheminée' then cookoon.update(fireplace: true)
+          when 'Vaisselle' then cookoon.update(tableware_quantity: perk.quantity)
+          end
         end
         cookoon.save
       end
     end
 
     PerkSpecification.destroy_all
+
+    drop_table :perk_specifications
+    drop_table :perks
   end
 end
