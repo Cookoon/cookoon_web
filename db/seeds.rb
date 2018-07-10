@@ -28,7 +28,7 @@ cookoons_attributes = [
     category: 'Appartement',
     status: :approved,
     description: "Au sommet d'un des plus hauts immeubles des batignolles, l'appartement de Laura & Grégory offre une vue à 180 ° sur tout Paris, de Montmartre à la Tour Eiffel. Il pourra ainsi aussi bien accueillir une réunion de travail pour 6 personnes, un dîner entre amis ou un tête à tête romantique.",
-    photo_urls: ["http://cookoon.fr/img/marais/marais4.jpg", "http://cookoon.fr/img/marais/marais1.jpg", "http://cookoon.fr/img/marais/marais2.jpg", "http://cookoon.fr/img/marais/marais3.jpg"]
+    photo_urls: ["http://res.cloudinary.com/cookoon-dev/image/upload/v1530622600/rm6kobv8rpjwha7jpz2o.jpg"]
   },
   {
     user: User.first,
@@ -41,10 +41,10 @@ cookoons_attributes = [
     category: 'Appartement',
     status: :approved,
     description: "Au sommet d'un des plus hauts immeubles des batignolles, l'appartement de Laura & Grégory offre une vue à 180 ° sur tout Paris, de Montmartre à la Tour Eiffel. Il pourra ainsi aussi bien accueillir une réunion de travail pour 6 personnes, un dîner entre amis ou un tête à tête romantique.",
-    photo_urls: ["http://cookoon.fr/img/clichy/clichy1.jpg", "http://cookoon.fr/img/clichy/clichy2.jpg", "http://cookoon.fr/img/clichy/clichy3.jpg", "http://cookoon.fr/img/clichy/clichy4.jpg"]
+    photo_urls: ["http://res.cloudinary.com/cookoon-dev/image/upload/v1530622600/rm6kobv8rpjwha7jpz2o.jpg"]
   },
   {
-    user: User.first,
+    user: User.second,
     name: "Grand Salon 1930 - Silicon Sentier",
     surface: 100,
     price_cents: 3000,
@@ -54,10 +54,10 @@ cookoons_attributes = [
     category: 'Appartement',
     status: :approved,
     description: "La rue Montorgueil, Numa, les Start up et l'appartement de Marie & Guillaume, nous sommes dans le Sentier. A quelques minutes du métro (Sentier, ligne 3), l'appartement a bénéficié des talents d'architecte d'intérieur de Marie qui a su conférer un style année 30 modernisé à son intérieur. Ici tout est ouvert, la cuisine est séparée du salon par un bar qui cotoie également la partie salle à manger. Un lieu idéal pour une journée de formation, un rdv professionnel mais également un dîner entre amis.",
-    photo_urls: ["http://cookoon.fr/img/aboukir/aboukir.jpg", "http://cookoon.fr/img/aboukir/aboukir2.jpg", "http://cookoon.fr/img/aboukir/aboukir3.jpg", "http://cookoon.fr/img/aboukir/aboukir4.jpg", "http://cookoon.fr/img/aboukir/aboukir5.jpg"]
+    photo_urls: ["http://res.cloudinary.com/cookoon-dev/image/upload/v1530622600/rm6kobv8rpjwha7jpz2o.jpg"]
   },
   {
-    user: User.first,
+    user: User.second,
     name: "Salle de réunion - République",
     surface: 120,
     price_cents: 3000,
@@ -67,21 +67,8 @@ cookoons_attributes = [
     category: 'Appartement',
     status: :approved,
     description: "En plein Paris, au métro République, nous trouvons les locaux de l'agence Le Rendez-Vous à Paris. A quelques minutes du métro (République ou Temple), le bureau bénéficie d'une situation particulièrement priviligée quand on cherche à se retrouver pour une réunion de travail. Entre Marais et République, le bureau est entouré de restaurants et de commerces. Vous y trouverez tout ce dont vous avez besoin pour vos journées de travail hors-les-murs ou de formation.",
-    photo_urls: ["http://cookoon.fr/img/republique/republique1.jpg", "http://cookoon.fr/img/republique/republique2.jpg", "http://cookoon.fr/img/republique/republique3.jpg"]
+    photo_urls: ["http://res.cloudinary.com/cookoon-dev/image/upload/v1530622600/rm6kobv8rpjwha7jpz2o.jpg"]
   },
-  {
-    user: User.first,
-    name: "Maison de Campagne à Paris",
-    surface: 200,
-    price_cents: 4000,
-    price_currency: "EUR",
-    address: "15 Rue Paul Strauss, 75020 Paris",
-    capacity: "10",
-    category: 'Maison',
-    status: :approved,
-    description: "Situé au sein de la campagne à Paris, la maison de Jean Sébastien est l'idéal pour un repas, une réunion ou une journée de formation. Son jardin pourra également accueillir un brunch ou un bbq, l'été venu. Et peut-être Jean-Seb vous proposera une table d'hôtes?",
-    photo_urls: ["http://cookoon.fr/img/bagnolet/bagnolet.jpg", "http://cookoon.fr/img/bagnolet/bagnolet2.jpg", "http://cookoon.fr/img/bagnolet/bagnolet3.jpg", "http://cookoon.fr/img/bagnolet/bagnolet4.jpg", "http://cookoon.fr/img/bagnolet/bagnolet5.jpg"]
-  }
 ]
 puts "Seeding Cookoons"
 cookoons_attributes.each do |attributes|
