@@ -51,13 +51,12 @@ class TransferCookoonPerksToNewSystem < ActiveRecord::Migration[5.2]
           when 'Vaisselle' then cookoon.update(tableware_quantity: perk.quantity)
           end
         end
-        cookoon.save
       end
     end
 
     PerkSpecification.destroy_all
-
-    drop_table :perk_specifications
+    
     drop_table :perks
+    drop_table :perk_specifications
   end
 end
