@@ -56,6 +56,7 @@ module Stripe
         customer: user.stripe_customer.id,
         source: options[:source],
         description: charge_description,
+        metadata: charge_metadata,
         capture: should_capture?
       }
     end

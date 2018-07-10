@@ -47,4 +47,8 @@ class Payment
     # Each specific Payment Class needs to implement this method
     payment_amount_cents
   end
+
+  def charge_metadata
+    {}
+  end
 end
