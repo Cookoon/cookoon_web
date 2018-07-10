@@ -8,14 +8,16 @@ class TransferCookoonPerksToNewSystem < ActiveRecord::Migration[5.2]
     fireplace = PerkSpecification.create! name: 'Cheminée', icon_name: 'logo'
     tableware = PerkSpecification.create! name: 'Vaisselle', icon_name: 'logo'
 
-    Cookoon.all.each do |cookoon|
-      cookoon.perks.create(perk_specification: display_device) if cookoon.display_device
-      cookoon.perks.create(perk_specification: sound_system) if cookoon.sound_system
-      cookoon.perks.create(perk_specification: kitchen) if cookoon.kitchen
-      cookoon.perks.create(perk_specification: elevator) if cookoon.elevator
-      cookoon.perks.create(perk_specification: barbecue) if cookoon.barbecue
-      cookoon.perks.create(perk_specification: fireplace) if cookoon.fireplace
-      cookoon.perks.create(perk_specification: tableware, quantity: cookoon.tableware_quantity) unless cookoon.tableware_quantity.nil?
+    ActiveRecord::Base.transaction do
+      Cookoon.all.each do |cookoon|
+        cookoon.perks.create(perk_specification: display_device) if cookoon.display_device
+        cookoon.perks.create(perk_specification: sound_system) if cookoon.sound_system
+        cookoon.perks.create(perk_specification: kitchen) if cookoon.kitchen
+        cookoon.perks.create(perk_specification: elevator) if cookoon.elevator
+        cookoon.perks.create(perk_specification: barbecue) if cookoon.barbecue
+        cookoon.perks.create(perk_specification: fireplace) if cookoon.fireplace
+        cookoon.perks.create(perk_specification: tableware, quantity: cookoon.tableware_quantity) unless cookoon.tableware_quantity.nil?
+      end
     end
 
     remove_column :cookoons, :display_device
@@ -36,18 +38,20 @@ class TransferCookoonPerksToNewSystem < ActiveRecord::Migration[5.2]
     add_column :cookoons, :fireplace, :boolean, default: false, null: false
     add_column :cookoons, :tableware_quantity, :integer
 
-    Cookoon.all.each do |cookoon|
-      cookoon.perks.each do |perk|
-        case perk.name
-        when 'Écran' then cookoon.display_device = true
-        when 'Système son' then cookoon.sound_system = true
-        when 'Cuisine équipée' then cookoon.kitchen = true
-        when 'Ascenseur' then cookoon.elevator = true
-        when 'Barbecue' then cookoon.barbecue = true
-        when 'Cheminée' then cookoon.fireplace = true
-        when 'Vaisselle' then cookoon.tableware_quantity = perk.quantity
+    ActiveRecord::Base.transaction do
+      Cookoon.all.each do |cookoon|
+        cookoon.perks.each do |perk|
+          case perk.name
+          when 'Écran' then cookoon.display_device = true
+          when 'Système son' then cookoon.sound_system = true
+          when 'Cuisine équipée' then cookoon.kitchen = true
+          when 'Ascenseur' then cookoon.elevator = true
+          when 'Barbecue' then cookoon.barbecue = true
+          when 'Cheminée' then cookoon.fireplace = true
+          when 'Vaisselle' then cookoon.tableware_quantity = perk.quantity
+        end
+        cookoon.save
       end
-      cookoon.save
     end
 
     PerkSpecification.destroy_all
