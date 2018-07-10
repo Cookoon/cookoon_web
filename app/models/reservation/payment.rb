@@ -30,6 +30,17 @@ class Reservation
       "Paiement pour #{chargeable.cookoon.name}"
     end
 
+    def charge_metadata
+      {
+        reservation_id: chargeable.id,
+        reservation_price: chargeable.price,
+        reservation_services_price: chargeable.services_price,
+        reservation_tenant_fee: chargeable.tenant_fee,
+        reservation_host_fee: chargeable.host_fee,
+        reservation_services: chargeable.services.payment_tied_to_reservation.pluck(:category).join(' · ')
+      }
+    end
+
     def transfer_amount
       chargeable.host_payout_price_cents
     end
