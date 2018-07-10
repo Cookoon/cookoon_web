@@ -38,18 +38,18 @@ class TransferCookoonPerksToNewSystem < ActiveRecord::Migration[5.2]
     add_column :cookoons, :fireplace, :boolean, default: false, null: false
     add_column :cookoons, :tableware_quantity, :integer
 
-    ActiveRecord::Base.transaction do
-      Cookoon.all.each do |cookoon|
-        cookoon.perks.each do |perk|
-          case perk.name
-          when 'Écran' then cookoon.update(display_device: true)
-          when 'Système son' then cookoon.update(sound_system: true)
-          when 'Cuisine équipée' then cookoon.update(kitchen: true)
-          when 'Ascenseur' then cookoon.update(elevator: true)
-          when 'Barbecue' then cookoon.update(barbecue: true)
-          when 'Cheminée' then cookoon.update(fireplace: true)
-          when 'Vaisselle' then cookoon.update(tableware_quantity: perk.quantity)
-          end
+    Cookoon.reset_column_information
+
+    Cookoon.all.each do |cookoon|
+      cookoon.perks.each do |perk|
+        case perk.name
+        when 'Écran' then cookoon.update(display_device: true)
+        when 'Système son' then cookoon.update(sound_system: true)
+        when 'Cuisine équipée' then cookoon.update(kitchen: true)
+        when 'Ascenseur' then cookoon.update(elevator: true)
+        when 'Barbecue' then cookoon.update(barbecue: true)
+        when 'Cheminée' then cookoon.update(fireplace: true)
+        when 'Vaisselle' then cookoon.update(tableware_quantity: perk.quantity)
         end
       end
     end
