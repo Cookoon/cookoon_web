@@ -42,7 +42,7 @@ class Cookoon < ApplicationRecord
 
   def list_perks
     # cannot pluck because of delegation
-    perks.map { |perk| perk.name }.join(" / ")
+    perks.map(&:name).join(' / ')
   end
 
   private
