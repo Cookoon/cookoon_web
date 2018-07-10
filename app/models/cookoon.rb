@@ -40,6 +40,11 @@ class Cookoon < ApplicationRecord
     overlapping_reservations(date_range) + overlapping_availabilities(date_range)
   end
 
+  def list_perks
+    # cannot pluck because of delegation
+    perks.map { |perk| perk.name }.join(" / ")
+  end
+
   private
 
   def overlapping_reservations(date_range)
