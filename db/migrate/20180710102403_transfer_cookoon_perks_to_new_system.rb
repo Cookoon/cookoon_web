@@ -55,8 +55,5 @@ class TransferCookoonPerksToNewSystem < ActiveRecord::Migration[5.2]
     end
 
     PerkSpecification.destroy_all
-    
-    drop_table :perks
-    drop_table :perk_specifications
   end
 end
