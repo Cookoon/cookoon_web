@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(version: 2018_07_10_102403) do
     t.string "wifi_network"
     t.string "wifi_code"
     t.text "caretaker_instructions"
-    t.boolean "basic_cooking_ingredients", default: false, null: false
     t.index ["user_id"], name: "index_cookoons_on_user_id"
   end
 
