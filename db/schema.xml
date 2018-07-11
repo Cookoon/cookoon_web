@@ -37,7 +37,7 @@
     <type label="SET" length="1" sql="SET" quote=""/>
     <type label="Bit" length="0" sql="bit" quote=""/>
   </group>
-</datatypes><table x="1182" y="14" name="attachinary_files">
+</datatypes><table x="42" y="650" name="attachinary_files">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -78,16 +78,17 @@
 <part>id</part>
 </key>
 </table>
-<table x="437" y="588" name="availabilities">
+<table x="718" y="969" name="availabilities">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
+<row name="cookoon_id" null="1" autoincrement="0">
+<datatype>TINYINT</datatype>
+<default>NULL</default><relation table="cookoons" row="id" />
+</row>
 <row name="available" null="1" autoincrement="0">
 <datatype>BINARY</datatype>
 <default>'false'</default></row>
-<row name="cookoon_id" null="1" autoincrement="0">
-<datatype>TINYINT</datatype>
-<default>NULL</default></row>
 <row name="date" null="1" autoincrement="0">
 <datatype>DATE</datatype>
 <default>NULL</default></row>
@@ -110,13 +111,14 @@
 <part>id</part>
 </key>
 </table>
-<table x="209" y="20" name="cookoon_searches">
+<table x="714" y="40" name="cookoon_searches">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
 <row name="user_id" null="1" autoincrement="0">
 <datatype>TINYINT</datatype>
-<default>NULL</default></row>
+<default>NULL</default><relation table="users" row="id" />
+</row>
 <row name="start_at" null="1" autoincrement="0">
 <datatype>DATETIME</datatype>
 <default>NULL</default></row>
@@ -142,13 +144,14 @@
 <part>id</part>
 </key>
 </table>
-<table x="200" y="423" name="cookoons">
+<table x="288" y="805" name="cookoons">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
 <row name="user_id" null="1" autoincrement="0">
 <datatype>TINYINT</datatype>
-<default>NULL</default></row>
+<default>NULL</default><relation table="users" row="id" />
+</row>
 <row name="name" null="1" autoincrement="0">
 <datatype>CHAR</datatype>
 <default>NULL</default></row>
@@ -216,7 +219,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="923" y="20" name="ephemerals">
+<table x="290" y="1360" name="ephemerals">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -228,7 +231,8 @@
 <default>NULL</default></row>
 <row name="cookoon_id" null="1" autoincrement="0">
 <datatype>TINYINT</datatype>
-<default>NULL</default></row>
+<default>NULL</default><relation table="cookoons" row="id" />
+</row>
 <row name="start_at" null="1" autoincrement="0">
 <datatype>DATETIME</datatype>
 <default>NULL</default></row>
@@ -260,13 +264,14 @@
 <part>id</part>
 </key>
 </table>
-<table x="93" y="810" name="guests">
+<table x="717" y="704" name="guests">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
 <row name="user_id" null="1" autoincrement="0">
 <datatype>TINYINT</datatype>
-<default>NULL</default></row>
+<default>NULL</default><relation table="users" row="id" />
+</row>
 <row name="email" null="1" autoincrement="0">
 <datatype>CHAR</datatype>
 <default>NULL</default></row>
@@ -286,7 +291,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="986" y="588" name="inventories">
+<table x="1109" y="486" name="inventories">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -315,7 +320,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="209" y="1034" name="perk_specifications">
+<table x="984" y="1327" name="perk_specifications">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -335,16 +340,18 @@
 <part>id</part>
 </key>
 </table>
-<table x="427" y="930" name="perks">
+<table x="718" y="1208" name="perks">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
 <row name="cookoon_id" null="1" autoincrement="0">
 <datatype>TINYINT</datatype>
-<default>NULL</default></row>
+<default>NULL</default><relation table="cookoons" row="id" />
+</row>
 <row name="perk_specification_id" null="1" autoincrement="0">
 <datatype>TINYINT</datatype>
-<default>NULL</default></row>
+<default>NULL</default><relation table="perk_specifications" row="id" />
+</row>
 <row name="quantity" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>NULL</default></row>
@@ -358,16 +365,18 @@
 <part>id</part>
 </key>
 </table>
-<table x="646" y="532" name="reservation_guests">
+<table x="1095" y="728" name="reservation_guests">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
 <row name="reservation_id" null="1" autoincrement="0">
 <datatype>TINYINT</datatype>
-<default>NULL</default></row>
+<default>NULL</default><relation table="reservations" row="id" />
+</row>
 <row name="guest_id" null="1" autoincrement="0">
 <datatype>TINYINT</datatype>
-<default>NULL</default></row>
+<default>NULL</default><relation table="guests" row="id" />
+</row>
 <row name="created_at" null="1" autoincrement="0">
 <datatype>DATETIME</datatype>
 <default>NULL</default></row>
@@ -378,16 +387,18 @@
 <part>id</part>
 </key>
 </table>
-<table x="450" y="112" name="reservations">
+<table x="715" y="284" name="reservations">
 <row name="id" null="1" autoincrement="1">
-<datatype>TINYINT</datatype>
-<default>NULL</default></row>
-<row name="cookoon_id" null="1" autoincrement="0">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
 <row name="user_id" null="1" autoincrement="0">
 <datatype>TINYINT</datatype>
-<default>NULL</default></row>
+<default>NULL</default><relation table="users" row="id" />
+</row>
+<row name="cookoon_id" null="1" autoincrement="0">
+<datatype>TINYINT</datatype>
+<default>NULL</default><relation table="cookoons" row="id" />
+</row>
 <row name="start_at" null="1" autoincrement="0">
 <datatype>DATETIME</datatype>
 <default>NULL</default></row>
@@ -437,13 +448,14 @@
 <part>id</part>
 </key>
 </table>
-<table x="664" y="173" name="services">
+<table x="1084" y="167" name="services">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
 <row name="reservation_id" null="1" autoincrement="0">
 <datatype>TINYINT</datatype>
-<default>NULL</default></row>
+<default>NULL</default><relation table="reservations" row="id" />
+</row>
 <row name="content" null="1" autoincrement="0">
 <datatype>MEDIUMTEXT</datatype>
 <default>NULL</default></row>
@@ -478,7 +490,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="0" y="0" name="users">
+<table x="291" y="41" name="users">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
