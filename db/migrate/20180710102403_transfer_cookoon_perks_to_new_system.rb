@@ -6,6 +6,7 @@ class TransferCookoonPerksToNewSystem < ActiveRecord::Migration[5.2]
     elevator = PerkSpecification.create! name: 'Ascenseur', icon_name: 'logo'
     barbecue = PerkSpecification.create! name: 'Barbecue', icon_name: 'logo'
     fireplace = PerkSpecification.create! name: 'Cheminée', icon_name: 'logo'
+    cooking_ingredients = PerkSpecification.create! name: 'Ingrédients de cuisine', icon_name: 'logo'
     tableware = PerkSpecification.create! name: 'Vaisselle', icon_name: 'logo'
 
     ActiveRecord::Base.transaction do
@@ -16,6 +17,7 @@ class TransferCookoonPerksToNewSystem < ActiveRecord::Migration[5.2]
         cookoon.perks.create(perk_specification: elevator) if cookoon.elevator
         cookoon.perks.create(perk_specification: barbecue) if cookoon.barbecue
         cookoon.perks.create(perk_specification: fireplace) if cookoon.fireplace
+        cookoon.perks.create(perk_specification: cooking_ingredients) if cookoon.basic_cooking_ingredients
         cookoon.perks.create(perk_specification: tableware, quantity: cookoon.tableware_quantity) unless cookoon.tableware_quantity.nil?
       end
     end
@@ -26,6 +28,7 @@ class TransferCookoonPerksToNewSystem < ActiveRecord::Migration[5.2]
     remove_column :cookoons, :elevator
     remove_column :cookoons, :barbecue
     remove_column :cookoons, :fireplace
+    remove_column :cookoons, :basic_cooking_ingredients
     remove_column :cookoons, :tableware_quantity
   end
 
@@ -36,6 +39,7 @@ class TransferCookoonPerksToNewSystem < ActiveRecord::Migration[5.2]
     add_column :cookoons, :elevator, :boolean, default: false, null: false
     add_column :cookoons, :barbecue, :boolean, default: false, null: false
     add_column :cookoons, :fireplace, :boolean, default: false, null: false
+    add_column :cookoons, :basic_cooking_ingredients, :boolean, default: false, null: false
     add_column :cookoons, :tableware_quantity, :integer
 
     Cookoon.reset_column_information
@@ -49,6 +53,7 @@ class TransferCookoonPerksToNewSystem < ActiveRecord::Migration[5.2]
         when 'Ascenseur' then cookoon.update(elevator: true)
         when 'Barbecue' then cookoon.update(barbecue: true)
         when 'Cheminée' then cookoon.update(fireplace: true)
+        when 'Ingrédients de cuisine' then cookoon.update(basic_cooking_ingredients: true)
         when 'Vaisselle' then cookoon.update(tableware_quantity: perk.quantity)
         end
       end
