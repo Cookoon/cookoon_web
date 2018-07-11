@@ -8,7 +8,9 @@ class ReservationsController < ApplicationController
     @inactive_reservations = reservations.inactive
   end
 
-  def show; end
+  def show
+    @cookoon = @reservation.cookoon
+  end
 
   def create
     # TODO Handle erros when user has no search
