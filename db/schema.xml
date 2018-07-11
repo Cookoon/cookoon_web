@@ -219,7 +219,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="290" y="1360" name="ephemerals">
+<table x="289" y="1383" name="ephemerals">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -264,7 +264,7 @@
 <part>id</part>
 </key>
 </table>
-<table x="717" y="704" name="guests">
+<table x="716" y="741" name="guests">
 <row name="id" null="1" autoincrement="1">
 <datatype>TINYINT</datatype>
 <default>NULL</default></row>
@@ -297,7 +297,8 @@
 <default>NULL</default></row>
 <row name="reservation_id" null="1" autoincrement="0">
 <datatype>TINYINT</datatype>
-<default>NULL</default></row>
+<default>NULL</default><relation table="reservations" row="id" />
+</row>
 <row name="status" null="1" autoincrement="0">
 <datatype>INTEGER</datatype>
 <default>0</default></row>
