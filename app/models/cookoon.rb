@@ -17,6 +17,7 @@ class Cookoon < ApplicationRecord
   has_many :reservations, dependent: :restrict_with_exception
   has_many :availabilities, dependent: :destroy
   has_many :future_availabilities, -> { future }, class_name: 'Availability', inverse_of: :cookoon
+  has_many :perks, dependent: :destroy
 
   has_attachments :photos, maximum: 5, order: 'id ASC'
 
@@ -37,6 +38,11 @@ class Cookoon < ApplicationRecord
 
   def unavailabilites(date_range)
     overlapping_reservations(date_range) + overlapping_availabilities(date_range)
+  end
+
+  def list_perks
+    # cannot pluck because of delegation
+    perks.map(&:name).join(' / ')
   end
 
   private
