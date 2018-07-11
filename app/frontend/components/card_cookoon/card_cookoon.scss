@@ -33,17 +33,21 @@
     width: 100%;
     background-size: cover;
     background-position: center;
-    .cta {
+    .bottom {
       position: absolute;
       bottom: -0.9375rem;
       right: 2rem;
       z-index: 1;
       background-color: var(--white);
       max-width: calc(75% - 1rem);
+      padding: 0.25rem 1rem;
+    }
+    .cta {
       padding: 0.25rem 2.5rem;
     }
     .infos {
       font-family: 'Tisa Sans Pro', sans-serif;
+      font-size: 0.875rem;
     }
     .icons {
       position: absolute;
