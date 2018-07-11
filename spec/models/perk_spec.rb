@@ -1,5 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe Perk, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it { should delegate(:name).to(:perk_specification) }
+  it { should delegate(:icon_name).to(:perk_specification) }
 end
