@@ -9,12 +9,13 @@ module UserReservationCardHelper
     include DatetimeHelper
 
     def initialize(view, reservation)
-      @view, @reservation = view, reservation
+      @view = view
+      @reservation = reservation
     end
 
     def html
       content = safe_join([header, picture])
-      link_to reservation_link do
+      link_to reservation_path(reservation) do
         content_tag(:div, content, class: "user-reservation-card user-reservation-card-#{color}")
       end
     end
@@ -45,7 +46,7 @@ module UserReservationCardHelper
     def header_status
       case reservation.status
       when 'paid'
-        content_tag(:i, nil, class: "co co-reversed-meeting")
+        content_tag(:i, nil, class: 'co co-reversed-meeting')
       when 'accepted', 'passed'
         content_tag(:i, nil, class: 'far fa-check-circle')
       when 'ongoing'
@@ -59,19 +60,11 @@ module UserReservationCardHelper
       content_tag(:div, nil, class: 'user-reservation-card-picture', style: "background-image: url(#{cl_image_path reservation.cookoon.photos.first.path})")
     end
 
-
     def color
       case reservation.status
       when 'paid' then 'white'
       when 'accepted', 'ongoing' then 'blue'
       else 'grey'
-      end
-    end
-
-    def reservation_link
-      case reservation.status
-      when 'paid', 'accepted' then edit_reservation_path(reservation)
-      when 'refused', 'passed', 'cancelled' then reservation_path(reservation)
       end
     end
   end

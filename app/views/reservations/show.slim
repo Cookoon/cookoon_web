@@ -1,18 +1,19 @@
 = content_for :navbar_type, :back
-= content_for :navbar_back_url, reservations_path
 = content_for :navbar_content do
   <h4 class='text-primary'>Mes Réservations</h4>
 
-= component 'card_cookoon',
-            title: @cookoon.name,
-            title_style: :reverse,
-            image_url: cl_image_path(@cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
-            infos: date_and_duration_display_for(@reservation).html_safe
-            
+.bg-dark
+  = carousel_for(@cookoon.photos)
+
+.cookoon-title-wrapper
+  .cookoon-title-content class=(' bg-secondary' if @reservation.refused_passed_or_cancelled?)
+    h4 = @cookoon.name
+
 / TODO CP 01.06 Probably not the best use of slim syntax...
 .container.pt-2
   p Adresse: <strong>#{@cookoon.address}</strong>
     <br>Chez: <strong>#{@cookoon.user.full_name}</strong>
+    <br>Le: #{date_and_duration_display_for(@reservation).html_safe}
 
   p <strong>Contactez l'hôte :</strong>
 
@@ -45,7 +46,7 @@
       strong = humanized_money_with_symbol @reservation.payment_amount
 
     .py-4
-      = link_to 'Demander une facture', reservation_invoices_path(@reservation), class: 'btn btn-primary btn-action btn-block', method: :post, remote: true
+      = link_to 'Demander une facture', reservation_invoices_path(@reservation), class: classnames("btn", "btn-primary", 'btn-action', 'bg-secondary' => @reservation.refused_passed_or_cancelled?), method: :post, remote: true
 
     = component 'hr'
 
@@ -54,7 +55,8 @@
         p <strong>Partagez adresses et horaires de votre location en conviant vos invités</strong>
         = link_to 'Convier mes invités', reservation_guests_path(@reservation), class: 'btn btn-primary btn-action btn-block'
 
-    .text-center.pt-3
-      p Attention : si vous annulez 48h avant votre location, vous risquez de ne pas être remboursé de l'intégralité du montant de la location
-      = link_to reservation_path(@reservation), method: :patch, remote: true, class: 'text-primary opacity-hover', data: { 'confirm-swal': "Êtes vous sûr ?", text: "Vous êtes sur le point d'annuler la réservation" } do
-        <u>Annuler la réservation</u>
+    - if @reservation.paid? || @reservation.accepted?
+      .text-center.pt-3
+        p Attention : si vous annulez 48h avant votre location, vous risquez de ne pas être remboursé de l'intégralité du montant de la location
+        = link_to reservation_path(@reservation), method: :patch, remote: true, class: 'text-primary opacity-hover', data: { 'confirm-swal': "Êtes vous sûr ?", text: "Vous êtes sur le point d'annuler la réservation" } do
+          <u>Annuler la réservation</u>
