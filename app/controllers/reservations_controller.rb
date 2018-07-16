@@ -1,6 +1,6 @@
 class ReservationsController < ApplicationController
   before_action :find_cookoon, only: :create
-  before_action :find_reservation, only: %i[edit update show]
+  before_action :find_reservation, only: %i[update show]
 
   def index
     reservations = policy_scope(Reservation).includes(cookoon: :photo_files)
@@ -25,10 +25,6 @@ class ReservationsController < ApplicationController
       flash.alert = @reservation.errors.full_messages.join(', ')
       redirect_to @cookoon
     end
-  end
-
-  def edit
-    @cookoon = @reservation.cookoon
   end
 
   def update
