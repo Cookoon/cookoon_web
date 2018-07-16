@@ -13,6 +13,10 @@
     opacity: 0.8;
   }
 
+  .swiper-pagination-bullets {
+    bottom: 30px;
+  }
+
   .swiper-pagination-bullet-active {
     background: var(--primary);
   }

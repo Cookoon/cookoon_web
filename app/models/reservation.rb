@@ -85,6 +85,10 @@ class Reservation < ApplicationRecord
     pending? || paid?
   end
 
+  def refused_passed_or_cancelled?
+    refused? || passed? || cancelled?
+  end
+
   def payment(options = {})
     @payment ||= Reservation::Payment.new(self, options)
   end
