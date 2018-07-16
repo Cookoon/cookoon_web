@@ -3,12 +3,10 @@
 module CardCookoonComponent
   extend ComponentHelper
 
+  attr_reader :title_class
+
   def image_url
     @image_url || 'https://lorempixel.com/800/450/city/'
-  end
-
-  def title_class
-    @title_style
   end
 
   def link_url?
