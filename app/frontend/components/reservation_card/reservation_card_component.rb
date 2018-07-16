@@ -22,10 +22,7 @@ module ReservationCardComponent
   end
 
   def link_url
-    case reservation.status
-    when 'paid', 'accepted' then edit_reservation_path(reservation)
-    when 'refused', 'passed', 'cancelled' then reservation_path(reservation)
-    end
+    reservation_path(reservation)
   end
 
   def infos
