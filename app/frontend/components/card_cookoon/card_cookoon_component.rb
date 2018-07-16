@@ -9,10 +9,6 @@ module CardCookoonComponent
     @image_url || 'https://lorempixel.com/800/450/city/'
   end
 
-  def title_class
-    @title_class
-  end
-
   def link_url?
     @link_url.present?
   end
