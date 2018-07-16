@@ -58,6 +58,7 @@ gem 'simple_scheduler'
 # Front
 gem 'draper'
 gem 'icalendar'
+gem 'klassnames'
 gem 'komponent'
 gem 'roadie-rails'
 gem 'sidekiq'
