@@ -161,7 +161,6 @@ GEM
     jsonapi-serializers (1.0.1)
       activesupport
     jwt (2.1.0)
-    klassnames (1.0.2)
     komponent (2.1.0)
       actionview (>= 4.2)
       activesupport (>= 4.2)
@@ -421,7 +420,6 @@ DEPENDENCIES
   i18n-tasks
   icalendar
   jbuilder (~> 2.5)
-  klassnames
   komponent
   letter_opener
   listen (>= 3.0.5, < 3.2)
