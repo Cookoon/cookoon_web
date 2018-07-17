@@ -1,20 +1,22 @@
 - content_for :body_class, 'bg-primary'
 - content_for :navbar_type, :logo
 
-= component 'search'
+.d-flex.justify-content-center
+  .fitter
+    = component 'search'
 
-.mb-4
-  = component 'hr', style: :inverted
+    .mb-4
+      = component 'hr', style: :inverted
 
-.mx-5
-  .h4.text-white Les éphémères Cookoon
-  .p.text-white.font-weight-light(style="font-size: 0.75rem;") Réservez des expériences Cookoon conçues par nos soins
+    .mx-5
+      .h4.text-white Les éphémères Cookoon
+      .p.text-white.font-weight-light(style="font-size: 0.75rem;") Réservez des expériences Cookoon conçues par nos soins
 
-.py-4
-  = component 'swiper',
-              slide_component: 'card_cookoon',
-              slides_locals: [{ title: @ephemeral.title,
-                                title_style: 'multiline',
-                                image_url: ephemeral_safe_picture(@ephemeral),
-                                link_url: (@ephemeral if @ephemeral.persisted?),
-                                cta: ('Réserver' if @ephemeral.persisted?) }]
+    .py-4
+      = component 'swiper',
+                  slide_component: 'card_cookoon',
+                  slides_locals: [{ title: @ephemeral.title,
+                                    title_style: 'multiline',
+                                    image_url: ephemeral_safe_picture(@ephemeral),
+                                    link_url: (@ephemeral if @ephemeral.persisted?),
+                                    cta: ('Réserver' if @ephemeral.persisted?) }]

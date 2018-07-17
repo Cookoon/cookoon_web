@@ -2,6 +2,10 @@ body {
   position: relative;
   min-height: 100vh;
 }
+.fitter {
+  width: 420px;
+  max-width: 100vw;
+}
 
 hr.half {
   width: 50%;
@@ -113,28 +117,33 @@ hr.half {
   }
 }
 
+.mx-2rem {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
 .w-15rem {
   width: 15rem;
 }
 .w-90 {
   width: 90%;
 }
-.mw-400px {
-  max-width: 400px;
+.mw-420px {
+  max-width: 420px;
 }
 
 // Placeholders
 ::-webkit-input-placeholder {
-   font-style: italic;
+  font-style: italic;
 }
 :-moz-placeholder {
-   font-style: italic;
+  font-style: italic;
 }
 ::-moz-placeholder {
-   font-style: italic;
+  font-style: italic;
 }
 :-ms-input-placeholder {
-   font-style: italic;
+  font-style: italic;
 }
 
 // Animation
