@@ -1,0 +1,10 @@
+= content_for :navbar_content do
+  h4.text-primary Résultats <br/> de votre recherche</h4>
+  p = "le #{display_datetime_for @search.start_at, join_expression: 'à'}"
+  p = "pour #{@search.duration} heures et pour #{@search.people_count} personnes"
+
+div#cookoons_and_map(class=classnames(container: desktop_view?))
+  - if @cookoons.empty?
+    = render 'no_cookoon'
+  - else
+    = render 'cookoons_and_map'
