@@ -2,6 +2,10 @@ body {
   position: relative;
   min-height: 100vh;
 }
+.fitter {
+  width: 420px;
+  max-width: 100vw;
+}
 
 hr.half {
   width: 50%;
@@ -125,16 +129,16 @@ hr.half {
 
 // Placeholders
 ::-webkit-input-placeholder {
-   font-style: italic;
+  font-style: italic;
 }
 :-moz-placeholder {
-   font-style: italic;
+  font-style: italic;
 }
 ::-moz-placeholder {
-   font-style: italic;
+  font-style: italic;
 }
 :-ms-input-placeholder {
-   font-style: italic;
+  font-style: italic;
 }
 
 // Animation
