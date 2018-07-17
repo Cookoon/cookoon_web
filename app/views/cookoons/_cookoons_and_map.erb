@@ -1,23 +1,25 @@
-<div class="col-12 col-md-8">
-  <div class="row no-gutters">
-    <% @cookoons.each do |cookoon| %>
-      <div class="col-12 col-md-6 my-2">
-        <%= component 'card_cookoon',
-                      title: cookoon.name,
-                      title_class: :reverse,
-                      image_url: cl_image_path(cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
-                      link_url: cookoon,
-                      icons: [cookoon.category_icon, cookoon.price_icon]
-        %>
-      </div>
-    <% end %>
+<div class="row">
+  <div class="col-12 col-md-8">
+    <div class="row">
+      <% @cookoons.each do |cookoon| %>
+        <div class="col-12 col-md-6 my-2">
+          <%= component 'card_cookoon',
+                        title: cookoon.name,
+                        title_class: :reverse,
+                        image_url: cl_image_path(cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
+                        link_url: cookoon,
+                        icons: [cookoon.category_icon, cookoon.price_icon]
+          %>
+        </div>
+      <% end %>
+    </div>
   </div>
-</div>
 
-<div class="col-12 col-md-4 d-none d-sm-block">
-  <div class="map-cookoon-index d-none d-sm-block"
-       data-controller='google-maps'
-       data-target="google-maps.cookoonIndexMap"
-       data-google-maps-markers="<%= @markers.to_json %>"
-  ></div>
+  <div class="col-12 col-md-4 d-none d-sm-block">
+    <div class="map-cookoon-index d-none d-sm-block"
+         data-controller='google-maps'
+         data-target="google-maps.cookoonIndexMap"
+         data-google-maps-markers="<%= @markers.to_json %>"
+    ></div>
+  </div>
 </div>
