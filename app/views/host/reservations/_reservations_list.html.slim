@@ -1,0 +1,4 @@
+.row
+  - reservations.each do |reservation|
+    .col-md-6
+      = host_card_for(reservation)
