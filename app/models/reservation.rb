@@ -77,6 +77,10 @@ class Reservation < ApplicationRecord
     OpenStruct.new DEFAULTS.slice(:max_duration, :max_people_count)
   end
 
+  def invoiceable?
+    accepted? || cancelled? || ongoing? || passed?
+  end
+
   def cookoon_owner
     cookoon.user
   end

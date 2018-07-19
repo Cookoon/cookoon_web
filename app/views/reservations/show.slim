@@ -45,8 +45,9 @@
       strong TOTAL
       strong = humanized_money_with_symbol @reservation.payment_amount
 
-    .py-4.text-center
-      = link_to 'Demander une facture', reservation_invoices_path(@reservation), class: classnames('btn', 'btn-primary', 'btn-action', 'btn-block', 'btn-secondary': @reservation.refused_passed_or_cancelled?), method: :post, remote: true
+    - if @reservation.invoiceable?
+      .py-4.text-center
+        = link_to 'Demander une facture', reservation_invoices_path(@reservation), class: classnames('btn', 'btn-primary', 'btn-action', 'btn-block', 'btn-secondary': @reservation.refused_passed_or_cancelled?), method: :post, remote: true
 
     = component 'hr'
 
