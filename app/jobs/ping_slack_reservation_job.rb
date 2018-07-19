@@ -3,7 +3,7 @@ class PingSlackReservationJob < ApplicationJob
 
   def perform(reservation_id)
     reservation = Reservation.find(reservation_id)
-    service = SlackNotifierService.new(reservation: reservation)
+    service = Slack::ReservationNotifier.new(reservation: reservation)
     service.notify
   end
 end
