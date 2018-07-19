@@ -43,6 +43,7 @@ class User < ApplicationRecord
   after_save :upsert_mailchimp_subscription, if: :saved_change_to_born_on?
 
   before_update :set_discount_expires_at, if: :discount_balance_cents_changed?
+  before_update :report_to_slack, if: :stripe_account_id_changed?
 
   def full_name
     if first_name.present? && last_name.present?
@@ -110,6 +111,11 @@ class User < ApplicationRecord
   end
 
   private
+
+  def report_to_slack
+    # return unless Rails.env.production?
+    PingSlackHostJob.perform_later(id)
+  end
 
   def set_discount_expires_at
     return if discount_balance_cents < discount_balance_cents_was
