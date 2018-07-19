@@ -113,7 +113,7 @@ class User < ApplicationRecord
   private
 
   def report_to_slack
-    # return unless Rails.env.production?
+    return unless Rails.env.production?
     PingSlackHostJob.perform_later(id)
   end
 
