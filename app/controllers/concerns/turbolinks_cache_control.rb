@@ -2,7 +2,7 @@ module TurbolinksCacheControl
   extend ActiveSupport::Concern
 
   included do
-    before_action :disable_turbolinks_preview_cache, only: :new
+    before_action :disable_turbolinks_preview_cache, only: %i[new edit]
   end
 
   private
