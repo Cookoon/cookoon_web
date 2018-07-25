@@ -7,7 +7,7 @@ module Pro
       authorize @quote
 
       if @quote.save
-        redirect_to root_path
+        redirect_to pro_root_path
       else
         render :new
       end
