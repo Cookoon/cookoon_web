@@ -71,10 +71,12 @@ Rails.application.routes.draw do
 
   # -------- PRO NAMESPACE ---------
   namespace :pro do
-    get :home, controller: :pages
+    root 'pages#home'
+
     resources :quotes, only: %i[index create update] do
       resources :proposals, only: %i[show edit update]
     end
+
     resources :services, only: %i[index]
     resources :cookoons, only: %i[index]
   end
