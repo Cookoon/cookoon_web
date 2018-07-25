@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_10_102403) do
+ActiveRecord::Schema.define(version: 2018_07_25_093818) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,16 @@ ActiveRecord::Schema.define(version: 2018_07_10_102403) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cookoon_id"], name: "index_availabilities_on_cookoon_id"
+  end
+
+  create_table "companies", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.integer "siren"
+    t.bigint "siret"
+    t.string "vat"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "cookoon_searches", force: :cascade do |t|
@@ -171,10 +181,10 @@ ActiveRecord::Schema.define(version: 2018_07_10_102403) do
     t.integer "price_cents"
     t.string "price_currency", default: "EUR", null: false
     t.integer "status", default: 0, null: false
+    t.string "stripe_charge_id"
+    t.integer "discount_amount_cents", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "stripe_charge_id"
-    t.integer "discount_amount_cents", default: 0
     t.integer "category", default: 0, null: false
     t.boolean "payment_tied_to_reservation", default: false
     t.index ["reservation_id"], name: "index_services_on_reservation_id"
@@ -212,6 +222,8 @@ ActiveRecord::Schema.define(version: 2018_07_10_102403) do
     t.integer "discount_balance_cents", default: 0
     t.datetime "discount_expires_at"
     t.date "born_on"
+    t.bigint "company_id"
+    t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"
@@ -233,4 +245,5 @@ ActiveRecord::Schema.define(version: 2018_07_10_102403) do
   add_foreign_key "reservations", "cookoons"
   add_foreign_key "reservations", "users"
   add_foreign_key "services", "reservations"
+  add_foreign_key "users", "companies"
 end
