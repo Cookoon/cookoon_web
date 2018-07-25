@@ -1,11 +1,13 @@
-class QuotesController < ApplicationController
-  def index; end
+module Pro
+  class QuotesController < ApplicationController
+    def index; end
 
-  def create; end
+    def create; end
 
-  def update; end
+    def update; end
 
-  private
+    private
 
-  def quote_params; end
+    def quote_params; end
+  end
 end

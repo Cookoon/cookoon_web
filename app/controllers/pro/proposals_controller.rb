@@ -1,11 +1,13 @@
-class ProposalsController < ApplicationController
-  def show; end
+module Pro
+  class ProposalsController < ApplicationController
+    def show; end
 
-  def edit; end
+    def edit; end
 
-  def update; end
+    def update; end
 
-  private
+    private
 
-  def proposal_params; end
+    def proposal_params; end
+  end
 end

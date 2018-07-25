@@ -1,3 +1,5 @@
-class CookoonsController < ApplicationController
-  def index; end
+module Pro
+  class CookoonsController < ApplicationController
+    def index; end
+  end
 end
