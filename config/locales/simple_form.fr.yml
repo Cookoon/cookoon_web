@@ -6,13 +6,15 @@ fr:
         create: Ajouter un nouveau contact
       cookoon_search:
         create: Chercher
+      pro_quote:
+        create: Trouver un espace
       user:
         update: Mettre à jour
   simple_form:
     error_notification:
       default_message: 'Merci de revoir les éléments ci-dessous :'
     'no': Non
-    
+
     placeholders:
       cookoon:
         caretaker_instructions: 'exemples : emplacement du local poubelle, consigne de gestion des clés, etc.'

@@ -22,6 +22,10 @@ fr:
         phone_number: Téléphone portable
         born_on: Date de naissance
         reset_password_token: Votre lien de réinitialisation
+      pro/quote:
+        start_at: la date et l'heure de début
+        duration: la durée
+        people_count: le nombre de personnes
     errors:
       models:
         availability:
@@ -65,6 +69,14 @@ fr:
               taken: Cet utilisateur est déjà membre !
             phone_number:
               invalid: vérifiez le format de votre numéro de téléphone
+        pro/quote:
+          attributes:
+            start_at:
+              blank: doivent être renseignées
+            duration:
+              not_a_number: doit être renseignée
+            people_count:
+              not_a_number: doit être renseigné
     models:
       user: Utilisateur
   attributes:
