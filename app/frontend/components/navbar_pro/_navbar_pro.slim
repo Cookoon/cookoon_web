@@ -1,5 +1,9 @@
-.navbar-pro
-  i.co.co-logo.text-white.fa-4x
+.navbar-pro.text-white
+  i.co.co-logo.fa-4x
+
+  - if content?
+    .navbar-pro-content = @content
+
   .navbar-pro-actions
     = link_to 'Mes Réservations', '#'
     = link_to 'Réceptions Nouvelles', '#'

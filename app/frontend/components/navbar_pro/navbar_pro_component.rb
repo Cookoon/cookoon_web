@@ -2,4 +2,8 @@
 
 module NavbarProComponent
   extend ComponentHelper
+
+  def content?
+    @content.present?
+  end
 end
