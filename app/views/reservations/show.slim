@@ -49,14 +49,17 @@
       .py-4.text-center
         = link_to 'Demander une facture', reservation_invoices_path(@reservation), class: classnames('btn', 'btn-primary', 'btn-action', 'btn-block', 'btn-secondary': @reservation.refused_passed_or_cancelled?), method: :post, remote: true
 
-    = component 'hr'
 
     - if @reservation.accepted?
+      = component 'hr'
+
       .text-center.py-3
         p <strong>Partagez adresses et horaires de votre location en conviant vos invités</strong>
         = link_to 'Convier mes invités', reservation_guests_path(@reservation), class: 'btn btn-primary btn-action btn-block'
 
     - if @reservation.paid? || @reservation.accepted?
+      = component 'hr'
+
       .text-center.pt-3
         p Attention : si vous annulez 48h avant votre location, vous risquez de ne pas être remboursé de l'intégralité du montant de la location
         = link_to reservation_path(@reservation), method: :patch, remote: true, class: 'text-primary opacity-hover', data: { 'confirm-swal': "Êtes vous sûr ?", text: "Vous êtes sur le point d'annuler la réservation" } do
