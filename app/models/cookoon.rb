@@ -10,6 +10,8 @@ class Cookoon < ApplicationRecord
   scope :without_availabilty_in, ->(range) { where.not(id: Availability.unavailable.overlapping(range).pluck(:cookoon_id).uniq) }
   scope :created_in_day_range_around, ->(date_time) { where created_at: day_range(date_time) }
 
+  scope :random, -> { order(Arel::Nodes::NamedFunction.new('RANDOM', [])) }
+
   CATEGORIES = %w[Appartement Maison Jardin Loft Terrasse Toit Villa].freeze
   MAX_PER_USER = 2
 

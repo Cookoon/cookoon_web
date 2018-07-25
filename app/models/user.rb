@@ -58,6 +58,10 @@ class User < ApplicationRecord
     Mail::Address.new("#{full_name} <#{email}>")
   end
 
+  def pro?
+    company.present?
+  end
+
   def notifiable_reservations
     reservations.accepted
   end
