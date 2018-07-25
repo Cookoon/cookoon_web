@@ -20,7 +20,6 @@ module NavbarCookoonComponent
     content? ? 'content-padded' : nil
   end
 
-
   def content?
     @content.present?
   end
