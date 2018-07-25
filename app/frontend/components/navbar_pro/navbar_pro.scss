@@ -1,0 +1,25 @@
+.navbar-pro {
+  padding: 25px;
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  align-items: center;
+  margin: 0 auto;
+  &-content {
+    flex: 6;
+    padding-left: 25px;
+    p {
+      font-size: 13px;
+      margin: 1px;
+    }
+    h4 {
+      margin: 0;
+    }
+  }
+  &-actions {
+    a {
+      color: white;
+      margin-left: 20px;
+    }
+  }
+}
