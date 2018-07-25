@@ -12,5 +12,8 @@
     color: var(--white);
     width: 280px;
     padding: 10px 15px;
+    > * {
+      margin-bottom: 0;
+    }
   }
 }
