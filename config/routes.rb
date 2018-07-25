@@ -69,6 +69,12 @@ Rails.application.routes.draw do
     end
   end
 
+  # -------- PRO NAMESPACE ---------
+  namespace :pro do
+    get :home, controller: :pages
+  end
+
+
   # -------- ADMIN ROUTES ---------
   # Sidekiq Web UI, only for admins
   authenticate :user, ->(user) { user.admin } do
