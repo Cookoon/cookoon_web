@@ -83,5 +83,5 @@ Company.create!(name: "Réceptions Nouvelles", address: "12 rue Lincoln, 75008 P
 puts 'Companies done'
 
 puts 'Seeding Pro::Quotes'
-Pro::Quote.create(user: User.find(4), company: Company.first, start_at: 1.day.from_now, duration: 2, people_count: 4)
+Pro::Quote.create(user: User.first, company: Company.first, start_at: 1.day.from_now, duration: 2, people_count: 4)
 puts 'Pro::Quotes done'
