@@ -75,3 +75,13 @@ cookoons_attributes.each do |attributes|
   Cookoon.create! attributes
 end
 puts "Cookoons done"
+
+puts 'Pro section'
+
+puts 'Seeding Companies'
+Company.create!(name: "Réceptions Nouvelles", address: "12 rue Lincoln, 75008 Paris", siren: 821316239, siret: 82131623900010, vat: "FR 28 821316239")
+puts 'Companies done'
+
+puts 'Seeding Pro::Quotes'
+Pro::Quote.create(user: User.first, company: Company.first, start_at: 1.day.from_now, duration: 2, people_count: 4)
+puts 'Pro::Quotes done'

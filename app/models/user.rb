@@ -19,6 +19,7 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable, :recoverable,
          :trackable, :validatable, :rememberable
 
+  belongs_to :company, required: false
   has_many :cookoons, dependent: :restrict_with_exception
   has_many :reservations, dependent: :restrict_with_exception
   has_many :reservation_requests, through: :cookoons, source: :reservations
