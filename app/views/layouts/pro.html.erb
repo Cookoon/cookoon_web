@@ -35,7 +35,7 @@
       <%= render 'shared/flashes' %>
     </div>
 
-    <%= c 'navbar_pro' %>
+    <%= c 'navbar_pro', content: content_for?(:navbar_content) ? yield(:navbar_content) : nil %> %>
 
     <%= yield %>
   </body>
