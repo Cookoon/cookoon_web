@@ -1,3 +1,20 @@
-- content_for :body_class, 'bg-primary'
+- content_for :body_class, 'bg-primary text-white'
 
-p Bienvenue sur la home des pro
+.container.text-center
+  h1
+    | Organisez une expérience originale à <u>Paris</u>
+    br pour tous vos évènements d’entreprise avec Cookoon !
+
+  p Composant 1. Trouver un espace
+
+  = render 'pro/quotes/form'
+
+  .row.mt-5
+    - @cookoons.each do |cookoon|
+      .col
+        = component 'card_cookoon',
+                     title: cookoon.name,
+                     title_class: :reverse,
+                     image_url: cl_image_path(cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
+                     # link_url: cookoon,
+                     icons: [cookoon.category_icon, cookoon.price_icon]

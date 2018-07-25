@@ -12,9 +12,15 @@ fr:
     error_notification:
       default_message: 'Merci de revoir les éléments ci-dessous :'
     'no': Non
+    
     placeholders:
       cookoon:
         caretaker_instructions: 'exemples : emplacement du local poubelle, consigne de gestion des clés, etc.'
+      pro_quote:
+        start_at: Date de l'événement
+        duration: Durée de l'événement
+        people_count: Nombre de personnes
+
     required:
       mark: '*'
       text: requis
