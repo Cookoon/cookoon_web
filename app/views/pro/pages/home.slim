@@ -14,7 +14,5 @@
       .col
         = component 'card_cookoon',
                      title: cookoon.name,
-                     title_class: :reverse,
                      image_url: cl_image_path(cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
-                     # link_url: cookoon,
                      icons: [cookoon.category_icon, cookoon.price_icon]
