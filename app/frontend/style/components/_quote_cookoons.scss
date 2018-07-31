@@ -1,0 +1,12 @@
+.quote-cookoons {
+  display: flex;
+  &-list {
+    flex: 4;
+    height: 100vh;
+    overflow: scroll;
+  }
+  &-infos {
+    padding-left: 50px;
+    flex: 4;
+  }
+}
