@@ -1,0 +1,14 @@
+div.container.py-4
+  p Ajoutez  2 Cookoons à votre sélection pour obtenir une proposition
+
+  div.quote-cookoons
+    div.quote-cookoons-list
+      - @cookoons.each do |cookoon|
+        = c 'card_cookoon',
+            title: cookoon.name,
+            title_class: :reverse,
+            image_url: cl_image_path(cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
+            icons: [cookoon.category_icon, cookoon.price_icon]
+
+    div.quote-cookoons-infos
+      p Slectionnez un Cookoon pour voir les informations relatives à ce dernier.
