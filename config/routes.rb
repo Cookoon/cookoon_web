@@ -78,6 +78,8 @@ Rails.application.routes.draw do
       resources :services, only: %i[index]
       resources :cookoons, only: %i[index]
     end
+
+    resources :cookoons, only: %i[show]
   end
 
 
