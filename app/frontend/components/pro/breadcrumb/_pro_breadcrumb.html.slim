@@ -1,0 +1,12 @@
+.pro-breadcrumb
+  .step(class=classnames(done: @step > 1)) 1
+  - if @step == 1
+    .step-text Trouver une espace
+  .hyphen
+  .step(class=classnames(done: @step > 2)) 2
+  - if @step == 2
+    .step-text Choisir un Cookoon
+  .hyphen
+  .step(class=classnames(done: @step > 3)) 3
+  - if @step == 3
+    .step-text Ajouter des services

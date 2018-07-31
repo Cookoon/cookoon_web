@@ -1,0 +1,26 @@
+.pro-breadcrumb {
+  display: flex;
+  align-items: center;
+  .step {
+    height: 2rem;
+    width: 2rem;
+    border: 1px solid white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &.done {
+      background-color: white;
+      color: var(--primary);
+    }
+    &-text {
+      margin-left: 0.5rem;
+    }
+  }
+  .hyphen {
+    flex-grow: 1;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border-bottom: 1px solid white;
+  }
+}

@@ -7,4 +7,6 @@ import 'components/reservation_card/reservation_card';
 import 'components/search/search';
 import 'components/service/service';
 import 'components/swiper/swiper';
-import "components/navbar_pro/navbar_pro";
+
+import 'components/pro';
+import 'components/navbar_pro/navbar_pro';
