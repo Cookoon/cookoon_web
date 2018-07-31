@@ -7,7 +7,7 @@ module Pro
       authorize @quote
 
       if @quote.save
-        redirect_to pro_root_path
+        redirect_to pro_quote_cookoons_path(@quote)
       else
         render :new
       end
