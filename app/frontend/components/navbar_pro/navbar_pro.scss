@@ -1,10 +1,13 @@
 .navbar-pro {
-  padding: 25px;
-  display: flex;
-  justify-content: space-between;
-  width: 80%;
-  align-items: center;
-  margin: 0 auto;
+  background: var(--primary);
+  &-container {
+    margin: 0 auto;
+    padding: 25px;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    align-items: center;
+  }
   &-content {
     flex: 6;
     padding-left: 25px;
