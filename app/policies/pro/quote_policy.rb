@@ -7,7 +7,7 @@ module Pro
     end
 
     def create?
-      record.user.pro?
+      user.pro?
     end
   end
 end
