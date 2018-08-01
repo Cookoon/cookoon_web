@@ -9,4 +9,3 @@ import 'components/service/service';
 import 'components/swiper/swiper';
 
 import 'components/pro';
-import 'components/navbar_pro/navbar_pro';

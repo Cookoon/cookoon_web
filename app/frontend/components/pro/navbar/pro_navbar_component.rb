@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module NavbarProComponent
+module ProNavbarComponent
   extend ComponentHelper
 
   def content?
