@@ -1,10 +1,10 @@
-.navbar-pro.text-white
-  .navbar-pro-container
+.pro-navbar.text-white
+  .pro-navbar-container
     i.co.co-logo.fa-4x
 
     - if content?
-      .navbar-pro-content = @content
+      .pro-navbar-content = @content
 
-    .navbar-pro-actions
+    .pro-navbar-actions
       = link_to 'Mes Réservations', '#'
       = link_to current_user.company.name, '#'
