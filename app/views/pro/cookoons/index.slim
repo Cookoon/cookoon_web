@@ -2,6 +2,16 @@
   .mx-5.d-none.d-xl-block
     = component 'pro/breadcrumb', step: 2
 
+.bg-primary.text-white.pb-5
+  .container
+    .row.align-items-center
+      .col-8.d-flex.child-mx-2.text-center
+        .quote-attribute-box.p-3.flex-grow-1 = @quote.start_at
+        .quote-attribute-box.p-3.flex-grow-1 = @quote.duration
+        .quote-attribute-box.p-3.flex-grow-1 = @quote.people_count
+      .col-4
+        img(src== image_path('paris-map.svg') class='img-fluid')
+
 div.container.py-4
   p Ajoutez  2 Cookoons à votre sélection pour obtenir une proposition
 
