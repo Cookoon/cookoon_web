@@ -156,7 +156,6 @@ ActiveRecord::Schema.define(version: 2018_08_02_132853) do
   create_table "pro_quote_services", force: :cascade do |t|
     t.bigint "pro_quote_id"
     t.integer "category", default: 0, null: false
-    t.string "name"
     t.integer "quantity"
     t.index ["pro_quote_id"], name: "index_pro_quote_services_on_pro_quote_id"
   end
