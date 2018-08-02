@@ -1,22 +1,20 @@
 module Pro
   class QuoteServicesController < ApplicationController
-    # TODO: FC 02 AUG : Use actual pundit policies
-    skip_after_action :verify_policy_scoped
-    skip_after_action :verify_authorized
-
     def index
       @quote = Quote.find(params[:quote_id]).decorate
 
       # TODO: FC 02 AUG : plug correct cookoon
       @highlighted_cookoon = Cookoon.first.decorate # @quote.cookoons.first.decorate
 
-      @service_categories = build_service_categories
+      @quote_service_categories = build_quote_service_categories
     end
 
     def create
       @quote = Quote.find(params[:quote_id])
 
       @quote_service = @quote.services.new(quote_service_params)
+      authorize @quote_service
+
       if @quote_service.save
         render json: { url: pro_service_path(@quote_service), method: 'delete', selected: 'true' }
       else
@@ -26,6 +24,7 @@ module Pro
 
     def destroy
       @quote_service = Pro::QuoteService.find(params[:id])
+      authorize @quote_service
 
       @quote_service.destroy
       render json: { url: pro_quote_services_path(@quote_service.quote), method: 'post', selected: 'false' }
@@ -40,8 +39,9 @@ module Pro
     end
 
     # TODO: CP 2may2018 Try to refactor this
-    def build_service_categories
-      quote_service_categories = @quote.services.pluck(:category)
+    def build_quote_service_categories
+      quote_service_categories = policy_scope(@quote.services).pluck(:category)
+
       Service.categories.keys.reverse.map do |category|
         if quote_service_categories.exclude? category
           { url: pro_quote_services_path(@quote), method: 'post', selected: 'false' }
