@@ -9,6 +9,10 @@ module Pro
              foreign_key: :pro_quote_id, dependent: :destroy
     has_many :cookoons, through: :quote_cookoons
 
+    has_many :services,
+             class_name: 'Pro::QuoteService', inverse_of: :quote,
+             foreign_key: :pro_quote_id, dependent: :destroy
+
     validates :start_at, presence: true
     validates :duration, numericality: { only_integer: true, greater_than: 0 }
     validates :people_count, numericality: { only_integer: true, greater_than: 0 }
