@@ -23,6 +23,8 @@ div.container.py-4
             title_class: :reverse,
             link_url: pro_cookoon_path(cookoon),
             remote: true,
+            card_id: "cookoon-#{cookoon.id}",
+            selected: @quote.cookoons.include?(cookoon),
             image_url: cl_image_path(cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
             icons: [cookoon.category_icon, cookoon.price_icon]
 
