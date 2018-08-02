@@ -1,5 +1,6 @@
 module Pro
   class QuoteCookoonsController < ApplicationController
+    # TODO, CP 2aug : Replace with actual policies
     skip_after_action :verify_policy_scoped
     skip_after_action :verify_authorized
 
@@ -11,6 +12,7 @@ module Pro
       return redirect_to pro_quote_services_path(@quote) if @quote.cookoons.count == 2
     end
 
+    # TODO, CP 2aug : Will we use this ?
     def update; end
 
     private
