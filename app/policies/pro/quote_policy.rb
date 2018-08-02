@@ -7,7 +7,11 @@ module Pro
     end
 
     def create?
-      user.pro?
+      true
+    end
+
+    def update?
+      record.user == user
     end
   end
 end

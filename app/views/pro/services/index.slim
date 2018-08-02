@@ -1,0 +1,34 @@
+= content_for :navbar_content do
+  .mx-5.d-none.d-xl-block
+    = component 'pro/breadcrumb', step: 3
+
+.bg-primary.text-white.pb-5
+  .container
+    .row.align-items-center
+      .col-8.d-flex.child-mx-2.text-center
+        .quote-attribute-box.p-3.flex-grow-1 = @quote.start_at
+        .quote-attribute-box.p-3.flex-grow-1 = @quote.duration
+        .quote-attribute-box.p-3.flex-grow-1 = @quote.people_count
+      .col-4
+        img(src== image_path('paris-map.svg') class='img-fluid')
+
+.container.py-4
+  .row
+    .col-7
+      p Souhaitez-vous ajouter des services supplémentaires ?
+
+    .col-5
+      p 2 Cookoons sélectionnés dont
+      = c 'card_cookoon',
+          title: @highlighted_cookoon.name,
+          title_class: :reverse,
+          image_url: cl_image_path(@highlighted_cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
+          icons: [@highlighted_cookoon.category_icon, @highlighted_cookoon.price_icon]
+
+  = simple_form_for @quote do |f|
+    .row.align-items-end
+      .col-7
+        = f.input :comment, input_html: { rows: 6}
+      .col-5
+        .bg-primary.p-4
+          = f.submit class: 'btn btn-action btn-block btn-light'
