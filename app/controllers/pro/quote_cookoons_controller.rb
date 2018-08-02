@@ -12,13 +12,6 @@ module Pro
       return redirect_to pro_quote_services_path(@quote) if @quote.cookoons.count == 2
     end
 
-    # TODO, CP 2aug : Will we use this ?
-    def update; end
-
-    private
-
-    def quote_params
-      params.require(:pro_quote).permit(:start_at, :duration, :people_count)
-    end
+    def destroy; end
   end
 end
