@@ -21,7 +21,7 @@ div.container.py-4
         = c 'card_cookoon',
             title: cookoon.name,
             title_class: :reverse,
-            link_url: pro_cookoon_path(cookoon),
+            link_url: pro_quote_cookoon_path(@quote, cookoon),
             remote: true,
             card_id: "cookoon-#{cookoon.id}",
             selected: @quote.cookoons.include?(cookoon),
