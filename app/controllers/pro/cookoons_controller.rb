@@ -15,6 +15,7 @@ module Pro
     end
 
     def show
+      @quote = Quote.includes(:cookoons).find(params[:quote_id])
       @cookoon = Cookoon.find(params[:id])
       authorize @cookoon
 
