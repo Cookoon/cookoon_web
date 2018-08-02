@@ -1,4 +1,7 @@
-.title(class="#{title_class}") = @title
+.title(class="#{title_class}")
+  = @title
+  .title-icon class=('d-block' if selected?)
+    i.co.co-check
 .image(style="background-image: url(#{image_url})")
   - if cta?
     .bottom.cta
