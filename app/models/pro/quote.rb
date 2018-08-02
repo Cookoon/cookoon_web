@@ -5,7 +5,7 @@ module Pro
     belongs_to :user
     belongs_to :company
     has_many :quote_cookoons,
-             class_name: 'Pro::QuoteCookoon', inverse_of: :pro_quote,
+             class_name: 'Pro::QuoteCookoon', inverse_of: :quote,
              foreign_key: :pro_quote_id, dependent: :destroy
     has_many :cookoons, through: :quote_cookoons
 
