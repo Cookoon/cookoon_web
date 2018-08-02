@@ -17,6 +17,10 @@ module CardCookoonComponent
     @cta.present?
   end
 
+  def selected?
+    @selected
+  end
+
   def icons?
     @icons&.any?
   end

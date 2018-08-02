@@ -75,7 +75,9 @@ Rails.application.routes.draw do
 
     resources :quotes, only: %i[index create update] do
       resources :proposals, only: %i[show edit update]
-      resources :cookoons, only: %i[index show], shallow: true
+      resources :cookoons, only: %i[index show] do
+        resources :quote_cookoons, only: %i[create]
+      end
       resources :services, controller: 'quote_services',
                            only: %i[index create destroy],
                            shallow: true
