@@ -1,13 +1,13 @@
 module Pro
-  class ServicesController < ApplicationController
-    # TODO FC 02 AUG : Use actual pundit policies
+  class QuoteServicesController < ApplicationController
+    # TODO: FC 02 AUG : Use actual pundit policies
     skip_after_action :verify_policy_scoped
     skip_after_action :verify_authorized
 
     def index
       @quote = Quote.find(params[:quote_id]).decorate
 
-      # TODO FC 02 AUG : plug correct cookoon
+      # TODO: FC 02 AUG : plug correct cookoon
       @highlighted_cookoon = Cookoon.first.decorate # @quote.cookoons.first.decorate
 
       @service_categories = build_service_categories
@@ -16,26 +16,26 @@ module Pro
     def create
       @quote = Quote.find(params[:quote_id])
 
-      @service = @quote.services.new(service_params)
-      if @service.save
-        render json: { url: pro_service_path(@service), method: 'delete', selected: 'true' }
+      @quote_service = @quote.services.new(quote_service_params)
+      if @quote_service.save
+        render json: { url: pro_service_path(@quote_service), method: 'delete', selected: 'true' }
       else
-        render json: { errors: @service.errors.full_messages }, status: :unprocessable_entity
+        render json: { errors: @quote_service.errors.full_messages }, status: :unprocessable_entity
       end
     end
 
     def destroy
-      @service = Pro::QuoteService.find(params[:id])
+      @quote_service = Pro::QuoteService.find(params[:id])
 
-      @service.destroy
-      render json: { url: pro_quote_services_path(@service.quote), method: 'post', selected: 'false' }
+      @quote_service.destroy
+      render json: { url: pro_quote_services_path(@quote_service.quote), method: 'post', selected: 'false' }
     rescue ActiveRecord::RecordNotFound
       render json: { errors: ["Ce service n'existe plus"] }, status: :unprocessable_entity
     end
 
     private
 
-    def service_params
+    def quote_service_params
       params.require(:service).permit(:category)
     end
 
@@ -52,6 +52,7 @@ module Pro
       end
     end
 
+    # TODO: FC 02aug18 fix duplication from services_controller
     def display_options_for(category)
       case category
       when 'corporate'

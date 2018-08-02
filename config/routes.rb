@@ -75,11 +75,12 @@ Rails.application.routes.draw do
 
     resources :quotes, only: %i[index create update] do
       resources :proposals, only: %i[show edit update]
-      resources :services, only: %i[index create destroy], shallow: true
       resources :cookoons, only: %i[index show], shallow: true
+      resources :services, controller: 'quote_services',
+                           only: %i[index create destroy],
+                           shallow: true
     end
   end
-
 
   # -------- ADMIN ROUTES ---------
   # Sidekiq Web UI, only for admins
