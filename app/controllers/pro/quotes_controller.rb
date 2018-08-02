@@ -18,6 +18,8 @@ module Pro
       authorize @quote
 
       @quote.update(quote_params.slice(:comment))
+
+      flash.notice = 'Votre demande de devis a bien été transmise, nous revenons vers vous rapidement'
       redirect_to pro_root_path
     end
 
