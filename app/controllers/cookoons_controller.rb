@@ -11,7 +11,6 @@ class CookoonsController < ApplicationController
       accomodates_for: @search.people_count,
       available_in: (@search.start_at..@search.end_at)
     }
-    # TODO : Will probably have to remove Random Order here
     @cookoons = policy_scope(Cookoon)
                 .includes(:photo_files)
                 .filter(filtering_params)
