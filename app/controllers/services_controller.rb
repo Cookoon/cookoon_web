@@ -1,14 +1,17 @@
 class ServicesController < ApplicationController
   before_action :set_reservation, only: %i[show create]
-  skip_after_action :verify_authorized, only: :destroy
 
   def show
+    authorize @reservation
+
     @service = @reservation.services.last
     @credit_cards = current_user.credit_cards
   end
 
   def create
     @service = @reservation.services.new(full_params)
+    authorize @service
+
     if @service.save
       render json: { url: service_path(@service), method: 'delete', selected: 'true' }
     else
@@ -19,6 +22,7 @@ class ServicesController < ApplicationController
   def destroy
     @service = Service.find(params[:id])
     authorize @service
+
     @service.destroy
     render json: { url: reservation_services_path(@service.reservation), method: 'post', selected: 'false' }
   rescue ActiveRecord::RecordNotFound
@@ -29,7 +33,6 @@ class ServicesController < ApplicationController
 
   def set_reservation
     @reservation = Reservation.find(params[:reservation_id])
-    authorize @reservation
   end
 
   def service_params
