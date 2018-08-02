@@ -7,7 +7,7 @@ module Pro
     end
 
     def create?
-      true
+      user.pro?
     end
 
     def update?
