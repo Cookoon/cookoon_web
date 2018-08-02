@@ -1,5 +1,5 @@
 module Pro
-  class QuotePolicy < ApplicationPolicy
+  class QuoteServicePolicy < ApplicationPolicy
     class Scope < Scope
       def resolve
         scope
@@ -7,11 +7,11 @@ module Pro
     end
 
     def create?
-      user.pro?
+      record.quote.user == user
     end
 
-    def update?
-      record.user == user
+    def destroy?
+      create?
     end
   end
 end

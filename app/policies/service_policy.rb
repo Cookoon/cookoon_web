@@ -5,7 +5,11 @@ class ServicePolicy < ApplicationPolicy
     end
   end
 
-  def destroy?
+  def create?
     record.reservation.user == user
+  end
+
+  def destroy?
+    create?
   end
 end

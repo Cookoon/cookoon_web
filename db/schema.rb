@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_07_25_100200) do
+ActiveRecord::Schema.define(version: 2018_08_02_132853) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,6 +153,13 @@ ActiveRecord::Schema.define(version: 2018_07_25_100200) do
     t.index ["pro_quote_id"], name: "index_pro_quote_cookoons_on_pro_quote_id"
   end
 
+  create_table "pro_quote_services", force: :cascade do |t|
+    t.bigint "pro_quote_id"
+    t.integer "category", default: 0, null: false
+    t.integer "quantity"
+    t.index ["pro_quote_id"], name: "index_pro_quote_services_on_pro_quote_id"
+  end
+
   create_table "pro_quotes", force: :cascade do |t|
     t.integer "status", default: 0
     t.bigint "user_id"
@@ -266,6 +273,7 @@ ActiveRecord::Schema.define(version: 2018_07_25_100200) do
   add_foreign_key "perks", "perk_specifications"
   add_foreign_key "pro_quote_cookoons", "cookoons"
   add_foreign_key "pro_quote_cookoons", "pro_quotes"
+  add_foreign_key "pro_quote_services", "pro_quotes"
   add_foreign_key "pro_quotes", "companies"
   add_foreign_key "pro_quotes", "users"
   add_foreign_key "reservation_guests", "guests"

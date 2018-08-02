@@ -8,12 +8,17 @@ fr:
         create: Chercher
       pro_quote:
         create: Trouver un espace
+        update: Demander un devis
       user:
         update: Mettre à jour
   simple_form:
     error_notification:
       default_message: 'Merci de revoir les éléments ci-dessous :'
     'no': Non
+
+    labels:
+      pro_quote:
+        comment: Souhaitez-vous apporter des précision ?
 
     placeholders:
       cookoon:
