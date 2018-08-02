@@ -1,9 +1,5 @@
 module Pro
   class CookoonsController < ApplicationController
-    # TODO CP 31 JUL : Use actual pundit policies
-    skip_after_action :verify_policy_scoped
-    skip_after_action :verify_authorized
-
     def index
       quote = Pro::Quote.find(params[:quote_id])
       @quote = quote.decorate
@@ -20,6 +16,8 @@ module Pro
 
     def show
       @cookoon = Cookoon.find(params[:id])
+      authorize @cookoon
+      
       @marker = { lat: @cookoon.latitude, lng: @cookoon.longitude }
     end
   end
