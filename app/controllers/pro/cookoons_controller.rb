@@ -17,7 +17,7 @@ module Pro
     def show
       @cookoon = Cookoon.find(params[:id])
       authorize @cookoon
-      
+
       @marker = { lat: @cookoon.latitude, lng: @cookoon.longitude }
     end
   end
