@@ -3,8 +3,7 @@ module Pro
     def index
       @quote = Quote.find(params[:quote_id]).decorate
 
-      # TODO: FC 02 AUG : plug correct cookoon
-      @highlighted_cookoon = Cookoon.first.decorate # @quote.cookoons.first.decorate
+      @highlighted_cookoon = @quote.cookoons.first.decorate
 
       @quote_service_categories = build_quote_service_categories
     end
