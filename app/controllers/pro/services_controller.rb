@@ -22,12 +22,10 @@ module Pro
       else
         render json: { errors: @service.errors.full_messages }, status: :unprocessable_entity
       end
-
     end
 
     def destroy
       @service = Pro::QuoteService.find(params[:id])
-      # authorize @service
 
       @service.destroy
       render json: { url: pro_quote_services_path(@service.quote), method: 'post', selected: 'false' }
@@ -57,7 +55,7 @@ module Pro
     def display_options_for(category)
       case category
       when 'corporate'
-        { icon_name: 'pro', display_name: "Carnets,<br />eau, etc." }
+        { icon_name: 'pro', display_name: 'Carnets,<br />eau, etc.' }
       when 'chef'
         { icon_name: 'chef', display_name: 'Chef à<br />domicile' }
       when 'catering'
