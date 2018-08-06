@@ -1,7 +1,7 @@
 class CreateProQuotes < ActiveRecord::Migration[5.2]
   def change
     create_table :pro_quotes do |t|
-      t.integer :status, default: 0, nil: false
+      t.integer :status, default: 0
       t.references :user, foreign_key: true
       t.references :company, foreign_key: true
       t.datetime :start_at

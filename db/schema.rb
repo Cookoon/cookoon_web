@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_02_132853) do
+ActiveRecord::Schema.define(version: 2018_08_06_100033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -161,7 +161,7 @@ ActiveRecord::Schema.define(version: 2018_08_02_132853) do
   end
 
   create_table "pro_quotes", force: :cascade do |t|
-    t.integer "status", default: 0
+    t.integer "status", default: 0, null: false
     t.bigint "user_id"
     t.bigint "company_id"
     t.datetime "start_at"
@@ -173,6 +173,41 @@ ActiveRecord::Schema.define(version: 2018_08_02_132853) do
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_pro_quotes_on_company_id"
     t.index ["user_id"], name: "index_pro_quotes_on_user_id"
+  end
+
+  create_table "pro_reservations", force: :cascade do |t|
+    t.integer "status", default: 0, null: false
+    t.bigint "pro_quote_id"
+    t.bigint "cookoon_id"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.integer "duration"
+    t.integer "people_count"
+    t.integer "cookoon_price_cents", default: 0, null: false
+    t.string "cookoon_price_currency", default: "EUR", null: false
+    t.integer "services_price_cents", default: 0, null: false
+    t.string "services_price_currency", default: "EUR", null: false
+    t.integer "fee_cents", default: 0, null: false
+    t.string "fee_currency", default: "EUR", null: false
+    t.integer "price_cents", default: 0, null: false
+    t.string "price_currency", default: "EUR", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cookoon_id"], name: "index_pro_reservations_on_cookoon_id"
+    t.index ["pro_quote_id"], name: "index_pro_reservations_on_pro_quote_id"
+  end
+
+  create_table "pro_services", force: :cascade do |t|
+    t.bigint "pro_reservation_id"
+    t.string "name"
+    t.integer "quantity"
+    t.integer "unit_price_cents", default: 0, null: false
+    t.string "unit_price_currency", default: "EUR", null: false
+    t.integer "price_cents", default: 0, null: false
+    t.string "price_currency", default: "EUR", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pro_reservation_id"], name: "index_pro_services_on_pro_reservation_id"
   end
 
   create_table "reservation_guests", force: :cascade do |t|
@@ -276,6 +311,9 @@ ActiveRecord::Schema.define(version: 2018_08_02_132853) do
   add_foreign_key "pro_quote_services", "pro_quotes"
   add_foreign_key "pro_quotes", "companies"
   add_foreign_key "pro_quotes", "users"
+  add_foreign_key "pro_reservations", "cookoons"
+  add_foreign_key "pro_reservations", "pro_quotes"
+  add_foreign_key "pro_services", "pro_reservations"
   add_foreign_key "reservation_guests", "guests"
   add_foreign_key "reservation_guests", "reservations"
   add_foreign_key "reservations", "cookoons"
