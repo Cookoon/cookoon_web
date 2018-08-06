@@ -18,6 +18,7 @@ class Cookoon < ApplicationRecord
   belongs_to :user
   has_many :reservations, dependent: :restrict_with_exception
   has_many :availabilities, dependent: :destroy
+  has_many :pro_reservations, class_name: 'Pro::Reservation', dependent: :restrict_with_exception
   has_many :future_availabilities, -> { future }, class_name: 'Availability', inverse_of: :cookoon
   has_many :perks, dependent: :destroy
 
