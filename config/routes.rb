@@ -91,8 +91,6 @@ Rails.application.routes.draw do
   end
 
   # ForestAdmin
-  mount ForestLiana::Engine, at: :forest
-
   namespace :forest do
     # User
     post '/actions/award-invitations', to: 'users#award_invitations'
@@ -104,5 +102,10 @@ Rails.application.routes.draw do
 
     # Service
     post '/actions/create-service', to: 'services#create'
+
+    # Pro::Quote
+    post '/actions/create-draft-reservation' => 'pro/quotes#create_draft_reservation'
   end
+  
+  mount ForestLiana::Engine, at: :forest
 end
