@@ -10,8 +10,7 @@ module Pro
 
     def create
       @quote = Quote.find(params[:quote_id])
-
-      @quote_service = @quote.services.new(quote_service_params)
+      @quote_service = @quote.services.new(quote_service_params.merge(quantity: @quote.people_count))
       authorize @quote_service
 
       if @quote_service.save
