@@ -5,7 +5,8 @@
         p Devis n°#{quote.id} - Loc. du #{quote.start_on(without_year: true)}
         ul
           - quote.reservations.each do |reservation|
-            li Proposition n°#{reservation.id}, le #{reservation.created_on}
+            li = link_to reservation, remote: true do
+              | Proposition n°#{reservation.id}, le #{reservation.created_on}
 
     .quote-index-infos#quote-index-infos
       p Sélectionnez une proposition à afficher
