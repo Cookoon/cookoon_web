@@ -3,7 +3,9 @@ module Pro
     def index
       @quotes = policy_scope(Pro::Quote.request)
                 .includes(:reservations)
-                .where(pro_reservations: { status: 1 })
+                .where(pro_reservations: {
+                         status: Pro::Reservation.statuses[:proposed]
+                       })
                 .decorate
     end
 
