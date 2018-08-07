@@ -6,6 +6,10 @@ module Pro
       end
     end
 
+    def show?
+      record.company == user.company
+    end
+
     def create?
       user.pro?
     end
