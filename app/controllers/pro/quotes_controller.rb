@@ -1,7 +1,12 @@
 module Pro
   class QuotesController < ApplicationController
     def index
-      @quotes = policy_scope(Pro::Quote.request).includes(reservations: []).decorate
+      @quotes = policy_scope(Pro::Quote.request)
+                .includes(:reservations)
+                .where(pro_reservations: { status: 1 })
+                .decorate
+                # TODO: FC 07aug18 replace where clause when status enum merged
+                # .where(pro_reservations: { status: :proposed })
     end
 
     def create
