@@ -74,7 +74,6 @@ Rails.application.routes.draw do
     root 'pages#home'
 
     resources :quotes, only: %i[index create update] do
-      resources :proposals, only: %i[show edit update]
       resources :cookoons, only: %i[index show] do
         resources :quote_cookoons, only: %i[create]
       end
@@ -82,6 +81,8 @@ Rails.application.routes.draw do
                            only: %i[index create destroy],
                            shallow: true
     end
+
+    resources :reservations, only: %i[show]
   end
 
   # -------- ADMIN ROUTES ---------
