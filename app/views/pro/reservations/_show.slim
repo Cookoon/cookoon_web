@@ -1,1 +1,15 @@
-| Proposition n°#{@reservation.id}, le #{@reservation.created_on}
+p Devis n°#{@reservation.quote.id}
+p
+  div = @reservation.company.name
+  div = @reservation.company.address
+  div N° TVA Intra : #{@reservation.company.vat}
+
+p Votre demande de location pour le #{@reservation.start_on(without_year: true)}, de #{@reservation.start_time} à #{@reservation.end_time}
+
+h3 Mise à disposition d'un Cookoon
+.row
+  .col-8
+    | Cookoon #{@reservation.cookoon.name} × #{@reservation.duration}
+    .small Cette somme sera encaissée pour le compte de l'Hôte Cookoon et ne sera pas soumise à TVA.
+  .col-4.text-right
+    = @reservation.cookoon_price

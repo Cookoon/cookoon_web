@@ -16,6 +16,8 @@ module Pro
 
     enum status: %i[draft proposed accepted cancelled ongoing passed dead]
 
+    delegate :company, to: :quote
+
     validates :start_at, presence: true
     validates :duration, numericality: { only_integer: true, greater_than: 0 }
     validates :people_count, numericality: { only_integer: true, greater_than: 0 }
