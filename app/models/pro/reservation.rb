@@ -16,8 +16,23 @@ module Pro
 
     enum status: %i[draft proposed accepted cancelled ongoing passed dead]
 
+    delegate :company, to: :quote
+
     validates :start_at, presence: true
     validates :duration, numericality: { only_integer: true, greater_than: 0 }
     validates :people_count, numericality: { only_integer: true, greater_than: 0 }
+
+    before_save :assign_prices
+
+    private
+
+    def assign_prices
+      assign_attributes(
+        cookoon_price: duration * cookoon.price,
+        services_price_cents: services.sum(:price_cents),
+        fee: (cookoon_price + services_price) * 0.07,
+        price: cookoon_price + services_price + fee
+      )
+    end
   end
 end
