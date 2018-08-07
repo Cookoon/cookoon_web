@@ -1,5 +1,6 @@
 class Company < ApplicationRecord
   has_many :users, dependent: :restrict_with_exception
+  has_many :quotes, class_name: 'Pro::Quote', dependent: :restrict_with_exception
 
   validates :name, presence: true
   validates :address, presence: true
