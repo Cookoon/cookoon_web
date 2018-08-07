@@ -2,7 +2,7 @@ module Pro
   class QuotePolicy < ApplicationPolicy
     class Scope < Scope
       def resolve
-        scope
+        scope.where(company: user.company)
       end
     end
 
