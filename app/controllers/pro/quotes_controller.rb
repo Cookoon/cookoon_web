@@ -1,6 +1,13 @@
 module Pro
   class QuotesController < ApplicationController
-    def index; end
+    def index
+      @quotes = policy_scope(Pro::Quote.request)
+                .includes(:reservations)
+                .where(pro_reservations: {
+                         status: Pro::Reservation.statuses[:proposed]
+                       })
+                .decorate
+    end
 
     def create
       @quote = Quote.new(quote_params.merge(user: current_user, company: current_user.company))

@@ -1,7 +1,10 @@
 module Pro
-  class QuoteDecorator < Draper::Decorator
+  class ReservationDecorator < Draper::Decorator
     delegate_all
-    decorates_association :reservations
+
+    def created_on(options = {})
+      h.display_date_for(object.created_at, options)
+    end
 
     def start_at
       "le #{h.display_datetime_for(object.start_at, join_expression: 'à')}"
