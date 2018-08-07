@@ -9,13 +9,15 @@ module Pro
              class_name: 'Pro::Service', inverse_of: :reservation,
              foreign_key: :pro_reservation_id, dependent: :destroy
 
-    validates :start_at, presence: true
-    validates :duration, numericality: { only_integer: true, greater_than: 0 }
-    validates :people_count, numericality: { only_integer: true, greater_than: 0 }
-
     monetize :cookoon_price_cents
     monetize :services_price_cents
     monetize :fee_cents
     monetize :price_cents
+
+    enum status: %i[draft proposed accepted cancelled ongoing passed dead]
+
+    validates :start_at, presence: true
+    validates :duration, numericality: { only_integer: true, greater_than: 0 }
+    validates :people_count, numericality: { only_integer: true, greater_than: 0 }
   end
 end

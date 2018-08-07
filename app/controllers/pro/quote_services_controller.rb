@@ -40,7 +40,7 @@ module Pro
     def build_quote_service_categories
       quote_service_categories = policy_scope(@quote.services).pluck(:category)
 
-      Service.categories.keys.reverse.map do |category|
+      ::Service.categories.keys.reverse.map do |category|
         if quote_service_categories.exclude? category
           { url: pro_quote_services_path(@quote), method: 'post', selected: 'false' }
         else
