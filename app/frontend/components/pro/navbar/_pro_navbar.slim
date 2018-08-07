@@ -6,5 +6,5 @@
       .pro-navbar-content = @content
 
     .pro-navbar-actions
-      = link_to 'Mes Réservations', '#'
-      = link_to current_user.company.name, '#'
+      = link_to 'Mes Réservations', pro_quotes_path
+      = link_to current_user.company.name, pro_root_path
