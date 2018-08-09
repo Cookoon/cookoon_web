@@ -9,6 +9,8 @@ fr:
       pro_quote:
         create: Trouver un espace
         update: Demander un devis
+      pro_reservation:
+        update: Demander la modification
       user:
         update: Mettre à jour
   simple_form:
@@ -27,6 +29,9 @@ fr:
         start_at: Date de l'événement
         duration: Durée de l'événement
         people_count: Nombre de personnes
+      pro_reservation:
+        requested_modification: Dites-nous ce qu'il convient de modifier...
+
 
     required:
       mark: '*'

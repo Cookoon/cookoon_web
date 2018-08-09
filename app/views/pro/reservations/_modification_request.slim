@@ -1,0 +1,14 @@
+button.btn.btn-primary type="button" data-toggle="modal" data-target="#modificationRequestModal"
+  | Demander une modification
+
+#modificationRequestModal.modal.fade tabindex="-1" role="dialog"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        h5.modal-title Vous souhaitez demander une modification sur ce devis ?
+        button.close type="button" data-dismiss="modal" ×
+      .modal-body
+        = simple_form_for @reservation, remote: true do |f|
+          = f.input :requested_modification, label: false, input_html: { rows: 6}
+          .text-right
+            = f.submit class: 'btn btn-light'
