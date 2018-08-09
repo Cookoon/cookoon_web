@@ -2,7 +2,8 @@
   .quote-index
     .quote-index-list
       - @quotes.each do |quote|
-        p Devis n°#{quote.id} - Loc. du #{quote.start_on(without_year: true)}
+        = link_to quote.reservations.first, remote: true do
+          | Devis n°#{quote.id} - Loc. du #{quote.start_on(without_year: true)}
         ul
           - quote.reservations.each do |reservation|
             li = link_to reservation, remote: true do
