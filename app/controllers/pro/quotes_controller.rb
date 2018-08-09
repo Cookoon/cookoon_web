@@ -3,11 +3,7 @@ module Pro
     def index
       @quotes = policy_scope(Pro::Quote.request)
                 .includes(:reservations)
-                .where.not(pro_reservations: {
-                             status: [
-                               Pro::Reservation.statuses[:draft]
-                             ]
-                           })
+                .where.not(pro_reservations: { status: Pro::Reservation.statuses[:draft] })
                 .order(created_at: :desc)
                 .order('pro_reservations.created_at DESC')
                 .decorate
