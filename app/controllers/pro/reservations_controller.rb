@@ -9,10 +9,14 @@ module Pro
       @reservation = Reservation.find(params[:id])
       authorize @reservation.quote
 
-      if @reservation.update(reservation_params)
-        flash.notice = 'Votre demande de modification a bien été prise en compte'
-        redirect_to pro_quotes_path
-      end
+      @reservation.update(reservation_params)
+      flash.notice = case @reservation.status
+                     when 'modification_requested'
+                       'Votre demande de modification a bien été prise en compte'
+                     when 'accepted'
+                       'Votre réservation est confirmée'
+                     end
+      redirect_to pro_quotes_path
     end
 
     private
