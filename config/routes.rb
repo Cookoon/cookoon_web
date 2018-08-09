@@ -78,7 +78,7 @@ Rails.application.routes.draw do
         resources :quote_cookoons, only: %i[create]
       end
       resources :services, controller: 'quote_services',
-                           only: %i[index create destroy],
+                           only: %i[index create destroy update],
                            shallow: true
     end
 
@@ -107,6 +107,6 @@ Rails.application.routes.draw do
     # Pro::Quote
     post '/actions/create-draft-reservation' => 'pro/quotes#create_draft_reservation'
   end
-  
+
   mount ForestLiana::Engine, at: :forest
 end
