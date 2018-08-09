@@ -82,7 +82,7 @@ Rails.application.routes.draw do
                            shallow: true
     end
 
-    resources :reservations, only: %i[show]
+    resources :reservations, only: %i[show update]
   end
 
   # -------- ADMIN ROUTES ---------
@@ -107,6 +107,6 @@ Rails.application.routes.draw do
     # Pro::Quote
     post '/actions/create-draft-reservation' => 'pro/quotes#create_draft_reservation'
   end
-  
+
   mount ForestLiana::Engine, at: :forest
 end
