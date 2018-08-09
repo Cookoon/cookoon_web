@@ -14,7 +14,17 @@ module Pro
       authorize @quote_service
 
       if @quote_service.save
-        render json: { url: pro_service_path(@quote_service), method: 'delete', selected: 'true' }
+        render json: { url: pro_service_path(@quote_service), method: 'delete', selected: 'true', quantity: @quote_service.quantity }
+      else
+        render json: { errors: @quote_service.errors.full_messages }, status: :unprocessable_entity
+      end
+    end
+
+    def update
+      @quote_service = QuoteService.find(params[:id])
+      authorize @quote_service
+      if @quote_service.update(quote_service_params)
+        render json: { quantity: @quote_service.quantity }
       else
         render json: { errors: @quote_service.errors.full_messages }, status: :unprocessable_entity
       end
@@ -33,7 +43,7 @@ module Pro
     private
 
     def quote_service_params
-      params.require(:service).permit(:category)
+      params.require(:service).permit(:category, :quantity)
     end
 
     # TODO: CP 2may2018 Try to refactor this
@@ -45,7 +55,7 @@ module Pro
           { url: pro_quote_services_path(@quote), method: 'post', selected: 'false' }
         else
           quote_service = @quote.services.find_by(category: category)
-          { url: pro_service_path(quote_service), method: 'delete', selected: 'true' }
+          { url: pro_service_path(quote_service), method: 'delete', selected: 'true', quantity: quote_service.quantity }
         end.merge(display_options_for(category))
       end
     end
