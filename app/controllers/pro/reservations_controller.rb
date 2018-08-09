@@ -18,7 +18,7 @@ module Pro
     private
 
     def reservation_params
-      params.require(:pro_reservation).permit(:requested_modification)
+      params.require(:pro_reservation).permit(:status, :requested_modification)
     end
   end
 end

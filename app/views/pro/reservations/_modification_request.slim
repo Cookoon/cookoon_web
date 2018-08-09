@@ -9,6 +9,7 @@ button.btn.btn-primary type="button" data-toggle="modal" data-target="#modificat
         button.close type="button" data-dismiss="modal" ×
       .modal-body
         = simple_form_for @reservation, remote: true do |f|
+          = f.input :status, as: :hidden, input_html: { value: :modification_requested }
           = f.input :requested_modification, label: false, input_html: { rows: 6}
           .text-right
             = f.submit class: 'btn btn-light'
