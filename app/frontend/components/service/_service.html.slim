@@ -1,11 +1,22 @@
 .service(
-  class=('service-selected' if @selected == 'true')
   data-controller="service"
   data-service-category=@category
   data-service-selected=@selected.to_s
   data-service-url=@url
   data-service-method=@method
-  data-action='click->service#toggle'
+  data-service-quantity=@quantity
 )
-  .co(class="co-service-#{@icon_name}")
-  p.service-category-name = @display_name.html_safe
+  .service-icon(
+    class=('service-icon-selected' if @selected == 'true')
+    data-action='click->service#toggle'
+    data-target="service.icon"
+  )
+    .co(class="co-service-#{@icon_name}")
+    p.service-icon-category-name = @display_name.html_safe
+
+  input#service-quantity(
+    class=classnames('d-none': @quantity.blank?)
+    value=@quantity
+    data-target="service.quantityInput"
+    data-action="change->service#updateQuantity"
+  )
