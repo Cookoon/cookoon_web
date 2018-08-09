@@ -4,7 +4,7 @@ module Pro
       @quotes = policy_scope(Pro::Quote.request)
                 .includes(:reservations)
                 .where(pro_reservations: {
-                         status: Pro::Reservation.statuses[:proposed]
+                         status: [Pro::Reservation.statuses[:proposed], Pro::Reservation.statuses[:modification_requested]]
                        })
                 .decorate
     end
