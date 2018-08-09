@@ -82,7 +82,7 @@ Rails.application.routes.draw do
                            shallow: true
     end
 
-    resources :reservations, only: %i[show]
+    resources :reservations, only: %i[show update]
   end
 
   # -------- ADMIN ROUTES ---------

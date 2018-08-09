@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_06_100033) do
+ActiveRecord::Schema.define(version: 2018_08_09_083937) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -193,6 +193,7 @@ ActiveRecord::Schema.define(version: 2018_08_06_100033) do
     t.string "price_currency", default: "EUR", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "requested_modification"
     t.index ["cookoon_id"], name: "index_pro_reservations_on_cookoon_id"
     t.index ["pro_quote_id"], name: "index_pro_reservations_on_pro_quote_id"
   end
