@@ -68,7 +68,7 @@ h3 Mise à disposition d'un Cookoon
     = @reservation.price
 
 .mt-4
-  - if @reservation.requested_modification.blank?
+  - if !@reservation.modification_requested?
     = render 'modification_request'
   - else
     | Modification demandée :
