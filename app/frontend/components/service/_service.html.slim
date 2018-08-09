@@ -15,7 +15,7 @@
     p.service-icon-category-name = @display_name.html_safe
 
   input#service-quantity(
-    class=classnames('d-none': @quantity.blank?)
+    class=classnames('d-none': (@quantity.blank? || @category == 'special'))
     value=@quantity
     data-target="service.quantityInput"
     data-action="change->service#updateQuantity"
