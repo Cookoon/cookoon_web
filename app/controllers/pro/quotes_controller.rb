@@ -3,12 +3,11 @@ module Pro
     def index
       @quotes = policy_scope(Pro::Quote.request)
                 .includes(:reservations)
-                .where(pro_reservations: {
-                         status: [
-                           Pro::Reservation.statuses[:proposed],
-                           Pro::Reservation.statuses[:modification_requested]
-                         ]
-                       })
+                .where.not(pro_reservations: {
+                             status: [
+                               Pro::Reservation.statuses[:draft]
+                             ]
+                           })
                 .decorate
     end
 
