@@ -19,7 +19,7 @@ export default class extends Controller {
         this.data.set('url', url);
         this.data.set('method', method);
         this.data.set('selected', selected);
-        if (quantity) {
+        if (quantity && this.data.get('category') !== 'special') {
           this.data.set('quantity', quantity);
           this.quantityInputTarget.value = quantity;
           this.quantityInputTarget.classList.remove('d-none');
@@ -36,7 +36,7 @@ export default class extends Controller {
 
   updateQuantity() {
     const data = new FormData();
-    data.append('service[quantity]', this.element.querySelector('input').value);
+    data.append('service[quantity]', this.quantityInputTarget.value);
 
     Rails.ajax({
       url: this.data.get('url'),
