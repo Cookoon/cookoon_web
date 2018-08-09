@@ -68,8 +68,15 @@ h3 Mise à disposition d'un Cookoon
     = @reservation.price
 
 .mt-4
-  - if !@reservation.modification_requested?
-    = render 'modification_request'
-  - else
+  - if @reservation.modification_requested?
     | Modification demandée :
     i = simple_format @reservation.requested_modification
+  - elsif @reservation.accepted?
+    | Réservation acceptée !
+  - else
+    .d-flex.justify-content-around
+      = render 'modification_request'
+
+      = link_to 'Valider le devis', pro_reservation_path(@reservation,
+        pro_reservation: { status: :accepted }), remote: :true, method: :patch,
+        class: 'btn btn-primary'
