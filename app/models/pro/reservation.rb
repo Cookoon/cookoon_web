@@ -14,7 +14,7 @@ module Pro
     monetize :fee_cents
     monetize :price_cents
 
-    enum status: %i[draft proposed accepted cancelled ongoing passed dead]
+    enum status: %i[draft proposed modification_requested accepted cancelled ongoing passed dead]
 
     delegate :company, to: :quote
 
