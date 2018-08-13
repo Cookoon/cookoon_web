@@ -1,14 +1,17 @@
 .container
   .quote-index
-    .quote-index-list
+    .quote-index-list.mt-4
       - @quotes.each do |quote|
-        = link_to quote.reservations.first, remote: true do
-          | Devis n°#{quote.id} - Loc. du #{quote.start_on(without_year: true)}
-        ul.list-unstyled.ml-3
-          - quote.reservations.each do |reservation|
-            li = link_to reservation, remote: true do
-              = '> ' if reservation == quote.reservations.last
-              | Proposition n°#{reservation.id}, le #{reservation.created_on}
+        .mb-5
+          = link_to quote.reservations.last, remote: true do
+            .p-2.border.border-primary.d-flex.justify-content-between.align-items-center
+              span Devis n°#{quote.id} - Loc. du #{quote.start_on(without_year: true)}
+              i.co.co-reversed-check.fa-2x
+          ul.list-unstyled.ml-4.my-3
+            - quote.reservations.each do |reservation|
+              li.mb-2 = link_to reservation, remote: true do
+                = '> ' if reservation == quote.reservations.last
+                | Proposition n°#{reservation.id}, le #{reservation.created_on}
 
     .quote-index-infos#quote-index-infos
       p Sélectionnez une proposition à afficher
