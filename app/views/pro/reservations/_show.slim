@@ -1,3 +1,6 @@
+.my-4
+  = render 'actions'
+
 .row
   .col-6
     h3.d-flex.align-items-center.child-mx-2
@@ -67,16 +70,5 @@ h3 Mise à disposition d'un Cookoon
   .col-4.text-right
     = @reservation.price
 
-.mt-4
-  - if @reservation.modification_requested?
-    | Modification demandée :
-    i = simple_format @reservation.requested_modification
-  - elsif @reservation.accepted?
-    | Réservation acceptée !
-  - else
-    .d-flex.justify-content-around
-      = render 'modification_request'
-
-      = link_to 'Valider le devis', pro_reservation_path(@reservation,
-        pro_reservation: { status: :accepted }), remote: :true, method: :patch,
-        class: 'btn btn-primary'
+.my-4
+  = render 'actions'
