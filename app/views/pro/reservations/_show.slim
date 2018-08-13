@@ -14,6 +14,7 @@
       div N° TVA Intra : #{@reservation.company.vat}
     .col.pro-reservation-card-offset
       = c 'card_cookoon',
+          small: true,
           link_url: cookoon_path(@reservation.cookoon),
           image_url: cl_image_path(@reservation.cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
           infos: 'Voir la fiche de ce Cookoon',
