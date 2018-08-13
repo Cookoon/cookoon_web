@@ -3,7 +3,7 @@
 
 .shadow-page.p-5
   .row
-    .col-6
+    .col
       h3.d-flex.align-items-center.child-mx-2
         i.co.co-logo.fa-2x.text-primary
         span Cookoon
@@ -13,7 +13,7 @@
         div = @reservation.company.name
         div = @reservation.company.address
         div N° TVA Intra : #{@reservation.company.vat}
-    .col-6
+    .col.pro-reservation-card-offset
       = c 'card_cookoon',
           link_url: cookoon_path(@reservation.cookoon),
           image_url: cl_image_path(@reservation.cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
