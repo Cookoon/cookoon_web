@@ -4,9 +4,10 @@
       - @quotes.each do |quote|
         = link_to quote.reservations.first, remote: true do
           | Devis n°#{quote.id} - Loc. du #{quote.start_on(without_year: true)}
-        ul
+        ul.list-unstyled.ml-3
           - quote.reservations.each do |reservation|
             li = link_to reservation, remote: true do
+              = '> ' if reservation == quote.reservations.last
               | Proposition n°#{reservation.id}, le #{reservation.created_on}
 
     .quote-index-infos#quote-index-infos
