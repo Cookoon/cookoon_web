@@ -55,6 +55,10 @@
     .infos {
       font-family: 'Tisa Sans Pro', sans-serif;
       font-size: 0.875rem;
+      &.reverse {
+        background-color: var(--primary);
+        color: var(--white);
+      }
     }
     .icons {
       position: absolute;
