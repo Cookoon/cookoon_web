@@ -8,11 +8,10 @@
         i.co.co-logo.fa-2x.text-primary
         span Cookoon
 
-      p Devis n°#{@reservation.quote.id}
-      p
-        div = @reservation.company.name
-        div = @reservation.company.address
-        div N° TVA Intra : #{@reservation.company.vat}
+      div Devis n°#{@reservation.quote.id}
+      div.text-uppercase = @reservation.company.name
+      div = @reservation.company.address
+      div N° TVA Intra : #{@reservation.company.vat}
     .col.pro-reservation-card-offset
       = c 'card_cookoon',
           link_url: cookoon_path(@reservation.cookoon),
@@ -25,8 +24,8 @@
   h3 Mise à disposition d'un Cookoon
   .row
     .col-8
-      | Cookoon #{@reservation.cookoon.name} × #{@reservation.duration}
-      .small Cette somme sera encaissée pour le compte de l'Hôte Cookoon et ne sera pas soumise à TVA.
+      | Cookoon “<u>#{@reservation.cookoon.name}</u>” × #{@reservation.duration}
+      p.small Cette somme sera encaissée pour le compte de l'Hôte Cookoon et ne sera pas soumise à TVA.
     .col-4.text-right
       = @reservation.cookoon_price
 
@@ -36,7 +35,7 @@
       = @reservation.fee
 
     .col-8
-      | dont TVA (XX%)
+      p dont TVA (XX%)
     .col-4.text-right
       | XX,XX €
 
@@ -45,24 +44,24 @@
     .row
       - @reservation.services.each do |service|
         .col-8
-          | #{service.name} × #{service.quantity}
+          p #{service.name} × #{service.quantity}
         .col-2.text-right
           = service.unit_price
         .col-2.text-right
           = service.price
 
       .col-8
-        | Frais de service (XX%)
+        p Frais de service (XX%)
       .col-4.text-right
         = @reservation.fee
 
       .col-8
-        | Total HT des options
+        p Total HT des options
       .col-4.text-right
         = @reservation.services_price
 
       .col-8
-        | Total TTC des options
+        p Total TTC des options
       .col-4.text-right
         = @reservation.services_price
 
@@ -71,6 +70,14 @@
       | TOTAL
     .col-4.text-right
       = @reservation.price
+
+  .mt-4.text-center
+    p.small
+      | Cookoon est une marque de Réceptions Nouvelles, SAS au capital de X XXX€,
+      br
+      | immatriculée au RCS de Paris sous le numéro XXX XXX XXX
+      br
+      | 12 rue Lincoln, 75008 Paris
 
 .my-4
   = render 'actions'
