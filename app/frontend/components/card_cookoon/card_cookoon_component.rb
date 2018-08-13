@@ -5,6 +5,10 @@ module CardCookoonComponent
 
   attr_reader :title_class, :infos_class
 
+  def small?
+    @small
+  end
+
   def image_url
     @image_url || 'https://lorempixel.com/800/450/city/'
   end

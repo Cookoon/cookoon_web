@@ -6,6 +6,9 @@
   font-size: 1.125rem;
   line-height: normal;
   color: var(--primary);
+  &.small {
+    height: calc(163.31625px + 2.3375rem);
+  }
   .title {
     position: absolute;
     top: 0;
