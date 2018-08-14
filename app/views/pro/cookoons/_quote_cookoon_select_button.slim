@@ -8,7 +8,7 @@
               method: :post,
               remote: true
   - elsif @quote.cookoons.include?(@cookoon)
-    p Ce cookoon a bien été choisi, ajoutez en encore un pour passer à l'étape suivante.
+    p Ce cookoon a bien été choisi,<br>ajoutez-en un autre pour passer à l'étape suivante.
   - elsif @quote.cookoons.count == 1 && !@quote.cookoons.include?(@cookoon)
     = link_to "Choisir ce Cookoon et passer à l'étape suivante", pro_quote_cookoon_quote_cookoons_path(@quote, @cookoon),
               class: 'btn btn-action-sm btn-block btn-light',
