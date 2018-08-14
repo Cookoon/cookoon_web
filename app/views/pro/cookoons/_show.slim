@@ -7,7 +7,7 @@
 
   i.text-secondary Ce Cookoon dispose d'un espace de réception de <b>#{@cookoon.surface} m²</b>, il est idéal pour <b>#{@cookoon.capacity}</b> personnes.
 
-.map-cookoon-show(
+.map-cookoon-show.mb-3(
   data-controller='google-maps'
   data-target="google-maps.cookoonShowMap"
   data-google-maps-marker="#{@marker.to_json}"
