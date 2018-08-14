@@ -1,4 +1,4 @@
-.title(class="#{title_class}")
+.title(class== title_class)
   = @title
   .title-icon class=('d-block' if selected?)
     i.co.co-check
@@ -7,7 +7,7 @@
     .bottom.cta
       = @cta
   - if infos?
-    .bottom.infos
+    .bottom.infos(class== infos_class)
       = @infos
   - if icons?
     .icons

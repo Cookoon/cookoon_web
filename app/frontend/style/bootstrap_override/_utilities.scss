@@ -106,8 +106,9 @@ hr.half {
   height: 100vh;
 }
 
-.pointer {
-  cursor: pointer;
+.mx-2rem {
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
 
 .opacity-hover {
@@ -117,9 +118,12 @@ hr.half {
   }
 }
 
-.mx-2rem {
-  margin-left: 2rem;
-  margin-right: 2rem;
+.pointer {
+  cursor: pointer;
+}
+
+.shadow-page {
+  box-shadow: 0 0.125rem 0.25rem 0.075rem rgba($black, 0.25);
 }
 
 .w-15rem {

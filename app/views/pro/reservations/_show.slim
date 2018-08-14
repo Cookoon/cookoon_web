@@ -1,50 +1,34 @@
-.row
-  .col-6
-    h3.d-flex.align-items-center.child-mx-2
-      i.co.co-logo.fa-2x.text-primary
-      span Cookoon
+.my-4
+  = render 'actions'
 
-    p Devis n°#{@reservation.quote.id}
-    p
-      div = @reservation.company.name
+.shadow-page.p-5
+  .row
+    .col
+      h3.d-flex.align-items-center.child-mx-2
+        i.co.co-logo.fa-2x.text-primary
+        span Cookoon
+
+      div Devis n°#{@reservation.quote.id}
+      div.text-uppercase = @reservation.company.name
       div = @reservation.company.address
       div N° TVA Intra : #{@reservation.company.vat}
-  .col-6
-    = c 'card_cookoon',
-        link_url: cookoon_path(@reservation.cookoon),
-        image_url: cl_image_path(@reservation.cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
-        infos: 'Voir la fiche de ce Cookoon'
+    .col.pro-reservation-card-offset
+      = c 'card_cookoon',
+          small: true,
+          link_url: cookoon_path(@reservation.cookoon),
+          image_url: cl_image_path(@reservation.cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
+          infos: 'Voir la fiche de ce Cookoon',
+          infos_class: :reverse
 
-p Votre demande de location pour le #{@reservation.start_on(without_year: true)}, de #{@reservation.start_time} à #{@reservation.end_time}
+  p Votre demande de location pour le #{@reservation.start_on(without_year: true)}, de #{@reservation.start_time} à #{@reservation.end_time}
 
-h3 Mise à disposition d'un Cookoon
-.row
-  .col-8
-    | Cookoon #{@reservation.cookoon.name} × #{@reservation.duration}
-    .small Cette somme sera encaissée pour le compte de l'Hôte Cookoon et ne sera pas soumise à TVA.
-  .col-4.text-right
-    = @reservation.cookoon_price
-
-  .col-8
-    | Frais de service (XX%)
-  .col-4.text-right
-    = @reservation.fee
-
-  .col-8
-    | dont TVA (XX%)
-  .col-4.text-right
-    | XX,XX €
-
-- if @reservation.services.any?
-  h3 Options
+  h3 Mise à disposition d'un Cookoon
   .row
-    - @reservation.services.each do |service|
-      .col-8
-        | #{service.name} × #{service.quantity}
-      .col-2.text-right
-        = service.unit_price
-      .col-2.text-right
-        = service.price
+    .col-8
+      | Cookoon “<u>#{@reservation.cookoon.name}</u>” × #{@reservation.duration}
+      p.small Cette somme sera encaissée pour le compte de l'Hôte Cookoon et ne sera pas soumise à TVA.
+    .col-4.text-right
+      = @reservation.cookoon_price
 
     .col-8
       | Frais de service (XX%)
@@ -52,31 +36,49 @@ h3 Mise à disposition d'un Cookoon
       = @reservation.fee
 
     .col-8
-      | Total HT des options
+      p dont TVA (XX%)
     .col-4.text-right
-      = @reservation.services_price
+      | XX,XX €
 
+  - if @reservation.services.any?
+    h3 Options
+    .row
+      - @reservation.services.each do |service|
+        .col-8
+          p #{service.name} × #{service.quantity}
+        .col-2.text-right
+          = service.unit_price
+        .col-2.text-right
+          = service.price
+
+      .col-8
+        p Frais de service (XX%)
+      .col-4.text-right
+        = @reservation.fee
+
+      .col-8
+        p Total HT des options
+      .col-4.text-right
+        = @reservation.services_price
+
+      .col-8
+        p Total TTC des options
+      .col-4.text-right
+        = @reservation.services_price
+
+  .row.bg-primary.text-white
     .col-8
-      | Total TTC des options
+      | TOTAL
     .col-4.text-right
-      = @reservation.services_price
+      = @reservation.price
 
-.row.bg-primary.text-white
-  .col-8
-    | TOTAL
-  .col-4.text-right
-    = @reservation.price
+  .mt-4.text-center
+    p.small
+      | Cookoon est une marque de Réceptions Nouvelles, SAS au capital de X XXX€,
+      br
+      | immatriculée au RCS de Paris sous le numéro XXX XXX XXX
+      br
+      | 12 rue Lincoln, 75008 Paris
 
-.mt-4
-  - if @reservation.modification_requested?
-    | Modification demandée :
-    i = simple_format @reservation.requested_modification
-  - elsif @reservation.accepted?
-    | Réservation acceptée !
-  - else
-    .d-flex.justify-content-around
-      = render 'modification_request'
-
-      = link_to 'Valider le devis', pro_reservation_path(@reservation,
-        pro_reservation: { status: :accepted }), remote: :true, method: :patch,
-        class: 'btn btn-primary'
+.my-4
+  = render 'actions'
