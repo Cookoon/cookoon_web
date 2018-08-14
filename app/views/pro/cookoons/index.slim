@@ -10,7 +10,10 @@
         .quote-attribute-box.p-3.flex-grow-1 = @quote.duration
         .quote-attribute-box.p-3.flex-grow-1 = @quote.people_count
       .col-4
-        img(src== image_path('paris-map.svg') class='img-fluid')
+        img(src== image_path('paris-map.svg') class="img-fluid"
+            data-controller="tooltips" data-target="tooltips.tooltip"
+            title="Bientôt disponible : filtre par arrondissement"
+           )
 
 div.container.py-4
   p Ajoutez  2 Cookoons à votre sélection pour obtenir une proposition
