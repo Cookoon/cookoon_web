@@ -28,5 +28,7 @@ div.container.py-4
             image_url: cl_image_path(cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
             icons: [cookoon.category_icon, cookoon.price_icon]
 
-    div.quote-cookoons-infos#quote-cookoon-infos
-      p Slectionnez un Cookoon pour voir les informations relatives à ce dernier.
+    .quote-cookoons-infos#quote-cookoon-infos
+      .text-center
+        .my-5 = image_tag 'persona.png', class: 'img-fluid h-30rem'
+        p Cliquez sur un Cookoon<br>pour afficher ses informations
