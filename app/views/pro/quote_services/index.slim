@@ -13,25 +13,24 @@
         img(src== image_path('paris-map.svg') class='img-fluid')
 
 .container.py-4
-  .row
-    .col-7
-      p Souhaitez-vous ajouter des services supplémentaires ?
-      .d-flex.justify-content-around
-        - @quote_service_categories.each do |service_category|
-            = c 'service', service_category.merge(large: true)
-
-    .col-5
-      p 2 Cookoons sélectionnés dont
-      = c 'card_cookoon',
-          title: @highlighted_cookoon.name,
-          title_class: :reverse,
-          image_url: cl_image_path(@highlighted_cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
-          icons: [@highlighted_cookoon.category_icon, @highlighted_cookoon.price_icon]
-
   = simple_form_for @quote do |f|
-    .row.align-items-end
+    .row
       .col-7
-        = f.input :comment, input_html: { rows: 6}
+        .d-flex.justify-content-around
+          - @quote_service_categories.each do |service_category|
+              = c 'service', service_category.merge(large: true)
+        = f.input :comment,
+          input_html: { rows: 6 },
+          label: 'Souhaitez-vous ajouter des services supplémentaires ?',
+          wrapper_html: { class: 'mt-5' }
+
       .col-5
+        p 2 Cookoons sélectionnés dont
+        = c 'card_cookoon',
+            title: @highlighted_cookoon.name,
+            title_class: :reverse,
+            image_url: cl_image_path(@highlighted_cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
+            icons: [@highlighted_cookoon.category_icon, @highlighted_cookoon.price_icon]
+
         .bg-primary.p-4
           = f.submit class: 'btn btn-action btn-block btn-light'
