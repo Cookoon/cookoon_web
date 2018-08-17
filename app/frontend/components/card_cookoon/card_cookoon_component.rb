@@ -9,8 +9,16 @@ module CardCookoonComponent
     @small
   end
 
+  def spaced?
+    @spaced
+  end
+
   def image_url
     @image_url || 'https://lorempixel.com/800/450/city/'
+  end
+
+  def carousel_photos?
+    @carousel_photos.present?
   end
 
   def link_url?
