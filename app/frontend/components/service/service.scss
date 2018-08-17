@@ -30,13 +30,21 @@
   }
 }
 
-#service-quantity {
-  width: 25px;
+.service-quantity-container {
   position: absolute;
   bottom: -30px;
-  left: 40px;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+}
+
+#service-quantity {
+  width: 25px;
   border: none;
   border-bottom: 1px solid black;
   text-align: center;
   font-size: 16px;
+  color: var(--blue);
 }

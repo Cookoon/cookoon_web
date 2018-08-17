@@ -3,7 +3,7 @@ import Rails from 'rails-ujs';
 
 export default class extends Controller {
   static serviceChangedEvent = new Event('serviceChanged', { bubbles: true });
-  static targets = [ "quantityInput", "icon" ]
+  static targets = [ "quantityInput", "icon", "quantityContainer" ]
 
 
   toggle() {
@@ -22,9 +22,9 @@ export default class extends Controller {
         if (quantity && this.data.get('category') !== 'special') {
           this.data.set('quantity', quantity);
           this.quantityInputTarget.value = quantity;
-          this.quantityInputTarget.classList.remove('d-none');
+          this.quantityContainerTarget.classList.remove('d-none');
         } else {
-          this.quantityInputTarget.classList.add('d-none');
+          this.quantityContainerTarget.classList.add('d-none');
         }
         this.element.dispatchEvent(this.constructor.serviceChangedEvent);
       },

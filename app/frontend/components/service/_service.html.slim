@@ -15,9 +15,14 @@
       .co(class="co-service-#{@icon_name}")
       p.service-icon-category-name = @display_name.html_safe
 
-  input#service-quantity(
+  .service-quantity-container(
+    data-target="service.quantityContainer"
     class=classnames('d-none': (@quantity.blank? || @category == 'special'))
-    value=@quantity
-    data-target="service.quantityInput"
-    data-action="change->service#updateQuantity"
   )
+    | pour
+    input#service-quantity(
+      value=@quantity
+      data-target="service.quantityInput"
+      data-action="change->service#updateQuantity"
+    )
+    | personnes
