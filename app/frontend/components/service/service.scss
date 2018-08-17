@@ -1,13 +1,19 @@
 .service {
   position: relative;
   &-icon {
-    padding-top: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     width: 70px;
     height: 70px;
     border-radius: 10px;
     border: 1px solid gray;
     text-align: center;
     cursor: pointer;
+    &.large {
+      width: 100px;
+      height: 100px;
+    }
     &-selected {
       background: var(--primary);
       color: white;

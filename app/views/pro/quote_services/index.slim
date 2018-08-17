@@ -18,7 +18,7 @@
       p Souhaitez-vous ajouter des services supplémentaires ?
       .d-flex.justify-content-around
         - @quote_service_categories.each do |service_category|
-            = c 'service', service_category
+            = c 'service', service_category.merge(large: true)
 
     .col-5
       p 2 Cookoons sélectionnés dont
