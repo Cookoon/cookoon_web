@@ -2,14 +2,11 @@
   = @title
   .title-icon class=('d-block' if selected?)
     i.co.co-check
-.image(style="background-image: url(#{image_url})")
-  - if cta?
-    .bottom.cta
-      = @cta
-  - if infos?
-    .bottom.infos(class== infos_class)
-      = @infos
-  - if icons?
-    .icons
-      - @icons.each do |icon|
-        = icon
+- if carousel_photos?
+  .image
+    = carousel_for(@carousel_photos)
+    = render 'card_extras'
+
+- else
+  .image(style="background-image: url(#{image_url})")
+    = render 'card_extras'

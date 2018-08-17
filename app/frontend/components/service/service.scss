@@ -1,13 +1,19 @@
 .service {
   position: relative;
   &-icon {
-    padding-top: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     width: 70px;
     height: 70px;
     border-radius: 10px;
     border: 1px solid gray;
     text-align: center;
     cursor: pointer;
+    &.large {
+      width: 100px;
+      height: 100px;
+    }
     &-selected {
       background: var(--primary);
       color: white;
@@ -24,9 +30,21 @@
   }
 }
 
-#service-quantity {
-  width: 25px;
+.service-quantity-container {
   position: absolute;
   bottom: -30px;
-  left: 20px;
+  left: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+}
+
+#service-quantity {
+  width: 25px;
+  border: none;
+  border-bottom: 1px solid black;
+  text-align: center;
+  font-size: 16px;
+  color: var(--blue);
 }

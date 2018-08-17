@@ -1,6 +1,8 @@
 .pro-breadcrumb {
   display: flex;
   align-items: center;
+  max-width: 500px;
+  margin: 0 auto;
   .step {
     height: 2rem;
     width: 2rem;

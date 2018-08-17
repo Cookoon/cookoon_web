@@ -20,7 +20,7 @@ fr:
 
     labels:
       pro_quote:
-        comment: Souhaitez-vous apporter des précision ?
+        comment: Souhaitez-vous apporter des précisions ?
 
     placeholders:
       cookoon:
@@ -29,6 +29,7 @@ fr:
         start_at: Date de l'événement
         duration: Durée de l'événement
         people_count: Nombre de personnes
+        comment: Une envie particulière ? Notre concierge vous contactera avec des propositions.
       pro_reservation:
         requested_modification: Dites-nous ce qu'il convient de modifier...
 

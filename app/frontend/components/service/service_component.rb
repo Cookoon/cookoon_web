@@ -2,4 +2,8 @@
 
 module ServiceComponent
   extend ComponentHelper
+
+  def large?
+    @large
+  end
 end

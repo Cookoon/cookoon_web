@@ -1,0 +1,10 @@
+- if cta?
+  .bottom.cta
+    = @cta
+- if infos?
+  .bottom.infos(class== infos_class)
+    = @infos
+- if icons?
+  .icons
+    - @icons.each do |icon|
+      = icon
