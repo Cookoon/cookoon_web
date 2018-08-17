@@ -20,9 +20,8 @@
           - @quote_service_categories.each do |service_category|
               = c 'service', service_category.merge(large: true)
         = f.input :comment,
-          input_html: { rows: 6 },
-          label: 'Souhaitez-vous ajouter des services supplémentaires ?',
-          wrapper_html: { class: 'mt-5' }
+          wrapper_html: { class: 'mt-5' },
+          input_html: { rows: 8, class: 'border border-primary' }
 
       .col-5
         p 2 Cookoons sélectionnés dont
