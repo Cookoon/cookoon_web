@@ -34,6 +34,9 @@ div.container.py-4
             icons: [cookoon.category_icon, cookoon.price_icon]
 
     .quote-cookoons-infos#quote-cookoon-infos
+      - if @quote.cookoons.count.positive?
+        = render 'recap'
+
       .text-center
         .my-5 = image_tag 'persona.png', class: 'img-fluid h-30rem'
         p Cliquez sur un Cookoon<br>pour afficher ses informations
