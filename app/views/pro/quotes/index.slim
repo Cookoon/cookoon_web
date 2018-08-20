@@ -4,9 +4,12 @@
       - @quotes.each do |quote|
         .mb-3
           .pb-4
-            .p-2.border.border-primary.d-flex.justify-content-between.align-items-center(data-toggle="collapse" data-target="#quote_#{quote.id}")
+            .p-2.border.border-primary.d-flex.justify-content-between.align-items-center(
+              class=classnames('bg-primary text-white': quote.confirm?)
+              data-toggle="collapse" data-target="#quote_#{quote.id}"
+            )
               span Devis n°#{quote.id} - Loc. du #{quote.start_on(without_year: true)}
-              i.co.co-reversed-check.fa-2x
+              i.co.fa-2x class=classnames('co-reversed-check': quote.request?, 'co-check': quote.confirm?)
           .collapse(id="quote_#{quote.id}")
             .pb-3
               ul.list-unstyled.ml-4.mb-0
