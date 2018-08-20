@@ -9,7 +9,7 @@
               data-toggle="collapse" data-target="#quote_#{quote.id}"
             )
               span Devis n°#{quote.id} - Loc. du #{quote.start_on(without_year: true)}
-              i.co.fa-2x class=classnames('co-reversed-check': quote.request?, 'co-check': quote.confirm?)
+              i.co.fa-2x class=classnames('co-reversed-check text-primary': quote.request?, 'co-check': quote.confirm?)
           .collapse(id="quote_#{quote.id}")
             .pb-3
               ul.list-unstyled.ml-4.mb-0
