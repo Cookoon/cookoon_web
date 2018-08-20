@@ -23,6 +23,7 @@ module Pro
     validates :people_count, numericality: { only_integer: true, greater_than: 0 }
 
     before_save :assign_prices
+    after_save :update_quote_status, if: :saved_change_to_status
 
     private
 
@@ -33,6 +34,10 @@ module Pro
         fee: (cookoon_price + services_price) * 0.07,
         price: cookoon_price + services_price + fee
       )
+    end
+
+    def update_quote_status
+      quote.confirm! if accepted?
     end
   end
 end
