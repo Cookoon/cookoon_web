@@ -1,0 +1,3 @@
+document.querySelector('#reservationCookoonShowModal .modal-title').textContent = '<%= @cookoon.name %>';
+document.querySelector('#reservationCookoonShowModal .modal-body').innerHTML = '<%= j render partial: "pro/reservations/cookoons/show" %>';
+$('#reservationCookoonShowModal').modal('show')
