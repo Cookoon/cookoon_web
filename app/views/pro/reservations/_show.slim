@@ -15,7 +15,8 @@
     .col.pro-reservation-card-offset
       = c 'card_cookoon',
           small: true,
-          link_url: cookoon_path(@reservation.cookoon),
+          link_url: pro_reservations_cookoon_path(@reservation.cookoon),
+          remote: true,
           image_url: cl_image_path(@reservation.cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
           infos: 'Voir la fiche de ce Cookoon',
           infos_class: :reverse
@@ -82,3 +83,5 @@
 
 .my-4
   = render 'actions'
+
+= render 'cookoon_show_modal'
