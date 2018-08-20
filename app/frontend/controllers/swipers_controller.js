@@ -7,6 +7,8 @@ export default class extends Controller {
   connect() {
     this.swiper = new Swiper(this.swiperContainerTarget, {
       loop: true,
+      observer: true,
+      observeParents: true,
 
       pagination: {
         el: '.swiper-pagination'
