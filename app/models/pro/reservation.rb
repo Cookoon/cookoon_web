@@ -37,7 +37,7 @@ module Pro
     end
 
     def update_quote_status
-      quote.confirm! if accepted?
+      quote.confirmed! if accepted?
     end
   end
 end

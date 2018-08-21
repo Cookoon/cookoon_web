@@ -5,11 +5,11 @@
         .mb-3
           .pb-4
             .p-2.border.border-primary.d-flex.justify-content-between.align-items-center(
-              class=classnames('bg-primary text-white': quote.confirm?)
+              class=classnames('bg-primary text-white': quote.confirmed?)
               data-toggle="collapse" data-target="#quote_#{quote.id}"
             )
               span Devis n°#{quote.id} - Loc. du #{quote.start_on(without_year: true)}
-              i.co.fa-2x class=classnames('co-reversed-check text-primary': quote.request?, 'co-check': quote.confirm?)
+              i.co.fa-2x class=classnames('co-reversed-check text-primary': quote.requested?, 'co-check': quote.confirmed?)
           .collapse(id="quote_#{quote.id}")
             .pb-3
               ul.list-unstyled.ml-4.mb-0

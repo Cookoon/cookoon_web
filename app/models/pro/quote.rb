@@ -21,6 +21,6 @@ module Pro
     validates :duration, numericality: { only_integer: true, greater_than: 0 }
     validates :people_count, numericality: { only_integer: true, greater_than: 0 }
 
-    enum status: %i[initial request confirm]
+    enum status: %i[initial requested confirmed]
   end
 end
