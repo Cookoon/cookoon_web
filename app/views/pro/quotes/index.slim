@@ -13,6 +13,7 @@
           .collapse(id="quote_#{quote.id}")
             .pb-3
               ul.list-unstyled.ml-4.mb-0
+                / TODO: FC 21aug18 try to filter reservations on controller instead of reject here
                 - if quote.reservations.reject(&:draft?).any?
                   - quote.reservations.reject(&:draft?).each do |reservation|
                     li.pb-2 = link_to reservation, remote: true do
