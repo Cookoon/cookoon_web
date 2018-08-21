@@ -1,7 +1,8 @@
 module Pro
   class QuotesController < ApplicationController
     def index
-      @quotes = policy_scope(Pro::Quote.request)
+      @quotes = policy_scope(Pro::Quote)
+                .where.not(status: :initial)
                 .includes(:reservations)
                 .where.not(pro_reservations: { status: Pro::Reservation.statuses[:draft] })
                 .order(:created_at)
@@ -24,7 +25,7 @@ module Pro
       @quote = Quote.find(params[:id])
       authorize @quote
 
-      @quote.update(quote_params.slice(:comment).merge(status: :request))
+      @quote.update(quote_params.slice(:comment).merge(status: :requested))
 
       flash.notice = 'Votre demande de devis a bien été transmise, nous revenons vers vous rapidement'
       redirect_to pro_root_path
