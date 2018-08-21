@@ -38,12 +38,12 @@ hr.half {
 .btn-action {
   padding: 1rem 3rem;
   border-radius: 0;
-  font-family: 'GFS Didot', serif;
+  font-family: "GFS Didot", serif;
   text-transform: uppercase;
   &-sm {
     padding: 0.75rem 2rem;
     border-radius: 0;
-    font-family: 'GFS Didot', serif;
+    font-family: "GFS Didot", serif;
     text-transform: uppercase;
   }
 }
@@ -95,10 +95,10 @@ hr.half {
 
 .font {
   &-didot {
-    font-family: 'GFS Didot', serif;
+    font-family: "GFS Didot", serif;
   }
   &-tisa {
-    font-family: 'Tisa Sans Pro', sans-serif;
+    font-family: "Tisa Sans Pro", sans-serif;
   }
 }
 
@@ -131,6 +131,9 @@ hr.half {
 
 .w-15rem {
   width: 15rem;
+}
+.w-300px {
+  width: 300px;
 }
 .w-90 {
   width: 90%;
@@ -181,20 +184,20 @@ hr {
 
 // Trick to disable zoom on iOS mobile devices
 @include media-breakpoint-down(sm) {
-  input[type='color'],
-  input[type='date'],
-  input[type='datetime'],
-  input[type='datetime-local'],
-  input[type='email'],
-  input[type='month'],
-  input[type='number'],
-  input[type='password'],
-  input[type='search'],
-  input[type='tel'],
-  input[type='text'],
-  input[type='time'],
-  input[type='url'],
-  input[type='week'],
+  input[type="color"],
+  input[type="date"],
+  input[type="datetime"],
+  input[type="datetime-local"],
+  input[type="email"],
+  input[type="month"],
+  input[type="number"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="text"],
+  input[type="time"],
+  input[type="url"],
+  input[type="week"],
   select,
   select:focus,
   textarea {

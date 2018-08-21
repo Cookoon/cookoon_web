@@ -9,8 +9,8 @@
         .quote-attribute-box.p-3.flex-grow-1 = @quote.start_at
         .quote-attribute-box.p-3.flex-grow-1 = @quote.duration
         .quote-attribute-box.p-3.flex-grow-1 = @quote.people_count
-      .col-4
-        img(src== image_path('paris-map.svg') class="img-fluid"
+      .col-4.d-flex.justify-content-end
+        img(src== image_path('paris-map.svg') class="img-fluid w-300px"
             data-controller="tooltips" data-target="tooltips.tooltip"
             title="Bientôt disponible : filtre par arrondissement"
            )
