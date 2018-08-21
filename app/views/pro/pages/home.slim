@@ -11,10 +11,4 @@
 
   = render 'pro/quotes/form'
 
-  .row.my-5
-    - @cookoons.each do |cookoon|
-      .col
-        = component 'card_cookoon',
-                     title: cookoon.name,
-                     image_url: cl_image_path(cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
-                     icons: [cookoon.category_icon, cookoon.price_icon]
+  = render 'cookoon_carousel'
