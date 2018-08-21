@@ -1,4 +1,4 @@
-.quote-cookoons-infos-recap.text-white.bg-primary.p-4.mx-5
+.quote-cookoons-infos-recap.text-white.bg-primary.p-4
   p Récapitulatif
 
   - @quote.cookoons.each do |cookoon|
@@ -12,4 +12,7 @@
       p.ml-3 Vous n'avez pas ajouté de second Cookoon
 
   - if @quote.cookoons.count > 1
-    = link_to 'Sélectionner des services', pro_quote_services_path(@quote), class: 'btn btn-action-sm btn-block bg-white'
+    - if page == :services && f.present?
+      = f.submit class: 'btn btn-action-sm btn-block bg-white'
+    - else
+      = link_to 'Sélectionner des services', pro_quote_services_path(@quote), class: 'btn btn-action-sm btn-block bg-white'
