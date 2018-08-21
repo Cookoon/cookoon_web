@@ -1,1 +1,5 @@
 document.getElementById('quote-cookoon-infos').innerHTML = '<%= j render partial: "show" %>'
+document.querySelectorAll('.card-cookoon').forEach(function(element) {
+  element.classList.remove('clicked');
+})
+document.getElementById('cookoon-<%= @cookoon.id %>').classList.add('clicked');

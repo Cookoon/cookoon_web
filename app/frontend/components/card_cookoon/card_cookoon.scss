@@ -12,6 +12,9 @@
   &.spaced {
     margin-bottom: 20px;
   }
+  &.clicked .image {
+    border-right: 3px solid var(--primary);
+  }
   .title {
     position: absolute;
     top: 0;
