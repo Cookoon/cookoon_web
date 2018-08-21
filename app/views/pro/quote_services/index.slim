@@ -24,12 +24,12 @@
           input_html: { rows: 8, class: 'border border-primary' }
 
       .col-5
-        p 2 Cookoons sélectionnés dont
-        = c 'card_cookoon',
-            title: @highlighted_cookoon.name,
-            title_class: :reverse,
-            image_url: cl_image_path(@highlighted_cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
-            icons: [@highlighted_cookoon.category_icon, @highlighted_cookoon.price_icon]
+        = render 'pro/cookoons/recap', page: :services, f: f
 
-        .bg-primary.p-4
-          = f.submit class: 'btn btn-action btn-block btn-light'
+        .text-center.pt-5
+          p Demander un devis ne vous engage en rien.
+          p
+          | Nous revenons vers vous sous 48 heures
+            avec une première proposition dans l’un des Cookoons
+            que vous avez choisi, ou un autre similaire si ils ne sont
+            pas disponibles.

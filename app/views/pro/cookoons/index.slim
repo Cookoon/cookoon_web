@@ -35,7 +35,7 @@ div.container.py-4
     .quote-cookoons-infos
       #quote-cookoons-recap
         - if @quote.cookoons.count.positive?
-          = render 'recap'
+          = render 'recap', page: :cookoons
 
       #quote-cookoon-infos
         .text-center
