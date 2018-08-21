@@ -1,9 +1,10 @@
 - if @reservation.modification_requested?
-  .p-2.border.border-primary
-    .d-flex.justify-content-center.align-items-center.mb-3
+  .pt-2.px-2.border.border-primary
+    .d-flex.justify-content-center.align-items-center.mb-2
       .mr-3 Modification demandée
       i.co.co-reversed-success.fa-2x.text-primary
     .px-5
+      span Votre message :
       i = simple_format @reservation.requested_modification
 - elsif @reservation.accepted?
   .p-2.bg-primary.text-white.border.border-primary.d-flex.justify-content-center.align-items-center
