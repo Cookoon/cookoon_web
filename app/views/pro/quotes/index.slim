@@ -13,10 +13,14 @@
           .collapse(id="quote_#{quote.id}")
             .pb-3
               ul.list-unstyled.ml-4.mb-0
-                - quote.reservations.each do |reservation|
-                  li.pb-2 = link_to reservation, remote: true do
-                    = '> ' if reservation == quote.reservations.last
-                    | Proposition n°#{reservation.id}, le #{reservation.created_on}
+                / TODO: FC 21aug18 try to filter reservations on controller instead of reject here
+                - if quote.reservations.reject(&:draft?).any?
+                  - quote.reservations.reject(&:draft?).each do |reservation|
+                    li.pb-2 = link_to reservation, remote: true do
+                      = '> ' if reservation == quote.reservations.last
+                      | Proposition n°#{reservation.id}, le #{reservation.created_on}
+                - else
+                  | Votre demande de réservation a bien été prise en compte. Notre équipe revient vers vous dans les 48h au maximum.
 
     .quote-index-infos#quote-index-infos
       .text-center

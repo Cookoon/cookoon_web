@@ -5,8 +5,7 @@ module Pro
       @quote = quote.decorate
 
       filtering_params = {
-        accomodates_for: quote.people_count,
-        available_in: (quote.start_at..@quote.end_at)
+        accomodates_for: quote.people_count
       }
       @cookoons = policy_scope(Cookoon)
                   .includes(:photo_files)
