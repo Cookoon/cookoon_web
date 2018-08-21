@@ -1,1 +1,9 @@
-= link_to "Retour à l'accueil", pro_root_path
+- content_for :body_class, 'bg-primary text-white'
+
+.container.text-center
+  .my-5 = component 'pro/breadcrumb', step: 4
+  h2 Votre demande de réservation a bien été envoyée.
+  h2 Notre équipe reviendra vers vous d’ici 48h, au maximum.
+  = link_to "Retour à l'accueil", pro_root_path, class: 'btn btn-action-sm btn-primary border border-white my-5'
+
+  = render 'pro/pages/cookoon_carousel'
