@@ -25,7 +25,7 @@ module Pro
       @quote = Quote.find(params[:id])
       authorize @quote
 
-      @quote.update(quote_params.slice(:comment).merge(status: :request))
+      @quote.update(quote_params.slice(:comment).merge(status: :requested))
 
       flash.notice = 'Votre demande de devis a bien été transmise, nous revenons vers vous rapidement'
       redirect_to pro_root_path
