@@ -80,6 +80,7 @@ Rails.application.routes.draw do
       resources :services, controller: 'quote_services',
                            only: %i[index create destroy update],
                            shallow: true
+      get :request_confirmation
     end
 
     resources :reservations, only: %i[show update]
