@@ -1,4 +1,7 @@
 .container
+  #quote-cookoon-select
+     = render 'quote_cookoon_select_button'
+     
   p <b>#{@cookoon.category}</b> <i>de <span class="text-secondary">#{@cookoon.user.first_name}</span></i>
 
   p = @cookoon.description
@@ -10,6 +13,3 @@
   data-target="google-maps.cookoonShowMap"
   data-google-maps-marker="#{@marker.to_json}"
 )
-
-#quote-cookoon-select
-  = render 'quote_cookoon_select_button'
