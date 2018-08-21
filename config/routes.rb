@@ -83,6 +83,9 @@ Rails.application.routes.draw do
     end
 
     resources :reservations, only: %i[show update]
+    namespace :reservations do
+      resources :cookoons, only: :show
+    end
   end
 
   # -------- ADMIN ROUTES ---------

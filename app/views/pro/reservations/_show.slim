@@ -15,7 +15,8 @@
     .col.pro-reservation-card-offset
       = c 'card_cookoon',
           small: true,
-          link_url: cookoon_path(@reservation.cookoon),
+          link_url: pro_reservations_cookoon_path(@reservation.cookoon),
+          remote: true,
           image_url: cl_image_path(@reservation.cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
           infos: 'Voir la fiche de ce Cookoon',
           infos_class: :reverse
@@ -74,11 +75,13 @@
 
   .mt-4.text-center
     p.small
-      | Cookoon est une marque de Réceptions Nouvelles, SAS au capital de X XXX€,
+      | Cookoon est une marque de Réceptions Nouvelles, SAS au capital de 2 364€,
       br
-      | immatriculée au RCS de Paris sous le numéro XXX XXX XXX
+      | immatriculée au RCS de Paris sous le numéro 821 316 239
       br
       | 12 rue Lincoln, 75008 Paris
 
 .my-4
   = render 'actions'
+
+#reservationCookoonShowModalWrapper

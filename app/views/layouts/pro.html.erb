@@ -31,11 +31,11 @@
 
     <div id="pro-bg-pattern"></div>
 
+    <%= c 'pro/navbar', content: content_for?(:navbar_content) ? yield(:navbar_content) : nil %>
+
     <div id="flash">
       <%= render 'shared/flashes' %>
     </div>
-
-    <%= c 'pro/navbar', content: content_for?(:navbar_content) ? yield(:navbar_content) : nil %>
 
     <%= yield %>
   </body>
