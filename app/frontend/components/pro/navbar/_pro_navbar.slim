@@ -1,6 +1,7 @@
 .pro-navbar.text-white
   .pro-navbar-container
-    i.co.co-logo.fa-4x
+    = link_to pro_root_path
+      i.co.co-logo.fa-4x.text-white
 
     - if content?
       .pro-navbar-content = @content

@@ -1,7 +1,6 @@
-/ TODO CP 2 aug : Add link -> 'Passer à l'etape suivante when 2 cookoons are selected
 / TODO CP 2 aug : Refacto with Helper, only the text is different
 
-.bg-primary.text-white.text-center.px-4.py-5
+.text-center.px-4.py-3
   - if @quote.cookoons.count.zero?
     = link_to 'Sélectionner ce Cookoon', pro_quote_cookoon_quote_cookoons_path(@quote, @cookoon),
               class: 'btn btn-action-sm btn-block btn-light',
@@ -9,6 +8,8 @@
               remote: true
   - elsif @quote.cookoons.include?(@cookoon)
     p Ce cookoon a bien été choisi,<br>ajoutez-en un autre pour passer à l'étape suivante.
+  - elsif @quote.cookoons.count > 1
+    p Vous avez déja sélectionné deux Cookoons, veuillez passer à l'étape suivante.
   - elsif @quote.cookoons.count == 1 && !@quote.cookoons.include?(@cookoon)
     = link_to "Choisir ce Cookoon et passer à l'étape suivante", pro_quote_cookoon_quote_cookoons_path(@quote, @cookoon),
               class: 'btn btn-action-sm btn-block btn-light',

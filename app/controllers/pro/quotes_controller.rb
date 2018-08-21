@@ -27,8 +27,14 @@ module Pro
 
       @quote.update(quote_params.slice(:comment).merge(status: :requested))
 
-      flash.notice = 'Votre demande de devis a bien été transmise, nous revenons vers vous rapidement'
-      redirect_to pro_root_path
+      redirect_to pro_quote_request_confirmation_path(@quote)
+    end
+
+    def request_confirmation
+      quote = Quote.find(params[:quote_id])
+      authorize quote, :update?
+
+      @cookoons = Cookoon.random.limit(3).decorate
     end
 
     private
