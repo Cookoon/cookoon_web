@@ -12,6 +12,12 @@
   &.spaced {
     margin-bottom: 20px;
   }
+  &.clicked .image {
+    border-right: 3px solid var(--primary);
+  }
+  &.selected .swiper-wrapper {
+    opacity: 0.5;
+  }
   .title {
     position: absolute;
     top: 0;
