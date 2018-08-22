@@ -6,6 +6,11 @@
     - if content?
       .pro-navbar-content = @content
 
-    .pro-navbar-actions
-      = link_to 'Mes Réservations', pro_quotes_path
+    .pro-navbar-actions.child-mx-3
+      .dropdown.pointer
+        span data-toggle="dropdown" Mes Réservations
+        .dropdown-menu
+          = link_to 'Mes Devis', pro_quotes_path, class: 'dropdown-item border-bottom border-primary'
+          = link_to 'Mes Locations', pro_quotes_path, class: 'dropdown-item'
+
       = link_to current_user.company.name, pro_root_path
