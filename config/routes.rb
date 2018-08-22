@@ -83,7 +83,7 @@ Rails.application.routes.draw do
       get :request_confirmation
     end
 
-    resources :reservations, only: %i[show update]
+    resources :reservations, only: %i[index show update]
     namespace :reservations do
       resources :cookoons, only: :show
     end
