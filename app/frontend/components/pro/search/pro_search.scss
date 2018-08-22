@@ -7,8 +7,31 @@
     justify-content: space-between;
     align-items: center;
     color: var(--gray);
+    cursor: pointer;
+    position: relative;
     i {
       font-size: 24px;
+    }
+    &-selection {
+      background: white;
+      position: absolute;
+      width: 100%;
+      left: 0;
+      z-index: 3;
+      bottom: -215px;
+      text-align: left;
+      max-height: 207px;
+      overflow: scroll;
+      &-item:not(:last-child) {
+        border-bottom: 1px solid var(--primary);
+      }
+      &-item {
+        padding: 15px 10px;
+        &:hover {
+          background: var(--primary);
+          color: white;
+        }
+      }
     }
   }
 }
