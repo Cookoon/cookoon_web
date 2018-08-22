@@ -1,2 +1,18 @@
 .pro-search(data-controller="pro-search")
-  | pro_search_component
+  .pro-search-inputs.d-flex-default
+    .pro-search-input
+      | Date de l'événment
+      i.co.co-logo
+    .pro-search-input
+      | Durée de l'événment
+      i.co.co-logo
+    .pro-search-input
+      | Nombre de personnes
+      i.co.co-logo
+
+  = simple_form_for @quote do |f|
+    = f.input :start_at, html5: true, as: :hidden
+    = f.input :duration, as: :hidden
+    = f.input :people_count, as: :hidden
+
+    = f.submit class: 'btn btn-block btn-success'

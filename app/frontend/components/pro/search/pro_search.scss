@@ -1,1 +1,14 @@
-.pro-search {}
+.pro-search {
+  &-input {
+    background: white;
+    padding: 20px;
+    width: 32%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--gray);
+    i {
+      font-size: 24px;
+    }
+  }
+}
