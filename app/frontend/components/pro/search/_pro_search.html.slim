@@ -7,18 +7,15 @@
       | Durée de l'événment
       i.co.co-logo
       .pro-search-input-selection
-        .pro-search-input-selection-item une réunion (2heures)
-        .pro-search-input-selection-item un comité (4 heures)
-        .pro-search-input-selection-item demi-journée (5 heures)
-        .pro-search-input-selection-item journée complète (10 heures)
+        - @durations.each do |duration|
+          .pro-search-input-selection-item data={duration: duration[:data]} #{duration[:display]}
+
     .pro-search-input
       | Nombre de personnes
       i.co.co-logo
       .pro-search-input-selection
-        .pro-search-input-selection-item 2 personnes
-        .pro-search-input-selection-item un comité (4 heures)
-        .pro-search-input-selection-item demi-journée (5 heures)
-        .pro-search-input-selection-item journée complète (10 heures)
+        - (2..20).each do |num|
+          .pro-search-input-selection-item data={people_count: num} #{num} personnes
 
   = simple_form_for @quote do |f|
     = f.input :start_at, html5: true, as: :hidden
