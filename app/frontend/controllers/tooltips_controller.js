@@ -1,14 +1,13 @@
-import { Controller } from 'stimulus';
-import Swiper from '../vendor/swiper';
+import { Controller } from 'stimulus'
 
 export default class extends Controller {
-  static targets = ['tooltip'];
+  static targets = ['tooltip']
 
   connect() {
-    $(this.tooltipTarget).tooltip();
+    $(this.tooltipTarget).tooltip()
   }
 
   disconnect() {
-    $(this.tooltipTarget).tooltip('dispose');
+    $(this.tooltipTarget).tooltip('dispose')
   }
 }
