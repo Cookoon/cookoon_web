@@ -11,6 +11,7 @@ export default class extends Controller {
   ]
 
   connect() {
+    this.displayFromInputs()
   }
 
   toggleSelection() {
@@ -36,5 +37,13 @@ export default class extends Controller {
     const duration = event.target.dataset.duration
     this.durationTextTarget.innerHTML = `${duration} heures`
     this.durationInputTarget.value = duration
+  }
+
+  displayFromInputs() {
+    const count = this.countInputTarget.value
+    if (count) { this.countTextTarget.innerHTML = `${count} personnes`  }
+
+    const duration = this.durationInputTarget.value
+    if (duration) { this.durationTextTarget.innerHTML = `${duration} heures` }
   }
 }
