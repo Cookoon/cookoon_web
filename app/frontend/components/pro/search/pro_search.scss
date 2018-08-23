@@ -1,4 +1,11 @@
 .pro-search {
+  &-hint {
+    padding-top: 10px;
+    width: 64%;
+  }
+  &-submit {
+    width: 32%;
+  }
   &-input {
     background: white;
     padding: 20px;

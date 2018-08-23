@@ -17,4 +17,7 @@
         - people_counts.each do |num|
           .pro-search-input-selection-item data={count: num, action: 'click->pro-search#selectCount'} #{num} personnes
 
-  = render 'pro/quotes/form'
+
+  .d-flex-default
+    i.pro-search-hint Remplissez les champs et lancer la recherche pour voir nos espaces à louer à Paris.
+    .pro-search-submit = render 'pro/quotes/form'
