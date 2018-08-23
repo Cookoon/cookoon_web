@@ -11,8 +11,6 @@ export default class extends Controller {
   ]
 
   connect() {
-    this.durationTextTarget.innerHTML = "Durée de l'événement"
-    this.countTextTarget.innerHTML = "Nombre de personnes"
   }
 
   toggleSelection() {
