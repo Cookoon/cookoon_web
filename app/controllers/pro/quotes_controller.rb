@@ -16,6 +16,7 @@ module Pro
       if @quote.save
         redirect_to pro_quote_cookoons_path(@quote)
       else
+        flash.alert = @quote.errors.full_messages.join(', ')
         @cookoons = Cookoon.random.limit(3).decorate
         render 'pro/pages/home'
       end
