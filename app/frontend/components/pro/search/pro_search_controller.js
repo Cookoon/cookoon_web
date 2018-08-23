@@ -5,11 +5,14 @@ export default class extends Controller {
     'durationSelection',
     'selection',
     'durationInput',
-    'countInput'
+    'durationText',
+    'countInput',
+    'countText'
   ]
 
   connect() {
-    console.log("Hello, Stimulus!", this.element)
+    this.durationTextTarget.innerHTML = "Durée de l'événement"
+    this.countTextTarget.innerHTML = "Nombre de personnes"
   }
 
   toggleSelection() {
@@ -26,10 +29,14 @@ export default class extends Controller {
   }
 
   selectCount() {
-    this.countInputTarget.value = event.target.dataset.count
+    const count = event.target.dataset.count
+    this.countTextTarget.innerHTML = `${count} personnes`
+    this.countInputTarget.value = count
   }
 
   selectDuration() {
-    this.durationInputTarget.value = event.target.dataset.duration
+    const duration = event.target.dataset.duration
+    this.durationTextTarget.innerHTML = `${duration} heures`
+    this.durationInputTarget.value = duration
   }
 }

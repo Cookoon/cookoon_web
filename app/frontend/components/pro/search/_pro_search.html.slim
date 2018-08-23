@@ -4,14 +4,14 @@
       | Date de l'événment
       i.co.co-logo
     .pro-search-input data={action: 'click->pro-search#toggleSelection', target: 'pro-search.selection'}
-      | Durée de l'événment
+      span data={target: 'pro-search.durationText'} Durée de l'événment
       i.co.co-logo
       .pro-search-input-selection.d-none data={}
         - @durations.each do |duration|
           .pro-search-input-selection-item data={duration: duration[:data], action: 'click->pro-search#selectDuration'} #{duration[:display]}
 
     .pro-search-input data={action: 'click->pro-search#toggleSelection', target: 'pro-search.selection'}
-      | Nombre de personnes
+      span data={target: 'pro-search.countText'} Nombre de personnes
       i.co.co-logo
       .pro-search-input-selection.d-none
         - (2..20).each do |num|
@@ -19,7 +19,7 @@
 
   = simple_form_for @quote, remote: true do |f|
     = f.input :start_at, html5: true, as: :hidden
-    = f.input :duration, input_html: { data: {target: 'pro-search.durationInput'} }
-    = f.input :people_count, input_html: { data: {target: 'pro-search.countInput'} }
+    = f.input :duration, input_html: { data: {target: 'pro-search.durationInput'} }, as: :hidden
+    = f.input :people_count, input_html: { data: {target: 'pro-search.countInput'} }, as: :hidden
 
     = f.submit class: 'btn btn-block btn-success'
