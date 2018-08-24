@@ -1,4 +1,5 @@
 import { Controller } from "stimulus"
+import flatpickr from 'vendor/flatpickr';
 
 export default class extends Controller {
   static targets = [
@@ -7,11 +8,17 @@ export default class extends Controller {
     'durationInput',
     'durationText',
     'countInput',
-    'countText'
+    'countText',
+    'dateInput'
   ]
 
   connect() {
     this.displayFromInputs()
+    flatpickr(this.dateInputTarget, {
+      dateFormat: 'd/m/Y',
+      minDate: 'today',
+      weekNumbers: true
+    });
   }
 
   toggleSelection() {

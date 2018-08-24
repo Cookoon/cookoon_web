@@ -1,6 +1,6 @@
 .pro-search data={controller: "pro-search", action: 'click@window->pro-search#hideSelections'}
   .pro-search-inputs.d-flex-default
-    .pro-search-input
+    .pro-search-input data={target: 'pro-search.dateInput'}
       | Date de l'événment
       i.co.co-logo
     .pro-search-input data={action: 'click->pro-search#toggleSelection', target: 'pro-search.selection'}
@@ -14,8 +14,8 @@
       span data={target: 'pro-search.countText'} Nombre de personnes
       i.co.co-logo
       .pro-search-input-selection.d-none
-        - people_counts.each do |num|
-          .pro-search-input-selection-item data={count: num, action: 'click->pro-search#selectCount'} #{num} personnes
+        - people_counts.each do |count|
+          .pro-search-input-selection-item data={count: count, action: 'click->pro-search#selectCount'} #{count} personnes
 
 
   .d-flex-default
