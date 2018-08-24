@@ -1,5 +1,6 @@
 import { Controller } from "stimulus"
 import flatpickr from 'vendor/flatpickr';
+import moment from 'moment';
 
 export default class extends Controller {
   static targets = [
@@ -13,6 +14,15 @@ export default class extends Controller {
     'dateText'
   ]
 
+  static dateOptions = {
+    weekday: "short",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric"
+  }
+
   connect() {
     this.displayFromInputs()
     flatpickr(this.dateSelectionTarget, {
@@ -23,9 +33,8 @@ export default class extends Controller {
       time_24hr: true,
       onValueUpdate: (selectedDates, dateStr, instance) => {
         this.selectDate(selectedDates, dateStr)
-        console.log(dateStr)
       },
-    });
+    })
   }
 
   toggleSelection() {
@@ -55,10 +64,9 @@ export default class extends Controller {
 
   selectDate(selectedDates, dateStr) {
     const date = selectedDates[0]
-    const options = {weekday: "short", year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "numeric"}
-    this.dateTextTarget.innerHTML = date.toLocaleString('fr', options)
+    this.dateTextTarget.innerHTML = date.toLocaleString('fr', this.constructor.dateOptions)
 
-    this.dateInputTarget.value = dateStr;
+    this.dateInputTarget.value = dateStr
   }
 
   displayFromInputs() {
@@ -67,5 +75,10 @@ export default class extends Controller {
 
     const duration = this.durationInputTarget.value
     if (duration) { this.durationTextTarget.innerHTML = `${duration} heures` }
+
+    const momentDate = moment(this.dateInputTarget.value, 'YYYY-MM-DDTHH:mm')
+    if (momentDate.isValid()) {
+      this.dateTextTarget.innerHTML = momentDate.toDate().toLocaleString('fr', this.constructor.dateOptions)
+    }
   }
 }

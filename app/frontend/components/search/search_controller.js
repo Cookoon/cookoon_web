@@ -19,7 +19,7 @@ export default class extends Controller {
     'startAtInput',
     'timeDisplay',
     'timeSelect'
-  ];
+  ]
 
   connect() {
     const device = this.data.get('device');
