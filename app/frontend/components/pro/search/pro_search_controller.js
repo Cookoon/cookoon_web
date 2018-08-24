@@ -25,13 +25,14 @@ export default class extends Controller {
 
   connect() {
     this.displayFromInputs()
+    window.history.replaceState({}, 'Cookoon - Pro', '/pro')
     flatpickr(this.dateSelectionTarget, {
       dateFormat: 'Y-m-dTH:i',
       minDate: 'today',
       weekNumbers: true,
       enableTime: true,
       time_24hr: true,
-      onValueUpdate: (selectedDates, dateStr, instance) => {
+      onValueUpdate: (selectedDates, dateStr) => {
         this.selectDate(selectedDates, dateStr)
       },
     })
