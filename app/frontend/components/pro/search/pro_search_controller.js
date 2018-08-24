@@ -3,21 +3,28 @@ import flatpickr from 'vendor/flatpickr';
 
 export default class extends Controller {
   static targets = [
-    'durationSelection',
     'selection',
     'durationInput',
     'durationText',
     'countInput',
     'countText',
-    'dateInput'
+    'dateSelection',
+    'dateInput',
+    'dateText'
   ]
 
   connect() {
     this.displayFromInputs()
-    flatpickr(this.dateInputTarget, {
-      dateFormat: 'd/m/Y',
+    flatpickr(this.dateSelectionTarget, {
+      dateFormat: 'Y-m-dTH:i',
       minDate: 'today',
-      weekNumbers: true
+      weekNumbers: true,
+      enableTime: true,
+      time_24hr: true,
+      onValueUpdate: (selectedDates, dateStr, instance) => {
+        this.selectDate(selectedDates, dateStr)
+        console.log(dateStr)
+      },
     });
   }
 
@@ -44,6 +51,14 @@ export default class extends Controller {
     const duration = event.target.dataset.duration
     this.durationTextTarget.innerHTML = `${duration} heures`
     this.durationInputTarget.value = duration
+  }
+
+  selectDate(selectedDates, dateStr) {
+    const date = selectedDates[0]
+    const options = {weekday: "short", year: "numeric", month: "long", day: "numeric", hour: "numeric", minute: "numeric"}
+    this.dateTextTarget.innerHTML = date.toLocaleString('fr', options)
+
+    this.dateInputTarget.value = dateStr;
   }
 
   displayFromInputs() {

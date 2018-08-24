@@ -1,12 +1,12 @@
 .pro-search data={controller: "pro-search", action: 'click@window->pro-search#hideSelections'}
   .pro-search-inputs.d-flex-default
-    .pro-search-input data={target: 'pro-search.dateInput'}
-      | Date de l'événment
+    .pro-search-input data={target: 'pro-search.dateSelection'}
+      span data={target: 'pro-search.dateText'} Date de l'événment
       i.co.co-logo
     .pro-search-input data={action: 'click->pro-search#toggleSelection', target: 'pro-search.selection'}
       span data={target: 'pro-search.durationText'} Durée de l'événment
       i.co.co-logo
-      .pro-search-input-selection.d-none data={}
+      .pro-search-input-selection.d-none
         - durations.each do |duration|
           .pro-search-input-selection-item data={duration: duration[:data], action: 'click->pro-search#selectDuration'} #{duration[:display]}
 

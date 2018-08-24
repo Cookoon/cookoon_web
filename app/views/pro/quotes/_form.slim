@@ -1,5 +1,5 @@
 = simple_form_for @quote, defaults: { error: false } do |f|
-  = f.input :start_at, html5: true, as: :hidden
+  = f.input :start_at, html5: true, input_html: { data: {target: 'pro-search.dateInput'} }, as: :hidden
   = f.input :duration, input_html: { data: {target: 'pro-search.durationInput'} }, as: :hidden
   = f.input :people_count, input_html: { data: {target: 'pro-search.countInput'} }, as: :hidden
 
