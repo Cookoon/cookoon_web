@@ -10,7 +10,7 @@ environment.plugins.prepend(
   new webpack.ProvidePlugin({
     $: 'jquery',
     jQuery: 'jquery'
-  }),
+  })
 );
 
 environment.plugins.prepend(
