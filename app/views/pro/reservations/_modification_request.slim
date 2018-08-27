@@ -10,6 +10,6 @@ button.btn.btn-link type="button" data-toggle="modal" data-target="#modification
       .modal-body
         = simple_form_for @reservation, remote: true do |f|
           = f.input :status, as: :hidden, input_html: { value: :modification_requested }
-          = f.input :requested_modification, label: false, input_html: { rows: 6}
+          = f.input :requested_modification, label: false, input_html: { rows: 6, class: 'bg-white text-dark' }
           .text-right
             = f.submit class: 'btn btn-light'

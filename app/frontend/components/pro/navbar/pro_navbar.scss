@@ -20,15 +20,17 @@
     }
   }
   &-actions {
-    a {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    > a {
       color: white;
-      margin-left: 20px;
-    }
-    a:hover {
-      color: white;
-    }
-    a:visited {
-      color: white;
+      &:hover {
+        color: white;
+      }
+      &:visited {
+        color: white;
+      }
     }
   }
 }
