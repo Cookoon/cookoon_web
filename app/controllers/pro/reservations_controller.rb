@@ -1,8 +1,8 @@
 module Pro
   class ReservationsController < ApplicationController
     def index
-      @reservations = policy_scope(Reservation.all)
-                      .where('status >= ?', Reservation.statuses[:accepted])
+      @reservations = policy_scope(Reservation)
+                      .where('pro_reservations.status >= ?', Reservation.statuses[:accepted])
                       .includes(:cookoon)
                       .decorate
     end
