@@ -39,13 +39,13 @@ export default class extends Controller {
   }
 
   toggleSelection() {
-    event.target.querySelector('.pro-search-input-selection') &&
-      event.target.querySelector('.pro-search-input-selection').classList.toggle('d-none')
+    const input = event.target.closest('.pro-search-input')
+    input.querySelector('.pro-search-input-selection').classList.toggle('d-none')
   }
 
   hideSelections() {
     this.selectionTargets.forEach(element => {
-      if (element !== event.target) {
+      if (element !== event.target.closest('.pro-search-input')) {
         element.querySelector('.pro-search-input-selection').classList.add('d-none')
       }
     })
