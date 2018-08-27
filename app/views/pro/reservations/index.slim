@@ -1,0 +1,11 @@
+.container
+  - @reservations.each do |reservation|
+    = link_to reservation do
+      .row.my-4.p-3.text-center.align-items-center.border.border-primary
+        .col-2 = Pro::Reservation.human_attribute_name("status.#{reservation.status}")
+        .col-2 Loc. #{reservation.id}
+        .col-3 = reservation.cookoon.name
+        .col-2 = reservation.start_on
+        .col-2 = reservation.price
+        .col-1
+          i.co.co-reversed-check.fa-2x.text-primary

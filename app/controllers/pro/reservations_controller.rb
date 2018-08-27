@@ -1,5 +1,12 @@
 module Pro
   class ReservationsController < ApplicationController
+    def index
+      @reservations = policy_scope(Reservation)
+                      .where('pro_reservations.status >= ?', Reservation.statuses[:accepted])
+                      .includes(:cookoon)
+                      .decorate
+    end
+
     def show
       @reservation = Reservation.find(params[:id]).decorate
       authorize @reservation.quote
