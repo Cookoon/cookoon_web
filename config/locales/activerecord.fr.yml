@@ -1,4 +1,3 @@
----
 fr:
   activerecord:
     attributes:
@@ -26,6 +25,11 @@ fr:
         start_at: la date et l'heure de début
         duration: la durée
         people_count: le nombre de personnes
+      pro/reservation/status:
+        accepted: A venir
+        ongoing: En cours
+        passed: Passée
+        cancelled: Annulée
     errors:
       models:
         availability:
@@ -48,7 +52,7 @@ fr:
         cookoon:
           attributes:
             user:
-              max_cookoons_count: "Un maximum de deux cookoons par utilisateur est autorisé sur notre plateforme"
+              max_cookoons_count: 'Un maximum de deux cookoons par utilisateur est autorisé sur notre plateforme'
         cookoon_search:
           attributes:
             start_at:
@@ -91,7 +95,7 @@ fr:
       email:
         blank: doit être renseigné
         invalid: n'est pas un email valide
-        invitation_not_yet_accepted:  |
+        invitation_not_yet_accepted: |
           Vous n'avez pas encore créé votre compte Cookoon : retournez sur votre
           invitation e-mail pour activer votre compte et choisir un mot de passe !
         not_found: |
