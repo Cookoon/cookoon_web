@@ -13,4 +13,10 @@ environment.plugins.prepend(
   })
 );
 
+environment.plugins.prepend(
+  'MomentIgnoreLocales',
+  new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+);
+
+
 module.exports = environment;

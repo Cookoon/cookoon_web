@@ -1,0 +1,23 @@
+.pro-search data={controller: "pro-search", action: 'click@window->pro-search#hideSelections'}
+  .pro-search-inputs.d-flex-default
+    .pro-search-input data={target: 'pro-search.dateSelection'}
+      span data={target: 'pro-search.dateText'} = t('simple_form.placeholders.pro_quote.start_at')
+      i.far.fa-calendar
+
+    .pro-search-input data={action: 'click->pro-search#toggleSelection', target: 'pro-search.selection'}
+      span data={target: 'pro-search.durationText'} = t('simple_form.placeholders.pro_quote.duration')
+      i.far.fa-clock
+      .pro-search-input-selection.d-none
+        - durations.each do |duration|
+          .pro-search-input-selection-item data={duration: duration[:data], action: 'click->pro-search#selectDuration'} #{duration[:display]}
+
+    .pro-search-input data={action: 'click->pro-search#toggleSelection', target: 'pro-search.selection'}
+      span data={target: 'pro-search.countText'} = t('simple_form.placeholders.pro_quote.people_count')
+      i.far.fa-user
+      .pro-search-input-selection.d-none
+        - people_counts.each do |count|
+          .pro-search-input-selection-item data={count: count, action: 'click->pro-search#selectCount'} #{count} personnes
+
+  .d-flex-default
+    i.pro-search-hint Remplissez les champs et lancer la recherche pour voir nos espaces à louer à Paris.
+    .pro-search-submit = render 'form'
