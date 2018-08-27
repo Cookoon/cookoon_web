@@ -10,7 +10,13 @@ environment.plugins.prepend(
   new webpack.ProvidePlugin({
     $: 'jquery',
     jQuery: 'jquery'
-  })
+  }),
 );
+
+environment.plugins.prepend(
+  'MomentIgnoreLocales',
+  new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+);
+
 
 module.exports = environment;
