@@ -8,7 +8,7 @@
         i.co.co-logo.fa-2x.text-primary
         span Cookoon
 
-      div Devis n°#{@reservation.quote.id}
+      div = title ||= "Devis n°#{@reservation.quote.id}"
       div.text-uppercase = @reservation.company.name
       div = @reservation.company.address
       div N° TVA Intra : #{@reservation.company.vat}
