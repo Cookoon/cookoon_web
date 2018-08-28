@@ -7,6 +7,7 @@ class Reservation < ApplicationRecord
   scope :for_tenant, ->(user) { where(user: user) }
   scope :for_host, ->(user) { where(cookoon: user.cookoons) }
   scope :active, -> { where(status: %i[paid accepted ongoing]) }
+  scope :engaged, -> {where(status: %i[accepted ongoing])}
   scope :inactive, -> { where(status: %i[refused cancelled passed]) }
   scope :created_in_day_range_around, ->(datetime) { where created_at: day_range(datetime) }
   scope :in_hour_range_around, ->(datetime) { where start_at: hour_range(datetime) }
