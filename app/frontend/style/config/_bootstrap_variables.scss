@@ -3,6 +3,10 @@ $font-size-base: 0.875rem;
 $headings-font-family: $gfs-didot;
 
 $blue: #004254;
+$gray: #9b9b9b;
+$theme-colors: (
+  gray: $gray,
+);
 
 // Customize the dark text colors for use in our YIQ color contrast function.
 $yiq-text-dark: $blue;
