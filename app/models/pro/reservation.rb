@@ -1,5 +1,6 @@
 module Pro
   class Reservation < ApplicationRecord
+    include DatesOverlapScope
     include EndAtSetter
 
     belongs_to :quote, class_name: 'Pro::Quote', foreign_key: :pro_quote_id, inverse_of: :reservations
@@ -17,6 +18,8 @@ module Pro
     enum status: %i[draft proposed modification_requested accepted cancelled ongoing passed dead]
 
     delegate :company, to: :quote
+
+    scope :engaged, -> {where(status: %i[proposed modification_requested accepted])}
 
     validates :start_at, presence: true
     validates :duration, numericality: { only_integer: true, greater_than: 0 }
