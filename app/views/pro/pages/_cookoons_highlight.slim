@@ -1,7 +1,3 @@
-.row.my-5
+.cookoon-highlight.d-flex.justify-content-around
   - @cookoons.each do |cookoon|
-    .col
-      = component 'card_cookoon',
-                   title: cookoon.name,
-                   image_url: cl_image_path(cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
-                   icons: [cookoon.category_icon, cookoon.price_icon]
+    = cl_image_tag(cookoon.photos.first.path, width: 350, height: 220, crop: :fill)
