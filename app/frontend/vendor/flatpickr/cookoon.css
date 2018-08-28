@@ -9,6 +9,7 @@
   animation: none;
   direction: ltr;
   border: 0;
+  margin-top: 6px;
   font-size: 14px;
   line-height: 24px;
   border-radius: 5px;
@@ -69,7 +70,7 @@
   border-left: 0;
 }
 .flatpickr-calendar.showTimeInput.hasTime .flatpickr-time {
-  height: 40px;
+  height: 60px;
   border-top: 1px solid rgba(0,66,84,0.5);
 }
 .flatpickr-calendar.noCalendar.hasTime .flatpickr-time {
@@ -130,7 +131,7 @@
   background: #fff;
   color: rgba(0,0,0,0.9);
   fill: rgba(0,0,0,0.9);
-  height: 28px;
+  height: 40px;
   line-height: 1;
   text-align: center;
   position: relative;
@@ -143,7 +144,7 @@
   text-decoration: none;
   cursor: pointer;
   position: absolute;
-  top: 0px;
+  top: 5px;
   line-height: 16px;
   height: 28px;
   padding: 10px;
@@ -280,7 +281,7 @@
   position: absolute;
   width: 75%;
   left: 12.5%;
-  padding: 6.16px 0 0 0;
+  padding: 11px 0 0 0;
   line-height: 1;
   height: 28px;
   display: inline-block;
@@ -551,8 +552,8 @@ span.flatpickr-weekday {
   outline: 0;
   display: block;
   height: 0;
-  line-height: 40px;
-  max-height: 40px;
+  line-height: 60px;
+  max-height: 60px;
   box-sizing: border-box;
   overflow: hidden;
   display: flex;
@@ -565,7 +566,7 @@ span.flatpickr-weekday {
 .flatpickr-time .numInputWrapper {
   flex: 1;
   width: 40%;
-  height: 40px;
+  height: 60px;
   float: left;
 }
 .flatpickr-time .numInputWrapper span.arrowUp:after {
