@@ -5,10 +5,12 @@
 .bg-primary.text-white.pb-5
   .container
     .row.align-items-center
-      .col-8.d-flex.child-mx-2.text-center
+      .col-8.d-flex.text-center.align-items-center.child-mx-2
         .quote-attribute-box.p-3.flex-grow-1 = @quote.start_at
         .quote-attribute-box.p-3.flex-grow-1 = @quote.duration
         .quote-attribute-box.p-3.flex-grow-1 = @quote.people_count
+        = link_to pro_root_path, class: 'text-white' do
+          i.fas.fa-times-circle.fa-lg
       .col-4
         img(src== image_path('paris-map.svg') class='img-fluid')
 
