@@ -1,4 +1,5 @@
 - content_for :body_class, 'bg-primary text-white'
+- content_for :footer, true
 
 .container.text-center
   h1
@@ -13,5 +14,3 @@
     = c 'pro/search', quote: @quote
 
   = render 'pro/pages/cookoons_highlight'
-
-= render 'shared/footer'
