@@ -18,13 +18,14 @@
   = simple_form_for @quote do |f|
     .row
       .col-7
-        p.pb-3 Souhaitez-vous ajouter des services supplémentaires ?
+        p.pb-3.font-weight-bold Souhaitez-vous ajouter des services supplémentaires ?
         .d-flex.justify-content-around
           - @quote_service_categories.each do |service_category|
               = c 'service', service_category.merge(large: true)
         = f.input :comment,
           wrapper_html: { class: 'mt-5' },
-          input_html: { rows: 8, class: 'border border-primary' }
+          input_html: { rows: 8, class: 'border border-primary' },
+          label_html: { class: 'font-weight-bold' }
 
       .col-5
         = render 'pro/cookoons/recap', page: :services, f: f
