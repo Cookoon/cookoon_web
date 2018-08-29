@@ -21,8 +21,8 @@
       border-radius: 10px;
     }
     &-category-name {
-      font-size: 9px;
-      line-height: 10px;
+      font-size: 12px;
+      line-height: 15px;
     }
     .co {
       font-size: 30px;
@@ -33,11 +33,11 @@
 .service-quantity-container {
   position: absolute;
   bottom: -30px;
-  left: 0;
+  left: -10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 10px;
+  font-size: 1rem;
 }
 
 #service-quantity {

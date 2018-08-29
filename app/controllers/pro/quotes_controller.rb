@@ -35,7 +35,7 @@ module Pro
       quote = Quote.find(params[:quote_id])
       authorize quote, :update?
 
-      @cookoons = Cookoon.random.limit(3).decorate
+      @cookoons = Cookoon.displayable_on_index.random.limit(3).decorate
     end
 
     private
