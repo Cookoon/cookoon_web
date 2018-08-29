@@ -8,7 +8,7 @@
 
   - if @quote.cookoons.count == 1
     .d-flex.align-items-center.font-didot.mb-3
-      = image_tag 'https://via.placeholder.com/60x40'
+      = image_tag 'cookoon_placeholder', width: 60, height: 40
       p.ml-3 Vous n'avez pas ajouté de second Cookoon
 
   - if @quote.cookoons.count > 1
