@@ -15,10 +15,10 @@
     .col.pro-reservation-card-offset
       = c 'card_cookoon',
           small: true,
-          link_url: pro_reservations_cookoon_path(@reservation.cookoon),
-          remote: true,
+          link_url: @reservation.cookoon.pdf_url,
+          target: :cookoon_pdf,
           image_url: cl_image_path(@reservation.cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
-          infos: 'Voir la fiche de ce Cookoon',
+          infos: ('Voir la fiche de ce Cookoon' if @reservation.cookoon.pdf_url),
           infos_class: :reverse
 
   p Votre demande de location pour le #{@reservation.start_on(without_year: true)}, de #{@reservation.start_time} à #{@reservation.end_time}
@@ -83,5 +83,3 @@
 
 .my-4
   = render 'actions'
-
-#reservationCookoonShowModalWrapper
