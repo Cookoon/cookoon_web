@@ -1,8 +1,8 @@
 - content_for :body_class, 'bg-primary text-white'
 - content_for :footer, true
 
-.container.text-center.mb-5
-  .my-5 = component 'pro/breadcrumb', step: 4
+.container.text-center.pb-5
+  .py-5 = component 'pro/breadcrumb', step: 4
   h2 Votre demande de réservation a bien été envoyée.
   h2 Notre équipe reviendra vers vous d’ici 48h, au maximum.
   = link_to "Retour à l'accueil", pro_root_path, class: 'btn btn-action-sm btn-primary border border-white my-5'
