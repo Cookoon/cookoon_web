@@ -37,6 +37,8 @@
       <%= render 'shared/flashes' %>
     </div>
 
-    <%= yield %>
+    <main><%= yield %></main>
+
+    <%= render 'shared/footer' if content_for?(:footer) %>
   </body>
 </html>

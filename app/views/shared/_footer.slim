@@ -1,0 +1,22 @@
+footer.bg-gray
+  .container.py-5
+    .row
+      .col
+        h4 Cookoon
+        | Tous droits réservés à
+        br Réceptions Nouvelles,
+        | 2018
+      .col.text-center
+        h4 Découvrir le Service
+        div = link_to 'Comment organiser son événement ?', '#', target: :cookoon, class: 'text-white'
+        div = link_to 'Confiance et garanties', 'https://cookoon.fr/garanties', target: :cookoon, class: 'text-white'
+        div = link_to 'Questions fréquentes', 'https://aide.cookoon.fr', target: :faq, class: 'text-white'
+
+      .col.text-center
+        h4 Société
+        div = link_to 'A propos', 'https://cookoon.fr', target: :cookoon, class: 'text-white'
+        div = link_to 'Presse', 'https://cookoon.fr', target: :cookoon, class: 'text-white'
+        div = link_to 'Jobs', 'https://angel.co/cookoon/jobs', target: :jobs, class: 'text-white'
+
+      .col.text-center.align-self-center
+        i.co.co-logo.fa-5x
