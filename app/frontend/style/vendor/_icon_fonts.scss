@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'cookoon';
-  src: url('fonts/cookoon.eot?qvcsj');
-  src: url('fonts/cookoon.eot?qvcsj#iefix') format('embedded-opentype'),
-    url('fonts/cookoon.ttf?qvcsj') format('truetype'),
-    url('fonts/cookoon.woff?qvcsj') format('woff'),
-    url('fonts/cookoon.svg?qvcsj#cookoon') format('svg');
+  src:  url('fonts/cookoon.eot?6lw5qz');
+  src:  url('fonts/cookoon.eot?6lw5qz#iefix') format('embedded-opentype'),
+    url('fonts/cookoon.ttf?6lw5qz') format('truetype'),
+    url('fonts/cookoon.woff?6lw5qz') format('woff'),
+    url('fonts/cookoon.svg?6lw5qz#cookoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -25,146 +25,220 @@
 }
 
 .co-addcookoon:before {
-  content: '\e900';
+  content: "\e900";
+  color: #004254;
 }
 .co-bank:before {
-  content: '\e901';
+  content: "\e901";
+  color: #004254;
 }
 .co-broken-door:before {
-  content: '\e902';
+  content: "\e902";
+  color: #004254;
 }
 .co-camera:before {
-  content: '\e903';
+  content: "\e903";
+  color: #004254;
 }
 .co-cb:before {
-  content: '\e904';
+  content: "\e904";
+  color: #004254;
 }
 .co-check:before {
-  content: '\e905';
+  content: "\e905";
+  color: #004254;
 }
 .co-cleaning:before {
-  content: '\e906';
+  content: "\e906";
+  color: #004254;
 }
 .co-concierge:before {
-  content: '\e907';
+  content: "\e907";
+  color: #004254;
 }
 .co-cookoon-mark1:before {
-  content: '\e908';
+  content: "\e908";
+  color: #004254;
 }
 .co-cookoon-mark2:before {
-  content: '\e909';
+  content: "\e909";
+  color: #004254;
 }
 .co-cookoon-mark3:before {
-  content: '\e90a';
+  content: "\e90a";
+  color: #004254;
+}
+.co-datetime-picker:before {
+  content: "\e90b";
+  color: #4a4a4a;
 }
 .co-email:before {
-  content: '\e90b';
+  content: "\e90c";
+  color: #004254;
 }
 .co-fire:before {
-  content: '\e90c';
+  content: "\e90d";
+  color: #004254;
 }
 .co-glasshole-search:before {
-  content: '\e90d';
+  content: "\e90e";
+  color: #004254;
 }
 .co-home:before {
-  content: '\e90e';
+  content: "\e90f";
+  color: #004254;
+}
+.co-lenght-picker:before {
+  content: "\e910";
+  color: #4a4a4a;
 }
 .co-logo:before {
-  content: '\e90f';
+  content: "\e911";
+  color: #004254;
 }
 .co-lost:before {
-  content: '\e910';
+  content: "\e912";
+  color: #004254;
 }
 .co-meeting:before {
-  content: '\e911';
+  content: "\e913";
+  color: #004254;
 }
 .co-minus:before {
-  content: '\e912';
+  content: "\e914";
+  color: #004254;
 }
 .co-notifications:before {
-  content: '\e913';
+  content: "\e915";
+  color: #004254;
+}
+.co-pax-picker:before {
+  content: "\e916";
+  color: #4a4a4a;
 }
 .co-plus:before {
-  content: '\e914';
+  content: "\e917";
+  color: #004254;
 }
 .co-reversed--camera:before {
-  content: '\e915';
+  content: "\e918";
+  color: #006f8c;
 }
 .co-reversed-addcookoon:before {
-  content: '\e916';
+  content: "\e919";
+  color: #006f8c;
 }
 .co-reversed-bank:before {
-  content: '\e917';
+  content: "\e91a";
+  color: #006f8c;
 }
 .co-reversed-cb:before {
-  content: '\e918';
+  content: "\e91b";
+  color: #006f8c;
 }
 .co-reversed-check:before {
-  content: '\e919';
+  content: "\e91c";
+  color: #006f8c;
 }
 .co-reversed-cleaning:before {
-  content: '\e91a';
+  content: "\e91d";
+  color: #006f8c;
 }
 .co-reversed-concierge:before {
-  content: '\e91b';
+  content: "\e91e";
+  color: #006f8c;
 }
 .co-reversed-email:before {
-  content: '\e91c';
+  content: "\e91f";
+  color: #006f8c;
 }
 .co-reversed-home:before {
-  content: '\e91d';
+  content: "\e920";
+  color: #006f8c;
 }
 .co-reversed-logo:before {
-  content: '\e91e';
+  content: "\e921";
+  color: #006f8c;
 }
 .co-reversed-meeting:before {
-  content: '\e91f';
+  content: "\e922";
+  color: #006f8c;
 }
 .co-reversed-minus:before {
-  content: '\e920';
+  content: "\e923";
+  color: #006f8c;
 }
 .co-reversed-notifications:before {
-  content: '\e921';
+  content: "\e924";
+  color: #006f8c;
+}
+.co-reversed-placeholder---picture .path1:before {
+  content: "\e925";
+  color: rgb(255, 255, 255);
+}
+.co-reversed-placeholder---picture .path2:before {
+  content: "\e926";
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
+}
+.co-reversed-placeholder---picture .path3:before {
+  content: "\e927";
+  margin-left: -1em;
+  color: rgb(0, 111, 140);
 }
 .co-reversed-plus:before {
-  content: '\e922';
+  content: "\e928";
+  color: #006f8c;
 }
 .co-reversed-sad:before {
-  content: '\e923';
+  content: "\e929";
+  color: #006f8c;
 }
 .co-reversed-success:before {
-  content: '\e924';
+  content: "\e92a";
+  color: #006f8c;
 }
 .co-reversed-user:before {
-  content: '\e925';
+  content: "\e92b";
+  color: #006f8c;
 }
 .co-service-chef:before {
-  content: '\e926';
+  content: "\e92c";
+  color: #9b9b9b;
 }
 .co-service-concierge:before {
-  content: '\e927';
+  content: "\e92d";
+  color: #9b9b9b;
 }
 .co-service-food:before {
-  content: '\e928';
+  content: "\e92e";
+  color: #9b9b9b;
 }
 .co-service-pro:before {
-  content: '\e929';
+  content: "\e92f";
+  color: #9b9b9b;
 }
 .co-stain:before {
-  content: '\e92a';
+  content: "\e930";
+  color: #004254;
 }
 .co-success:before {
-  content: '\e92b';
+  content: "\e931";
+  color: #004254;
 }
 .co-type-flat:before {
-  content: '\e92c';
+  content: "\e932";
+  color: #004254;
 }
 .co-type-house:before {
-  content: '\e92d';
+  content: "\e933";
+  color: #004254;
 }
 .co-type-loft:before {
-  content: '\e92e';
+  content: "\e934";
+  color: #004254;
 }
 .co-user:before {
-  content: '\e92f';
+  content: "\e935";
+  color: #004254;
 }
