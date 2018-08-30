@@ -5,7 +5,7 @@ module Pro
                 .where.not(status: :initial)
                 .includes(:reservations)
                 .order(created_at: :desc)
-                .order('pro_reservations.created_at DESC')
+                .order('pro_reservations.created_at')
                 .decorate
     end
 
