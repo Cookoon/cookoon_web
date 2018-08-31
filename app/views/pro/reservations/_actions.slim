@@ -10,6 +10,9 @@
   .p-2.d-flex.justify-content-end.align-items-center
     = link_to 'Annuler la réservation', '#', class: 'mr-4'
     = link_to 'Télécharger la facture', '#', class: 'btn btn-sm btn-primary btn-action'
+- elsif @reservation.passed?
+    .d-flex.justify-content-end
+      = link_to 'Faire une réclamation', '#', class: 'btn btn-sm btn-primary btn-action'
 - else
   .d-flex.justify-content-end.align-items-center.child-mx-3
     = link_to pro_quotes_path, class: 'btn btn-link child-mx-2' do
