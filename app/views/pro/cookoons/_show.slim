@@ -2,7 +2,9 @@
 #quote-cookoon-select
    = render 'quote_cookoon_select_button'
 
-.container   
+.container
+
+  h4.m-0.pt-2 = @cookoon.name
 
   p <b>#{@cookoon.category}</b> <i>de <span class="text-secondary">#{@cookoon.user.first_name}</span></i>
 

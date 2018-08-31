@@ -21,6 +21,7 @@ div.container.py-4
 
   div.quote-cookoons
     div.quote-cookoons-list
+      p.text-center.py-2 Ajoutez  2 Cookoons à votre sélection pour obtenir une proposition
       - @cookoons.each do |cookoon|
         = c 'card_cookoon',
             title: cookoon.name,

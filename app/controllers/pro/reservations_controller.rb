@@ -4,6 +4,7 @@ module Pro
       @reservations = policy_scope(Reservation)
                       .where('pro_reservations.status >= ?', Reservation.statuses[:accepted])
                       .includes(:cookoon)
+                      .order(created_at: :desc)
                       .decorate
     end
 

@@ -29,10 +29,10 @@
                 .collapse(id="quote_#{quote.id}")
                   .pb-3
                     ul.list-unstyled.ml-4.mb-0
-                      - quote.reservations.reject(&:draft?).each do |reservation|
+                      - quote.reservations.reject(&:draft?).each_with_index do |reservation, index|
                         li.pb-2 = link_to reservation, remote: true do
                           = '> ' if reservation == quote.reservations.last
-                          | Proposition n°#{reservation.id}, le #{reservation.created_on}
+                          | Proposition n°#{index + 1}, le #{reservation.created_on}
 
     #quote-index-infos.quote-index-infos data-target='pro--quotes-index.infos'
       = render 'pro/quotes/index/persona'
