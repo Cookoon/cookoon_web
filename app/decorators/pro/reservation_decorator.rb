@@ -27,12 +27,32 @@ module Pro
       h.humanized_money_with_symbol object.cookoon_price
     end
 
-    def services_price
-      h.humanized_money_with_symbol object.services_price
+    def cookoon_fee_plus_tax
+      h.humanized_money_with_symbol(object.cookoon_fee + object.cookoon_fee_tax)
     end
 
-    def fee
-      h.humanized_money_with_symbol object.fee
+    def cookoon_fee_tax
+      h.humanized_money_with_symbol object.cookoon_fee_tax
+    end
+
+    def services_fee
+      h.humanized_money_with_symbol object.services_fee
+    end
+
+    def services_price_plus_fee
+      h.humanized_money_with_symbol(object.services_price + object.services_fee)
+    end
+
+    def services_tax
+      h.humanized_money_with_symbol object.services_tax
+    end
+
+    def services_price_plus_fee_plus_tax
+      h.humanized_money_with_symbol(object.services_price + object.services_fee + object.services_tax)
+    end
+
+    def price_excluding_tax
+      h.humanized_money_with_symbol object.price_excluding_tax
     end
 
     def price
