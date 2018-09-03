@@ -32,12 +32,12 @@
       = @reservation.cookoon_price
 
     .col-8
-      | Frais de service (#{number_to_percentage(Pro::Reservation::DEFAULTS[:fee_rate] * 100, precision: 0)})
+      | Frais de service (#{number_to_percentage(Pro::Reservation.fee_percentage, precision: 0)})
     .col-4.text-right
       = @reservation.cookoon_fee_plus_tax
 
     .col-8
-      p dont TVA (#{number_to_percentage(Pro::Reservation::DEFAULTS[:tax_rate] * 100, precision: 0)})
+      p dont TVA (#{number_to_percentage(Pro::Reservation.tax_percentage, precision: 0)})
     .col-4.text-right
       = @reservation.cookoon_fee_tax
 
@@ -53,7 +53,7 @@
           = service.price
 
       .col-8
-        p Frais de service (#{number_to_percentage(Pro::Reservation::DEFAULTS[:fee_rate] * 100, precision: 0)})
+        p Frais de service (#{number_to_percentage(Pro::Reservation.tax_percentage, precision: 0)})
       .col-4.text-right
         = @reservation.services_fee
 
