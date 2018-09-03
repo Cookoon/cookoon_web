@@ -52,14 +52,51 @@ module Pro
     private
 
     def assign_prices
-      self.cookoon_price = (duration * cookoon.price) * (DEGRESSION_RATES[duration] || 1)
-      self.cookoon_fee = cookoon_price * DEFAULTS[:fee_rate]
-      self.cookoon_fee_tax = cookoon_fee * DEFAULTS[:tax_rate]
-      self.services_price_cents = services.sum(:price_cents)
-      self.services_fee = services_price * DEFAULTS[:fee_rate]
-      self.services_tax = (services_price + services_fee) * DEFAULTS[:tax_rate]
-      self.price_excluding_tax = cookoon_price + cookoon_fee + services_price + services_fee
-      self.price = price_excluding_tax + cookoon_fee_tax + services_tax
+      self.cookoon_price = compute_degressive_cookoon_price
+      self.cookoon_fee = compute_cookoon_fee
+      self.cookoon_fee_tax = compute_cookoon_fee_tax
+      self.services_price = compute_services_price
+      self.services_fee = compute_services_fee
+      self.services_tax = compute_services_tax
+      self.price_excluding_tax = compute_price_excluding_tax
+      self.price = compute_price
+    end
+
+    def compute_full_cookoon_price
+      duration * cookoon.price
+    end
+
+    def compute_degressive_cookoon_price
+      compute_full_cookoon_price * (DEGRESSION_RATES[duration] || 1)
+    end
+
+    def compute_cookoon_fee
+      compute_degressive_cookoon_price * DEFAULTS[:fee_rate]
+    end
+
+    def compute_cookoon_fee_tax
+      compute_cookoon_fee * DEFAULTS[:tax_rate]
+    end
+
+    def compute_services_price
+      services_price_cents = services.sum(:price_cents)
+      Money.new(services_price_cents)
+    end
+
+    def compute_services_fee
+      compute_services_price * DEFAULTS[:fee_rate]
+    end
+
+    def compute_services_tax
+      (compute_services_price + compute_services_fee) * DEFAULTS[:tax_rate]
+    end
+
+    def compute_price_excluding_tax
+      compute_degressive_cookoon_price + compute_cookoon_fee + compute_services_price + compute_services_fee
+    end
+
+    def compute_price
+      compute_price_excluding_tax + compute_cookoon_fee_tax + compute_services_tax
     end
 
     def update_quote_status
