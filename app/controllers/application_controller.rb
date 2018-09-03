@@ -15,12 +15,6 @@ class ApplicationController < ActionController::Base
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
   after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
 
-  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
-  def user_not_authorized
-    flash[:alert] = "Vous n'êtes pas autorisé à réaliser cette action"
-    redirect_to(root_path)
-  end
-
   # Devise
   def is_flashing_format?
     controller_name.in? %w[invitations passwords]
@@ -31,6 +25,12 @@ class ApplicationController < ActionController::Base
   end
 
   private
+
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  def user_not_authorized
+    flash[:alert] = "Vous n'êtes pas autorisé à réaliser cette action"
+    redirect_to(root_path)
+  end
 
   def set_device
     @device = case request.user_agent
