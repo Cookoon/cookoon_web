@@ -28,7 +28,7 @@ module Pro
     end
 
     def cookoon_fee_plus_tax
-      h.humanized_money_with_symbol(object.cookoon_fee + object.cookoon_fee_tax)
+      h.humanized_money_with_symbol object.cookoon_fee_plus_tax
     end
 
     def cookoon_fee_tax
@@ -40,7 +40,7 @@ module Pro
     end
 
     def services_price_plus_fee
-      h.humanized_money_with_symbol(object.services_price + object.services_fee)
+      h.humanized_money_with_symbol object.services_price_plus_fee
     end
 
     def services_tax
@@ -48,7 +48,7 @@ module Pro
     end
 
     def services_price_plus_fee_plus_tax
-      h.humanized_money_with_symbol(object.services_price + object.services_fee + object.services_tax)
+      h.humanized_money_with_symbol object.services_price_plus_fee_plus_tax
     end
 
     def price_excluding_tax

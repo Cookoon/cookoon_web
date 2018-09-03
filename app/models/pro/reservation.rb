@@ -58,6 +58,18 @@ module Pro
       DEFAULTS[:tax_rate] * 100
     end
 
+    def cookoon_fee_plus_tax
+      cookoon_fee + cookoon_fee_tax
+    end
+
+    def services_price_plus_fee
+      services_price + services_fee
+    end
+
+    def services_price_plus_fee_plus_tax
+      services_price + services_fee + services_tax
+    end
+
     private
 
     def assign_prices
