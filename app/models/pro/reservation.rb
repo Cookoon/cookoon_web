@@ -3,12 +3,18 @@ module Pro
     include DatesOverlapScope
     include EndAtSetter
 
+    scope :engaged, -> { where(status: %i[proposed modification_requested accepted]) }
+
     belongs_to :quote, class_name: 'Pro::Quote', foreign_key: :pro_quote_id, inverse_of: :reservations
     belongs_to :cookoon
 
     has_many :services,
              class_name: 'Pro::Service', inverse_of: :reservation,
              foreign_key: :pro_reservation_id, dependent: :destroy
+
+    enum status: %i[draft proposed modification_requested accepted cancelled ongoing passed dead]
+
+    delegate :company, to: :quote
 
     monetize :cookoon_price_cents
     monetize :cookoon_fee_cents
@@ -18,12 +24,6 @@ module Pro
     monetize :services_tax_cents
     monetize :price_excluding_tax_cents
     monetize :price_cents
-
-    enum status: %i[draft proposed modification_requested accepted cancelled ongoing passed dead]
-
-    delegate :company, to: :quote
-
-    scope :engaged, -> {where(status: %i[proposed modification_requested accepted])}
 
     DEGRESSION_RATES = {
       2 => 1,
