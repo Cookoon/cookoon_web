@@ -2,6 +2,7 @@ module Pro
   class Reservation < ApplicationRecord
     include DatesOverlapScope
     include EndAtSetter
+    include PriceComputer
 
     scope :engaged, -> { where(status: %i[proposed modification_requested accepted]) }
 
@@ -49,54 +50,18 @@ module Pro
     before_save :assign_prices
     after_save :update_quote_status, if: :saved_change_to_status
 
+    def self.fee_percentage
+      DEFAULTS[:fee_rate] * 100
+    end
+
+    def self.tax_percentage
+      DEFAULTS[:tax_rate] * 100
+    end
+
     private
 
     def assign_prices
-      self.cookoon_price = compute_degressive_cookoon_price
-      self.cookoon_fee = compute_cookoon_fee
-      self.cookoon_fee_tax = compute_cookoon_fee_tax
-      self.services_price = compute_services_price
-      self.services_fee = compute_services_fee
-      self.services_tax = compute_services_tax
-      self.price_excluding_tax = compute_price_excluding_tax
-      self.price = compute_price
-    end
-
-    def compute_full_cookoon_price
-      duration * cookoon.price
-    end
-
-    def compute_degressive_cookoon_price
-      compute_full_cookoon_price * (DEGRESSION_RATES[duration] || 1)
-    end
-
-    def compute_cookoon_fee
-      compute_degressive_cookoon_price * DEFAULTS[:fee_rate]
-    end
-
-    def compute_cookoon_fee_tax
-      compute_cookoon_fee * DEFAULTS[:tax_rate]
-    end
-
-    def compute_services_price
-      services_price_cents = services.sum(:price_cents)
-      Money.new(services_price_cents)
-    end
-
-    def compute_services_fee
-      compute_services_price * DEFAULTS[:fee_rate]
-    end
-
-    def compute_services_tax
-      (compute_services_price + compute_services_fee) * DEFAULTS[:tax_rate]
-    end
-
-    def compute_price_excluding_tax
-      compute_degressive_cookoon_price + compute_cookoon_fee + compute_services_price + compute_services_fee
-    end
-
-    def compute_price
-      compute_price_excluding_tax + compute_cookoon_fee_tax + compute_services_tax
+      assign_attributes(computed_price_attributes)
     end
 
     def update_quote_status
