@@ -25,15 +25,6 @@ module Pro
 
     scope :engaged, -> {where(status: %i[proposed modification_requested accepted])}
 
-    validates :start_at, presence: true
-    validates :duration, numericality: { only_integer: true, greater_than: 0 }
-    validates :people_count, numericality: { only_integer: true, greater_than: 0 }
-
-    before_save :assign_prices
-    after_save :update_quote_status, if: :saved_change_to_status
-
-    private
-
     DEGRESSION_RATES = {
       2 => 1,
       3 => 1,
@@ -50,6 +41,15 @@ module Pro
       fee_rate: 0.07,
       tax_rate: 0.2
     }.freeze
+
+    validates :start_at, presence: true
+    validates :duration, numericality: { only_integer: true, greater_than: 0 }
+    validates :people_count, numericality: { only_integer: true, greater_than: 0 }
+
+    before_save :assign_prices
+    after_save :update_quote_status, if: :saved_change_to_status
+
+    private
 
     def assign_prices
       self.cookoon_price = (duration * cookoon.price) * (DEGRESSION_RATES[duration] || 1)
