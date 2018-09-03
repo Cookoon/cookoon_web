@@ -17,6 +17,17 @@ class Reservation < ApplicationRecord
   scope :short_notice, -> { paid.where('start_at < ?', Time.zone.now.in(DEFAULTS[:safety_period])) }
   scope :stripe_will_not_capture, -> { paid.created_before(DEFAULTS[:stripe_validity_period].ago.in(DEFAULTS[:safety_period])) }
 
+  belongs_to :cookoon
+  belongs_to :user
+  has_many :services, dependent: :destroy
+  has_one :inventory, dependent: :destroy
+  has_many :reservation_guests, dependent: :destroy
+  has_many :guests, through: :reservation_guests
+
+  accepts_nested_attributes_for :services
+
+  enum status: %i[pending paid accepted refused cancelled ongoing passed dead]
+
   DEFAULTS = {
     tenant_fee_rate: 0.07,
     host_fee_rate: 0.07,
@@ -39,15 +50,6 @@ class Reservation < ApplicationRecord
     10 => 0.8
   }.freeze
 
-  belongs_to :cookoon
-  belongs_to :user
-  has_many :services, dependent: :destroy
-  has_one :inventory, dependent: :destroy
-  has_many :reservation_guests, dependent: :destroy
-  has_many :guests, through: :reservation_guests
-
-  accepts_nested_attributes_for :services
-
   monetize :price_cents
   monetize :discount_amount_cents
 
@@ -61,8 +63,6 @@ class Reservation < ApplicationRecord
   monetize :host_payout_price_cents
   monetize :payment_amount_cents
   monetize :services_price_cents
-
-  enum status: %i[pending paid accepted refused cancelled ongoing passed dead]
 
   validates :start_at, presence: true
   validates :duration, presence: true
