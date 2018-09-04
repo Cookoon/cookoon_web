@@ -29,7 +29,7 @@ module Pro
 
     def report_to_slack
       return unless Rails.env.production?
-      PingSlackQuoteJob.perform_later(id) if requested?
+      Pro::PingSlackQuoteJob.perform_later(id) if requested?
     end
   end
 end
