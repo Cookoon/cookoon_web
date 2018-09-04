@@ -107,6 +107,9 @@ Rails.application.routes.draw do
 
     # Pro::Quote
     post '/actions/create-draft-reservation' => 'pro/quotes#create_draft_reservation'
+
+    # Pro::Quote
+    post '/actions/propose-reservation' => 'pro/reservations#propose_reservation'
   end
 
   mount ForestLiana::Engine, at: :forest
