@@ -31,7 +31,8 @@ module Pro
       end
 
       def compute_degressive_cookoon_price
-        compute_full_cookoon_price * (degression_rates[duration] || 1)
+        degression_rate = degression_rates[duration] || 1
+        compute_full_cookoon_price * degression_rate
       end
 
       def compute_cookoon_fee
@@ -56,11 +57,11 @@ module Pro
       end
 
       def compute_price_excluding_tax
-        compute_degressive_cookoon_price + compute_cookoon_fee + compute_services_price + compute_services_fee
+        [compute_degressive_cookoon_price, compute_cookoon_fee, compute_services_price, compute_services_fee].sum
       end
 
       def compute_price
-        compute_price_excluding_tax + compute_cookoon_fee_tax + compute_services_tax
+        [compute_price_excluding_tax, compute_cookoon_fee_tax, compute_services_tax].sum
       end
     end
   end
