@@ -22,5 +22,14 @@ module Pro
     validates :people_count, numericality: { only_integer: true, greater_than: 0 }
 
     enum status: %i[initial requested confirmed]
+
+    after_save :report_to_slack, if: :saved_change_to_status?
+
+    private
+
+    def report_to_slack
+      return unless Rails.env.production?
+      PingSlackQuoteJob.perform_later(id) if requested?
+    end
   end
 end
