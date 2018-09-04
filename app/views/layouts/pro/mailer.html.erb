@@ -1,0 +1,166 @@
+<!doctype html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title><%= message.subject %></title>
+    <%= stylesheet_pack_tag 'mailer', media: 'all' %>
+    <style type="text/css" data-roadie-ignore>
+      /* -------------------------------------
+          PRESERVE THESE STYLES IN THE HEAD
+      ------------------------------------- */
+      @media all {
+        .ExternalClass {
+          width: 100%;
+        }
+        .ExternalClass,
+        .ExternalClass p,
+        .ExternalClass span,
+        .ExternalClass font,
+        .ExternalClass td,
+        .ExternalClass div {
+          line-height: 100%;
+        }
+        .apple-link a {
+          color: inherit !important;
+          font-family: inherit !important;
+          font-size: inherit !important;
+          font-weight: inherit !important;
+          line-height: inherit !important;
+          text-decoration: none !important;
+        }
+        .btn-primary table td:hover {
+          background-color: #095b70 !important;
+        }
+        .btn-primary a:hover {
+          background-color: #095b70 !important;
+          border-color: #095b70 !important;
+        }
+      }
+      /* -------------------------------------
+          RESPONSIVE AND MOBILE FRIENDLY STYLES
+      ------------------------------------- */
+      @media only screen and (max-width: 620px) {
+        h1 {
+          font-size: 28px !important;
+          margin-bottom: 10px !important;
+        }
+        p,
+        ul,
+        ol,
+        td,
+        span,
+        a {
+          font-size: 16px !important;
+        }
+        .wrapper,
+        .article {
+          padding: 10px !important;
+        }
+        .content {
+          padding: 0 !important;
+        }
+        .container {
+          padding: 0 !important;
+          width: 100% !important;
+        }
+        .main {
+          border-left-width: 0 !important;
+          border-radius: 0 !important;
+          border-right-width: 0 !important;
+        }
+        .btn table {
+          width: 100% !important;
+        }
+        .btn a {
+          width: 100% !important;
+        }
+        .img-responsive {
+          height: auto !important;
+          max-width: 100% !important;
+          width: auto !important;
+        }
+        .header,
+        .header img,
+        .prefooter {
+          border-radius: 0 !important;
+        }
+        .footer td,
+        .footer span,
+        .footer a {
+          font-size: 11px !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <table border="0" cellpadding="0" cellspacing="0" class="body">
+      <tr>
+        <td class="container">
+          <div class="content">
+
+            <!-- START CENTERED WHITE CONTAINER -->
+            <span class="preheader"><%= message.subject %></span>
+            <table border="0" cellpadding="0" cellspacing="0" class="main">
+              <tr>
+                <td align="center" class="header">
+                  <%= image_tag('mailer-header.jpg', alt: 'COOKOON') %>
+                </td>
+              </tr>
+
+              <!-- START MAIN CONTENT AREA -->
+              <tr>
+                <td class="wrapper">
+
+                  <table border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                      <td>
+                        <%= yield %>
+                        <p>
+                          A très bientôt sur Cookoon,
+                          <br>Quentin & Grégory
+                        </p>
+                        <%= yield :post_scriptum %>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+
+              <!-- END MAIN CONTENT AREA -->
+              <tr>
+                <td align="center" class="prefooter">
+                  <b>COOKOON</b>
+                  <br>Partagez vos expériences avec <%= link_to '#cookoonlife', 'https://twitter.com/search?f=tweets&q=%23cookoonlife', target: :_blank %>
+                  <div class="social-icons">
+                    <%= link_to 'https://www.facebook.com/groups/378511112571275', target: :_blank do %>
+                      <%= image_tag 'facebook-negative.png', alt: 'Facebook' %>
+                    <% end %>
+                    <%= link_to 'https://fr.linkedin.com/company/cookoon', target: :_blank do %>
+                      <%= image_tag 'linkedin-negative.png', alt: 'LinkedIn' %>
+                    <% end %>
+                  </div>
+                </td>
+              </tr>
+            </table>
+
+            <!-- START FOOTER -->
+            <div class="footer">
+              <table border="0" cellpadding="0" cellspacing="0">
+                <tr>
+                  <td class="content-block">
+                    <span class="apple-link">Réceptions Nouvelles SAS, 12 rue Lincoln, 75008 Paris</span>
+                    <br>Vous ne souhaitez plus recevoir nos emails ? <%= mail_to 'concierge@cookoon.fr', 'Dites-le nous', target: :_blank %>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <!-- END FOOTER -->
+
+          <!-- END CENTERED WHITE CONTAINER -->
+          </div>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
