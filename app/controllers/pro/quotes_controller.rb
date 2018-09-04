@@ -27,6 +27,7 @@ module Pro
       authorize @quote
 
       @quote.update(quote_params.slice(:comment).merge(status: :requested))
+      QuoteMailer.requested(@quote).deliver_later
 
       redirect_to pro_quote_request_confirmation_path(@quote)
     end
