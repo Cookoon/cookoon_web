@@ -13,7 +13,12 @@
               subject: "[Demande d'annulation] Réservation ##{@reservation.id} / #{@reservation.quote.company.name}",
               body: 'Je souhaiterais annuler la réservation pour les motifs suivants :',
               class: 'mr-4'
-    = link_to 'Télécharger la facture', '#', class: 'btn btn-sm btn-primary btn-action'
+    = mail_to 'concierge@cookoon.fr',
+              'Demander la facture',
+              subject: "[Demande de facture] Réservation ##{@reservation.id} / #{@reservation.quote.company.name}",
+              body: 'Je souhaiterais obtenir une facture pour cette réservation',
+              class: 'btn btn-sm btn-primary btn-action'
+
 - elsif @reservation.passed?
     .d-flex.justify-content-end
       = mail_to 'concierge@cookoon.fr',
