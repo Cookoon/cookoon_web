@@ -35,8 +35,8 @@
       .container.px-5
         h4.mb-4.text-primary Votre mot de passe
         .d-flex-default
-          .flex-1.m-2 = f.input :password
-          .flex-1.m-2 = f.input :password_confirmation
+          .flex-1.m-2 = f.input :password, autocomplete: 'off'
+          .flex-1.m-2 = f.input :password_confirmation, autocomplete: 'off'
 
         i Assurez-vous que votre nouveau mot de passe comprenne au moins :
         ul
