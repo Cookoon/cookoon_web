@@ -1,2 +1,10 @@
-p Bonjour #{@tenant.first_name},
-p Voici votre proposition.
+p Cher(e) #{@tenant.first_name},
+p Nous avons trouvé le Cookoon parfait pour votre évènement : découvrez-le, ainsi que notre proposition pour votre évènement #{@reservation.quote.company} du #{display_date_for @reservation.start_at} sur votre espace Cookoon :
+
+table.btn.btn-primary border="0" cellpadding="0" cellspacing="10" class="btn btn-primary"
+  tbody
+    tr
+      td align="center"
+        = link_to 'Consulter le devis', pro_quotes_url, target: :_blank
+
+p Validez-le devis pour confirmer votre évènement, ou précisez vos besoin : nous vous enverrons une nouvelle proposition !

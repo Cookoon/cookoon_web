@@ -7,4 +7,6 @@ class Company < ApplicationRecord
   validates :siren, numericality: { only_integer: true }, length: { is: 9 }
   validates :siret, numericality: { only_integer: true }, length: { is: 14 }
   validates :vat, presence: true
+
+  alias_attribute :to_s, :name
 end
