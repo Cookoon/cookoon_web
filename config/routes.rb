@@ -84,6 +84,7 @@ Rails.application.routes.draw do
     end
 
     resources :reservations, only: %i[index show update]
+    resource :user, only: %i[edit update]
   end
 
   # -------- ADMIN ROUTES ---------
