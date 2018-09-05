@@ -1,0 +1,58 @@
+- content_for :footer, true
+
+.container
+  = simple_form_for [:pro, @user], html: { class: 'small-labels' } do |f|
+    .shadow.p-5.mt-5.mb-3.bg-white.rounded
+      .container.px-5
+        h4.mb-4.text-primary Votre Profil
+
+        .d-flex-default
+          .flex-1.m-2 = f.input :first_name
+          .flex-1.m-2 = f.input :last_name
+
+        .d-flex-default
+          .flex-1.m-2 = f.input :email
+          .flex-1.m-2 = f.input :phone_number
+
+        = f.submit 'MODIFIER VOS INFORMATIONS', class: 'btn btn-block btn-action btn-primary mt-5'
+
+    .shadow.p-5.mt-5.mb-3.bg-white.rounded
+      .container.px-5
+        h4.mb-4.text-primary Votre Entreprise
+        = f.simple_fields_for @user.company, defaults: { disabled: true } do |c|
+          .d-flex-default
+            .flex-1.m-2 = c.input :name
+            .flex-1.m-2 = c.input :address
+
+          .d-flex-default
+            .flex-1.m-2 = c.input :siret
+            .flex-1.m-2 = c.input :vat
+
+        p.text-gray.text-center
+          | Ces champs ne sont pas éditables, veuillez nous contacter pour toute modification de votre entreprise.
+
+    .shadow.p-5.mb-3.bg-white.rounded
+      .container.px-5
+        h4.mb-4.text-primary Votre mot de passe
+        .d-flex-default
+          .flex-1.m-2 = f.input :password, autocomplete: 'off'
+          .flex-1.m-2 = f.input :password_confirmation, autocomplete: 'off'
+
+        i Assurez-vous que votre nouveau mot de passe comprenne au moins :
+        ul
+          li 12 caractères
+          li 1 chiffre
+          li 1 symbole (tel que @, €, !)
+          li 1 lettre majuscule et 1 lettre minuscule
+
+        = f.submit 'MODIFIER VOTRE MOT DE PASSE', class: 'btn btn-block btn-action btn-primary mt-5'
+
+    .shadow.p-5.mb-3.bg-white.rounded
+      .container.px-5
+        h4.mb-4.text-primary Vos moyens de paiement
+
+        .payment-block.text-primary
+          b Virement à 30 jours
+          i.co.co-check
+
+  p.text-primary.text-center.m-5 Une question ? Ecrivez-nous à <u>#{mail_to 'concierge@cookoon.fr'}</u>

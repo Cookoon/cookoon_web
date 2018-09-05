@@ -35,6 +35,6 @@ fr:
 
 
     required:
-      mark: '*'
+      mark: ''
       text: requis
     'yes': Oui
