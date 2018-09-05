@@ -1,1 +1,32 @@
-p La page edit gros
+.container
+  = simple_form_for [:pro, @user] do |f|
+    .shadow.py-3.px-5.mt-5.mb-3.bg-white.rounded
+      h4.text-primary Votre Profil
+
+      = f.input :first_name
+      = f.input :last_name
+      = f.input :email
+      = f.input :phone_number
+
+      = f.submit 'MODIFIER VOS INFORMATIONS', class: 'btn btn-block btn-action btn-primary'
+
+    .shadow.py-3.px-5.mb-3.bg-white.rounded
+      h4.text-primary Votre mot de passe
+      .d-flex-default
+        .flex-1.m-2 = f.input :password
+        .flex-1.m-2 = f.input :password_confirmation
+
+      i Assurez-vous que votre nouveau mot de passe comprenne au moins :
+      ul
+        li 12 caractères
+        li 1 chiffre
+        li 1 symbole (tel que @, €, !)
+        li 1 lettre majuscule et 1 lettre minuscule
+
+      = f.submit 'MODIFIER VOTRE MOT DE PASSE', class: 'btn btn-block btn-action btn-primary'
+    .shadow.py-3.px-5.mb-3.bg-white.rounded
+      h4.text-primary Vos moyens de paiement
+
+      .payment-block
+        b Virement à 30 jours
+        i.co.co-check
