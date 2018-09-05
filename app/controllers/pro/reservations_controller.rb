@@ -18,12 +18,13 @@ module Pro
       authorize @reservation.quote
 
       @reservation.update(reservation_params)
-      flash.notice = case @reservation.status
-                     when 'modification_requested'
-                       'Votre demande de modification a bien été prise en compte'
-                     when 'accepted'
-                       'Votre réservation est confirmée'
-                     end
+      case @reservation.status
+      when 'modification_requested'
+        flash.notice = 'Votre demande de modification a bien été prise en compte'
+      when 'accepted'
+        ReservationMailer.accepted(@reservation).deliver_later
+        flash.notice = 'Votre réservation est confirmée'
+      end
       redirect_to pro_quotes_path
     end
 
