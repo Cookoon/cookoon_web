@@ -1,2 +1,35 @@
-p Bonjour #{@tenant.first_name},
-p Votre demande de devis est en cours de traitement.
+p Cher(e) #{@tenant.first_name},
+p Nous avons bien reçu votre demande de devis pour votre évènement :
+
+table.info border="0" cellpadding="0" cellspacing="10"
+  tbody
+    tr
+      td align="center"
+        = image_tag('icon-home.png', alt: 'Cookoon')
+      td
+        b = @quote.company.name
+        br Le #{display_date_for @quote.start_at}
+        br À #{display_time_for @quote.start_at} pour #{display_duration_for @quote.duration}
+        br De #{@quote.people_count} personnes
+
+    - if @quote.services.any?
+      tr
+        td align="center"
+          = image_tag('icon-services.png', alt: 'Services')
+        td
+          b Vous avez demandé :
+          ul
+            - @quote.services.each do |service|
+              li #{Service::DISPLAY.dig(service.category.to_sym, :mail_display_name)} × #{service.quantity}
+
+- if @quote.comment.present?
+  table.embedded-message border="0" cellpadding="0" cellspacing="10"
+    tbody
+      tr
+        td
+          b Votre commentaire :
+          p = simple_format @quote.comment
+
+p Nous allons désormais contacter plusieurs Hôtes Cookoons afin de vous faire une proposition juste et rapide.
+
+p Vous recevrez un mail dès que votre devis sera prêt ! Si vous changez d’avis d’ici là ou souhaitez complétez votre demande, contactez la conciergerie Cookoon #{mail_to 'concierge@cookoon.fr'}
