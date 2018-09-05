@@ -13,7 +13,7 @@ module Pro
       @reservation = reservation
       @cookoon = @reservation.cookoon
       @tenant = @reservation.quote.user
-      
+
       attachments[@reservation.ical_file_name] = {
         mime_type: 'application/ics',
         content: @reservation.ical_for(:tenant).to_ical
