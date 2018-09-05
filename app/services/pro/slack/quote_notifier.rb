@@ -11,7 +11,7 @@ module Pro
       attr_reader :quote
 
       def message
-        "[NOUVELLE DEMANDE DE DEVIS] #{quote.user.full_name} vient de demander un devis pour la société #{quote.company.name} !"
+        "[NOUVELLE DEMANDE DE DEVIS] #{quote.user.full_name} vient de demander un devis pour la société #{quote.company} !"
       end
     end
   end
