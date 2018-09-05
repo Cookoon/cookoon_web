@@ -7,7 +7,7 @@ table.info border="0" cellpadding="0" cellspacing="10"
       td align="center"
         = image_tag('icon-home.png', alt: 'Cookoon')
       td
-        b = @quote.company.name
+        b = @quote.company
         br Le #{display_date_for @quote.start_at}
         br À #{display_time_for @quote.start_at} pour #{display_duration_for @quote.duration}
         br De #{@quote.people_count} personnes
