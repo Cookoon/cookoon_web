@@ -5,14 +5,14 @@ module Pro
 
     def proposed(reservation)
       @reservation = reservation
-      @tenant = @reservation.quote.user
+      @tenant = @reservation.user
       mail(to: @tenant.full_email, subject: 'Votre devis Cookoon est disponible !')
     end
 
     def accepted(reservation)
       @reservation = reservation
       @cookoon = @reservation.cookoon
-      @tenant = @reservation.quote.user
+      @tenant = @reservation.user
 
       attachments[@reservation.ical_file_name] = {
         mime_type: 'application/ics',

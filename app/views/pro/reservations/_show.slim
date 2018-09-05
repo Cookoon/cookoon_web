@@ -9,7 +9,7 @@
         span Cookoon
 
       div = title ||= "Devis n°#{@reservation.quote.id}"
-      div.text-uppercase = @reservation.company.name
+      div.text-uppercase = @reservation.company
       div = @reservation.company.address
       div N° TVA Intra : #{@reservation.company.vat}
     .col.pro-reservation-card-offset
