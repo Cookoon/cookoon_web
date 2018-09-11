@@ -26,6 +26,8 @@ module Pro
     monetize :price_excluding_tax_cents
     monetize :price_cents
 
+    monetize :host_payout_price_cents
+
     DEGRESSION_RATES = {
       2 => 1,
       3 => 1,
@@ -70,6 +72,18 @@ module Pro
       services_price + services_fee + services_tax
     end
 
+    def host_fee_rate
+      DEFAULTS[:fee_rate]
+    end
+
+    def host_fee_cents
+      (cookoon_price_cents * host_fee_rate).round
+    end
+
+    def host_payout_price_cents
+      cookoon_price_cents - host_fee_cents
+    end
+
     def ical_for(role)
       cal = Icalendar::Calendar.new
       cal.event do |e|
@@ -107,10 +121,6 @@ module Pro
           summary: "Location de votre Cookoon : #{cookoon.name}",
           description: <<~DESCRIPTION
             Location de votre Cookoon : #{cookoon.name}
-
-            Locataire :
-            #{user.full_name}
-            #{user.phone_number} - #{user.email}
           DESCRIPTION
         },
         tenant: {
