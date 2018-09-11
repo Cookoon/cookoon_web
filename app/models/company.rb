@@ -4,9 +4,8 @@ class Company < ApplicationRecord
 
   validates :name, presence: true
   validates :address, presence: true
-  validates :siren, numericality: { only_integer: true }, length: { is: 9 }
-  validates :siret, numericality: { only_integer: true }, length: { is: 14 }
-  validates :vat, presence: true
+  validates :siren, numericality: { only_integer: true }, length: { is: 9 }, allow_nil: true
+  validates :siret, numericality: { only_integer: true }, length: { is: 14 }, allow_nil: true
 
   alias_attribute :to_s, :name
 end
