@@ -23,6 +23,7 @@ module Pro
         flash.notice = 'Votre demande de modification a bien été prise en compte'
       when 'accepted'
         ReservationMailer.accepted(@reservation).deliver_later
+        ReservationMailer.accepted_to_host(@reservation).deliver_later
         flash.notice = 'Votre réservation est confirmée'
       end
       redirect_to pro_quotes_path
