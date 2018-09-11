@@ -1,0 +1,22 @@
+p Cher(e) #{@host.first_name},
+p L' évènement organisé dans votre Cookoon le #{display_date_for @reservation.start_at} est confirmé.
+
+table.info border="0" cellpadding="0" cellspacing="10"
+  tbody
+    tr
+      td align="center"
+        = image_tag('icon-home.png', alt: 'Cookoon')
+      td
+        b = @cookoon.name
+        br Le #{display_date_for @reservation.start_at}
+        br À #{display_time_for @reservation.start_at} pour #{display_duration_for @reservation.duration}
+        br Pour #{@reservation.people_count} personnes
+
+    tr
+      td align="center"
+        = image_tag('icon-euro.png', alt: 'Prix')
+      td
+        b Vous recevrez :
+        br = humanized_money_with_symbol @reservation.host_payout_price
+
+p Une question, une envie ? Rendez-vous sur aide.cookoon.fr ou contactez notre concierge : #{mail_to 'concierge@cookoon.fr'}
