@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   include TimeRangeBuilder
   include Stripe::Customerable
+  class NotProError < StandardError; end
 
   scope :pending_invitation, -> { where.not(invitation_token: nil) }
   scope :invited_in_day_range_around, ->(date_time) { pending_invitation.where invitation_sent_at: day_range(date_time) }
