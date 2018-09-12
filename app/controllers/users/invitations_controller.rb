@@ -3,6 +3,10 @@ class Users::InvitationsController < Devise::InvitationsController
 
   private
 
+  def after_accept_path_for(resource)
+    resource.pro? ? pro_root_path : after_sign_in_path_for(resource)
+  end
+
   def update_resource_params
     params.require(:user).permit(
       :invitation_token,
