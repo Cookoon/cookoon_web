@@ -107,10 +107,11 @@ Rails.application.routes.draw do
     post '/actions/create-service', to: 'services#create'
 
     # Pro::Quote
-    post '/actions/create-draft-reservation' => 'pro/quotes#create_draft_reservation'
+    post '/actions/create-draft-reservation', to: 'pro/quotes#create_draft_reservation'
 
-    # Pro::Quote
-    post '/actions/propose-reservation' => 'pro/reservations#propose_reservation'
+    # Pro::Reservation
+    post '/actions/propose-reservation', to: 'pro/reservations#propose_reservation'
+    post '/actions/duplicate-reservation-as-draft', to: 'pro/reservations#duplicate_reservation_as_draft'
   end
 
   mount ForestLiana::Engine, at: :forest
