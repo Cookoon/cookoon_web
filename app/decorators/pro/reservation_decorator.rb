@@ -3,6 +3,22 @@ module Pro
     delegate_all
     decorates_association :services
 
+    def title
+      if Reservation.statuses[object.status] < Reservation.statuses[:accepted]
+        "Devis n°#{object.quote.id}"
+      else
+        "Location ##{object.id}"
+      end
+    end
+
+    def subtitle
+      if Reservation.statuses[object.status] < Reservation.statuses[:accepted]
+        "Votre demande de location pour le #{start_on(without_year: true)}, de #{start_time} à #{end_time}"
+      else
+        "Récapitulatif de votre location du #{start_on(without_year: true)}, de #{start_time} à #{end_time}"
+      end
+    end
+
     def created_on(options = {})
       h.display_date_for(object.created_at, options)
     end
