@@ -49,7 +49,7 @@ module Pro
     validates :duration, numericality: { only_integer: true, greater_than: 0 }
     validates :people_count, numericality: { only_integer: true, greater_than: 0 }
 
-    before_save :assign_prices
+    before_save :assign_prices, if: :draft?
     after_save :update_quote_status, if: :saved_change_to_status
 
     def self.fee_percentage
