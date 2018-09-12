@@ -36,7 +36,7 @@ module Pro
       end
 
       def compute_cookoon_fee
-        compute_degressive_cookoon_price * defaults[:fee_rate]
+        compute_degressive_cookoon_price * defaults[:fee_rate] / (1 + defaults[:tax_rate])
       end
 
       def compute_cookoon_fee_tax
