@@ -19,9 +19,7 @@ module Forest
 
         reservation.services.each do |service|
           new_reservation.services.create(
-            name: service.name,
-            quantity: service.quantity,
-            unit_price_cents: service.unit_price_cents
+            service.attributes.slice('name', 'quantity', 'unit_price_cents')
           )
         end
 
