@@ -51,6 +51,7 @@ module Pro
 
     before_save :assign_prices, if: :draft?
     after_save :update_quote_status, if: :saved_change_to_status
+    after_save :report_to_slack, if: :saved_change_to_status?
 
     def self.fee_percentage
       DEFAULTS[:fee_rate] * 100
@@ -113,6 +114,11 @@ module Pro
 
     def update_quote_status
       quote.confirmed! if accepted?
+    end
+
+    def report_to_slack
+      return unless Rails.env.production?
+      PingSlackReservationModificationRequestJob.perform_later(id) if modification_requested?
     end
 
     def ical_params
