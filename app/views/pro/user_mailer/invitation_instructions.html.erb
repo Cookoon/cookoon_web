@@ -1,0 +1,20 @@
+<p>Bonjour<%= " #{@user.first_name}" if @user.first_name.present? %>,</p>
+<p><b><%= @user.invited_by&.full_name %></b> vous a invité(e) à rejoindre <b>Cookoon, un réseau sélectif fondé sur la confiance</b> pour organiser vos évènements.</p>
+<p>Votre adresse pour vous connecter : <b><%= @user.email %></b></p>
+<p>Pour créer votre compte, suivez le lien ci-dessous :</p>
+
+<table border="0" cellpadding="0" cellspacing="10" class="btn btn-primary"><tbody><tr>
+  <td align="center">
+    <%= link_to 'Je deviens membre Cookoon !', accept_invitation_url(@user, invitation_token: @token), target: :_blank %>
+  </td>
+</tr></tbody></table>
+
+<p><strong>Qui sommes nous ?</strong></p>
+<p>Cookoon est un réseau bâti sur la confiance et l'implication de ses membres qui vous permettra de :</p>
+<ul>
+  <li><strong>louer l'appartement d'un autre membre et de choisir des services additionnels</strong> pour tous vos évènements du quotidien, personnels ou professionnels</li>
+  <li>si vous le souhaitez, <strong>de rentabiliser votre appartement dès que vous n'y êtes pas</strong></li>
+  <li><strong>communiquer</strong> avec et auprès des autres membres</li>
+</ul>
+
+<p>Une question ? Rendez-vous sur <%= link_to 'cookoon.fr', 'https://cookoon.fr/', target: :_blank %>.</p>

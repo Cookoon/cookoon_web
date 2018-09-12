@@ -106,6 +106,9 @@ Rails.application.routes.draw do
     # Service
     post '/actions/create-service', to: 'services#create'
 
+    # Company
+    post '/actions/invite-user', to: 'companies#invite_user'
+
     # Pro::Quote
     post '/actions/create-draft-reservation', to: 'pro/quotes#create_draft_reservation'
 
