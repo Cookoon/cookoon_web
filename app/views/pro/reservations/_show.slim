@@ -8,7 +8,7 @@
         i.co.co-logo.fa-2x.text-primary
         span Cookoon
 
-      div = title ||= "Devis n°#{@reservation.quote.id}"
+      div = @reservation.title
       div.text-uppercase = @reservation.company
       div = @reservation.company.address
       - if @reservation.company.vat.present?
@@ -22,7 +22,7 @@
           infos: ('Voir la fiche de ce Cookoon' if @reservation.cookoon.pdf_url),
           infos_class: :reverse
 
-  p Votre demande de location pour le #{@reservation.start_on(without_year: true)}, de #{@reservation.start_time} à #{@reservation.end_time}
+  p = @reservation.subtitle
 
   h3 Mise à disposition d'un Cookoon
   .row

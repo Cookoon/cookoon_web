@@ -49,8 +49,9 @@ module Pro
     validates :duration, numericality: { only_integer: true, greater_than: 0 }
     validates :people_count, numericality: { only_integer: true, greater_than: 0 }
 
-    before_save :assign_prices
+    before_save :assign_prices, if: :draft?
     after_save :update_quote_status, if: :saved_change_to_status
+    after_save :report_to_slack, if: :saved_change_to_status?
 
     def self.fee_percentage
       DEFAULTS[:fee_rate] * 100
@@ -115,6 +116,16 @@ module Pro
       quote.confirmed! if accepted?
     end
 
+    def report_to_slack
+      return unless Rails.env.production?
+      case status
+      when 'modification_requested'
+        PingSlackReservationModificationRequestJob.perform_later(id)
+      when 'accepted'
+        PingSlackReservationAcceptJob.perform_later(id)
+      end
+    end
+
     def ical_params
       {
         host: {
@@ -131,6 +142,5 @@ module Pro
         }
       }
     end
-
   end
 end

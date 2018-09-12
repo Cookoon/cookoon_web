@@ -114,6 +114,7 @@ Rails.application.routes.draw do
 
     # Pro::Reservation
     post '/actions/propose-reservation', to: 'pro/reservations#propose_reservation'
+    post '/actions/duplicate-reservation-as-draft', to: 'pro/reservations#duplicate_reservation_as_draft'
   end
 
   mount ForestLiana::Engine, at: :forest
