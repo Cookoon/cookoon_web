@@ -118,7 +118,12 @@ module Pro
 
     def report_to_slack
       return unless Rails.env.production?
-      PingSlackReservationModificationRequestJob.perform_later(id) if modification_requested?
+      case status
+      when 'modification_requested'
+        PingSlackReservationModificationRequestJob.perform_later(id)
+      when 'accepted'
+        PingSlackReservationAcceptJob.perform_later(id)
+      end
     end
 
     def ical_params
@@ -137,6 +142,5 @@ module Pro
         }
       }
     end
-
   end
 end
