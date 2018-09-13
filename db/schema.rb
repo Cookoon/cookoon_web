@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_13_093228) do
+ActiveRecord::Schema.define(version: 2018_09_03_121529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,7 +87,6 @@ ActiveRecord::Schema.define(version: 2018_09_13_093228) do
     t.string "wifi_network"
     t.string "wifi_code"
     t.text "caretaker_instructions"
-    t.boolean "basic_cooking_ingredients", default: false, null: false
     t.string "pdf_url"
     t.index ["user_id"], name: "index_cookoons_on_user_id"
   end
