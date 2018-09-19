@@ -1,4 +1,4 @@
-- if @reservation.modification_requested?
+- if @reservation.modification_requested? || @reservation.modification_processed?
   .pt-2.px-2.border.border-primary
     .d-flex.justify-content-center.align-items-center.mb-2
       .mr-3 Modification demandée

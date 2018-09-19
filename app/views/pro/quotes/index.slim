@@ -7,7 +7,7 @@
     .quote-index-list.mt-4
       - @quotes.each do |quote|
             / TODO: FC 21aug18 try to filter reservations on controller instead of reject here
-            - if quote.reservations.reject(&:draft?).empty?
+            - if quote.reservations.reject(&:draft_initial?).empty?
               .mb-3
                 .pb-4
                   .p-2.border.border-primary.d-flex.justify-content-between.align-items-center.pointer(
