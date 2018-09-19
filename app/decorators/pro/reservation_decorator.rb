@@ -7,7 +7,7 @@ module Pro
       if object.status_before_type_cast < Reservation.statuses[:accepted]
         "Devis n°#{object.quote.id}"
       else
-        "Location ##{object.id}"
+        "Réservation ##{object.id}"
       end
     end
 
