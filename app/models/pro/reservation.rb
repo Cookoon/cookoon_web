@@ -13,7 +13,20 @@ module Pro
              class_name: 'Pro::Service', inverse_of: :reservation,
              foreign_key: :pro_reservation_id, dependent: :destroy
 
-    enum status: %i[draft proposed modification_requested accepted cancelled ongoing passed dead]
+    enum status: {
+      draft_initial: 0,
+      draft: 1,
+      proposed_initial: 10,
+      proposed: 11,
+      modification_requested: 20,
+      modification_processed: 21,
+      accepted: 50,
+      ongoing: 60,
+      passed: 70,
+      # dead: 80,
+      # cancelled_by_tenant: 90,
+      # cancelled_by_host: 91
+    }
 
     delegate :user, :company, to: :quote
 
@@ -49,7 +62,7 @@ module Pro
     validates :duration, numericality: { only_integer: true, greater_than: 0 }
     validates :people_count, numericality: { only_integer: true, greater_than: 0 }
 
-    before_save :assign_prices, if: :draft?
+    before_save :assign_prices, if: :assign_prices_needed?
     after_save :update_quote_status, if: :saved_change_to_status
     after_save :report_to_slack, if: :saved_change_to_status?
 
@@ -107,6 +120,10 @@ module Pro
     end
 
     private
+
+    def assign_prices_needed?
+      draft_initial? || draft?
+    end
 
     def assign_prices
       assign_attributes(computed_price_attributes)
