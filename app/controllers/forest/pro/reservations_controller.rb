@@ -3,9 +3,10 @@ module Forest
     class ReservationsController < ForestLiana::ApplicationController
       def propose_reservation
         reservation = ::Pro::Reservation.find(params.dig(:data, :attributes, :ids)&.first)
+        message = params.dig(:data, :attributes, :values, :message)
 
-        reservation.proposed!
-        ::Pro::ReservationMailer.proposed(reservation).deliver_later
+        reservation.draft_initial? ? reservation.proposed_initial! : reservation.proposed!
+        ::Pro::ReservationMailer.proposed(reservation, message).deliver_later
 
         render json: { success: 'Pro::Reservation is proposed and mail sent' }
       end
@@ -15,6 +16,7 @@ module Forest
 
         new_reservation = ::Pro::Reservation.create(
           reservation.attributes.slice('pro_quote_id', 'cookoon_id', 'start_at', 'duration', 'people_count')
+            .merge(status: :draft)
         )
 
         reservation.services.each do |service|
@@ -22,6 +24,8 @@ module Forest
             service.attributes.slice('name', 'quantity', 'unit_price_cents')
           )
         end
+
+        reservation.modification_processed!
 
         render json: { success: 'Pro::Reservation is duplicated as draft' }
       end

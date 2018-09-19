@@ -3,8 +3,9 @@ module Pro
     include DatetimeHelper
     helper :datetime
 
-    def proposed(reservation)
+    def proposed(reservation, message)
       @reservation = reservation
+      @message = message
       @tenant = @reservation.user
       mail(to: @tenant.full_email, subject: 'Votre devis Cookoon est disponible !')
     end
