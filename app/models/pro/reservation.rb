@@ -86,6 +86,8 @@ module Pro
       services_price + services_fee + services_tax
     end
 
+    # __________________________________________________________________________
+    # Must move to a new Payment model
     def host_fee_rate
       DEFAULTS[:fee_rate]
     end
@@ -97,6 +99,19 @@ module Pro
     def host_payout_price_cents
       cookoon_price_cents - host_fee_cents
     end
+
+    def transfer_attributes
+      {
+        amount: host_payout_price_cents,
+        currency: 'eur',
+        destination: cookoon.user.stripe_account_id,
+      }
+    end
+
+    def trigger_transfer
+      Stripe::Transfer.create(transfer_attributes)
+    end
+    # __________________________________________________________________________
 
     def ical_for(role)
       cal = Icalendar::Calendar.new
