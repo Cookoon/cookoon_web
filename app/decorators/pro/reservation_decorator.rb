@@ -5,9 +5,11 @@ module Pro
 
     def title
       if object.status_before_type_cast < Reservation.statuses[:accepted]
-        "Devis n°#{object.quote.id}"
+        "Devis #{object.quote_reference}"
+      elsif object.status_before_type_cast < Reservation.statuses[:ongoing]
+        "Réservation ##{object.id}\nselon devis #{object.quote_reference}"
       else
-        "Réservation ##{object.id}"
+        "Facture #{object.invoice_reference}\nselon devis #{object.quote_reference}"
       end
     end
 
@@ -17,6 +19,17 @@ module Pro
       else
         "Récapitulatif de votre location du #{start_on(without_year: true)}, de #{start_time} à #{end_time}"
       end
+    end
+
+    def invoice_legal_mentions
+      <<~LEGAL_MENTIONS
+        Délai de règlement : #{1.month.since(start_at).strftime('%d/%m/%Y')}
+        Moyen de règlement : Virement
+
+        Banque : BPN
+        BIC : CCBPFRPPLIL
+        IBAN : FR76 1350 7000 3631 3930 2217 870
+      LEGAL_MENTIONS
     end
 
     def created_on(options = {})
