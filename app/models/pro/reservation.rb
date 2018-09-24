@@ -113,6 +113,22 @@ module Pro
     end
     # __________________________________________________________________________
 
+    def quote_reference
+      "DEV#{quote.created_at.strftime('%y%m')}#{format '%03d', quote.id}"
+    end
+
+    def quote_full_reference
+      "#{quote_reference}_COOKOON_#{company.name.parameterize(separator: '_').upcase}"
+    end
+
+    def invoice_reference
+      "FAC#{start_at.strftime('%y%m')}#{format '%03d', id}"
+    end
+
+    def invoice_full_reference
+      "#{invoice_reference}_COOKOON_#{company.name.parameterize(separator: '_').upcase}"
+    end
+
     def ical_for(role)
       cal = Icalendar::Calendar.new
       cal.event do |e|
