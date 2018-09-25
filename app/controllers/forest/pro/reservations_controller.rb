@@ -1,6 +1,18 @@
 module Forest
   module Pro
     class ReservationsController < ForestLiana::ApplicationController
+      def add_service_from_specification
+        reservation = ::Pro::Reservation.find(params.dig(:data, :attributes, :ids)&.first)
+
+        service_specification = ::Pro::ServiceSpecification.find(params.dig(:data, :attributes, :values, :service_specification_id))
+        quantity = params.dig(:data, :attributes, :values, :quantity).to_i
+
+        reservation.services.create(
+          service_specification.attributes.slice('name', 'unit_price_cents')
+            .merge(quantity: quantity)
+        )
+      end
+
       def propose_reservation
         reservation = ::Pro::Reservation.find(params.dig(:data, :attributes, :ids)&.first)
         message = params.dig(:data, :attributes, :values, :message)
