@@ -114,7 +114,7 @@ module Pro
     # __________________________________________________________________________
 
     def quote_reference
-      "DEV#{quote.created_at.strftime('%y%m')}#{format '%03d', quote.id}"
+      "DEV-C4B-#{quote.created_at.strftime('%y%m')}#{format '%03d', quote.id}"
     end
 
     def quote_full_reference
@@ -122,7 +122,7 @@ module Pro
     end
 
     def invoice_reference
-      "FAC#{start_at.strftime('%y%m')}#{format '%03d', id}"
+      "FAC-C4B-#{start_at.strftime('%y%m')}#{format '%03d', id}"
     end
 
     def invoice_full_reference
