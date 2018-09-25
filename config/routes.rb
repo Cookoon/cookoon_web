@@ -113,6 +113,7 @@ Rails.application.routes.draw do
     post '/actions/create-draft-reservation', to: 'pro/quotes#create_draft_reservation'
 
     # Pro::Reservation
+    post '/actions/add-service-from-specification', to: 'pro/reservations#add_service_from_specification'
     post '/actions/propose-reservation', to: 'pro/reservations#propose_reservation'
     post '/actions/duplicate-reservation-as-draft', to: 'pro/reservations#duplicate_reservation_as_draft'
   end
