@@ -15,7 +15,7 @@ module Pro
     end
 
     def update?
-      record.user == user
+      record.company == user.company
     end
   end
 end

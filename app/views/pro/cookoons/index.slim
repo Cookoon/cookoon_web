@@ -1,5 +1,5 @@
 = content_for :navbar_content do
-  .mx-5.d-none.d-xl-block
+  .d-none.d-xl-block
     = component 'pro/breadcrumb', step: 2
 
 .bg-primary.text-white.pb-5
@@ -13,7 +13,7 @@
           i.fas.fa-times-circle.fa-lg
       .col-4.d-flex.justify-content-end
         img(src== image_path('paris-map.svg') class="img-fluid w-300px"
-            data-controller="tooltips" data-target="tooltips.tooltip"
+            data-controller="tooltips"
             title="Bientôt disponible : filtre par arrondissement"
            )
 
@@ -21,6 +21,7 @@ div.container.py-4
 
   div.quote-cookoons
     div.quote-cookoons-list
+      p.text-center.py-2 Ajoutez  2 Cookoons à votre sélection pour obtenir une proposition
       - @cookoons.each do |cookoon|
         = c 'card_cookoon',
             title: cookoon.name,
@@ -36,10 +37,8 @@ div.container.py-4
 
     .quote-cookoons-infos
       #quote-cookoons-recap
-        - if @quote.cookoons.count.positive?
-          = render 'recap', page: :cookoons
+        = render 'recap', page: :cookoons
 
       #quote-cookoon-infos
         .text-center
           .my-5 = image_tag 'persona.png', class: 'img-fluid h-30rem'
-          p Cliquez sur un Cookoon<br>pour afficher ses informations

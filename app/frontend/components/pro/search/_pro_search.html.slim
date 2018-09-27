@@ -2,22 +2,26 @@
   .pro-search-inputs.d-flex-default
     .pro-search-input data={target: 'pro-search.dateSelection'}
       span data={target: 'pro-search.dateText'} = t('simple_form.placeholders.pro_quote.start_at')
-      i.far.fa-calendar
+      i.co.co-datetime-picker.fa-3x
 
     .pro-search-input data={action: 'click->pro-search#toggleSelection', target: 'pro-search.selection'}
       span data={target: 'pro-search.durationText'} = t('simple_form.placeholders.pro_quote.duration')
-      i.far.fa-clock
+      i.co.co-lenght-picker.fa-3x
       .pro-search-input-selection.d-none
         - durations.each do |duration|
           .pro-search-input-selection-item data={duration: duration[:data], action: 'click->pro-search#selectDuration'} #{duration[:display]}
 
     .pro-search-input data={action: 'click->pro-search#toggleSelection', target: 'pro-search.selection'}
       span data={target: 'pro-search.countText'} = t('simple_form.placeholders.pro_quote.people_count')
-      i.far.fa-user
+      i.co.co-pax-picker.fa-3x
       .pro-search-input-selection.d-none
         - people_counts.each do |count|
           .pro-search-input-selection-item data={count: count, action: 'click->pro-search#selectCount'} #{count} personnes
 
-  .d-flex-default
-    i.pro-search-hint Remplissez les champs et lancer la recherche pour voir nos espaces à louer à Paris.
+  .mb-3.d-flex-default
+    i.pro-search-hint Remplissez les champs et lancez la recherche pour découvrir les espaces de nos hôtes à Paris.
     .pro-search-submit = render 'form'
+
+  .d-flex.justify-content-end.align-items-end.child-mx-2
+    i.font-weight-light Toutes nos locations sont assurées par
+    = image_tag 'logoAxa.png', size: '40'

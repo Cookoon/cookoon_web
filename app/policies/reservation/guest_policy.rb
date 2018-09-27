@@ -5,7 +5,7 @@ class Reservation::GuestPolicy < ApplicationPolicy
 
   class Scope < Scope
     def resolve
-      scope.last
+      scope
     end
   end
 end

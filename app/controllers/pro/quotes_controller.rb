@@ -4,7 +4,7 @@ module Pro
       @quotes = policy_scope(Pro::Quote)
                 .where.not(status: :initial)
                 .includes(:reservations)
-                .order(:created_at)
+                .order(created_at: :desc)
                 .order('pro_reservations.created_at')
                 .decorate
     end
@@ -27,6 +27,7 @@ module Pro
       authorize @quote
 
       @quote.update(quote_params.slice(:comment).merge(status: :requested))
+      QuoteMailer.requested(@quote).deliver_later
 
       redirect_to pro_quote_request_confirmation_path(@quote)
     end
@@ -35,7 +36,7 @@ module Pro
       quote = Quote.find(params[:quote_id])
       authorize quote, :update?
 
-      @cookoons = Cookoon.random.limit(3).decorate
+      @cookoons = Cookoon.displayable_on_index.random.limit(3).decorate
     end
 
     private

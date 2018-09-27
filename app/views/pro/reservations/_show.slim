@@ -2,27 +2,28 @@
   = render 'actions'
 
 .shadow-page.p-5
-  .row
+  .row.mb-3
     .col
       h3.d-flex.align-items-center.child-mx-2
         i.co.co-logo.fa-2x.text-primary
         span Cookoon
 
-      div = title ||= "Devis n°#{@reservation.quote.id}"
-      div.text-uppercase = @reservation.company.name
+      div = simple_format(@reservation.title)
+      div.text-uppercase = @reservation.company
       div = @reservation.company.address
-      div N° TVA Intra : #{@reservation.company.vat}
+      - if @reservation.company.vat.present?
+        div N° TVA Intra : #{@reservation.company.vat}
     .col.pro-reservation-card-offset
       - unless formats.include? :pdf
         = c 'card_cookoon',
             small: true,
-            link_url: pro_reservations_cookoon_path(@reservation.cookoon),
-            remote: true,
+            link_url: @reservation.cookoon.pdf_url,
+            target: :cookoon_pdf,
             image_url: cl_image_path(@reservation.cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
-            infos: 'Voir la fiche de ce Cookoon',
+            infos: ('Voir la fiche de ce Cookoon' if @reservation.cookoon.pdf_url),
             infos_class: :reverse
 
-  p Votre demande de location pour le #{@reservation.start_on(without_year: true)}, de #{@reservation.start_time} à #{@reservation.end_time}
+  p = @reservation.subtitle
 
   h3 Mise à disposition d'un Cookoon
   .row
@@ -33,14 +34,14 @@
       = @reservation.cookoon_price
 
     .col-8
-      | Frais de service (XX%)
+      | Frais de service (#{number_to_percentage(Pro::Reservation.fee_percentage, precision: 0)})
     .col-4.text-right
-      = @reservation.fee
+      = @reservation.cookoon_fee_plus_tax
 
     .col-8
-      p dont TVA (XX%)
+      p dont TVA (#{number_to_percentage(Pro::Reservation.tax_percentage, precision: 0)})
     .col-4.text-right
-      | XX,XX €
+      = @reservation.cookoon_fee_tax
 
   - if @reservation.services.any?
     h3 Options
@@ -54,25 +55,40 @@
           = service.price
 
       .col-8
-        p Frais de service (XX%)
+        p Frais de service (#{number_to_percentage(Pro::Reservation.tax_percentage, precision: 0)})
       .col-4.text-right
-        = @reservation.fee
+        = @reservation.services_fee
 
       .col-8
-        p Total HT des options
+        | Total HT des options
       .col-4.text-right
-        = @reservation.services_price
+        = @reservation.services_price_plus_fee
+
+      .col-8
+        p TVA #{number_to_percentage(Pro::Reservation::DEFAULTS[:tax_rate] *100, precision: 0)}
+      .col-4.text-right
+        = @reservation.services_tax
 
       .col-8
         p Total TTC des options
       .col-4.text-right
-        = @reservation.services_price
+        = @reservation.services_price_plus_fee_plus_tax
 
   .row.bg-primary.text-white
     .col-8
-      | TOTAL
+      | TOTAL HT
+    .col-4.text-right
+      = @reservation.price_excluding_tax
+
+  .row
+    .col-8
+      | TOTAL TTC
     .col-4.text-right
       = @reservation.price
+
+  - if @reservation.status_before_type_cast >= Pro::Reservation.statuses[:ongoing]
+    .mt-4
+      = simple_format(@reservation.invoice_legal_mentions)
 
   .mt-4.text-center
     p.small
@@ -84,5 +100,3 @@
 
 .my-4
   = render 'actions'
-
-#reservationCookoonShowModalWrapper

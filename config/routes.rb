@@ -84,9 +84,7 @@ Rails.application.routes.draw do
     end
 
     resources :reservations, only: %i[index show update]
-    namespace :reservations do
-      resources :cookoons, only: :show
-    end
+    resource :user, only: %i[edit update]
   end
 
   # -------- ADMIN ROUTES ---------
@@ -108,8 +106,16 @@ Rails.application.routes.draw do
     # Service
     post '/actions/create-service', to: 'services#create'
 
+    # Company
+    post '/actions/invite-user', to: 'companies#invite_user'
+
     # Pro::Quote
-    post '/actions/create-draft-reservation' => 'pro/quotes#create_draft_reservation'
+    post '/actions/create-draft-reservation', to: 'pro/quotes#create_draft_reservation'
+
+    # Pro::Reservation
+    post '/actions/add-service-from-specification', to: 'pro/reservations#add_service_from_specification'
+    post '/actions/propose-reservation', to: 'pro/reservations#propose_reservation'
+    post '/actions/duplicate-reservation-as-draft', to: 'pro/reservations#duplicate_reservation_as_draft'
   end
 
   mount ForestLiana::Engine, at: :forest

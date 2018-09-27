@@ -7,5 +7,6 @@
 @import 'vendor/icon_fonts';
 
 // CSS
-@import 'bootstrap_override/index';
+@import 'override/bootstrap/index';
+@import 'override/simple_form/index';
 @import 'components/index';

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_08_09_083937) do
+ActiveRecord::Schema.define(version: 2018_09_25_080903) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 2018_08_09_083937) do
     t.string "wifi_network"
     t.string "wifi_code"
     t.text "caretaker_instructions"
+    t.string "pdf_url"
     t.index ["user_id"], name: "index_cookoons_on_user_id"
   end
 
@@ -187,15 +188,31 @@ ActiveRecord::Schema.define(version: 2018_08_09_083937) do
     t.string "cookoon_price_currency", default: "EUR", null: false
     t.integer "services_price_cents", default: 0, null: false
     t.string "services_price_currency", default: "EUR", null: false
-    t.integer "fee_cents", default: 0, null: false
-    t.string "fee_currency", default: "EUR", null: false
+    t.integer "cookoon_fee_cents", default: 0, null: false
+    t.string "cookoon_fee_currency", default: "EUR", null: false
     t.integer "price_cents", default: 0, null: false
     t.string "price_currency", default: "EUR", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "requested_modification"
+    t.integer "cookoon_fee_tax_cents", default: 0, null: false
+    t.string "cookoon_fee_tax_currency", default: "EUR", null: false
+    t.integer "services_fee_cents", default: 0, null: false
+    t.string "services_fee_currency", default: "EUR", null: false
+    t.integer "services_tax_cents", default: 0, null: false
+    t.string "services_tax_currency", default: "EUR", null: false
+    t.integer "price_excluding_tax_cents", default: 0, null: false
+    t.string "price_excluding_tax_currency", default: "EUR", null: false
     t.index ["cookoon_id"], name: "index_pro_reservations_on_cookoon_id"
     t.index ["pro_quote_id"], name: "index_pro_reservations_on_pro_quote_id"
+  end
+
+  create_table "pro_service_specifications", force: :cascade do |t|
+    t.string "name"
+    t.integer "unit_price_cents", default: 0, null: false
+    t.string "unit_price_currency", default: "EUR", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "pro_services", force: :cascade do |t|

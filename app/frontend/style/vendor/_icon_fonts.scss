@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'cookoon';
-  src: url('fonts/cookoon.eot?qvcsj');
-  src: url('fonts/cookoon.eot?qvcsj#iefix') format('embedded-opentype'),
-    url('fonts/cookoon.ttf?qvcsj') format('truetype'),
-    url('fonts/cookoon.woff?qvcsj') format('woff'),
-    url('fonts/cookoon.svg?qvcsj#cookoon') format('svg');
+  src:  url('fonts/cookoon.eot?6lw5qz');
+  src:  url('fonts/cookoon.eot?6lw5qz#iefix') format('embedded-opentype'),
+    url('fonts/cookoon.ttf?6lw5qz') format('truetype'),
+    url('fonts/cookoon.woff?6lw5qz') format('woff'),
+    url('fonts/cookoon.svg?6lw5qz#cookoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -25,146 +25,166 @@
 }
 
 .co-addcookoon:before {
-  content: '\e900';
+  content: "\e900";
 }
 .co-bank:before {
-  content: '\e901';
+  content: "\e901";
 }
 .co-broken-door:before {
-  content: '\e902';
+  content: "\e902";
 }
 .co-camera:before {
-  content: '\e903';
+  content: "\e903";
 }
 .co-cb:before {
-  content: '\e904';
+  content: "\e904";
 }
 .co-check:before {
-  content: '\e905';
+  content: "\e905";
 }
 .co-cleaning:before {
-  content: '\e906';
+  content: "\e906";
 }
 .co-concierge:before {
-  content: '\e907';
+  content: "\e907";
 }
 .co-cookoon-mark1:before {
-  content: '\e908';
+  content: "\e908";
 }
 .co-cookoon-mark2:before {
-  content: '\e909';
+  content: "\e909";
 }
 .co-cookoon-mark3:before {
-  content: '\e90a';
+  content: "\e90a";
+}
+.co-datetime-picker:before {
+  content: "\e90b";
 }
 .co-email:before {
-  content: '\e90b';
+  content: "\e90c";
 }
 .co-fire:before {
-  content: '\e90c';
+  content: "\e90d";
 }
 .co-glasshole-search:before {
-  content: '\e90d';
+  content: "\e90e";
 }
 .co-home:before {
-  content: '\e90e';
+  content: "\e90f";
+}
+.co-lenght-picker:before {
+  content: "\e910";
 }
 .co-logo:before {
-  content: '\e90f';
+  content: "\e911";
 }
 .co-lost:before {
-  content: '\e910';
+  content: "\e912";
 }
 .co-meeting:before {
-  content: '\e911';
+  content: "\e913";
 }
 .co-minus:before {
-  content: '\e912';
+  content: "\e914";
 }
 .co-notifications:before {
-  content: '\e913';
+  content: "\e915";
+}
+.co-pax-picker:before {
+  content: "\e916";
 }
 .co-plus:before {
-  content: '\e914';
+  content: "\e917";
 }
 .co-reversed--camera:before {
-  content: '\e915';
+  content: "\e918";
 }
 .co-reversed-addcookoon:before {
-  content: '\e916';
+  content: "\e919";
 }
 .co-reversed-bank:before {
-  content: '\e917';
+  content: "\e91a";
 }
 .co-reversed-cb:before {
-  content: '\e918';
+  content: "\e91b";
 }
 .co-reversed-check:before {
-  content: '\e919';
+  content: "\e91c";
 }
 .co-reversed-cleaning:before {
-  content: '\e91a';
+  content: "\e91d";
 }
 .co-reversed-concierge:before {
-  content: '\e91b';
+  content: "\e91e";
 }
 .co-reversed-email:before {
-  content: '\e91c';
+  content: "\e91f";
 }
 .co-reversed-home:before {
-  content: '\e91d';
+  content: "\e920";
 }
 .co-reversed-logo:before {
-  content: '\e91e';
+  content: "\e921";
 }
 .co-reversed-meeting:before {
-  content: '\e91f';
+  content: "\e922";
 }
 .co-reversed-minus:before {
-  content: '\e920';
+  content: "\e923";
 }
 .co-reversed-notifications:before {
-  content: '\e921';
+  content: "\e924";
+}
+.co-reversed-placeholder---picture .path1:before {
+  content: "\e925";
+}
+.co-reversed-placeholder---picture .path2:before {
+  content: "\e926";
+  margin-left: -1em;
+}
+.co-reversed-placeholder---picture .path3:before {
+  content: "\e927";
+  margin-left: -1em;
 }
 .co-reversed-plus:before {
-  content: '\e922';
+  content: "\e928";
 }
 .co-reversed-sad:before {
-  content: '\e923';
+  content: "\e929";
 }
 .co-reversed-success:before {
-  content: '\e924';
+  content: "\e92a";
 }
 .co-reversed-user:before {
-  content: '\e925';
+  content: "\e92b";
 }
 .co-service-chef:before {
-  content: '\e926';
+  content: "\e92c";
 }
 .co-service-concierge:before {
-  content: '\e927';
+  content: "\e92d";
 }
 .co-service-food:before {
-  content: '\e928';
+  content: "\e92e";
 }
 .co-service-pro:before {
-  content: '\e929';
+  content: "\e92f";
 }
 .co-stain:before {
-  content: '\e92a';
+  content: "\e930";
 }
 .co-success:before {
-  content: '\e92b';
+  content: "\e931";
 }
 .co-type-flat:before {
-  content: '\e92c';
+  content: "\e932";
 }
 .co-type-house:before {
-  content: '\e92d';
+  content: "\e933";
 }
 .co-type-loft:before {
-  content: '\e92e';
+  content: "\e934";
 }
 .co-user:before {
-  content: '\e92f';
+  content: "\e935";
 }
