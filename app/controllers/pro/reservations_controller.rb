@@ -16,7 +16,7 @@ module Pro
         format.html
         format.js
         format.pdf do
-          render pdf: "COOKOON · Réservation ##{@reservation.id}"
+          render pdf: @reservation.quote_full_reference
         end
       end
     end
