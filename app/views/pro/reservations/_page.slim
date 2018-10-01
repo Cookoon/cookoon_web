@@ -32,11 +32,13 @@ h3 Mise à disposition d'un Cookoon
   .col-4.text-right
     = @reservation.cookoon_price
 
+.row
   .col-8
     | Frais de service (#{number_to_percentage(Pro::Reservation.fee_percentage, precision: 0)})
   .col-4.text-right
     = @reservation.cookoon_fee_plus_tax
 
+.row
   .col-8
     p dont TVA (#{number_to_percentage(Pro::Reservation.tax_percentage, precision: 0)})
   .col-4.text-right
@@ -44,30 +46,33 @@ h3 Mise à disposition d'un Cookoon
 
 - if @reservation.services.any?
   h3 Options
-  .row
-    - @reservation.services.each do |service|
+  - @reservation.services.each do |service|
+    .row
       .col-8
         p #{service.name} × #{service.quantity}
       .col-2.text-right
         = service.unit_price
       .col-2.text-right
         = service.price
-
+  .row
     .col-8
       p Frais de service (#{number_to_percentage(Pro::Reservation.tax_percentage, precision: 0)})
     .col-4.text-right
       = @reservation.services_fee
 
+  .row
     .col-8
       | Total HT des options
     .col-4.text-right
       = @reservation.services_price_plus_fee
 
+  .row
     .col-8
       p TVA #{number_to_percentage(Pro::Reservation::DEFAULTS[:tax_rate] *100, precision: 0)}
     .col-4.text-right
       = @reservation.services_tax
 
+  .row
     .col-8
       p Total TTC des options
     .col-4.text-right
