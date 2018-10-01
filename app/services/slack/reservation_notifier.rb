@@ -2,6 +2,7 @@ module Slack
   class ReservationNotifier < BaseNotifier
     include DatetimeHelper
     include ActionView::Helpers::TranslationHelper
+    include MoneyRails::ActionViewExtension
 
     def initialize(attributes)
       @reservation = attributes[:reservation]
@@ -18,8 +19,7 @@ module Slack
     def message
       return unless reservation
       case reservation.status.to_sym
-      when :paid
-        "[NOUVELLE DEMANDE] #{cookoon.name} le #{formatted_date} par #{tenant.full_name}"
+      when :paid then paid_message
       when :accepted
         "[ACCEPTATION] la location pour #{cookoon.name} le #{formatted_date} vient d'être acceptée par #{host.full_name}"
       when :refused
@@ -35,6 +35,23 @@ module Slack
 
     def formatted_date
       display_datetime_for(reservation.start_at, join_expression: 'à', without_year: true)
+    end
+
+    def paid_message
+      <<~MESSAGE
+        [NOUVELLE DEMANDE] #{cookoon.name} le #{formatted_date} par #{tenant.full_name}
+        pour #{reservation.people_count} personnes pendant #{reservation.duration} heures.
+
+        Services associés :
+        #{list_services}
+
+        Total : #{humanized_money_with_symbol reservation.payment_amount}
+      MESSAGE
+    end
+
+    def list_services
+      return 'Aucun service supplémentaire' if reservation.services.none?
+      reservation.services.map { |service| "- #{Service::DISPLAY[service.category.to_sym][:mail_display_name]}" }.join("\n")
     end
   end
 end
