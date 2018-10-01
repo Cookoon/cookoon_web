@@ -408,6 +408,7 @@ GEM
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
     wkhtmltopdf-binary (0.12.4)
+    wkhtmltopdf-heroku (2.12.4.0)
 
 PLATFORMS
   ruby
@@ -470,6 +471,7 @@ DEPENDENCIES
   webpacker (~> 3.5)
   wicked_pdf!
   wkhtmltopdf-binary
+  wkhtmltopdf-heroku
 
 RUBY VERSION
    ruby 2.5.1p57
