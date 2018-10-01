@@ -25,10 +25,10 @@
 p = @reservation.subtitle
 
 h3 Mise à disposition d'un Cookoon
-.row
+.row.mb-3
   .col-8
     | Cookoon “<u>#{@reservation.cookoon.name}</u>” × #{@reservation.duration}
-    p.small Cette somme sera encaissée pour le compte de l'Hôte Cookoon et ne sera pas soumise à TVA.
+    .small Cette somme sera encaissée pour le compte de l'Hôte Cookoon et ne sera pas soumise à TVA.
   .col-4.text-right
     = @reservation.cookoon_price
 
@@ -38,25 +38,25 @@ h3 Mise à disposition d'un Cookoon
   .col-4.text-right
     = @reservation.cookoon_fee_plus_tax
 
-.row
+.row.mb-3
   .col-8
-    p dont TVA (#{number_to_percentage(Pro::Reservation.tax_percentage, precision: 0)})
+    | dont TVA (#{number_to_percentage(Pro::Reservation.tax_percentage, precision: 0)})
   .col-4.text-right
     = @reservation.cookoon_fee_tax
 
 - if @reservation.services.any?
   h3 Options
   - @reservation.services.each do |service|
-    .row
+    .row.mb-3
       .col-8
-        p #{service.name} × #{service.quantity}
+        | #{service.name} × #{service.quantity}
       .col-2.text-right
         = service.unit_price
       .col-2.text-right
         = service.price
-  .row
+  .row.mb-3
     .col-8
-      p Frais de service (#{number_to_percentage(Pro::Reservation.tax_percentage, precision: 0)})
+      | Frais de service (#{number_to_percentage(Pro::Reservation.tax_percentage, precision: 0)})
     .col-4.text-right
       = @reservation.services_fee
 
@@ -66,28 +66,28 @@ h3 Mise à disposition d'un Cookoon
     .col-4.text-right
       = @reservation.services_price_plus_fee
 
-  .row
+  .row.mb-3
     .col-8
-      p TVA #{number_to_percentage(Pro::Reservation::DEFAULTS[:tax_rate] *100, precision: 0)}
+      | TVA #{number_to_percentage(Pro::Reservation::DEFAULTS[:tax_rate] *100, precision: 0)}
     .col-4.text-right
       = @reservation.services_tax
 
-  .row
+  .row.mb-3
     .col-8
-      p Total TTC des options
+      | Total TTC des options
     .col-4.text-right
       = @reservation.services_price_plus_fee_plus_tax
 
 .row.bg-primary.text-white
-  .col-8
+  .col-8.pl-3
     | TOTAL HT
-  .col-4.text-right
+  .col-4.text-right.pr-3
     = @reservation.price_excluding_tax
 
 .row
-  .col-8
+  .col-8.pl-3
     | TOTAL TTC
-  .col-4.text-right
+  .col-4.text-right.pr-3
     = @reservation.price
 
 - if @reservation.status_before_type_cast >= Pro::Reservation.statuses[:ongoing]
