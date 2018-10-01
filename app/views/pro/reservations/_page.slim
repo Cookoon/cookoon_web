@@ -1,0 +1,98 @@
+.row.mb-3
+  .col
+    h3.d-flex.align-items-center.child-mx-2
+      i.co.co-logo.fa-2x.text-primary
+      span Cookoon
+
+    div = simple_format(@reservation.title)
+    div.text-uppercase = @reservation.company
+    div = @reservation.company.address
+    - if @reservation.company.vat.present?
+      div N° TVA Intra : #{@reservation.company.vat}
+  - if formats.include? :pdf
+    .col
+      = cl_image_tag(@reservation.cookoon.photos.first.path, width: 800, height: 450, crop: :fill, class: 'img-fluid')
+  - else
+    .col.pro-reservation-card-offset
+      = c 'card_cookoon',
+          small: true,
+          link_url: @reservation.cookoon.pdf_url,
+          target: :cookoon_pdf,
+          image_url: cl_image_path(@reservation.cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
+          infos: ('Voir la fiche de ce Cookoon' if @reservation.cookoon.pdf_url),
+          infos_class: :reverse
+
+p = @reservation.subtitle
+
+h3 Mise à disposition d'un Cookoon
+.row
+  .col-8
+    | Cookoon “<u>#{@reservation.cookoon.name}</u>” × #{@reservation.duration}
+    p.small Cette somme sera encaissée pour le compte de l'Hôte Cookoon et ne sera pas soumise à TVA.
+  .col-4.text-right
+    = @reservation.cookoon_price
+
+  .col-8
+    | Frais de service (#{number_to_percentage(Pro::Reservation.fee_percentage, precision: 0)})
+  .col-4.text-right
+    = @reservation.cookoon_fee_plus_tax
+
+  .col-8
+    p dont TVA (#{number_to_percentage(Pro::Reservation.tax_percentage, precision: 0)})
+  .col-4.text-right
+    = @reservation.cookoon_fee_tax
+
+- if @reservation.services.any?
+  h3 Options
+  .row
+    - @reservation.services.each do |service|
+      .col-8
+        p #{service.name} × #{service.quantity}
+      .col-2.text-right
+        = service.unit_price
+      .col-2.text-right
+        = service.price
+
+    .col-8
+      p Frais de service (#{number_to_percentage(Pro::Reservation.tax_percentage, precision: 0)})
+    .col-4.text-right
+      = @reservation.services_fee
+
+    .col-8
+      | Total HT des options
+    .col-4.text-right
+      = @reservation.services_price_plus_fee
+
+    .col-8
+      p TVA #{number_to_percentage(Pro::Reservation::DEFAULTS[:tax_rate] *100, precision: 0)}
+    .col-4.text-right
+      = @reservation.services_tax
+
+    .col-8
+      p Total TTC des options
+    .col-4.text-right
+      = @reservation.services_price_plus_fee_plus_tax
+
+.row.bg-primary.text-white
+  .col-8
+    | TOTAL HT
+  .col-4.text-right
+    = @reservation.price_excluding_tax
+
+.row
+  .col-8
+    | TOTAL TTC
+  .col-4.text-right
+    = @reservation.price
+
+- if @reservation.status_before_type_cast >= Pro::Reservation.statuses[:ongoing]
+  .mt-4
+    = simple_format(@reservation.invoice_legal_mentions)
+
+.mt-4.text-center
+  p.small
+    | Cookoon est une marque de Réceptions Nouvelles, SAS au capital de 2 364€,
+    br
+    | immatriculée au RCS de Paris sous le numéro 821 316 239
+    br
+    | 12 rue Lincoln, 75008 Paris
