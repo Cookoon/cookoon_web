@@ -21,6 +21,14 @@ module Pro
       end
     end
 
+    def pdf_file_name
+      if object.status_before_type_cast < Reservation.statuses[:accepted]
+        "#{object.quote_reference}_COOKOON_#{object.company.name.parameterize(separator: '_').upcase}"
+      else
+        "#{object.invoice_reference}_COOKOON_#{object.company.name.parameterize(separator: '_').upcase}"
+      end
+    end
+
     def invoice_legal_mentions
       <<~LEGAL_MENTIONS
         Délai de règlement : #{1.month.since(start_at).strftime('%d/%m/%Y')}
