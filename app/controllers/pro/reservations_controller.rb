@@ -16,7 +16,7 @@ module Pro
         format.html
         format.js
         format.pdf do
-          render pdf: @reservation.quote_full_reference
+          render pdf: @reservation.quote_full_reference, disposition: 'attachment'
         end
       end
     end
