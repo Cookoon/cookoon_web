@@ -11,6 +11,14 @@ module Pro
     def show
       @reservation = Reservation.find(params[:id]).decorate
       authorize @reservation.quote
+
+      respond_to do |format|
+        format.html
+        format.js
+        format.pdf do
+          render pdf: @reservation.pdf_file_name, disposition: 'attachment'
+        end
+      end
     end
 
     def update

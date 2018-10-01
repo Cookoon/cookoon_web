@@ -117,16 +117,8 @@ module Pro
       "DEV-C4B-#{quote.created_at.strftime('%y%m')}#{format '%03d', quote.id}"
     end
 
-    def quote_full_reference
-      "#{quote_reference}_COOKOON_#{company.name.parameterize(separator: '_').upcase}"
-    end
-
     def invoice_reference
       "FAC-C4B-#{start_at.strftime('%y%m')}#{format '%03d', id}"
-    end
-
-    def invoice_full_reference
-      "#{invoice_reference}_COOKOON_#{company.name.parameterize(separator: '_').upcase}"
     end
 
     def ical_for(role)

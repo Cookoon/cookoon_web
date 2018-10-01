@@ -54,6 +54,8 @@ gem 'pundit'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rails-i18n'
 gem 'simple_scheduler'
+gem 'wicked_pdf', git: 'https://github.com/LeKristapino/wicked_pdf.git', branch: 'add_webpack_support'
+gem 'wkhtmltopdf-binary'
 
 # Front
 gem 'draper'

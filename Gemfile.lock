@@ -6,6 +6,14 @@ GIT
       cloudinary (~> 1.8)
       rails (>= 3.2)
 
+GIT
+  remote: https://github.com/LeKristapino/wicked_pdf.git
+  revision: c60c6a7698af9870c6e14d57a8aaad7f3d15b96e
+  branch: add_webpack_support
+  specs:
+    wicked_pdf (1.1.0)
+      activesupport
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -399,6 +407,7 @@ GEM
     websocket-driver (0.7.0)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.3)
+    wkhtmltopdf-binary (0.12.4)
 
 PLATFORMS
   ruby
@@ -459,6 +468,8 @@ DEPENDENCIES
   web-console (>= 3.3.0)
   webmock
   webpacker (~> 3.5)
+  wicked_pdf!
+  wkhtmltopdf-binary
 
 RUBY VERSION
    ruby 2.5.1p57
