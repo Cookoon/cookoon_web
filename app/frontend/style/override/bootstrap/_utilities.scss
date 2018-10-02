@@ -124,6 +124,10 @@ hr.half {
   }
 }
 
+.page-break-inside-avoid {
+  page-break-inside: avoid;
+}
+
 .pointer {
   cursor: pointer;
   user-select: none;
