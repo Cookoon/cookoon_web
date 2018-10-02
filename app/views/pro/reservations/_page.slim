@@ -47,54 +47,57 @@ h3 Mise à disposition d'un Cookoon
 - if @reservation.services.any?
   h3 Options
   - @reservation.services.each do |service|
-    .row.mb-3
+    .row.mb-3.page-break-inside-avoid
       .col-8
         | #{service.name} × #{service.quantity}
       .col-2.text-right
         = service.unit_price
       .col-2.text-right
         = service.price
-  .row.mb-3
-    .col-8
-      | Frais de service (#{number_to_percentage(Pro::Reservation.tax_percentage, precision: 0)})
-    .col-4.text-right
-      = @reservation.services_fee
+
+  .page-break-inside-avoid
+    .row.mb-3
+      .col-8
+        | Frais de service (#{number_to_percentage(Pro::Reservation.tax_percentage, precision: 0)})
+      .col-4.text-right
+        = @reservation.services_fee
+
+    .row
+      .col-8
+        | Total HT des options
+      .col-4.text-right
+        = @reservation.services_price_plus_fee
+
+    .row.mb-3
+      .col-8
+        | TVA #{number_to_percentage(Pro::Reservation::DEFAULTS[:tax_rate] *100, precision: 0)}
+      .col-4.text-right
+        = @reservation.services_tax
+
+    .row.mb-3
+      .col-8
+        | Total TTC des options
+      .col-4.text-right
+        = @reservation.services_price_plus_fee_plus_tax
+
+.page-break-inside-avoid
+  .row.bg-primary.text-white
+    .col-8.pl-3
+      | TOTAL HT
+    .col-4.text-right.pr-3
+      = @reservation.price_excluding_tax
 
   .row
-    .col-8
-      | Total HT des options
-    .col-4.text-right
-      = @reservation.services_price_plus_fee
-
-  .row.mb-3
-    .col-8
-      | TVA #{number_to_percentage(Pro::Reservation::DEFAULTS[:tax_rate] *100, precision: 0)}
-    .col-4.text-right
-      = @reservation.services_tax
-
-  .row.mb-3
-    .col-8
-      | Total TTC des options
-    .col-4.text-right
-      = @reservation.services_price_plus_fee_plus_tax
-
-.row.bg-primary.text-white
-  .col-8.pl-3
-    | TOTAL HT
-  .col-4.text-right.pr-3
-    = @reservation.price_excluding_tax
-
-.row
-  .col-8.pl-3
-    | TOTAL TTC
-  .col-4.text-right.pr-3
-    = @reservation.price
+    .col-8.pl-3
+      | TOTAL TTC
+    .col-4.text-right.pr-3
+      = @reservation.price
 
 - if @reservation.status_before_type_cast >= Pro::Reservation.statuses[:ongoing]
-  .mt-4
+  .mt-4.page-break-inside-avoid
     = simple_format(@reservation.invoice_legal_mentions)
 
-.mt-4.text-center
+.mt-4.text-center.page-break-inside-avoid
   p.small
     | Cookoon est une marque de Réceptions Nouvelles, SAS au capital de 2 364€,
     br
