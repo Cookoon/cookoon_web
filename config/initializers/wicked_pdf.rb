@@ -19,5 +19,5 @@ WickedPdf.config = {
   # (but can be overridden in `render :pdf` calls)
   layout: 'pro/pdf',
   dpi: '300',
-  zoom: '1.5'
+  zoom: '1.25'
 }
