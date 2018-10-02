@@ -29,9 +29,11 @@
     max-width: calc(100% - 4rem);
     background-color: var(--white);
     white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
     padding: 0.7rem;
+    &-text {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     &-icon {
       margin-left: 15px;
       display: none;
