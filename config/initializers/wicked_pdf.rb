@@ -18,5 +18,6 @@ WickedPdf.config = {
   # Layout file to be used for all PDFs
   # (but can be overridden in `render :pdf` calls)
   layout: 'pro/pdf',
-  dpi: '600'
+  dpi: '300',
+  zoom: '2'
 }
