@@ -25,5 +25,8 @@
   "devDependencies": {
     "webpack-bundle-analyzer": "^2.11.1",
     "webpack-dev-server": "2.11.2"
-  }
+  },
+  "browserslist": [
+    "Chrome >= 13"
+  ]
 }
