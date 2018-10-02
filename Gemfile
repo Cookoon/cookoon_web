@@ -55,6 +55,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'rails-i18n'
 gem 'simple_scheduler'
 gem 'wicked_pdf', git: 'https://github.com/LeKristapino/wicked_pdf.git', branch: 'add_webpack_support'
+gem 'wkhtmltopdf-binary'
 
 # Front
 gem 'draper'
@@ -85,10 +86,6 @@ gem 'scout_apm'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-group :production, :staging do
-  gem 'wkhtmltopdf-heroku'
-end
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -116,7 +113,6 @@ group :development do
   gem 'pry-rails'
   gem 'rubocop', require: false
   gem 'spring-commands-rspec'
-  gem 'wkhtmltopdf-binary'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
