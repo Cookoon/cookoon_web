@@ -7,18 +7,31 @@ RSpec.describe Pro::Reservation, type: :model do
   end
 
   it 'is invalid without a start date' do
-    reservation = build(:reservation, start_at: nil)
+    reservation = build(:pro_reservation, start_at: nil)
     reservation.valid?
-    expect(reservation.errors[:start_at]).to include('doit être rempli(e)')
+    expect(reservation.errors).to include(:start_at)
   end
 
   it 'is invalid without a duration' do
-    reservation = build(:reservation, duration: nil)
+    reservation = build(:pro_reservation, duration: nil)
     reservation.valid?
-    expect(reservation.errors[:duration]).to include('doit être rempli(e)')
+    expect(reservation.errors).to include(:duration)
+  end
+
+  it 'is invalid without a people count' do
+    reservation = build(:pro_reservation, people_count: nil)
+    reservation.valid?
+    expect(reservation.errors).to include(:people_count)
   end
 
   it { should delegate(:user).to(:quote) }
-
   it { should delegate(:company).to(:quote) }
+
+  describe '#quote_reference' do
+    it 'builds a formatted name for quote'
+  end
+
+  describe '#invoice_reference' do
+    it 'builds a formatted name for invoice'
+  end
 end
