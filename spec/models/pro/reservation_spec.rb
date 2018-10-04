@@ -27,11 +27,36 @@ RSpec.describe Pro::Reservation, type: :model do
   it { should delegate(:user).to(:quote) }
   it { should delegate(:company).to(:quote) }
 
-  describe '#quote_reference' do
-    it 'builds a formatted name for quote'
+  context 'Money Rails' do
+    it { is_expected.to monetize(:cookoon_price) }
+    it { is_expected.to monetize(:cookoon_fee) }
+    it { is_expected.to monetize(:cookoon_fee_tax) }
+    it { is_expected.to monetize(:services_price) }
+    it { is_expected.to monetize(:services_fee) }
+    it { is_expected.to monetize(:services_tax) }
+    it { is_expected.to monetize(:price_excluding_tax) }
+    it { is_expected.to monetize(:price) }
   end
 
-  describe '#invoice_reference' do
-    it 'builds a formatted name for invoice'
+  context 'Formating' do
+    let(:reservation) { create(:pro_reservation) }
+
+    describe '#quote_reference' do
+      it 'returns a formatted name for quote' do
+        expect(reservation.quote_reference).to match(/DEV-C4B-\d{7,}/)
+      end
+    end
+
+    describe '#invoice_reference' do
+      it 'returns a formatted name for invoice' do
+        expect(reservation.invoice_reference).to match(/FAC-C4B-\d{7,}/)
+      end
+    end
+
+    describe '#ical_file_name' do
+      it 'returns a formatted name for ical file' do
+        expect(reservation.ical_file_name).to match(/\w*.ics/)
+      end
+    end
   end
 end
