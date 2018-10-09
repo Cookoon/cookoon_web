@@ -59,4 +59,22 @@ RSpec.describe Pro::Reservation, type: :model do
       end
     end
   end
+
+  describe 'scopes' do
+    let(:draft) { create(:pro_reservation, :draft) }
+    let(:proposed) { create(:pro_reservation, :proposed) }
+    let(:modification_requested) { create(:pro_reservation, :modification_requested) }
+    let(:accepted) { create(:pro_reservation, :accepted) }
+    let(:passed) { create(:pro_reservation, :passed) }
+
+
+    describe '.engaged' do
+      let(:tested_scope) { described_class.engaged }
+
+      it 'returns only pending reservations created more than few hours ago' do
+        expect(tested_scope).to include(proposed, modification_requested, accepted)
+        expect(tested_scope).to_not include(draft, passed)
+      end
+    end
+  end
 end
