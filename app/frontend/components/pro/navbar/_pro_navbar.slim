@@ -1,7 +1,7 @@
 .pro-navbar.text-white
   .pro-navbar-container
     = link_to pro_root_path
-      i.co.co-logo.fa-4x.text-white
+      = image_tag 'cookoon_pro_logo', width: '70%'
 
     - if content?
       .pro-navbar-content = @content
