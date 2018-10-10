@@ -5,10 +5,10 @@ module ProSearchComponent
 
   def durations
     [
-      {data: 3, display: 'une réunion (3 heures)'},
-      {data: 5, display: 'un comité (5 heures)'},
-      {data: 7, display: 'demi-journée (7 heures)'},
-      {data: 10, display: 'journée complète (10 heures)'}
+      {data: 3, display: '3h - pour une réunion ?'},
+      {data: 5, display: '5h  - pour un déjeuner ou un board meeting ?'},
+      {data: 7, display: '7h - pour un dîner ou une formation ?'},
+      {data: 10, display: '10h - pour une journée de teambuilding ?'}
     ]
   end
 
