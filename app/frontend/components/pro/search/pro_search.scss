@@ -28,6 +28,7 @@
       text-align: left;
       max-height: 207px;
       overflow: scroll;
+      box-shadow: -11px 14px 10px rgba(0, 0, 0, 0.5);
       &-item:not(:last-child) {
         border-bottom: 1px solid var(--primary);
       }
