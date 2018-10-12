@@ -85,3 +85,12 @@
 .is-navOpen {
   overflow: hidden;
 }
+
+// Iphone 5 Query
+@media (max-width: 320px) {
+  .drawer {
+    .fixed-bottom {
+      bottom: -90px;
+    }
+  }
+}
