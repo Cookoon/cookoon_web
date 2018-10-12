@@ -28,7 +28,7 @@
       li
         i.far.fa-question-circle aria-hidden="true"
         |   #{link_to 'MES CONTACTS UTILES', support_path}
-      - if current_user.pro?
+      - if current_user&.pro?
         li.no-padd = link_to pro_root_path do
           = image_tag 'cookoon_pro_logo.png', width: 150;
     p= link_to 'Conditions Générales', 'https://cookoon.fr/conditions-generales/', target: :_blank
