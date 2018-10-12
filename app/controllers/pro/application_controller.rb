@@ -23,8 +23,7 @@ module Pro
     end
 
     def desktop_only
-      flash[:alert] = 'Cet espace est accessible sur Desktop uniquement'
-      redirect_to(root_path)
+      redirect_to(desktop_only_path)
     end
 
     def verify_pro_user
