@@ -55,6 +55,14 @@
   li {
     padding: 20px 0;
     border-bottom: 1px solid white;
+    &.no-padd {
+      padding: 5px;
+      display: flex;
+      justify-content: space-around;
+    }
+    img {
+      padding-right: 10px;
+    }
   }
 
   p {
@@ -76,4 +84,13 @@
 
 .is-navOpen {
   overflow: hidden;
+}
+
+// Iphone 5 Query
+@media (max-width: 320px) {
+  .drawer {
+    .fixed-bottom {
+      bottom: -90px;
+    }
+  }
 }

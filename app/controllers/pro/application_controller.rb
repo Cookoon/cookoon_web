@@ -1,6 +1,8 @@
 module Pro
   class ApplicationController < ::ApplicationController
-    before_action :verify_pro_user
+    class MobileForbiddenError < StandardError; end
+
+    before_action :verify_access
 
     layout 'pro'
 
@@ -8,6 +10,7 @@ module Pro
 
     rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
     rescue_from User::NotProError, with: :user_not_pro
+    rescue_from MobileForbiddenError, with: :desktop_only
 
     def user_not_authorized
       flash[:alert] = "Vous n'êtes pas autorisé à réaliser cette action"
@@ -19,8 +22,21 @@ module Pro
       redirect_to(root_path)
     end
 
+    def desktop_only
+      redirect_to(desktop_only_path)
+    end
+
     def verify_pro_user
       raise User::NotProError unless current_user.pro?
+    end
+
+    def restrict_to_desktop
+      raise MobileForbiddenError unless @device == :desktop
+    end
+
+    def verify_access
+      restrict_to_desktop
+      verify_pro_user
     end
   end
 end
