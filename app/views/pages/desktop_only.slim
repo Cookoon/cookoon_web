@@ -1,0 +1,14 @@
+- content_for :navbar_type, :none
+
+.h-100vh.bg-cover(style="background-image: linear-gradient(rgba(255, 255, 255, 0.6) 0%, rgba(255, 255, 255, 0.6) 100%), url(#{image_url 'cookoon_background.jpg'})")
+  .container.h-100.p-4
+    .row.h-100
+      .offset-sm-2.col-sm-8.offset-md-3.col-md-6.offset-lg-4.col-lg-4.h-100
+        .d-flex.flex-column.justify-content-between.align-items-center.h-100.text-center.font-tisa
+          .mt-5
+            i.co.co-logo.fa-5x.text-primary
+            h1 = image_tag 'logo-home.png', alt: 'COOKOON - RECEVONS PARTOUT !', class: 'w-15rem mt-3'
+          .mb-5
+            p.px-3.mb-4 Pour plus de confort, cette partie de notre application est uniquement disponible sur un ordinateur
+            = link_to 'En savoir +', 'https://cookoon.fr/', target: :_blank, class: 'btn btn-action btn-primary btn-block'
+            = link_to 'Retour à mon espace', root_path, class: 'btn btn-action btn-primary btn-block'
