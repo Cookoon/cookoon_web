@@ -15,6 +15,7 @@ class Cookoon < ApplicationRecord
 
   CATEGORIES = %w[Appartement Maison Jardin Loft Terrasse Toit Villa].freeze
   MAX_PER_USER = 2
+  REWARD_INVITATIONS_COUNT = 5
 
   belongs_to :user
   has_many :reservations, dependent: :restrict_with_exception
@@ -39,6 +40,7 @@ class Cookoon < ApplicationRecord
   validate :count_per_user, on: :create
 
   after_validation :geocode, if: :address_changed?
+  before_update :award_invite_to_user, if: :status_changed?
 
   def unavailabilites(date_range)
     overlapping_reservations(date_range) + overlapping_availabilities(date_range)
@@ -67,6 +69,13 @@ class Cookoon < ApplicationRecord
   def count_per_user
     if user&.reached_max_cookoons_count?
       errors.add(:user, :max_cookoons_count)
+    end
+  end
+
+  def award_invite_to_user
+    if approved?
+      user.invitation_limit += REWARD_INVITATIONS_COUNT
+      user.save
     end
   end
 end
