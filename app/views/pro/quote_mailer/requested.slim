@@ -30,9 +30,11 @@ table.info border="0" cellpadding="0" cellspacing="10"
           b Votre commentaire :
           p = simple_format @quote.comment
 
-p Nous allons désormais contacter plusieurs Hôtes Cookoons afin de vous faire une proposition juste et rapide.
+p
+ | Nous allons désormais contacter les hôtes des lieux que vous avez retenus et vous faire une proposition rapidement.
+ | Vous recevrez un mail dès que votre devis sera prêt.
 
-p Vous recevrez un mail dès que votre devis sera prêt ! Si vous changez d’avis d’ici là ou souhaitez complétez votre demande, contactez la conciergerie Cookoon #{mail_to 'concierge@cookoon.fr'}
+p Si vous souhaitez modifier ou complétez votre demande, contactez la conciergerie Cookoon <b>concierge@cookoon.fr</b>
 
 - content_for :post_scriptum
   p Une question? Rendez-vous sur #{link_to 'aide.cookoon.fr', 'https://aide.cookoon.fr', target: :_blank}
