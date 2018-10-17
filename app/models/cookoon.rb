@@ -40,7 +40,7 @@ class Cookoon < ApplicationRecord
   validate :count_per_user, on: :create
 
   after_validation :geocode, if: :address_changed?
-  before_update :award_invite_to_user, if: :status_changed?
+  after_update :award_invite_to_user, if: :saved_change_to_status?
 
   def unavailabilites(date_range)
     overlapping_reservations(date_range) + overlapping_availabilities(date_range)
