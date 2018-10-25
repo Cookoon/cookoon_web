@@ -67,7 +67,7 @@ class Reservation < ApplicationRecord
   validates :start_at, presence: true
   validates :duration, presence: true
   validate :tenant_is_not_host
-  validates :start_at, after_notice_period: true, on: :create
+  validates :start_at, in_future: true, on: :create # TEMP DISABLED after_notice_period: true
   validate :possible_in_datetime_range, on: :create
 
   before_validation :set_price_cents, if: :price_cents_needs_update?
