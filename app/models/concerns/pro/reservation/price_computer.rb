@@ -16,7 +16,7 @@ module Pro
       def computed_price_attributes
         {
           cookoon_price: compute_degressive_cookoon_price,
-          cookoon_fee: compute_cookoon_fee,
+          cookoon_fee: compute_cookoon_fee_including_tax,
           cookoon_fee_tax: compute_cookoon_fee_tax,
           services_price: compute_services_price,
           services_fee: compute_services_fee,
@@ -35,12 +35,16 @@ module Pro
         compute_full_cookoon_price * degression_rate
       end
 
-      def compute_cookoon_fee
+      def compute_cookoon_fee_minus_tax
         compute_degressive_cookoon_price * defaults[:fee_rate] / (1 + defaults[:tax_rate])
       end
 
+      def compute_cookoon_fee_including_tax
+        compute_degressive_cookoon_price * defaults[:fee_rate]
+      end
+
       def compute_cookoon_fee_tax
-        compute_cookoon_fee * defaults[:tax_rate]
+        compute_cookoon_fee_including_tax * defaults[:tax_rate]
       end
 
       def compute_services_price
@@ -57,7 +61,7 @@ module Pro
       end
 
       def compute_price_excluding_tax
-        [compute_degressive_cookoon_price, compute_cookoon_fee, compute_services_price, compute_services_fee].sum
+        [compute_degressive_cookoon_price, compute_cookoon_fee_minus_tax, compute_services_price, compute_services_fee].sum
       end
 
       def compute_price

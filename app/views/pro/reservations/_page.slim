@@ -36,7 +36,7 @@ h3 Mise à disposition d'un Cookoon
   .col-8
     | Frais de service (#{number_to_percentage(Pro::Reservation.fee_percentage, precision: 0)})
   .col-4.text-right
-    = @reservation.cookoon_fee_plus_tax
+    = @reservation.cookoon_fee
 
 .row.mb-3
   .col-8
@@ -58,7 +58,7 @@ h3 Mise à disposition d'un Cookoon
   .page-break-inside-avoid
     .row.mb-3
       .col-8
-        | Frais de service (#{number_to_percentage(Pro::Reservation.tax_percentage, precision: 0)})
+        | Frais de service (#{number_to_percentage(Pro::Reservation.fee_percentage, precision: 0)})
       .col-4.text-right
         = @reservation.services_fee
 

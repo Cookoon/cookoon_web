@@ -64,8 +64,8 @@ module Pro
       h.humanized_money_with_symbol object.cookoon_price
     end
 
-    def cookoon_fee_plus_tax
-      h.humanized_money_with_symbol object.cookoon_fee_plus_tax
+    def cookoon_fee
+      h.humanized_money_with_symbol object.cookoon_fee
     end
 
     def cookoon_fee_tax
