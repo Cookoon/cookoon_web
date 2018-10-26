@@ -16,7 +16,7 @@ class CookoonSearch < ApplicationRecord
 
   belongs_to :user
 
-  validates :start_at, presence: true, in_future: true # TEMP DISABLED after_notice_period: true
+  validates :start_at, presence: true, in_future: true, after_notice_period: true
   validates :duration, presence: true
   validates :people_count, presence: true
 
