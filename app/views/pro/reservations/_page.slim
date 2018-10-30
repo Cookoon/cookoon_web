@@ -23,7 +23,7 @@
             infos: ('Voir la fiche de ce Cookoon' if @reservation.cookoon.pdf_url),
             infos_class: :reverse
 
-  p = @reservation.subtitle
+  p.font-weight-bold = @reservation.subtitle
 
   h3 Mise à disposition d'un Cookoon
   .row.mb-3
