@@ -9,14 +9,8 @@
       = component 'hr', style: :inverted
 
     .mx-5
-      .h4.text-white Les éphémères Cookoon
-      .p.text-white.font-weight-light(style="font-size: 0.75rem;") Réservez des expériences Cookoon conçues par nos soins
+      .h4.text-white Les derniers Cookoons
+      .p.text-white.font-weight-light(style="font-size: 0.75rem;") Visualisez les cookoons les plus récents.
 
     .py-4
-      = component 'swiper',
-                  slide_component: 'card_cookoon',
-                  slides_locals: [{ title: @ephemeral.title,
-                                    title_style: 'multiline',
-                                    image_url: ephemeral_safe_picture(@ephemeral),
-                                    link_url: (@ephemeral if @ephemeral.persisted?),
-                                    cta: ('Réserver' if @ephemeral.persisted?) }]
+      = carousel_for(@highlighted_cookoon.photos)
