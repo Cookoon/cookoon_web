@@ -10,18 +10,19 @@
       div = @reservation.company.address
       - if @reservation.company.vat.present?
         div N° TVA Intra : #{@reservation.company.vat}
-    - if formats.include? :pdf
-      .col
-        = cl_image_tag(@reservation.cookoon.photos.first.path, width: 800, height: 450, crop: :fill, class: 'img-fluid')
-    - else
-      .col.pro-reservation-card-offset
-        = c 'card_cookoon',
-            small: true,
-            link_url: @reservation.cookoon.pdf_url,
-            target: :cookoon_pdf,
-            image_url: cl_image_path(@reservation.cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
-            infos: ('Voir la fiche de ce Cookoon' if @reservation.cookoon.pdf_url),
-            infos_class: :reverse
+    / TODO: Remove if we decide to get rid of picture for sure.
+    / - if formats.include? :pdf
+    /   .col
+    /     = cl_image_tag(@reservation.cookoon.photos.first.path, width: 800, height: 450, crop: :fill, class: 'img-fluid')
+    / - else
+    /   .col.pro-reservation-card-offset
+    /     = c 'card_cookoon',
+    /         small: true,
+    /         link_url: @reservation.cookoon.pdf_url,
+    /         target: :cookoon_pdf,
+    /         image_url: cl_image_path(@reservation.cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
+    /         infos: ('Voir la fiche de ce Cookoon' if @reservation.cookoon.pdf_url),
+    /         infos_class: :reverse
 
   p.font-weight-bold = @reservation.subtitle
 
