@@ -82,16 +82,16 @@
           = @reservation.services_price_plus_fee_plus_tax
 
   .page-break-inside-avoid
-    .row.bg-primary.text-white
-      .col-8.pl-3
+    .row.bg-primary.text-white.p-2
+      .col-8
         | TOTAL HT
-      .col-4.text-right.pr-3
+      .col-4.text-right
         = @reservation.price_excluding_tax
 
-    .row
-      .col-8.pl-3
+    .row.p-2
+      .col-8
         | TOTAL TTC
-      .col-4.text-right.pr-3
+      .col-4.text-right
         = @reservation.price
 
   - if @reservation.status_before_type_cast >= Pro::Reservation.statuses[:ongoing]
