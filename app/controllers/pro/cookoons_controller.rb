@@ -15,7 +15,7 @@ module Pro
 
     def show
       @quote = Quote.find(params[:quote_id])
-      @cookoon = Cookoon.find(params[:id])
+      @cookoon = Cookoon.find(params[:id]).decorate
       authorize @cookoon
 
       @marker = { lat: @cookoon.latitude, lng: @cookoon.longitude }
