@@ -29,8 +29,6 @@ div.container.py-4
             link_url: pro_quote_cookoon_path(@quote, cookoon),
             remote: true,
             card_id: "cookoon-#{cookoon.id}",
-            carousel_photos: cookoon.photos,
-            spaced: true,
             selected: @quote.cookoons.include?(cookoon),
             image_url: cl_image_path(cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
             icons: [cookoon.category_icon, cookoon.price_icon]
