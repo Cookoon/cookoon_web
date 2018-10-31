@@ -1,7 +1,8 @@
-.mt-3 data-controller="photoswipe"
+.mt-3 data-controller="photoswipe" data-photoswipe-items="#{@cookoon.photoswipe_slides}"
   button.btn.btn-action-sm.btn-block.btn-outline-primary(
     data-action='photoswipe#open'
   ) Voir les photos
+  = render 'photoswipe_element'
 
 #quote-cookoon-select
    = render 'quote_cookoon_select_button'
