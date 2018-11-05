@@ -37,7 +37,6 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.roadie.url_options = { host: 'localhost', scheme: 'http', port: 3000 }
-  config.action_mailer.asset_host = nil
 
   config.action_mailer.preview_path = 'spec/mailers/previews'
 
