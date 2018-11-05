@@ -82,6 +82,13 @@ module Pro
       services_price + services_fee + services_tax
     end
 
+    def admin_close
+      trigger_transfer
+      ::ReservationMailer.notify_payout_to_host(self).deliver_later
+
+      passed!
+    end
+
     # __________________________________________________________________________
     # Must move to a new Payment model
     def host_fee_rate
