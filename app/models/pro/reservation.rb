@@ -33,11 +33,13 @@ module Pro
     monetize :cookoon_price_cents
     monetize :cookoon_fee_cents
     monetize :cookoon_fee_tax_cents
-    monetize :services_price_cents
+    monetize :services_price_without_tax_and_fee_cents
     monetize :services_fee_cents
     monetize :services_tax_cents
     monetize :price_excluding_tax_cents
     monetize :price_cents
+    monetize :services_price_with_fee_cents
+    monetize :services_price_full_cents
 
     monetize :host_payout_price_cents
 
@@ -72,14 +74,6 @@ module Pro
 
     def self.tax_percentage
       DEFAULTS[:tax_rate] * 100
-    end
-
-    def services_price_plus_fee
-      services_price + services_fee
-    end
-
-    def services_price_plus_fee_plus_tax
-      services_price + services_fee + services_tax
     end
 
     def admin_close
