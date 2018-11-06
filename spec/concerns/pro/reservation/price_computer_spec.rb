@@ -35,6 +35,14 @@ RSpec.describe Pro::Reservation::PriceComputer do
       expect(prices[:services_tax]).to eq(Money.new 21036, 'EUR')
     end
 
+    it 'computes services_price_with_fee (Services prices plus fee)' do
+      expect(prices[:services_price_with_fee]).to eq(Money.new 105181, 'EUR')
+    end
+
+    it 'computes services_price_full (Services prices plus fee plus tax)' do
+      expect(prices[:services_price_full]).to eq(Money.new 126217, 'EUR')
+    end
+
     it 'computes price_excluding_tax (global price excluding tax)' do
       expect(prices[:price_excluding_tax]).to eq(Money.new 181381, 'EUR')
     end
