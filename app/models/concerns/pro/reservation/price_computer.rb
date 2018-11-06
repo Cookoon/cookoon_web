@@ -3,6 +3,21 @@ module Pro
     module PriceComputer
       extend ActiveSupport::Concern
 
+      def computed_price_attributes
+        {
+          cookoon_price: compute_degressive_cookoon_price,
+          cookoon_fee: compute_cookoon_fee_including_tax,
+          cookoon_fee_tax: compute_cookoon_fee_tax,
+          services_price_without_tax_and_fee: compute_services_price_without_tax_and_fee,
+          services_fee: compute_services_fee,
+          services_tax: compute_services_tax,
+          services_price_with_fee: compute_services_price_with_fee,
+          services_price_full: compute_services_price_full,
+          price_excluding_tax: compute_price_excluding_tax,
+          price: compute_price
+        }
+      end
+
       private
 
       def degression_rates
@@ -11,19 +26,6 @@ module Pro
 
       def defaults
         self.class::DEFAULTS
-      end
-
-      def computed_price_attributes
-        {
-          cookoon_price: compute_degressive_cookoon_price,
-          cookoon_fee: compute_cookoon_fee_including_tax,
-          cookoon_fee_tax: compute_cookoon_fee_tax,
-          services_price: compute_services_price,
-          services_fee: compute_services_fee,
-          services_tax: compute_services_tax,
-          price_excluding_tax: compute_price_excluding_tax,
-          price: compute_price
-        }
       end
 
       def compute_full_cookoon_price
@@ -44,24 +46,32 @@ module Pro
       end
 
       def compute_cookoon_fee_tax
-        compute_cookoon_fee_including_tax * defaults[:tax_rate]
+        compute_cookoon_fee_minus_tax * defaults[:tax_rate]
       end
 
-      def compute_services_price
+      def compute_services_price_without_tax_and_fee
         services_price_cents = services.sum(:price_cents)
         Money.new(services_price_cents)
       end
 
       def compute_services_fee
-        compute_services_price * defaults[:fee_rate]
+        compute_services_price_without_tax_and_fee * defaults[:fee_rate]
+      end
+
+      def compute_services_price_with_fee
+        compute_services_price_without_tax_and_fee + compute_services_fee
       end
 
       def compute_services_tax
-        (compute_services_price + compute_services_fee) * defaults[:tax_rate]
+        (compute_services_price_without_tax_and_fee + compute_services_fee) * defaults[:tax_rate]
+      end
+
+      def compute_services_price_full
+        [compute_services_price_without_tax_and_fee, compute_services_fee, compute_services_tax].sum
       end
 
       def compute_price_excluding_tax
-        [compute_degressive_cookoon_price, compute_cookoon_fee_minus_tax, compute_services_price, compute_services_fee].sum
+        [compute_degressive_cookoon_price, compute_cookoon_fee_minus_tax, compute_services_price_without_tax_and_fee, compute_services_fee].sum
       end
 
       def compute_price
