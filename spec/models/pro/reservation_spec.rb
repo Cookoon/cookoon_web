@@ -31,9 +31,11 @@ RSpec.describe Pro::Reservation, type: :model do
     it { is_expected.to monetize(:cookoon_price) }
     it { is_expected.to monetize(:cookoon_fee) }
     it { is_expected.to monetize(:cookoon_fee_tax) }
-    it { is_expected.to monetize(:services_price) }
+    it { is_expected.to monetize(:services_price_without_tax_and_fee) }
     it { is_expected.to monetize(:services_fee) }
     it { is_expected.to monetize(:services_tax) }
+    it { is_expected.to monetize(:services_price_with_fee) }
+    it { is_expected.to monetize(:services_price_full) }
     it { is_expected.to monetize(:price_excluding_tax) }
     it { is_expected.to monetize(:price) }
   end
