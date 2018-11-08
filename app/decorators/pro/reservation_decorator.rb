@@ -76,16 +76,16 @@ module Pro
       h.humanized_money_with_symbol object.services_fee
     end
 
-    def services_price_plus_fee
-      h.humanized_money_with_symbol object.services_price_plus_fee
+    def services_price_with_fee
+      h.humanized_money_with_symbol object.services_price_with_fee
     end
 
     def services_tax
       h.humanized_money_with_symbol object.services_tax
     end
 
-    def services_price_plus_fee_plus_tax
-      h.humanized_money_with_symbol object.services_price_plus_fee_plus_tax
+    def services_price_full
+      h.humanized_money_with_symbol object.services_price_full
     end
 
     def price_excluding_tax
