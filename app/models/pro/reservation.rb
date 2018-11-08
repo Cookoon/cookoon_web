@@ -139,6 +139,14 @@ module Pro
       "#{cookoon.name.parameterize(separator: '_')}_#{start_at.strftime('%d%b%y').downcase}.ics"
     end
 
+    def quotation?
+      status_before_type_cast < Pro::Reservation.statuses[:ongoing]
+    end
+
+    def invoice?
+      status_before_type_cast >= Pro::Reservation.statuses[:ongoing]
+    end
+
     private
 
     def assign_prices_needed?

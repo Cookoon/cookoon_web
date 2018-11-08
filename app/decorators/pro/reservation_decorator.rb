@@ -4,9 +4,9 @@ module Pro
     decorates_association :services
 
     def title
-      if object.status_before_type_cast < Reservation.statuses[:accepted]
+      if object.quotation?
         "Devis #{object.quote_reference}"
-      elsif object.status_before_type_cast < Reservation.statuses[:ongoing]
+      elsif object.ongoing?
         "Réservation ##{object.id}\nselon devis #{object.quote_reference}"
       else
         "Facture #{object.invoice_reference}\nselon devis #{object.quote_reference}"
@@ -14,7 +14,7 @@ module Pro
     end
 
     def subtitle
-      if object.status_before_type_cast < Reservation.statuses[:accepted]
+      if object.quotation?
         "Votre demande de location pour le #{start_on(without_year: true)}, de #{start_time} à #{end_time}"
       else
         "Récapitulatif de votre location du #{start_on(without_year: true)}, de #{start_time} à #{end_time}"
@@ -22,7 +22,7 @@ module Pro
     end
 
     def pdf_file_name
-      if object.status_before_type_cast < Reservation.statuses[:accepted]
+      if object.quotation?
         "#{object.quote_reference}_COOKOON_#{object.company.name.parameterize(separator: '_').upcase}"
       else
         "#{object.invoice_reference}_COOKOON_#{object.company.name.parameterize(separator: '_').upcase}"
@@ -38,6 +38,16 @@ module Pro
         BIC : CCBPFRPPLIL
         IBAN : FR76 1350 7000 3631 3930 2217 870
       LEGAL_MENTIONS
+    end
+
+    def quotation_cancel_policy
+      <<-CANCEL_POLICY
+        Conditions d’annulation
+
+        Gratuit plus de 6 jours ouvrés avant le début de la mise à disposition
+        50% du montant total entre 6 et 3 jours ouvrés avant le début de la mise à disposition
+        100 % du montant total moins de 3 jours ouvrés avant le début de la mise à disposition
+      CANCEL_POLICY
     end
 
     def created_on(options = {})
@@ -76,16 +86,16 @@ module Pro
       h.humanized_money_with_symbol object.services_fee
     end
 
-    def services_price_plus_fee
-      h.humanized_money_with_symbol object.services_price_plus_fee
+    def services_price_with_fee
+      h.humanized_money_with_symbol object.services_price_with_fee
     end
 
     def services_tax
       h.humanized_money_with_symbol object.services_tax
     end
 
-    def services_price_plus_fee_plus_tax
-      h.humanized_money_with_symbol object.services_price_plus_fee_plus_tax
+    def services_price_full
+      h.humanized_money_with_symbol object.services_price_full
     end
 
     def price_excluding_tax
