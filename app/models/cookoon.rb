@@ -17,6 +17,7 @@ class Cookoon < ApplicationRecord
   CATEGORIES = %w[Appartement Maison Jardin Loft Terrasse Toit Villa].freeze
   MAX_PER_USER = 2
   REWARD_INVITATIONS_COUNT = 5
+  HIGHLIGHT_PRICE = 60
 
   belongs_to :user
   has_many :reservations, dependent: :restrict_with_exception
