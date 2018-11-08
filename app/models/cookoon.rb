@@ -10,12 +10,14 @@ class Cookoon < ApplicationRecord
   scope :without_availabilty_in, ->(range) { where.not(id: Availability.unavailable.overlapping(range).pluck(:cookoon_id).uniq) }
   scope :without_pro_reservation_in, ->(range) { where.not(id: Pro::Reservation.engaged.overlapping(range).pluck(:cookoon_id).uniq) }
   scope :created_in_day_range_around, ->(date_time) { where created_at: day_range(date_time) }
+  scope :over_price, ->(price) { where 'price_cents >= ?', price }
 
   scope :random, -> { order(Arel::Nodes::NamedFunction.new('RANDOM', [])) }
 
   CATEGORIES = %w[Appartement Maison Jardin Loft Terrasse Toit Villa].freeze
   MAX_PER_USER = 2
   REWARD_INVITATIONS_COUNT = 5
+  HIGHLIGHT_PRICE = 60
 
   belongs_to :user
   has_many :reservations, dependent: :restrict_with_exception
