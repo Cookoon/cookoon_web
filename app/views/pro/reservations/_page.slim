@@ -10,19 +10,6 @@
       div = @reservation.company.address
       - if @reservation.company.vat.present?
         div N° TVA Intra : #{@reservation.company.vat}
-    / TODO: Remove if we decide to get rid of picture for sure.
-    / - if formats.include? :pdf
-    /   .col
-    /     = cl_image_tag(@reservation.cookoon.photos.first.path, width: 800, height: 450, crop: :fill, class: 'img-fluid')
-    / - else
-    /   .col.pro-reservation-card-offset
-    /     = c 'card_cookoon',
-    /         small: true,
-    /         link_url: @reservation.cookoon.pdf_url,
-    /         target: :cookoon_pdf,
-    /         image_url: cl_image_path(@reservation.cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
-    /         infos: ('Voir la fiche de ce Cookoon' if @reservation.cookoon.pdf_url),
-    /         infos_class: :reverse
 
   p.font-weight-bold = @reservation.subtitle
 
@@ -68,7 +55,7 @@
         .col-8
           | Total HT des options
         .col-4.text-right
-          = @reservation.services_price_plus_fee
+          = @reservation.services_price_with_fee
 
       .row.mb-3
         .col-8
@@ -80,7 +67,7 @@
         .col-8
           | Total TTC des options
         .col-4.text-right
-          = @reservation.services_price_plus_fee_plus_tax
+          = @reservation.services_price_full
 
   .page-break-inside-avoid
     .row.bg-primary.text-white.p-2
