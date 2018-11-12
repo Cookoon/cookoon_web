@@ -1,12 +1,12 @@
 class Payment
   include Stripe::Chargeable
 
-  attr_reader :chargeable, :options, :errors
+  attr_reader :payable, :options, :errors
 
-  delegate :user, :payment_amount_cents, to: :chargeable
+  delegate :user, :payment_amount_cents, to: :payable
 
-  def initialize(chargeable, options = {})
-    @chargeable = chargeable
+  def initialize(payable, options = {})
+    @payable = payable
     @options = options
     @errors = []
   end
@@ -14,7 +14,7 @@ class Payment
   def proceed
     before_proceed
     create_stripe_charge if charge_needed?
-    errors.empty? ? chargeable.paid! : false
+    errors.empty? ? payable.paid! : false
   end
 
   def refund
