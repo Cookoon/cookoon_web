@@ -28,12 +28,12 @@ module Stripe
     end
 
     def charge
-      return false unless chargeable.stripe_charge_id
-      @charge ||= Stripe::Charge.retrieve(chargeable.stripe_charge_id)
+      return false unless payable.stripe_charge_id
+      @charge ||= Stripe::Charge.retrieve(payable.stripe_charge_id)
     end
 
     def persist_charge
-      chargeable.update(stripe_charge_id: stripe_charge.id) if stripe_charge
+      payable.update(stripe_charge_id: stripe_charge.id) if stripe_charge
     end
 
     def create_charge
