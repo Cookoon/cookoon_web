@@ -168,10 +168,6 @@ class Reservation < ApplicationRecord
     [janitor, cleaning].count(true) * default_service_price_cents
   end
 
-  def host_payout_price_cents
-    degressive_price_cents - host_fee_cents - host_services_price_cents
-  end
-
   def payment_amount_cents
     price_with_tenant_fee_cents + services_price_cents
   end
@@ -198,6 +194,10 @@ class Reservation < ApplicationRecord
 
   def host_fee_cents
     (degressive_price_cents * host_fee_rate).round
+  end
+
+  def host_payout_price_cents
+    degressive_price_cents - host_fee_cents - host_services_price_cents
   end
 
   def base_price_cents
