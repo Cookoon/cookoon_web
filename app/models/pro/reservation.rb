@@ -83,6 +83,10 @@ module Pro
       passed!
     end
 
+    def payment(options = {})
+      Pro::Reservation::Payment.new(self, options)
+    end
+
     # __________________________________________________________________________
     # Must move to a new Payment model
     def host_fee_rate
