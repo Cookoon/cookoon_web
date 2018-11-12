@@ -3,10 +3,6 @@ class Reservation
     include Discountable
     include Stripe::Transferable
 
-    def transfer
-      trigger_stripe_transfer
-    end
-
     private
 
     # can be removed along with Discoutable
