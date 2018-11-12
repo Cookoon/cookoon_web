@@ -22,19 +22,27 @@ module Discountable
   end
 
   def discount_used?
-    chargeable.discount_amount_cents.positive?
+    payable.discount_amount_cents.positive?
   end
 
   def refund_user_discount
     return unless discount_used?
-    user.discount_balance_cents += chargeable.discount_amount_cents
+    user.discount_balance_cents += payable.discount_amount_cents
     user.save
   end
 
   private
 
+  def discount_asked?
+    ActiveModel::Type::Boolean.new.cast(options[:discount])
+  end
+
+  def discount_amount_used
+    ActionController::Base.helpers.humanized_money_with_symbol(payable.discount_amount)
+  end
+
   def update_discountable
-    chargeable.update(discount_amount_cents: discountable_discount_amount_cents)
+    payable.update(discount_amount_cents: discountable_discount_amount_cents)
   end
 
   def update_user
