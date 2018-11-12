@@ -11,10 +11,6 @@ class Reservation
       persist_discount if discount_asked?
     end
 
-    def discount_asked?
-      ActiveModel::Type::Boolean.new.cast(options[:discount])
-    end
-
     def should_capture?
       ActiveModel::Type::Boolean.new.cast(options[:capture]) || false
     end
@@ -44,10 +40,6 @@ class Reservation
 
     def transfer_destination
       reservation.cookoon.user.stripe_account_id
-    end
-
-    def discount_amount_used
-      ActionController::Base.helpers.humanized_money_with_symbol(reservation.discount_amount)
     end
   end
 end

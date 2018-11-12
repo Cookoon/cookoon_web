@@ -1,16 +1,13 @@
 class Service
   class Payment < ::Payment
     include Discountable
+    alias_method :service, :payable
 
     private
 
     # can be removed along with Discoutable
     def before_proceed
       persist_discount if discount_asked?
-    end
-
-    def discount_asked?
-      ActiveModel::Type::Boolean.new.cast(options[:discount])
     end
 
     def should_capture?
@@ -22,7 +19,7 @@ class Service
     end
 
     def charge_description
-      "Paiement des services pour #{chargeable.cookoon.name}"
+      "Paiement des services pour #{service.cookoon.name}"
     end
   end
 end
