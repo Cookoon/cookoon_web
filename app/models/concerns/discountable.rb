@@ -17,7 +17,7 @@ module Discountable
   end
 
   def persist_discount
-    update_discountable
+    update_payable
     update_user
   end
 
@@ -41,7 +41,7 @@ module Discountable
     ActionController::Base.helpers.humanized_money_with_symbol(payable.discount_amount)
   end
 
-  def update_discountable
+  def update_payable
     payable.update(discount_amount_cents: discountable_discount_amount_cents)
   end
 
