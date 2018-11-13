@@ -19,6 +19,8 @@ Rails.application.routes.draw do
     get :desktop_only
   end
 
+  post '/stripe_webhook', to: 'stripe#webhook'
+
   # -------- RESOURCES ---------
   resource :users, only: %i[edit update]
   resources :users, only: :index do
