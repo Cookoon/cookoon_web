@@ -30,6 +30,10 @@ module Stripe
       stripe_customer.save
     end
 
+    def stripe_customer?
+      stripe_customer_id.present?
+    end
+
     private
 
     def update_user(customer)
