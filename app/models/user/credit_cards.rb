@@ -12,7 +12,7 @@ class User
     end
 
     def add(token)
-      user.create_stripe_customer unless stripe_customer
+      user.create_stripe_customer unless stripe_customer?
       user.create_stripe_source(token)
     end
 
