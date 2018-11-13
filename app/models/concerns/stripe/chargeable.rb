@@ -49,7 +49,6 @@ module Stripe
     end
 
     def charge_attributes
-      # add metadata ?
       {
         amount: charge_amount_cents,
         currency: 'eur',
