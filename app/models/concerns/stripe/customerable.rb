@@ -1,11 +1,15 @@
 module Stripe
   module Customerable
+    class AlreadyCustomerError < StandardError; end
+
     def stripe_customer
       return nil unless stripe_customer_id
       @stripe_customer ||= retrieve_customer
     end
 
     def create_stripe_customer
+      raise AlreadyCustomerError if stripe_customer?
+
       customer = create_customer
       update_user(customer)
       customer
