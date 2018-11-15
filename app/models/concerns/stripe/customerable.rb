@@ -15,8 +15,8 @@ module Stripe
       customer
     end
 
-    def create_stripe_source(token)
-      create_source(token)
+    def link_stripe_source(token)
+      link_source(token)
     end
 
     def retrieve_stripe_sources
@@ -60,13 +60,24 @@ module Stripe
       )
     end
 
-    def create_source(token)
+    def link_source(token)
       stripe_customer.sources.create(source: token)
     rescue Stripe::CardError, Stripe::InvalidRequestError => e
       Rails.logger.error("Failed to create stripe source for #{customerable_label}")
       Rails.logger.error(e.message)
       errors.add(:stripe_source, e.message)
       false
+    end
+
+    def create_sepa_source
+      Stripe::Source.create({
+        type: 'sepa_credit_transfer',
+        currency: 'eur',
+        owner: {
+          name: name,
+          email: referent_email,
+        }
+      })
     end
   end
 end
