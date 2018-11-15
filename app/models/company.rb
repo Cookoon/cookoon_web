@@ -8,7 +8,18 @@ class Company < ApplicationRecord
   validates :address, presence: true
   validates :siren, numericality: { only_integer: true }, length: { is: 9 }, allow_nil: true
   validates :siret, numericality: { only_integer: true }, length: { is: 14 }, allow_nil: true
+  validates :referent_email, presence: true
+
+  after_create :stripe_prepare
 
   alias_attribute :to_s, :name
   alias_attribute :customerable_label, :name
+
+  private
+
+  def stripe_prepare
+    create_stripe_customer
+    source = create_sepa_source
+    link_stripe_source(source.id)
+  end
 end
