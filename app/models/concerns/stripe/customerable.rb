@@ -11,7 +11,7 @@ module Stripe
       raise AlreadyCustomerError if stripe_customer?
 
       customer = create_customer
-      update_user(customer)
+      update_customerable(customer)
       customer
     end
 
@@ -40,7 +40,7 @@ module Stripe
 
     private
 
-    def update_user(customer)
+    def update_customerable(customer)
       update(stripe_customer_id: customer.id) if customer
     end
 
