@@ -1,6 +1,10 @@
 module Stripe
   module Customerable
-    class AlreadyCustomerError < StandardError; end
+    class AlreadyCustomerError < StandardError
+      def message
+        "This User or Company already has a Stripe Customer attached"
+      end
+    end
 
     def stripe_customer
       return nil unless stripe_customer_id
