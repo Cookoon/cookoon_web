@@ -47,7 +47,7 @@ module Stripe
     def retrieve_customer
       Stripe::Customer.retrieve(stripe_customer_id)
     rescue Stripe::InvalidRequestError => e
-      Rails.logger.error("Failed to retrieve customer for #{email}")
+      Rails.logger.error("Failed to retrieve customer for #{customerable_label}")
       Rails.logger.error(e.message)
       errors.add(:customer, 'Failed to retrieve stripe customer')
       false
@@ -55,17 +55,17 @@ module Stripe
 
     def create_customer
       Stripe::Customer.create(
-        description: "Customer for #{email}",
-        email: email
+        description: "Customer for #{customerable_label}",
+        email: try(:email)
       )
     end
 
     def create_source(token)
       stripe_customer.sources.create(source: token)
     rescue Stripe::CardError, Stripe::InvalidRequestError => e
-      Rails.logger.error("Failed to create credit_card for #{email}")
+      Rails.logger.error("Failed to create stripe source for #{customerable_label}")
       Rails.logger.error(e.message)
-      errors.add(:credit_card, e.message)
+      errors.add(:stripe_source, e.message)
       false
     end
   end
