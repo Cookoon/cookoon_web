@@ -23,13 +23,20 @@ module Stripe
       link_source(token)
     end
 
-    def retrieve_stripe_sources
+    # can pass source instead of card to retrive sepa
+    def retrieve_stripe_sources(object = 'card')
       return [] unless stripe_customer
-      stripe_customer.sources.all(object: 'card')
+      stripe_customer.sources.all(object: object)
     end
 
-    def destroy_stripe_source(card)
-      stripe_customer.sources.retrieve(card).delete
+    def sepa_infos
+      sources = retrieve_stripe_sources('source')
+      return nil if sources.empty?
+      sources.data.first['sepa_credit_transfer']
+    end
+
+    def destroy_stripe_source(source)
+      stripe_customer.sources.retrieve(source).delete
     end
 
     def default_stripe_source(card)
