@@ -34,9 +34,9 @@ module Pro
         Délai de règlement : #{1.month.since(start_at).strftime('%d/%m/%Y')}
         Moyen de règlement : Virement
 
-        Banque : BPN
-        BIC : CCBPFRPPLIL
-        IBAN : FR76 1350 7000 3631 3930 2217 870
+        Banque : #{object.company.sepa_infos.bank_name}
+        BIC : #{object.company.sepa_infos.bic}
+        IBAN : #{object.company.sepa_infos.iban}
       LEGAL_MENTIONS
     end
 
