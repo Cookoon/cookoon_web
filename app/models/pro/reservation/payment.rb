@@ -2,17 +2,17 @@ module Pro
   class Reservation
     class Payment < ::Payment
       include Stripe::Transferable
+
       alias_method :reservation, :payable
-      # include Stripe::SepaCreditable
 
       private
 
-      def should_capture?
-        true
+      def transfer_amount
+        reservation.host_payout_price_cents
       end
 
-      def charge_amount_cents
-        price_cents
+      def transfer_destination
+        reservation.cookoon.user.stripe_account_id
       end
     end
   end
