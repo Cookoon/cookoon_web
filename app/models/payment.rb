@@ -51,4 +51,8 @@ class Payment
   def charge_metadata
     {}
   end
+
+  def transfer_metadata
+    {}
+  end
 end
