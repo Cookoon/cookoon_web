@@ -77,7 +77,7 @@ module Pro
     end
 
     def admin_close
-      trigger_transfer
+      payment.transfer
       ::ReservationMailer.notify_payout_to_host(self).deliver_later
 
       passed!
@@ -87,8 +87,6 @@ module Pro
       Pro::Reservation::Payment.new(self, options)
     end
 
-    # __________________________________________________________________________
-    # Must move to a new Payment model
     def host_fee_rate
       DEFAULTS[:fee_rate]
     end
@@ -100,19 +98,6 @@ module Pro
     def host_payout_price_cents
       cookoon_price_cents - host_fee_cents
     end
-
-    def transfer_attributes
-      {
-        amount: host_payout_price_cents,
-        currency: 'eur',
-        destination: cookoon.user.stripe_account_id,
-      }
-    end
-
-    def trigger_transfer
-      Stripe::Transfer.create(transfer_attributes)
-    end
-    # __________________________________________________________________________
 
     def quote_reference
       "DEV-C4B-#{quote.created_at.strftime('%y%m')}#{format '%03d', quote.id}"
