@@ -34,6 +34,14 @@ class Reservation
       }
     end
 
+    def transfer_metadata
+      {
+        metadata: {
+          discount_amount: discount_amount_used
+        }
+      }
+    end
+
     def transfer_amount
       reservation.host_payout_price_cents
     end
