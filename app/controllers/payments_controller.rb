@@ -63,7 +63,7 @@ class PaymentsController < ApplicationController
     when 'corporate'
       { icon_name: 'pro', display_name: "Carnets,<br />eau, etc." }
     when 'chef'
-      { icon_name: 'chef', display_name: 'Chef à<br />domicile' }
+      { icon_name: 'chef', display_name: 'Chef<br />privé' }
     when 'catering'
       { icon_name: 'food', display_name: 'Plateaux<br />repas' }
     when 'special'
