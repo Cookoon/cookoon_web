@@ -55,4 +55,9 @@ class Payment
   def transfer_metadata
     {}
   end
+
+  def stripe_customer
+    return nil unless user.stripe_customer?
+    user.stripe_customer
+  end
 end
