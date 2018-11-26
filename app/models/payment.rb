@@ -14,7 +14,7 @@ class Payment
   def proceed
     before_proceed
     create_stripe_charge if charge_needed?
-    errors.empty? ? payable.paid! : false
+    after_proceed
   end
 
   def refund
@@ -37,6 +37,8 @@ class Payment
   private
 
   def before_proceed; end
+
+  def after_proceed; end
 
   def charge_needed?
     charge_amount_cents.positive?

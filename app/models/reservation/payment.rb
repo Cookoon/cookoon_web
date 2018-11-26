@@ -11,6 +11,10 @@ class Reservation
       persist_discount if discount_asked?
     end
 
+    def after_proceed
+      reservation.paid! if errors.empty?
+    end
+
     def should_capture?
       ActiveModel::Type::Boolean.new.cast(options[:capture]) || false
     end

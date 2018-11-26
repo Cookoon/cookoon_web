@@ -72,6 +72,11 @@ module Pro
       DEFAULTS[:fee_rate] * 100
     end
 
+    ### TODO MOVE TO STRIPE WEBHOOK
+    # reservation = Pro::Reservation.find(:id)
+    # source = reservation.user.company.retrieve_stripe_sources('source').data.first.id
+    # reservation.payment({source: source}).proceed
+
     def self.tax_percentage
       DEFAULTS[:tax_rate] * 100
     end
