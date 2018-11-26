@@ -1,27 +1,42 @@
 module Stripe
   module Customerable
+    class AlreadyCustomerError < StandardError
+      def message
+        "This User or Company already has a Stripe Customer attached"
+      end
+    end
+
     def stripe_customer
       return nil unless stripe_customer_id
       @stripe_customer ||= retrieve_customer
     end
 
     def create_stripe_customer
+      raise AlreadyCustomerError if stripe_customer?
+
       customer = create_customer
-      update_user(customer)
+      update_customerable(customer)
       customer
     end
 
-    def create_stripe_source(token)
-      create_source(token)
+    def link_stripe_source(token)
+      link_source(token)
     end
 
-    def retrieve_stripe_sources
+    # can pass source instead of card to retrive sepa
+    def retrieve_stripe_sources(object = 'card')
       return [] unless stripe_customer
-      stripe_customer.sources.all(object: 'card')
+      stripe_customer.sources.all(object: object)
     end
 
-    def destroy_stripe_source(card)
-      stripe_customer.sources.retrieve(card).delete
+    def sepa_infos
+      sources = retrieve_stripe_sources('source')
+      return nil if sources.empty?
+      sources.data.first['sepa_credit_transfer']
+    end
+
+    def destroy_stripe_source(source)
+      stripe_customer.sources.retrieve(source).delete
     end
 
     def default_stripe_source(card)
@@ -30,16 +45,20 @@ module Stripe
       stripe_customer.save
     end
 
+    def stripe_customer?
+      stripe_customer_id.present?
+    end
+
     private
 
-    def update_user(customer)
+    def update_customerable(customer)
       update(stripe_customer_id: customer.id) if customer
     end
 
     def retrieve_customer
       Stripe::Customer.retrieve(stripe_customer_id)
     rescue Stripe::InvalidRequestError => e
-      Rails.logger.error("Failed to retrieve customer for #{email}")
+      Rails.logger.error("Failed to retrieve customer for #{customerable_label}")
       Rails.logger.error(e.message)
       errors.add(:customer, 'Failed to retrieve stripe customer')
       false
@@ -47,18 +66,29 @@ module Stripe
 
     def create_customer
       Stripe::Customer.create(
-        description: "Customer for #{email}",
-        email: email
+        description: "Customer for #{customerable_label}",
+        email: try(:email)
       )
     end
 
-    def create_source(token)
+    def link_source(token)
       stripe_customer.sources.create(source: token)
     rescue Stripe::CardError, Stripe::InvalidRequestError => e
-      Rails.logger.error("Failed to create credit_card for #{email}")
+      Rails.logger.error("Failed to create stripe source for #{customerable_label}")
       Rails.logger.error(e.message)
-      errors.add(:credit_card, e.message)
+      errors.add(:stripe_source, e.message)
       false
+    end
+
+    def create_sepa_source
+      Stripe::Source.create({
+        type: 'sepa_credit_transfer',
+        currency: 'eur',
+        owner: {
+          name: name,
+          email: referent_email,
+        }
+      })
     end
   end
 end

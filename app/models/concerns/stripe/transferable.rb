@@ -1,6 +1,6 @@
 module Stripe
   module Transferable
-    def trigger_stripe_transfer
+    def transfer
       trigger_transfer
     end
 
@@ -21,11 +21,8 @@ module Stripe
       {
         amount: transfer_amount,
         currency: 'eur',
-        destination: transfer_destination,
-        metadata: {
-          discount_amount: discount_amount_used
-        }
-      }
+        destination: transfer_destination
+      }.merge(transfer_metadata)
     end
   end
 end

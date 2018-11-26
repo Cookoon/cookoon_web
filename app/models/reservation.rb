@@ -106,42 +106,8 @@ class Reservation < ApplicationRecord
     janitor || cleaning
   end
 
-  def base_price_cents
-    return 0 unless duration && cookoon
-    duration * cookoon.price_cents
-  end
-
-  def degressive_price_cents
-    degressive_rate = DEGRESSION_RATES[duration] || 1
-    (base_price_cents * degressive_rate).round
-  end
-
   def has_tied_services?
     services.payment_tied_to_reservation.any?
-  end
-
-  def services_price_cents
-    services.payment_tied_to_reservation.sum(:price_cents)
-  end
-
-  def tenant_fee_rate
-    DEFAULTS[:tenant_fee_rate]
-  end
-
-  def tenant_fee_cents
-    (degressive_price_cents * tenant_fee_rate).round
-  end
-
-  def price_with_tenant_fee_cents
-    degressive_price_cents + tenant_fee_cents
-  end
-
-  def host_fee_rate
-    DEFAULTS[:host_fee_rate]
-  end
-
-  def host_fee_cents
-    (degressive_price_cents * host_fee_rate).round
   end
 
   def notify_users_after_payment
@@ -154,22 +120,6 @@ class Reservation < ApplicationRecord
     ReservationMailer.confirmed_to_host(self).deliver_later
   end
 
-  def default_service_price_cents
-    DEFAULTS[:service_price_cents]
-  end
-
-  def host_services_price_cents
-    [janitor, cleaning].count(true) * default_service_price_cents
-  end
-
-  def host_payout_price_cents
-    degressive_price_cents - host_fee_cents - host_services_price_cents
-  end
-
-  def payment_amount_cents
-    price_with_tenant_fee_cents + services_price_cents
-  end
-
   def admin_close
     payment.transfer
     ReservationMailer.notify_payout_to_host(self).deliver_later
@@ -178,6 +128,7 @@ class Reservation < ApplicationRecord
     send_ending_surveys
   end
 
+  # should move to payment ?
   def full_discount?
     discount_amount_cents >= payment_amount_cents
   end
@@ -207,6 +158,58 @@ class Reservation < ApplicationRecord
   def ical_file_name
     "#{cookoon.name.parameterize(separator: '_')}_#{start_at.strftime('%d%b%y').downcase}.ics"
   end
+
+  # ======= PRICES ========
+  def default_service_price_cents
+    DEFAULTS[:service_price_cents]
+  end
+
+  def host_services_price_cents
+    [janitor, cleaning].count(true) * default_service_price_cents
+  end
+
+  def payment_amount_cents
+    price_with_tenant_fee_cents + services_price_cents
+  end
+
+  def services_price_cents
+    services.payment_tied_to_reservation.sum(:price_cents)
+  end
+
+  def tenant_fee_rate
+    DEFAULTS[:tenant_fee_rate]
+  end
+
+  def tenant_fee_cents
+    (degressive_price_cents * tenant_fee_rate).round
+  end
+
+  def price_with_tenant_fee_cents
+    degressive_price_cents + tenant_fee_cents
+  end
+
+  def host_fee_rate
+    DEFAULTS[:host_fee_rate]
+  end
+
+  def host_fee_cents
+    (degressive_price_cents * host_fee_rate).round
+  end
+
+  def host_payout_price_cents
+    degressive_price_cents - host_fee_cents - host_services_price_cents
+  end
+
+  def base_price_cents
+    return 0 unless duration && cookoon
+    duration * cookoon.price_cents
+  end
+
+  def degressive_price_cents
+    degressive_rate = DEGRESSION_RATES[duration] || 1
+    (base_price_cents * degressive_rate).round
+  end
+  # ======================
 
   private
 

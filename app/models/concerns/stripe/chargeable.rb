@@ -28,17 +28,17 @@ module Stripe
     end
 
     def charge
-      return false unless chargeable.stripe_charge_id
-      @charge ||= Stripe::Charge.retrieve(chargeable.stripe_charge_id)
+      return false unless payable.stripe_charge_id
+      @charge ||= Stripe::Charge.retrieve(payable.stripe_charge_id)
     end
 
     def persist_charge
-      chargeable.update(stripe_charge_id: stripe_charge.id) if stripe_charge
+      payable.update(stripe_charge_id: stripe_charge.id) if stripe_charge
     end
 
     def create_charge
       # keep rescue ?
-      return false unless user&.stripe_customer
+      return false unless stripe_customer
       @stripe_charge = Stripe::Charge.create(charge_attributes)
     rescue Stripe::CardError, Stripe::InvalidRequestError => e
       Rails.logger.error('Failed to create Stripe Charge')
@@ -49,11 +49,10 @@ module Stripe
     end
 
     def charge_attributes
-      # add metadata ?
       {
         amount: charge_amount_cents,
         currency: 'eur',
-        customer: user.stripe_customer.id,
+        customer: stripe_customer.id,
         source: options[:source],
         description: charge_description,
         metadata: charge_metadata,

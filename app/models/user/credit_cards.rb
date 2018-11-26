@@ -12,8 +12,8 @@ class User
     end
 
     def add(token)
-      user.create_stripe_customer unless stripe_customer
-      user.create_stripe_source(token)
+      user.create_stripe_customer unless user.stripe_customer?
+      user.link_stripe_source(token)
     end
 
     def destroy(card)

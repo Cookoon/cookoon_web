@@ -72,19 +72,26 @@ module Pro
       DEFAULTS[:fee_rate] * 100
     end
 
+    ### PROCEDURE DE CHARGE STRIPE
+    # reservation = Pro::Reservation.find(:id)
+    # source = reservation.user.company.retrieve_stripe_sources('source').data.first.id
+    # reservation.payment({source: source}).proceed
+
     def self.tax_percentage
       DEFAULTS[:tax_rate] * 100
     end
 
     def admin_close
-      trigger_transfer
+      payment.transfer
       ::ReservationMailer.notify_payout_to_host(self).deliver_later
 
       passed!
     end
 
-    # __________________________________________________________________________
-    # Must move to a new Payment model
+    def payment(options = {})
+      Pro::Reservation::Payment.new(self, options)
+    end
+
     def host_fee_rate
       DEFAULTS[:fee_rate]
     end
@@ -96,19 +103,6 @@ module Pro
     def host_payout_price_cents
       cookoon_price_cents - host_fee_cents
     end
-
-    def transfer_attributes
-      {
-        amount: host_payout_price_cents,
-        currency: 'eur',
-        destination: cookoon.user.stripe_account_id,
-      }
-    end
-
-    def trigger_transfer
-      Stripe::Transfer.create(transfer_attributes)
-    end
-    # __________________________________________________________________________
 
     def quote_reference
       "DEV-C4B-#{quote.created_at.strftime('%y%m')}#{format '%03d', quote.id}"

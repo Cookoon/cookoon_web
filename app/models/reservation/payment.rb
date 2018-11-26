@@ -2,10 +2,7 @@ class Reservation
   class Payment < ::Payment
     include Discountable
     include Stripe::Transferable
-
-    def transfer
-      trigger_stripe_transfer
-    end
+    alias_method :reservation, :payable
 
     private
 
@@ -14,8 +11,8 @@ class Reservation
       persist_discount if discount_asked?
     end
 
-    def discount_asked?
-      ActiveModel::Type::Boolean.new.cast(options[:discount])
+    def after_proceed
+      reservation.paid! if errors.empty?
     end
 
     def should_capture?
@@ -27,30 +24,34 @@ class Reservation
     end
 
     def charge_description
-      "Paiement pour #{chargeable.cookoon.name}"
+      "Paiement pour #{reservation.cookoon.name}"
     end
 
     def charge_metadata
       {
-        reservation_id: chargeable.id,
-        reservation_price: chargeable.price,
-        reservation_services_price: chargeable.services_price,
-        reservation_tenant_fee: chargeable.tenant_fee,
-        reservation_host_fee: chargeable.host_fee,
-        reservation_services: chargeable.services.payment_tied_to_reservation.pluck(:category).join(' · ')
+        reservation_id: reservation.id,
+        reservation_price: reservation.price,
+        reservation_services_price: reservation.services_price,
+        reservation_tenant_fee: reservation.tenant_fee,
+        reservation_host_fee: reservation.host_fee,
+        reservation_services: reservation.services.payment_tied_to_reservation.pluck(:category).join(' · ')
+      }
+    end
+
+    def transfer_metadata
+      {
+        metadata: {
+          discount_amount: discount_amount_used
+        }
       }
     end
 
     def transfer_amount
-      chargeable.host_payout_price_cents
+      reservation.host_payout_price_cents
     end
 
     def transfer_destination
-      chargeable.cookoon.user.stripe_account_id
-    end
-
-    def discount_amount_used
-      ActionController::Base.helpers.humanized_money_with_symbol(chargeable.discount_amount)
+      reservation.cookoon.user.stripe_account_id
     end
   end
 end

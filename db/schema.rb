@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_11_06_142127) do
+ActiveRecord::Schema.define(version: 2018_11_26_104627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -51,6 +51,8 @@ ActiveRecord::Schema.define(version: 2018_11_06_142127) do
     t.string "vat"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "stripe_customer_id"
+    t.string "referent_email"
   end
 
   create_table "cookoon_searches", force: :cascade do |t|
@@ -207,6 +209,7 @@ ActiveRecord::Schema.define(version: 2018_11_06_142127) do
     t.string "services_price_with_fee_currency", default: "EUR", null: false
     t.integer "services_price_full_cents", default: 0, null: false
     t.string "services_price_full_currency", default: "EUR", null: false
+    t.string "stripe_charge_id"
     t.index ["cookoon_id"], name: "index_pro_reservations_on_cookoon_id"
     t.index ["pro_quote_id"], name: "index_pro_reservations_on_pro_quote_id"
   end

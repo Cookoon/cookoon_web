@@ -41,11 +41,11 @@ class User < ApplicationRecord
   validates :terms_of_service, acceptance: { message: 'Vous devez accepter les conditions générales pour continuer' }
 
   after_invitation_accepted :send_welcome_email
-
   after_save :upsert_mailchimp_subscription, if: :saved_change_to_born_on?
-
   before_update :set_discount_expires_at, if: :discount_balance_cents_changed?
   before_update :report_to_slack, if: :stripe_account_id_changed?
+
+  alias_attribute :customerable_label, :email
 
   def self.pro_invite!(attributes, inviter = nil)
     raise NotProError if attributes[:company_id].blank? # Maybe not
