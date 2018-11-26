@@ -13,8 +13,7 @@ module Pro
       end
 
       def charge_amount_cents
-        # price_cents
-        1000
+        price_cents
       end
 
       def charge_description
