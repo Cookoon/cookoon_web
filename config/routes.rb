@@ -19,7 +19,12 @@ Rails.application.routes.draw do
     get :desktop_only
   end
 
-  post '/stripe_webhook', to: 'stripe#webhook'
+  namespace :stripe do
+    controller :webhooks do
+      post :source_chargeable
+      post :charge_succeeded
+    end
+  end
 
   # -------- RESOURCES ---------
   resource :users, only: %i[edit update]

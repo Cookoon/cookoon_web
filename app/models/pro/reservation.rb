@@ -72,7 +72,7 @@ module Pro
       DEFAULTS[:fee_rate] * 100
     end
 
-    ### TODO MOVE TO STRIPE WEBHOOK
+    ### PROCEDURE DE CHARGE STRIPE
     # reservation = Pro::Reservation.find(:id)
     # source = reservation.user.company.retrieve_stripe_sources('source').data.first.id
     # reservation.payment({source: source}).proceed
