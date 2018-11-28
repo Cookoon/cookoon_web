@@ -17,5 +17,9 @@ FactoryBot.define do
     trait :with_photos_upload do
       photo_urls %w[https://picsum.photos/400/300]
     end
+
+    trait :approved do
+      status :approved
+    end
   end
 end

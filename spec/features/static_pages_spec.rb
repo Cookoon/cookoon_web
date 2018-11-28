@@ -9,7 +9,7 @@ RSpec.feature "Static Pages", type: :feature do
     end
 
     scenario 'user visits b2c homepage' do
-      create(:cookoon)
+      create(:cookoon, :approved)
       visit root_path
       expect(page).to have_current_path '/'
       expect(page).to have_css 'i.co-logo'
