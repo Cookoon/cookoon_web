@@ -50,9 +50,6 @@ jobs:
           key: cookoon-web-yarn-{{ checksum "yarn.lock" }}
           paths: ~/.cache/yarn
 
-      # Prepare .env
-      - run: cp .env.example .env
-
       # Database setup
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load
