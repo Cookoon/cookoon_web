@@ -20,7 +20,6 @@ jobs:
           POSTGRES_USER: root
           POSTGRES_DB: cookoon_web_test
           POSTGRES_PASSWORD: ""
-      - image: selenium/standalone-chrome:3.4.0
 
     steps:
       - checkout
