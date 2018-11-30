@@ -159,8 +159,6 @@ GEM
       multi_xml (>= 0.5.2)
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
-    i18n-debug (1.1.1)
-      i18n (< 2)
     i18n-tasks (0.9.23)
       activesupport (>= 4.0.2)
       ast (>= 2.1.0)
@@ -445,7 +443,6 @@ DEPENDENCIES
   forest_liana
   geocoder
   gibbon
-  i18n-debug
   i18n-tasks
   icalendar
   jbuilder (~> 2.5)

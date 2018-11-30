@@ -106,7 +106,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   # Custom
   gem 'bullet'
-  gem 'i18n-debug'
+  # gem 'i18n-debug'
   gem 'i18n-tasks', require: false
   gem 'letter_opener'
   gem 'pry-byebug'
