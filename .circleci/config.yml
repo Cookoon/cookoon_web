@@ -5,38 +5,46 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/cookoon_web
-    docker:
+    parallelism: 3
+    docker: # run the steps with Docker
       - image: circleci/ruby:2.5.1-node-browsers
         environment:
           BUNDLE_JOBS: 3
           BUNDLE_RETRY: 3
-          RAILS_ENV: test
+          BUNDLE_PATH: vendor/bundle
           PGHOST: 127.0.0.1
           PGUSER: root
-          BUNDLE_PATH: vendor/bundle
+          RAILS_ENV: test
       - image: circleci/postgres:9.6.2-alpine
         environment:
           POSTGRES_USER: root
           POSTGRES_DB: cookoon_web_test
           POSTGRES_PASSWORD: ""
-
     steps:
       - checkout
 
+      # Which version of bundler?
+      - run:
+          name: Which bundler?
+          command: bundle -v
+
+      # Restore bundle cache
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "Gemfile.lock" }}
-          - v1-dependencies-
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - v1-dependencies-
 
       - run:
-          name: install dependencies
+          name: Bundle Install
           command: bundle check || bundle install
 
+      # Store bundle cache
       - save_cache:
-          paths: vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
 
+      # Only necessary if app uses webpacker or yarn in some other way
       - restore_cache:
           keys:
             - cookoon-web-yarn-{{ checksum "yarn.lock" }}
@@ -46,23 +54,30 @@ jobs:
           name: Yarn Install
           command: yarn install --cache-folder ~/.cache/yarn
 
+      # Store yarn / webpacker cache
       - save_cache:
           key: cookoon-web-yarn-{{ checksum "yarn.lock" }}
-          paths: ~/.cache/yarn
-
-      # Database setup
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load
+          paths:
+            - ~/.cache/yarn
 
       - run:
-          name: Download Selenium
-          command: curl -O http://selenium-release.storage.googleapis.com/3.5/selenium-server-standalone-3.5.3.jar
-      - run:
-          name: Start Selenium
-          command: java -jar selenium-server-standalone-3.5.3.jar
-          background: true
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
-      # run tests!
       - run:
-          name: run tests
-          command: bundle exec rspec --format progress
+          name: Database setup
+          command: bin/rails db:schema:load --trace
+
+      - run:
+          name: Run rspec in parallel
+          command: |
+            bundle exec rspec --profile 10 \
+                              --format RspecJunitFormatter \
+                              --out test_results/rspec.xml \
+                              --format progress \
+                              $(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)
+
+      # Save test results for timing analysis
+      - store_test_results:
+          path: test_results
+      # See https://circleci.com/docs/2.0/deployment-integrations/ for example deploy configs
