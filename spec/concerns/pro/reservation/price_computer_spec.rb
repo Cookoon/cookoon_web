@@ -50,5 +50,9 @@ RSpec.describe Pro::Reservation::PriceComputer do
     it 'computes price (global price)' do
       expect(prices[:price]).to eq(Money.new 203257, 'EUR')
     end
+
+    it 'computes tax_total (total taxes)' do
+      expect(prices[:tax_total]).to eq(Money.new 21876, 'EUR')
+    end
   end
 end
