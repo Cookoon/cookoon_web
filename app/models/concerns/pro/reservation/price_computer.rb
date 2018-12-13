@@ -14,6 +14,7 @@ module Pro
           services_price_with_fee: compute_services_price_with_fee,
           services_price_full: compute_services_price_full,
           price_excluding_tax: compute_price_excluding_tax,
+          tax_total: compute_tax_total,
           price: compute_price
         }
       end
@@ -76,6 +77,10 @@ module Pro
 
       def compute_price
         [compute_price_excluding_tax, compute_cookoon_fee_tax, compute_services_tax].sum
+      end
+
+      def compute_tax_total
+        [compute_services_tax, compute_cookoon_fee_tax].sum
       end
     end
   end

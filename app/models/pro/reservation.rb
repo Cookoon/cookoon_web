@@ -40,6 +40,7 @@ module Pro
     monetize :price_cents
     monetize :services_price_with_fee_cents
     monetize :services_price_full_cents
+    monetize :tax_total_cents
 
     monetize :host_payout_price_cents
 
