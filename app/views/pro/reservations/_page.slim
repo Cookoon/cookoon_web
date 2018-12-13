@@ -15,8 +15,10 @@
 
   h3 Mise à disposition d'un Cookoon
   .row.mb-3
-    .col-8 Cookoon “<u>#{@reservation.cookoon.name}</u>” × #{@reservation.duration}
+    .col-8
+      | Cookoon “<u>#{@reservation.cookoon.name}</u>” × #{@reservation.duration}
       .small Cette somme sera encaissée pour le compte de l'Hôte Cookoon et ne sera pas soumise à TVA.
+
     .col-4.text-right = @reservation.cookoon_price
 
   .row
@@ -65,6 +67,6 @@
     - if @reservation.quotation?
       = simple_format(@reservation.quotation_cancel_policy)
     - elsif @reservation.invoice?
-      = simple_format(@reservation.invoice_legal_mentions)
+      =# simple_format(@reservation.invoice_legal_mentions)
 
   = render 'footer'
