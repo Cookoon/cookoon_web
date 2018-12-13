@@ -105,5 +105,9 @@ module Pro
     def price
       h.humanized_money_with_symbol object.price
     end
+
+    def tax_total
+      h.humanized_money_with_symbol object.tax_total
+    end
   end
 end

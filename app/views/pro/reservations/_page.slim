@@ -60,6 +60,10 @@
       .col-4.text-right = @reservation.price_excluding_tax
 
     .row.p-2
+      .col-8 TOTAL TAXES
+      .col-4.text-right = @reservation.tax_total
+
+    .row.bg-primary.text-white.p-2
       .col-8 TOTAL TTC
       .col-4.text-right = @reservation.price
 
@@ -67,6 +71,6 @@
     - if @reservation.quotation?
       = simple_format(@reservation.quotation_cancel_policy)
     - elsif @reservation.invoice?
-      =# simple_format(@reservation.invoice_legal_mentions)
+      = simple_format(@reservation.invoice_legal_mentions)
 
   = render 'footer'
