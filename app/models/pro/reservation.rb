@@ -33,14 +33,12 @@ module Pro
     monetize :cookoon_price_cents
     monetize :cookoon_fee_cents
     monetize :cookoon_fee_tax_cents
-    monetize :services_price_without_tax_and_fee_cents
-    monetize :services_fee_cents
+    monetize :services_price_cents
     monetize :services_tax_cents
-    monetize :price_excluding_tax_cents
-    monetize :price_cents
-    monetize :services_price_with_fee_cents
-    monetize :services_price_full_cents
-    monetize :tax_total_cents
+    monetize :services_full_price_cents
+    monetize :total_price_cents
+    monetize :total_tax_cents
+    monetize :total_full_price_cents
 
     monetize :host_payout_price_cents
 

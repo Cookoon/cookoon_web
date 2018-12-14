@@ -82,32 +82,28 @@ module Pro
       h.humanized_money_with_symbol object.cookoon_fee_tax
     end
 
-    def services_fee
-      h.humanized_money_with_symbol object.services_fee
-    end
-
-    def services_price_with_fee
-      h.humanized_money_with_symbol object.services_price_with_fee
-    end
-
     def services_tax
       h.humanized_money_with_symbol object.services_tax
     end
 
-    def services_price_full
-      h.humanized_money_with_symbol object.services_price_full
+    def services_price
+      h.humanized_money_with_symbol object.services_price
     end
 
-    def price_excluding_tax
-      h.humanized_money_with_symbol object.price_excluding_tax
+    def services_full_price
+      h.humanized_money_with_symbol object.services_full_price
     end
 
-    def price
-      h.humanized_money_with_symbol object.price
+    def total_price
+      h.humanized_money_with_symbol object.total_price
     end
 
-    def tax_total
-      h.humanized_money_with_symbol object.tax_total
+    def total_full_price
+      h.humanized_money_with_symbol object.total_full_price
+    end
+
+    def total_tax
+      h.humanized_money_with_symbol object.total_tax
     end
   end
 end
