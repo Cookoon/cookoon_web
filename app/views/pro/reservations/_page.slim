@@ -15,8 +15,10 @@
 
   h3 Mise à disposition d'un Cookoon
   .row.mb-3
-    .col-8 Cookoon “<u>#{@reservation.cookoon.name}</u>” × #{@reservation.duration}
+    .col-8
+      | Cookoon “<u>#{@reservation.cookoon.name}</u>” × #{@reservation.duration}
       .small Cette somme sera encaissée pour le compte de l'Hôte Cookoon et ne sera pas soumise à TVA.
+
     .col-4.text-right = @reservation.cookoon_price
 
   .row
@@ -36,13 +38,9 @@
         .col-2.text-right = service.price
 
     .page-break-inside-avoid
-      .row.mb-3
-        .col-8 Frais de service (#{number_to_percentage(Pro::Reservation.fee_percentage, precision: 0)})
-        .col-4.text-right = @reservation.services_fee
-
       .row
         .col-8 Total HT des options
-        .col-4.text-right = @reservation.services_price_with_fee
+        .col-4.text-right = @reservation.services_price
 
       .row.mb-3
         .col-8 TVA #{number_to_percentage(Pro::Reservation::DEFAULTS[:tax_rate] *100, precision: 0)}
@@ -50,16 +48,20 @@
 
       .row.mb-3
         .col-8 Total TTC des options
-        .col-4.text-right = @reservation.services_price_full
+        .col-4.text-right = @reservation.services_full_price
 
   .page-break-inside-avoid
     .row.bg-primary.text-white.p-2
       .col-8 TOTAL HT
-      .col-4.text-right = @reservation.price_excluding_tax
+      .col-4.text-right = @reservation.total_price
 
     .row.p-2
+      .col-8 TOTAL TAXES
+      .col-4.text-right = @reservation.total_tax
+
+    .row.bg-primary.text-white.p-2
       .col-8 TOTAL TTC
-      .col-4.text-right = @reservation.price
+      .col-4.text-right = @reservation.total_full_price
 
   .mt-4.small.page-break-inside-avoid
     - if @reservation.quotation?

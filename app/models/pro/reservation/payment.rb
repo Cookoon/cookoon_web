@@ -13,7 +13,7 @@ module Pro
       end
 
       def charge_amount_cents
-        price_cents
+        total_full_price_cents
       end
 
       def charge_description
