@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_13_162034) do
+ActiveRecord::Schema.define(version: 2018_12_14_113105) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -187,31 +187,18 @@ ActiveRecord::Schema.define(version: 2018_12_13_162034) do
     t.integer "duration"
     t.integer "people_count"
     t.integer "cookoon_price_cents", default: 0, null: false
-    t.string "cookoon_price_currency", default: "EUR", null: false
-    t.integer "services_price_without_tax_and_fee_cents", default: 0, null: false
-    t.string "services_price_without_tax_and_fee_currency", default: "EUR", null: false
+    t.integer "services_price_cents", default: 0, null: false
     t.integer "cookoon_fee_cents", default: 0, null: false
-    t.string "cookoon_fee_currency", default: "EUR", null: false
-    t.integer "price_cents", default: 0, null: false
-    t.string "price_currency", default: "EUR", null: false
+    t.integer "total_full_price_cents", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "requested_modification"
     t.integer "cookoon_fee_tax_cents", default: 0, null: false
-    t.string "cookoon_fee_tax_currency", default: "EUR", null: false
-    t.integer "services_fee_cents", default: 0, null: false
-    t.string "services_fee_currency", default: "EUR", null: false
     t.integer "services_tax_cents", default: 0, null: false
-    t.string "services_tax_currency", default: "EUR", null: false
-    t.integer "price_excluding_tax_cents", default: 0, null: false
-    t.string "price_excluding_tax_currency", default: "EUR", null: false
-    t.integer "services_price_with_fee_cents", default: 0, null: false
-    t.string "services_price_with_fee_currency", default: "EUR", null: false
-    t.integer "services_price_full_cents", default: 0, null: false
-    t.string "services_price_full_currency", default: "EUR", null: false
+    t.integer "total_price_cents", default: 0, null: false
+    t.integer "services_full_price_cents", default: 0, null: false
     t.string "stripe_charge_id"
-    t.integer "tax_total_cents", default: 0, null: false
-    t.string "tax_total_currency", default: "EUR", null: false
+    t.integer "total_tax_cents", default: 0, null: false
     t.index ["cookoon_id"], name: "index_pro_reservations_on_cookoon_id"
     t.index ["pro_quote_id"], name: "index_pro_reservations_on_pro_quote_id"
   end
