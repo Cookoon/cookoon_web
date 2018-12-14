@@ -3,6 +3,6 @@ FactoryBot.define do
     name "Restauration"
     quantity 1
     association :reservation, factory: :pro_reservation
-    unit_price_cents 98300
+    unit_price_cents 10000
   end
 end
