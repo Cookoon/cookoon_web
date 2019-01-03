@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_14_113105) do
+ActiveRecord::Schema.define(version: 2019_01_03_160307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,9 @@ ActiveRecord::Schema.define(version: 2018_12_14_113105) do
     t.datetime "updated_at", null: false
     t.string "stripe_customer_id"
     t.string "referent_email"
+    t.string "stripe_bank_name"
+    t.string "stripe_bic"
+    t.string "stripe_iban"
   end
 
   create_table "cookoon_searches", force: :cascade do |t|
