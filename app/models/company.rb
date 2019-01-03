@@ -21,5 +21,6 @@ class Company < ApplicationRecord
     create_stripe_customer
     source = create_sepa_source
     link_stripe_source(source.id)
+    persist_sepa_source
   end
 end
