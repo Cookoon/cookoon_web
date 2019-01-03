@@ -29,12 +29,6 @@ module Stripe
       stripe_customer.sources.all(object: object)
     end
 
-    def sepa_infos
-      sources = retrieve_stripe_sources('source')
-      return nil if sources.empty?
-      sources.data.first['sepa_credit_transfer']
-    end
-
     def destroy_stripe_source(source)
       stripe_customer.sources.retrieve(source).delete
     end
@@ -89,6 +83,19 @@ module Stripe
           email: referent_email,
         }
       })
+    end
+
+    def persist_sepa_source
+      sources = retrieve_stripe_sources('source')
+      return nil if sources.empty?
+      sepa_infos = sources.data.first['sepa_credit_transfer']
+      if sepa_infos
+        update(
+          stripe_bank_name: sepa_infos.bank_name,
+          stripe_bic: sepa_infos.bic,
+          stripe_iban: sepa_infos.iban
+        )
+      end
     end
   end
 end
