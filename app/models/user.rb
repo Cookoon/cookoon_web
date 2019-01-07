@@ -140,12 +140,20 @@ class User < ApplicationRecord
   end
 
   def upsert_mailchimp_subscription
-    merge_fields = {
-      FIRST_NAME: first_name,
-      LAST_NAME: last_name,
-      BORN_ON: born_on&.to_s,
-      BIRTHDAY: born_on&.strftime('%m/%d')
+    body = {
+      email_address: email,
+      status: 'subscribed',
+      merge_fields: {
+        FIRST_NAME: first_name,
+        LAST_NAME: last_name,
+        BORN_ON: born_on&.to_s,
+        BIRTHDAY: born_on&.strftime('%m/%d')
+      },
+      interests: {
+        "1fb3f8668d"=> cookoons.any?, # Groupe Hôtes
+        "b58fb2d731"=> pro? # Groupe Business
+      }
     }
-    UpsertMailchimpSubscriptionJob.perform_later(email, ENV['MAILCHIMP_LIST_ID'], merge_fields)
+    UpsertMailchimpSubscriptionJob.perform_later(email, ENV['MAILCHIMP_LIST_ID'], body)
   end
 end
