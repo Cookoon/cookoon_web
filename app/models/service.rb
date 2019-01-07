@@ -27,7 +27,7 @@ class Service < ApplicationRecord
 
   PRICES = {
     catering: { base_price: 0, unit_price: 2500 },
-    chef: { base_price: 0, unit_price: 6500 },
+    chef: { base_price: 0, unit_price: 11000 },
     corporate: { base_price: 2000, unit_price: 1000 }
   }.freeze
 

@@ -18,8 +18,11 @@ class Company < ApplicationRecord
   private
 
   def stripe_prepare
-    create_stripe_customer
-    source = create_sepa_source
-    link_stripe_source(source.id)
+    if stripe_customer_id.blank?
+      create_stripe_customer
+      source = create_sepa_source
+      link_stripe_source(source.id)
+    end
+    persist_sepa_source
   end
 end

@@ -34,9 +34,9 @@ module Pro
         Délai de règlement : #{1.month.since(start_at).strftime('%d/%m/%Y')}
         Moyen de règlement : Virement
 
-        Banque : #{object.company.sepa_infos.bank_name}
-        BIC : #{object.company.sepa_infos.bic}
-        IBAN : #{object.company.sepa_infos.iban}
+        Banque : #{object.company.stripe_bank_name}
+        BIC : #{object.company.stripe_bic}
+        IBAN : #{object.company.stripe_iban}
       LEGAL_MENTIONS
     end
 
