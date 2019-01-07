@@ -150,7 +150,7 @@ class User < ApplicationRecord
         BIRTHDAY: born_on&.strftime('%m/%d')
       },
       interests: {
-        "1fb3f8668d"=> cookoons.any?, # Groupe Hôtes
+        "1fb3f8668d"=> cookoons.approved.any?, # Groupe Hôtes
         "b58fb2d731"=> pro? # Groupe Business
       }
     }
