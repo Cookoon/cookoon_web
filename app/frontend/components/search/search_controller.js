@@ -32,18 +32,18 @@ export default class extends Controller {
     });
 
     this.durationSlider = new Slider(this.durationInputTarget, {
-      value: 2,
-      ticks: [2, 3, 5, 7, 10],
-      ticks_labels: ['2h', '3h', '5h', '7h', '10h'],
-      ticks_positions: [0, 25, 50, 75, 100],
-      ticks_snap_bounds: 5
+      value: 5,
+      ticks: [5, 7, 10, 12],
+      ticks_labels: ['5h', '7h', '10h', '12h'],
+      ticks_positions: [0, 33, 66, 100],
+      ticks_snap_bounds: 4
     }).on('change', this.renderDurationDescription);
     this.renderDurationDescription();
 
     this.peopleSlider = new Slider(this.peopleInputTarget, {
-      value: 4,
-      ticks: [4, 6, 8, 10, 12],
-      ticks_labels: ['4', '6', '8', '10', '12']
+      value: 6,
+      ticks: [6, 8, 10, 12],
+      ticks_labels: ['6', '8', '10', '12']
     });
   }
 
@@ -138,6 +138,11 @@ export default class extends Controller {
         this.durationDescriptionTarget.textContent =
           'Pour une journée de séminaire ? un vide-dressing ?';
         break;
+      case '11':
+      case '12':
+        this.durationDescriptionTarget.textContent =
+          'Pour une journée de séminaire ? un vide-dressing ?';
+        break;
       default:
         this.durationDescriptionTarget.textContent = '';
     }
@@ -150,8 +155,8 @@ export default class extends Controller {
     this.peopleSlider.destroy();
     this.peopleSlider = new Slider(this.peopleInputTarget, {
       value: 12,
-      ticks: [4, 6, 8, 10, 12],
-      ticks_labels: ['4', '6', '8', '10', '12']
+      ticks: [6, 8, 10, 12],
+      ticks_labels: ['6', '8', '10', '12']
     });
   }
 
