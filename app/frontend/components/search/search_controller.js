@@ -41,9 +41,9 @@ export default class extends Controller {
     this.renderDurationDescription();
 
     this.peopleSlider = new Slider(this.peopleInputTarget, {
-      value: 4,
-      ticks: [4, 6, 8, 10, 12],
-      ticks_labels: ['4', '6', '8', '10', '12']
+      value: 6,
+      ticks: [6, 8, 10, 12],
+      ticks_labels: ['6', '8', '10', '12']
     });
   }
 
@@ -150,8 +150,8 @@ export default class extends Controller {
     this.peopleSlider.destroy();
     this.peopleSlider = new Slider(this.peopleInputTarget, {
       value: 12,
-      ticks: [4, 6, 8, 10, 12],
-      ticks_labels: ['4', '6', '8', '10', '12']
+      ticks: [6, 8, 10, 12],
+      ticks_labels: ['6', '8', '10', '12']
     });
   }
 
