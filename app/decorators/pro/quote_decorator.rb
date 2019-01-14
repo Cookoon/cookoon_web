@@ -18,5 +18,9 @@ module Pro
     def people_count
       "#{object.people_count} personnes"
     end
+
+    def estimated_price
+      h.humanized_money_with_symbol object.estimated_price
+    end
   end
 end
