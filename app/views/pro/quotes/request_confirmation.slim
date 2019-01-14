@@ -6,4 +6,6 @@
     .py-5 = component 'pro/breadcrumb', step: 4
   h2 Votre demande de réservation a bien été envoyée.
   h2.mb-5 Notre équipe reviendra vers vous d’ici 48h, au maximum.
+  h1.mb-5 Prix estimé : ~ #{@quote.estimated_price}
+
   = link_to "Retour à l'accueil", pro_root_path, class: 'btn btn-action-sm btn-outline-light px-5'
