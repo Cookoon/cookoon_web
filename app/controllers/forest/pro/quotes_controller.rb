@@ -15,7 +15,7 @@ module Forest
           reservation.services.create(
             name: service.category.capitalize,
             quantity: service.quantity,
-            unit_price_cents: ::Service::PRICES.try(:[], service.category.to_sym).try(:[], :unit_price)
+            unit_price_cents: service.unit_price_cents
           )
         end
 
