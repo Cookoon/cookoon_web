@@ -37,6 +37,11 @@ module Pro
       authorize @quote, :update?
     end
 
+    def estimation
+      @quote = Quote.find(params[:id]).decorate
+      authorize @quote, :update?
+    end
+
     private
 
     def quote_params
