@@ -1,3 +1,6 @@
-.text-center.pt-3
-  - if quote.services.none?
-    p Choisissez un ou plusieurs services pour afficher une estimation de prix.
+.text-center.pt-4
+  - if quote.services.any?
+    p.mb-0 Le prix de votre réservation s'elève à #{quote.estimated_price}
+    p.small ce prix est une estimation, il peut être amené à changer.
+  - else
+    p.mb-0 Choisissez un ou plusieurs services pour afficher une estimation de prix.
