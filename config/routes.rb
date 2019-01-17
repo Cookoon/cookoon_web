@@ -89,6 +89,10 @@ Rails.application.routes.draw do
                            only: %i[index create destroy update],
                            shallow: true
       get :request_confirmation
+      
+      member do
+        get :estimation
+      end
     end
 
     resources :reservations, only: %i[index show update]
