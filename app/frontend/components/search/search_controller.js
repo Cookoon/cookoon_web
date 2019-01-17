@@ -32,11 +32,11 @@ export default class extends Controller {
     });
 
     this.durationSlider = new Slider(this.durationInputTarget, {
-      value: 5,
-      ticks: [5, 7, 10, 12],
-      ticks_labels: ['5h', '7h', '10h', '12h'],
-      ticks_positions: [0, 33, 66, 100],
-      ticks_snap_bounds: 4
+      value: 4,
+      ticks: [4, 5, 7, 10, 12],
+      ticks_labels: ['4h', '5h', '7h', '10h', '12h'],
+      ticks_positions: [0, 25, 50, 75, 100],
+      ticks_snap_bounds: 5
     }).on('change', this.renderDurationDescription);
     this.renderDurationDescription();
 
@@ -115,33 +115,30 @@ export default class extends Controller {
   renderDurationDescription = () => {
     switch (this.durationInputTarget.value) {
       case '2':
-        this.durationDescriptionTarget.textContent =
-          'Pour un rendez-vous ? une réunion rapide ?';
-        break;
       case '3':
-        this.durationDescriptionTarget.textContent =
-          'Pour un déjeuner ? un brainstorming ?';
-        break;
       case '4':
+        this.durationDescriptionTarget.textContent =
+          "Pour un petit déjeuner";
+        break;
       case '5':
         this.durationDescriptionTarget.textContent =
-          "Pour un dîner ? une réunion d'équipe ?";
+          "Pour un déjeuner ou un brunch";
         break;
       case '6':
       case '7':
         this.durationDescriptionTarget.textContent =
-          "Un grand dîner ? Un comité d'entreprise ?";
+          "Pour un grand dîner avec chef";
         break;
       case '8':
       case '9':
       case '10':
         this.durationDescriptionTarget.textContent =
-          'Pour une journée de séminaire ? un vide-dressing ?';
+          'Pour un comité d’entreprise';
         break;
       case '11':
       case '12':
         this.durationDescriptionTarget.textContent =
-          'Pour une journée de séminaire ? un vide-dressing ?';
+          'Pour une journée de séminaire';
         break;
       default:
         this.durationDescriptionTarget.textContent = '';
