@@ -17,11 +17,6 @@
     - if @quote.cookoons.count > 1
       - if page == :services && f.present?
         = f.submit class: 'btn btn-block btn-outline-light btn-lg font-didot'
-        #price-estimation(
-          data-controller='pro--quotes-estimations'
-          data-target='pro--quotes-estimations.estimation'
-          data-pro--quotes-estimations-url=estimation_pro_quote_path(@quote)
-        )
-          = render 'pro/quotes/price_estimation', quote: @quote
+        #price-estimation = render 'pro/quotes/price_estimation', quote: @quote
       - else
         = link_to 'Sélectionner des services', pro_quote_services_path(@quote), class: 'btn btn-block btn-outline-light btn-lg font-didot'
