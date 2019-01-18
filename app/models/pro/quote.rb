@@ -36,7 +36,7 @@ module Pro
     def estimated_price_cents
       services_price_cents = services.map { |service| service.estimated_price_cents }.sum
       cookoon_price_cents = (cookoons.sum(:price_cents) / MAX_COOKOONS_COUNT) * duration
-      [services_price_cents, cookoon_price_cents].sum
+      ([services_price_cents, cookoon_price_cents].sum) * 1.2
     end
 
     def report_to_slack
