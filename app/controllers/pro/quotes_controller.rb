@@ -33,10 +33,8 @@ module Pro
     end
 
     def request_confirmation
-      quote = Quote.find(params[:quote_id])
-      authorize quote, :update?
-
-      @cookoons = Cookoon.displayable_on_index.random.limit(3).decorate
+      @quote = Quote.find(params[:quote_id]).decorate
+      authorize @quote, :update?
     end
 
     private

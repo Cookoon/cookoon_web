@@ -14,7 +14,13 @@ module Pro
       authorize @quote_service
 
       if @quote_service.save
-        render json: { url: pro_service_path(@quote_service), method: 'delete', selected: 'true', quantity: @quote_service.quantity }
+        render json: {
+          url: pro_service_path(@quote_service),
+          method: 'delete',
+          selected: 'true',
+          quantity: @quote_service.quantity,
+          html_data: render_to_string(partial: 'pro/quotes/price_estimation', locals: {quote: @quote.decorate})
+        }
       else
         render json: { errors: @quote_service.errors.full_messages }, status: :unprocessable_entity
       end
@@ -23,8 +29,14 @@ module Pro
     def update
       @quote_service = QuoteService.find(params[:id])
       authorize @quote_service
+
+      @quote = @quote_service.quote
+
       if @quote_service.update(quote_service_params)
-        render json: { quantity: @quote_service.quantity }
+        render json: {
+          quantity: @quote_service.quantity,
+          html_data: render_to_string(partial: 'pro/quotes/price_estimation', locals: {quote: @quote.decorate})
+        }
       else
         render json: { errors: @quote_service.errors.full_messages }, status: :unprocessable_entity
       end
@@ -34,8 +46,15 @@ module Pro
       @quote_service = Pro::QuoteService.find(params[:id])
       authorize @quote_service
 
+      @quote = @quote_service.quote
+
       @quote_service.destroy
-      render json: { url: pro_quote_services_path(@quote_service.quote), method: 'post', selected: 'false' }
+      render json: {
+        url: pro_quote_services_path(@quote_service.quote),
+        method: 'post',
+        selected: 'false',
+        html_data: render_to_string(partial: 'pro/quotes/price_estimation', locals: {quote: @quote.decorate})
+      }
     rescue ActiveRecord::RecordNotFound
       render json: { errors: ["Ce service n'existe plus"] }, status: :unprocessable_entity
     end

@@ -25,7 +25,19 @@ module Pro
 
     after_save :report_to_slack, if: :saved_change_to_status?
 
+    MAX_COOKOONS_COUNT = 2
+
+    def estimated_price
+      Money.new estimated_price_cents
+    end
+
     private
+
+    def estimated_price_cents
+      services_price_cents = services.map { |service| service.estimated_price_cents }.sum
+      cookoon_price_cents = (cookoons.sum(:price_cents) / MAX_COOKOONS_COUNT) * duration
+      ([services_price_cents, cookoon_price_cents].sum) * 1.2
+    end
 
     def report_to_slack
       return unless Rails.env.production?

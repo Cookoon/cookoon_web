@@ -18,5 +18,13 @@ module Pro
     def people_count
       "#{object.people_count} personnes"
     end
+
+    def estimated_price
+      h.humanized_money_with_symbol object.estimated_price
+    end
+
+    def only_special_service?
+      object.services.count == 1 && object.services.first.special?
+    end
   end
 end
