@@ -1,6 +1,13 @@
 .text-center.pt-4
-  - if quote.services.any?
+  - if quote.only_special_service?
+    p.mb-0 Choisissez un ou plusieurs services pour afficher une estimation de prix.
+    p.small
+      | (votre besoin particulier sera estimé par nos équipes)
+  - elsif quote.services.any?
     p.mb-0 Le prix de votre réservation s'elève à #{quote.estimated_price}
     p.small ce prix est une estimation, il peut être amené à changer.
+    - if quote.services.special.any?
+      p.small
+        | (votre besoin particulier sera estimé par nos équipes)
   - else
     p.mb-0 Choisissez un ou plusieurs services pour afficher une estimation de prix.
