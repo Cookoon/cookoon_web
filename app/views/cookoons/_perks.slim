@@ -1,0 +1,5 @@
+- if cookoon.perks.any?
+  strong.mb-2 L'équipement :
+  ul
+    - cookoon.perks.each do |perk|
+      li = perk.name
