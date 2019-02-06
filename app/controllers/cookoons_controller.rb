@@ -21,7 +21,7 @@ class CookoonsController < ApplicationController
   end
 
   def show
-    @cookoon = Cookoon.includes(:perks).find(params[:id]).decorate
+    @cookoon = Cookoon.includes(perks: :perk_specification).find(params[:id]).decorate
     authorize @cookoon
 
     params_from_search = @search.to_reservation_attributes.merge(cookoon: @cookoon)
