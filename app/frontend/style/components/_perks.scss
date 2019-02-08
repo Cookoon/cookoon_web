@@ -1,0 +1,18 @@
+.perks {
+  display: grid;
+  width: 100%;
+  grid-gap: 5px;
+  grid-template-columns: 1fr 1fr 1fr;
+  &-card {
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    padding: 10px;
+    p {
+      font-size: small;
+      margin: 10px 0 0 0;
+    }
+    i {
+      font-size: x-large;
+    }
+  }
+}

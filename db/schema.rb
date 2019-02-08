@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_01_03_160307) do
+ActiveRecord::Schema.define(version: 2019_01_31_150219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,11 @@ ActiveRecord::Schema.define(version: 2019_01_03_160307) do
     t.string "wifi_code"
     t.text "caretaker_instructions"
     t.string "pdf_url"
+    t.string "address_complement"
+    t.integer "capacity_standing"
+    t.text "recommended_uses"
+    t.text "perks_complement"
+    t.string "architect_name"
     t.index ["user_id"], name: "index_cookoons_on_user_id"
   end
 

@@ -30,4 +30,30 @@ class CookoonDecorator < Draper::Decorator
       }
     end.to_json
   end
+
+  def ideal_capacity
+    return unless capacity
+    "#{capacity} personnes en configuration dîner"
+  end
+
+  def ideal_capacity_standing
+    return unless capacity_standing
+    "#{capacity_standing} personnes en configuration cocktail"
+  end
+
+  def recommended_uses
+    return unless object.recommended_uses
+    <<-USES
+      Ce lieux est recommandé pour :
+      #{h.simple_format object.recommended_uses}
+    USES
+  end
+
+  def perks_complement
+    return unless object.perks_complement
+    <<-PERKS
+      Les plus :
+      #{h.simple_format object.perks_complement}
+    PERKS
+  end
 end

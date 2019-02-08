@@ -4,20 +4,7 @@
   <%= carousel_for(@cookoon.photos) %>
 </div>
 
-<div class="cookoon-title-wrapper">
-  <div class="cookoon-title-content">
-    <h4><%= @cookoon.name %></h4>
-  </div>
-</div>
-
-
-<div class="container mt-3">
-  <p><b><%= @cookoon.category %></b> <i>de <span class="text-secondary"><%= @cookoon.user.first_name %></span></i></p>
-
-  <p><%= @cookoon.description %></p>
-
-  <i class="text-secondary">Ce Cookoon dispose d'un espace de réception de <b><%= @cookoon.surface %> m²</b>, il est idéal pour <b><%= @cookoon.capacity %></b> personnes.</i>
-</div>
+<%= render 'presentation' %>
 
 <!-- Map -->
 <div class="map-cookoon-show"

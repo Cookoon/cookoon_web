@@ -7,15 +7,7 @@
 #quote-cookoon-select
    = render 'quote_cookoon_select_button'
 
-.container
-
-  h4.m-0.pt-2 = @cookoon.name
-
-  p <b>#{@cookoon.category}</b> <i>de <span class="text-secondary">#{@cookoon.user.first_name}</span></i>
-
-  p = @cookoon.description
-
-  i.text-secondary Ce Cookoon dispose d'un espace de réception de <b>#{@cookoon.surface} m²</b>, il est idéal pour <b>#{@cookoon.capacity}</b> personnes.
+.container = render 'cookoons/presentation'
 
 .map-cookoon-show.mb-3(
   data-controller='google-maps'
