@@ -1,0 +1,8 @@
+- if cookoon.perks.any?
+  strong.mb-2 L'équipement :
+
+  .perks.my-3
+    - cookoon.perks.each do |perk|
+      .perks-card.text-center
+        i class=("fas fa-#{perk.icon_name}")
+        p = perk.name
