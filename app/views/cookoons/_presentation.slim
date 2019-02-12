@@ -2,13 +2,12 @@
   h4.m-0.pt-2 = @cookoon.name
   = @cookoon.address_complement.presence
   p
-    <strong>#{@cookoon.category}</strong> de
-    em.text-secondary = @cookoon.user.first_name
+    <strong>#{@cookoon.category}</strong> de <em class='text-secondary'>#{@cookoon.user.first_name}</em>
 
   strong.mb-2 Ce Cookoon est idéal pour :
   .d-flex-default
-    .text-center = @cookoon.ideal_capacity
-    .text-center = @cookoon.ideal_capacity_standing
+    .text-left = @cookoon.ideal_capacity
+    .text-left = @cookoon.ideal_capacity_standing
 
   .my-3 = simple_format @cookoon.recommended_uses
   .my-3 = simple_format @cookoon.perks_complement
