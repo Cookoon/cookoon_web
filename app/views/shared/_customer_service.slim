@@ -12,6 +12,15 @@
         .co.co-concierge.fa-5x.mb-3 aria-hidden="true" style="-webkit-text-fill-color:white"
         h4 Vous organisez votre première réception Cookoon ?
         p Laissez nos concierges vous y aider !
-        .mb-5
-          u
-            a.h4.text-white href='tel:+33601020304' 06.01.02.03.04
+
+        - if local_assigns[:pro_space].presence
+          .mb-5
+            p
+              u
+                a.h4.text-white href='tel:+33601020304' 06.01.02.03.04
+            p
+              u
+                a.h4.text-white href='mailto:gregory@cookoon.fr' gregory@cookoon.fr
+        - else
+          .m-5
+            a.button.button-white href='tel:+33601020304' Appelez notre concierge
