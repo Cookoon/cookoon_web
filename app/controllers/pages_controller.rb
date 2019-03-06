@@ -6,7 +6,6 @@ class PagesController < ApplicationController
 
   def home
     @search = CookoonSearch.new
-    # @ephemeral = Ephemeral.available.first || Ephemeral.new(title: 'Bientôt disponible', cookoon: Cookoon.first)
     @highlighted_cookoon = Cookoon.approved.over_price(Cookoon::HIGHLIGHT_PRICE_CENTS).includes(:photo_files).sample
   end
 
