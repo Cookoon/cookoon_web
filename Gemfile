@@ -109,6 +109,7 @@ group :development do
   # gem 'i18n-debug'
   gem 'i18n-tasks', require: false
   gem 'letter_opener'
+  gem 'rb-readline' 
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rubocop', require: false
