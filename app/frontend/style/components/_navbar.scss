@@ -1,0 +1,44 @@
+.cookoon-nav {
+    &-infos {
+        display: flex;
+
+        &-service {
+            flex: 6;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            align-items: center;
+        }
+        &-user {
+            flex: 1;
+            display: flex;
+            color: white;
+            justify-content: space-between;
+            padding: 10px;
+            align-items: center;
+        }
+    }
+    &-navigation {
+        display: flex;
+        color: white;
+        align-items: center;
+        padding: 10px;
+
+        ul {
+            margin: 0;
+        }
+
+        .logo {
+            flex: 1;
+            padding: 10px;
+        }
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            flex: 5;
+        }
+        .cta {
+            flex: 1;
+        }
+    }
+}

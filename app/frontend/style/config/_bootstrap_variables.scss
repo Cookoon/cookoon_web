@@ -4,17 +4,23 @@ $font-size-base: 1rem;
 $headings-font-family: $gfs-didot;
 $font-family-base: $tisa-sans;
 
-$blue: #004254;
-$gray: #9b9b9b;
+$gold: #CDBB8A;
+$gray: #F9F9F9;
+$black: #121212;
+$green: #85B11D;
+
 $theme-colors: (
   gray: $gray,
+  primary: $gold,
+  green: $green,
+  black: $black
 );
 
 // Customize the dark text colors for use in our YIQ color contrast function.
-$yiq-text-dark: $blue;
+$yiq-text-dark: $gold;
 
 // Links
-$link-hover-color: lighten($blue, 5%);
+$link-hover-color: lighten($gold, 5%);
 $link-hover-decoration: none;
 
 // Components
@@ -23,12 +29,12 @@ $border-radius-lg: 0;
 $border-radius-sm: 0;
 
 // Forms
-$form-feedback-valid-color: $blue;
+$form-feedback-valid-color: $gold;
 // $input-bg: $white;
 $input-border-color: #000;
 // $input-border-radius: 0;
 $input-border-width: 1px;
-$input-focus-border-color: lighten($blue, 10%);
+$input-focus-border-color: lighten($gold, 10%);
 $input-focus-box-shadow: none;
 $input-focus-width: 0;
 
