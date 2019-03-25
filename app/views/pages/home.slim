@@ -1,18 +1,9 @@
-- content_for :navbar_type, :logo
+.home-banner.text-center
+  h4 GARE DU NORD
+  p Paris Xème
 
-.d-flex.justify-content-center
-  .fitter
-    = component 'search'
-
-    .mb-4
-      = component 'hr', style: :inverted
-
-    - if @highlighted_cookoon
-      .mx-5
-        .h4.text-white Inspirez-vous
-        .p.text-white.font-weight-light(style="font-size: 0.75rem;") Visualisez les propriétés les plus récentes.
-
-      .py-4
-        = carousel_for(@highlighted_cookoon.photos)
+  h1 Moderne & Contemporain
+  
+  = link_to 'DÉCOUVRIR', '#'
 
 = render 'shared/customer_service'
