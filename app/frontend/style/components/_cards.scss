@@ -1,206 +1,22 @@
-.card {
-  position: relative;
-  margin-bottom: 10px;
-  border-radius: 3px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12), 0 1px 1px rgba(0, 0, 0, 0.24);
-  &-edit {
-    background: $blue;
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    right: 10px;
-    top: 10px;
-    i {
-      position: inherit;
-      top: 11px;
-      right: 12px;
-      font-size: 18px;
-      color: white;
-    }
-  }
-  &-picture {
-    height: 200px;
-    background-size: cover;
-    background-position: center;
-  }
-  &-data {
-    position: relative;
-    width: 100%;
-    padding: 8px;
-    background: $blue;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
-  }
-  &-text {
-    padding-right: 110px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-  &-infos {
+// 
+
+.cookoon-card {
+  border: 1px solid lightgray;
+  &-image {
+    height: 250px;
+    background: url('https://via.placeholder.com/150');
     display: flex;
     justify-content: space-around;
-    position: absolute;
-    right: 10px;
-    top: -10px;
-  }
-}
-
-.host-reservation-edit-card {
-  background: $blue;
-  padding: 15px;
-  color: $white;
-  border-radius: 10px;
-  p.service-description {
-    font-size: 12px;
-  }
-}
-
-.service-input {
-  margin-top: 15px;
-  margin-left: 30px;
-}
-
-.review-card {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  background: $blue;
-  padding: 20px;
-  color: white;
-  &-title {
-    padding-bottom: 20px;
-    font-weight: bold;
-  }
-}
-
-.reservation-preview-card {
-  padding: 15px;
-  background: white;
-  border-radius: 5px;
-  margin-bottom: 20px;
-  &-blue {
-    background: $blue;
-    color: white;
-  }
-  &-white {
-    background: white;
-    color: $blue;
-  }
-  &-grey {
-    background: $secondary;
-    color: white;
-  }
-  &-infos {
-    display: flex;
-    justify-content: space-between;
-  }
-  &-recap {
-    display: flex;
-    justify-content: space-between;
     align-items: center;
   }
-  .infos-block {
-    margin-right: 60px;
+  &-body {
+    padding: 20px;
   }
-  p {
-    margin: 6px;
-  }
-  i {
-    font-size: 25px;
-  }
-  .price {
-    font-size: 15px;
-    font-weight: bold;
-  }
-  #force-margin {
-    margin-left: 20px;
-  }
-}
-
-.card-bottom {
-  width: 100%;
-  background: $blue;
-  padding: 20px;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  flex-grow: 1;
-  a {
-    color: white;
-    &:focus {
-      color: white;
+  &-services {
+    padding: 20px;
+    border-top: 1px solid lightgray;
+    p {
+      margin: 0;
     }
-  }
-  &-title {
-    padding-bottom: 20px;
-    font-weight: bold;
-  }
-  &-footer {
-    text-align: right;
-  }
-}
-
-.reservation-details-card {
-  padding: 25px;
-  border-radius: 25px;
-  &-blue {
-    background: $blue;
-    color: white;
-  }
-  &-grey {
-    background: $secondary;
-    color: white;
-  }
-  i {
-    font-size: 10px;
-  }
-}
-
-.information-card {
-  background: $blue;
-  padding: 60px 45px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  color: white;
-  border-radius: 8px;
-  &-picto {
-    padding-bottom: 10px;
-    font-size: 20px;
-  }
-  &-title {
-    font-weight: bold;
-    padding-bottom: 20px;
-  }
-  &-cta {
-    margin-top: 30px;
-  }
-}
-
-@media (max-width: 320px) {
-  .information-card {
-    padding: 20px 30px;
-    &-cta {
-      margin-bottom: 20px;
-    }
-  }
-}
-
-.no-cookoon-card {
-  background: $blue;
-  padding: 25px;
-  color: white;
-  margin: 0 15px;
-  width: 100%;
-  #cookoon-error {
-    width: 80px;
-    margin-bottom: 25px;
   }
 }

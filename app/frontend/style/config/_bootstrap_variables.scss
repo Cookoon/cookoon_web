@@ -1,8 +1,11 @@
 // variables.scss
 // $font-size-base: 0.875rem;
 $font-size-base: 1rem;
-$headings-font-family: $gfs-didot;
-$font-family-base: $tisa-sans;
+
+// TODO NEW DESIGN
+// Set fallback fonts 
+$headings-font-family: Cochin;
+$font-family-base: Avenir;
 
 $gold: #CDBB8A;
 $gray: #F9F9F9;
