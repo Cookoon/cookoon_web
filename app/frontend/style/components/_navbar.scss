@@ -24,13 +24,21 @@
         align-items: center;
         padding: 10px;
 
+        a {
+            color: white;
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+
         ul {
             margin: 0;
         }
 
         .logo {
             flex: 1;
-            padding: 10px;
+            display: flex;
+            align-items: center;
         }
         .menu {
             display: flex;
