@@ -1,0 +1,23 @@
+.cookoon-nav
+    .cookoon-nav-infos
+        .cookoon-nav-infos-service.bg-white Conciergerie - 061212121212
+        .cookoon-nav-infos-user.bg-primary
+            div
+                - if current_user.photo?
+                    = cl_image_tag(current_user.photo.path, { size: '30x30', crop: :thumb, gravity: :face, class: 'avatar-30' })
+                - else
+                    = image_tag 'base_user.png', class: 'avatar-30' 
+            div Bob Dylan
+
+    .cookoon-nav-navigation.bg-black
+        .logo
+            i.co.co-logo.fa-2x.text-primary
+            div.pl-2 Cookoon
+
+        .menu
+            ul.list-inline
+                li.list-inline-item.px-2 = link_to 'Home', '#'
+                li.list-inline-item.px-2 = link_to 'Mes Réservations', '#'
+                li.list-inline-item.px-2 = link_to 'Mes Documents', '#'
+
+        .cta = link_to 'Click me', '#'
