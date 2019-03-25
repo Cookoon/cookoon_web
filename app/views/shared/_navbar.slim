@@ -1,6 +1,6 @@
 .cookoon-nav
     .cookoon-nav-infos
-        .cookoon-nav-infos-service.bg-white Conciergerie - 061212121212
+        .cookoon-nav-infos-service.bg-white Conciergerie - 06 12 12 12 12
         .cookoon-nav-infos-user.bg-primary
             div
                 - if current_user.photo?
@@ -20,4 +20,4 @@
                 li.list-inline-item.px-2 = link_to 'Mes Réservations', '#'
                 li.list-inline-item.px-2 = link_to 'Mes Documents', '#'
 
-        .cta = link_to 'Click me', '#', class: 'btn-cookoon btn-cookoon-secondary d-block text-center'
+        .cta = link_to 'Rechercher', cookoons_path, class: 'btn-cookoon btn-cookoon-secondary d-block text-center'
