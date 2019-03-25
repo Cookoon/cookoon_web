@@ -5,8 +5,8 @@ class PagesController < ApplicationController
   def welcome; end
 
   def home
-    @search = CookoonSearch.new
-    @highlighted_cookoon = Cookoon.approved.over_price(Cookoon::HIGHLIGHT_PRICE_CENTS).includes(:photo_files).sample
+    # @search = CookoonSearch.new
+    # @highlighted_cookoon = Cookoon.approved.over_price(Cookoon::HIGHLIGHT_PRICE_CENTS).includes(:photo_files).sample
   end
 
   def support; end

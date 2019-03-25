@@ -1,0 +1,22 @@
+.cookoon-combined {
+    display: flex;
+    border: 2px solid $gold;
+    
+    &-input {
+      border: none;
+      background: transparent;
+      flex: 1;
+      padding: 6px 30px;
+      &:focus {
+        outline: none;
+      }
+      &-bg-dark {
+        background: transparent;
+        color: white !important;
+      }
+    }
+
+    input[type=submit] {
+      border: none;
+    }
+  }
