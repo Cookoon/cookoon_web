@@ -1,78 +1,121 @@
-.button {
-  border-radius: 30px;
-  padding: 16px 46px;
-  color: white;
-  border: none;
-  text-transform: uppercase;
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-  &:hover {
-    text-decoration: none;
-    color: white;
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.25), 0 5px 12px rgba(0, 0, 0, 0.22);
-  }
-  &-white {
-    background: white;
-    color: $blue;
-    border: none;
-    &:hover {
-      color: #464646;
-      background: darken(white, 5%);
-    }
-  }
-  &-blue {
-    background: $blue;
-    &:hover {
-      background: darken($blue, 5%);
-    }
-    &:focus {
-      background: $blue;
-      color: white;
-    }
-    &:active {
-      background: $blue;
-      color: white;
-    }
-    &:visited {
-      background: $blue;
-      color: white;
-    }
-  }
-  &-gray {
-    background: #999999;
-    &:hover {
-      background: darken(#999999, 5%);
-    }
-  }
-  &-fixed {
-    background: $blue;
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.25), 0 5px 12px rgba(0, 0, 0, 0.22);
-    &:hover {
-      background: darken($blue, 5%);
-    }
-  }
-}
+// .button {
+//   border-radius: 30px;
+//   padding: 16px 46px;
+//   color: white;
+//   border: none;
+//   text-transform: uppercase;
+//   transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+//   &:hover {
+//     text-decoration: none;
+//     color: white;
+//     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.25), 0 5px 12px rgba(0, 0, 0, 0.22);
+//   }
+//   &-white {
+//     background: white;
+//     color: $blue;
+//     border: none;
+//     &:hover {
+//       color: #464646;
+//       background: darken(white, 5%);
+//     }
+//   }
+//   &-blue {
+//     background: $blue;
+//     &:hover {
+//       background: darken($blue, 5%);
+//     }
+//     &:focus {
+//       background: $blue;
+//       color: white;
+//     }
+//     &:active {
+//       background: $blue;
+//       color: white;
+//     }
+//     &:visited {
+//       background: $blue;
+//       color: white;
+//     }
+//   }
+//   &-gray {
+//     background: #999999;
+//     &:hover {
+//       background: darken(#999999, 5%);
+//     }
+//   }
+//   &-fixed {
+//     background: $blue;
+//     box-shadow: 0 5px 5px rgba(0, 0, 0, 0.25), 0 5px 12px rgba(0, 0, 0, 0.22);
+//     &:hover {
+//       background: darken($blue, 5%);
+//     }
+//   }
+// }
 
-.no-button {
-  color: $blue;
-  text-decoration: none;
-  text-transform: uppercase;
-  font-weight: bold;
-  &:hover,
-  &:focus {
-    color: lighten($blue, 10%);
-  }
-  &-white {
-    color: white;
-    &:hover,
-    &:focus {
-      color: darken(white, 10%);
-    }
-  }
-}
+// .no-button {
+//   color: $blue;
+//   text-decoration: none;
+//   text-transform: uppercase;
+//   font-weight: bold;
+//   &:hover,
+//   &:focus {
+//     color: lighten($blue, 10%);
+//   }
+//   &-white {
+//     color: white;
+//     &:hover,
+//     &:focus {
+//       color: darken(white, 10%);
+//     }
+//   }
+// }
 
-// Iphone 5 Query
-@media (max-width: 320px) {
-  .button {
-    padding: 16px 30px;
+// // Iphone 5 Query
+// @media (max-width: 320px) {
+//   .button {
+//     padding: 16px 30px;
+//   }
+// }
+
+
+
+
+// NEW DESIGN 
+
+.btn-cookoon {
+  padding: 6px 30px;
+  text-transform: uppercase;
+  font-family: Avenir;
+  cursor: pointer;
+  &-primary {
+    background: $gold; 
+    color: white !important;
+  }
+  &-secondary {
+    border: 1px solid white;
+    color: white !important;
+  }
+  &-secondary-gold {
+    border: 1px solid $gold;
+    color: $gold !important;
+  }
+  &-disabled {
+    background: lightgray; 
+    color: white !important;
+    cursor: not-allowed;
+  }
+  &-combined {
+    display: flex;
+    border: 2px solid $gold;
+    input {
+      border: none;
+      background: transparent;
+      flex: 4;
+      padding: 6px 30px;
+      color: white !important;
+      &:focus {
+        outline: none;
+      }
+    }
   }
 }
