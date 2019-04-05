@@ -12,7 +12,7 @@ fr:
       pro_reservation:
         update: Demander la modification
       user:
-        update: Mettre à jour
+        update: Modifier
   simple_form:
     error_notification:
       default_message: 'Merci de revoir les éléments ci-dessous :'
