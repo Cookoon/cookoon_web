@@ -6,7 +6,7 @@
       border: none;
       background: transparent;
       flex: 1;
-      padding: 6px 30px;
+      padding: 6px;
       &:focus {
         outline: none;
       }
@@ -20,3 +20,11 @@
       border: none;
     }
   }
+
+@media (max-width: 320px) {
+  .cookoon-combined {
+    .btn-cookoon {
+      padding: 6px 13px;
+    }
+  }
+}
