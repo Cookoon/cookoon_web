@@ -11,13 +11,11 @@ class CookoonsController < ApplicationController
       accomodates_for: @search.people_count,
       available_in: (@search.start_at..@search.end_at)
     }
+    
     @cookoons = policy_scope(Cookoon)
                 .includes(:photo_files)
                 .filter(filtering_params)
                 .decorate
-
-    # TODO : Will we keep markers when done ?
-    build_markers
   end
 
   def show
