@@ -25,7 +25,9 @@ $theme-colors: (
 $yiq-text-dark: $gold;
 
 // Links
-$link-hover-color: lighten($gold, 5%);
+// These can be set to another color later
+$link-color: inherit;
+$link-hover-color: inherit;
 $link-hover-decoration: none;
 
 // Components

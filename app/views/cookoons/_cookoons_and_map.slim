@@ -9,9 +9,3 @@ div class=classnames('row', 'no-gutters' => !desktop_view?)
                         image_url: cl_image_path(cookoon.photos.first.path, width: 800, height: 450, crop: :fill),
                         link_url: cookoon,
                         icons: [cookoon.category_icon, cookoon.price_icon]
-
-  div.col-12.col-md-4.d-none.d-sm-block
-    div.map-cookoon-index.d-none.d-sm-block[
-      data-controller='google-maps'
-      data-target="google-maps.cookoonIndexMap"
-      data-google-maps-markers="#{@markers.to_json}"]
