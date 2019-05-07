@@ -6,8 +6,7 @@
         - if current_user.photo?
           = cl_image_tag(current_user.photo.path, { size: '30x30', crop: :thumb, gravity: :face, class: 'avatar-30' })
         - else
-          = image_tag 'base_user.png', class: 'avatar-30' 
-      div Bob Dylan
+          = image_tag 'base_user.png', class: 'avatar-30'
 
   .cookoon-nav-navigation.bg-black
     .logo

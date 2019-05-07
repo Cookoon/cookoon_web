@@ -7,18 +7,20 @@ $font-size-base: 1rem;
 $headings-font-family: Cochin;
 $font-family-base: Avenir;
 
-$gold: #CDBB8A;
+$primary: #CDBB8A;
 $gray: #F9F9F9;
 $black: #121212;
 $dark: #2C2C2C;
 $green: #85B11D;
+$white: #FFFFFF; 
 
 $theme-colors: (
   gray: $gray,
-  primary: $gold,
+  primary: $primary,
   green: $green,
   black: $black,
   dark: $dark
+  white: $white;
 );
 
 // Customize the dark text colors for use in our YIQ color contrast function.
