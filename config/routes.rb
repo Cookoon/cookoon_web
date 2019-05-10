@@ -41,11 +41,12 @@ Rails.application.routes.draw do
   resources :stripe_accounts, only: %i[new create]
 
   resources :cookoons, except: :destroy do
-    resources :reservations, only: :create
     resources :availabilities, only: %i[index create update], shallow: true
   end
 
-  resources :reservations, only: %i[index show update] do
+  resources :reservations, only: %i[index show create update] do
+    resources :cookoons, only: %i[index]
+    resources :services, only: %i[index]
     resources :payments, only: %i[new create] do
       post :amounts, on: :collection
     end

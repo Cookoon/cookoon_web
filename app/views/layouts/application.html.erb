@@ -25,14 +25,8 @@
   </head>
 
   <body class="<%= yield(:body_class) %>" data-controller="application-navigation" >
-    <%= render 'shared/loader' %>
-
     <%= render 'shared/navbar' %>
-
-    <%= c 'drawer' %>
-
     <%= render 'shared/pretender_infos' %>
-
     <div id="flash">
       <%= render 'shared/flashes' %>
     </div>

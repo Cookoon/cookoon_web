@@ -8,6 +8,11 @@
 
 .container
   .search.search-home
+    = simple_form_for @reservation do |f|
+      = f.input :people_count
+      = f.input :start_at
+      = f.input :duration
+      = f.submit
 
   .text-center
     h3 Experience d'exception

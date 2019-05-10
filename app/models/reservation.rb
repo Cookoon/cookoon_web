@@ -18,8 +18,8 @@ class Reservation < ApplicationRecord
   scope :short_notice, -> { paid.where('start_at < ?', Time.zone.now.in(DEFAULTS[:safety_period])) }
   scope :stripe_will_not_capture, -> { paid.created_before(DEFAULTS[:stripe_validity_period].ago.in(DEFAULTS[:safety_period])) }
 
-  belongs_to :cookoon
   belongs_to :user
+  belongs_to :cookoon, optional: true
   has_many :services, dependent: :destroy
   has_one :inventory, dependent: :destroy
   has_many :reservation_guests, dependent: :destroy
@@ -71,7 +71,6 @@ class Reservation < ApplicationRecord
   validates :duration, presence: true
   validate :tenant_is_not_host
   validates :start_at, in_future: true, after_notice_period: true, on: :create
-  validate :possible_in_datetime_range, on: :create
 
   before_validation :set_price_cents, if: :price_cents_needs_update?
   after_save :report_to_slack, if: :saved_change_to_status?
@@ -272,6 +271,7 @@ class Reservation < ApplicationRecord
     errors.add(:cookoon, :host_cannot_be_tenant) if cookoon.user == user
   end
 
+  # TO REMOVE WHEN DONE
   def possible_in_datetime_range
     return unless start_at && duration
     range = start_at..(start_at + duration.hours)
