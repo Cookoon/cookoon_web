@@ -7,12 +7,7 @@
   = link_to 'DÉCOUVRIR', '#', class: 'btn-cookoon btn-cookoon-secondary'
 
 .container
-  .search.search-home
-    = simple_form_for @reservation do |f|
-      = f.input :people_count
-      = f.input :start_at
-      = f.input :duration
-      = f.submit
+  = c 'search'
 
   .text-center
     h3 Experience d'exception

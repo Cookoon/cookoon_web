@@ -2,8 +2,8 @@
 fr:
   helpers:
     submit:
-      cookoon_search:
-        create: Chercher
+      reservation:
+        create: Consulter les expériences
       pro_quote:
         create: Trouver un espace
         update: Demander un devis
