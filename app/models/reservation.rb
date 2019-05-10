@@ -26,7 +26,7 @@ class Reservation < ApplicationRecord
   accepts_nested_attributes_for :services
 
   # Status will be removed before merged, need to cast production statuses to AASM State before deleting column
-  enum status: %i[pending paid accepted refused cancelled ongoing passed dead]
+  # enum status: %i[pending paid accepted refused cancelled ongoing passed dead]
   enum category: %i[customer business]
 
   DEFAULTS = {
