@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_06_170219) do
+ActiveRecord::Schema.define(version: 2019_05_10_080147) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 2019_03_06_170219) do
     t.datetime "updated_at", null: false
     t.integer "status", default: 0, null: false
     t.datetime "end_at"
+    t.integer "category", default: 0, null: false
     t.index ["user_id"], name: "index_cookoon_searches_on_user_id"
   end
 
@@ -243,6 +244,9 @@ ActiveRecord::Schema.define(version: 2019_03_06_170219) do
     t.text "guests_message"
     t.integer "people_count"
     t.text "message_for_host"
+    t.string "aasm_state"
+    t.boolean "paid", default: false
+    t.integer "category", default: 0
     t.index ["cookoon_id"], name: "index_reservations_on_cookoon_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
