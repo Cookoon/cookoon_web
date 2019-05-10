@@ -3,7 +3,7 @@
     .cookoon-nav-infos-service.bg-white Conciergerie - 06 12 12 12 12
     .cookoon-nav-infos-user.bg-primary
       div
-        - if current_user.photo?
+        - if current_user&.photo?
           = cl_image_tag(current_user.photo.path, { size: '30x30', crop: :thumb, gravity: :face, class: 'avatar-30' })
         - else
           = image_tag 'base_user.png', class: 'avatar-30'
