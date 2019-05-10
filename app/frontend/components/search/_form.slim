@@ -1,0 +1,5 @@
+= simple_form_for @reservation, remote: true do |f|
+    = f.input :people_count, input_html: { data: {target: 'search.countInput'} }, as: :hidden
+    = f.input :duration, input_html: { data: {target: 'search.durationInput'} }, as: :hidden
+    = f.input :start_at, html5: true, input_html: { data: {target: 'search.dateInput'} }, as: :hidden
+    = f.submit class: 'btn-cookoon btn-cookoon-primary btn-block'

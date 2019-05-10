@@ -1,0 +1,23 @@
+.search.search-home data={controller: "search", action: 'click@window->search#hideSelections'}
+  .search-category-selection.d-flex-default
+    p Vous vouhaitez réserver pour
+    p Pour un particulier 
+    p Pour un professionnel
+
+  .search-inputs
+    .search-input.input-cookoon data={action: 'click->search#toggleSelection', target: 'search.selection'}
+      span data={target: 'search.countText'} Nombre de convives
+      .search-input-selection.d-none
+        - people_counts.each do |count|
+          .search-input-selection-item data={count: count, action: 'click->search#selectCount'} #{count} personnes
+
+    .search-input.input-cookoon data={action: 'click->search#toggleSelection', target: 'search.selection'}
+      span data={target: 'search.durationText'} Type de réception
+      .search-input-selection.d-none
+        - durations.each do |duration|
+          .pro-search-input-selection-item data={duration: duration[:data], text: duration[:display], action: 'click->search#selectDuration'} #{duration[:display]}
+
+    .search-input.input-cookoon data={target: 'search.dateSelection'}
+      span data={target: 'search.dateText'} Date
+
+    = render 'form'

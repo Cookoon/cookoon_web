@@ -43,6 +43,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 # Back
+gem 'aasm'
 gem 'attachinary', github: 'Cookoon/attachinary'
 gem 'devise'
 gem 'devise-i18n'

@@ -362,7 +362,7 @@ span.flatpickr-weekday {
   cursor: default;
   font-size: 90%;
   background: #fff;
-  color: #004254;
+  color: #000000;
   line-height: 1;
   margin: 0;
   text-align: center;
@@ -410,7 +410,7 @@ span.flatpickr-weekday {
   border: 1px solid transparent;
   border-radius: 150px;
   box-sizing: border-box;
-  color: rgba(0, 66, 84, 0.95);
+  color: rgba(0, 0, 0, 0.95);
   cursor: pointer;
   font-weight: 400;
   width: 14.2857143%;

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_06_170219) do
+ActiveRecord::Schema.define(version: 2019_05_10_085602) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 2019_03_06_170219) do
     t.datetime "updated_at", null: false
     t.integer "status", default: 0, null: false
     t.datetime "end_at"
+    t.integer "category", default: 0, null: false
     t.index ["user_id"], name: "index_cookoon_searches_on_user_id"
   end
 
@@ -99,16 +100,6 @@ ActiveRecord::Schema.define(version: 2019_03_06_170219) do
     t.text "perks_complement"
     t.string "architect_name"
     t.index ["user_id"], name: "index_cookoons_on_user_id"
-  end
-
-  create_table "guests", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "email"
-    t.string "first_name"
-    t.string "last_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_guests_on_user_id"
   end
 
   create_table "inventories", force: :cascade do |t|
@@ -216,15 +207,6 @@ ActiveRecord::Schema.define(version: 2019_03_06_170219) do
     t.index ["pro_reservation_id"], name: "index_pro_services_on_pro_reservation_id"
   end
 
-  create_table "reservation_guests", force: :cascade do |t|
-    t.bigint "reservation_id"
-    t.bigint "guest_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["guest_id"], name: "index_reservation_guests_on_guest_id"
-    t.index ["reservation_id"], name: "index_reservation_guests_on_reservation_id"
-  end
-
   create_table "reservations", force: :cascade do |t|
     t.bigint "cookoon_id"
     t.bigint "user_id"
@@ -240,9 +222,11 @@ ActiveRecord::Schema.define(version: 2019_03_06_170219) do
     t.string "stripe_charge_id"
     t.integer "discount_amount_cents", default: 0, null: false
     t.datetime "end_at"
-    t.text "guests_message"
     t.integer "people_count"
     t.text "message_for_host"
+    t.string "aasm_state"
+    t.boolean "paid", default: false
+    t.integer "category", default: 0
     t.index ["cookoon_id"], name: "index_reservations_on_cookoon_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
@@ -307,7 +291,6 @@ ActiveRecord::Schema.define(version: 2019_03_06_170219) do
   add_foreign_key "availabilities", "cookoons"
   add_foreign_key "cookoon_searches", "users"
   add_foreign_key "cookoons", "users"
-  add_foreign_key "guests", "users"
   add_foreign_key "inventories", "reservations"
   add_foreign_key "perks", "cookoons"
   add_foreign_key "perks", "perk_specifications"
@@ -319,8 +302,6 @@ ActiveRecord::Schema.define(version: 2019_03_06_170219) do
   add_foreign_key "pro_reservations", "cookoons"
   add_foreign_key "pro_reservations", "pro_quotes"
   add_foreign_key "pro_services", "pro_reservations"
-  add_foreign_key "reservation_guests", "guests"
-  add_foreign_key "reservation_guests", "reservations"
   add_foreign_key "reservations", "cookoons"
   add_foreign_key "reservations", "users"
   add_foreign_key "services", "reservations"
