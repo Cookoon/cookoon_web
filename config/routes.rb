@@ -52,9 +52,6 @@ Rails.application.routes.draw do
     end
     resources :invoices, only: :create
     resource :services, only: %i[show create]
-    resources :guests, controller: 'reservations/guests', only: %i[index create] do
-      post :create_all, on: :collection
-    end
     resources :messages, controller: 'reservations/messages', only: %i[new create]
   end
 

@@ -53,10 +53,6 @@
     - if @reservation.accepted?
       = component 'hr'
 
-      .text-center.py-3
-        p <strong>Partagez adresses et horaires de votre location en conviant vos invités</strong>
-        = link_to 'Convier mes invités', reservation_guests_path(@reservation), class: 'btn btn-primary btn-action btn-block'
-
     - if @reservation.paid? || @reservation.accepted?
       = component 'hr'
 

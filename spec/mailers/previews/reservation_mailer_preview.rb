@@ -24,17 +24,6 @@ class ReservationMailerPreview < ActionMailer::Preview
     ReservationMailer.ending_survey_to_tenant(Reservation.last)
   end
 
-  def guests_overview_to_tenant
-    ReservationMailer.guests_overview_to_tenant(Reservation.last.id)
-  end
-  # ============================
-
-  # ==== Mails for Tenant Guests =====
-  def invitation_to_guest
-    ReservationMailer.invitation_to_guest(Reservation.last, Guest.last)
-  end
-  # ============================
-
   # ==== Mails for Host =====
   def paid_request_to_host
     ReservationMailer.paid_request_to_host(Reservation.last)
