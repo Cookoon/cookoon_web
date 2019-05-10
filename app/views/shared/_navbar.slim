@@ -9,9 +9,10 @@
           = image_tag 'base_user.png', class: 'avatar-30'
 
   .cookoon-nav-navigation.bg-black
-    .logo
-      i.co.co-logo.fa-2x.text-primary
-      div.pl-2 Cookoon
+    = link_to root_path do
+      .logo
+        i.co.co-logo.fa-2x.text-primary
+        div.pl-2 Cookoon
 
     .menu.d-none.d-md-block
       ul.list-inline
