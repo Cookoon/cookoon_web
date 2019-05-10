@@ -12,7 +12,6 @@ class ReservationsController < ApplicationController
   end
 
   def create
-    # TODO Handle erros when user has no search
     @reservation = current_user.reservations.build reservation_params
     authorize @reservation
 
@@ -39,6 +38,7 @@ class ReservationsController < ApplicationController
   end
 
   def reservation_params
-    params.require(:reservation).permit(:people_count, :duration, :start_at)
+    # params.require(:reservation).permit(:people_count, :duration, :start_at)
+    { duration: 4, people_count: 6, start_at: 2.days.from_now }
   end
 end
