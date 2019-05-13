@@ -1,0 +1,7 @@
+.bg-dark
+  = carousel_for(@cookoon.photos)
+
+= render 'presentation'
+
+.text-center
+  = link_to 'Choisir ce Cookoon', reservation_cookoon_path(@reservation, @cookoon), class: 'btn-cookoon btn-cookoon-primary', method: :patch

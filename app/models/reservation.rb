@@ -67,9 +67,13 @@ class Reservation < ApplicationRecord
 
   validates :start_at, presence: true
   validates :duration, presence: true
-  validate :tenant_is_not_host
+  validates :people_count, presence: true
   validates :start_at, in_future: true, after_notice_period: true, on: :create
+  validates :type_name, inclusion: { in: %w[breakfast brunch lunch diner cocktail morning afternoon day], message: "Ce type de réservation n'est pas valide" } 
 
+  validate :tenant_is_not_host
+
+  before_validation :set_duration_and_time_from_type_name, on: :create
   before_validation :set_price_cents, if: :price_cents_needs_update?
   after_save :report_to_slack, if: :saved_change_to_status?
   after_save :update_services, if: :services_need_update?
@@ -212,6 +216,35 @@ class Reservation < ApplicationRecord
   # ======================
 
   private
+
+  def set_duration_and_time_from_type_name
+    case type_name
+    when 'breakfast'
+      self.duration = 3
+      self.start_at = start_at.change(hour: 8, min: 30)
+    when 'brunch'
+      self.duration = 4
+      self.start_at = start_at.change(hour: 12, min: 30)
+    when 'lunch'
+      self.duration = 5
+      self.start_at = start_at.change(hour: 12, min: 30)
+    when 'diner'
+      self.duration = 7
+      self.start_at = start_at.change(hour: 20, min: 0)
+    when 'cocktail'
+      self.duration = 7
+      self.start_at = start_at.change(hour: 19, min: 30)
+    when 'morning'
+      self.duration = 5
+      self.start_at = start_at.change(hour: 9, min: 0)
+    when 'afternoon'
+      self.duration = 6
+      self.start_at = start_at.change(hour: 14, min: 0)
+    when 'day'
+      self.duration = 11
+      self.start_at = start_at.change(hour: 9, min: 0)
+    end
+  end
 
   def price_cents_needs_update?
     will_save_change_to_duration? || will_save_change_to_cookoon_id?

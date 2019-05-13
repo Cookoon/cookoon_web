@@ -11,6 +11,11 @@ class ReservationsController < ApplicationController
     @cookoon = @reservation.cookoon
   end
 
+  def new 
+    @reservation = Reservation.new(category: params[:category])
+    authorize @reservation
+  end
+
   def create
     @reservation = current_user.reservations.build reservation_params
     authorize @reservation
@@ -18,7 +23,7 @@ class ReservationsController < ApplicationController
     if @reservation.save
       redirect_to reservation_cookoons_path(@reservation)
     else
-      flash.alert = @reservation.errors.full_messages.join(', ')
+      flash.alert = "Oops, votre réservation n'est pas valide, vous devez remplir tous les champs"
       redirect_to root_path
     end
   end
@@ -38,7 +43,6 @@ class ReservationsController < ApplicationController
   end
 
   def reservation_params
-    # params.require(:reservation).permit(:people_count, :duration, :start_at)
-    { duration: 4, people_count: 6, start_at: 2.days.from_now }
+    params.require(:reservation).permit(:category, :people_count, :type_name, :start_at)
   end
 end

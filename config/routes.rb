@@ -40,18 +40,18 @@ Rails.application.routes.draw do
   resources :credit_cards, only: %i[index create destroy]
   resources :stripe_accounts, only: %i[new create]
 
-  resources :cookoons, except: :destroy do
+  resources :cookoons, only: %i[new create update] do
     resources :availabilities, only: %i[index create update], shallow: true
   end
 
-  resources :reservations, only: %i[index show create update] do
-    resources :cookoons, only: %i[index]
-    resources :services, only: %i[index]
+  resources :reservations, only: %i[index show new create update] do
+    resources :cookoons, only: %i[index show]
+    patch 'cookoons/:id', to: 'cookoons#select_cookoon'
     resources :payments, only: %i[new create] do
       post :amounts, on: :collection
     end
     resources :invoices, only: :create
-    resource :services, only: %i[show create]
+    resource :services, only: %i[index show create]
     resources :messages, controller: 'reservations/messages', only: %i[new create]
   end
 
