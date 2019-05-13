@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_10_085602) do
+ActiveRecord::Schema.define(version: 2019_05_13_100153) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -227,6 +227,7 @@ ActiveRecord::Schema.define(version: 2019_05_10_085602) do
     t.string "aasm_state"
     t.boolean "paid", default: false
     t.integer "category", default: 0
+    t.string "type_name"
     t.index ["cookoon_id"], name: "index_reservations_on_cookoon_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
