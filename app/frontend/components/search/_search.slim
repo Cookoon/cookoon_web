@@ -1,8 +1,8 @@
 .search.search-home data={controller: "search", action: 'click@window->search#hideSelections'}
-  .search-category-selection.d-flex-default
-    p Vous vouhaitez réserver pour
-    p Pour un particulier 
-    p Pour un professionnel
+  .search-category-selection.d-flex-default.mb-3
+    | Vous souhaitez réserver pour
+    = link_to 'Pour un particulier', new_reservation_path(category: :customer), remote: true, class: classnames('btn-cookoon', {'btn-cookoon-primary': @reservation.customer?})
+    = link_to 'Pour un professionnel', new_reservation_path(category: :business), remote: true, class: classnames('btn-cookoon', {'btn-cookoon-primary': @reservation.business?})
 
   .search-inputs
     .search-input.input-cookoon data={action: 'click->search#toggleSelection', target: 'search.selection'}
@@ -15,7 +15,7 @@
       span data={target: 'search.typeText'} Type de réception
       .search-input-selection.d-none
         - types.each do |type|
-          .pro-search-input-selection-item data={duration: type[:data], text: type[:display], action: 'click->search#selectType'} #{type[:display]}
+          .pro-search-input-selection-item data={type: type[:data], text: type[:display], action: 'click->search#selectType'} #{type[:display]}
 
     .search-input.input-cookoon data={target: 'search.dateSelection'}
       span data={target: 'search.dateText'} Date

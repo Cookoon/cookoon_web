@@ -53,7 +53,7 @@ export default class extends Controller {
   }
 
   selectType() {
-    const duration = event.target.dataset.duration
+    const duration = event.target.dataset.type
     const text = event.target.dataset.text
     this.typeTextTarget.innerHTML = text
     this.typeInputTarget.value = duration
