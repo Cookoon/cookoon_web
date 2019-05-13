@@ -3,6 +3,10 @@ class ReservationPolicy < ApplicationPolicy
     record.user == user
   end
 
+  def new?
+    true
+  end
+
   def create?
     #can be updated to check if user has a credit card
     true
