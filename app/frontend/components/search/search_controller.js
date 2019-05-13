@@ -6,8 +6,8 @@ export default class extends Controller {
     'selection',
     'countText',
     'countInput',
-    'durationText',
-    'durationInput',
+    'typeText',
+    'typeInput',
     'dateSelection',
     'dateText',
     'dateInput'
@@ -52,11 +52,11 @@ export default class extends Controller {
     event.target.closest('.search-input').classList.remove('focus')
   }
 
-  selectDuration() {
+  selectType() {
     const duration = event.target.dataset.duration
     const text = event.target.dataset.text
-    this.durationTextTarget.innerHTML = text
-    this.durationInputTarget.value = duration
+    this.typeTextTarget.innerHTML = text
+    this.typeInputTarget.value = duration
     event.target.closest('.search-input').classList.remove('focus')
   }
 

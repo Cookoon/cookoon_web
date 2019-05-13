@@ -1,12 +1,12 @@
 module SearchComponent
   extend ComponentHelper
 
-  def durations
+  def types
     [
-      {data: 4, display: 'Brunch'},
-      {data: 5, display: 'Déjeuner'},
-      {data: 7, display: 'Dîner'},
-      {data: 7, display: 'Cocktail'}
+      {data: 'brunch', display: 'Brunch'},
+      {data: 'lunch', display: 'Déjeuner'},
+      {data: 'diner', display: 'Dîner'},
+      {data: 'cocktail', display: 'Cocktail'}
     ]
   end
 

@@ -12,10 +12,10 @@
           .search-input-selection-item data={count: count, action: 'click->search#selectCount'} #{count} personnes
 
     .search-input.input-cookoon data={action: 'click->search#toggleSelection', target: 'search.selection'}
-      span data={target: 'search.durationText'} Type de réception
+      span data={target: 'search.typeText'} Type de réception
       .search-input-selection.d-none
-        - durations.each do |duration|
-          .pro-search-input-selection-item data={duration: duration[:data], text: duration[:display], action: 'click->search#selectDuration'} #{duration[:display]}
+        - types.each do |type|
+          .pro-search-input-selection-item data={duration: type[:data], text: type[:display], action: 'click->search#selectType'} #{type[:display]}
 
     .search-input.input-cookoon data={target: 'search.dateSelection'}
       span data={target: 'search.dateText'} Date
