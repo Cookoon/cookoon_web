@@ -1,4 +1,4 @@
-= link_to cookoon do
+= link_to reservation_cookoon_path(@reservation, cookoon) do
   .cookoon-card
     .cookoon-card-image style="background: url(#{cl_image_path(cookoon.photos.first.path, height: 250, crop: :fill)});"
       .btn-cookoon.btn-cookoon-primary Découvrir

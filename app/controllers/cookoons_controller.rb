@@ -1,15 +1,14 @@
 class CookoonsController < ApplicationController
   include DatetimeHelper
 
-  before_action :find_cookoon, only: %i[edit update]
-  before_action :find_search, only: %i[index show]
+  before_action :find_reservation, only: %i[index show select_cookoon]
+  before_action :find_cookoon, only: %i[edit update select_cookoon]
 
   def index
-    skip_policy_scope && (return redirect_to root_path) unless @search
-
     filtering_params = {
-      accomodates_for: @search.people_count,
-      available_in: (@search.start_at..@search.end_at)
+      accomodates_for: @reservation.people_count,
+      available_in: (@reservation.start_at..@reservation.end_at),
+      available_for: current_user
     }
     
     @cookoons = policy_scope(Cookoon)
@@ -21,11 +20,6 @@ class CookoonsController < ApplicationController
   def show
     @cookoon = Cookoon.includes(perks: :perk_specification).find(params[:id]).decorate
     authorize @cookoon
-
-    params_from_search = @search.to_reservation_attributes.merge(cookoon: @cookoon)
-    @reservation = Reservation.new params_from_search
-
-    @marker = { lat: @cookoon.latitude, lng: @cookoon.longitude }
   end
 
   def new
@@ -62,6 +56,11 @@ class CookoonsController < ApplicationController
     end
   end
 
+  def select_cookoon
+    @reservation.select_cookoon!(@cookoon.id)
+    redirect_to reservation_services_path(@reservation)
+  end
+
   private
 
   def find_cookoon
@@ -69,10 +68,8 @@ class CookoonsController < ApplicationController
     authorize @cookoon
   end
 
-  def find_search
-    @search = current_user.cookoon_searches.last
-    # TODO: FC replace old way?
-    # @search = current_user&.current_search || new_default_search
+  def find_reservation
+    @reservation = Reservation.find(params[:reservation_id])
   end
 
   def cookoon_params

@@ -1,5 +1,9 @@
 class ServicesController < ApplicationController
-  before_action :set_reservation, only: %i[show create]
+  skip_after_action :verify_policy_scoped
+  before_action :set_reservation, only: %i[index show create]
+
+  def index
+  end
 
   def show
     authorize @reservation
