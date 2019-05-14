@@ -1,7 +1,16 @@
-.bg-dark
-  = carousel_for(@cookoon.photos)
+h1.text-center.my-4 = @cookoon.name
 
-= render 'presentation'
+div class=classnames(container: desktop_view?)
+  .d-flex
+    .d-none.d-md-block.mr-2
+      = link_to '< Retour aux annonces', reservation_cookoons_path(@reservation), class: 'btn-cookoon btn-block btn-cookoon-secondary-gold mb-2 small'
+      = render 'reservations/search_recap', reservation: @reservation
 
-.text-center
-  = link_to 'Choisir ce Cookoon', reservation_cookoon_path(@reservation, @cookoon), class: 'btn-cookoon btn-cookoon-primary', method: :patch
+    div
+      .bg-dark
+        = carousel_for(@cookoon.photos)
+
+      = render 'presentation'
+
+      .text-center
+        = link_to 'Choisir ce Cookoon', reservation_cookoon_path(@reservation, @cookoon), class: 'btn-cookoon btn-cookoon-primary', method: :patch
