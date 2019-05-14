@@ -2,10 +2,8 @@ h1.text-center.mb-5 Les annonces
 
 div class=classnames(container: desktop_view?)
   .d-flex
-    .d-none.d-md-block.w-100
-      p #{@reservation.type_name} 
-      p le #{@reservation.start_at}
-      p pour #{@reservation.people_count} personnes
+    .d-none.d-md-block.w-100.mr-2
+      = render 'reservations/search_recap', reservation: @reservation
     .row
       - @cookoons.each do |cookoon|
         .col-12.col-md-6
