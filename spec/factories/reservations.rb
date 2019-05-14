@@ -3,10 +3,11 @@ FactoryBot.define do
     association :cookoon
     association :user
     start_at 10.days.from_now
-    duration 2
+    people_count 6
+    type_name 'brunch'
 
     trait :paid do
-      status :paid
+      paid true
     end
 
     trait :created_two_days_ago do
