@@ -69,7 +69,7 @@ class CookoonsController < ApplicationController
   end
 
   def find_reservation
-    @reservation = Reservation.find(params[:reservation_id])
+    @reservation = Reservation.find(params[:reservation_id]).decorate
   end
 
   def cookoon_params
@@ -79,10 +79,6 @@ class CookoonsController < ApplicationController
       :wifi_network, :wifi_code, :caretaker_instructions,
       photos: []
     )
-  end
-
-  def new_default_search
-    CookoonSearch.new CookoonSearch.default_params
   end
 
   def build_markers

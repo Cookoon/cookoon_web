@@ -7,10 +7,22 @@ div class=classnames(container: desktop_view?)
       = render 'reservations/search_recap', reservation: @reservation
 
     div
-      .bg-dark
-        = carousel_for(@cookoon.photos)
+      .bg-dark.text-center
+        = cl_image_tag(@cookoon.photos.first.path, width: 800, height: 450, crop: :fill)
 
       = render 'presentation'
 
-      .text-center
+      / This part can maybe be partialized
+      h3 Tarif
+      ul
+        li
+          p.m-0 #{@reservation.type_name} - #{@reservation.people_count_text} - #{@reservation.duration} heures
+          i * Tarifs indicatifs, le prix final dépend des besoins client
+
+      h3 Services compris
+      ul
+        li <strong>Conciergerie</strong> - Notre concierge vous contactera pour adapter les services
+        li <strong>Maitre d'hotel</strong> - Notre maitre d'hotel sera présent pour garantir le bon déroulement de votre événement
+
+      .text-center.m-4
         = link_to 'Choisir ce Cookoon', reservation_cookoon_path(@reservation, @cookoon), class: 'btn-cookoon btn-cookoon-primary', method: :patch
