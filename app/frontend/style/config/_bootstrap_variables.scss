@@ -8,7 +8,6 @@ $headings-font-family: Cochin;
 $font-family-base: Avenir;
 
 $primary: #CDBB8A;
-$gold: #CDBB8A;
 $gray: #F9F9F9;
 $black: #121212;
 $dark: #2C2C2C;
@@ -25,7 +24,7 @@ $theme-colors: (
 );
 
 // Customize the dark text colors for use in our YIQ color contrast function.
-$yiq-text-dark: $gold;
+$yiq-text-dark: $white;
 
 // Links
 // These can be set to another color later
@@ -39,12 +38,12 @@ $border-radius-lg: 0;
 $border-radius-sm: 0;
 
 // Forms
-$form-feedback-valid-color: $gold;
+$form-feedback-valid-color: $primary;
 // $input-bg: $white;
-$input-border-color: #000;
+$input-border-color:#F5F5F5;
 // $input-border-radius: 0;
-$input-border-width: 1px;
-$input-focus-border-color: lighten($gold, 10%);
+$input-border-width: 2px;
+$input-focus-border-color: lighten($primary, 10%);
 $input-focus-box-shadow: none;
 $input-focus-width: 0;
 

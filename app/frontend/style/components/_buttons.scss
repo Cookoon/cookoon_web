@@ -88,16 +88,16 @@
   font-family: Avenir;
   cursor: pointer;
   &-primary {
-    background: $gold; 
+    background: $primary; 
     color: white !important;
   }
   &-secondary {
     border: 1px solid white;
     color: white !important;
   }
-  &-secondary-gold {
-    border: 1px solid $gold;
-    color: $gold !important;
+  &-secondary-primary {
+    border: 1px solid $primary;
+    color: $primary !important;
   }
   &-disabled {
     background: lightgray; 

@@ -1,13 +1,12 @@
 input.form-control,
 textarea.form-control,
 select.form-control {
-  border-left: none;
-  border-right: none;
-  border-top: none;
-  padding-bottom: 1px;
+  padding: 20px;
+  margin: 5px 0;
   &:focus {
-    border-width: ($input-border-width * 2);
-    padding-bottom: 0;
+    outline: none;
+    border-color: #F5F5F5;
+    border-left: 5px solid #CDBB8A;
   }
 }
 
