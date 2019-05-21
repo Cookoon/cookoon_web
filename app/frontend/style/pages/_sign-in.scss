@@ -1,0 +1,11 @@
+.signin {
+  &-container {
+    flex: 1;
+  }
+  &-banner {
+    flex: 1;
+    height: 100vh;
+    background-size: cover;
+    background-position-y: center;
+  }
+}
