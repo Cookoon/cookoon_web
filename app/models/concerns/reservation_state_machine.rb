@@ -19,7 +19,6 @@ module ReservationStateMachine
       state :dead
 
       event :select_cookoon do
-        # before { puts "here" }
         transitions from: [:initial, :cookoon_selected], to: :cookoon_selected, after: :set_cookoon, guard: :cookoon_exists?
       end
 
@@ -61,12 +60,12 @@ module ReservationStateMachine
     end
   end
 
-  def cookoon_exists?(cookoon_id)
-    Cookoon.exists?(cookoon_id)
+  def cookoon_exists?(cookoon)
+    cookoon.present?
   end
 
-  def set_cookoon(cookoon_id)
-    self.cookoon_id = cookoon_id
+  def set_cookoon(cookoon)
+    self.cookoon = cookoon
   end
 
   def at_least_one_service?

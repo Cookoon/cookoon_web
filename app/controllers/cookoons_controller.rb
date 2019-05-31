@@ -10,7 +10,7 @@ class CookoonsController < ApplicationController
       available_in: (@reservation.start_at..@reservation.end_at),
       available_for: current_user
     }
-    
+
     @cookoons = policy_scope(Cookoon)
                 .includes(:photo_files)
                 .filtrate(filtering_params)
@@ -20,6 +20,7 @@ class CookoonsController < ApplicationController
   def show
     @cookoon = Cookoon.includes(perks: :perk_specification).find(params[:id]).decorate
     authorize @cookoon
+    @reservation.select_cookoon(@cookoon)
   end
 
   def new
@@ -57,7 +58,7 @@ class CookoonsController < ApplicationController
   end
 
   def select_cookoon
-    @reservation.select_cookoon!(@cookoon.id)
+    @reservation.select_cookoon!(@cookoon)
     redirect_to reservation_services_path(@reservation)
   end
 
