@@ -225,28 +225,36 @@ class Reservation < ApplicationRecord
     when 'breakfast'
       self.duration = 3
       self.start_at = start_at.change(hour: 8, min: 30)
+      services.build(category: :catering, payment_tied_to_reservation: true)
     when 'brunch'
       self.duration = 4
       self.start_at = start_at.change(hour: 12, min: 30)
+      services.build(category: :catering, payment_tied_to_reservation: true)
     when 'lunch'
       self.duration = 5
       self.start_at = start_at.change(hour: 12, min: 30)
-      services.build(category: 'chef', payment_tied_to_reservation: true)
+      services.build(category: :chef, payment_tied_to_reservation: true)
     when 'diner'
       self.duration = 7
       self.start_at = start_at.change(hour: 20, min: 0)
+      services.build(category: :chef, payment_tied_to_reservation: true)
     when 'cocktail'
       self.duration = 7
       self.start_at = start_at.change(hour: 19, min: 30)
+      services.build(category: :catering, payment_tied_to_reservation: true)
     when 'morning'
       self.duration = 5
       self.start_at = start_at.change(hour: 9, min: 0)
+      services.build(category: :corporate, payment_tied_to_reservation: true)
     when 'afternoon'
       self.duration = 6
       self.start_at = start_at.change(hour: 14, min: 0)
+      services.build(category: :corporate, payment_tied_to_reservation: true)
     when 'day'
       self.duration = 11
       self.start_at = start_at.change(hour: 9, min: 0)
+      services.build(category: :chef, payment_tied_to_reservation: true)
+      services.build(category: :corporate, payment_tied_to_reservation: true)
     end
   end
 
