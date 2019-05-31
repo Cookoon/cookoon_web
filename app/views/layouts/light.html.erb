@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
+    <title>Cookoon</title>
+    <%= csrf_meta_tags %>
+    <%= turbolinks_cache_control_meta_tag %>
+    <%= favicon_link_tag %>
+
+    <%= stylesheet_pack_tag 'application', media: :all, 'data-turbolinks-track': :reload %>
+
+    <% if Rails.env.production? %>
+      <%= render 'shared/marketing/google_analytics' %>
+      <%= render 'shared/marketing/hotjar' %>
+      <%= render 'shared/marketing/facebook_sdk' %>
+      <%= render 'shared/marketing/linkedin_insight' %>
+    <% end %>
+
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': :reload, async: @device != :ios_inside %>
+  </head>
+
+  <body>
+    <%= render 'shared/pretender_infos' %>
+    <div id="flash">
+      <%= render 'shared/flashes' %>
+    </div>
+
+    <%= yield %>
+
+  </body>
+</html>

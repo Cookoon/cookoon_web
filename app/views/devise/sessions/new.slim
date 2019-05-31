@@ -1,0 +1,17 @@
+.d-flex-default.min-vh-100
+  .signin-container.container.mt-5
+    .text-center
+      i.co.co-logo.fa-2x.text-primary
+      h1 COOKOON
+      p NOUS SOMMES COOKOON
+
+      h3 Bienvenue à vous !
+      p#devise-failure-invalid.text-danger
+
+    .d-flex.justify-content-around
+      .w-75.d-none
+        = render 'form'
+      .d-md-block
+        = render 'form'
+
+  .signin-banner.d-none.d-md-block style="background-image: url(#{image_url 'signin_banner.jpg'})"

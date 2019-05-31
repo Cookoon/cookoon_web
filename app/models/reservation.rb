@@ -75,7 +75,7 @@ class Reservation < ApplicationRecord
 
   validate :tenant_is_not_host
 
-  before_validation :set_duration_and_time_from_type_name, on: :create
+  before_validation :configure_from_type_name, on: :create
   before_validation :set_price_cents, if: :price_cents_needs_update?
   after_save :report_to_slack, if: :saved_change_to_status?
   after_save :update_services, if: :services_need_update?
@@ -219,33 +219,42 @@ class Reservation < ApplicationRecord
 
   private
 
-  def set_duration_and_time_from_type_name
-    return unless start_at.present?
+  def configure_from_type_name
+    return unless type_name.present? && start_at.present?
     case type_name
     when 'breakfast'
       self.duration = 3
       self.start_at = start_at.change(hour: 8, min: 30)
+      services.build(category: :catering, payment_tied_to_reservation: true)
     when 'brunch'
       self.duration = 4
       self.start_at = start_at.change(hour: 12, min: 30)
+      services.build(category: :catering, payment_tied_to_reservation: true)
     when 'lunch'
       self.duration = 5
       self.start_at = start_at.change(hour: 12, min: 30)
+      services.build(category: :chef, payment_tied_to_reservation: true)
     when 'diner'
       self.duration = 7
       self.start_at = start_at.change(hour: 20, min: 0)
+      services.build(category: :chef, payment_tied_to_reservation: true)
     when 'cocktail'
       self.duration = 7
       self.start_at = start_at.change(hour: 19, min: 30)
+      services.build(category: :catering, payment_tied_to_reservation: true)
     when 'morning'
       self.duration = 5
       self.start_at = start_at.change(hour: 9, min: 0)
+      services.build(category: :corporate, payment_tied_to_reservation: true)
     when 'afternoon'
       self.duration = 6
       self.start_at = start_at.change(hour: 14, min: 0)
+      services.build(category: :corporate, payment_tied_to_reservation: true)
     when 'day'
       self.duration = 11
       self.start_at = start_at.change(hour: 9, min: 0)
+      services.build(category: :chef, payment_tied_to_reservation: true)
+      services.build(category: :corporate, payment_tied_to_reservation: true)
     end
   end
 

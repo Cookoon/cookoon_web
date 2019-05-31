@@ -15,7 +15,7 @@ fr:
     sessions:
       form:
         first_sign_in: Première Connexion ?
-        forgot_your_password: Vous avez perdu vos identifiants ?
+        forgot_your_password: Mot de passe perdu
         remember_me: Se souvenir de moi ?
         sign_in: Se connecter
   errors:

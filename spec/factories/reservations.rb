@@ -11,11 +11,11 @@ FactoryBot.define do
     end
 
     trait :created_two_days_ago do
-      created_at 2.days.ago
+      created_at { 2.days.ago }
     end
 
     trait :created_ten_days_ago do
-      created_at 10.days.ago
+      created_at { 10.days.ago }
     end
   end
 end

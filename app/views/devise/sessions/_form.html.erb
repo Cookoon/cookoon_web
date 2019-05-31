@@ -5,22 +5,14 @@
   <% if @device.in? %i[ios_inside android_inside] %>
     <%= f.input :remember_me, as: :hidden, input_html: { value: 1 } %>
   <% else %>
-    <!-- ==== CUSTOM CHECKBOX ==== -->
-    <p><%= t('.remember_me') %></p>
-    <div class="form-group boolean optional user_remember_me">
-      <input value="0" type="hidden" name="user[remember_me]">
-      <input class="boolean optional d-none" type="checkbox" value="1" name="user[remember_me]" id="user_remember_me">
-      <label class="boolean optional toggle" for="user_remember_me">
-        <span class="toggle-handler"></span>
-      </label>
+    <div class="d-flex justify-content-between flex-wrap mb-3">
+      <%= f.input :remember_me, as: :boolean %>
+      <i><%= link_to t('.forgot_your_password'), new_password_path(resource_name) %></i>  
     </div>
-    <!-- ==== FIN CUSTOM CHECKBOX ==== -->
   <% end %>
 
-  <%= f.button :submit, t('.sign_in'), class: 'btn btn-primary btn-action-sm btn-block' %>
-
-  <div class="mt-5">
-    <%= render 'first_signin_modal' %>
-    <i><%= link_to t('.forgot_your_password'), new_password_path(resource_name) %></i>  
+  <div class="d-flex flex-wrap">
+    <%= f.button :submit, t('.sign_in'), class: 'btn btn-primary btn-action-sm btn-block' %>
+    <%= link_to 'Devenir Hôte', '#', class: 'btn btn-outline-black btn-action-sm btn-block' %>
   </div>
 <% end %>
