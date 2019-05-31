@@ -10,7 +10,7 @@ class CookoonsController < ApplicationController
       available_in: (@reservation.start_at..@reservation.end_at),
       available_for: current_user
     }
-    
+
     @cookoons = policy_scope(Cookoon)
                 .includes(:photo_files)
                 .filter(filtering_params)
