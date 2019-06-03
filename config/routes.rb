@@ -45,11 +45,13 @@ Rails.application.routes.draw do
   end
 
   resources :reservations, only: %i[index show new create update] do
-    resources :cookoons, only: %i[index show]
-    patch 'cookoons/:id', to: 'cookoons#select_cookoon'
-    resources :payments, only: %i[new create] do
-      post :amounts, on: :collection
+    resources :cookoons, only: %i[index show] do
+      resources :payments, only: [] do
+        post :amounts, on: :collection
+      end
     end
+    resources :payments, only: %i[new create]
+    patch 'cookoons/:id', to: 'cookoons#select_cookoon'
     resources :invoices, only: :create
     resource :services, only: %i[index show create]
     resources :messages, controller: 'reservations/messages', only: %i[new create]
