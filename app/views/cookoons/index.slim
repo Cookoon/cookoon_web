@@ -1,8 +1,8 @@
-h1.text-center.mb-5 Les annonces
+h1.text-center.my-4 Les annonces
 
 div class=classnames(container: desktop_view?)
   .d-flex
-    .d-none.d-md-block.w-100.mr-2
+    .d-none.d-md-block.mr-2
       = render 'reservations/search_recap', reservation: @reservation
     .row
       - @cookoons.each do |cookoon|

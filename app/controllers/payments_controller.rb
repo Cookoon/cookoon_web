@@ -1,5 +1,6 @@
 class PaymentsController < ApplicationController
   before_action :find_reservation
+  before_action :find_cookoon, only: %i[amounts]
 
   def new
     @service_categories = build_service_categories
@@ -37,8 +38,13 @@ class PaymentsController < ApplicationController
   end
 
   def find_reservation
-    @reservation = Reservation.where(status: :pending).find(params[:reservation_id])
+    @reservation = Reservation.find(params[:reservation_id])
     authorize @reservation
+  end
+
+  def find_cookoon
+    @cookoon = Cookoon.find(params[:cookoon_id])
+    @reservation.select_cookoon(@cookoon)
   end
 
   def payment_params

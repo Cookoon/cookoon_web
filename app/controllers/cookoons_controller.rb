@@ -18,6 +18,7 @@ class CookoonsController < ApplicationController
   end
 
   def show
+    @service_categories = build_service_categories
     @cookoon = Cookoon.includes(perks: :perk_specification).find(params[:id]).decorate
     authorize @cookoon
     @reservation.select_cookoon(@cookoon)
@@ -58,8 +59,9 @@ class CookoonsController < ApplicationController
   end
 
   def select_cookoon
-    @reservation.select_cookoon!(@cookoon)
-    redirect_to reservation_services_path(@reservation)
+    @reservation.select_cookoon(@cookoon)
+    @reservation.select_services!
+    redirect_to new_reservation_payment_path(@reservation)
   end
 
   private
@@ -70,7 +72,7 @@ class CookoonsController < ApplicationController
   end
 
   def find_reservation
-    @reservation = Reservation.find(params[:reservation_id])
+    @reservation = Reservation.find(params[:reservation_id]).decorate
   end
 
   def cookoon_params
@@ -82,8 +84,29 @@ class CookoonsController < ApplicationController
     )
   end
 
-  def new_default_search
-    CookoonSearch.new CookoonSearch.default_params
+  def build_service_categories
+    reservation_service_categories = @reservation.services.pluck(:category)
+    Service.categories.keys.reverse.map do |category|
+      if reservation_service_categories.exclude? category
+        { url: reservation_services_path(@reservation), method: 'post', selected: 'false' }
+      else
+        reservation_service = @reservation.services.find_by(category: category)
+        { url: service_path(reservation_service), method: 'delete', selected: 'true' }
+      end.merge(display_options_for(category))
+    end
+  end
+
+  def display_options_for(category)
+    case category
+    when 'corporate'
+      { icon_name: 'pro', display_name: "Carnets,<br />eau, etc." }
+    when 'chef'
+      { icon_name: 'chef', display_name: 'Chef<br />privé' }
+    when 'catering'
+      { icon_name: 'food', display_name: 'Plateaux<br />repas' }
+    when 'special'
+      { icon_name: 'concierge', display_name: 'Un besoin<br />particulier ?' }
+    end.merge(category: category)
   end
 
   def build_markers

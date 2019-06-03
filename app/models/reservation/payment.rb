@@ -12,7 +12,7 @@ class Reservation
     end
 
     def after_proceed
-      reservation.paid! if errors.empty?
+      reservation.charge! if errors.empty?
     end
 
     def should_capture?
