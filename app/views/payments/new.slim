@@ -6,7 +6,10 @@ div class=classnames(container: desktop_view?)
       = link_to '< Retour aux annonces', reservation_cookoons_path(@reservation), class: 'btn-cookoon btn-block btn-cookoon-secondary-gold mb-2 small'
       = render 'reservations/search_recap', reservation: @reservation 
 
-    div
+    .container
+      .d-flex-default
+        h5 Votre réservation
+        p <i class="fas fa-map-marker-alt"></i> #{@cookoon.address}
       = render 'reservations/recap_string', reservation: @reservation
 
       p Vos services :
@@ -29,3 +32,8 @@ div class=classnames(container: desktop_view?)
           b = humanized_money_with_symbol @reservation.payment_amount
     
       = render 'credit_cards/selection'
+
+      - if @reservation.business?
+        .text-center
+          p Vous pouvez aussi demander un devis
+          = link_to 'Demander un Devis', "#", class: 'btn btn-primary btn-action btn-block'

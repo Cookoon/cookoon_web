@@ -5,6 +5,7 @@ class PaymentsController < ApplicationController
   def new
     @service_categories = build_service_categories
     @credit_cards = current_user.credit_cards
+    @cookoon = @reservation.cookoon.decorate
   end
 
   def create
