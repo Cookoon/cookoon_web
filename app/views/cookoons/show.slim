@@ -10,7 +10,9 @@ div class=classnames(container: desktop_view?)
       .bg-dark.text-center
         = cl_image_tag(@cookoon.photos.first.path, width: 800, height: 450, crop: :fill)
 
-      = render 'presentation'
+      = render 'presentation', cookoon: @cookoon
+      = render 'reservations/recap_string', reservation: @reservation
+
 
       / This part can maybe be partialized
       h3 Tarif

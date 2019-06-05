@@ -1,18 +1,15 @@
 .container.mt-3
   .d-flex-default
     div
-      h4.m-0.pt-2 = @cookoon.name
-      = @cookoon.address_complement.presence
+      h4.m-0.pt-2 = cookoon.name
+      = cookoon.address_complement.presence
       p
-        <strong>#{@cookoon.category}</strong> de <em class='text-secondary'>#{@cookoon.user.first_name}</em>
+        <strong>#{cookoon.category}</strong> de <em class='text-secondary'>#{@cookoon.user.first_name}</em>
     div.d-none.d-md-flex
-      p <i class="fas fa-map-marker-alt"></i> #{@cookoon.address}
+      p <i class="fas fa-map-marker-alt"></i> #{cookoon.address}
 
-  = render 'perks', cookoon: @cookoon
-
-  .reservation-recap-string
-    <i class='co co-logo'></i> #{@reservation.recap_string}
-
+  = render 'perks', cookoon: cookoon
+  
   p = @cookoon.description
 
   - if @cookoon.architect_name
