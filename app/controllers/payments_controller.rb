@@ -5,10 +5,11 @@ class PaymentsController < ApplicationController
   def new
     @service_categories = build_service_categories
     @credit_cards = current_user.credit_cards
+    @cookoon = @reservation.cookoon.decorate
   end
 
   def create
-    payment = Reservation::Payment.new(@reservation, payment_params)
+    payment = Reservation::Payment.new(@reservation)
     if payment.proceed
       @reservation.notify_users_after_payment
       redirect_to new_reservation_message_path(@reservation)
@@ -38,17 +39,13 @@ class PaymentsController < ApplicationController
   end
 
   def find_reservation
-    @reservation = Reservation.find(params[:reservation_id])
+    @reservation = Reservation.find(params[:reservation_id]).decorate
     authorize @reservation
   end
 
   def find_cookoon
     @cookoon = Cookoon.find(params[:cookoon_id])
     @reservation.select_cookoon(@cookoon)
-  end
-
-  def payment_params
-    params.require(:payment).permit(:discount)
   end
 
   # TODO: CP 2may2018 Try to refactor this

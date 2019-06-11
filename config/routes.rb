@@ -52,6 +52,7 @@ Rails.application.routes.draw do
     end
     resources :payments, only: %i[new create]
     patch 'cookoons/:id', to: 'cookoons#select_cookoon'
+    patch :ask_quotation, on: :member
     resources :invoices, only: :create
     resource :services, only: %i[index show create]
     resources :messages, controller: 'reservations/messages', only: %i[new create]

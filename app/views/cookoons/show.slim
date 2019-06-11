@@ -6,33 +6,36 @@ div class=classnames(container: desktop_view?)
       = link_to '< Retour aux annonces', reservation_cookoons_path(@reservation), class: 'btn-cookoon btn-block btn-cookoon-secondary-gold mb-2 small'
       = render 'reservations/search_recap', reservation: @reservation
 
-    div data-controller="payments" data-payments-amounts-url=amounts_reservation_cookoon_payments_path(@reservation, @cookoon) data-payments-discount="false"
+    .container
       .bg-dark.text-center
         = cl_image_tag(@cookoon.photos.first.path, width: 800, height: 450, crop: :fill)
 
-      = render 'presentation'
+      = render 'presentation', cookoon: @cookoon
+      = render 'reservations/recap_string', reservation: @reservation
+
 
       / This part can maybe be partialized
-      h3 Tarif
-      ul
-        li
-          p.m-0 #{@reservation.type_name} - #{@reservation.people_count_text} - #{@reservation.duration} heures
-          i * Tarifs indicatifs, le prix final dépend des besoins client
+      div data-controller="payments" data-payments-amounts-url=amounts_reservation_cookoon_payments_path(@reservation, @cookoon) data-payments-discount="false"
+        h3 Tarif
+        ul
+          li
+            p.m-0 #{@reservation.type_name} - #{@reservation.people_count_text} - #{@reservation.duration} heures
+            i * Tarifs indicatifs, le prix final dépend des besoins client
 
-      h3 Services compris
-      .d-flex.justify-content-around
-        - @service_categories.each do |service_category|
-          div data-action="serviceChanged->payments#priceChanged"
-            = c 'service', service_category
+        h3 Services compris
+        .d-flex.justify-content-around
+          - @service_categories.each do |service_category|
+            div data-action="serviceChanged->payments#priceChanged"
+              = c 'service', service_category
 
-      div class=classnames('mb-2', 'd-none': @reservation.services.none?) data-target="payments.servicesPrices"
-        = render 'reservations/services_prices'
+        div class=classnames('mb-2', 'd-none': @reservation.services.none?) data-target="payments.servicesPrices"
+          = render 'reservations/services_prices'
 
-      hr
+        hr
 
-      .d-flex-default.mb-2
-        b data-target="payments.chargeAmountLabel" TOTAL
-        b data-target="payments.chargeAmount" = humanized_money_with_symbol @reservation.payment_amount
+        .d-flex-default.mb-2
+          b data-target="payments.chargeAmountLabel" TOTAL
+          b data-target="payments.chargeAmount" = humanized_money_with_symbol @reservation.payment_amount
 
-      .text-center.m-4
-        = link_to 'Confirmer', reservation_cookoon_path(@reservation, @cookoon), class: 'btn-cookoon btn-cookoon-primary', method: :patch
+        .text-center.m-4
+          = link_to 'Confirmer', reservation_cookoon_path(@reservation, @cookoon), class: 'btn btn-primary btn-action btn-block', method: :patch
