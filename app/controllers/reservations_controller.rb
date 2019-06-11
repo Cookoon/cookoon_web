@@ -1,5 +1,5 @@
 class ReservationsController < ApplicationController
-  before_action :find_reservation, only: %i[update show]
+  before_action :find_reservation, only: %i[update show ask_quotation]
 
   def index
     reservations = policy_scope(Reservation).includes(cookoon: :photo_files)
@@ -33,6 +33,13 @@ class ReservationsController < ApplicationController
     ReservationMailer.cancelled_by_tenant_to_tenant(@reservation).deliver_later
     ReservationMailer.cancelled_by_tenant_to_host(@reservation).deliver_later
     redirect_to reservations_path
+  end
+
+  def ask_quotation
+    @reservation.ask_quotation!
+    flash.notice = 'Votre demande de devis est enregistrée notre concierge reviendra vers vous rapidement par email !'
+    # probably redirect to my::reservations#index or equivalent
+    redirect_to root_path
   end
 
   private

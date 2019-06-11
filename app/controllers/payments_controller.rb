@@ -9,7 +9,7 @@ class PaymentsController < ApplicationController
   end
 
   def create
-    payment = Reservation::Payment.new(@reservation, payment_params)
+    payment = Reservation::Payment.new(@reservation)
     if payment.proceed
       @reservation.notify_users_after_payment
       redirect_to new_reservation_message_path(@reservation)
@@ -46,10 +46,6 @@ class PaymentsController < ApplicationController
   def find_cookoon
     @cookoon = Cookoon.find(params[:cookoon_id])
     @reservation.select_cookoon(@cookoon)
-  end
-
-  def payment_params
-    params.require(:payment).permit(:discount)
   end
 
   # TODO: CP 2may2018 Try to refactor this

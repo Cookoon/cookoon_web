@@ -36,4 +36,4 @@ div class=classnames(container: desktop_view?)
       - if @reservation.business?
         .text-center
           p Vous pouvez aussi demander un devis
-          = link_to 'Demander un Devis', "#", class: 'btn btn-primary btn-action btn-block'
+          = link_to 'Demander un Devis', ask_quotation_reservation_path(@reservation), class: 'btn btn-primary btn-action btn-block', method: :patch

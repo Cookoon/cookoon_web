@@ -30,7 +30,7 @@ module ReservationStateMachine
         transitions from: :services_selected, to: :charged
       end
 
-      event :ask_quote do
+      event :ask_quotation do
         transitions from: :services_selected, to: :quotation_asked
       end
 
