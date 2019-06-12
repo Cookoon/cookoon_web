@@ -1,0 +1,14 @@
+#invitation-modal.modal.fade tabindex="-1" role="dialog"
+  .modal-dialog role="document"
+    .modal-content.p-4
+      .modal-header
+        h3.modal-title Inviter un filleul
+        button.close type="button" data-dismiss="modal" aria-label="Close" ×
+      .modal-body
+        = simple_form_for resource, as: resource_name, url: invitation_path(resource_name), html: { method: :post, remote: true } do |f|
+          = f.input :email, label: "L'e-mail de votre invité(e)"
+          = f.input :first_name, label: "Son prénom"
+          = f.input :last_name, label: "Son nom"
+
+          .text-center
+            = f.button :submit, "INVITER", class: 'btn-cookoon btn-cookoon-primary btn-block'
