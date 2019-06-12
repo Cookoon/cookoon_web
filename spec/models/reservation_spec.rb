@@ -31,7 +31,7 @@ RSpec.describe Reservation, type: :model do
       let!(:paid) { create(:reservation, :paid) }
 
       it 'returns only paid reservations starting in less than few hours' do
-        Timecop.freeze(10.days.from_now - 1.hour) do
+        Timecop.freeze(10.days.from_now) do
           expect(described_class.short_notice).to include(paid)
         end
         Timecop.freeze(8.days.from_now) do
