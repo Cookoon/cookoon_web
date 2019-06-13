@@ -24,6 +24,7 @@ export default class extends Controller {
     flatpickr(this.dateSelectionTarget, {
       dateFormat: 'Y-m-dTH:i',
       minDate: 'today',
+      disableMobile: "true",
       onValueUpdate: (selectedDates, dateStr) => {
         this.selectDate(selectedDates, dateStr)
       },

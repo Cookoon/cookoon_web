@@ -16,3 +16,18 @@
     display: flex;
   }
 }
+
+@media (max-width: 576px) {
+  .search-home {
+    display: block;
+  }
+
+  .search-inputs {
+    display: block;
+  }
+
+  .search-inputs-container {
+    padding: 0;
+  }
+}
+
