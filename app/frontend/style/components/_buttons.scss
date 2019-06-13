@@ -104,4 +104,42 @@
     color: white !important;
     cursor: not-allowed;
   }
+  &-search {
+    white-space: normal;
+    text-transform: uppercase;
+    font-family: Avenir;
+    color: white;
+    background: none;
+    border: none;
+    cursor: inherit;
+    &-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 200px;
+      height: 200px;
+      background: $primary;
+      cursor: pointer;
+      &:hover {
+        background: darken($primary, 5%)
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .btn-cookoon-search {
+    width: 100%;
+  }
+
+  .btn-cookoon {
+    padding: 6px 20px;
+  }
+
+  .btn-cookoon-search-container {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-around;
+  }
 }

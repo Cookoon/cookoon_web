@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   def welcome; end
 
   def home
-    @reservation = Reservation.new
+    @reservation = Reservation.new.decorate
   end
 
   def support; end

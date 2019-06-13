@@ -4,7 +4,7 @@ class Services::PaymentsController < ApplicationController
   skip_after_action :verify_authorized
 
   def create
-    payment = Service::Payment.new(@service, payment_params)
+    payment = Service::Payment.new(@service)
     if payment.proceed
       redirect_to reservations_path, flash: { service_payment_succeed: true }
     else
@@ -15,19 +15,15 @@ class Services::PaymentsController < ApplicationController
   end
 
   def amounts
-    @amounts = build_amounts.merge(payment_params.to_h.symbolize_keys)
+    @amounts = build_amounts
     respond_to :json
   end
 
   private
 
   def build_amounts
-    discount_amount = @service.payment(payment_params).discountable_discount_amount
-
     {
-      discount_amount: discount_amount,
-      charge_amount: @service.payment(payment_params).discountable_charge_amount,
-      user_discount_balance: @service.user.discount_balance - discount_amount
+      charge_amount: @service.payment.discountable_charge_amount,
     }
   end
 
@@ -35,9 +31,5 @@ class Services::PaymentsController < ApplicationController
     @service = Service.find(params[:service_id])
     @reservation = @service.reservation
     # authorize @service
-  end
-
-  def payment_params
-    params.require(:payment).permit(:discount)
   end
 end
