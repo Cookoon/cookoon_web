@@ -104,4 +104,25 @@
     color: white !important;
     cursor: not-allowed;
   }
+  &-search {
+    white-space: normal;
+    text-transform: uppercase;
+    font-family: Avenir;
+    color: white;
+    background: none;
+    border: none;
+    cursor: inherit;
+    &-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      width: 180px;
+      height: 180px;
+      background: $primary;
+      cursor: pointer;
+      &:hover {
+        background: darken($primary, 5%)
+      }
+    }
+  }
 }
