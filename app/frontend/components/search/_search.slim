@@ -6,20 +6,23 @@
       = link_to 'Pour un professionnel', new_reservation_path(category: :business), remote: true, class: classnames('btn-cookoon', {'btn-cookoon-primary': @reservation.business?})
 
     .search-inputs
-      .search-input.input-cookoon data={action: 'click->search#toggleSelection', target: 'search.selection'}
-        span data={target: 'search.countText'} Nombre de convives
-        .search-input-selection.d-none
+      .input-cookoon-search data={action: 'click->search#toggleSelection', target: 'search.selection'}
+        p Convives
+        span.input-cookoon-search-data data={target: 'search.countText'} = @reservation.default_people_count
+        .input-cookoon-search-selection.d-none
           - people_counts.each do |count|
-            .search-input-selection-item data={count: count, action: 'click->search#selectCount'} #{count} personnes
+            .input-cookoon-search-selection-item data={count: count, action: 'click->search#selectCount'} #{count} personnes
 
-      .search-input.input-cookoon data={action: 'click->search#toggleSelection', target: 'search.selection'}
-        span data={target: 'search.typeText'} Type de réception
-        .search-input-selection.d-none
+      .input-cookoon-search data={action: 'click->search#toggleSelection', target: 'search.selection'}
+        p Type de réception
+        span.input-cookoon-search-data data={target: 'search.typeText'} = @reservation.default_type
+        .input-cookoon-search-selection.d-none
           - types.each do |type|
-            .pro-search-input-selection-item data={type: type[:data], text: type[:display], action: 'click->search#selectType'} #{type[:display]}
+            .input-cookoon-search-selection-item data={type: type[:data], text: type[:display], action: 'click->search#selectType'} #{type[:display]}
 
-      .search-input.input-cookoon data={target: 'search.dateSelection'}
-        span data={target: 'search.dateText'} Date
+      .input-cookoon-search data={target: 'search.dateSelection'}
+        p Date
+        span.input-cookoon-search-data data={target: 'search.dateText'} = @reservation.default_date
 
   .btn-cookoon-search-container
     = render 'form'

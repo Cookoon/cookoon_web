@@ -31,15 +31,15 @@ export default class extends Controller {
   }
 
   toggleSelection() {
-    const input = event.target.closest('.search-input')
-    input.querySelector('.search-input-selection').classList.toggle('d-none')
+    const input = event.target.closest('.input-cookoon-search')
+    input.querySelector('.input-cookoon-search-selection').classList.toggle('d-none')
     event.target.classList.toggle('focus')
   }
 
   hideSelections() {
     this.selectionTargets.forEach(element => {
-      if (element !== event.target.closest('.search-input')) {
-        element.querySelector('.search-input-selection').classList.add('d-none')
+      if (element !== event.target.closest('.input-cookoon-search')) {
+        element.querySelector('.input-cookoon-search-selection').classList.add('d-none')
         element.classList.remove('focus')
       }
     })
@@ -47,9 +47,9 @@ export default class extends Controller {
 
   selectCount() {
     const count = event.target.dataset.count
-    this.countTextTarget.innerHTML = `${count} personnes`
+    this.countTextTarget.innerHTML = count
     this.countInputTarget.value = count
-    event.target.closest('.search-input').classList.remove('focus')
+    event.target.closest('.input-cookoon-search').classList.remove('focus')
   }
 
   selectType() {
@@ -57,7 +57,7 @@ export default class extends Controller {
     const text = event.target.dataset.text
     this.typeTextTarget.innerHTML = text
     this.typeInputTarget.value = duration
-    event.target.closest('.search-input').classList.remove('focus')
+    event.target.closest('.input-cookoon-search').classList.remove('focus')
   }
 
   selectDate(selectedDates, dateStr) {

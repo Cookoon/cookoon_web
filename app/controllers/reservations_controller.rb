@@ -12,7 +12,7 @@ class ReservationsController < ApplicationController
   end
 
   def new 
-    @reservation = Reservation.new(category: params[:category])
+    @reservation = Reservation.new(category: params[:category]).decorate
     authorize @reservation
   end
 
