@@ -21,19 +21,15 @@ class PaymentsController < ApplicationController
   end
 
   def amounts
-    @amounts = build_amounts.merge(payment_params.to_h.symbolize_keys)
+    @amounts = build_amounts
     respond_to :json
   end
 
   private
 
   def build_amounts
-    discount_amount = @reservation.payment(payment_params).discountable_discount_amount
-
     {
-      discount_amount: discount_amount,
-      charge_amount: @reservation.payment(payment_params).discountable_charge_amount,
-      user_discount_balance: @reservation.user.discount_balance - discount_amount,
+      charge_amount: @reservation.payment.discountable_charge_amount,
       services_count: @reservation.services.count
     }
   end
