@@ -4,12 +4,12 @@ class Reservation < ApplicationRecord
   include EndAtSetter
   include TimeRangeBuilder
 
-  scope :displayable, -> { where.not(status: :pending).order(start_at: :asc) }
+  scope :displayable, -> { where.not(aasm_state: :initial).order(start_at: :asc) }
   scope :for_tenant, ->(user) { where(user: user) }
   scope :for_host, ->(user) { where(cookoon: user.cookoons) }
-  scope :active, -> { where(status: %i[paid accepted ongoing]) }
-  scope :engaged, -> {where(status: %i[accepted ongoing])}
-  scope :inactive, -> { where(status: %i[refused cancelled passed]) }
+  scope :active, -> { charged.or(accepted).or(ongoing) }
+  scope :engaged, -> { accepted.or(ongoing) }
+  scope :inactive, -> { refused.or(passed) }
   scope :created_in_day_range_around, ->(datetime) { where created_at: day_range(datetime) }
   scope :in_hour_range_around, ->(datetime) { where start_at: hour_range(datetime) }
   scope :finished_in_day_range_around, ->(datetime) { joins(:inventory).merge(Inventory.checked_out_in_day_range_around(datetime)) }
@@ -85,7 +85,7 @@ class Reservation < ApplicationRecord
   end
 
   def invoiceable?
-    accepted? || cancelled? || ongoing? || passed?
+    accepted? || ongoing? || passed?
   end
 
   def cookoon_owner
@@ -93,11 +93,11 @@ class Reservation < ApplicationRecord
   end
 
   def pending_or_paid?
-    pending? || paid?
+    initial? || paid
   end
 
   def refused_passed_or_cancelled?
-    refused? || passed? || cancelled?
+    refused? || passed? #|| cancelled? Uncomment when implementing cancel
   end
 
   def payment(options = {})

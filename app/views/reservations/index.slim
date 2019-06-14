@@ -1,7 +1,5 @@
-= content_for :navbar_content do
-  h4.text-primary Mes réservations
-
 div(class=classnames(container: @device == :desktop))
+  h3.my-4 Mes réservations
   ul(class=classnames('nav', 'nav-pills', 'mb-2', 'mx-2rem': @device != :desktop))
     li.nav-item
       a(href="#active" class="nav-link active" data-toggle="pill" role="tab") En cours
