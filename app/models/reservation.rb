@@ -85,7 +85,7 @@ class Reservation < ApplicationRecord
   end
 
   def invoiceable?
-    accepted? || cancelled? || ongoing? || passed?
+    accepted? || ongoing? || passed?
   end
 
   def cookoon_owner
@@ -93,11 +93,11 @@ class Reservation < ApplicationRecord
   end
 
   def pending_or_paid?
-    pending? || paid?
+    initial? || paid
   end
 
   def refused_passed_or_cancelled?
-    refused? || passed? || cancelled?
+    refused? || passed? #|| cancelled? Uncomment when implementing cancel
   end
 
   def payment(options = {})
