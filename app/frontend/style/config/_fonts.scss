@@ -1,12 +1,36 @@
-@import url('https://fonts.googleapis.com/css?family=GFS+Didot');
-
-$gfs-didot: 'GFS Didot', serif;
+@font-face {
+  font-family: 'cochinitalic';
+  src: url('fonts/cochinitalic.eot');
+  src: url('fonts/cochinitalic.eot?#iefix') format('embedded-opentype'),
+       url('fonts/cochinitalic.woff2') format('woff2');
+  src: url('fonts/Cochin-Italic.ttf') format('truetype'),
+       url('fonts/Cochin-Italic.woff') format('woff');       
+  font-weight: normal;
+  font-style: normal;
+}
+$cochin-italic: 'cochinitalic', serif;
 
 @font-face {
-  font-family: 'Tisa Sans Pro';
-  src: url('fonts/tisasanspro.eot');
-  src: url('fonts/tisasanspro.eot?#iefix') format('embedded-opentype'),
-    url('fonts/tisasanspro.woff') format('woff'),
-    url('fonts/tisasanspro.ttf') format('truetype');
+  font-family: 'Avenir';
+  src: url('fonts/AvenirLTStd-Light.eot');
+  src: url('fonts/AvenirLTStd-Light.eot?#iefix') format('embedded-opentype'),
+       url('fonts/AvenirLTStd-Light.svg#AvenirLTStd-Light') format('svg'),
+       url('fonts/AvenirLTStd-Light.ttf') format('truetype'),
+       url('fonts/AvenirLTStd-Light.woff') format('woff'),
+       url('fonts/AvenirLTStd-Light.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
 }
-$tisa-sans: 'Tisa Sans Pro', sans-serif;
+
+@font-face {
+  font-family: 'Avenir';
+  src: url('fonts/AvenirLTStd-Heavy.eot');
+  src: url('fonts/AvenirLTStd-Heavy.eot?#iefix') format('embedded-opentype'),
+       url('fonts/AvenirLTStd-Heavy.svg#AvenirLTStd-Heavy') format('svg'),
+       url('fonts/AvenirLTStd-Heavy.ttf') format('truetype'),
+       url('fonts/AvenirLTStd-Heavy.woff') format('woff'),
+       url('fonts/AvenirLTStd-Heavy.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+$avenir: 'Avenir', serif;
