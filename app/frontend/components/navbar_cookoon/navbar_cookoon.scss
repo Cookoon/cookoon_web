@@ -1,82 +1,49 @@
-// .navbar-cookoon {
-//   padding: 1rem 2rem;
-//   display: flex;
-//   justify-content: space-between;
-//   align-items: center;
-//   font-size: 1.5rem;
-//   line-height: normal;
-//   &-back,
-//   &-fixed-back {
-//     padding-left: 1rem;
-//     padding-right: 1rem;
-//   }
-//   &-logo {
-//     position: relative;
-//     background-color: var(--primary);
-//     padding: 3rem 0 3rem 0;
-//     color: white;
-//     .logo-wrapper {
-//       position: absolute;
-//       top: 0;
-//       height: 100%;
-//       left: 0;
-//       width: 100%;
-//       display: flex;
-//       justify-content: center;
-//       align-items: center;
-//       font-size: 4rem;
-//     }
-//   }
-//   &-content {
-//     flex: 6;
-//     padding-left: 25px;
-//     p {
-//       font-size: 13px;
-//       margin: 1px;
-//     }
-//     h4 {
-//       margin: 0;
-//     }
-//   }
-//   &-fixed-back {
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     width: 100%;
-//     z-index: 2;
-//     a {
-//       color: white;
-//     }
-//   }
-//   &-none {
-//     display: none;
-//   }
-// }
+.cookoon-nav {
+    &-infos {
+        display: flex;
 
-// .content-padded {
-//   padding: 50px 10px 50px 0;
-// }
+        &-service {
+            flex: 6;
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            align-items: center;
+        }
+        &-user {
+            flex: 1;
+            display: flex;
+            color: white;
+            justify-content: space-between;
+            padding: 10px;
+            align-items: center;
+        }
+    }
+    &-navigation {
+        display: flex;
+        color: white;
+        align-items: center;
+        padding: 10px;
 
-// .content-padded-backlink {
-//   padding: 30px 20px;
-// }
+        a {
+            color: white;
+        }
 
-// @media (min-width: 576px) {
-//   .content-padded {
-//     padding: 50px;
-//   }
-// }
+        ul {
+            margin: 0;
+        }
 
-// @media only screen and (min-width: 1824px) {
-//   .content-padded {
-//     padding: 50px;
-//     max-width: 70%;
-//     margin: auto;
-//   }
-//   .content-padded-backlink {
-//     max-width: 60%;
-//   }
-//   .navbar-cookoon-content {
-//     left: 21%;
-//   }
-// }
+        .logo {
+            flex: 1;
+            display: flex;
+            align-items: center;
+        }
+        .menu {
+            display: flex;
+            justify-content: space-around;
+            flex: 5;
+        }
+        .cta {
+            flex: 1;
+        }
+    }
+}
