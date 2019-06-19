@@ -15,6 +15,7 @@
       justify-content: space-between;
       padding: 10px;
       align-items: center;
+      position: relative;
     }
   }
   &-navigation {
@@ -44,6 +45,18 @@
       justify-content: space-around;
       width: 80%;
     }
+  }
+}
+
+.navigation-dropdown-menu {
+  position: absolute;
+  background: white;
+  top: 50px;
+  left: 0;
+  width: 100%;
+  &-item {
+    display: block;
+    color: black;
   }
 }
 
