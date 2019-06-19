@@ -6,6 +6,6 @@
     = f.input :born_on, start_year: Date.today.year - 90, end_year: Date.today.year - 12, selected: @user.born_on || Date.new(1965, 1, 1) 
     = f.input :phone_number 
 
-  .form-actions
+  .form-actions.mb-4
     .text-right
-      = f.submit class: 'btn-lg btn-cookoon btn-cookoon-primary px-5'
+      = f.submit class: 'btn-cookoon btn-cookoon-primary px-5'

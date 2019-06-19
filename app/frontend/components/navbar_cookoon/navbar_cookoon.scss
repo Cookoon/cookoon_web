@@ -3,19 +3,19 @@
     display: flex;
 
     &-service {
-    flex: 6;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    align-items: center;
+      flex: 6;
+      display: flex;
+      padding: 10px;
+      align-items: center;
     }
     &-user {
-    flex: 1;
-    display: flex;
-    color: white;
-    justify-content: space-between;
-    padding: 10px;
-    align-items: center;
+      flex: 1;
+      display: flex;
+      color: white;
+      justify-content: space-between;
+      padding: 10px;
+      align-items: center;
+      position: relative;
     }
   }
   &-navigation {
@@ -33,17 +33,45 @@
     }
 
     .logo {
-      flex: 1;
       display: flex;
       align-items: center;
     }
+    
     .menu {
       display: flex;
       justify-content: space-around;
-      flex: 5;
+      width: 80%;
     }
-    .cta {
-      flex: 1;
+  }
+}
+
+.navigation-dropdown-menu {
+  display: none;
+  &--opened {
+    display: block;
+    position: absolute;
+    background: white;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    padding: 15px;
+    z-index: 3;
+    box-shadow: 0px 14px 10px rgba(0, 0, 0, .4);
+  }
+
+  &-item {
+    display: block;
+    color: black;
+    padding: 5px 0;
+    &:hover {
+      color: black;
+      text-decoration: underline;
     }
+  }
+}
+
+@media (max-width: 992px) {
+  .cookoon-nav-infos-user {
+      flex: 14;
   }
 }
