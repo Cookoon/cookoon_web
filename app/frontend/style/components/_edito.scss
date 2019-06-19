@@ -42,11 +42,17 @@
 
 @media (max-width: 576px) {
   .edito-container {
-    border: 1px solid gray;
     display: block;
   }
 
   .edito-row {
     display: block;
   }
+}
+
+@media (min-width: 992px) {
+  .edito-container {
+    margin: 0 100px;
+  }
+
 }
