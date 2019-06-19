@@ -26,6 +26,9 @@
 
     a {
       color: white;
+      &:hover {
+        text-decoration: underline;
+      }
     }
 
     ul {
@@ -33,17 +36,14 @@
     }
 
     .logo {
-      flex: 1;
       display: flex;
       align-items: center;
     }
+    
     .menu {
       display: flex;
       justify-content: space-around;
-      flex: 5;
-    }
-    .cta {
-      flex: 1;
+      width: 80%;
     }
   }
 }
