@@ -1,11 +1,11 @@
-.cookoon-nav
+.cookoon-nav data={controller: "dropdowns", action: "click@window->dropdowns#close" }
   .cookoon-nav-infos
     .cookoon-nav-infos-service.bg-white
       - if @device == :desktop
         | Conciergerie - 06 12 12 12 12
       - else 
         | Conciergerie
-    .cookoon-nav-infos-user.bg-primary.pointer id="navigationDropdownMenu" aria-haspopup="true" aria-expanded="false"
+    .cookoon-nav-infos-user.bg-primary.pointer id="navigationDropdownMenu" aria-haspopup="true" aria-expanded="false" data={target: 'dropdowns.trigger', action: "click->dropdowns#toggle" }
       - if current_user&.photo?
         = cl_image_tag(current_user.photo.path, { size: '30x30', crop: :thumb, gravity: :face, class: 'avatar-30' })
       - else
@@ -14,10 +14,10 @@
       = current_user.full_name
       i.fas.fa-chevron-down
 
-      .navigation-dropdown-menu aria-labelledby="navigationDropdownMenu"
-        = link_to 'Mon compte', '#', class: 'navigation-dropdown-menu-item'
-        = link_to 'Mes moyens de paiement', '#', class: 'navigation-dropdown-menu-item'
-        = link_to 'Déconnexion', '#', class: 'navigation-dropdown-menu-item'
+      .navigation-dropdown-menu aria-labelledby="navigationDropdownMenu" data-target="dropdowns.body"
+        = link_to 'Mon compte', edit_users_path, class: 'navigation-dropdown-menu-item'
+        = link_to 'Mes moyens de paiement', credit_cards_path, class: 'navigation-dropdown-menu-item'
+        = link_to 'Déconnexion', destroy_user_session_path, class: 'navigation-dropdown-menu-item', method: 'delete'
 
   .cookoon-nav-navigation.bg-black
     = link_to root_path do
