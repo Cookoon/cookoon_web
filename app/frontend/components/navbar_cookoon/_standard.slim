@@ -1,12 +1,18 @@
 .cookoon-nav
   .cookoon-nav-infos
-    .cookoon-nav-infos-service.bg-white Conciergerie - 06 12 12 12 12
+    .cookoon-nav-infos-service.bg-white 
+      - if @device == :desktop
+        | Conciergerie - 06 12 12 12 12
+      - else 
+        | Conciergerie
     .cookoon-nav-infos-user.bg-primary
-      div
-        - if current_user&.photo?
-          = cl_image_tag(current_user.photo.path, { size: '30x30', crop: :thumb, gravity: :face, class: 'avatar-30' })
-        - else
-          = image_tag 'base_user.png', class: 'avatar-30'
+      - if current_user&.photo?
+        = cl_image_tag(current_user.photo.path, { size: '30x30', crop: :thumb, gravity: :face, class: 'avatar-30' })
+      - else
+        = image_tag 'base_user.png', class: 'avatar-30'
+
+      = current_user.full_name
+      i.fas.fa-chevron-down
 
   .cookoon-nav-navigation.bg-black
     = link_to root_path do

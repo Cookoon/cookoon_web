@@ -3,19 +3,18 @@
     display: flex;
 
     &-service {
-    flex: 6;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    align-items: center;
+      flex: 6;
+      display: flex;
+      padding: 10px;
+      align-items: center;
     }
     &-user {
-    flex: 1;
-    display: flex;
-    color: white;
-    justify-content: space-between;
-    padding: 10px;
-    align-items: center;
+      flex: 1;
+      display: flex;
+      color: white;
+      justify-content: space-between;
+      padding: 10px;
+      align-items: center;
     }
   }
   &-navigation {
@@ -45,5 +44,11 @@
       justify-content: space-around;
       width: 80%;
     }
+  }
+}
+
+@media (max-width: 992px) {
+  .cookoon-nav-infos-user {
+      flex: 14;
   }
 }
