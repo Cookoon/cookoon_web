@@ -1,9 +1,9 @@
 .cookoon-nav data={controller: "dropdowns", action: "click@window->dropdowns#close" }
   .cookoon-nav-infos
     .cookoon-nav-infos-service.bg-white
-      - if @device == :desktop
+      .d-none.d-md-block
         | Conciergerie - 06 12 12 12 12
-      - else 
+      .d-block.d-md-none
         | Conciergerie
     .cookoon-nav-infos-user.bg-primary.pointer id="navigationDropdownMenu" aria-haspopup="true" aria-expanded="false" data={target: 'dropdowns.trigger', action: "click->dropdowns#toggle" }
       - if current_user&.photo?
