@@ -41,6 +41,13 @@ module Forest
 
         render json: { success: 'Pro::Reservation is duplicated as draft' }
       end
+
+      def admin_close
+        reservation = ::Pro::Reservation.find(params.dig(:data, :attributes, :ids)&.first)
+        reservation.admin_close
+
+        render json: { success: 'Pro::Reservation is now closed' }
+      end
     end
   end
 end
