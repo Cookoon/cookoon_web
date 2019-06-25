@@ -2,27 +2,10 @@
   h1 Mes moyens de paiement
 
   .cookoon-card.p-4
+    h4 Mes cartes
 
-    - if current_user.available_discount? && @credit_cards.blank?
-      .information-card.text-center
-        .information-card-picto
-          .far.fa-question-circle.fa-3x aria-hidden="true"
-
-        .information-card-title
-          p Aucune carte associée
-
-        .information-card-text
-          p
-            | Ajoutez une carte de paiement pour pouvoir réserver un Cookoon et bénéficier 
-            | de <b>#{humanized_money_with_symbol current_user.discount_balance} de crédit.</b>
-
-          p Allez-y en toute confiance : votre numéro de carte est crypté contre toute violation.
-
-    - elsif @credit_cards.blank?
-      .information-card.text-center
-        .information-card-picto
-          .far.fa-question-circle.fa-3x aria-hidden="true"
-
+    - if @credit_cards.blank?
+      .information-card
         .information-card-title
           p Aucune carte associée
 
@@ -32,7 +15,6 @@
             | violation, et vous serez débité uniquement si votre Hôte accepte votre demande de location.
 
     - else
-      h4 Mes cartes
       - @credit_cards.data.each_with_index do |card_data, index|
         .d-flex-default.pt-1
           .h5
@@ -42,22 +24,11 @@
           = link_to credit_card_path(card_data.id), remote: true, method: :delete, class: 'no-button slowLoad' do
             .d-flex-default
               .fas.fa-times.fa-lg
-              .pl-3.d-none.d-md-block Supprimer
+              .pl-2.d-none.d-md-block Supprimer
 
     .py-3
       h4 Nouveau moyen de paiement
       button.btn-cookoon.btn-cookoon-primary type="button" data-toggle="modal" data-target="#credit-card-modal"
         | Ajouter une nouvelle carte
-
-
-  - if @credit_cards.any? && current_user.available_discount?
-    .card-bottom.mt-3
-      .card-bottom-content
-        .text-center
-          <i class="far fa-question-circle fa-2x" aria-hidden="true"></i>
-
-        p.mt-3
-          | <b>Vous avez #{humanized_money_with_symbol current_user.discount_balance} à dépenser chez Cookoon !</b>
-          | Vous pouvez en profiter jusqu'au #{display_date_for current_user.discount_expires_at}, dépéchez-vous !
 
 = render 'modal'
