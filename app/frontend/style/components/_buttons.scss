@@ -2,9 +2,15 @@
   padding: 10px 30px;
   text-transform: uppercase;
   cursor: pointer;
+  &:focus {
+    outline: none;
+  }
   &-primary {
     background: $primary; 
     color: white !important;
+    &:hover {
+      background: darken($primary, 5%)
+    }
   }
   &-secondary {
     border: 1px solid white;

@@ -22,5 +22,7 @@ module Forest
     }]
 
     action 'Duplicate Reservation as draft', type: 'single'
+
+    action 'Admin close', type: 'single'
   end
 end

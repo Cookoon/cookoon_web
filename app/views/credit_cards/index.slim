@@ -1,0 +1,34 @@
+.container.py-4
+  h1 Mes moyens de paiement
+
+  .cookoon-card.p-4
+    h4 Mes cartes
+
+    - if @credit_cards.blank?
+      .information-card
+        .information-card-title
+          p Aucune carte associée
+
+        .information-card-text
+          p
+            | Vous pouvez ajouter votre carte de paiement en toute confiance : votre numéro de carte est crypté contre toute
+            | violation, et vous serez débité uniquement si votre Hôte accepte votre demande de location.
+
+    - else
+      - @credit_cards.data.each_with_index do |card_data, index|
+        .d-flex-default.pt-1
+          .h5
+            = render_credit_card_for card_data
+            = "(Principale)" if index.zero?
+
+          = link_to credit_card_path(card_data.id), remote: true, method: :delete, class: 'no-button slowLoad' do
+            .d-flex-default
+              .fas.fa-times.fa-lg
+              .pl-2.d-none.d-md-block Supprimer
+
+    .py-3
+      h4 Nouveau moyen de paiement
+      button.btn-cookoon.btn-cookoon-primary type="button" data-toggle="modal" data-target="#credit-card-modal"
+        | Ajouter une nouvelle carte
+
+= render 'modal'

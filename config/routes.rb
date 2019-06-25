@@ -119,6 +119,7 @@ Rails.application.routes.draw do
     post '/actions/add-service-from-specification', to: 'pro/reservations#add_service_from_specification'
     post '/actions/propose-reservation', to: 'pro/reservations#propose_reservation'
     post '/actions/duplicate-reservation-as-draft', to: 'pro/reservations#duplicate_reservation_as_draft'
+    post '/actions/admin-close', to: 'pro/reservations#admin_close'
   end
 
   mount ForestLiana::Engine, at: :forest
