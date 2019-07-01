@@ -9,7 +9,7 @@
     background: $primary; 
     color: white !important;
     &:hover {
-      background: darken($primary, 5%)
+      background: darken($primary, 5%);
     }
   }
   &-secondary {
@@ -19,6 +19,10 @@
   &-secondary-gold {
     border: 1px solid $primary;
     color: $primary !important;
+    &:hover {
+      border: 1px solid darken($primary, 10%);
+      color: darken($primary, 10%) !important;
+    }
   }
   &-disabled {
     background: lightgray; 

@@ -1,7 +1,7 @@
 input.form-control,
 textarea.form-control,
 select.form-control {
-  padding: 20px;
+  height: 50px;
   margin: 5px 0;
   &:focus {
     outline: none;
@@ -12,4 +12,14 @@ select.form-control {
 
 .form-control.is-invalid:focus {
   box-shadow: none;
+}
+
+.form-control.is-valid {
+  border: 2px solid #F5F5F5;
+  background-image: none;
+  &:focus {
+    outline: none;
+    border: 2px solid #F5F5F5;
+    border-left: 5px solid #CDBB8A;
+  }
 }
