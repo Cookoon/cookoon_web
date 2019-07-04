@@ -10,10 +10,10 @@
                 span Cookoon
 
               - if @reservation.business?
-                .text-uppercase = @reservation.company
-                div = @reservation.company.address
-                - if @reservation.company.vat.present?
-                  div N° TVA Intra : #{@reservation.company.vat}
+                .text-uppercase = @reservation.user.company
+                div = @reservation.user.company.address
+                - if @reservation.user.company.vat.present?
+                  div N° TVA Intra : #{@reservation.user.company.vat}
 
           p.font-weight-bold Récapitulatif de votre location du #{@reservation.start_on(without_year: true)}, de #{@reservation.start_time} à #{@reservation.end_time}
 
@@ -37,9 +37,10 @@
             h3 Options
             - @reservation.services.each do |service|
               .row.mb-3.page-break-inside-avoid
-                .col-8 #{service.name} × #{service.quantity}
-                .col-2.text-right = service.unit_price
-                .col-2.text-right = service.price
+              / TODO UNCOMMENT WHEN SERVICE MATCH
+                / .col-8 #{service.name} × #{service.quantity}
+                / .col-2.text-right = service.unit_price
+                / .col-2.text-right = service.price
 
             .page-break-inside-avoid
               .row
@@ -68,7 +69,7 @@
               .col-4.text-right = @reservation.total_full_price
 
           .mt-4.small.page-break-inside-avoid
-            - if @reservation.quotation?
+            - if @reservation.quotation_proposed?
               = simple_format(@reservation.quotation_cancel_policy)
             - elsif @reservation.invoice?
               = simple_format(@reservation.invoice_legal_mentions)
