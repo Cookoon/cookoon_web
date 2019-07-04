@@ -17,6 +17,10 @@ class ReservationDecorator < Draper::Decorator
     h.display_time_for object.end_at
   end
 
+  def start_on(options = {})
+    h.display_date_for(object.start_at, options)
+  end
+
   def default_type
     'Brunch'
   end 
@@ -31,5 +35,45 @@ class ReservationDecorator < Draper::Decorator
 
   def people_count_text
     "#{object.people_count} convives"
+  end
+
+  def duration
+    h.display_duration_for object.duration
+  end
+
+  def cookoon_price
+    h.humanized_money_with_symbol object.cookoon_price
+  end
+
+  def cookoon_fee
+    h.humanized_money_with_symbol object.cookoon_fee
+  end
+
+  def cookoon_fee_tax
+    h.humanized_money_with_symbol object.cookoon_fee_tax
+  end
+
+  def services_tax
+    h.humanized_money_with_symbol object.services_tax
+  end
+
+  def services_price
+    h.humanized_money_with_symbol object.services_price
+  end
+
+  def services_full_price
+    h.humanized_money_with_symbol object.services_full_price
+  end
+
+  def total_price
+    h.humanized_money_with_symbol object.total_price
+  end
+
+  def total_full_price
+    h.humanized_money_with_symbol object.total_full_price
+  end
+
+  def total_tax
+    h.humanized_money_with_symbol object.total_tax
   end
 end

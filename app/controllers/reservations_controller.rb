@@ -45,7 +45,7 @@ class ReservationsController < ApplicationController
   private
 
   def find_reservation
-    @reservation = Reservation.find(params[:id])
+    @reservation = Reservation.find(params[:id]).decorate
     authorize @reservation
   end
 
