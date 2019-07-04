@@ -9,12 +9,24 @@ class ReservationDecorator < Draper::Decorator
     10
   end
 
+  def start_time
+    h.display_time_for object.start_at
+  end
+
+  def end_time
+    h.display_time_for object.end_at
+  end
+
   def default_type
     'Brunch'
   end 
 
   def default_date
     'Votre choix'
+  end
+
+  def cookoon_owner_name
+    object.cookoon.user.full_name
   end
 
   def people_count_text
