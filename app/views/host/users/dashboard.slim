@@ -1,0 +1,48 @@
+= render 'stripe_connection_card' unless @user.stripe_verified?
+
+div(class=classnames(container: @device == :desktop))
+  h1.my-4 Mon espace hôte
+
+  .container.pb-3
+    p <b>Votre activité</b>
+    p Historique des revenus : <span class="text-primary">#{humanized_money_with_symbol current_user.total_payouts_for_dashboard}</span>
+
+    - if @cookoons.any?
+      p
+        | Optimisez vos revenus, recevez des demandes de locations au bon moment en
+        | mettant à jour les disponibilités de votre Cookoon:
+
+      .text-center.pt-4.pb-3
+        = link_to 'Mon calendrier', cookoon_availabilities_path(@cookoons.first), class: 'btn btn-primary btn-action btn-block'
+
+    hr
+
+    p 
+      | <b>Vos dernières demandes de réservation</b>
+      | Vous avez <span class="text-primary">#{@pending_reservations_count} demande(s) de réservation</span> en attente
+
+    .text-center.pt-5.pb-3
+      = link_to 'Voir mes Réservations', host_reservations_path, class: 'btn btn-primary btn-action btn-block'
+
+    hr
+
+    p <b>Vos Cookoons</b>
+
+    .row
+      - @cookoons.each do |cookoon|
+        .col-12.col-md-6.mb-3
+          = component 'card_cookoon',
+                        title: cookoon.name,
+                        title_class: :reverse,
+                        image_url: cl_image_path(cookoon.photos.first.path, width: 800, height: 450, crop: :fill)
+
+    - unless @user.reached_max_cookoons_count?
+      .py-3.text-center
+        - button_text = @cookoons.any? ? 'Ajouter un autre Cookoon' : 'Proposer mon appartement'
+        = link_to button_text, new_cookoon_path, class: 'btn btn-action btn-block btn-outline-primary'
+
+    .border.border-dark.pt-2.px-2.text-center
+      p
+        | Cookoon s'inscrit dans une démarche responsable, à ce titre nous n'acceptons
+        | pas plus deux espaces par hôte afin de ne pas participer à l'inflation des
+        | prix de l'immobilier.
