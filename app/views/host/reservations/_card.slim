@@ -1,0 +1,22 @@
+.cookoon-card.p-4.border-primary
+  h4.mb-5 = reservation.cookoon.name
+
+  p.font-weight-bold
+    | #{display_date_for(reservation.start_at, without_year: true)} 
+    | - de #{reservation.end_time} à #{reservation.start_time} 
+    | - #{reservation.people_count_text}
+
+  p Vous recevez : #{humanized_money_with_symbol reservation.host_payout_price}
+
+  hr
+
+  .d-flex-default
+    p.w-50
+      | Locataire : #{reservation.user.full_name} <br>
+      | <span class='small'>Membre depuis le #{display_date_for(reservation.user.created_at)}</span> 
+
+    - if reservation.charged?
+      div
+        = simple_form_for [:host, reservation] do |f|
+          = f.submit 'Accepter', name: "accept", class: 'btn-cookoon btn-cookoon-primary btn-block'
+          = f.submit 'Refuser', name: "refuse", class: 'btn-cookoon btn-cookoon-primary btn-block'

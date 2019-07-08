@@ -38,7 +38,7 @@ div class=classnames(container: desktop_view?)
 
         .d-flex-default.mb-2
           b data-target="payments.chargeAmountLabel" TOTAL
-          b data-target="payments.chargeAmount" = humanized_money_with_symbol @reservation.payment_amount
+          b data-target="payments.chargeAmount" = humanized_money_with_symbol @reservation.total_full_price
 
         .text-center.m-4
           = link_to 'Confirmer', reservation_cookoon_path(@reservation, @cookoon), class: 'btn btn-primary btn-action btn-block', method: :patch
