@@ -22,6 +22,7 @@ class CookoonsController < ApplicationController
     @cookoon = Cookoon.includes(perks: :perk_specification).find(params[:id]).decorate
     authorize @cookoon
     @reservation.select_cookoon(@cookoon)
+    @reservation.assign_prices
   end
 
   def new

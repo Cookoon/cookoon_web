@@ -59,19 +59,19 @@ class Reservation < ApplicationRecord
   #   10 => 0.8
   # }.freeze
 
-  # monetize :price_cents
-  # monetize :discount_amount_cents
+  # ============ THESE NEED TO BE REMOVED WITH NEW DESIGN MERGE ========
+  monetize :price_cents
+  monetize :discount_amount_cents
 
-  # monetize :base_price_cents
-  # monetize :degressive_price_cents
-  # monetize :tenant_fee_cents
-  # monetize :price_with_tenant_fee_cents
-  # monetize :host_fee_cents
-  # monetize :default_service_price_cents
-  # monetize :host_services_price_cents
-  # monetize :host_payout_price_cents
-  # monetize :payment_amount_cents
-  # monetize :services_price_cents
+  monetize :base_price_cents
+  monetize :degressive_price_cents
+  monetize :tenant_fee_cents
+  monetize :price_with_tenant_fee_cents
+  monetize :host_fee_cents
+  monetize :default_service_price_cents
+  monetize :host_services_price_cents
+  monetize :payment_amount_cents
+  # ======================================================================
 
   monetize :cookoon_price_cents
   monetize :cookoon_fee_cents

@@ -28,6 +28,7 @@ class PaymentsController < ApplicationController
   private
 
   def build_amounts
+    @reservation.assign_prices
     {
       charge_amount: @reservation.payment.discountable_charge_amount,
       services_count: @reservation.services.count
