@@ -1,7 +1,6 @@
-= content_for :navbar_content do
-  h4 Confirmation de demande de location
+.container.py-5
+  h1 Confirmation de demande de location
 
-.container
   .p-4.d-flex.align-items-center
     i.co.co-check.fa-2x.text-primary.mr-3 aria-hidden="true"
     strong Votre demande de location a bien été envoyée.
@@ -15,5 +14,5 @@
                     url: reservation_messages_path(@reservation),
                     method: :post,
                     remote: true do |f|
-    = f.input :message_for_host, label: false, placeholder: 'Je souhaite louer votre Cookoon pour ...'
+    = f.input :message_for_host, label: false, placeholder: 'Je souhaite louer votre Cookoon pour ...', input_html: { rows: 7, style: 'height: inherit' }
     = f.submit 'ENVOYER', class: 'btn btn-primary btn-action btn-block'
