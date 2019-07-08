@@ -166,6 +166,10 @@ class Reservation < ApplicationRecord
   def invoice?
     ongoing? || passed?
   end
+
+  def assign_prices
+    assign_attributes(computed_price_attributes)
+  end
   
   # To Remove 
   # ======= ICAL ======== 
@@ -327,10 +331,6 @@ class Reservation < ApplicationRecord
 
   def assign_prices_needed?
     services_selected? || quotation_proposed?
-  end
-
-  def assign_prices
-    assign_attributes(computed_price_attributes)
   end
 
   def report_to_slack
