@@ -68,10 +68,11 @@
               .col-8 TOTAL TTC
               .col-4.text-right = @reservation.total_full_price
 
-          .mt-4.small.page-break-inside-avoid
-            - if @reservation.quotation_proposed?
-              = simple_format(@reservation.quotation_cancel_policy)
-            - elsif @reservation.invoice?
-              = simple_format(@reservation.invoice_legal_mentions)
+          - if @reservation.business?
+            .mt-4.small.page-break-inside-avoid
+              - if @reservation.quotation_proposed?
+                = simple_format(@reservation.quotation_cancel_policy)
+              - elsif @reservation.invoice?
+                = simple_format(@reservation.invoice_legal_mentions)
 
           = render 'footer'

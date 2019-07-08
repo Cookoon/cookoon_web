@@ -76,4 +76,26 @@ class ReservationDecorator < Draper::Decorator
   def total_tax
     h.humanized_money_with_symbol object.total_tax
   end
+
+  def invoice_legal_mentions
+    return unless object.user.company
+    <<~LEGAL_MENTIONS
+      Délai de règlement : #{1.month.since(start_at).strftime('%d/%m/%Y')}
+      Moyen de règlement : Virement
+
+      Banque : #{object.user.company.stripe_bank_name}
+      BIC : #{object.user.company.stripe_bic}
+      IBAN : #{object.user.company.stripe_iban}
+    LEGAL_MENTIONS
+  end
+
+  def quotation_cancel_policy
+    <<-CANCEL_POLICY
+      Conditions d’annulation
+
+      Gratuit plus de 6 jours ouvrés avant le début de la mise à disposition
+      50% du montant total entre 6 et 3 jours ouvrés avant le début de la mise à disposition
+      100 % du montant total moins de 3 jours ouvrés avant le début de la mise à disposition
+    CANCEL_POLICY
+  end
 end
