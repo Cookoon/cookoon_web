@@ -1,0 +1,16 @@
+div(class=classnames(container: @device == :desktop))
+  h1.my-4 Mes réservations
+
+  ul.nav.nav-pills.mb-2
+    li.nav-item
+      a.nav-link.active href="#active" data-toggle="pill" role="tab" À traiter
+
+    li.nav-item
+      a.nav-link href="#inactive" data-toggle="pill" role="tab" Passées
+
+  .tab-content.py-3
+    .tab-pane.fade.show.active id="active" role="tabpanel"
+      = reservations_list_or_empty_card(@active_reservations)
+
+    .tab-pane.fade#inactive role="tabpanel"
+      = reservations_list_or_empty_card(@inactive_reservations)

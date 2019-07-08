@@ -1,62 +1,78 @@
-= content_for :navbar_type, :back
-= content_for :navbar_content do
-  <h4 class='text-primary'>Mes Réservations</h4>
+.container
+  .row
+    .offset-2.col-8
+      .shadow-page
+        .p-5
+          .row.mb-3
+            .col
+              h3.d-flex.align-items-center.child-mx-2
+                i.co.co-logo.fa-2x.text-primary
+                span Cookoon
 
-.bg-dark
-  = carousel_for(@cookoon.photos)
+              - if @reservation.business?
+                .text-uppercase = @reservation.user.company
+                div = @reservation.user.company.address
+                - if @reservation.user.company.vat.present?
+                  div N° TVA Intra : #{@reservation.user.company.vat}
 
-.cookoon-title-wrapper
-  .cookoon-title-content class=(' bg-secondary' if @reservation.refused_passed_or_cancelled?)
-    h4 = @cookoon.name
+          p.font-weight-bold Récapitulatif de votre location du #{@reservation.start_on(without_year: true)}, de #{@reservation.start_time} à #{@reservation.end_time}
 
-/ TODO CP 01.06 Probably not the best use of slim syntax...
-.container.pt-2
-  p Adresse: <strong>#{@cookoon.address}</strong>
-    <br>Chez: <strong>#{@cookoon.user.full_name}</strong>
-    <br>Le: #{date_and_duration_display_for(@reservation).html_safe}
+          h3 Mise à disposition d'un Cookoon
+          .row.mb-3
+            .col-8
+              | Cookoon “<u>#{@reservation.cookoon.name}</u>” × #{@reservation.duration}
+              .small Cette somme sera encaissée pour le compte de l'Hôte Cookoon et ne sera pas soumise à TVA.
 
-  p <strong>Contactez l'hôte :</strong>
+            .col-4.text-right = @reservation.cookoon_price
 
-  p Téléphone: <strong>#{tel_to(@cookoon.user.phone_number)}</strong>
+          .row
+            .col-8 Frais de service (#{number_to_percentage(Pro::Reservation.fee_percentage, precision: 0)})
+            .col-4.text-right = @reservation.cookoon_fee
 
-  p E-mail: <strong>#{mail_to @cookoon.user.email, @cookoon.user.email, target: :_blank, data: { turbolinks: false }}</strong>
+          .row.mb-3
+            .col-8 dont TVA (#{number_to_percentage(Pro::Reservation.tax_percentage, precision: 0)})
+            .col-4.text-right = @reservation.cookoon_fee_tax
 
-  hr.half
+          - if @reservation.services.any?
+            h3 Options
+            - @reservation.services.each do |service|
+              .row.mb-3.page-break-inside-avoid
+              / TODO UNCOMMENT WHEN SERVICE MATCH
+                / .col-8 #{service.name} × #{service.quantity}
+                / .col-2.text-right = service.unit_price
+                / .col-2.text-right = service.price
 
-  p <strong>Récapitulatif :</strong>
+            .page-break-inside-avoid
+              .row
+                .col-8 Total HT des options
+                .col-4.text-right = @reservation.services_price
 
-  .mb-4
-    strong Location
+              .row.mb-3
+                .col-8 TVA #{number_to_percentage(Pro::Reservation::DEFAULTS[:tax_rate] *100, precision: 0)}
+                .col-4.text-right = @reservation.services_tax
 
-    .d-flex-default.ml-3
-      | Cookoon
-      span = humanized_money_with_symbol @reservation.degressive_price
+              .row.mb-3
+                .col-8 Total TTC des options
+                .col-4.text-right = @reservation.services_full_price
 
-    .d-flex-default.mb-2.ml-3
-      | Frais de service
-      span = humanized_money_with_symbol @reservation.tenant_fee
+          .page-break-inside-avoid
+            .row.bg-primary.text-white.p-2
+              .col-8 TOTAL HT
+              .col-4.text-right = @reservation.total_price
 
-    .mb-2 class=(' d-none' if @reservation.services.none?)
-      = render 'reservations/services_prices'
+            .row.p-2
+              .col-8 TOTAL TAXES
+              .col-4.text-right = @reservation.total_tax
 
-    hr.half
+            .row.bg-primary.text-white.p-2
+              .col-8 TOTAL TTC
+              .col-4.text-right = @reservation.total_full_price
 
-    .d-flex-default.mb-4
-      strong TOTAL
-      strong = humanized_money_with_symbol @reservation.payment_amount
+          - if @reservation.business?
+            .mt-4.small.page-break-inside-avoid
+              - if @reservation.quotation_proposed?
+                = simple_format(@reservation.quotation_cancel_policy)
+              - elsif @reservation.invoice?
+                = simple_format(@reservation.invoice_legal_mentions)
 
-    - if @reservation.invoiceable?
-      .py-4.text-center
-        = link_to 'Demander une facture', reservation_invoices_path(@reservation), class: classnames('btn', 'btn-primary', 'btn-action', 'btn-block', 'btn-secondary': @reservation.refused_passed_or_cancelled?), method: :post, remote: true
-
-
-    - if @reservation.accepted?
-      = component 'hr'
-
-    - if @reservation.paid? || @reservation.accepted?
-      = component 'hr'
-
-      .text-center.pt-3
-        p Attention : si vous annulez 48h avant votre location, vous risquez de ne pas être remboursé de l'intégralité du montant de la location
-        = link_to reservation_path(@reservation), method: :patch, remote: true, class: 'text-primary opacity-hover', data: { 'confirm-swal': "Êtes vous sûr ?", text: "Vous êtes sur le point d'annuler la réservation" } do
-          <u>Annuler la réservation</u>
+          = render 'footer'

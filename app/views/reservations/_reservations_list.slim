@@ -1,4 +1,4 @@
 .row(class=classnames('no-gutters': @device != :desktop))
   - reservations.each do |reservation|
-    .col-sm-6.col-lg-4.py-3
-      = component 'reservation_card', reservation: reservation
+    .col-12.col-md-6
+      = render 'card', reservation: reservation

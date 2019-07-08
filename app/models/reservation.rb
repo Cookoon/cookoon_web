@@ -3,6 +3,7 @@ class Reservation < ApplicationRecord
   include DatesOverlapScope
   include EndAtSetter
   include TimeRangeBuilder
+  include PriceComputer
 
   scope :displayable, -> { where.not(aasm_state: :initial).order(start_at: :asc) }
   scope :for_tenant, ->(user) { where(user: user) }
@@ -38,34 +39,51 @@ class Reservation < ApplicationRecord
     max_duration: 12,
     max_people_count: 20,
     stripe_validity_period: 7.days,
-    safety_period: 2.hours
+    safety_period: 2.hours,
+    fee_rate: 0.07,
+    tax_rate: 0.2
   }.freeze
 
-  DEGRESSION_RATES = {
-    2 => 1,
-    3 => 1,
-    4 => 1,
-    5 => 0.85,
-    6 => 0.85,
-    7 => 0.85,
-    8 => 0.85,
-    9 => 0.85,
-    10 => 0.8
-  }.freeze
+  DEGRESSION_RATES = {}.freeze # Remove ?
 
-  monetize :price_cents
-  monetize :discount_amount_cents
+  # Previous values
+  # DEGRESSION_RATES = {
+  #   2 => 1,
+  #   3 => 1,
+  #   4 => 1,
+  #   5 => 0.85,
+  #   6 => 0.85,
+  #   7 => 0.85,
+  #   8 => 0.85,
+  #   9 => 0.85,
+  #   10 => 0.8
+  # }.freeze
 
-  monetize :base_price_cents
-  monetize :degressive_price_cents
-  monetize :tenant_fee_cents
-  monetize :price_with_tenant_fee_cents
-  monetize :host_fee_cents
-  monetize :default_service_price_cents
-  monetize :host_services_price_cents
-  monetize :host_payout_price_cents
-  monetize :payment_amount_cents
+  # monetize :price_cents
+  # monetize :discount_amount_cents
+
+  # monetize :base_price_cents
+  # monetize :degressive_price_cents
+  # monetize :tenant_fee_cents
+  # monetize :price_with_tenant_fee_cents
+  # monetize :host_fee_cents
+  # monetize :default_service_price_cents
+  # monetize :host_services_price_cents
+  # monetize :host_payout_price_cents
+  # monetize :payment_amount_cents
+  # monetize :services_price_cents
+
+  monetize :cookoon_price_cents
+  monetize :cookoon_fee_cents
+  monetize :cookoon_fee_tax_cents
   monetize :services_price_cents
+  monetize :services_tax_cents
+  monetize :services_full_price_cents
+  monetize :total_price_cents
+  monetize :total_tax_cents
+  monetize :total_full_price_cents
+
+  monetize :host_payout_price_cents
 
   validates :start_at, presence: true
   validates :duration, presence: true
@@ -76,7 +94,7 @@ class Reservation < ApplicationRecord
   validate :tenant_is_not_host
 
   before_validation :configure_from_type_name, on: :create
-  before_validation :set_price_cents, if: :price_cents_needs_update?
+  before_save :assign_prices, if: :assign_prices_needed?
   after_save :report_to_slack, if: :saved_change_to_status?
   after_save :update_services, if: :services_need_update?
 
@@ -135,6 +153,7 @@ class Reservation < ApplicationRecord
   end
 
   # should move to payment ?
+  # Discount will be removed
   def full_discount?
     discount_amount_cents >= payment_amount_cents
   end
@@ -144,6 +163,12 @@ class Reservation < ApplicationRecord
     ReservationMailer.ending_survey_to_host(self).deliver_later
   end
 
+  def invoice?
+    ongoing? || passed?
+  end
+  
+  # To Remove 
+  # ======= ICAL ======== 
   def ical_for(role)
     cal = Icalendar::Calendar.new
     cal.event do |e|
@@ -165,6 +190,33 @@ class Reservation < ApplicationRecord
     "#{cookoon.name.parameterize(separator: '_')}_#{start_at.strftime('%d%b%y').downcase}.ics"
   end
 
+  def ical_params
+    {
+      host: {
+        summary: "Location de votre Cookoon : #{cookoon.name}",
+        description: <<~DESCRIPTION
+          Location de votre Cookoon : #{cookoon.name}
+
+          Locataire :
+          #{user.full_name}
+          #{user.phone_number} - #{user.email}
+        DESCRIPTION
+      },
+      tenant: {
+        summary: "Réservation Cookoon : #{cookoon.name}",
+        description: <<~DESCRIPTION
+          Réservation Cookoon : #{cookoon.name}
+
+          Hôte :
+          #{cookoon.user.full_name}
+          #{cookoon.user.phone_number} - #{cookoon.user.email}
+        DESCRIPTION
+      }
+    }
+  end
+  # =====================
+
+  # Whole prices can be removed since we are reading them from DB
   # ======= PRICES ========
   def default_service_price_cents
     DEFAULTS[:service_price_cents]
@@ -215,10 +267,12 @@ class Reservation < ApplicationRecord
     degressive_rate = DEGRESSION_RATES[duration] || 1
     (base_price_cents * degressive_rate).round
   end
+
   # ======================
 
   private
 
+  # Move this elsewhere
   def configure_from_type_name
     return unless type_name.present? && start_at.present?
     case type_name
@@ -271,33 +325,12 @@ class Reservation < ApplicationRecord
     services.payment_tied_to_reservation.each(&:paid!)
   end
 
-  def set_price_cents
-    self.price_cents = degressive_price_cents
+  def assign_prices_needed?
+    services_selected? || quotation_proposed?
   end
 
-  def ical_params
-    {
-      host: {
-        summary: "Location de votre Cookoon : #{cookoon.name}",
-        description: <<~DESCRIPTION
-          Location de votre Cookoon : #{cookoon.name}
-
-          Locataire :
-          #{user.full_name}
-          #{user.phone_number} - #{user.email}
-        DESCRIPTION
-      },
-      tenant: {
-        summary: "Réservation Cookoon : #{cookoon.name}",
-        description: <<~DESCRIPTION
-          Réservation Cookoon : #{cookoon.name}
-
-          Hôte :
-          #{cookoon.user.full_name}
-          #{cookoon.user.phone_number} - #{cookoon.user.email}
-        DESCRIPTION
-      }
-    }
+  def assign_prices
+    assign_attributes(computed_price_attributes)
   end
 
   def report_to_slack
