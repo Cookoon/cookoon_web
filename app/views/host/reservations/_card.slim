@@ -15,7 +15,8 @@
       | Locataire : #{reservation.user.full_name} <br>
       | <span class='small'>Membre depuis le #{display_date_for(reservation.user.created_at)}</span> 
 
-    div
-      = simple_form_for [:host, reservation] do |f|
-        = f.submit 'Accepter', name: "accept", class: 'btn-cookoon btn-cookoon-primary btn-block'
-        = f.submit 'Refuser', name: "refuse", class: 'btn-cookoon btn-cookoon-primary btn-block'
+    - if reservation.charged?
+      div
+        = simple_form_for [:host, reservation] do |f|
+          = f.submit 'Accepter', name: "accept", class: 'btn-cookoon btn-cookoon-primary btn-block'
+          = f.submit 'Refuser', name: "refuse", class: 'btn-cookoon btn-cookoon-primary btn-block'

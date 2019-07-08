@@ -30,6 +30,7 @@ class Reservation < ApplicationRecord
 
   # Status will be removed before merged, need to cast production statuses to AASM State before deleting column
   # enum status: %i[pending paid accepted refused cancelled ongoing passed dead]
+  
   enum category: %i[customer business]
 
   DEFAULTS = {
@@ -60,7 +61,6 @@ class Reservation < ApplicationRecord
   # }.freeze
 
   # ============ THESE NEED TO BE REMOVED WITH NEW DESIGN MERGE ========
-  monetize :price_cents
   monetize :discount_amount_cents
 
   monetize :base_price_cents
