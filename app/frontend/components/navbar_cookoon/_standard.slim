@@ -17,6 +17,7 @@
       .navigation-dropdown-menu aria-labelledby="navigationDropdownMenu" data-target="dropdowns.body"
         = link_to 'Mon compte', edit_users_path, class: 'navigation-dropdown-menu-item'
         = link_to 'Mes moyens de paiement', credit_cards_path, class: 'navigation-dropdown-menu-item'
+        = link_to 'Mon espace hôte', host_dashboard_path, class: 'navigation-dropdown-menu-item'
         = link_to 'Déconnexion', destroy_user_session_path, class: 'navigation-dropdown-menu-item', method: 'delete'
 
   .cookoon-nav-navigation.bg-black
