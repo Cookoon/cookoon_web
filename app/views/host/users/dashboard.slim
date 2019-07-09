@@ -4,29 +4,28 @@ div(class=classnames(container: @device == :desktop))
   h1.my-4 Mon espace hôte
 
   .container.pb-3
-    p <b>Votre activité</b>
-    p Historique des revenus : <span class="text-primary">#{humanized_money_with_symbol current_user.total_payouts_for_dashboard}</span>
-
     - if @cookoons.any?
+      h4 Optimisez vos revenus
       p
-        | Optimisez vos revenus, recevez des demandes de locations au bon moment en 
+        | Recevez des demandes de locations au bon moment en 
         | mettant à jour les disponibilités de votre Cookoon:
 
       .text-center.pt-4.pb-3
         = link_to 'Mon calendrier', cookoon_availabilities_path(@cookoons.first), class: 'btn btn-primary btn-action btn-block'
 
-    hr
+      hr
 
+    h4 Vos dernières demandes de réservation
     p 
-      | <b>Vos dernières demandes de réservation</b> 
-      | Vous avez <span class="text-primary">#{@pending_reservations_count} demande(s) de réservation</span> en attente
+      | Vous avez <b class="text-primary">#{@pending_reservations_count} demande(s) de réservation</b> 
+      | en attente
 
     .text-center.pt-5.pb-3
       = link_to 'Voir mes Réservations', host_reservations_path, class: 'btn btn-primary btn-action btn-block'
 
     hr
 
-    p <b>Vos Cookoons</b>
+    h4 Vos Cookoons
 
     .row
       - @cookoons.each do |cookoon|
