@@ -9,7 +9,7 @@ class Services::PaymentsController < ApplicationController
       redirect_to reservations_path, flash: { service_payment_succeed: true }
     else
       @credit_cards = current_user.credit_cards
-      flash.now.alert = payment.displayable_errors
+      flash.alert = payment.displayable_errors
       render 'services/show'
     end
   end
