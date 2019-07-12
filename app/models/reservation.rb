@@ -136,54 +136,6 @@ class Reservation < ApplicationRecord
     assign_attributes(computed_price_attributes)
   end
   
-  # To Remove 
-  # ======= ICAL ======== 
-  def ical_for(role)
-    cal = Icalendar::Calendar.new
-    cal.event do |e|
-      e.dtstart = Icalendar::Values::DateTime.new start_at, tzid: start_at.zone
-      e.dtend = Icalendar::Values::DateTime.new end_at, tzid: end_at.zone
-      e.summary = ical_params.dig(role, :summary)
-      e.location = cookoon.address
-      e.description = <<~DESCRIPTION
-        #{ical_params.dig(role, :description)}
-
-        Une question ? Rendez-vous sur https://aide.cookoon.fr
-      DESCRIPTION
-      e.organizer = "mailto:#{Rails.configuration.action_mailer.default_options[:from]}"
-    end
-    cal
-  end
-
-  def ical_file_name
-    "#{cookoon.name.parameterize(separator: '_')}_#{start_at.strftime('%d%b%y').downcase}.ics"
-  end
-
-  def ical_params
-    {
-      host: {
-        summary: "Location de votre Cookoon : #{cookoon.name}",
-        description: <<~DESCRIPTION
-          Location de votre Cookoon : #{cookoon.name}
-
-          Locataire :
-          #{user.full_name}
-          #{user.phone_number} - #{user.email}
-        DESCRIPTION
-      },
-      tenant: {
-        summary: "Réservation Cookoon : #{cookoon.name}",
-        description: <<~DESCRIPTION
-          Réservation Cookoon : #{cookoon.name}
-
-          Hôte :
-          #{cookoon.user.full_name}
-          #{cookoon.user.phone_number} - #{cookoon.user.email}
-        DESCRIPTION
-      }
-    }
-  end
-  # =====================
   def host_fee_rate
     DEFAULTS[:fee_rate]
   end
