@@ -1,5 +1,4 @@
 <%= simple_form_for :payment, url: reservation_payments_path(@reservation), remote: true do |f| %>
-  <%= f.input :discount, as: :hidden, input_html: { value: 'false', data: { target: 'payments.discountInput' } } %>
 
   <b>Vos moyens de paiement</b>
   <div class="credit-card-select payment-block">

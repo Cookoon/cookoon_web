@@ -19,7 +19,6 @@ class Payment
 
   def refund
     refund_stripe_charge
-    refund_user_discount
   end
 
   def capture

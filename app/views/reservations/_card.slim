@@ -4,7 +4,7 @@
 
     p.font-weight-bold
       | #{display_date_for(reservation.start_at, without_year: true)} 
-      | - de #{reservation.end_time} à #{reservation.start_time} 
+      | - de #{reservation.start_time} à #{reservation.end_time} 
       | - #{reservation.people_count_text}
 
     hr

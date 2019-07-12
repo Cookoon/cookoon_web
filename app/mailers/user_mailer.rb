@@ -14,13 +14,6 @@ class UserMailer < ApplicationMailer
     mail(to: @user.full_email, subject: t('.subject', count: @invitation_quantity))
   end
 
-  def notify_credit_granted(user, credit_amount_cents, message)
-    @user = user
-    @credit_amount = Money.new(credit_amount_cents)
-    @message = message
-    mail(to: @user.full_email, subject: "Nous venons de vous accorder #{humanized_money_with_symbol @credit_amount} de crédit")
-  end
-
   def notify_two_days_after_join(user)
     @user = user
     mail(to: @user.full_email, subject: 'Vous êtes membre de Cookoon ? Devenez Hôte !')
