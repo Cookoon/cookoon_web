@@ -1,36 +1,20 @@
-= content_for :navbar_type, :back
-= content_for :navbar_back_url, reservations_path
-= content_for :navbar_content do
-  <h4 class='text-primary'>Mes Réservations</h4>
+.container
+  h1.my-4 Payez vos options de réservation
 
+  - if @service
+    div
+      p Récapitulatif :
 
-- if @service
-  .container(
-    data-controller='payments'
-    data-payments-amounts-url=amounts_service_payments_path(@service)
-    data-payments-discount='false'
-  )
-    h2 Payez vos options de réservation
+      .mb-4
+        = @service.try(:name)
 
-    p Récapitulatif :
+        hr
 
-    .mb-4
-      = @service.content.html_safe
+        .d-flex-default
+          b(data-target="payments.chargeAmountLabel") TOTAL
+          b(data-target="payments.chargeAmount") = humanized_money_with_symbol @service.price
 
-      hr
-
-      .d-flex-default
-        b(data-target="payments.chargeAmountLabel") TOTAL
-        b(data-target="payments.chargeAmount") = humanized_money_with_symbol @service.price
-
-    - if current_user.available_discount?
-      p Cliquez pour utiliser votre crédit pour payer cette option.
-      .payment-block(data-action="click->payments#toggleDiscount" data-target="payments.discountButton")
-        b <span data-target="payments.userDiscountLabel">Crédit disponible</span> : <span data-target="payments.userDiscountBalance">#{humanized_money_with_symbol current_user.discount_balance}</span>
-        i.co.co-check
-
-      .text-center.my-3.text-primary •
-
-    = render 'services/payments/form'
-- else
-  p Pas de service associé à cette réservation !
+      = render 'services/payments/form'
+  - else
+    div style="height: 60vh"
+      p Aucun service restant à régler sur cette réservation !

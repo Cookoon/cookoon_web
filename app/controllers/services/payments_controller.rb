@@ -10,26 +10,14 @@ class Services::PaymentsController < ApplicationController
     else
       @credit_cards = current_user.credit_cards
       flash.now.alert = payment.displayable_errors
-      render :new
+      render 'services/show'
     end
-  end
-
-  def amounts
-    @amounts = build_amounts
-    respond_to :json
   end
 
   private
 
-  def build_amounts
-    {
-      charge_amount: @service.payment.discountable_charge_amount,
-    }
-  end
-
   def set_service
     @service = Service.find(params[:service_id])
     @reservation = @service.reservation
-    # authorize @service
   end
 end

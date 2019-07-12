@@ -59,9 +59,7 @@ Rails.application.routes.draw do
   end
 
   resources :services, only: [:destroy] do
-    resources :payments, controller: 'services/payments', only: :create do
-      post :amounts, on: :collection
-    end
+    resources :payments, controller: 'services/payments', only: :create
   end
 
   # -------- HOST NAMESPACE ---------
