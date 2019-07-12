@@ -35,7 +35,6 @@ class Reservation < ApplicationRecord
 
   DEFAULTS = {
     tenant_fee_rate: 0.07,
-    host_fee_rate: 0.07,
     service_price_cents: 2000,
     max_duration: 12,
     max_people_count: 20,
@@ -44,16 +43,6 @@ class Reservation < ApplicationRecord
     fee_rate: 0.07,
     tax_rate: 0.2
   }.freeze
-
-  # ============ THESE NEED TO BE REMOVED WITH NEW DESIGN MERGE ========
-  monetize :base_price_cents
-  monetize :tenant_fee_cents
-  monetize :price_with_tenant_fee_cents
-  monetize :host_fee_cents
-  monetize :default_service_price_cents
-  monetize :host_services_price_cents
-  monetize :payment_amount_cents
-  # ======================================================================
 
   monetize :cookoon_price_cents
   monetize :cookoon_fee_cents
@@ -195,6 +184,17 @@ class Reservation < ApplicationRecord
     }
   end
   # =====================
+  def host_fee_rate
+    DEFAULTS[:fee_rate]
+  end
+
+  def host_fee_cents
+    (cookoon_price_cents * host_fee_rate).round
+  end
+
+  def host_payout_price_cents
+    cookoon_price_cents - host_fee_cents
+  end
 
   private
 
