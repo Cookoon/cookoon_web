@@ -26,8 +26,6 @@ class Reservation
         reservation_id: reservation.id,
         reservation_price: reservation.total_full_price,
         reservation_services_price: reservation.services_full_price,
-        reservation_tenant_fee: reservation.tenant_fee,
-        reservation_host_fee: reservation.host_fee,
         reservation_services: reservation.services.payment_tied_to_reservation.pluck(:category).join(' · ')
       }
     end
