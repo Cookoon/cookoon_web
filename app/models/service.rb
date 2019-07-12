@@ -7,7 +7,6 @@ class Service < ApplicationRecord
 
   monetize :price_cents, disable_validation: true
   monetize :payment_amount_cents, disable_validation: true
-  monetize :discount_amount_cents
 
   enum status: %i[quote paid]
   enum category: %i[special catering chef corporate]

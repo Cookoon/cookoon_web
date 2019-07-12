@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_04_124417) do
+ActiveRecord::Schema.define(version: 2019_07_12_101627) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -243,16 +243,15 @@ ActiveRecord::Schema.define(version: 2019_07_04_124417) do
 
   create_table "services", force: :cascade do |t|
     t.bigint "reservation_id"
-    t.text "content"
     t.integer "price_cents"
     t.string "price_currency", default: "EUR", null: false
     t.integer "status", default: 0, null: false
     t.string "stripe_charge_id"
-    t.integer "discount_amount_cents", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "category", default: 0, null: false
     t.boolean "payment_tied_to_reservation", default: false
+    t.string "name"
     t.index ["reservation_id"], name: "index_services_on_reservation_id"
   end
 
