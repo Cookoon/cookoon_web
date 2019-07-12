@@ -2,8 +2,7 @@ module Pro
   class Reservation < ApplicationRecord
     include DatesOverlapScope
     include EndAtSetter
-    include PriceComputer
-
+    
     scope :engaged, -> { where(status: %i[proposed modification_requested accepted]) }
 
     belongs_to :quote, class_name: 'Pro::Quote', foreign_key: :pro_quote_id, inverse_of: :reservations
@@ -41,18 +40,6 @@ module Pro
     monetize :total_full_price_cents
 
     monetize :host_payout_price_cents
-
-    DEGRESSION_RATES = {
-      # 2 => 1,
-      # 3 => 1,
-      # 4 => 1,
-      # 5 => 0.85,
-      # 6 => 0.85,
-      # 7 => 0.85,
-      # 8 => 0.85,
-      # 9 => 0.85,
-      # 10 => 0.8
-    }.freeze
 
     DEFAULTS = {
       fee_rate: 0.07,
@@ -109,27 +96,6 @@ module Pro
 
     def invoice_reference
       "FAC-C4B-#{start_at.strftime('%y%m')}#{format '%03d', id}"
-    end
-
-    def ical_for(role)
-      cal = Icalendar::Calendar.new
-      cal.event do |e|
-        e.dtstart = Icalendar::Values::DateTime.new start_at, tzid: start_at.zone
-        e.dtend = Icalendar::Values::DateTime.new end_at, tzid: end_at.zone
-        e.summary = ical_params.dig(role, :summary)
-        e.location = cookoon.address
-        e.description = <<~DESCRIPTION
-          #{ical_params.dig(role, :description)}
-
-          Une question ? Rendez-vous sur https://aide.cookoon.fr
-        DESCRIPTION
-        e.organizer = "mailto:#{Rails.configuration.action_mailer.default_options[:from]}"
-      end
-      cal
-    end
-
-    def ical_file_name
-      "#{cookoon.name.parameterize(separator: '_')}_#{start_at.strftime('%d%b%y').downcase}.ics"
     end
 
     def quotation?
