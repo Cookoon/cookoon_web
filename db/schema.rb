@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_12_101627) do
+ActiveRecord::Schema.define(version: 2019_07_12_130757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -220,7 +220,6 @@ ActiveRecord::Schema.define(version: 2019_07_12_101627) do
     t.boolean "cleaning", default: false
     t.boolean "janitor", default: false
     t.string "stripe_charge_id"
-    t.integer "discount_amount_cents", default: 0, null: false
     t.datetime "end_at"
     t.integer "people_count"
     t.text "message_for_host"
@@ -284,8 +283,6 @@ ActiveRecord::Schema.define(version: 2019_07_12_101627) do
     t.string "stripe_customer_id"
     t.boolean "admin", default: false
     t.integer "emailing_preferences", default: 1
-    t.integer "discount_balance_cents", default: 0
-    t.datetime "discount_expires_at"
     t.date "born_on"
     t.bigint "company_id"
     t.index ["company_id"], name: "index_users_on_company_id"

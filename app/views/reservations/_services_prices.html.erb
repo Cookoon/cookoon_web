@@ -5,6 +5,8 @@
     <span><%= service.price ? humanized_money_with_symbol(service.price) : 'SUR DEVIS' %></span>
   </div>
 <% end %>
-<% if @reservation.services.any? %>
-  <%= render 'reservations/janitor_message' %>
-<% end %>
+<div class="d-flex-default ml-3">
+  Frais
+  <span><%= humanized_money_with_symbol(@reservation.services_tax) %></span>
+</div>
+<%= render 'reservations/janitor_message' %>

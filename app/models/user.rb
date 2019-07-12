@@ -12,7 +12,6 @@ class User < ApplicationRecord
   scope :with_reservation_finished_in_day_range_around, ->(date_time) { joins(:reservations).merge(Reservation.finished_in_day_range_around(date_time)).distinct }
   scope :has_cookoon, -> { joins(:cookoons).distinct }
   scope :has_no_cookoon, -> { left_outer_joins(:cookoons).where(cookoons: { id: nil }) }
-  scope :discount_expired, -> { where('discount_expires_at < ?', Time.zone.now) }
   enum emailing_preferences: { no_emails: 0, all_emails: 1 }
 
   PHONE_REGEXP = /\A(\+\d+)?([\s\-\.]?\(?\d+\)?)+\z/
@@ -29,7 +28,6 @@ class User < ApplicationRecord
   has_attachment :photo
 
   monetize :total_payouts_for_dashboard_cents
-  monetize :discount_balance_cents
 
   validates :first_name, presence: true
   validates :last_name, presence: true
@@ -41,7 +39,6 @@ class User < ApplicationRecord
 
   after_invitation_accepted :send_welcome_email
   after_save :upsert_mailchimp_subscription, if: :saved_change_to_born_on?
-  before_update :set_discount_expires_at, if: :discount_balance_cents_changed?
   before_update :report_to_slack, if: :stripe_account_id_changed?
 
   alias_attribute :customerable_label, :email
@@ -106,10 +103,6 @@ class User < ApplicationRecord
     reservation_requests.passed.includes(:cookoon).sum(&:host_payout_price_cents)
   end
 
-  def available_discount?
-    discount_balance_cents.positive? && discount_expires_at&.future?
-  end
-
   def send_reset_password_instructions
     if invited_to_sign_up?
       errors.add :email, :invitation_not_yet_accepted
@@ -127,11 +120,6 @@ class User < ApplicationRecord
   def report_to_slack
     return unless Rails.env.production?
     PingSlackHostJob.perform_later(id)
-  end
-
-  def set_discount_expires_at
-    return if discount_balance_cents < discount_balance_cents_was
-    self.discount_expires_at = 2.months.from_now
   end
 
   def send_welcome_email

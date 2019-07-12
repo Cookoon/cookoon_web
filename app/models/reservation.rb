@@ -46,8 +46,6 @@ class Reservation < ApplicationRecord
   }.freeze
 
   # ============ THESE NEED TO BE REMOVED WITH NEW DESIGN MERGE ========
-  monetize :discount_amount_cents
-
   monetize :base_price_cents
   monetize :tenant_fee_cents
   monetize :price_with_tenant_fee_cents
@@ -134,12 +132,6 @@ class Reservation < ApplicationRecord
 
     passed!
     send_ending_surveys
-  end
-
-  # should move to payment ?
-  # Discount will be removed
-  def full_discount?
-    discount_amount_cents >= payment_amount_cents
   end
 
   def send_ending_surveys
