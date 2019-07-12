@@ -18,11 +18,7 @@ module Pro
       end
 
       private
-
-      def degression_rates
-        self.class::DEGRESSION_RATES
-      end
-
+      
       def defaults
         self.class::DEFAULTS
       end

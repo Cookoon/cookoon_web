@@ -4,7 +4,7 @@ class Reservation
 
     def computed_price_attributes
       {
-        cookoon_price: compute_degressive_cookoon_price,
+        cookoon_price: compute_cookoon_price,
         cookoon_fee: compute_cookoon_fee,
         cookoon_fee_tax: compute_cookoon_fee_tax,
         services_price: compute_services_price,
@@ -18,10 +18,6 @@ class Reservation
 
     private
 
-    def degression_rates
-      self.class::DEGRESSION_RATES
-    end
-
     def defaults
       self.class::DEFAULTS
     end
@@ -30,17 +26,12 @@ class Reservation
       duration * cookoon.price
     end
 
-    def compute_degressive_cookoon_price
-      degression_rate = degression_rates[duration] || 1
-      compute_cookoon_price * degression_rate
-    end
-
     def compute_cookoon_fee_minus_tax
-      compute_degressive_cookoon_price * defaults[:fee_rate] / (1 + defaults[:tax_rate])
+      compute_cookoon_price * defaults[:fee_rate] / (1 + defaults[:tax_rate])
     end
 
     def compute_cookoon_fee
-      compute_degressive_cookoon_price * defaults[:fee_rate]
+      compute_cookoon_price * defaults[:fee_rate]
     end
 
     def compute_cookoon_fee_tax
@@ -61,7 +52,7 @@ class Reservation
     end
 
     def compute_total_price
-      [compute_degressive_cookoon_price, compute_cookoon_fee_minus_tax, compute_services_price].sum
+      [compute_cookoon_price, compute_cookoon_fee_minus_tax, compute_services_price].sum
     end
 
     def compute_total_full_price
