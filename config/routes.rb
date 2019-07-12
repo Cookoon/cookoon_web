@@ -99,7 +99,6 @@ Rails.application.routes.draw do
     # User
     post '/actions/award-invitations', to: 'users#award_invitations'
     post '/actions/change-e-mailing-preferences', to: 'users#change_emailing_preferences'
-    post '/actions/grant-credit', to: 'users#grant_credit'
 
     # Reservation
     post '/actions/cancel-by-host', to: 'reservations#cancel_by_host'

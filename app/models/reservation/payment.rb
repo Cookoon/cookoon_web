@@ -1,15 +1,9 @@
 class Reservation
   class Payment < ::Payment
-    include Discountable
     include Stripe::Transferable
     alias_method :reservation, :payable
 
     private
-
-    # can be removed along with Discoutable
-    def before_proceed
-      persist_discount if discount_asked?
-    end
 
     def after_proceed
       reservation.charge! if errors.empty?
@@ -20,7 +14,7 @@ class Reservation
     end
 
     def charge_amount_cents
-      discountable_charge_amount_cents
+      reservation.total_full_price_cents
     end
 
     def charge_description
@@ -39,11 +33,7 @@ class Reservation
     end
 
     def transfer_metadata
-      {
-        metadata: {
-          discount_amount: discount_amount_used
-        }
-      }
+      {}
     end
 
     def transfer_amount

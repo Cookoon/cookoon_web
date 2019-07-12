@@ -9,7 +9,7 @@ class PaymentsController < ApplicationController
   end
 
   def create
-    payment = Reservation::Payment.new(@reservation)
+    payment = Reservation::Payment.new(@reservation.object)
     if payment.proceed
       @reservation.notify_users_after_payment
       redirect_to new_reservation_message_path(@reservation)
@@ -30,7 +30,7 @@ class PaymentsController < ApplicationController
   def build_amounts
     @reservation.assign_prices
     {
-      charge_amount: @reservation.payment.discountable_charge_amount,
+      charge_amount: @reservation.total_full_price,
       services_count: @reservation.services.count
     }
   end
