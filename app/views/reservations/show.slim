@@ -35,12 +35,10 @@
 
           - if @reservation.services.any?
             h3 Options
-            - @reservation.services.each do |service|
+            - @reservation.services.payment_tied_to_reservation.each do |service|
               .row.mb-3.page-break-inside-avoid
-              / TODO UNCOMMENT WHEN SERVICE MATCH
-                / .col-8 #{service.name} × #{service.quantity}
-                / .col-2.text-right = service.unit_price
-                / .col-2.text-right = service.price
+                .col-8 #{service.name || 'Non défini'}
+                .col-4.text-right = humanized_money_with_symbol service.price
 
             .page-break-inside-avoid
               .row
