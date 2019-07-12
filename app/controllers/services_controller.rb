@@ -8,7 +8,7 @@ class ServicesController < ApplicationController
   def show
     authorize @reservation
 
-    @service = @reservation.services.last
+    @service = @reservation.services.where(payment_tied_to_reservation: false)&.last
     @credit_cards = current_user.credit_cards
   end
 

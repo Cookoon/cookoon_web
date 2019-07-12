@@ -1,8 +1,6 @@
-= simple_form_for :payment, url: service_payments_path(@service), remote: true do |f|
-  = f.input :discount, as: :hidden, input_html: { value: 'false', data: { target: 'payments.discountInput' } }
-
+= simple_form_for :payment, url: service_payments_path(@service) do |f|
   .credit-card-select.payment-block.mb-5
     i.co.co-cb
     = f.input :source, collection: @credit_cards, selected: :first, label: false, label_method: ->(card){ credit_card_label_for card }, value_method: ->(card){ card.id }
 
-  = f.button :submit, 'VALIDER CETTE OPTION', class: 'btn btn-primary btn-action btn-block'
+  = f.button :submit, 'VALIDER CETTE OPTION', class: 'btn btn-primary btn-action btn-block mb-4'
