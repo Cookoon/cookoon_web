@@ -5,14 +5,18 @@
         | Conciergerie - 06 12 12 12 12
       .d-block.d-md-none
         | Conciergerie
-    .cookoon-nav-infos-user.bg-primary.pointer id="navigationDropdownMenu" aria-haspopup="true" aria-expanded="false" data={target: 'dropdowns.trigger', action: "click->dropdowns#toggle" }
+    .cookoon-nav-infos-user.bg-primary.pointer(
+      id="navigationDropdownMenu" 
+      aria={ haspopup: "true", expanded: "false" }
+      data={ target: 'dropdowns.trigger', action: "click->dropdowns#toggle" }
+    )
       - if current_user&.photo?
-        = cl_image_tag(current_user.photo.path, { size: '30x30', crop: :thumb, gravity: :face, class: 'avatar-30' })
+        = cl_image_tag(current_user.photo.path, size: '30x30', crop: :thumb, gravity: :face, class: 'avatar-30', data: {target: 'dropdowns.trigger'} )
       - else
-        = image_tag 'base_user.png', class: 'avatar-30'
+        = image_tag 'base_user.png', class: 'avatar-30', data: {target: 'dropdowns.trigger'}
 
       = current_user.full_name
-      i.fas.fa-chevron-down
+      i.fas.fa-chevron-down data-target='dropdowns.trigger'
 
       .navigation-dropdown-menu aria-labelledby="navigationDropdownMenu" data-target="dropdowns.body"
         = link_to 'Mon compte', edit_users_path, class: 'navigation-dropdown-menu-item'

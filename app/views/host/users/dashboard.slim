@@ -1,4 +1,4 @@
-div(class=classnames(container: @device == :desktop))
+.container
   h1.my-4 Mon espace hôte
 
   = render 'stripe_connection_card' unless @user.stripe_verified?
