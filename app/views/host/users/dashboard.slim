@@ -1,9 +1,9 @@
-= render 'stripe_connection_card' unless @user.stripe_verified?
-
 div(class=classnames(container: @device == :desktop))
   h1.my-4 Mon espace hôte
 
-  .container.pb-3
+  = render 'stripe_connection_card' unless @user.stripe_verified?
+
+  .pb-3
     - if @cookoons.any?
       h4 Optimisez vos revenus
       p
