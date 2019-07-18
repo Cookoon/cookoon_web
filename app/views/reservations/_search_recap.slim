@@ -4,10 +4,10 @@
     p.search-recap-box-data = reservation.people_count
   .second.search-recap-box
     p RÉCEPTION
-    p.search-recap-box-data = reservation.type_name
+    p.search-recap-box-data = reservation.type_name.capitalize
   .third.search-recap-box
     p DATE
     p.search-recap-box-data #{reservation.start_at.day} <span class ='small'>#{t('date.month_names')[reservation.start_at.month]}</span>
   .fourth.search-recap-box
     p.search-recap-box-data 
-      i.co.co-logo.fa-2x.text-primary
+      i.co.icon-cookoon-logo.fa-2x.text-primary
