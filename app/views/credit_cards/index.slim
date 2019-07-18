@@ -2,7 +2,7 @@
   h1 Mes moyens de paiement
 
   .cookoon-card.p-4
-    h4 Mes cartes
+    h3 <i class='co icon-losange text-primary mr-2'></i> Mes cartes
 
     - if @credit_cards.blank?
       .information-card
@@ -26,8 +26,11 @@
               .fas.fa-times.fa-lg
               .pl-2.d-none.d-md-block Supprimer
 
+
+    hr          
+
     .py-3
-      h4 Nouveau moyen de paiement
+      h3 <i class='co icon-losange text-primary mr-2'></i> Nouveau moyen de paiement
       button.btn-cookoon.btn-cookoon-primary type="button" data-toggle="modal" data-target="#credit-card-modal"
         | Ajouter une nouvelle carte
 

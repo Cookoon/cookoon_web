@@ -5,7 +5,7 @@
 
   .pb-3
     - if @cookoons.any?
-      h4 Optimisez vos revenus
+      h3 <i class='co icon-losange text-primary mr-2'></i> Optimisez vos revenus
       p
         | Recevez des demandes de locations au bon moment en 
         | mettant à jour les disponibilités de votre Cookoon:
@@ -15,7 +15,7 @@
 
       hr
 
-    h4 Vos dernières demandes de réservation
+    h3 <i class='co icon-losange text-primary mr-2'></i> Vos dernières demandes de réservation
     p 
       | Vous avez <b class="text-primary">#{@pending_reservations_count} demande(s) de réservation</b> 
       | en attente
@@ -25,7 +25,7 @@
 
     hr
 
-    h4 Vos Cookoons
+    h3 <i class='co icon-losange text-primary mr-2'></i> Vos Cookoons
 
     .row
       - @cookoons.each do |cookoon|
