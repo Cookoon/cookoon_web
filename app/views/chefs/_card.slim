@@ -14,5 +14,6 @@
           p = simple_format menu.description
 
           b Prix/pers #{humanized_money_with_symbol menu.unit_price}
-          .btn-cookoon.btn-cookoon-primary.text-center Choisir ce menu
+          = link_to 'Choisir ce menu', reservation_select_menu_path(@reservation, menu), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
+
           hr
