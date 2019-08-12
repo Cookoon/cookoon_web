@@ -24,7 +24,7 @@ module ReservationStateMachine
       end
 
       event :select_cookoon do
-        transitions from: [:initial, :cookoon_selected, :services_selected], to: :cookoon_selected, after: :set_cookoon, guard: :cookoon_exists?
+        transitions from: [:initial, :menu_selected, :cookoon_selected, :services_selected], to: :cookoon_selected, after: :set_cookoon, guard: :cookoon_exists?
       end
 
       event :select_services do
