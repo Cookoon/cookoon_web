@@ -2,7 +2,7 @@ class ChefsController < ApplicationController
   before_action :find_reservation, only: %i[index]
 
   def index
-    @chefs = policy_scope(Chef).includes(:menus)
+    @chefs = policy_scope(Chef).includes(:menus).decorate
   end
 
   private
