@@ -123,7 +123,8 @@ ActiveRecord::Schema.define(version: 2019_08_12_080700) do
   create_table "menus", force: :cascade do |t|
     t.bigint "chef_id"
     t.string "description"
-    t.integer "unit_price_cents"
+    t.integer "unit_price_cents", default: 0, null: false
+    t.string "unit_price_currency", default: "EUR", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["chef_id"], name: "index_menus_on_chef_id"

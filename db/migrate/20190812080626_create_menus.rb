@@ -3,7 +3,7 @@ class CreateMenus < ActiveRecord::Migration[5.2]
     create_table :menus do |t|
       t.references :chef, foreign_key: true
       t.string :description
-      t.integer :unit_price_cents
+      t.monetize :unit_price
 
       t.timestamps
     end
