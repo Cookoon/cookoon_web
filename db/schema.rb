@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_12_130757) do
+ActiveRecord::Schema.define(version: 2019_08_12_080700) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,13 @@ ActiveRecord::Schema.define(version: 2019_07_12_130757) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cookoon_id"], name: "index_availabilities_on_cookoon_id"
+  end
+
+  create_table "chefs", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "companies", force: :cascade do |t|
@@ -111,6 +118,15 @@ ActiveRecord::Schema.define(version: 2019_07_12_130757) do
     t.datetime "checkout_at"
     t.text "remark"
     t.index ["reservation_id"], name: "index_inventories_on_reservation_id"
+  end
+
+  create_table "menus", force: :cascade do |t|
+    t.bigint "chef_id"
+    t.string "description"
+    t.integer "unit_price_cents"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chef_id"], name: "index_menus_on_chef_id"
   end
 
   create_table "perk_specifications", force: :cascade do |t|
@@ -236,7 +252,9 @@ ActiveRecord::Schema.define(version: 2019_07_12_130757) do
     t.integer "total_tax_cents", default: 0, null: false
     t.integer "total_price_cents", default: 0, null: false
     t.integer "total_full_price_cents", default: 0, null: false
+    t.bigint "menu_id"
     t.index ["cookoon_id"], name: "index_reservations_on_cookoon_id"
+    t.index ["menu_id"], name: "index_reservations_on_menu_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
 
@@ -298,6 +316,7 @@ ActiveRecord::Schema.define(version: 2019_07_12_130757) do
   add_foreign_key "cookoon_searches", "users"
   add_foreign_key "cookoons", "users"
   add_foreign_key "inventories", "reservations"
+  add_foreign_key "menus", "chefs"
   add_foreign_key "perks", "cookoons"
   add_foreign_key "perks", "perk_specifications"
   add_foreign_key "pro_quote_cookoons", "cookoons"
@@ -309,6 +328,7 @@ ActiveRecord::Schema.define(version: 2019_07_12_130757) do
   add_foreign_key "pro_reservations", "pro_quotes"
   add_foreign_key "pro_services", "pro_reservations"
   add_foreign_key "reservations", "cookoons"
+  add_foreign_key "reservations", "menus"
   add_foreign_key "reservations", "users"
   add_foreign_key "services", "reservations"
   add_foreign_key "users", "companies"

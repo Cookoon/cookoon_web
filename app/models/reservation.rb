@@ -23,6 +23,7 @@ class Reservation < ApplicationRecord
 
   belongs_to :user
   belongs_to :cookoon, optional: true
+  belongs_to :menu, optional: true
   has_many :services, dependent: :destroy
   has_one :inventory, dependent: :destroy
 
