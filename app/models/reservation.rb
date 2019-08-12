@@ -149,6 +149,10 @@ class Reservation < ApplicationRecord
     cookoon_price_cents - host_fee_cents
   end
 
+  def needs_chef?
+    %w[brunch lunch diner cocktail afternoon day].include? type_name
+  end
+
   private
 
   # Move this elsewhere

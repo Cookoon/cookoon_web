@@ -1,0 +1,10 @@
+h1.text-center.my-4 Les Chefs
+
+div class=classnames(container: desktop_view?)
+  .d-flex
+    .d-none.d-md-block.mr-2
+      = render 'reservations/search_recap', reservation: @reservation
+    .row
+      - @chefs.each do |chef|
+        .col-12.col-md-6
+          = chef.name

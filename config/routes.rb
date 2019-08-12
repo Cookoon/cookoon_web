@@ -50,6 +50,7 @@ Rails.application.routes.draw do
         post :amounts, on: :collection
       end
     end
+    resources :chefs, only: :index
     resources :payments, only: %i[new create]
     patch 'cookoons/:id', to: 'cookoons#select_cookoon'
     patch :ask_quotation, on: :member

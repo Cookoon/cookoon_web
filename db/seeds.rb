@@ -76,6 +76,9 @@
 # Company.create!(name: "Réceptions Nouvelles", address: "12 rue Lincoln, 75008 Paris", siren: 821316239, siret: 82131623900010, vat: "FR 28 821316239")
 # puts 'Companies done'
 
+Menu.destroy_all
+Chef.destroy_all
+
 chef_attributes = [
   {
     name: 'Hélène Darroze',
