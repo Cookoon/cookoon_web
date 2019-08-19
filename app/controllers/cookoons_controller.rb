@@ -1,7 +1,7 @@
 class CookoonsController < ApplicationController
   include DatetimeHelper
 
-  before_action :find_reservation, only: %i[index show select_cookoon]
+  before_action :find_reservation, only: %i[index show select_cookoon select_menu]
   before_action :find_cookoon, only: %i[edit update select_cookoon]
 
   def index
@@ -63,6 +63,13 @@ class CookoonsController < ApplicationController
     @reservation.select_cookoon(@cookoon)
     @reservation.select_services!
     redirect_to new_reservation_payment_path(@reservation)
+  end
+
+  def select_menu
+    @menu = Menu.find(params[:id])
+    authorize @menu
+    @reservation.select_menu!(@menu)
+    redirect_to reservation_cookoons_path(@reservation)
   end
 
   private

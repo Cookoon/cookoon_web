@@ -6,6 +6,7 @@ module ReservationStateMachine
 
     aasm do
       state :initial, initial: true
+      state :menu_selected
       state :cookoon_selected
       state :services_selected
       state :charged
@@ -18,8 +19,12 @@ module ReservationStateMachine
       state :passed
       state :dead
 
+      event :select_menu do
+        transitions from: [:initial, :menu_selected], to: :menu_selected, after: :set_menu
+      end
+
       event :select_cookoon do
-        transitions from: [:initial, :cookoon_selected, :services_selected], to: :cookoon_selected, after: :set_cookoon, guard: :cookoon_exists?
+        transitions from: [:initial, :menu_selected, :cookoon_selected, :services_selected], to: :cookoon_selected, after: :set_cookoon, guard: :cookoon_exists?
       end
 
       event :select_services do
@@ -66,6 +71,10 @@ module ReservationStateMachine
 
   def set_cookoon(cookoon)
     self.cookoon = cookoon
+  end
+
+  def set_menu(menu)
+    self.menu = menu
   end
 
   def at_least_one_service?

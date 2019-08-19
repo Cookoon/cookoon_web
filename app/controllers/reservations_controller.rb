@@ -21,7 +21,8 @@ class ReservationsController < ApplicationController
     authorize @reservation
 
     if @reservation.save
-      redirect_to reservation_cookoons_path(@reservation)
+      redirect_path = @reservation.needs_chef? ? reservation_chefs_path(@reservation) : reservation_cookoons_path(@reservation)
+      redirect_to redirect_path
     else
       flash.alert = "Oops, votre réservation n'est pas valide, vous devez remplir tous les champs"
       redirect_to root_path

@@ -23,6 +23,7 @@ class Reservation < ApplicationRecord
 
   belongs_to :user
   belongs_to :cookoon, optional: true
+  belongs_to :menu, optional: true
   has_many :services, dependent: :destroy
   has_one :inventory, dependent: :destroy
 
@@ -146,6 +147,10 @@ class Reservation < ApplicationRecord
 
   def host_payout_price_cents
     cookoon_price_cents - host_fee_cents
+  end
+
+  def needs_chef?
+    %w[brunch lunch diner cocktail afternoon day].include? type_name
   end
 
   private
