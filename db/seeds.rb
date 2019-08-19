@@ -106,34 +106,42 @@ puts 'Chefs done'
 menu_attributes = [
   {
     chef: Chef.first,
+    unit_price_cents: 3500,
     description: <<-DESCRIPTION
-      Le menu 1 d'Hélène
-
-      C'est un menu de qualité
+      Tapas et Croquants de l'hiver
+                  *
+      Gambas au lait de tigre, maïs et avocat
+                  *
+      Cuisses de pintade pochées au bouillon thaï
     DESCRIPTION
   },
   {
     chef: Chef.first,
+    unit_price_cents: 5000,
     description: <<-DESCRIPTION
-      Le menu 2 d'Hélène
-
-      C'est un menu de qualité
+      Tapas et Croquants de l'hiver
+      Gambas au lait de tigre, maïs et avocat
+      Cuisses de pintade pochées au bouillon thaï
     DESCRIPTION
   },
   {
     chef: Chef.last,
+    unit_price_cents: 3500,
     description: <<-DESCRIPTION
-      Le menu 1 de Gordon
-
-      C'est un menu de qualité
+      Tapas et Croquants de l'hiver
+                  *
+      Gambas au lait de tigre, maïs et avocat
+                  *
+      Cuisses de pintade pochées au bouillon thaï
     DESCRIPTION
   },
   {
     chef: Chef.last,
+    unit_price_cents: 5000,
     description: <<-DESCRIPTION
-      Le menu 2 de Gordon
-
-      C'est un menu de qualité
+      Tapas et Croquants de l'hiver
+      Gambas au lait de tigre, maïs et avocat
+      Cuisses de pintade pochées au bouillon thaï
     DESCRIPTION
   }
 ]

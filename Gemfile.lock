@@ -8,10 +8,9 @@ GIT
 
 GIT
   remote: https://github.com/LeKristapino/wicked_pdf.git
-  revision: c60c6a7698af9870c6e14d57a8aaad7f3d15b96e
-  branch: add_webpack_support
+  revision: d26f7cfc50ebaa7b258b76ebdf0a00629bf4ad02
   specs:
-    wicked_pdf (1.1.0)
+    wicked_pdf (1.2.2)
       activesupport
 
 GEM
