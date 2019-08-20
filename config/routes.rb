@@ -33,10 +33,6 @@ Rails.application.routes.draw do
     post :stop_impersonating, on: :collection
   end
 
-  resources :cookoon_searches, only: :create do
-    patch :update_all, on: :collection
-  end
-
   resources :credit_cards, only: %i[index create destroy]
   resources :stripe_accounts, only: %i[new create]
 
