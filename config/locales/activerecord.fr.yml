@@ -12,10 +12,6 @@ fr:
       inventory:
         checkin_photos: Photos à l'entrée des lieux
         checkout_photos: Photos à la sortie des lieux
-      cookoon_search:
-        start_at: la date et l'heure de début
-        duration: la durée
-        people_count: le nombre de convives
       reservation:
         start_at: la date de réservation
       user:
@@ -50,16 +46,6 @@ fr:
           attributes:
             user:
               max_cookoons_count: 'Un maximum de deux cookoons par utilisateur est autorisé sur notre plateforme'
-        cookoon_search:
-          attributes:
-            start_at:
-              blank: doivent être renseignées
-              before_notice_period: doivent être dans plus de 10 heures
-              cannot_be_passed: ne peuvent être dans le passé
-            duration:
-              blank: doit être renseignée
-            people_count:
-              blank: doit être renseigné
         service:
           attributes:
             category:

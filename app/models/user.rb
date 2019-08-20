@@ -23,7 +23,6 @@ class User < ApplicationRecord
   has_many :cookoons, dependent: :restrict_with_exception
   has_many :reservations, dependent: :restrict_with_exception
   has_many :reservation_requests, through: :cookoons, source: :reservations
-  has_many :cookoon_searches, dependent: :destroy
 
   has_attachment :photo
 
@@ -89,14 +88,6 @@ class User < ApplicationRecord
   def stripe_verified?
     return false unless stripe_account
     stripe_account.payouts_enabled
-  end
-
-  def active_recent_searches
-    cookoon_searches.active_recents
-  end
-
-  def current_search
-    active_recent_searches.last
   end
 
   def total_payouts_for_dashboard_cents

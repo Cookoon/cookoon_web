@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_12_080700) do
+ActiveRecord::Schema.define(version: 2019_08_20_083900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,19 +63,6 @@ ActiveRecord::Schema.define(version: 2019_08_12_080700) do
     t.string "stripe_bank_name"
     t.string "stripe_bic"
     t.string "stripe_iban"
-  end
-
-  create_table "cookoon_searches", force: :cascade do |t|
-    t.bigint "user_id"
-    t.datetime "start_at"
-    t.integer "people_count"
-    t.integer "duration"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "status", default: 0, null: false
-    t.datetime "end_at"
-    t.integer "category", default: 0, null: false
-    t.index ["user_id"], name: "index_cookoon_searches_on_user_id"
   end
 
   create_table "cookoons", force: :cascade do |t|
@@ -314,7 +301,6 @@ ActiveRecord::Schema.define(version: 2019_08_12_080700) do
   end
 
   add_foreign_key "availabilities", "cookoons"
-  add_foreign_key "cookoon_searches", "users"
   add_foreign_key "cookoons", "users"
   add_foreign_key "inventories", "reservations"
   add_foreign_key "menus", "chefs"
