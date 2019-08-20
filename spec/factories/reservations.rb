@@ -4,7 +4,7 @@ FactoryBot.define do
     association :user
     start_at 10.days.from_now
     people_count 6
-    type_name 'brunch'
+    type_name 'breakfast'
 
     trait :paid do
       paid true
