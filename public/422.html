@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <title>Le serveur a rejeté le changement (422)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta charset="UTF-8">
   <style>
     .cookoon-error-page {
       background-color: #004254;
@@ -12,12 +14,15 @@
       margin: 40px;
       margin-top: 25vh;
     }
+
     img {
       width: 150px;
     }
+
     .dialog {
       margin-bottom: 50px;
     }
+
     a {
       margin-top: 50px;
       text-decoration: none;
@@ -38,9 +43,10 @@
   <a href="#" id='host-link'>Revenir à l'accueil</a>
 
   <script type="text/javascript">
-  var baseUrl = window.location.origin;
-document.getElementById('host-link').href = baseUrl;
-document.getElementById('error-image').src = baseUrl + '/cookoon_error.png';
-</script>
+    var baseUrl = window.location.origin;
+    document.getElementById('host-link').href = baseUrl;
+    document.getElementById('error-image').src = baseUrl + '/cookoon_error.png';
+  </script>
 </body>
+
 </html>
