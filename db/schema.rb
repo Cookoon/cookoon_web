@@ -241,7 +241,6 @@ ActiveRecord::Schema.define(version: 2019_08_20_083900) do
     t.integer "total_price_cents", default: 0, null: false
     t.integer "total_full_price_cents", default: 0, null: false
     t.bigint "menu_id"
-    t.integer "menu_full_price_cents", default: 0, null: false
     t.index ["cookoon_id"], name: "index_reservations_on_cookoon_id"
     t.index ["menu_id"], name: "index_reservations_on_menu_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
