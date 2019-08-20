@@ -98,10 +98,6 @@ class Reservation < ApplicationRecord
     start_at.past? || start_at.between?(Time.zone.now, (Time.zone.now + 3.hours))
   end
 
-  def host_services?
-    janitor || cleaning
-  end
-
   def has_tied_services?
     services.payment_tied_to_reservation.any?
   end
