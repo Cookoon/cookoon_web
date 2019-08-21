@@ -22,7 +22,7 @@ module Forest
         field: 'quantity',
         type: 'Number',
         description: 'The number of invitations you want to award these users',
-        isRequired: true,
+        is_required: true,
         defaultValue: 5
       },
       {

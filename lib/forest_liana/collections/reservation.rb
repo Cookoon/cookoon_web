@@ -8,7 +8,7 @@ module Forest
       field: 'confirmed',
       type: 'Boolean',
       description: 'Are you sure?',
-      isRequired: true,
+      is_required: true,
       defaultValue: false
     }]
 
@@ -17,14 +17,14 @@ module Forest
         field: 'content',
         type: 'String',
         description: 'Content / description',
-        isRequired: true,
+        is_required: true,
         widget: 'rich text editor'
       },
       {
         field: 'price',
         type: 'Number',
         description: 'Price in €, ex. 99,99',
-        isRequired: true
+        is_required: true
       }
     ]
   end
