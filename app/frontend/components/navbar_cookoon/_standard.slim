@@ -1,0 +1,36 @@
+.cookoon-nav data={controller: "dropdowns", action: "click@window->dropdowns#close" }
+  .cookoon-nav-infos
+    .cookoon-nav-infos-service.bg-white
+      .d-none.d-md-block
+        | <i class='co icon-key'></i> Conciergerie - 06 12 12 12 12
+      .d-block.d-md-none
+        | <i class='co icon-key'></i> Conciergerie
+    .cookoon-nav-infos-user.bg-primary.pointer(
+      id="navigationDropdownMenu" 
+      aria={ haspopup: "true", expanded: "false" }
+      data={ target: 'dropdowns.trigger', action: "click->dropdowns#toggle" }
+    )
+      - if current_user&.photo?
+        = cl_image_tag(current_user.photo.path, size: '30x30', crop: :thumb, gravity: :face, class: 'avatar-30', data: {target: 'dropdowns.trigger'} )
+      - else
+        = image_tag 'base_user.png', class: 'avatar-30', data: {target: 'dropdowns.trigger'}
+
+      = current_user.full_name
+      i.fas.fa-chevron-down data-target='dropdowns.trigger'
+
+      .navigation-dropdown-menu aria-labelledby="navigationDropdownMenu" data-target="dropdowns.body"
+        = link_to 'Mon compte', edit_users_path, class: 'navigation-dropdown-menu-item'
+        = link_to 'Mes moyens de paiement', credit_cards_path, class: 'navigation-dropdown-menu-item'
+        = link_to 'Mon espace hôte', host_dashboard_path, class: 'navigation-dropdown-menu-item'
+        = link_to 'Déconnexion', destroy_user_session_path, class: 'navigation-dropdown-menu-item', method: 'delete'
+
+  .cookoon-nav-navigation.bg-black
+    = link_to root_path do
+      .logo
+        i.co.icon-cookoon-logo.fa-2x.text-primary
+        div.pl-2 Cookoon
+
+    .menu.d-none.d-md-block
+      ul.list-inline.text-center
+        li.list-inline-item.px-2 = link_to 'Mes Réservations', reservations_path
+        li.list-inline-item.px-2 = link_to 'Mes Invitations', new_user_invitation_path

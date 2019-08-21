@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_06_170219) do
+ActiveRecord::Schema.define(version: 2019_08_20_083900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,13 @@ ActiveRecord::Schema.define(version: 2019_03_06_170219) do
     t.index ["cookoon_id"], name: "index_availabilities_on_cookoon_id"
   end
 
+  create_table "chefs", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "companies", force: :cascade do |t|
     t.string "name"
     t.string "address"
@@ -56,18 +63,6 @@ ActiveRecord::Schema.define(version: 2019_03_06_170219) do
     t.string "stripe_bank_name"
     t.string "stripe_bic"
     t.string "stripe_iban"
-  end
-
-  create_table "cookoon_searches", force: :cascade do |t|
-    t.bigint "user_id"
-    t.datetime "start_at"
-    t.integer "people_count"
-    t.integer "duration"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer "status", default: 0, null: false
-    t.datetime "end_at"
-    t.index ["user_id"], name: "index_cookoon_searches_on_user_id"
   end
 
   create_table "cookoons", force: :cascade do |t|
@@ -101,16 +96,6 @@ ActiveRecord::Schema.define(version: 2019_03_06_170219) do
     t.index ["user_id"], name: "index_cookoons_on_user_id"
   end
 
-  create_table "guests", force: :cascade do |t|
-    t.bigint "user_id"
-    t.string "email"
-    t.string "first_name"
-    t.string "last_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_guests_on_user_id"
-  end
-
   create_table "inventories", force: :cascade do |t|
     t.bigint "reservation_id"
     t.integer "status", default: 0
@@ -120,6 +105,16 @@ ActiveRecord::Schema.define(version: 2019_03_06_170219) do
     t.datetime "checkout_at"
     t.text "remark"
     t.index ["reservation_id"], name: "index_inventories_on_reservation_id"
+  end
+
+  create_table "menus", force: :cascade do |t|
+    t.bigint "chef_id"
+    t.string "description"
+    t.integer "unit_price_cents", default: 0, null: false
+    t.string "unit_price_currency", default: "EUR", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chef_id"], name: "index_menus_on_chef_id"
   end
 
   create_table "perk_specifications", force: :cascade do |t|
@@ -216,15 +211,6 @@ ActiveRecord::Schema.define(version: 2019_03_06_170219) do
     t.index ["pro_reservation_id"], name: "index_pro_services_on_pro_reservation_id"
   end
 
-  create_table "reservation_guests", force: :cascade do |t|
-    t.bigint "reservation_id"
-    t.bigint "guest_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["guest_id"], name: "index_reservation_guests_on_guest_id"
-    t.index ["reservation_id"], name: "index_reservation_guests_on_reservation_id"
-  end
-
   create_table "reservations", force: :cascade do |t|
     t.bigint "cookoon_id"
     t.bigint "user_id"
@@ -238,27 +224,39 @@ ActiveRecord::Schema.define(version: 2019_03_06_170219) do
     t.boolean "cleaning", default: false
     t.boolean "janitor", default: false
     t.string "stripe_charge_id"
-    t.integer "discount_amount_cents", default: 0, null: false
     t.datetime "end_at"
-    t.text "guests_message"
     t.integer "people_count"
     t.text "message_for_host"
+    t.string "aasm_state"
+    t.boolean "paid", default: false
+    t.integer "category", default: 0
+    t.string "type_name"
+    t.integer "cookoon_price_cents", default: 0, null: false
+    t.integer "cookoon_fee_cents", default: 0, null: false
+    t.integer "cookoon_fee_tax_cents", default: 0, null: false
+    t.integer "services_price_cents", default: 0, null: false
+    t.integer "services_tax_cents", default: 0, null: false
+    t.integer "services_full_price_cents", default: 0, null: false
+    t.integer "total_tax_cents", default: 0, null: false
+    t.integer "total_price_cents", default: 0, null: false
+    t.integer "total_full_price_cents", default: 0, null: false
+    t.bigint "menu_id"
     t.index ["cookoon_id"], name: "index_reservations_on_cookoon_id"
+    t.index ["menu_id"], name: "index_reservations_on_menu_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
 
   create_table "services", force: :cascade do |t|
     t.bigint "reservation_id"
-    t.text "content"
     t.integer "price_cents"
     t.string "price_currency", default: "EUR", null: false
     t.integer "status", default: 0, null: false
     t.string "stripe_charge_id"
-    t.integer "discount_amount_cents", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "category", default: 0, null: false
     t.boolean "payment_tied_to_reservation", default: false
+    t.string "name"
     t.index ["reservation_id"], name: "index_services_on_reservation_id"
   end
 
@@ -291,8 +289,6 @@ ActiveRecord::Schema.define(version: 2019_03_06_170219) do
     t.string "stripe_customer_id"
     t.boolean "admin", default: false
     t.integer "emailing_preferences", default: 1
-    t.integer "discount_balance_cents", default: 0
-    t.datetime "discount_expires_at"
     t.date "born_on"
     t.bigint "company_id"
     t.index ["company_id"], name: "index_users_on_company_id"
@@ -305,10 +301,9 @@ ActiveRecord::Schema.define(version: 2019_03_06_170219) do
   end
 
   add_foreign_key "availabilities", "cookoons"
-  add_foreign_key "cookoon_searches", "users"
   add_foreign_key "cookoons", "users"
-  add_foreign_key "guests", "users"
   add_foreign_key "inventories", "reservations"
+  add_foreign_key "menus", "chefs"
   add_foreign_key "perks", "cookoons"
   add_foreign_key "perks", "perk_specifications"
   add_foreign_key "pro_quote_cookoons", "cookoons"
@@ -319,9 +314,8 @@ ActiveRecord::Schema.define(version: 2019_03_06_170219) do
   add_foreign_key "pro_reservations", "cookoons"
   add_foreign_key "pro_reservations", "pro_quotes"
   add_foreign_key "pro_services", "pro_reservations"
-  add_foreign_key "reservation_guests", "guests"
-  add_foreign_key "reservation_guests", "reservations"
   add_foreign_key "reservations", "cookoons"
+  add_foreign_key "reservations", "menus"
   add_foreign_key "reservations", "users"
   add_foreign_key "services", "reservations"
   add_foreign_key "users", "companies"

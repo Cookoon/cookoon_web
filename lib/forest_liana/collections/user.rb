@@ -38,21 +38,5 @@ module Forest
       type: 'Enum',
       enums: ['Aucun e-mail', 'Tous les emails']
     }]
-
-    action 'Grant credit', fields: [
-      {
-        field: 'amount',
-        type: 'Number',
-        description: 'The credit you want to grant, in euros (no cents)',
-        isRequired: true,
-        defaultValue: 100
-      },
-      {
-        field: 'message',
-        type: 'String',
-        description: 'The specific message you want to embed in the email',
-        widget: 'text area'
-      }
-    ]
   end
 end

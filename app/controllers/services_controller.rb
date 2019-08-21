@@ -1,10 +1,14 @@
 class ServicesController < ApplicationController
-  before_action :set_reservation, only: %i[show create]
+  skip_after_action :verify_policy_scoped
+  before_action :set_reservation, only: %i[index show create]
+
+  def index
+  end
 
   def show
     authorize @reservation
 
-    @service = @reservation.services.last
+    @service = @reservation.services.where(payment_tied_to_reservation: false)&.last
     @credit_cards = current_user.credit_cards
   end
 

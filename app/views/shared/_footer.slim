@@ -1,22 +1,23 @@
-footer.bg-gray.text-white
-  .container.py-5.px-0
-    .row
-      .col
-        h4 Cookoon
-        | Tous droits réservés à
-        br Réceptions Nouvelles,
-        | 2018
-      .col
-        h4 Découvrir le Service
-        div = link_to 'Comment organiser son événement ?', '#', target: :cookoon, class: 'text-white'
-        div = link_to 'Confiance et garanties', 'https://cookoon.fr/garanties', target: :cookoon, class: 'text-white'
-        div = link_to 'Questions fréquentes', 'https://aide.cookoon.fr', target: :faq, class: 'text-white'
+footer.text-white
+  .bg-dark
+    .container.py-5.d-flex-default
+      .d-none.d-md-block
+        .d-flex-default
+          div.mr-3
+            p Assistance téléphonique <br /> 7j/7 - 24h/24
+            p 01 45 05 44 44
 
-      .col
-        h4 Société
-        div = link_to 'A propos', 'https://cookoon.fr', target: :cookoon, class: 'text-white'
-        div = link_to 'Presse', 'https://cookoon.fr', target: :cookoon, class: 'text-white'
-        div = link_to 'Jobs', 'https://angel.co/cookoon/jobs', target: :jobs, class: 'text-white'
+          div
+            p.m-0 À propos
+            p.m-0 <i class='co icon-mail'></i> Relations Presse
+            p.m-0 <i class='co icon-cookoon-bibliotheque-pictogrammes_apple-tv'></i> Télécharger notre pressbook
+            p.m-0 <i class='co icon-payment'></i> Paiement sécurisé
 
-      .col.text-center.align-self-center
-        i.co.co-logo.fa-5x
+      div
+        p Newsletter
+        p Toute notre activité
+                        
+  .bg-black
+    .container.py-3.d-block.d-md-flex
+      p <i class='co icon-cookoon-logo text-primary mr-2'></i> COOKOON
+      p.ml-5 Copyright 2019 - Mentions légales

@@ -1,171 +1,68 @@
 import { Controller } from 'stimulus';
 import flatpickr from 'vendor/flatpickr';
-import Slider from 'bootstrap-slider';
-import 'bootstrap-slider/dist/css/bootstrap-slider';
-import './slider';
 
 export default class extends Controller {
   static targets = [
-    'body',
-    'dateDisplay',
-    'dateInput',
-    'durationDescription',
-    'durationInput',
-    'cta',
-    'peopleInput',
-    'peopleSliderDecreaser',
-    'peopleSliderIncreaser',
-    'pusher',
-    'startAtInput',
-    'timeDisplay',
-    'timeSelect'
+    'selection',
+    'countText',
+    'countInput',
+    'typeText',
+    'typeInput',
+    'dateSelection',
+    'dateText',
+    'dateInput'
   ]
 
+  static dateOptions = {
+    weekday: "short",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  }
+
   connect() {
-    const device = this.data.get('device');
-
-    flatpickr(this.dateInputTarget, {
-      dateFormat: 'd/m/Y',
-      disableMobile: device === 'android_inside',
+    flatpickr(this.dateSelectionTarget, {
+      dateFormat: 'Y-m-dTH:i',
       minDate: 'today',
-      weekNumbers: device === 'desktop'
-    });
-
-    this.durationSlider = new Slider(this.durationInputTarget, {
-      value: 4,
-      ticks: [4, 5, 7, 10, 12],
-      ticks_labels: ['4h', '5h', '7h', '10h', '12h'],
-      ticks_positions: [0, 25, 50, 75, 100],
-      ticks_snap_bounds: 5
-    }).on('change', this.renderDurationDescription);
-    this.renderDurationDescription();
-
-    this.peopleSlider = new Slider(this.peopleInputTarget, {
-      value: 6,
-      ticks: [6, 8, 10, 12],
-      ticks_labels: ['6', '8', '10', '12']
-    });
+      disableMobile: "true",
+      onValueUpdate: (selectedDates, dateStr) => {
+        this.selectDate(selectedDates, dateStr)
+      },
+    })
   }
 
-  disconnect() {
-    this.durationSlider.destroy();
-    this.peopleSlider.destroy();
+  toggleSelection() {
+    const input = event.target.closest('.input-cookoon-search')
+    input.querySelector('.input-cookoon-search-selection').classList.toggle('d-none')
+    event.target.classList.toggle('focus')
   }
 
-  toggleBodyVisibility() {
-    $(this.bodyTarget).slideToggle(600);
-    this.durationSlider.relayout();
-    this.peopleSlider.relayout();
-
-    $(this.pusherTarget).slideToggle(600);
-
-    setTimeout(() => $(this.ctaTarget).slideToggle(200), 200);
+  hideSelections() {
+    this.selectionTargets.forEach(element => {
+      if (element !== event.target.closest('.input-cookoon-search')) {
+        element.querySelector('.input-cookoon-search-selection').classList.add('d-none')
+        element.classList.remove('focus')
+      }
+    })
   }
 
-  pickDate() {
-    this.updateStartAtInput();
-    this.renderDateDisplay();
+  selectCount() {
+    const count = event.target.dataset.count
+    this.countTextTarget.innerHTML = count
+    this.countInputTarget.value = count
+    event.target.closest('.input-cookoon-search').classList.remove('focus')
   }
 
-  selectTime() {
-    this.updateStartAtInput();
-    this.renderTimeDisplay();
+  selectType() {
+    const duration = event.target.dataset.type
+    const text = event.target.dataset.text
+    this.typeTextTarget.innerHTML = text
+    this.typeInputTarget.value = duration
+    event.target.closest('.input-cookoon-search').classList.remove('focus')
   }
 
-  renderDateDisplay() {
-    if (/\d{2}\/\d{2}\/\d{4}/.test(this.dateInputTarget.value)) {
-      this.dateDisplayTarget.textContent = this.dateInputTarget.value;
-    } else {
-      this.dateDisplayTarget.textContent = 'JJ/MM/AAAA';
-    }
-  }
-
-  renderTimeDisplay() {
-    if (/\d{1,2}:\d{2}/.test(this.timeSelectTarget.selectedOptions[0].value)) {
-      this.timeDisplayTarget.textContent = this.timeSelectTarget.selectedOptions[0].textContent;
-    } else {
-      this.timeDisplayTarget.textContent = '00h';
-    }
-  }
-
-  updateStartAtInput() {
-    const dateEl = this.dateInputTarget.value.split('/');
-    const timeEl = this.timeSelectTarget.value.split(':');
-    const date = new Date(
-      dateEl[2],
-      dateEl[1] - 1,
-      dateEl[0],
-      timeEl[0],
-      timeEl[1]
-    );
-    if (date instanceof Date && isFinite(date)) {
-      this.startAtInputTarget.value = date;
-    } else {
-      this.startAtInputTarget.value = '';
-    }
-  }
-
-  snapDurationSlider() {
-    setTimeout(
-      () => this.durationSlider.setValue(this.durationInputTarget.value),
-      1
-    );
-  }
-
-  renderDurationDescription = () => {
-    switch (this.durationInputTarget.value) {
-      case '2':
-      case '3':
-      case '4':
-        this.durationDescriptionTarget.textContent =
-          "Pour un petit déjeuner";
-        break;
-      case '5':
-        this.durationDescriptionTarget.textContent =
-          "Pour un déjeuner ou un brunch";
-        break;
-      case '6':
-      case '7':
-        this.durationDescriptionTarget.textContent =
-          "Pour un grand dîner avec chef";
-        break;
-      case '8':
-      case '9':
-      case '10':
-        this.durationDescriptionTarget.textContent =
-          'Pour un comité d’entreprise';
-        break;
-      case '11':
-      case '12':
-        this.durationDescriptionTarget.textContent =
-          'Pour une journée de séminaire';
-        break;
-      default:
-        this.durationDescriptionTarget.textContent = '';
-    }
-  };
-
-  decreasePeopleSlider() {
-    this.peopleSliderDecreaserTarget.style.display = 'none';
-    this.peopleSliderIncreaserTarget.style.display = 'flex';
-
-    this.peopleSlider.destroy();
-    this.peopleSlider = new Slider(this.peopleInputTarget, {
-      value: 12,
-      ticks: [6, 8, 10, 12],
-      ticks_labels: ['6', '8', '10', '12']
-    });
-  }
-
-  increasePeopleSlider() {
-    this.peopleSliderIncreaserTarget.style.display = 'none';
-    this.peopleSliderDecreaserTarget.style.display = 'flex';
-
-    this.peopleSlider.destroy();
-    this.peopleSlider = new Slider(this.peopleInputTarget, {
-      value: 12,
-      ticks: [12, 14, 16, 18, 20],
-      ticks_labels: ['12', '14', '16', '18', '20']
-    });
+  selectDate(selectedDates, dateStr) {
+    this.dateTextTarget.innerHTML = selectedDates[0].toLocaleString('fr', this.constructor.dateOptions)
+    this.dateInputTarget.value = dateStr
   }
 }

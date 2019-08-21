@@ -12,10 +12,6 @@ fr:
       inventory:
         checkin_photos: Photos à l'entrée des lieux
         checkout_photos: Photos à la sortie des lieux
-      cookoon_search:
-        start_at: la date et l'heure de début
-        duration: la durée
-        people_count: le nombre de convives
       reservation:
         start_at: la date de réservation
       user:
@@ -38,17 +34,11 @@ fr:
           attributes:
             cookoon:
               taken: Une disponibilité existe déja sur ce créneau pour ce Cookoon
-        guest:
-          attributes:
-            email:
-              taken: est déjà dans votre liste
         reservation:
           attributes:
             cookoon:
               host_cannot_be_tenant: Vous ne pouvez pas réserver votre propre Cookoon !
               unavailable_in_datetime_range: Ce cookoon est indisponible à ces dates.
-            guests:
-              blank: Vous n'avez sélectionné aucun contact
             start_at:
               before_notice_period: Un minimum de 10h est requis.
               cannot_be_passed: ne peut être dans le passé.
@@ -56,16 +46,6 @@ fr:
           attributes:
             user:
               max_cookoons_count: 'Un maximum de deux cookoons par utilisateur est autorisé sur notre plateforme'
-        cookoon_search:
-          attributes:
-            start_at:
-              blank: doivent être renseignées
-              before_notice_period: doivent être dans plus de 10 heures
-              cannot_be_passed: ne peuvent être dans le passé
-            duration:
-              blank: doit être renseignée
-            people_count:
-              blank: doit être renseigné
         service:
           attributes:
             category:
@@ -90,7 +70,6 @@ fr:
   attributes:
     description: Description
     email: Email
-    guests: Invités
     first_name: Prénom
     last_name: Nom
     photo: Photo

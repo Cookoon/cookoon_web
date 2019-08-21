@@ -22,9 +22,6 @@
       <br>
       <small>
         soit <%= humanized_money_with_symbol @reservation.price %> - <%= humanized_money_with_symbol @reservation.host_fee %> de frais
-        <% if @reservation.host_services? %>
-          - <%= humanized_money_with_symbol @reservation.host_services_price %> de services
-        <% end %>
       </small>
     </td>
   </tr>

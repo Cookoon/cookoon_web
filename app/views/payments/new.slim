@@ -1,0 +1,39 @@
+h1.text-center.my-4 = @reservation.cookoon.name
+
+div class=classnames(container: desktop_view?)
+  .d-flex
+    .d-none.d-md-block.mr-2
+      = link_to '< Retour aux annonces', reservation_cookoons_path(@reservation), class: 'btn-cookoon btn-block btn-cookoon-secondary-gold mb-2 small'
+      = render 'reservations/search_recap', reservation: @reservation 
+
+    .container
+      .d-flex-default
+        h5 Votre réservation
+        p <i class="fas fa-map-marker-alt"></i> #{@cookoon.address}
+      = render 'reservations/recap_string', reservation: @reservation
+
+      p Vos services :
+
+      .mb-4
+        b Location
+        .d-flex-default.ml-3
+          | Cookoon <span>#{humanized_money_with_symbol @reservation.cookoon_price}</span>
+
+        .d-flex-default.mb-2.ml-3
+          | Frais de service <span>#{humanized_money_with_symbol @reservation.cookoon_fee}</span>
+
+        div class=classnames('mb-2', 'd-none': @reservation.services.none?)
+          = render 'reservations/services_prices'
+
+        hr
+
+        .d-flex-default.mb-2
+          b TOTAL
+          b = humanized_money_with_symbol @reservation.total_full_price
+    
+      = render 'credit_cards/selection'
+
+      - if @reservation.business?
+        .text-center
+          p Vous pouvez aussi demander un devis
+          = link_to 'Demander un Devis', ask_quotation_reservation_path(@reservation), class: 'btn btn-primary btn-action btn-block', method: :patch

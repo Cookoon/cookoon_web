@@ -1,20 +1,35 @@
 // variables.scss
 // $font-size-base: 0.875rem;
 $font-size-base: 1rem;
-$headings-font-family: $gfs-didot;
-$font-family-base: $tisa-sans;
 
-$blue: #004254;
-$gray: #9b9b9b;
+// TODO NEW DESIGN
+// Set fallback fonts 
+$headings-font-family: $cochin-italic;
+$font-family-base: $avenir;
+
+$primary: #CDBB8A;
+$gray: #F9F9F9;
+$black: #121212;
+$dark: #2C2C2C;
+$green: #85B11D;
+$white: #FFFFFF; 
+
 $theme-colors: (
   gray: $gray,
+  primary: $primary,
+  green: $green,
+  black: $black,
+  dark: $dark,
+  white: $white
 );
 
 // Customize the dark text colors for use in our YIQ color contrast function.
-$yiq-text-dark: $blue;
+$yiq-text-dark: $white;
 
 // Links
-$link-hover-color: lighten($blue, 5%);
+// These can be set to another color later
+$link-color: inherit;
+$link-hover-color: inherit;
 $link-hover-decoration: none;
 
 // Components
@@ -22,13 +37,17 @@ $border-radius: 0;
 $border-radius-lg: 0;
 $border-radius-sm: 0;
 
+// Tabs
+$nav-pills-link-active-color: $black;
+$nav-pills-link-active-bg: none;
+
 // Forms
-$form-feedback-valid-color: $blue;
+$form-feedback-valid-color: $primary;
 // $input-bg: $white;
-$input-border-color: #000;
+$input-border-color:#F5F5F5;
 // $input-border-radius: 0;
-$input-border-width: 1px;
-$input-focus-border-color: lighten($blue, 10%);
+$input-border-width: 2px;
+$input-focus-border-color: lighten($primary, 10%);
 $input-focus-box-shadow: none;
 $input-focus-width: 0;
 
@@ -37,5 +56,5 @@ $custom-select-focus-box-shadow: none;
 
 $form-feedback-font-size: $font-size-base;
 
-$close-color: #fff; // $white is not yet defined here
+$close-color: black;
 $close-text-shadow: none;

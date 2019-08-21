@@ -1,0 +1,86 @@
+.cookoon-combined {
+  display: flex;
+  border: 2px solid $primary;
+  
+  &-input {
+    border: none;
+    background: transparent;
+    flex: 1;
+    padding: 6px;
+    &:focus {
+      outline: none;
+    }
+    &-bg-dark {
+      background: transparent;
+      color: white !important;
+    }
+  }
+
+  input[type=submit] {
+    border: none;
+  }
+}
+
+.input-cookoon {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 2px solid #F5F5F5;
+  &.focus {
+    outline: none;
+    border-left: 5px solid #CDBB8A;
+  }
+  &.icon:after {
+    font-family: 'FontAwesome';
+    content: '\f274';
+    position: absolute;
+    right: 6px;
+    color: blue;
+  }
+}
+
+.input-cookoon-search {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  text-align: center;
+  border: none;
+  position: relative;
+  cursor: pointer;
+  &-data {
+    font-size: 24px;
+  }
+}
+
+.input-cookoon-search-selection {
+  background: white;
+  position: absolute;
+  padding: 15px;
+  width: 100%;
+  left: 0;
+  z-index: 3;
+  text-align: left;
+  max-height: 265px;
+  overflow: scroll;
+  box-shadow: 0px 14px 10px rgba(0, 0, 0, .4);
+  &-item:not(:last-child) {
+    border-bottom: 1px solid var(--primary);
+  }
+  &-item {
+    padding: 15px 10px;
+    &:hover {
+      background: var(--primary);
+      color: white;
+    }
+  }
+}
+
+@media (max-width: 320px) {
+  .cookoon-combined {
+    .btn-cookoon {
+      padding: 6px 13px;
+    }
+  }
+}

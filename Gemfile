@@ -18,7 +18,7 @@ gem 'puma'
 # Use Uglifier as compressor for JavaScript assets
 # gem 'uglifier', '>= 1.3.0'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 3.5'
+gem 'webpacker'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -43,6 +43,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootsnap', '>= 1.1.0', require: false
 
 # Back
+gem 'aasm'
 gem 'attachinary', github: 'Cookoon/attachinary'
 gem 'devise'
 gem 'devise-i18n'
@@ -54,7 +55,7 @@ gem 'pundit'
 gem 'rack-cors', require: 'rack/cors'
 gem 'rails-i18n'
 gem 'simple_scheduler'
-gem 'wicked_pdf', git: 'https://github.com/LeKristapino/wicked_pdf.git', branch: 'add_webpack_support'
+gem 'wicked_pdf', git: 'https://github.com/LeKristapino/wicked_pdf.git'
 gem 'wkhtmltopdf-binary'
 
 # Front
@@ -109,6 +110,7 @@ group :development do
   # gem 'i18n-debug'
   gem 'i18n-tasks', require: false
   gem 'letter_opener'
+  gem 'rb-readline' 
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rubocop', require: false

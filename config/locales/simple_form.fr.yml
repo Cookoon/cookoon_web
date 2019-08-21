@@ -2,17 +2,15 @@
 fr:
   helpers:
     submit:
-      guest:
-        create: Ajouter un nouveau contact
-      cookoon_search:
-        create: Chercher
+      reservation:
+        create: Consulter les expériences
       pro_quote:
         create: Trouver un espace
         update: Demander un devis
       pro_reservation:
         update: Demander la modification
       user:
-        update: Mettre à jour
+        update: Modifier
   simple_form:
     error_notification:
       default_message: 'Merci de revoir les éléments ci-dessous :'

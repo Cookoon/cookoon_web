@@ -33,34 +33,31 @@ Rails.application.routes.draw do
     post :stop_impersonating, on: :collection
   end
 
-  resources :cookoon_searches, only: :create do
-    patch :update_all, on: :collection
-  end
-
   resources :credit_cards, only: %i[index create destroy]
   resources :stripe_accounts, only: %i[new create]
 
-  resources :cookoons, except: :destroy do
-    resources :reservations, only: :create
+  resources :cookoons, only: %i[new create update] do
     resources :availabilities, only: %i[index create update], shallow: true
   end
 
-  resources :reservations, only: %i[index show update] do
-    resources :payments, only: %i[new create] do
-      post :amounts, on: :collection
+  resources :reservations, only: %i[index show new create update] do
+    resources :cookoons, only: %i[index show] do
+      resources :payments, only: [] do
+        post :amounts, on: :collection
+      end
     end
+    resources :chefs, only: :index
+    resources :payments, only: %i[new create]
+    patch 'cookoons/:id', to: 'cookoons#select_cookoon'
+    patch 'menus/:id', to: 'cookoons#select_menu', as: :select_menu
+    patch :ask_quotation, on: :member
     resources :invoices, only: :create
-    resource :services, only: %i[show create]
-    resources :guests, controller: 'reservations/guests', only: %i[index create] do
-      post :create_all, on: :collection
-    end
+    resource :services, only: %i[index show create]
     resources :messages, controller: 'reservations/messages', only: %i[new create]
   end
 
   resources :services, only: [:destroy] do
-    resources :payments, controller: 'services/payments', only: :create do
-      post :amounts, on: :collection
-    end
+    resources :payments, controller: 'services/payments', only: :create
   end
 
   # -------- HOST NAMESPACE ---------
@@ -100,7 +97,6 @@ Rails.application.routes.draw do
     # User
     post '/actions/award-invitations', to: 'users#award_invitations'
     post '/actions/change-e-mailing-preferences', to: 'users#change_emailing_preferences'
-    post '/actions/grant-credit', to: 'users#grant_credit'
 
     # Reservation
     post '/actions/cancel-by-host', to: 'reservations#cancel_by_host'

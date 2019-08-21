@@ -1,6 +1,7 @@
 class Users::SessionsController < Devise::SessionsController
   respond_to :html, :js
   responders :turbolinks
+  layout 'light'
 
   # before_action :configure_sign_in_params, only: [:create]
 

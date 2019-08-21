@@ -12,12 +12,6 @@ RSpec.describe Reservation, type: :model do
     expect(reservation.errors[:start_at]).to include('doit être rempli(e)')
   end
 
-  it 'is invalid without a duration' do
-    reservation = build(:reservation, duration: nil)
-    reservation.valid?
-    expect(reservation.errors[:duration]).to include('doit être rempli(e)')
-  end
-
   describe 'scopes' do
     let(:classic) { create(:reservation) }
     let(:paid) { create(:reservation, :paid) }
@@ -37,7 +31,7 @@ RSpec.describe Reservation, type: :model do
       let!(:paid) { create(:reservation, :paid) }
 
       it 'returns only paid reservations starting in less than few hours' do
-        Timecop.freeze(10.days.from_now - 1.hour) do
+        Timecop.freeze(10.days.from_now) do
           expect(described_class.short_notice).to include(paid)
         end
         Timecop.freeze(8.days.from_now) do

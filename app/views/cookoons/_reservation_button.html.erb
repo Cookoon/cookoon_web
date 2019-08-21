@@ -1,9 +1,0 @@
-<%= link_to cookoon_reservations_path(@cookoon), method: :post, remote: true do %>
-  <div class="position-fixed b-0 l-0 r-0 mb-3 text-center container">
-    <button type="button" class="btn btn-primary btn-action btn-block"
-      data-target="#reservation-new" data-controller="analytics-events"
-      data-action="click->analytics-events#reservationModalOpen">
-      Réserver <%= display_duration_for(@reservation.duration) %> • <%= humanized_money_with_symbol @reservation.degressive_price %>
-    </button>
-  </div>
-<% end %>

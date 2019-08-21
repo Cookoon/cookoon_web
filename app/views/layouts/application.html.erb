@@ -25,21 +25,16 @@
   </head>
 
   <body class="<%= yield(:body_class) %>" data-controller="application-navigation" >
-    <%= render 'shared/loader' %>
-
     <%= c 'navbar_cookoon',
-          type: content_for?(:navbar_type) ? yield(:navbar_type) : :menu,
-          back_url: content_for?(:navbar_back_url) ? yield(:navbar_back_url) : nil,
-          content: content_for?(:navbar_content) ? yield(:navbar_content) : nil %>
-
-    <%= c 'drawer' %>
+          type: content_for?(:navbar_type) ? yield(:navbar_type) : :standard %>
 
     <%= render 'shared/pretender_infos' %>
-
     <div id="flash">
       <%= render 'shared/flashes' %>
     </div>
 
     <%= yield %>
+
+    <%= render 'shared/footer' %>
   </body>
 </html>

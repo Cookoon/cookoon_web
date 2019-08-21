@@ -8,8 +8,8 @@ export default class extends Controller {
   style = {
     base: {
       fontSize: '16px',
-      color: '#FFFFFF',
-      iconColor: '#FFFFFF',
+      color: '#2C2C2C',
+      iconColor: '#2C2C2C',
       '::placeholder': {
         color: '#c9c9c9'
       }
@@ -30,7 +30,7 @@ export default class extends Controller {
     this.formTarget.addEventListener('submit', this.handleSubmit);
 
     // iOS keyboard fix
-    $('#credit-card-modal').on('hide.bs.modal', function() {
+    $('#credit-card-modal').on('hide.bs.modal', function () {
       $('#invisible-input').focus();
       $('#invisible-input').blur();
     });

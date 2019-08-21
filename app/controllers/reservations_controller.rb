@@ -1,29 +1,31 @@
 class ReservationsController < ApplicationController
-  before_action :find_cookoon, only: :create
-  before_action :find_reservation, only: %i[update show]
+  before_action :find_reservation, only: %i[update show ask_quotation]
 
   def index
-    reservations = policy_scope(Reservation).includes(cookoon: :photo_files)
-    @active_reservations = reservations.active
-    @inactive_reservations = reservations.inactive
+    reservations = policy_scope(Reservation).includes(cookoon: :user)
+    @active_reservations = ReservationDecorator.decorate_collection(reservations.active)
+    @inactive_reservations = ReservationDecorator.decorate_collection(reservations.inactive)
   end
 
   def show
     @cookoon = @reservation.cookoon
   end
 
+  def new 
+    @reservation = Reservation.new(category: params[:category]).decorate
+    authorize @reservation
+  end
+
   def create
-    # TODO Handle erros when user has no search
-    search = current_user.cookoon_searches.last
-    params_from_search = search.to_reservation_attributes.merge(cookoon: @cookoon)
-    @reservation = Reservation.new params_from_search
+    @reservation = current_user.reservations.build reservation_params
     authorize @reservation
 
     if @reservation.save
-      redirect_to new_reservation_payment_path(@reservation)
+      redirect_path = @reservation.needs_chef? ? reservation_chefs_path(@reservation) : reservation_cookoons_path(@reservation)
+      redirect_to redirect_path
     else
-      flash.alert = @reservation.errors.full_messages.join(', ')
-      redirect_to @cookoon
+      flash.alert = "Oops, votre réservation n'est pas valide, vous devez remplir tous les champs"
+      redirect_to root_path
     end
   end
 
@@ -34,14 +36,21 @@ class ReservationsController < ApplicationController
     redirect_to reservations_path
   end
 
+  def ask_quotation
+    @reservation.ask_quotation!
+    flash.notice = 'Votre demande de devis est enregistrée notre concierge reviendra vers vous rapidement par email !'
+    # probably redirect to my::reservations#index or equivalent
+    redirect_to root_path
+  end
+
   private
 
   def find_reservation
-    @reservation = Reservation.find(params[:id])
+    @reservation = Reservation.find(params[:id]).decorate
     authorize @reservation
   end
 
-  def find_cookoon
-    @cookoon = Cookoon.find(params[:cookoon_id])
+  def reservation_params
+    params.require(:reservation).permit(:category, :people_count, :type_name, :start_at)
   end
 end

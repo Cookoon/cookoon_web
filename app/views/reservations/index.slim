@@ -1,0 +1,15 @@
+div(class=classnames(container: @device == :desktop))
+  h1.my-4 Mes réservations
+  ul(class=classnames('nav', 'nav-pills', 'mb-2', 'mx-2rem': @device != :desktop))
+    li.nav-item
+      a.nav-link.active.h5(href="#active" data-toggle="pill" role="tab") En cours
+
+    li.nav-item
+      a.nav-link.h5(href="#inactive" data-toggle="pill" role="tab") Passées
+
+  .tab-content.py-3
+    #active.tab-pane.fade.show.active(role="tabpanel")
+      = reservations_list_or_empty_card(@active_reservations)
+
+    #inactive.tab-pane.fade(role="tabpanel")
+      = reservations_list_or_empty_card(@inactive_reservations)

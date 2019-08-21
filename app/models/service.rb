@@ -6,8 +6,6 @@ class Service < ApplicationRecord
   delegate :cookoon, :user, to: :reservation
 
   monetize :price_cents, disable_validation: true
-  monetize :payment_amount_cents, disable_validation: true
-  monetize :discount_amount_cents
 
   enum status: %i[quote paid]
   enum category: %i[special catering chef corporate]
@@ -34,10 +32,6 @@ class Service < ApplicationRecord
 
   def payment(options = {})
     Service::Payment.new(self, options)
-  end
-
-  def payment_amount_cents
-    price_cents
   end
 
   private

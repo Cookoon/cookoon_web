@@ -1,0 +1,9 @@
+.nav-link {
+  font-family: $cochin-italic;
+}
+
+.nav-link.active,
+.show > .nav-link {
+  border-bottom: 1px solid $primary;
+  padding-bottom: 4px;
+}

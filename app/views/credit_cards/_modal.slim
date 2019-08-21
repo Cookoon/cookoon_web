@@ -1,0 +1,10 @@
+.modal.fade#credit-card-modal tabindex="-1" role="dialog" aria-labelledby="creditCardModalLabel"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        h4.modal-title#creditCardModalLabel Ajouter une carte
+        button.close type="button" data-dismiss="modal" aria-label="Close" ×
+
+      .modal-body style='padding: 15px;'
+        = render 'credit_cards/form'
+        input#invisible-input type="text" style="position: absolute; cursor: default; width: 1px; height: 1px; opacity: 0;"

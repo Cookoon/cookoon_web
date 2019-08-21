@@ -1,0 +1,17 @@
+= link_to reservation_cookoon_path(@reservation, cookoon) do
+  .cookoon-card
+    .cookoon-card-image style="background: url(#{cl_image_path(cookoon.photos.first.path, height: 250, crop: :fill)});"
+      .btn-cookoon.btn-cookoon-primary Découvrir
+      p.address-info <i class="fas fa-map-marker-alt"></i> #{cookoon.address}
+
+    .cookoon-card-body
+      h4 <i>Brunch Gastronomique (fake)</i>
+      .d-flex
+        p.mr-2 <i class="fas fa-cookie text-primary mr-2"></i>MAX. 10 PERS
+        p.mr-2 <i class="fas fa-cookie text-primary mr-2"></i>PISCINE
+        p.mr-2 <i class="fas fa-cookie text-primary mr-2"></i>ECRAN TV
+
+      p = cookoon.description
+
+    .cookoon-card-services
+      p Nos Services (fake) : <i class="fas fa-tools text-primary"></i> <i class="fas fa-cookie text-primary"></i>

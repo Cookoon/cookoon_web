@@ -1,0 +1,13 @@
+h1.text-center.my-4 Les Chefs
+
+.container
+  .d-flex
+    .d-none.d-md-block.mr-2
+      = render 'reservations/search_recap', reservation: @reservation
+    .row.mb-3
+      - @chefs.each do |chef|
+        .col-12.col-md-6
+          = render 'card', chef: chef
+
+  .text-center.my-4
+    = link_to 'Je veux choisir un lieux sans chef', reservation_cookoons_path(@reservation), class: 'btn-cookoon btn-cookoon-primary'        

@@ -1,0 +1,29 @@
+.container
+  h1.my-4 Mes invitations
+
+  .cookoon-card
+    .cookoon-card-body
+      h3 <i class='co icon-losange text-primary mr-2'></i> Parrainez vos proches
+
+      - if current_user.invitation_limit > 0
+        p 
+          | Vous disposez de <strong>#{current_user.invitation_limit} invitations </strong>
+          | pour convier vos proches à rejoindre Cookoon.
+          | <br>Vous serez responsable de vos filleuls. Choisissez les bien !
+        = link_to 'Invitez un filleul', '#', class: 'btn-cookoon btn-cookoon-primary', data: {toggle: "modal", target: "#invitation-modal"}
+      - else
+        p 
+          | Vos proches souhaitent rejoindre Cookoon ?
+          | <br>Vous pourrez les parrainer dès que vous disposerez d'invitations.
+          | <br><strong>Choisissez les bien !</strong>
+
+      hr.my-4 
+
+      h3 <i class='co icon-losange text-primary mr-2'></i> Obtenir des invitations
+
+      p 
+        | Vous disposez d'une très belle propriété ?
+        | <br>Proposez-la sur <strong>Cookoon</strong>, vous pourrez obtenir des invitations pour parrainer vos proches.
+      = link_to 'Devenir Hôte', '#', class: 'btn-cookoon btn-cookoon-secondary-gold'
+
+= render 'invitations/modal', resource: resource

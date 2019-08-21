@@ -1,33 +1,28 @@
 class CookoonsController < ApplicationController
   include DatetimeHelper
 
-  before_action :find_cookoon, only: %i[edit update]
-  before_action :find_search, only: %i[index show]
+  before_action :find_reservation, only: %i[index show select_cookoon select_menu]
+  before_action :find_cookoon, only: %i[edit update select_cookoon]
 
   def index
-    skip_policy_scope && (return redirect_to root_path) unless @search
-
     filtering_params = {
-      accomodates_for: @search.people_count,
-      available_in: (@search.start_at..@search.end_at)
+      accomodates_for: @reservation.people_count,
+      available_in: (@reservation.start_at..@reservation.end_at),
+      available_for: current_user
     }
+
     @cookoons = policy_scope(Cookoon)
                 .includes(:photo_files)
                 .filtrate(filtering_params)
                 .decorate
-
-    # TODO : Will we keep markers when done ?
-    build_markers
   end
 
   def show
+    @service_categories = build_service_categories
     @cookoon = Cookoon.includes(perks: :perk_specification).find(params[:id]).decorate
     authorize @cookoon
-
-    params_from_search = @search.to_reservation_attributes.merge(cookoon: @cookoon)
-    @reservation = Reservation.new params_from_search
-
-    @marker = { lat: @cookoon.latitude, lng: @cookoon.longitude }
+    @reservation.select_cookoon(@cookoon)
+    @reservation.assign_prices
   end
 
   def new
@@ -64,6 +59,19 @@ class CookoonsController < ApplicationController
     end
   end
 
+  def select_cookoon
+    @reservation.select_cookoon(@cookoon)
+    @reservation.select_services!
+    redirect_to new_reservation_payment_path(@reservation)
+  end
+
+  def select_menu
+    @menu = Menu.find(params[:id])
+    authorize @menu
+    @reservation.select_menu!(@menu)
+    redirect_to reservation_cookoons_path(@reservation)
+  end
+
   private
 
   def find_cookoon
@@ -71,10 +79,8 @@ class CookoonsController < ApplicationController
     authorize @cookoon
   end
 
-  def find_search
-    @search = current_user.cookoon_searches.last
-    # TODO: FC replace old way?
-    # @search = current_user&.current_search || new_default_search
+  def find_reservation
+    @reservation = Reservation.find(params[:reservation_id]).decorate
   end
 
   def cookoon_params
@@ -86,8 +92,29 @@ class CookoonsController < ApplicationController
     )
   end
 
-  def new_default_search
-    CookoonSearch.new CookoonSearch.default_params
+  def build_service_categories
+    reservation_service_categories = @reservation.services.pluck(:category)
+    Service.categories.keys.reverse.map do |category|
+      if reservation_service_categories.exclude? category
+        { url: reservation_services_path(@reservation), method: 'post', selected: 'false' }
+      else
+        reservation_service = @reservation.services.find_by(category: category)
+        { url: service_path(reservation_service), method: 'delete', selected: 'true' }
+      end.merge(display_options_for(category))
+    end
+  end
+
+  def display_options_for(category)
+    case category
+    when 'corporate'
+      { icon_name: 'pro', display_name: "Carnets,<br />eau, etc." }
+    when 'chef'
+      { icon_name: 'chef', display_name: 'Chef<br />privé' }
+    when 'catering'
+      { icon_name: 'food', display_name: 'Plateaux<br />repas' }
+    when 'special'
+      { icon_name: 'concierge', display_name: 'Un besoin<br />particulier ?' }
+    end.merge(category: category)
   end
 
   def build_markers

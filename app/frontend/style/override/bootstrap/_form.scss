@@ -1,16 +1,25 @@
 input.form-control,
 textarea.form-control,
 select.form-control {
-  border-left: none;
-  border-right: none;
-  border-top: none;
-  padding-bottom: 1px;
+  height: 50px;
+  margin: 5px 0;
   &:focus {
-    border-width: ($input-border-width * 2);
-    padding-bottom: 0;
+    outline: none;
+    border-color: #F5F5F5;
+    border-left: 5px solid #CDBB8A;
   }
 }
 
 .form-control.is-invalid:focus {
   box-shadow: none;
+}
+
+.form-control.is-valid {
+  border: 2px solid #F5F5F5;
+  background-image: none;
+  &:focus {
+    outline: none;
+    border: 2px solid #F5F5F5;
+    border-left: 5px solid #CDBB8A;
+  }
 }

@@ -1,9 +1,0 @@
-<%= simple_form_for [@reservation, @guest], remote: true do |f| %>
-  <%= f.input :email %>
-  <%= f.input :first_name %>
-  <%= f.input :last_name %>
-
-  <div class="text-center">
-    <%= f.button :submit, class: 'btn btn-light' %>
-  </div>
-<% end %>

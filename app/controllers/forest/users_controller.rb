@@ -33,20 +33,5 @@ module Forest
         user.save(validate: false)
       end
     end
-
-    def grant_credit
-      ids = params.dig(:data, :attributes, :ids).map(&:to_i)
-      credit_amount_cents = params.dig(:data, :attributes, :values, :amount).to_i * 100
-      message = params.dig(:data, :attributes, :values, :message)
-
-      users = ::User.where(id: ids)
-      users.each do |user|
-        user.discount_balance_cents += credit_amount_cents
-        UserMailer.notify_credit_granted(user, credit_amount_cents, message).deliver_later if user.invitation_accepted?
-        user.save(validate: false)
-      end
-
-      render json: { html: '<h1>Messages sent!</h1>' }
-    end
   end
 end
