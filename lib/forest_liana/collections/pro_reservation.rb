@@ -7,11 +7,11 @@ module Forest
     action 'Add Service from Specification', type: 'single', fields: [{
       field: 'service_specification_id',
       reference: 'Pro__ServiceSpecification.id',
-      isRequired: true
+      is_required: true
     }, {
       field: 'quantity',
       type: 'Number',
-      isRequired: true
+      is_required: true
     }]
 
     action 'Propose Reservation', type: 'single', fields: [{

@@ -7,15 +7,15 @@ module Forest
     action 'Invite User', type: 'single', fields: [{
       field: 'First name',
       type: 'String',
-      isRequired: true
+      is_required: true
     }, {
       field: 'Last name',
       type: 'String',
-      isRequired: true
+      is_required: true
     }, {
       field: 'Email',
       type: 'String',
-      isRequired: true
+      is_required: true
     }]
   end
 end
