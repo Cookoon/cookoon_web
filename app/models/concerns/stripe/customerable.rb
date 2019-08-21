@@ -26,11 +26,11 @@ module Stripe
     # can pass source instead of card to retrive sepa
     def retrieve_stripe_sources(object = 'card')
       return [] unless stripe_customer
-      stripe_customer.sources.all(object: object)
+      Stripe::Customer.list_sources(stripe_customer.id, { object: object })
     end
 
     def destroy_stripe_source(source)
-      stripe_customer.sources.retrieve(source).delete
+      Stripe::Customer.delete_source(stripe_customer.id, source)
     end
 
     def default_stripe_source(card)
@@ -66,7 +66,7 @@ module Stripe
     end
 
     def link_source(token)
-      stripe_customer.sources.create(source: token)
+      Stripe::Customer.create_source(stripe_customer.id, { source: token })
     rescue Stripe::CardError, Stripe::InvalidRequestError => e
       Rails.logger.error("Failed to create stripe source for #{customerable_label}")
       Rails.logger.error(e.message)
