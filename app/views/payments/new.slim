@@ -3,7 +3,7 @@ h1.text-center.my-4 = @reservation.cookoon.name
 div class=classnames(container: desktop_view?)
   .d-flex
     .d-none.d-md-block.mr-2
-      = link_to '< Retour aux annonces', reservation_cookoons_path(@reservation), class: 'btn-cookoon btn-block btn-cookoon-secondary-gold mb-2 small'
+      = link_to '< Retour au choix', reservation_cookoon_path(@reservation, @reservation.cookoon), class: 'btn-cookoon btn-block btn-cookoon-secondary-gold mb-2 small'
       = render 'reservations/search_recap', reservation: @reservation 
 
     .container
