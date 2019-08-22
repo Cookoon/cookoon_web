@@ -1,8 +1,8 @@
 class CookoonsController < ApplicationController
   include DatetimeHelper
 
-  before_action :find_reservation, only: %i[index show select_cookoon select_menu]
-  before_action :find_cookoon, only: %i[edit update select_cookoon select_menu]
+  before_action :find_reservation, only: %i[index show]
+  before_action :find_cookoon, only: %i[show edit update]
 
   def index
     filtering_params = {
@@ -18,11 +18,7 @@ class CookoonsController < ApplicationController
   end
 
   def show
-    @service_categories = build_service_categories
-    @cookoon = Cookoon.includes(perks: :perk_specification).find(params[:id]).decorate
-    authorize @cookoon
-    @reservation.select_cookoon(@cookoon)
-    @reservation.assign_prices
+    @reservation.select_cookoon!(@cookoon)
     @chefs = policy_scope(Chef).includes(:menus).decorate
   end
 
@@ -60,23 +56,10 @@ class CookoonsController < ApplicationController
     end
   end
 
-  def select_cookoon
-    @reservation.select_cookoon(@cookoon)
-    @reservation.select_services!
-    redirect_to new_reservation_payment_path(@reservation)
-  end
-
-  def select_menu
-    @menu = Menu.find(params[:id])
-    authorize @menu
-    @reservation.select_menu!(@menu)
-    redirect_to reservation_cookoon_path(@reservation, @cookoon, anchor: 'reservation-services')
-  end
-
   private
 
   def find_cookoon
-    @cookoon = Cookoon.find(params[:id])
+    @cookoon = Cookoon.find(params[:id]).decorate
     authorize @cookoon
   end
 

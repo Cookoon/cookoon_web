@@ -17,10 +17,11 @@ div class=classnames(container: desktop_view?)
       = render 'presentation', cookoon: @cookoon
       = render 'reservations/recap_string', reservation: @reservation
 
-      = render 'chefs/selection', chefs: @chefs if @reservation.needs_chef?
+      #reservation-menus
+        = render 'chefs/selection', chefs: @chefs if @reservation.needs_chef?
 
-      #reservation-services
-        p TODO LE CHOIX DES OPTIONS
+      #reservation-services.text-center
+        b # TODO LE CHOIX DES OPTIONS #
 
       .text-center.m-4
-        = link_to 'Confirmer', reservation_cookoon_path(@reservation, @cookoon), class: 'btn btn-primary btn-action btn-block', method: :patch
+        = link_to 'Confirmer', select_services_reservation_path(@reservation), class: 'btn btn-primary btn-action btn-block', method: :patch
