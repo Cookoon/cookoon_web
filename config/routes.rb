@@ -68,24 +68,6 @@ Rails.application.routes.draw do
     end
   end
 
-  # -------- PRO NAMESPACE ---------
-  namespace :pro do
-    root 'pages#home'
-
-    resources :quotes, only: %i[index create update] do
-      resources :cookoons, only: %i[index show] do
-        resources :quote_cookoons, only: %i[create]
-      end
-      resources :services, controller: 'quote_services',
-                           only: %i[index create destroy update],
-                           shallow: true
-      get :request_confirmation
-    end
-
-    resources :reservations, only: %i[index show update]
-    resource :user, only: %i[edit update]
-  end
-
   # -------- ADMIN ROUTES ---------
   # Sidekiq Web UI, only for admins
   authenticate :user, ->(user) { user.admin } do
