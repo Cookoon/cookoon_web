@@ -15,6 +15,11 @@ class CookoonPolicy < ApplicationPolicy
     record.approved?
   end
 
+  # needs to be moved to Reservation_policy along with action
+  def select_menu?
+    true
+  end
+
   class Scope < Scope
     def resolve
       scope.approved.displayable_on_index

@@ -8,38 +8,19 @@ div class=classnames(container: desktop_view?)
 
     .container
       .bg-dark.text-center
-        - if @device == :desktop
-          = cl_image_tag(@cookoon.photos.first.path, width: 800, height: 450, crop: :fill)
-        - else
-          = cl_image_tag(@cookoon.photos.first.path, width: 290, height: 200, crop: :fill)
+        = carousel_for(@cookoon.photos)
+        / - if @device == :desktop
+        /   = cl_image_tag(@cookoon.photos.first.path, width: 800, height: 450, crop: :fill)
+        / - else
+        /   = cl_image_tag(@cookoon.photos.first.path, width: 290, height: 200, crop: :fill)
 
       = render 'presentation', cookoon: @cookoon
       = render 'reservations/recap_string', reservation: @reservation
 
-      = render 'chefs/selection'
+      = render 'chefs/selection', chefs: @chefs if @reservation.needs_chef?
 
-      / This part can maybe be partialized
-      div data-controller="payments" data-payments-amounts-url=amounts_reservation_cookoon_payments_path(@reservation, @cookoon)
-        h3 Tarif
-        ul
-          li
-            p.m-0 #{@reservation.type_name} - #{@reservation.people_count_text} - #{@reservation.duration} heures
-            i * Tarifs indicatifs, le prix final dépend des besoins client
+      #reservation-services
+        p TODO LE CHOIX DES OPTIONS
 
-        h3 Services compris
-        .d-flex.justify-content-around
-          - @service_categories.each do |service_category|
-            div data-action="serviceChanged->payments#priceChanged"
-              = c 'service', service_category
-
-        div class=classnames('mb-2', 'd-none': @reservation.services.none?) data-target="payments.servicesPrices"
-          = render 'reservations/services_prices'
-
-        hr
-
-        .d-flex-default.mb-2
-          b data-target="payments.chargeAmountLabel" TOTAL
-          b data-target="payments.chargeAmount" = humanized_money_with_symbol @reservation.total_full_price
-
-        .text-center.m-4
-          = link_to 'Confirmer', reservation_cookoon_path(@reservation, @cookoon), class: 'btn btn-primary btn-action btn-block', method: :patch
+      .text-center.m-4
+        = link_to 'Confirmer', reservation_cookoon_path(@reservation, @cookoon), class: 'btn btn-primary btn-action btn-block', method: :patch

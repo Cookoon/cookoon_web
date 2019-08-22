@@ -2,7 +2,7 @@ class CookoonsController < ApplicationController
   include DatetimeHelper
 
   before_action :find_reservation, only: %i[index show select_cookoon select_menu]
-  before_action :find_cookoon, only: %i[edit update select_cookoon]
+  before_action :find_cookoon, only: %i[edit update select_cookoon select_menu]
 
   def index
     filtering_params = {
@@ -70,7 +70,7 @@ class CookoonsController < ApplicationController
     @menu = Menu.find(params[:id])
     authorize @menu
     @reservation.select_menu!(@menu)
-    redirect_to reservation_cookoons_path(@reservation)
+    redirect_to reservation_cookoon_path(@reservation, @cookoon, anchor: 'reservation-services')
   end
 
   private
