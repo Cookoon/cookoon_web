@@ -1,0 +1,8 @@
+h3 Choisissez un chef
+
+.d-flex
+  - @chefs.each do |chef|
+    = render 'chefs/card', chef: chef
+
+.text-center.my-4
+  = link_to 'Je veux choisir un lieux sans chef', '#', class: 'btn-cookoon btn-cookoon-primary'        

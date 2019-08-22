@@ -23,6 +23,7 @@ class CookoonsController < ApplicationController
     authorize @cookoon
     @reservation.select_cookoon(@cookoon)
     @reservation.assign_prices
+    @chefs = policy_scope(Chef).includes(:menus).decorate
   end
 
   def new

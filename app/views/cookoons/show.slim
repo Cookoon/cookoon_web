@@ -16,6 +16,7 @@ div class=classnames(container: desktop_view?)
       = render 'presentation', cookoon: @cookoon
       = render 'reservations/recap_string', reservation: @reservation
 
+      = render 'chefs/selection'
 
       / This part can maybe be partialized
       div data-controller="payments" data-payments-amounts-url=amounts_reservation_cookoon_payments_path(@reservation, @cookoon)
