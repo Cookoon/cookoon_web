@@ -2081,16 +2081,7 @@
       "validations": []
     }],
     "segments": [],
-    "actions": [{
-      "name": "Create draft Reservation",
-      "type": "single",
-      "base_url": null,
-      "endpoint": "forest/actions/create-draft-reservation",
-      "http_method": "POST",
-      "redirect": null,
-      "download": false,
-      "fields": []
-    }]
+    "actions": []
   }, {
     "name": "Pro__QuoteCookoon",
     "name_old": "pro_quote_cookoons",
@@ -2657,73 +2648,7 @@
       "validations": []
     }],
     "segments": [],
-    "actions": [{
-      "name": "Add Service from Specification",
-      "type": "single",
-      "base_url": null,
-      "endpoint": "forest/actions/add-service-from-specification",
-      "http_method": "POST",
-      "redirect": null,
-      "download": false,
-      "fields": [{
-        "field": "service_specification_id",
-        "type": "String",
-        "default_value": null,
-        "enums": null,
-        "is_required": true,
-        "reference": "Pro__ServiceSpecification.id",
-        "description": null,
-        "position": 0,
-        "widget": null
-      }, {
-        "field": "quantity",
-        "type": "Number",
-        "default_value": null,
-        "enums": null,
-        "is_required": true,
-        "reference": null,
-        "description": null,
-        "position": 1,
-        "widget": null
-      }]
-    }, {
-      "name": "Propose Reservation",
-      "type": "single",
-      "base_url": null,
-      "endpoint": "forest/actions/propose-reservation",
-      "http_method": "POST",
-      "redirect": null,
-      "download": false,
-      "fields": [{
-        "field": "message",
-        "type": "String",
-        "default_value": null,
-        "enums": null,
-        "is_required": false,
-        "reference": null,
-        "description": "The specific message you want to embed in the email",
-        "position": 0,
-        "widget": "text area"
-      }]
-    }, {
-      "name": "Duplicate Reservation as draft",
-      "type": "single",
-      "base_url": null,
-      "endpoint": "forest/actions/duplicate-reservation-as-draft",
-      "http_method": "POST",
-      "redirect": null,
-      "download": false,
-      "fields": []
-    }, {
-      "name": "Admin close",
-      "type": "single",
-      "base_url": null,
-      "endpoint": "forest/actions/admin-close",
-      "http_method": "POST",
-      "redirect": null,
-      "download": false,
-      "fields": []
-    }]
+    "actions": []
   }, {
     "name": "Pro__Service",
     "name_old": "pro_services",
