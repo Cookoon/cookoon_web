@@ -1,1 +1,3 @@
-p Vous avez choisi <strong>#{menu.chef.name}</strong> comme chef avec le menu ##{menu.id}
+.mb-4
+  p Vous avez choisi <strong>#{menu.chef.name}</strong> comme chef avec le menu ##{menu.id}
+  = link_to 'Annuler le choix', reset_menu_reservation_path(@reservation, cookoon_id: @cookoon.id), class: 'btn-cookoon btn-cookoon-primary', method: :patch
