@@ -1,5 +1,5 @@
 class ReservationsController < ApplicationController
-  before_action :find_reservation, only: %i[update show ask_quotationm reset_menu select_services]
+  before_action :find_reservation, only: %i[update show ask_quotation reset_menu select_services]
 
   def index
     reservations = policy_scope(Reservation).includes(cookoon: :user)
