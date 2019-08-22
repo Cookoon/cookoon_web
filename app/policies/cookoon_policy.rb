@@ -11,10 +11,6 @@ class CookoonPolicy < ApplicationPolicy
     record.user == user
   end
 
-  def select_cookoon?
-    record.approved?
-  end
-
   class Scope < Scope
     def resolve
       scope.approved.displayable_on_index

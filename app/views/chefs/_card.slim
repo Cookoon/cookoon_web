@@ -1,19 +1,14 @@
+.chef-card
+  .row
+    .col-12.col-md-6
+      .chef-card-image style="background-image: url(#{chef.picture_url});"
+    .col-12.col-md-6
+      h4 <i>#{chef.name}</i>
+      p = chef.description
 
-.flip-card
-  .flip-card-inner
-    .flip-card-front
-      img src="#{chef.picture_url}" style="width:320px;height:180px;"
-      .p-4
-        h4 <i>#{chef.name}</i>
-        p = chef.description
-
-    .flip-card-back
-      .p-4
-        h4 Menus de #{chef.name}
-        - chef.menus.each do |menu|
+  .row
+    - chef.menus.each do |menu|
+      .col-12.col-md-6
+        .chef-card-menu
           p = simple_format menu.description
-
-          b Prix/pers #{humanized_money_with_symbol menu.unit_price}
           = link_to 'Choisir ce menu', reservation_select_menu_path(@reservation, menu), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
-
-          hr

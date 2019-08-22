@@ -48,9 +48,10 @@ Rails.application.routes.draw do
     end
     resources :chefs, only: :index
     resources :payments, only: %i[new create]
-    patch 'cookoons/:id', to: 'cookoons#select_cookoon'
-    patch 'menus/:id', to: 'cookoons#select_menu', as: :select_menu
+    patch 'menus/:id', to: 'reservations#select_menu', as: :select_menu
+    patch :reset_menu, on: :member
     patch :ask_quotation, on: :member
+    patch :select_services, on: :member
     resources :invoices, only: :create
     resource :services, only: %i[index show create]
     resources :messages, controller: 'reservations/messages', only: %i[new create]

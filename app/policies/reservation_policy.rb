@@ -24,6 +24,18 @@ class ReservationPolicy < ApplicationPolicy
     record.business?
   end
 
+  def select_menu?
+    true
+  end
+
+  def reset_menu?
+    true
+  end
+
+  def select_services?
+    true
+  end
+
   class Scope < Scope
     def resolve
       scope.for_tenant(user).displayable

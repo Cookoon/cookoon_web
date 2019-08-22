@@ -1,5 +1,5 @@
 class ReservationsController < ApplicationController
-  before_action :find_reservation, only: %i[update show ask_quotation]
+  before_action :find_reservation, only: %i[update show ask_quotation reset_menu select_services]
 
   def index
     reservations = policy_scope(Reservation).includes(cookoon: :user)
@@ -21,8 +21,7 @@ class ReservationsController < ApplicationController
     authorize @reservation
 
     if @reservation.save
-      redirect_path = @reservation.needs_chef? ? reservation_chefs_path(@reservation) : reservation_cookoons_path(@reservation)
-      redirect_to redirect_path
+      redirect_to reservation_cookoons_path(@reservation)
     else
       flash.alert = "Oops, votre réservation n'est pas valide, vous devez remplir tous les champs"
       redirect_to root_path
@@ -43,6 +42,23 @@ class ReservationsController < ApplicationController
     redirect_to root_path
   end
 
+  def select_menu
+    @reservation = Reservation.find(params[:reservation_id]).decorate
+    authorize @reservation
+    @reservation.select_menu!(Menu.find(params[:id]))
+    redirect_to reservation_cookoon_path(@reservation, @reservation.cookoon, anchor: 'reservation-services')
+  end
+  
+  def reset_menu
+    @reservation.select_menu!(nil)
+    redirect_to reservation_cookoon_path(@reservation, params[:cookoon_id], anchor: 'reservation-menus')
+  end
+
+  def select_services
+    @reservation.select_services!
+    redirect_to new_reservation_payment_path(@reservation)
+  end
+  
   private
 
   def find_reservation
