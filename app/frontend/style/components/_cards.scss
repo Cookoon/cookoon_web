@@ -27,7 +27,6 @@
   }
 }
 
-
 .chef-card {
   &-image {
     height: 230px;
@@ -44,4 +43,12 @@
     flex-direction: column;
     justify-content: space-around;
   }
+}
+
+.collapsed {
+  transform: scaleY(0.3);
+  transform-origin: top;
+  height: 0;
+  opacity: 0;
+  transition: transform 0.4s, opacity 0.1s linear;
 }
