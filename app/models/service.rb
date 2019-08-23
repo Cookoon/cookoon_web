@@ -30,7 +30,7 @@ class Service < ApplicationRecord
   private
 
   def set_price_cents
-    return if special?
+    return if sommelier?
     self.price_cents = compute_price
   end
 
