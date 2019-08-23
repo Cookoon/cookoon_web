@@ -12,16 +12,6 @@ table.info border="0" cellpadding="0" cellspacing="10"
         br À #{display_time_for @quote.start_at} pour #{display_duration_for @quote.duration}
         br De #{@quote.people_count} personnes
 
-    - if @quote.services.any?
-      tr
-        td align="center"
-          = image_tag('icon-services.png', alt: 'Services')
-        td
-          b Vous avez demandé :
-          ul
-            - @quote.services.each do |service|
-              li #{Service::DISPLAY.dig(service.category.to_sym, :mail_display_name)} × #{service.quantity}
-
 - if @quote.comment.present?
   table.embedded-message border="0" cellpadding="0" cellspacing="10"
     tbody

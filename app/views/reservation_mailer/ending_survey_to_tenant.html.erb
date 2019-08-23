@@ -17,14 +17,6 @@
       <td align="center">
         <%= image_tag('icon-services.png', alt: 'Services') %>
       </td>
-      <td>
-        <b>Vos services pour <%= @reservation.people_count %> personnes :</b>
-        <ul>
-          <% @reservation.services.payment_tied_to_reservation.each do |service| %>
-            <li><%= Service::DISPLAY.dig(service.category.to_sym, :mail_display_name) %></li>
-          <% end %>
-        </ul>
-      </td>
     </tr>
   <% end %>
   <tr>
