@@ -7,16 +7,11 @@
   <meta charset="UTF-8">
   <style>
     .cookoon-error-page {
-      background-color: #004254;
-      color: white;
+      background-color: white;
       text-align: center;
       font-family: arial, sans-serif;
       margin: 40px;
       margin-top: 25vh;
-    }
-
-    img {
-      width: 150px;
     }
 
     .dialog {
@@ -24,18 +19,27 @@
     }
 
     a {
-      margin-top: 50px;
+      padding: 10px 30px;
+      text-transform: uppercase;
       text-decoration: none;
-      background: white;
-      padding: 15px 50px;
-      border-radius: 50px;
-      color: #004254;
+      cursor: pointer;
+      background: #CDBB8A;
+      color: white !important;
+    }
+
+    a:focus {
+      outline: none;
+    }
+
+    a:hover {
+      background: darken(#CDBB8A, 5%);
     }
   </style>
 </head>
 
 <body class="cookoon-error-page">
-  <img src="#" alt="cookoon_error" id='error-image'>
+  <img src="https://res.cloudinary.com/cookoon-dev/image/upload/c_scale,w_300/v1566303886/cookoon-logo_uye3dr.png"
+    alt="cookoon-logo">
   <div class="dialog">
     <p>Oups,</p>
     <p>Cette page n'existe pas, ou elle a été déplacée.</p>
@@ -43,9 +47,7 @@
   <a href="#" id='host-link'>Revenir à l'accueil</a>
 
   <script type="text/javascript">
-    let baseUrl = window.location.origin;
-    document.getElementById('host-link').href = baseUrl;
-    document.getElementById('error-image').src = baseUrl + '/cookoon_error.png';
+    document.getElementById('host-link').href = window.location.origin;
   </script>
 </body>
 
