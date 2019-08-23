@@ -8,26 +8,19 @@ class Service < ApplicationRecord
   monetize :price_cents, disable_validation: true
 
   enum status: %i[quote paid]
-  enum category: %i[special catering chef corporate]
+  enum category: %i[sommelier parking corporate catering breakfast]
 
   before_create :set_price_cents
 
   validates :category, presence: true
   validates :category, uniqueness: { scope: :reservation }
 
-  # TODO: FC 09may18 refactor payments_controller#display_options_for(category) to use DISPLAY?
-  DISPLAY = {
-    corporate: { icon_name: 'pro', mail_display_name: 'Kit professionnel' },
-    chef: { icon_name: 'chef', mail_display_name: 'Chef privé' },
-    catering: { icon_name: 'food', mail_display_name: 'Plateaux repas' },
-    special: { icon_name: 'concierge', mail_display_name: 'Demande spéciale' }
-  }.freeze
-
   PRICES = {
-    catering: { base_price: 0, unit_price: 2500 },
-    chef: { base_price: 0, unit_price: 11000 },
+    sommelier: { base_price: 0, unit_price: 0 },
+    parking: { base_price: 0, unit_price: 11000 },
     corporate: { base_price: 2000, unit_price: 1000 },
-    special: { base_price: 0, unit_price: 0 }
+    catering: { base_price: 0, unit_price: 2500 },
+    breakfast: { base_price: 0, unit_price: 2500 }
   }.freeze
 
   def payment(options = {})
