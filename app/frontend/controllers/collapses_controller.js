@@ -5,6 +5,6 @@ export default class extends Controller {
 
   toggle() {
     event.preventDefault();
-    this.bodyTarget.classList.toggle('collapsed')
+    this.bodyTarget.classList.toggle('d-none')
   }
 }
