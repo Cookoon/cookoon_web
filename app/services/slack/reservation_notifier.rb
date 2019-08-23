@@ -51,7 +51,8 @@ module Slack
 
     def list_services
       return 'Aucun service supplémentaire' if reservation.services.none?
-      reservation.services.map { |service| "- #{Service::DISPLAY[service.category.to_sym][:mail_display_name]}" }.join("\n")
+      # TODO CP 23/08/2019 refaire le message avec les nouveaux services
+      []
     end
   end
 end
