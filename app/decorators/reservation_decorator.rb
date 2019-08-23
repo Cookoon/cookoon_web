@@ -77,6 +77,30 @@ class ReservationDecorator < Draper::Decorator
     h.humanized_money_with_symbol object.total_tax
   end
 
+  def available_services_for_view
+    [
+      ['Sommelier', :sommelier],
+      ['Voiturier', :parking],
+      ['Kit professionnel', :corporate],
+      ['Plateaux repas', :catering]
+    ]
+  end
+
+  def selected_services_names
+    case object.type_name
+    when 'breakfast'
+      [:corporate]
+    when 'brunch'
+      [:sommelier]
+    when 'lunch', 'diner', 'cocktail'
+      [:sommelier, :parking]
+    when 'morning', 'afternoon'
+      [:corporate, :catering]
+    when 'day'
+      [:sommelier, :corporate, :catering]
+    end
+  end
+
   def invoice_legal_mentions
     return unless object.user.company
     <<~LEGAL_MENTIONS

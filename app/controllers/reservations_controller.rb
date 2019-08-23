@@ -55,6 +55,8 @@ class ReservationsController < ApplicationController
   end
 
   def select_services
+    # TODO: BUILD SERVICES FROM PARAMS !
+    raise
     @reservation.select_services!
     redirect_to new_reservation_payment_path(@reservation)
   end

@@ -20,8 +20,9 @@ div class=classnames(container: desktop_view?)
       #reservation-menus
         = render 'chefs/selection', chefs: @chefs if @reservation.needs_chef?
 
-      #reservation-services.text-center
-        b # TODO LE CHOIX DES OPTIONS #
+      #reservation-services
+        h3 Choisissez des options
 
-      .text-center.m-4
-        = link_to 'Confirmer', select_services_reservation_path(@reservation), class: 'btn btn-primary btn-action btn-block', method: :patch
+        = simple_form_for :reservation, url: select_services_reservation_path(@reservation), method: :patch do |f| 
+          = f.input :services, as: :check_boxes, collection: @reservation.available_services_for_view, label_method: :first, value_method: :second, checked: @reservation.selected_services_names
+          = f.submit 'Confirmer', class: 'btn btn-primary btn-action btn-block mb-4'
