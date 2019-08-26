@@ -78,6 +78,7 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def available_services_for_view
+    # Can filter depending on reservation type
     [
       ['Sommelier', :sommelier],
       ['Voiturier', :parking],
@@ -86,7 +87,7 @@ class ReservationDecorator < Draper::Decorator
     ]
   end
 
-  def selected_services_names
+  def builtin_services
     case object.type_name
     when 'breakfast'
       [:corporate]

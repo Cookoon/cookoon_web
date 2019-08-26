@@ -3619,10 +3619,11 @@
       "type": "Enum",
       "default_value": "0",
       "enums": [
-        "special",
+        "sommelier",
+        "parking",
+        "corporate",
         "catering",
-        "chef",
-        "corporate"
+        "breakfast"
       ],
       "integration": null,
       "is_filterable": true,

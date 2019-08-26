@@ -20,15 +20,21 @@ module ReservationStateMachine
       state :dead
 
       event :select_cookoon do
-        transitions from: [:initial, :menu_selected, :cookoon_selected, :services_selected], to: :cookoon_selected, after: :set_cookoon, guard: :cookoon_exists?
+        transitions from: [:initial, :menu_selected, :cookoon_selected, :services_selected], 
+          to: :cookoon_selected, 
+          after: [:set_cookoon, :set_prices]
       end
 
       event :select_menu do
-        transitions from: [:cookoon_selected, :menu_selected], to: :menu_selected, after: :set_menu
+        transitions from: [:cookoon_selected, :menu_selected], 
+          to: :menu_selected, 
+          after: [:set_menu, :set_prices]
       end
 
       event :select_services do
-        transitions from: [:cookoon_selected, :services_selected], to: :services_selected
+        transitions from: [:cookoon_selected, :services_selected], 
+          to: :services_selected,
+          after: [:set_services, :set_prices]
       end
 
       event :charge do
@@ -65,15 +71,20 @@ module ReservationStateMachine
     end
   end
 
-  def cookoon_exists?(cookoon)
-    cookoon.present?
-  end
-
   def set_cookoon(cookoon)
     self.cookoon = cookoon
   end
-
+  
   def set_menu(menu)
     self.menu = menu
+  end
+
+  def set_services(services)
+    # TODO Create services from Arr(sym)
+    # Compare array from existing services and adjust
+  end
+
+  def set_prices
+    assign_prices
   end
 end
