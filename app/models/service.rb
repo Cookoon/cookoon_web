@@ -5,10 +5,11 @@ class Service < ApplicationRecord
 
   delegate :cookoon, :user, to: :reservation
 
-  monetize :price_cents, disable_validation: true
+  monetize :unit_price_cents
+  monetize :price_cents
 
   enum status: %i[quote paid]
-  enum category: %i[sommelier parking corporate catering breakfast]
+  enum category: %i[special sommelier parking corporate catering breakfast]
 
   before_create :set_price_cents
 
@@ -16,6 +17,7 @@ class Service < ApplicationRecord
   validates :category, uniqueness: { scope: :reservation }
 
   PRICES = {
+    special: { base_price: 0, unit_price: 0 },
     sommelier: { base_price: 0, unit_price: 0 },
     parking: { base_price: 0, unit_price: 11000 },
     corporate: { base_price: 2000, unit_price: 1000 },
@@ -30,7 +32,7 @@ class Service < ApplicationRecord
   private
 
   def set_price_cents
-    return if sommelier?
+    return if sommelier? || special?
     self.price_cents = compute_price
   end
 
