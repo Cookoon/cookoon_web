@@ -58,6 +58,28 @@ module Pro
       DEFAULTS[:fee_rate] * 100
     end
 
+    def build_from_old
+      resa_attrs = self.attributes.slice('user_id', 'cookoon_id', 'start_at', 'end_at', 'duration', 'people_count', 'cookoon_price_cents', 'total_price_cents', 'created_at', 'updated_at', 'stripe_charge_id')
+      resa_attrs['services_price_cents'] = resa_attrs['total_price_cents'] - resa_attrs['cookoon_price_cents']
+      
+      resa = ::Reservation.new resa_attrs
+      resa.user_id = self.quote.user.id
+      resa.paid = true
+      resa.type_name = 'day'
+      resa.category = :business
+      resa.aasm_state = :passed
+
+      services_attributes = self.services.map { |service| service.attributes.slice('name', 'quantity', 'unit_price_cents', 'price_cents').merge(payment_tied_to_reservation: true) }
+
+      resa.services.build(services_attributes)
+
+      resa#.save(validate: false)
+    end
+
+    def self.batch_create_from_old(reservations)
+      reservations.each(&:build_from_old)
+    end
+
     ### PROCEDURE DE CHARGE STRIPE
     # reservation = Pro::Reservation.find(:id)
     # source = reservation.user.company.retrieve_stripe_sources('source').data.first.id

@@ -77,7 +77,7 @@ class ReservationDecorator < Draper::Decorator
     h.humanized_money_with_symbol object.total_tax
   end
 
-  def available_services_for_view
+  def services_collection_for_view
     # Can filter depending on reservation type
     [
       ['Sommelier', :sommelier],

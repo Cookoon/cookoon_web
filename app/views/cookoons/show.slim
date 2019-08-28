@@ -26,7 +26,7 @@ div class=classnames(container: desktop_view?)
         = simple_form_for :reservation, url: select_services_reservation_path(@reservation), method: :patch do |f| 
           = f.input :services, 
               as: :check_boxes, 
-              collection: @reservation.available_services_for_view, 
+              collection: @reservation.services_collection_for_view,
               checked: @reservation.builtin_services,
               label_method: :first, 
               value_method: :second

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_20_083900) do
+ActiveRecord::Schema.define(version: 2019_08_28_082058) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -257,6 +257,8 @@ ActiveRecord::Schema.define(version: 2019_08_20_083900) do
     t.integer "category", default: 0, null: false
     t.boolean "payment_tied_to_reservation", default: false
     t.string "name"
+    t.integer "quantity"
+    t.integer "unit_price_cents", default: 0, null: false
     t.index ["reservation_id"], name: "index_services_on_reservation_id"
   end
 
