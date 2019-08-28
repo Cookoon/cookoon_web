@@ -4,11 +4,6 @@ fr:
     submit:
       reservation:
         create: Consulter les expériences
-      pro_quote:
-        create: Trouver un espace
-        update: Demander un devis
-      pro_reservation:
-        update: Demander la modification
       user:
         update: Modifier
   simple_form:
@@ -23,14 +18,6 @@ fr:
     placeholders:
       cookoon:
         caretaker_instructions: 'exemples : emplacement du local poubelle, consigne de gestion des clés, etc.'
-      pro_quote:
-        start_at: Date de l'événement
-        duration: Durée de l'événement
-        people_count: Nombre de personnes
-        comment: Une envie particulière ? Notre concierge vous contactera avec des propositions.
-      pro_reservation:
-        requested_modification: Dites-nous ce qu'il convient de modifier...
-
 
     required:
       mark: ''
