@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_28_091122) do
+ActiveRecord::Schema.define(version: 2019_08_28_130341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -171,7 +171,7 @@ ActiveRecord::Schema.define(version: 2019_08_28_091122) do
 
   create_table "services", force: :cascade do |t|
     t.bigint "reservation_id"
-    t.integer "price_cents"
+    t.integer "price_cents", default: 0, null: false
     t.string "price_currency", default: "EUR", null: false
     t.integer "status", default: 0, null: false
     t.string "stripe_charge_id"

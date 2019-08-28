@@ -48,5 +48,5 @@ RSpec.describe Reservation, type: :model do
         expect(tested_scope).to_not include(paid, classic)
       end
     end
-  # end
+  end
 end
