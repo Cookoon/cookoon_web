@@ -42,13 +42,6 @@ class User < ApplicationRecord
 
   alias_attribute :customerable_label, :email
 
-  def self.pro_invite!(attributes, inviter = nil)
-    raise NotProError if attributes[:company_id].blank? # Maybe not
-    user = User.invite! attributes.merge(skip_invitation: true, invitation_sent_at: DateTime.now), inviter
-    token = user.raw_invitation_token
-    Pro::UserMailer.invitation_instructions(user, token).deliver_later
-  end
-
   def full_name
     if first_name.present? && last_name.present?
       "#{first_name} #{last_name}"
