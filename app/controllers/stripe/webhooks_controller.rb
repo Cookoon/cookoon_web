@@ -23,7 +23,7 @@ class Stripe::WebhooksController < ApplicationController
   def charge_succeeded
     # TODO : Transition reservation to paid
     # charge_id = params['data']['object']['id']
-    # reservation = Pro::Reservation.find_by_stripe_charge_id(charge_id)
+    # reservation = Reservation.find_by_stripe_charge_id(charge_id)
     # reservation.sepa_captured! or other status
 
     render json: { message: "OK" }, status: :ok
