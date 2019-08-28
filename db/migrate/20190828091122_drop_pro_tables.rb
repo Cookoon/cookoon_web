@@ -1,29 +1,13 @@
 class DropProTables < ActiveRecord::Migration[5.2]
   def change
-    drop_table :pro_quotes do |t|
-      t.integer :status, default: 0
-      t.references :user, foreign_key: true
-      t.references :company, foreign_key: true
-      t.datetime :start_at
-      t.datetime :end_at
-      t.integer :duration
-      t.integer :people_count
-      t.text :comment
-
-      t.timestamps
-    end
-
-    drop_table :pro_quote_cookoons do |t|
-      t.references :pro_quote, foreign_key: true
-      t.references :cookoon, foreign_key: true
-
-      t.timestamps
-    end
-
-    drop_table :pro_quote_services do |t|
-      t.references :pro_quote, foreign_key: true
-      t.integer :category, default: 0, null: false
+    drop_table :pro_services do |t|
+      t.references :pro_reservation, foreign_key: true
+      t.string :name
       t.integer :quantity
+      t.monetize :unit_price
+      t.monetize :price
+
+      t.timestamps
     end
 
     drop_table :pro_reservations do |t|
@@ -49,12 +33,28 @@ class DropProTables < ActiveRecord::Migration[5.2]
       t.timestamps
     end
 
-    drop_table :pro_services do |t|
-      t.references :pro_reservation, foreign_key: true
-      t.string :name
+     drop_table :pro_quote_cookoons do |t|
+      t.references :pro_quote, foreign_key: true
+      t.references :cookoon, foreign_key: true
+
+      t.timestamps
+    end
+
+    drop_table :pro_quote_services do |t|
+      t.references :pro_quote, foreign_key: true
+      t.integer :category, default: 0, null: false
       t.integer :quantity
-      t.monetize :unit_price
-      t.monetize :price
+    end
+
+    drop_table :pro_quotes do |t|
+      t.integer :status, default: 0
+      t.references :user, foreign_key: true
+      t.references :company, foreign_key: true
+      t.datetime :start_at
+      t.datetime :end_at
+      t.integer :duration
+      t.integer :people_count
+      t.text :comment
 
       t.timestamps
     end

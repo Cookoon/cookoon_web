@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_28_082058) do
+ActiveRecord::Schema.define(version: 2019_08_28_091122) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,83 +134,6 @@ ActiveRecord::Schema.define(version: 2019_08_28_082058) do
     t.index ["perk_specification_id"], name: "index_perks_on_perk_specification_id"
   end
 
-  create_table "pro_quote_cookoons", force: :cascade do |t|
-    t.bigint "pro_quote_id"
-    t.bigint "cookoon_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["cookoon_id"], name: "index_pro_quote_cookoons_on_cookoon_id"
-    t.index ["pro_quote_id"], name: "index_pro_quote_cookoons_on_pro_quote_id"
-  end
-
-  create_table "pro_quote_services", force: :cascade do |t|
-    t.bigint "pro_quote_id"
-    t.integer "category", default: 0, null: false
-    t.integer "quantity"
-    t.index ["pro_quote_id"], name: "index_pro_quote_services_on_pro_quote_id"
-  end
-
-  create_table "pro_quotes", force: :cascade do |t|
-    t.integer "status", default: 0, null: false
-    t.bigint "user_id"
-    t.bigint "company_id"
-    t.datetime "start_at"
-    t.datetime "end_at"
-    t.integer "duration"
-    t.integer "people_count"
-    t.text "comment"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_pro_quotes_on_company_id"
-    t.index ["user_id"], name: "index_pro_quotes_on_user_id"
-  end
-
-  create_table "pro_reservations", force: :cascade do |t|
-    t.integer "status", default: 0, null: false
-    t.bigint "pro_quote_id"
-    t.bigint "cookoon_id"
-    t.datetime "start_at"
-    t.datetime "end_at"
-    t.integer "duration"
-    t.integer "people_count"
-    t.integer "cookoon_price_cents", default: 0, null: false
-    t.integer "services_price_cents", default: 0, null: false
-    t.integer "cookoon_fee_cents", default: 0, null: false
-    t.integer "total_full_price_cents", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.text "requested_modification"
-    t.integer "cookoon_fee_tax_cents", default: 0, null: false
-    t.integer "services_tax_cents", default: 0, null: false
-    t.integer "total_price_cents", default: 0, null: false
-    t.integer "services_full_price_cents", default: 0, null: false
-    t.string "stripe_charge_id"
-    t.integer "total_tax_cents", default: 0, null: false
-    t.index ["cookoon_id"], name: "index_pro_reservations_on_cookoon_id"
-    t.index ["pro_quote_id"], name: "index_pro_reservations_on_pro_quote_id"
-  end
-
-  create_table "pro_service_specifications", force: :cascade do |t|
-    t.string "name"
-    t.integer "unit_price_cents", default: 0, null: false
-    t.string "unit_price_currency", default: "EUR", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "pro_services", force: :cascade do |t|
-    t.bigint "pro_reservation_id"
-    t.string "name"
-    t.integer "quantity"
-    t.integer "unit_price_cents", default: 0, null: false
-    t.string "unit_price_currency", default: "EUR", null: false
-    t.integer "price_cents", default: 0, null: false
-    t.string "price_currency", default: "EUR", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["pro_reservation_id"], name: "index_pro_services_on_pro_reservation_id"
-  end
-
   create_table "reservations", force: :cascade do |t|
     t.bigint "cookoon_id"
     t.bigint "user_id"
@@ -308,14 +231,6 @@ ActiveRecord::Schema.define(version: 2019_08_28_082058) do
   add_foreign_key "menus", "chefs"
   add_foreign_key "perks", "cookoons"
   add_foreign_key "perks", "perk_specifications"
-  add_foreign_key "pro_quote_cookoons", "cookoons"
-  add_foreign_key "pro_quote_cookoons", "pro_quotes"
-  add_foreign_key "pro_quote_services", "pro_quotes"
-  add_foreign_key "pro_quotes", "companies"
-  add_foreign_key "pro_quotes", "users"
-  add_foreign_key "pro_reservations", "cookoons"
-  add_foreign_key "pro_reservations", "pro_quotes"
-  add_foreign_key "pro_services", "pro_reservations"
   add_foreign_key "reservations", "cookoons"
   add_foreign_key "reservations", "menus"
   add_foreign_key "reservations", "users"
