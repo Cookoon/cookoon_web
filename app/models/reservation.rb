@@ -65,10 +65,10 @@ class Reservation < ApplicationRecord
 
   validate :tenant_is_not_host
 
-  # before_validation :configure_from_type_name, on: :create
-  # before_save :assign_prices, if: :assign_prices_needed?
-  # after_save :report_to_slack, if: :saved_change_to_status?
-  # after_save :update_services, if: :services_need_update?
+  before_validation :configure_from_type_name, on: :create
+  before_save :assign_prices, if: :assign_prices_needed?
+  after_save :report_to_slack, if: :saved_change_to_status?
+  after_save :update_services, if: :services_need_update?
 
   def self.default
     OpenStruct.new DEFAULTS.slice(:max_duration, :max_people_count)
