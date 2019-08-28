@@ -5,10 +5,9 @@ class Cookoon < ApplicationRecord
   scope :displayable_on_index, -> { joins(:user).where.not(users: { stripe_account_id: nil }) }
   scope :accomodates_for, ->(people_count) { where('capacity >= ?', people_count) }
   scope :available_for, ->(user) { where.not(user: user) }
-  scope :available_in, ->(range) { without_reservation_in(range).without_availabilty_in(range).without_pro_reservation_in(range) }
+  scope :available_in, ->(range) { without_reservation_in(range).without_availabilty_in(range) }
   scope :without_reservation_in, ->(range) { where.not(id: Reservation.engaged.overlapping(range).pluck(:cookoon_id).uniq) }
   scope :without_availabilty_in, ->(range) { where.not(id: Availability.unavailable.overlapping(range).pluck(:cookoon_id).uniq) }
-  scope :without_pro_reservation_in, ->(range) { where.not(id: Pro::Reservation.engaged.overlapping(range).pluck(:cookoon_id).uniq) }
   scope :created_in_day_range_around, ->(date_time) { where created_at: day_range(date_time) }
   scope :over_price, ->(price) { where 'price_cents >= ?', price }
 
@@ -22,7 +21,6 @@ class Cookoon < ApplicationRecord
   belongs_to :user
   has_many :reservations, dependent: :restrict_with_exception
   has_many :availabilities, dependent: :destroy
-  has_many :pro_reservations, class_name: 'Pro::Reservation', dependent: :restrict_with_exception
   has_many :future_availabilities, -> { future }, class_name: 'Availability', inverse_of: :cookoon
   has_many :perks, dependent: :destroy
 

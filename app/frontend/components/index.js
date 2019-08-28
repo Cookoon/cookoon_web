@@ -1,4 +1,3 @@
-import "components/pro";
 import 'components/availability/availability';
 import 'components/card_cookoon/card_cookoon';
 import 'components/drawer/drawer';
