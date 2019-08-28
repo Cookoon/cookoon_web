@@ -25,14 +25,6 @@
 
             .col-4.text-right = @reservation.cookoon_price
 
-          .row
-            .col-8 Frais de service (#{number_to_percentage(Pro::Reservation.fee_percentage, precision: 0)})
-            .col-4.text-right = @reservation.cookoon_fee
-
-          .row.mb-3
-            .col-8 dont TVA (#{number_to_percentage(Pro::Reservation.tax_percentage, precision: 0)})
-            .col-4.text-right = @reservation.cookoon_fee_tax
-
           - if @reservation.services.any?
             h3 Options
             - @reservation.services.payment_tied_to_reservation.each do |service|
@@ -44,10 +36,6 @@
               .row
                 .col-8 Total HT des options
                 .col-4.text-right = @reservation.services_price
-
-              .row.mb-3
-                .col-8 TVA #{number_to_percentage(Pro::Reservation::DEFAULTS[:tax_rate] *100, precision: 0)}
-                .col-4.text-right = @reservation.services_tax
 
               .row.mb-3
                 .col-8 Total TTC des options

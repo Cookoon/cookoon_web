@@ -45,17 +45,9 @@ class Reservation < ApplicationRecord
     tax_rate: 0.2
   }.freeze
 
-  monetize :cookoon_price_cents
-  monetize :cookoon_fee_cents
-  monetize :cookoon_fee_tax_cents
-  monetize :services_price_cents
-  monetize :services_tax_cents
-  monetize :services_full_price_cents
-  monetize :total_price_cents
-  monetize :total_tax_cents
-  monetize :total_full_price_cents
-
-  monetize :host_payout_price_cents
+  monetize :cookoon_price_cents #, disable_validation: true
+  monetize :services_price_cents #, disable_validation: true
+  monetize :total_price_cents #, disable_validation: true
 
   validates :start_at, presence: true
   validates :duration, presence: true
@@ -65,10 +57,10 @@ class Reservation < ApplicationRecord
 
   validate :tenant_is_not_host
 
-  # before_validation :configure_from_type_name, on: :create
-  # before_save :assign_prices, if: :assign_prices_needed?
-  # after_save :report_to_slack, if: :saved_change_to_status?
-  # after_save :update_services, if: :services_need_update?
+  before_validation :configure_from_type_name, on: :create
+  before_save :assign_prices, if: :assign_prices_needed?
+  after_save :report_to_slack, if: :saved_change_to_status?
+  after_save :update_services, if: :services_need_update?
 
   def self.default
     OpenStruct.new DEFAULTS.slice(:max_duration, :max_people_count)
