@@ -5,62 +5,76 @@ class Reservation
     def computed_price_attributes
       {
         cookoon_price: compute_cookoon_price,
-        cookoon_fee: compute_cookoon_fee,
-        cookoon_fee_tax: compute_cookoon_fee_tax,
         services_price: compute_services_price,
         services_tax: compute_services_tax,
-        services_full_price: compute_services_full_price,
+        services_with_tax: compute_services_with_tax,
         total_price: compute_total_price,
         total_tax: compute_total_tax,
-        total_full_price: compute_total_full_price
+        total_with_tax: compute_total_with_tax
       }
     end
 
-    private
+    # private
 
-    def defaults
-      self.class::DEFAULTS
+    def compute_services_tax
+      Money.new(compute_services_price * 0.20)
+    end
+
+    def compute_services_with_tax
+      Money.new(compute_services_price * 1.20)
+    end
+
+    def compute_total_tax
+      Money.new(compute_services_price * 0.20)
+    end
+
+    def compute_total_with_tax
+       Money.new([compute_cookoon_price, compute_services_with_tax].sum)
     end
 
     def compute_cookoon_price
-      duration * cookoon.price
-    end
-
-    def compute_cookoon_fee_minus_tax
-      compute_cookoon_price * defaults[:fee_rate] / (1 + defaults[:tax_rate])
-    end
-
-    def compute_cookoon_fee
-      compute_cookoon_price * defaults[:fee_rate]
-    end
-
-    def compute_cookoon_fee_tax
-      compute_cookoon_fee_minus_tax * defaults[:tax_rate]
+      return 0 unless duration.present? && cookoon.present?
+      cookoon_price_cents = duration * cookoon.price
+      cookoon_price_cents - (cookoon_price_cents * 0.15) if customer? && duration > 4
+      Money.new(cookoon_price_cents)
     end
 
     def compute_services_price
       services_price_cents = services.sum(:price_cents)
+      services_price_cents += builtin_service_price_cents
+      services_price_cents += menu_price_cents
       Money.new(services_price_cents)
     end
 
-    def compute_services_tax
-      compute_services_price * defaults[:tax_rate]
+    def builtin_service_price_cents
+      [production_fees_cents, butler_fees_cents].sum
     end
 
-    def compute_services_full_price
-      [compute_services_price, compute_services_tax].sum
+    def production_fees_cents
+      # 350 euros par convive à partir de 10
+      # 350 euros fixe si moins
+      # gratuit pour perso 
+      return 0 unless business?
+      (people_count * 5000)
     end
 
-    def compute_total_price
-      [compute_cookoon_price, compute_cookoon_fee_minus_tax, compute_services_price].sum
+    def butler_fees_cents
+      return 0 unless duration
+      # 46,50 euro par heure
+      # 1 butler pour 10 invités pro
+      # 1 butler pour 8 invités perso
+      (4650 * duration) * butler_count
     end
 
-    def compute_total_full_price
-      [compute_total_price, compute_cookoon_fee_tax, compute_services_tax].sum
+    def menu_price_cents
+      # prix unitaire du menu * nombre de personne
+      # minimun 500 euros
+      return 0 unless menu.present?
+      [(menu.unit_price_cents * people_count) , 50000].max
     end
 
-    def compute_total_tax
-      [compute_services_tax, compute_cookoon_fee_tax].sum
+     def compute_total_price
+      Money.new([compute_cookoon_price, compute_services_price].sum)
     end
   end
 end
