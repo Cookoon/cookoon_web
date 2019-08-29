@@ -20,7 +20,7 @@ class Service < ApplicationRecord
     special: { base_price: 0, unit_price: 0 },
     sommelier: { base_price: 0, unit_price: 0 },
     parking: { base_price: 0, unit_price: 11000 },
-    corporate: { base_price: 2000, unit_price: 1000 },
+    corporate: { base_price: 0, unit_price: 2500 },
     catering: { base_price: 0, unit_price: 2500 },
     breakfast: { base_price: 0, unit_price: 2500 }
   }.freeze

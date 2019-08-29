@@ -14,7 +14,7 @@ module ReservationStateMachine
       state :quotation_proposed
       state :accepted
       state :refused
-      # state :cancelled # will probably be needed later
+      state :cancelled
       state :ongoing
       state :passed
       state :dead
@@ -57,6 +57,10 @@ module ReservationStateMachine
         transitions from: :charged, to: :refused
       end
 
+      event :cancel do
+        transitions from: [:initial, :cookoon_selected, :menu_selected, :services_selected, :charged, :quotation_asked, :quotation_proposed], to: :cancelled
+      end
+
       event :start do
         transitions from: :accepted, to: :ongoing
       end
@@ -66,7 +70,7 @@ module ReservationStateMachine
       end
 
       event :kill do 
-        transitions from: [:initial, :quotation_asked, :quotation_proposed, :refused], to: :dead
+        transitions from: [:initial, :cookoon_selected, :menu_selected, :services_selected, :charged, :quotation_asked, :quotation_proposed, :accepted, :refused, :ongoing, :passed, :dead], to: :dead
       end
     end
   end

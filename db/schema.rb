@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_28_130341) do
+ActiveRecord::Schema.define(version: 2019_08_29_140954) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -139,13 +139,8 @@ ActiveRecord::Schema.define(version: 2019_08_28_130341) do
     t.bigint "user_id"
     t.datetime "start_at"
     t.integer "duration"
-    t.integer "price_cents"
-    t.string "price_currency", default: "EUR", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "status", default: 0
-    t.boolean "cleaning", default: false
-    t.boolean "janitor", default: false
     t.string "stripe_charge_id"
     t.datetime "end_at"
     t.integer "people_count"
@@ -155,15 +150,13 @@ ActiveRecord::Schema.define(version: 2019_08_28_130341) do
     t.integer "category", default: 0
     t.string "type_name"
     t.integer "cookoon_price_cents", default: 0, null: false
-    t.integer "cookoon_fee_cents", default: 0, null: false
-    t.integer "cookoon_fee_tax_cents", default: 0, null: false
     t.integer "services_price_cents", default: 0, null: false
-    t.integer "services_tax_cents", default: 0, null: false
-    t.integer "services_full_price_cents", default: 0, null: false
-    t.integer "total_tax_cents", default: 0, null: false
     t.integer "total_price_cents", default: 0, null: false
-    t.integer "total_full_price_cents", default: 0, null: false
     t.bigint "menu_id"
+    t.integer "services_tax_cents", default: 0, null: false
+    t.integer "services_with_tax_cents", default: 0, null: false
+    t.integer "total_tax_cents", default: 0, null: false
+    t.integer "total_with_tax_cents", default: 0, null: false
     t.index ["cookoon_id"], name: "index_reservations_on_cookoon_id"
     t.index ["menu_id"], name: "index_reservations_on_menu_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"

@@ -29,25 +29,22 @@ class Reservation < ApplicationRecord
 
   accepts_nested_attributes_for :services
 
-  # Status will be removed before merged, need to cast production statuses to AASM State before deleting column
-  # enum status: %i[pending paid accepted refused cancelled ongoing passed dead]
-  
   enum category: %i[customer business]
 
   DEFAULTS = {
-    tenant_fee_rate: 0.07,
-    service_price_cents: 2000,
-    max_duration: 12,
-    max_people_count: 20,
     stripe_validity_period: 7.days,
     safety_period: 2.hours,
     fee_rate: 0.07,
     tax_rate: 0.2
   }.freeze
 
-  monetize :cookoon_price_cents #, disable_validation: true
-  monetize :services_price_cents #, disable_validation: true
-  monetize :total_price_cents #, disable_validation: true
+  monetize :cookoon_price_cents
+  monetize :services_price_cents
+  monetize :services_tax_cents
+  monetize :services_with_tax_cents
+  monetize :total_price_cents
+  monetize :total_tax_cents
+  monetize :total_with_tax_cents
 
   validates :start_at, presence: true
   validates :duration, presence: true
@@ -59,12 +56,10 @@ class Reservation < ApplicationRecord
 
   before_validation :configure_from_type_name, on: :create
   before_save :assign_prices, if: :assign_prices_needed?
-  after_save :report_to_slack, if: :saved_change_to_status?
-  after_save :update_services, if: :services_need_update?
-
-  def self.default
-    OpenStruct.new DEFAULTS.slice(:max_duration, :max_people_count)
-  end
+  
+  # need to connect this to another condiction
+  # after_save :report_to_slack, if: :saved_change_to_status?
+  #after_save :update_services, if: :services_need_update?
 
   def invoiceable?
     accepted? || ongoing? || passed?
@@ -108,8 +103,17 @@ class Reservation < ApplicationRecord
     payment.transfer
     ReservationMailer.notify_payout_to_host(self).deliver_later
 
-    passed!
+    close!
     send_ending_surveys
+  end
+
+  def butler_count
+    # 10 people per butler for business
+    # 8 people per butler for customer
+    # Magic numbers can be stored in ::DEFAULT
+    return 1 unless people_count
+    customer_per_butler = business? ? 9 : 11
+    1 + (people_count / customer_per_butler)
   end
 
   def send_ending_surveys
@@ -134,7 +138,7 @@ class Reservation < ApplicationRecord
   end
 
   def host_payout_price_cents
-    cookoon_price_cents - host_fee_cents
+    cookoon_price_cents
   end
 
   def needs_chef?
@@ -189,7 +193,7 @@ class Reservation < ApplicationRecord
   end
 
   def assign_prices_needed?
-    services_selected? || quotation_proposed?
+    cookoon_selected? || menu_selected? || services_selected? || quotation_proposed?
   end
 
   def report_to_slack
@@ -204,12 +208,5 @@ class Reservation < ApplicationRecord
   def tenant_is_not_host
     return unless cookoon && user
     errors.add(:cookoon, :host_cannot_be_tenant) if cookoon.user == user
-  end
-
-  # TO REMOVE WHEN DONE
-  def possible_in_datetime_range
-    return unless start_at && duration
-    range = start_at..(start_at + duration.hours)
-    errors.add(:cookoon, :unavailable_in_datetime_range) if cookoon.unavailabilites(range).any?
   end
 end
