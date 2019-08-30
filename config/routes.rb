@@ -10,13 +10,11 @@ Rails.application.routes.draw do
 
   # -------- STATIC PAGES ---------
   # Different root for authenticated users
-  authenticated { root 'pages#home' }
-  root 'pages#welcome'
+  root 'pages#home'
 
   controller :pages do
     get :home
     get :support
-    get :desktop_only
   end
 
   namespace :stripe do

@@ -5,18 +5,11 @@
   div data={controller: "collapses", target: 'collapses.body'}
     h3 Choisissez un chef
 
-    .carousel.slide id="carouselExampleControls" data-ride="false"
+    .carousel.slide id="chefSelection" data-ride="false" data-interval="false"
       .carousel-inner
         - chefs.each_with_index do |chef, index|
           .carousel-item class=classnames('active': index.zero?)
             = render 'chefs/card', chef: chef
-
-      a.carousel-control-prev href="#carouselExampleControls" role="button" data-slide="prev"
-        span.carousel-control-prev-icon aria-hidden="true"
-        span.sr-only Previous
-      a.carousel-control-next href="#carouselExampleControls" role="button" data-slide="next"
-        span.carousel-control-next-icon aria-hidden="true"
-        span.sr-only Next
 
     .text-center.my-4
       = link_to 'Je ne veux pas de chef', '#', class: 'btn-cookoon btn-cookoon-primary', data: { action: "collapses#toggle" }

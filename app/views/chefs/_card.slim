@@ -1,9 +1,13 @@
 .chef-card
-  .row
+  .row.mb-3
     .col-12.col-md-6
       .chef-card-image style="background-image: url(#{chef.picture_url});"
     .col-12.col-md-6
-      h4 <i>#{chef.name}</i>
+      .d-flex-default
+        a.text-primary href="#chefSelection" role="button" data-slide="prev" <
+        h4 <i>#{chef.name}</i>
+        a.text-primary href="#chefSelection" role="button" data-slide="next" >
+
       p = chef.description
 
   .row
