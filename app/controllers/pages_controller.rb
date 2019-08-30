@@ -7,6 +7,4 @@ class PagesController < ApplicationController
   end
 
   def support; end
-
-  def desktop_only; end
 end

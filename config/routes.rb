@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   controller :pages do
     get :home
     get :support
-    get :desktop_only
   end
 
   namespace :stripe do
