@@ -5,7 +5,7 @@
   div data={controller: "collapses", target: 'collapses.body'}
     h3 Choisissez un chef
 
-    .carousel.slide id="carouselExampleControls" data-ride="false"
+    .carousel.slide id="carouselExampleControls" data-ride="false" data-interval="false"
       .carousel-inner
         - chefs.each_with_index do |chef, index|
           .carousel-item class=classnames('active': index.zero?)
