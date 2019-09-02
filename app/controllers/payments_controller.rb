@@ -3,7 +3,6 @@ class PaymentsController < ApplicationController
   before_action :find_cookoon, only: %i[amounts]
 
   def new
-    @service_categories = build_service_categories
     @credit_cards = current_user.credit_cards
     @cookoon = @reservation.cookoon.decorate
   end

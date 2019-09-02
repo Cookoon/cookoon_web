@@ -19,9 +19,6 @@ div class=classnames(container: desktop_view?)
         .d-flex-default.ml-3
           | Cookoon <span>#{humanized_money_with_symbol @reservation.cookoon_price}</span>
 
-        .d-flex-default.mb-2.ml-3
-          | Frais de service <span>#{humanized_money_with_symbol @reservation.cookoon_fee}</span>
-
         div class=classnames('mb-2', 'd-none': @reservation.services.none?)
           = render 'reservations/services_prices'
 
@@ -29,11 +26,14 @@ div class=classnames(container: desktop_view?)
 
         .d-flex-default.mb-2
           b TOTAL
-          b = humanized_money_with_symbol @reservation.total_full_price
+          - if @reservation.customer?
+            b.text-primary #{humanized_money_with_symbol @reservation.total_full_price} TTC
+          - else
+            b.text-primary #{humanized_money_with_symbol @reservation.total_price} HT
     
       = render 'credit_cards/selection'
 
       - if @reservation.business?
-        .text-center
+        .text-center.mb-4
           p Vous pouvez aussi demander un devis
           = link_to 'Demander un Devis', ask_quotation_reservation_path(@reservation), class: 'btn btn-primary btn-action btn-block', method: :patch

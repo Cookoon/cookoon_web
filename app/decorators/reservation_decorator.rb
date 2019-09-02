@@ -45,14 +45,6 @@ class ReservationDecorator < Draper::Decorator
     h.humanized_money_with_symbol object.cookoon_price
   end
 
-  def cookoon_fee
-    h.humanized_money_with_symbol object.cookoon_fee
-  end
-
-  def cookoon_fee_tax
-    h.humanized_money_with_symbol object.cookoon_fee_tax
-  end
-
   def services_tax
     h.humanized_money_with_symbol object.services_tax
   end
@@ -62,7 +54,7 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def services_full_price
-    h.humanized_money_with_symbol object.services_full_price
+    h.humanized_money_with_symbol object.services_with_tax
   end
 
   def total_price
@@ -70,7 +62,7 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def total_full_price
-    h.humanized_money_with_symbol object.total_full_price
+    h.humanized_money_with_symbol object.total_with_tax
   end
 
   def total_tax

@@ -38,8 +38,8 @@ class ReservationsController < ApplicationController
   def ask_quotation
     @reservation.ask_quotation!
     flash.notice = 'Votre demande de devis est enregistrée notre concierge reviendra vers vous rapidement par email !'
-    # probably redirect to my::reservations#index or equivalent
-    redirect_to root_path
+    
+    redirect_to reservations_path
   end
 
   def select_menu
@@ -55,9 +55,9 @@ class ReservationsController < ApplicationController
   end
 
   def select_services
-    # TODO: BUILD SERVICES FROM PARAMS !
-    raise
-    @reservation.select_services!
+    service_categories = params[:reservation][:services].delete_if(&:blank?)
+    @reservation.select_services!(service_categories)
+    
     redirect_to new_reservation_payment_path(@reservation)
   end
   
