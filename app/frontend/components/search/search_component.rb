@@ -23,12 +23,12 @@ module SearchComponent
   def business_types
     [
       {data: 'breakfast', display: 'Petit déjeuner'},
+      {data: 'lunch', display: 'Déjeuner'},
+      {data: 'diner', display: 'Dîner'},
+      {data: 'cocktail', display: 'Cocktail'},
       {data: 'morning', display: 'Matinée de travail'},
       {data: 'day', display: 'Journée de travail'},
-      {data: 'lunch', display: 'Déjeuner'},
-      {data: 'afternoon', display: 'Après-midi de travail'},
-      {data: 'diner', display: 'Dîner'},
-      {data: 'cocktail', display: 'Cocktail'}
+      {data: 'afternoon', display: 'Après-midi de travail'}
     ]
   end
 end
