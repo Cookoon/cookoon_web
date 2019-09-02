@@ -10,6 +10,3 @@
         - chefs.each_with_index do |chef, index|
           .carousel-item class=classnames('active': index.zero?)
             = render 'chefs/card', chef: chef
-
-    .text-center.my-4
-      = link_to 'Je ne veux pas de chef', '#', class: 'btn-cookoon btn-cookoon-primary', data: { action: "collapses#toggle" }
