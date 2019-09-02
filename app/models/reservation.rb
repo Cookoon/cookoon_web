@@ -8,7 +8,7 @@ class Reservation < ApplicationRecord
   scope :displayable, -> { where.not(aasm_state: :initial).order(start_at: :asc) }
   scope :for_tenant, ->(user) { where(user: user) }
   scope :for_host, ->(user) { where(cookoon: user.cookoons) }
-  scope :active, -> { charged.or(accepted).or(ongoing) }
+  scope :active, -> { charged.or(accepted).or(ongoing).or(quotation_asked) }
   scope :engaged, -> { accepted.or(ongoing) }
   scope :inactive, -> { refused.or(passed) }
   scope :created_in_day_range_around, ->(datetime) { where created_at: day_range(datetime) }

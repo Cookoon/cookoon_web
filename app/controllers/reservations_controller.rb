@@ -38,7 +38,7 @@ class ReservationsController < ApplicationController
   def ask_quotation
     @reservation.ask_quotation!
     flash.notice = 'Votre demande de devis est enregistrée notre concierge reviendra vers vous rapidement par email !'
-    # probably redirect to my::reservations#index or equivalent
+    
     redirect_to reservations_path
   end
 
