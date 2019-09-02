@@ -4,7 +4,7 @@
       .d-none.d-md-block
         | <i class='co icon-key'></i> Conciergerie - 06 12 12 12 12
       .d-block.d-md-none
-        | <i class='co icon-key'></i> Conciergerie
+        | <a href="tel:+33612121212">Conciergerie</a>
     .cookoon-nav-infos-user.bg-primary.pointer(
       id="navigationDropdownMenu" 
       aria={ haspopup: "true", expanded: "false" }
@@ -19,10 +19,10 @@
       i.fas.fa-chevron-down data-target='dropdowns.trigger'
 
       .navigation-dropdown-menu aria-labelledby="navigationDropdownMenu" data-target="dropdowns.body"
-        = link_to 'Mon compte', edit_users_path, class: 'navigation-dropdown-menu-item'
-        = link_to 'Mes moyens de paiement', credit_cards_path, class: 'navigation-dropdown-menu-item'
-        = link_to 'Mon espace hôte', host_dashboard_path, class: 'navigation-dropdown-menu-item'
-        = link_to 'Déconnexion', destroy_user_session_path, class: 'navigation-dropdown-menu-item', method: 'delete'
+        = link_to raw("<i class='co icon-user text-primary'></i> Mon compte"), edit_users_path, class: 'navigation-dropdown-menu-item'
+        = link_to raw("<i class='far fa-credit-card text-primary'></i> Mes moyens de paiement"), credit_cards_path, class: 'navigation-dropdown-menu-item'
+        = link_to raw("<i class='co icon-cookoon-bibliotheque-pictogrammes_loft text-primary'></i> Mon espace hôte"), host_dashboard_path, class: 'navigation-dropdown-menu-item'
+        = link_to raw("<i class='fas fa-power-off text-primary'></i> Déconnexion"), destroy_user_session_path, class: 'navigation-dropdown-menu-item', method: 'delete'
 
   .cookoon-nav-navigation.bg-black
     = link_to root_path do
@@ -34,3 +34,6 @@
       ul.list-inline.text-center
         li.list-inline-item.px-2 = link_to 'Mes Réservations', reservations_path
         li.list-inline-item.px-2 = link_to 'Mes Invitations', new_user_invitation_path
+    
+    .d-none.d-md-block
+      = link_to 'Devenir Hôte', 'https://cookoon.typeform.com/to/iY7Heh', class: 'btn-cookoon btn-cookoon-secondary'
