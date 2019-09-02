@@ -83,9 +83,10 @@ module ReservationStateMachine
     self.menu = menu
   end
 
-  def set_services(services)
-    # TODO Create services from Arr(sym)
-    # Compare array from existing services and adjust
+  def set_services(service_categories)
+    service_categories.each do |service_category|
+      services.create(category: service_category, payment_tied_to_reservation: true)
+    end
   end
 
   def set_prices

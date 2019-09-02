@@ -38,6 +38,10 @@ class Service < ApplicationRecord
 
   def compute_price
     prices = PRICES[category.to_sym]
-    prices[:base_price] + (prices[:unit_price] * reservation.people_count)
+    if parking?
+      prices[:base_price] + (prices[:unit_price] * reservation.duration)
+    else
+      prices[:base_price] + (prices[:unit_price] * reservation.people_count)
+    end
   end
 end

@@ -40,7 +40,7 @@ class Reservation
     end
 
     def compute_services_price
-      services_price_cents = services.sum(:price_cents)
+      services_price_cents = services.pluck(:price_cents).sum
       services_price_cents += builtin_service_price_cents
       services_price_cents += menu_price_cents
       Money.new(services_price_cents)
