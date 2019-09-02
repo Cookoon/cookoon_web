@@ -30,7 +30,6 @@ input[type=checkbox] {
 
 input[type="checkbox"]:checked {
   background: $primary;
-  position: relative;
   &:before {
     font-family: $font-awesome;
     content: '\f00c';
@@ -57,4 +56,8 @@ label.collection_check_boxes {
   align-items: center;
   padding: 10px;
   margin-left: 10px;
+}
+
+.form-check-input {
+  margin-top: 0.1rem;
 }
