@@ -22,7 +22,7 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def default_type
-    'Diner'
+    'Dîner'
   end 
 
   def default_date
