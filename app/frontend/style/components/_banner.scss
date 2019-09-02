@@ -5,4 +5,20 @@
     height: 65vh;
     padding: 70px;
     color: white;
+
+    h1 {
+        font-family: $avenir;
+    }
+}
+
+@media (max-width: 320px) {
+  .home-banner {
+    padding: 30px;
+  }
+}
+
+@media (min-width: 700px) {
+  .home-banner {
+    padding: 130px;
+  }
 }

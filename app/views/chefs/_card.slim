@@ -16,3 +16,6 @@
         .chef-card-menu
           p = simple_format menu.description
           = link_to 'Choisir ce menu', reservation_select_menu_path(@reservation, menu), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
+
+    .col-12.col-md-6.offset-md-6.text-center.my-4
+      = link_to 'Je ne veux pas de chef', '#', class: 'btn-cookoon btn-block btn-gray text-black', data: { action: "collapses#toggle" }
