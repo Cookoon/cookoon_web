@@ -11,7 +11,7 @@ class Service < ApplicationRecord
   enum status: %i[quote paid]
   enum category: %i[special sommelier parking corporate catering breakfast]
 
-  before_create :set_price_cents
+  before_create :set_price_cents, :set_name_from_category
 
   validates :category, presence: true
   validates :category, uniqueness: { scope: :reservation }
@@ -34,6 +34,23 @@ class Service < ApplicationRecord
   def set_price_cents
     return if sommelier? || special?
     self.price_cents = compute_price
+  end
+
+  def set_name_from_category
+    case category
+    when 'special'
+      self.name = 'Personnalisé'
+    when 'sommelier'
+      self.name = 'Sommelier'
+    when 'parking'
+      self.name = 'Voiturier'
+    when 'corporate'
+      self.name = 'Kit professionnel'
+    when 'catering'
+      self.name = 'Plateaux repas'
+    when 'breakfast'
+      self.name = 'Petit déjeuner'
+    end
   end
 
   def compute_price
