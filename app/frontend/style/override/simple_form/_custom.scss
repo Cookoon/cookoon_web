@@ -12,3 +12,49 @@
 .form-control:disabled {
   background: inherit;
 }
+
+legend {
+  display: none
+}
+
+input[type=checkbox] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  border-radius: 4px;
+  height: 18px;
+  width: 18px;
+  background: #fff;
+  border: 1px solid #ccc;
+}
+
+input[type="checkbox"]:checked {
+  background: $primary;
+  position: relative;
+  &:before {
+    font-family: $font-awesome;
+    content: '\f00c';
+    display: block;
+    color: white;
+    font-size: 16px;
+    position: absolute;
+    top: -4px;
+  }
+}
+
+input[type="checkbox"]:focus {
+  outline: none;
+}
+
+label.collection_check_boxes {
+  margin-left: 10px;
+  margin-bottom: 0px;
+}
+
+.reservation .form-check {
+  display: flex;
+  border-top: 1px solid $gray;
+  align-items: center;
+  padding: 10px;
+  margin-left: 10px;
+}
