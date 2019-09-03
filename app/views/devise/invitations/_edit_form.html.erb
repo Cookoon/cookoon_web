@@ -10,6 +10,6 @@
   <%= f.input :terms_of_service, as: :boolean, label: "J'accepte les #{link_to('conditions générales d\'utilisation', 'https://cookoon.fr/conditions-generales/', target: :_blank)}".html_safe %>
 
   <div class="text-center my-3">
-    <%= f.button :submit, t('.submit'), class: 'btn btn-primary btn-action' %>
+    <%= f.button :submit, t('.submit'), class: 'btn-cookoon btn-cookoon-primary' %>
   </div>
 <% end %>

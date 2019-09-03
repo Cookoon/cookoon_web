@@ -1,15 +1,15 @@
 .position-fixed.b-0.l-0.r-0.mb-3.text-center
-  button.btn.btn-primary.btn-action-sm.w-90.mw-420px.text-truncate type="button" data={toggle: "modal", target: "#cookoonsModal"}
+  button.btn-cookoon.btn-cookoon-primary.w-90.mw-420px.text-truncate type="button" data={toggle: "modal", target: "#cookoonsModal"}
     | <i class='fas fa-exchange-alt mr-2' aria-hidden="true"></i> #{@cookoon.name}
 
 .modal.fade#cookoonsModal tabindex="-1" role="dialog" aria-labelledby="cookoonsModalLabel" aria-hidden="true"
   .modal-dialog role="document"
     .modal-content
       .modal-header
-        h5.modal-title#cookoonsModalLabel Vos cookoons
+        h3.modal-title#cookoonsModalLabel Vos demeures
         button.close type="button" data-dismiss="modal" aria-label="Close"
           span aria-hidden="true" &times;
 
       .modal-body.text-center
         - @cookoons.each do |cookoon|
-          = link_to cookoon.name, cookoon_availabilities_path(cookoon), class: 'btn btn-light my-4 d-block'
+          = link_to cookoon.name, cookoon_availabilities_path(cookoon), class: 'btn-cookoon btn-cookoon-primary my-4 d-block'
