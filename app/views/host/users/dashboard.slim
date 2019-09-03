@@ -5,27 +5,27 @@
 
   .pb-3
     - if @cookoons.any?
-      h3 <i class='co icon-losange text-primary mr-2'></i> Optimisez vos revenus
+      h3 <i class='co icon-losange small text-primary mr-2'></i> Optimisez vos revenus
       p
         | Recevez des demandes de locations au bon moment en 
         | mettant à jour les disponibilités de votre Cookoon:
 
-      .text-center.pt-4.pb-3
-        = link_to 'Mon calendrier', cookoon_availabilities_path(@cookoons.first), class: 'btn btn-primary btn-action btn-block'
+      .pt-4.pb-3.text-right
+        = link_to 'Mon calendrier', cookoon_availabilities_path(@cookoons.first), class: 'btn-cookoon btn-cookoon-primary'
 
       hr
 
-    h3 <i class='co icon-losange text-primary mr-2'></i> Vos dernières demandes de réservation
+    h3 <i class='co icon-losange small text-primary mr-2'></i> Vos dernières demandes de réservation
     p 
       | Vous avez <b class="text-primary">#{@pending_reservations_count} demande(s) de réservation</b> 
       | en attente
 
-    .text-center.pt-5.pb-3
-      = link_to 'Voir mes Réservations', host_reservations_path, class: 'btn btn-primary btn-action btn-block'
+    .pt-4.pb-3.text-right
+      = link_to 'Voir mes Réservations', host_reservations_path, class: 'btn-cookoon btn-cookoon-primary'
 
     hr
 
-    h3 <i class='co icon-losange text-primary mr-2'></i> Vos Cookoons
+    h3 <i class='co icon-losange small text-primary mr-2'></i> Vos demeures
 
     .row
       - @cookoons.each do |cookoon|
@@ -36,9 +36,9 @@
                         image_url: cl_image_path(cookoon.photos.first.path, width: 800, height: 450, crop: :fill)
 
     - unless @user.reached_max_cookoons_count?
-      .py-3.text-center
+      .py-3.text-right
         - button_text = @cookoons.any? ? 'Ajouter un autre Cookoon' : 'Proposer mon appartement'
-        = link_to button_text, new_cookoon_path, class: 'btn btn-action btn-block btn-outline-primary'
+        = link_to button_text, new_cookoon_path, class: 'btn-cookoon btn-cookoon-primary'
 
     .border.border-dark.pt-2.px-2.text-center
       p

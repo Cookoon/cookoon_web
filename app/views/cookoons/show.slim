@@ -21,7 +21,7 @@ div class=classnames(container: desktop_view?)
         = render 'chefs/selection', chefs: @chefs if @reservation.needs_chef?
 
       #reservation-services
-        h3 Choisissez des options
+        h3 Les services intégrés
 
         = simple_form_for :reservation, url: select_services_reservation_path(@reservation), method: :patch do |f| 
           = f.input :services, 
@@ -29,6 +29,8 @@ div class=classnames(container: desktop_view?)
               collection: @reservation.services_collection_for_view,
               checked: @reservation.builtin_services,
               label_method: :first, 
-              value_method: :second
+              value_method: :second,
+              item_wrapper_class: "font-weight-bold pl-5 py-1"
 
-          = f.submit 'Confirmer', class: 'btn btn-primary btn-action btn-block mb-4'
+
+          = f.submit 'Confirmer', class: 'btn-cookoon btn-cookoon-primary btn-lg btn-block mb-4'
