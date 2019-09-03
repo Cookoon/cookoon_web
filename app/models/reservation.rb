@@ -47,9 +47,9 @@ class Reservation < ApplicationRecord
   monetize :total_with_tax_cents
 
   validates :start_at, presence: true
+  validates :start_at, in_future: true, after_notice_period: true, on: :create
   validates :duration, presence: true
   validates :people_count, presence: true
-  validates :start_at, in_future: true, after_notice_period: true, on: :create
   validates :type_name, inclusion: { in: %w[breakfast brunch lunch diner cocktail morning afternoon day], message: "Ce type de réservation n'est pas valide" } 
 
   validate :tenant_is_not_host
@@ -58,8 +58,8 @@ class Reservation < ApplicationRecord
   before_save :assign_prices, if: :assign_prices_needed?
   
   # need to connect this to another condiction
-  # after_save :report_to_slack, if: :saved_change_to_status?
-  #after_save :update_services, if: :services_need_update?
+  after_save :report_to_slack, if: :saved_change_to_aasm_state?
+  after_save :update_services, if: :services_need_update?
 
   def invoiceable?
     accepted? || ongoing? || passed?
@@ -129,14 +129,6 @@ class Reservation < ApplicationRecord
     assign_attributes(computed_price_attributes)
   end
   
-  def host_fee_rate
-    DEFAULTS[:fee_rate]
-  end
-
-  def host_fee_cents
-    (cookoon_price_cents * host_fee_rate).round
-  end
-
   def host_payout_price_cents
     cookoon_price_cents
   end
@@ -147,45 +139,13 @@ class Reservation < ApplicationRecord
 
   private
 
-  # Move this elsewhere
   def configure_from_type_name
-    return unless type_name.present? && start_at.present?
-    case type_name
-    when 'breakfast'
-      self.duration = 3
-      self.start_at = start_at.change(hour: 8, min: 30)
-      services.build(category: :breakfast, payment_tied_to_reservation: true)
-    when 'brunch'
-      self.duration = 4
-      self.start_at = start_at.change(hour: 12, min: 30)
-    when 'lunch'
-      self.duration = 5
-      self.start_at = start_at.change(hour: 12, min: 30)
-    when 'diner'
-      self.duration = 7
-      self.start_at = start_at.change(hour: 20, min: 0)
-    when 'cocktail'
-      self.duration = 7
-      self.start_at = start_at.change(hour: 19, min: 30)
-    when 'morning'
-      self.duration = 5
-      self.start_at = start_at.change(hour: 9, min: 0)
-    when 'afternoon'
-      self.duration = 6
-      self.start_at = start_at.change(hour: 14, min: 0)
-    when 'day'
-      self.duration = 11
-      self.start_at = start_at.change(hour: 9, min: 0)
-    end
+    Reservation::Configurator.new(self).call
   end
-
-  def price_cents_needs_update?
-    will_save_change_to_duration? || will_save_change_to_cookoon_id?
-  end
-
+  
   def services_need_update?
-    return unless saved_change_to_status?
-    saved_change_to_status.last == 'paid'
+    return unless saved_change_to_aasm_state?
+    saved_change_to_aasm_state.last == 'charged'
   end
 
   def update_services
@@ -202,7 +162,7 @@ class Reservation < ApplicationRecord
   end
 
   def notification_needed?
-    %w(paid accepted refused ongoing passed cancelled).include? status
+    %w(charged quotation_asked accepted refused ongoing passed cancelled).include? aasm_state
   end
 
   def tenant_is_not_host

@@ -15,7 +15,7 @@
 
       .input-cookoon-search data={action: 'click->search#toggleSelection', target: 'search.selection'}
         p Type de réception
-        span.input-cookoon-search-data data={target: 'search.typeText'} = @reservation.default_type
+        span.input-cookoon-search-data data={target: 'search.typeText'} = @reservation.default_type.first
         .input-cookoon-search-selection.d-none
           - types.each do |type|
             .input-cookoon-search-selection-item data={type: type[:data], text: type[:display], action: 'click->search#selectType'} #{type[:display]}

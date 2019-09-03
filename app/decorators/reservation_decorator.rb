@@ -22,7 +22,7 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def default_type
-    'Diner'
+    ['Dîner', 'diner']
   end 
 
   def default_date
@@ -77,6 +77,22 @@ class ReservationDecorator < Draper::Decorator
       ['Kit professionnel', :corporate],
       ['Plateaux repas', :catering]
     ]
+  end
+
+  def type_names
+    {
+      breakfast: 'Petit déjeuner',
+      lunch: 'Déjeuner',
+      diner: 'Dîner',
+      cocktail: 'Cocktail',
+      morning: 'Matinée',
+      day: 'Journée',
+      afternoon: 'Après-midi'
+    }
+  end
+
+  def humanized_type_name
+    type_names[object.type_name.to_sym]
   end
 
   def builtin_services
