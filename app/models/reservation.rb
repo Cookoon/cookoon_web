@@ -58,8 +58,8 @@ class Reservation < ApplicationRecord
   before_save :assign_prices, if: :assign_prices_needed?
   
   # need to connect this to another condiction
-  # after_save :report_to_slack, if: :saved_change_to_status?
-  #after_save :update_services, if: :services_need_update?
+  after_save :report_to_slack, if: :saved_change_to_aasm_state?
+  after_save :update_services, if: :services_need_update?
 
   def invoiceable?
     accepted? || ongoing? || passed?
@@ -139,45 +139,13 @@ class Reservation < ApplicationRecord
 
   private
 
-  # Move this elsewhere
   def configure_from_type_name
-    return if skip_configuration?
-    case type_name
-    when 'breakfast'
-      self.duration = 3
-      self.start_at = start_at.change(hour: 8, min: 30)
-      services.build(category: :breakfast, payment_tied_to_reservation: true)
-    when 'brunch'
-      self.duration = 4
-      self.start_at = start_at.change(hour: 12, min: 30)
-    when 'lunch'
-      self.duration = 5
-      self.start_at = start_at.change(hour: 12, min: 30)
-    when 'diner'
-      self.duration = 7
-      self.start_at = start_at.change(hour: 20, min: 0)
-    when 'cocktail'
-      self.duration = 7
-      self.start_at = start_at.change(hour: 19, min: 30)
-    when 'morning'
-      self.duration = 5
-      self.start_at = start_at.change(hour: 9, min: 0)
-    when 'afternoon'
-      self.duration = 6
-      self.start_at = start_at.change(hour: 14, min: 0)
-    when 'day'
-      self.duration = 11
-      self.start_at = start_at.change(hour: 9, min: 0)
-    end
+    Reservation::Configurator.new(self).call
   end
   
-  def skip_configuration?
-    quotation_proposed? || type_name.blank? || start_at.blank?
-  end
-
   def services_need_update?
-    return unless saved_change_to_status?
-    saved_change_to_status.last == 'paid'
+    return unless saved_change_to_aasm_state?
+    saved_change_to_aasm_state.last == 'charged'
   end
 
   def update_services
