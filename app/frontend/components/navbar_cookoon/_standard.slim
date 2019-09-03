@@ -24,16 +24,18 @@
         = link_to raw("<i class='co icon-cookoon-bibliotheque-pictogrammes_loft text-primary'></i> Mon espace hôte"), host_dashboard_path, class: 'navigation-dropdown-menu-item'
         = link_to raw("<i class='fas fa-power-off text-primary'></i> Déconnexion"), destroy_user_session_path, class: 'navigation-dropdown-menu-item', method: 'delete'
 
-  .cookoon-nav-navigation.bg-black
-    = link_to root_path do
-      .logo
-        i.co.icon-cookoon-logo.fa-2x.text-primary
-        div.pl-2 Cookoon
+  .cookoon-nav-bottom.bg-black
+    .cookoon-nav-navigation
+      = link_to root_path do
+        .logo
+          i.co.icon-cookoon-logo.fa-2x.text-primary
+          div.pl-2 Cookoon
 
-    .menu.d-none.d-md-block
-      ul.list-inline.text-center
-        li.list-inline-item.px-2 = link_to 'Mes Réservations', reservations_path
-        li.list-inline-item.px-2 = link_to 'Mes Invitations', new_user_invitation_path
-    
-    .d-none.d-md-block
-      = link_to raw('Devenir Hôte <i class="fas fa-arrow-right"></i>'), 'https://cookoon.typeform.com/to/iY7Heh', class: 'btn-cookoon btn-cookoon-secondary'
+      .menu.d-none.d-md-block
+        ul.list-inline.text-center
+          li.list-inline-item.px-2 = link_to 'Mes Réservations', reservations_path
+          li.list-inline-item.px-2 = link_to 'Mes Invitations', new_user_invitation_path
+
+    .cookoon-nav-hostlink
+      .d-none.d-md-block
+        = link_to raw('Devenir Hôte <i class="fas fa-arrow-right"></i>'), 'https://cookoon.typeform.com/to/iY7Heh', class: 'btn-cookoon btn-cookoon-secondary'

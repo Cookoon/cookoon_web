@@ -19,11 +19,22 @@
       max-height: 50px;
     }
   }
+
+  &-bottom {
+    display: flex;
+    align-items: center;
+  }
+
+  &-hostlink {
+    flex: 1;
+  }
+
   &-navigation {
     display: flex;
     color: white;
     align-items: center;
     padding: 10px;
+    flex: 6;
 
     a {
       color: white;
@@ -39,9 +50,7 @@
     }
     
     .menu {
-      display: flex;
-      justify-content: space-around;
-      width: 80%;
+      width: 100%;
     }
   }
 }
