@@ -1,6 +1,6 @@
 = simple_form_for @reservation do |f|
     = f.input :category, as: :string, as: :hidden
     = f.input :people_count, input_html: { value: @reservation.default_people_count, data: {target: 'search.countInput'} }, as: :hidden
-    = f.input :type_name, input_html: { value: @reservation.default_type.downcase ,data: {target: 'search.typeInput'} }, as: :hidden
+    = f.input :type_name, input_html: { value: @reservation.default_type.last ,data: {target: 'search.typeInput'} }, as: :hidden
     = f.input :start_at, input_html: { data: {target: 'search.dateInput'} }, as: :hidden
     = f.submit class: 'btn-cookoon-search'
