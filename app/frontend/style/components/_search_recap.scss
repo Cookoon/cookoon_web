@@ -8,6 +8,10 @@
   &-box {
     padding: 10px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    min-height: 130px;
     p {
       margin: 10px 0;
     }
@@ -18,10 +22,9 @@
     &-data {
       font-size: 30px;
       color: #CDBB8A;
-    }
-    &-data-smaller {
-      font-size: 20px;
-      color: #CDBB8A;
+      &.month {
+        line-height: 5px;
+      }
     }
   }
 }
