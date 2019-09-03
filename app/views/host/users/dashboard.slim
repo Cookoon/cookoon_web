@@ -10,7 +10,7 @@
         | Recevez des demandes de locations au bon moment en 
         | mettant à jour les disponibilités de votre Cookoon:
 
-      .pt-4.pb-3
+      .pt-4.pb-3.text-right
         = link_to 'Mon calendrier', cookoon_availabilities_path(@cookoons.first), class: 'btn-cookoon btn-cookoon-primary'
 
       hr
@@ -20,7 +20,7 @@
       | Vous avez <b class="text-primary">#{@pending_reservations_count} demande(s) de réservation</b> 
       | en attente
 
-    .pt-4.pb-3
+    .pt-4.pb-3.text-right
       = link_to 'Voir mes Réservations', host_reservations_path, class: 'btn-cookoon btn-cookoon-primary'
 
     hr
@@ -36,7 +36,7 @@
                         image_url: cl_image_path(cookoon.photos.first.path, width: 800, height: 450, crop: :fill)
 
     - unless @user.reached_max_cookoons_count?
-      .py-3
+      .py-3.text-right
         - button_text = @cookoons.any? ? 'Ajouter un autre Cookoon' : 'Proposer mon appartement'
         = link_to button_text, new_cookoon_path, class: 'btn-cookoon btn-cookoon-primary'
 
