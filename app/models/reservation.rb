@@ -47,9 +47,9 @@ class Reservation < ApplicationRecord
   monetize :total_with_tax_cents
 
   validates :start_at, presence: true
+  validates :start_at, in_future: true, after_notice_period: true, on: :create
   validates :duration, presence: true
   validates :people_count, presence: true
-  validates :start_at, in_future: true, after_notice_period: true, on: :create
   validates :type_name, inclusion: { in: %w[breakfast brunch lunch diner cocktail morning afternoon day], message: "Ce type de réservation n'est pas valide" } 
 
   validate :tenant_is_not_host
@@ -129,14 +129,6 @@ class Reservation < ApplicationRecord
     assign_attributes(computed_price_attributes)
   end
   
-  def host_fee_rate
-    DEFAULTS[:fee_rate]
-  end
-
-  def host_fee_cents
-    (cookoon_price_cents * host_fee_rate).round
-  end
-
   def host_payout_price_cents
     cookoon_price_cents
   end
@@ -149,7 +141,7 @@ class Reservation < ApplicationRecord
 
   # Move this elsewhere
   def configure_from_type_name
-    return unless type_name.present? && start_at.present?
+    return if skip_configuration?
     case type_name
     when 'breakfast'
       self.duration = 3
@@ -178,9 +170,9 @@ class Reservation < ApplicationRecord
       self.start_at = start_at.change(hour: 9, min: 0)
     end
   end
-
-  def price_cents_needs_update?
-    will_save_change_to_duration? || will_save_change_to_cookoon_id?
+  
+  def skip_configuration?
+    quotation_proposed? || type_name.blank? || start_at.blank?
   end
 
   def services_need_update?
@@ -202,7 +194,7 @@ class Reservation < ApplicationRecord
   end
 
   def notification_needed?
-    %w(paid accepted refused ongoing passed cancelled).include? status
+    %w(charged quotation_asked accepted refused ongoing passed cancelled).include? aasm_state
   end
 
   def tenant_is_not_host
