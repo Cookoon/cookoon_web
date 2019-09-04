@@ -14,7 +14,7 @@ class Reservation
       }
     end
 
-    # private
+    private
 
     def compute_services_tax
       Money.new(compute_services_price * 0.20)
