@@ -1,9 +1,10 @@
 .search.search-home data={controller: "search", action: 'click@window->search#hideSelections'}
   .search-inputs-container
-    .search-category-selection.d-flex-default.mb-3
-      span.d-none.d-md-block Vous souhaitez réserver pour :
-      = link_to 'Un particulier', new_reservation_path(category: :customer), remote: true, class: classnames('btn-cookoon', {'btn-cookoon-primary': @reservation.customer?})
-      = link_to 'Un professionnel', new_reservation_path(category: :business), remote: true, class: classnames('btn-cookoon', {'btn-cookoon-primary': @reservation.business?})
+    - if current_user.pro?
+      .search-category-selection.d-flex-default.mb-3
+        span.d-none.d-md-block Vous souhaitez réserver pour :
+        = link_to 'Un particulier', new_reservation_path(category: :customer), remote: true, class: classnames('btn-cookoon', {'btn-cookoon-primary': @reservation.customer?})
+        = link_to 'Un professionnel', new_reservation_path(category: :business), remote: true, class: classnames('btn-cookoon', {'btn-cookoon-primary': @reservation.business?})
 
     .search-inputs
       .input-cookoon-search data={action: 'click->search#toggleSelection', target: 'search.selection'}
