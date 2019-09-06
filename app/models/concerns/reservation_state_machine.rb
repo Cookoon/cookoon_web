@@ -84,6 +84,7 @@ module ReservationStateMachine
   end
 
   def set_services(service_categories)
+    services.where(category: [:sommelier, :parking, :corporate, :catering]).each(&:destroy)
     service_categories.each do |service_category|
       services.create(category: service_category, payment_tied_to_reservation: true)
     end

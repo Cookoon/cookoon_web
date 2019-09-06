@@ -35,7 +35,10 @@ class Reservation
     def compute_cookoon_price
       return 0 unless duration.present? && cookoon.present?
       cookoon_price_cents = duration * cookoon.price
-      cookoon_price_cents - (cookoon_price_cents * 0.15) if customer? && duration > 4
+      if customer? && duration > 4
+        # discount applied
+        cookoon_price_cents = cookoon_price_cents  * 0.85
+      end
       Money.new(cookoon_price_cents)
     end
 

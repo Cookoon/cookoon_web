@@ -100,17 +100,21 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def builtin_services
-    case object.type_name
-    when 'breakfast'
-      [:corporate]
-    when 'brunch'
-      [:sommelier]
-    when 'lunch', 'diner', 'cocktail'
-      [:sommelier, :parking]
-    when 'morning', 'afternoon'
-      [:corporate, :catering]
-    when 'day'
-      [:sommelier, :corporate, :catering]
+    if object.services.where(category: [:sommelier, :parking, :corporate, :catering]).any?
+      object.services.pluck(:category)
+    else
+      case object.type_name
+      when 'breakfast'
+        [:corporate]
+      when 'brunch'
+        [:sommelier]
+      when 'lunch', 'diner', 'cocktail'
+        [:sommelier, :parking]
+      when 'morning', 'afternoon'
+        [:corporate, :catering]
+      when 'day'
+        [:sommelier, :corporate, :catering]
+      end
     end
   end
 
