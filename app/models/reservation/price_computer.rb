@@ -52,8 +52,8 @@ class Reservation
 
     def production_fees_cents
       # gratuit pour perso 
-      return 0 unless business?
-      (people_count * 5000)
+      return 0 if customer?
+      (duration * 5000)
     end
 
     def butler_fees_cents
