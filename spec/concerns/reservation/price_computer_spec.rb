@@ -17,27 +17,27 @@ RSpec.describe Reservation::PriceComputer do
     end
 
     it 'computes services_price (sum of all options prices)' do
-      expect(prices[:services_price]).to eq(Money.new 127900, 'EUR')
+      expect(prices[:services_price]).to eq(Money.new 92900, 'EUR')
     end
 
     it 'computes services_tax (VAT on services)' do
-      expect(prices[:services_tax]).to eq(Money.new 25580, 'EUR')
+      expect(prices[:services_tax]).to eq(Money.new 18580, 'EUR')
     end
 
     it 'computes services_with_tax (Services prices with VAT)' do
-      expect(prices[:services_with_tax]).to eq(Money.new 153480, 'EUR')
+      expect(prices[:services_with_tax]).to eq(Money.new 111480, 'EUR')
     end
 
     it 'computes total_price (global price excluding tax)' do
-      expect(prices[:total_price]).to eq(Money.new 154900, 'EUR')
+      expect(prices[:total_price]).to eq(Money.new 119900, 'EUR')
     end
 
     it 'computes total_tax (total taxes)' do
-      expect(prices[:total_tax]).to eq(Money.new 25580, 'EUR')
+      expect(prices[:total_tax]).to eq(Money.new 18580, 'EUR')
     end
 
     it 'computes total_with_price (total price with VAT)' do
-      expect(prices[:total_with_tax]).to eq(Money.new 180480, 'EUR')
+      expect(prices[:total_with_tax]).to eq(Money.new 138480, 'EUR')
     end
   end
 end
