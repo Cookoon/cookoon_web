@@ -15,7 +15,7 @@ h1.text-center.my-4 Votre réservation
           b <span>#{humanized_money_with_symbol @reservation.cookoon_price}</span>
         .ml-3 = @cookoon.address
 
-        div class=classnames('m-2', 'd-none': @reservation.services.none?)
+        .m-2
           = render 'reservations/services_prices'
 
         hr
