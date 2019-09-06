@@ -7,8 +7,7 @@
     .cookoon-card-body
       h4 = cookoon.title_depending_on_reservation(@reservation)
       .d-flex
-        p.mr-2 <i class="fas fa-cookie text-primary mr-2"></i>MAX. 10 PERS
-        p.mr-2 <i class="fas fa-cookie text-primary mr-2"></i>PISCINE
-        p.mr-2 <i class="fas fa-cookie text-primary mr-2"></i>ECRAN TV
+        - cookoon.perk_specifications.limit(2).each do |perk_spec|
+          p.mr-2 <i class="#{perk_spec.icon_name} text-primary mr-2"></i> #{perk_spec.name}
 
       p = cookoon.description
