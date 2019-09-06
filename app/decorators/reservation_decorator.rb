@@ -41,6 +41,10 @@ class ReservationDecorator < Draper::Decorator
     h.display_duration_for object.duration
   end
 
+  def total_full_price_per_person
+    object.total_with_tax / object.people_count
+  end
+
   def cookoon_price
     h.humanized_money_with_symbol object.cookoon_price
   end

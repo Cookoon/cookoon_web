@@ -1,0 +1,15 @@
+.d-flex-default
+  b Services
+  - if @reservation.customer?
+    b = humanized_money_with_symbol(@reservation.services_with_tax)
+  - else
+    b = humanized_money_with_symbol(@reservation.services_price)
+
+
+.ml-3 Maitre d'Hôtel   
+
+- @reservation.services.each do |service|
+  .ml-3 = service.name
+
+- if @reservation.menu_id.present?
+  .ml-3 Chef
