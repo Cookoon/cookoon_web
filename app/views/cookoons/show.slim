@@ -9,10 +9,6 @@ div class=classnames(container: desktop_view?)
     .container
       .bg-dark.text-center
         = carousel_for(@cookoon.photos)
-        / - if @device == :desktop
-        /   = cl_image_tag(@cookoon.photos.first.path, width: 800, height: 450, crop: :fill)
-        / - else
-        /   = cl_image_tag(@cookoon.photos.first.path, width: 290, height: 200, crop: :fill)
 
       = render 'presentation', cookoon: @cookoon
       = render 'reservations/recap_string', reservation: @reservation

@@ -1,25 +1,21 @@
-h1.text-center.my-4 = @reservation.cookoon.name
+h1.text-center.my-4 Votre réservation
 
-div class=classnames(container: desktop_view?)
+.container
   .d-flex
     .d-none.d-md-block.mr-2
       = link_to '< Retour au choix', reservation_cookoon_path(@reservation, @reservation.cookoon), class: 'btn-cookoon btn-block btn-cookoon-secondary-gold mb-2 small'
       = render 'reservations/search_recap', reservation: @reservation 
 
-    .container
-      .d-flex-default
-        h5 Votre réservation
-        p <i class="fas fa-map-marker-alt"></i> #{@cookoon.address}
+    .container       
       = render 'reservations/recap_string', reservation: @reservation
 
-      p Vos services :
-
       .mb-4
-        b Location
-        .d-flex-default.ml-3
-          | Cookoon <span>#{humanized_money_with_symbol @reservation.cookoon_price}</span>
+        .d-flex-default
+          b Mise à disposition du lieu
+          b <span>#{humanized_money_with_symbol @reservation.cookoon_price}</span>
+        .ml-3 = @cookoon.address
 
-        div class=classnames('mb-2', 'd-none': @reservation.services.none?)
+        div class=classnames('m-2', 'd-none': @reservation.services.none?)
           = render 'reservations/services_prices'
 
         hr
@@ -27,7 +23,9 @@ div class=classnames(container: desktop_view?)
         .d-flex-default.mb-2
           b TOTAL
           - if @reservation.customer?
-            b.text-primary #{humanized_money_with_symbol @reservation.total_full_price} TTC
+            .text-right
+              b.text-primary #{humanized_money_with_symbol @reservation.total_full_price} TTC
+              p soit #{humanized_money_with_symbol(@reservation.total_full_price_per_person)} / personne
           - else
             b.text-primary #{humanized_money_with_symbol @reservation.total_price} HT
     

@@ -2,17 +2,12 @@
   h1 Mes moyens de paiement
 
   .cookoon-card.p-4
-    h3 <i class='co icon-losange text-primary mr-2'></i> Mes cartes
+    h3 <i class='co icon-losange small text-primary mr-2'></i> Mes cartes
 
     - if @credit_cards.blank?
       .information-card
         .information-card-title
-          p Aucune carte associée
-
-        .information-card-text
-          p
-            | Vous pouvez ajouter votre carte de paiement en toute confiance : votre numéro de carte est crypté contre toute
-            | violation, et vous serez débité uniquement si votre Hôte accepte votre demande de location.
+          p Aucune carte associée pour l'instant
 
     - else
       - @credit_cards.data.each_with_index do |card_data, index|
@@ -30,8 +25,8 @@
     hr          
 
     .py-3
-      h3 <i class='co icon-losange text-primary mr-2'></i> Nouveau moyen de paiement
-      button.btn-cookoon.btn-cookoon-primary type="button" data-toggle="modal" data-target="#credit-card-modal"
+      h3 <i class='co icon-losange small text-primary mr-2'></i> Nouveau moyen de paiement
+      button.btn-cookoon.btn-cookoon-primary.mt-4 type="button" data-toggle="modal" data-target="#credit-card-modal"
         | Ajouter une nouvelle carte
 
 = render 'modal'
