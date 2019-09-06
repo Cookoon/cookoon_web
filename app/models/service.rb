@@ -19,9 +19,9 @@ class Service < ApplicationRecord
   PRICES = {
     special: { base_price: 0, unit_price: 0 },
     sommelier: { base_price: 0, unit_price: 0 },
-    parking: { base_price: 0, unit_price: 11000 },
+    parking: { base_price: 0, unit_price: 8250 },
     corporate: { base_price: 0, unit_price: 2500 },
-    catering: { base_price: 0, unit_price: 2500 },
+    catering: { base_price: 0, unit_price: 3500 },
     breakfast: { base_price: 0, unit_price: 2500 }
   }.freeze
 
