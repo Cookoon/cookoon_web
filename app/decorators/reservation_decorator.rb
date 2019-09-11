@@ -91,7 +91,8 @@ class ReservationDecorator < Draper::Decorator
       cocktail: 'Cocktail',
       morning: 'Matinée',
       day: 'Journée',
-      afternoon: 'Après-midi'
+      afternoon: 'Après-midi',
+      brunch: 'Brunch'
     }
   end
 
