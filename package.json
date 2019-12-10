@@ -17,6 +17,7 @@
     "photoswipe": "^4.1.2",
     "popper.js": "^1.14.4",
     "rails-ujs": "^5.1.4",
+    "redis": "^2.8.0",
     "stimulus": "^1.0.0",
     "sweetalert2": "^7.20.10",
     "swiper": "^4.1.6",

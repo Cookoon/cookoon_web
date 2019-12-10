@@ -38,6 +38,7 @@ class Reservation < ApplicationRecord
     tax_rate: 0.2
   }.freeze
 
+  monetize :host_payout_price_cents
   monetize :cookoon_price_cents
   monetize :services_price_cents
   monetize :services_tax_cents
@@ -50,13 +51,13 @@ class Reservation < ApplicationRecord
   validates :start_at, in_future: true, after_notice_period: true, on: :create
   validates :duration, presence: true
   validates :people_count, presence: true
-  validates :type_name, inclusion: { in: %w[breakfast brunch lunch diner cocktail morning afternoon day], message: "Ce type de réservation n'est pas valide" } 
+  validates :type_name, inclusion: { in: %w[breakfast brunch lunch diner cocktail morning afternoon day], message: "Ce type de réservation n'est pas valide" }
 
   validate :tenant_is_not_host
 
   before_validation :configure_from_type_name, on: :create
   before_save :assign_prices, if: :assign_prices_needed?
-  
+
   # need to connect this to another condiction
   after_save :report_to_slack, if: :saved_change_to_aasm_state?
   after_save :update_services, if: :services_need_update?
@@ -128,7 +129,7 @@ class Reservation < ApplicationRecord
   def assign_prices
     assign_attributes(computed_price_attributes)
   end
-  
+
   def host_payout_price_cents
     cookoon_price_cents
   end
@@ -142,7 +143,7 @@ class Reservation < ApplicationRecord
   def configure_from_type_name
     Reservation::Configurator.new(self).call
   end
-  
+
   def services_need_update?
     return unless saved_change_to_aasm_state?
     saved_change_to_aasm_state.last == 'charged'
