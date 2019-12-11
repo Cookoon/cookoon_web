@@ -37,7 +37,7 @@ class Cookoon < ApplicationRecord
   validates :address,  presence: true
   validates :capacity, presence: true
   validates :category, presence: true
-  # validates :photos,   presence: true
+  validates :photos,   presence: true
   validate :count_per_user, on: :create
 
   after_validation :geocode, if: :address_changed?
