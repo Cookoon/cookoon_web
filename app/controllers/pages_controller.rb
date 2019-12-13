@@ -7,4 +7,8 @@ class PagesController < ApplicationController
   end
 
   def support; end
+
+  def general_conditions
+    # @reservation = Reservation.new.decorate
+  end
 end
