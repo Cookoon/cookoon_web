@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   controller :pages do
     get :home
     get :support
+    get :general_conditions
   end
 
   namespace :stripe do

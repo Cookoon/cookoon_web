@@ -1,0 +1,8 @@
+.a_gold {
+  color: #CDBB8A;
+  &:hover,
+  &:focus {
+    color: #CDBB8A;
+    text-decoration: underline;
+  }
+}
