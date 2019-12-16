@@ -9,4 +9,5 @@ class PagesController < ApplicationController
   def support; end
 
   def general_conditions; end
+
 end
