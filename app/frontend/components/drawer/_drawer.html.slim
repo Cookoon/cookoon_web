@@ -28,8 +28,8 @@
       li
         i.far.fa-question-circle aria-hidden="true"
         |   #{link_to 'MES CONTACTS UTILES', support_path}
-        
-    p= link_to 'Conditions Générales', 'https://cookoon.fr/conditions-generales/', target: :_blank
+
+    p= link_to 'Conditions Générales', 'https://cookoon.herokuapp.com/general_conditions/', target: :_blank
     .fixed-bottom
       = link_to host_dashboard_path do
         - if notifiable_reservation_requests?

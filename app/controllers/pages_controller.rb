@@ -7,10 +7,7 @@ class PagesController < ApplicationController
   end
 
   def support; end
-<<<<<<< Updated upstream
-=======
 
-  def general_conditions
-  end
->>>>>>> Stashed changes
+  def general_conditions; end
+
 end
