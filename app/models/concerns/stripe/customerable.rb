@@ -19,14 +19,18 @@ module Stripe
       customer
     end
 
-    def link_stripe_source(token)
-      link_source(token)
+    # def link_stripe_source(token)
+    def link_stripe_payment_method(payment_method)
+      # link_source(token)
+      link_payment_method(payment_method)
     end
 
     # can pass source instead of card to retrive sepa
-    def retrieve_stripe_sources(object = 'card')
+    # def retrieve_stripe_sources(object = 'card')
+    def retrieve_stripe_payment_methods(object = 'card')
       return [] unless stripe_customer
-      Stripe::Customer.list_sources(stripe_customer.id, { object: object })
+      # Stripe::Customer.list_sources(stripe_customer.id, { object: object })
+      Stripe::PaymentMethod.list({ customer: stripe_customer.id, type: object })
     end
 
     def destroy_stripe_source(source)
@@ -65,12 +69,15 @@ module Stripe
       )
     end
 
-    def link_source(token)
-      Stripe::Customer.create_source(stripe_customer.id, { source: token })
+    # def link_source(token)
+    def link_payment_method(payment_method)
+      # Stripe::Customer.create_source(stripe_customer.id, { source: token })
+      Stripe::PaymentMethod.attach(payment_method, { customer: stripe_customer.id })
     rescue Stripe::CardError, Stripe::InvalidRequestError => e
       Rails.logger.error("Failed to create stripe source for #{customerable_label}")
       Rails.logger.error(e.message)
-      errors.add(:stripe_source, e.message)
+      # errors.add(:stripe_source, e.message)
+      errors.add(:stripe_payment_method, e.message)
       false
     end
 
