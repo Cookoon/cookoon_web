@@ -1,19 +1,16 @@
-<div data-controller="stripe-payments"
-     data-stripe-payments-publishable-key="<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>"
->
+<!-- Code Alice -->
+<div>
   <%= simple_form_for :credit_card,
                       url: credit_cards_path,
                       remote: true,
                       authenticity_token: true,
                       html: {
-                        data: {
-                          target: 'stripe-payments.form'
-                        }
+                        id: "credit_card_form"
                       } do |f| %>
-    <div data-target="stripe-payments.cardElement"></div>
-    <div class="text-danger py-3" data-target='stripe-payments.cardError' role="alert"></div>
-    <%= f.input :stripe_token, as: :hidden, input_html: { data: { target: 'stripe-payments.tokenInput' } } %>
-
+    <%= f.input :cardholder_name, type:"text", class:"d-flex-default", placeholder:"Nom du porteur de carte", label: false %>
+    <div id="card-element"></div>
+    <div id="card-errors" role="alert"></div>
+    <%= f.input :stripe_payment_method, as:"hidden", label: false %>
     <div class="d-flex-default py-3">
       <p>Utiliser comme carte principale</p>
       <div class="form-group boolean optional">
@@ -29,10 +26,139 @@
                    'Ajouter une carte',
                    type: :submit,
                    class: 'btn-cookoon btn-cookoon-primary',
+                   id:'button_confirm_credit_card'
+      %>
+    </div>
+  <% end %>
+</div>
+
+<!-- <script src="https://js.stripe.com/v3/"></script> -->
+
+<script>
+  const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
+</script>
+
+<script>
+  // create elements
+  const elements = stripe.elements();
+  const cardElement = elements.create('card');
+  cardElement.mount('#card-element');
+
+  const cardholderName = document.getElementById('credit_card_cardholder_name');
+  // console.log(cardholderName);
+  const form = document.getElementById('credit_card_form');
+  // console.log(form);
+  const displayError = document.getElementById('card-errors');
+  // console.log(displayError);
+  const button = document.getElementById('button_confirm_credit_card');
+
+  // // affiche les messages d'erreur stripe sous les champs de carte pendant la saisie
+  // cardElement.addEventListener('change', ({error}) => {
+  //   if (error) {
+  //     displayError.textContent = error.message;
+  //   } else {
+  //     displayError.textContent = '';
+  //   }
+  // });
+
+  const changeDisabledButtonStatus = (btn) => {
+    if (btn.disabled === false) {
+      // Désactive le bouton Submit
+      btn.disabled = true;
+      // Indique Chargement dans le bouton
+      btn.innerHTML = "<i class='fas fa-spinner fa-spin' style='margin-right: 10px;''></i>Chargement";
+    } else if (btn.disabled === true) {
+      // Réactive le bouton Submit
+      btn.disabled = false;
+      // Indique Chargement dans le bouton
+      btn.innerHTML = "Ajouter une carte";
+    }
+  }
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    // désactive le bouton submit
+    changeDisabledButtonStatus(button);
+
+    // get the setupintent secret from credit_cards/secret.json
+    fetch("/credit_cards/secret.json")
+    .then(response => response.json())
+    .then((data) => {
+      const clientSecret = data.client_secret;
+      // console.log(data);
+      console.log(clientSecret);
+
+      // Confirmation of the credit card with the clientSecret;
+      stripe.confirmCardSetup(
+        clientSecret,
+        {
+          payment_method: {
+            card: cardElement,
+            billing_details: {
+              name: cardholderName.value,
+            },
+          },
+        }
+      )
+      .then((result) => {
+        if (result.error) {
+          // Display error.message in your UI.
+          // affiche le message d'erreur Stripe si le traitement échoue
+          displayError.textContent = result.error.message;
+          // réactive le bouton submit
+          changeDisabledButtonStatus(button);
+        } else {
+          // The setup has succeeded. Display a success message
+          // send result.setupIntent.payment_method to your server to save the card to a Customer
+          displayError.textContent = "Votre carte a bien été ajoutée";
+          document.getElementById("credit_card_stripe_payment_method").value = result.setupIntent.payment_method;
+          console.log(document.getElementById("credit_card_stripe_payment_method").value);
+          form.submit();
+        }
+      });
+    });
+  })
+</script>
+
+<!-- Code Charles -->
+
+<!-- <div data-controller="stripe-payments"
+     data-stripe-payments-publishable-key="<%#= ENV['STRIPE_PUBLISHABLE_KEY'] %>"
+>
+  <%#= simple_form_for :credit_card,
+                      url: credit_cards_path,
+                      remote: true,
+                      authenticity_token: true,
+                      html: {
+                        data: {
+                          target: 'stripe-payments.form'
+                        }
+                      } do |f| %>
+    <div data-target="stripe-payments.cardElement"></div>
+    <div class="text-danger py-3" data-target='stripe-payments.cardError' role="alert"></div>
+    <%#= f.input :stripe_token, as: :hidden, input_html: { data: { target: 'stripe-payments.tokenInput' } } %>
+
+    <div class="d-flex-default py-3">
+      <p>Utiliser comme carte principale</p>
+      <div class="form-group boolean optional">
+        <input value="0" type="hidden" name="credit_card[default]">
+        <input class="boolean optional d-none" type="checkbox" value="1" name="credit_card[default]" id="credit_card_default">
+        <label class="boolean optional toggle" for="credit_card_default">
+          <span class="toggle-handler"></span>
+        </label>
+      </div>
+    </div>
+    <div class="py-3 text-center">
+      <%#= f.button :button,
+                   'Ajouter une carte',
+                   type: :submit,
+                   class: 'btn-cookoon btn-cookoon-primary',
                    data: {
                      disable_with: '<i class="fas fa-spinner fa-spin" style="margin-right: 10px;"></i>Chargement'.html_safe
                    }
       %>
     </div>
-  <% end %>
-</div>
+  <%# end %>
+</div> -->
