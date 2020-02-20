@@ -20,7 +20,8 @@ class User
     end
 
     def destroy(card)
-      user.destroy_stripe_source(card)
+      # user.destroy_stripe_source(card)
+      user.detach_stripe_payment_method(card)
     end
 
     def default(card)
