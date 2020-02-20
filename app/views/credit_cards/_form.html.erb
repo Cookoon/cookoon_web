@@ -35,91 +35,90 @@
 <!-- <script src="https://js.stripe.com/v3/"></script> -->
 
 <script>
-  const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
-</script>
+    const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
 
-<script>
-  // create elements
-  const elements = stripe.elements();
-  const cardElement = elements.create('card');
-  cardElement.mount('#card-element');
+    // create elements
+    const elements = stripe.elements();
+    const cardElement = elements.create('card');
+    cardElement.mount('#card-element');
 
-  const cardholderName = document.getElementById('credit_card_cardholder_name');
-  // console.log(cardholderName);
-  const form = document.getElementById('credit_card_form');
-  // console.log(form);
-  const displayError = document.getElementById('card-errors');
-  // console.log(displayError);
-  const button = document.getElementById('button_confirm_credit_card');
+    const cardholderName = document.getElementById('credit_card_cardholder_name');
+    // console.log(cardholderName);
+    const form = document.getElementById('credit_card_form');
+    // console.log(form);
+    const displayError = document.getElementById('card-errors');
+    // console.log(displayError);
+    const button = document.getElementById('button_confirm_credit_card');
 
-  // // affiche les messages d'erreur stripe sous les champs de carte pendant la saisie
-  // cardElement.addEventListener('change', ({error}) => {
-  //   if (error) {
-  //     displayError.textContent = error.message;
-  //   } else {
-  //     displayError.textContent = '';
-  //   }
-  // });
+    // // affiche les messages d'erreur stripe sous les champs de carte pendant la saisie
+    // cardElement.addEventListener('change', ({error}) => {
+    //   if (error) {
+    //     displayError.textContent = error.message;
+    //   } else {
+    //     displayError.textContent = '';
+    //   }
+    // });
 
-  const changeDisabledButtonStatus = (btn) => {
-    if (btn.disabled === false) {
-      // Désactive le bouton Submit
-      btn.disabled = true;
-      // Indique Chargement dans le bouton
-      btn.innerHTML = "<i class='fas fa-spinner fa-spin' style='margin-right: 10px;''></i>Chargement";
-    } else if (btn.disabled === true) {
-      // Réactive le bouton Submit
-      btn.disabled = false;
-      // Indique Chargement dans le bouton
-      btn.innerHTML = "Ajouter une carte";
+    const changeDisabledButtonStatus = (btn) => {
+      if (btn.disabled === false) {
+        // Désactive le bouton Submit
+        btn.disabled = true;
+        // Indique Chargement dans le bouton
+        btn.innerHTML = "<i class='fas fa-spinner fa-spin' style='margin-right: 10px;''></i>Chargement";
+      } else if (btn.disabled === true) {
+        // Réactive le bouton Submit
+        btn.disabled = false;
+        // Indique Chargement dans le bouton
+        btn.innerHTML = "Ajouter une carte";
+      }
     }
-  }
 
-  form.addEventListener('submit', (event) => {
-    event.preventDefault();
-    event.stopPropagation();
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
 
-    // désactive le bouton submit
-    changeDisabledButtonStatus(button);
+      // désactive le bouton submit
+      changeDisabledButtonStatus(button);
 
-    // get the setupintent secret from credit_cards/secret.json
-    fetch("/credit_cards/secret.json")
-    .then(response => response.json())
-    .then((data) => {
-      const clientSecret = data.client_secret;
-      // console.log(data);
-      console.log(clientSecret);
+      // get the setupintent secret from credit_cards/secret.json
+      fetch("/credit_cards/secret.json")
+      .then(response => response.json())
+      .then((data) => {
+        const clientSecret = data.client_secret;
+        // console.log(data);
+        // console.log(clientSecret);
 
-      // Confirmation of the credit card with the clientSecret;
-      stripe.confirmCardSetup(
-        clientSecret,
-        {
-          payment_method: {
-            card: cardElement,
-            billing_details: {
-              name: cardholderName.value,
+        // Confirmation of the credit card with the clientSecret;
+        stripe.confirmCardSetup(
+          clientSecret,
+          {
+            payment_method: {
+              card: cardElement,
+              billing_details: {
+                name: cardholderName.value,
+              },
             },
-          },
-        }
-      )
-      .then((result) => {
-        if (result.error) {
-          // Display error.message in your UI.
-          // affiche le message d'erreur Stripe si le traitement échoue
-          displayError.textContent = result.error.message;
-          // réactive le bouton submit
-          changeDisabledButtonStatus(button);
-        } else {
-          // The setup has succeeded. Display a success message
-          // send result.setupIntent.payment_method to your server to save the card to a Customer
-          displayError.textContent = "Votre carte a bien été ajoutée";
-          document.getElementById("credit_card_stripe_payment_method").value = result.setupIntent.payment_method;
-          console.log(document.getElementById("credit_card_stripe_payment_method").value);
-          form.submit();
-        }
+          }
+        )
+        .then((result) => {
+          if (result.error) {
+            // Display error.message in your UI.
+            // affiche le message d'erreur Stripe si le traitement échoue
+            displayError.textContent = result.error.message;
+            // réactive le bouton submit
+            changeDisabledButtonStatus(button);
+          } else {
+            // The setup has succeeded. Display a success message
+            // send result.setupIntent.payment_method to your server to save the card to a Customer
+            displayError.textContent = "Votre carte a bien été ajoutée";
+            document.getElementById("credit_card_stripe_payment_method").value = result.setupIntent.payment_method;
+            // console.log(document.getElementById("credit_card_stripe_payment_method").value);
+            form.submit();
+          }
+        });
       });
-    });
-  })
+    })
+
 </script>
 
 <!-- Code Charles -->
