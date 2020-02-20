@@ -33,8 +33,10 @@ module Stripe
       Stripe::PaymentMethod.list({ customer: stripe_customer.id, type: object })
     end
 
-    def destroy_stripe_source(source)
-      Stripe::Customer.delete_source(stripe_customer.id, source)
+    # def destroy_stripe_source(source)
+    def detach_stripe_payment_method(payment_method)
+      # Stripe::Customer.delete_source(stripe_customer.id, source)
+      Stripe::PaymentMethod.detach(payment_method)
     end
 
     def default_stripe_source(card)
