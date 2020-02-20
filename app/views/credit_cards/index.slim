@@ -16,7 +16,7 @@
             = render_credit_card_for card_data
             = "(Principale)" if index.zero?
 
-          = link_to credit_card_path(card_data.id), remote: true, method: :delete, class: 'no-button slowLoad' do
+          = link_to credit_card_path(card_data.id), method: :delete, class: 'no-button slowLoad' do
             .d-flex-default
               .fas.fa-times.fa-lg
               .pl-2.d-none.d-md-block Supprimer
@@ -26,7 +26,7 @@
 
     .py-3
       h3 <i class='co icon-losange small text-primary mr-2'></i> Nouveau moyen de paiement
-      button.btn-cookoon.btn-cookoon-primary.mt-4 type="button" data-toggle="modal" data-target="#credit-card-modal"
+      button.btn-cookoon.btn-cookoon-primary.mt-4 type="button" data-toggle="modal" data-target="#credit-card-modal" id="btn_add_new_credit_card"
         | Ajouter une nouvelle carte
 
 = render 'modal'
