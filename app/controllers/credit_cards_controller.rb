@@ -10,13 +10,13 @@ class CreditCardsController < ApplicationController
 
   def index
     # @credit_cards = current_user.credit_cards
-    @credit_cards = current_user.credit_cards.data
+    @credit_cards = current_user.credit_cards
     default_payment_method = credit_card.find_default_payment_method
     if default_payment_method.nil?
       @credit_cards
     else
-      @credit_cards.delete(default_payment_method)
-      @credit_cards.unshift(default_payment_method)
+      @credit_cards.data.delete(default_payment_method)
+      @credit_cards.data.unshift(default_payment_method)
       @credit_cards
     end
   end
