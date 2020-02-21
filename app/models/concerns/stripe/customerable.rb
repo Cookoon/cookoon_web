@@ -52,6 +52,14 @@ module Stripe
       stripe_customer_id.present?
     end
 
+    def find_default_stripe_payment_method
+      if stripe_customer.invoice_settings.default_payment_method.nil?
+        nil
+      else
+        Stripe::PaymentMethod.retrieve(stripe_customer.invoice_settings.default_payment_method)
+      end
+    end
+
     private
 
     def update_customerable(customer)

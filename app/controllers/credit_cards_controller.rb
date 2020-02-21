@@ -11,13 +11,12 @@ class CreditCardsController < ApplicationController
   def index
     # @credit_cards = current_user.credit_cards
     @credit_cards = current_user.credit_cards.data
-    default_payment_method_id = Stripe::Customer.retrieve(current_user.stripe_customer_id).invoice_settings.default_payment_method
-    if default_payment_method_id.nil?
+    default_payment_method = credit_card.find_default_payment_method
+    if default_payment_method.nil?
       @credit_cards
     else
-      default_payment_method = Stripe::PaymentMethod.retrieve(default_payment_method_id)
-      @credit_cards.delete(@default_payment_method)
-      @credit_cards.unshift(@default_payment_method)
+      @credit_cards.delete(default_payment_method)
+      @credit_cards.unshift(default_payment_method)
       @credit_cards
     end
   end

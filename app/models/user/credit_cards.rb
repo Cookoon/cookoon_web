@@ -28,5 +28,9 @@ class User
       # user.default_stripe_source(card)
       user.default_stripe_payment_method(card)
     end
+
+    def find_default_payment_method
+      user.find_default_stripe_payment_method
+    end
   end
 end
