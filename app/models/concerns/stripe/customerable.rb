@@ -39,9 +39,12 @@ module Stripe
       Stripe::PaymentMethod.detach(payment_method)
     end
 
-    def default_stripe_source(card)
+    # def default_stripe_source(card)
+    def default_stripe_payment_method(card)
       return false unless card
-      stripe_customer.default_source = card.id
+      # stripe_customer.default_source = card.id
+      stripe_customer.invoice_settings.default_payment_method = card.id
+      # Stripe::Customer.update(stripe_customer_id, { invoice_settings { default_payment_method: card.id }});
       stripe_customer.save
     end
 
