@@ -53,9 +53,7 @@ module Stripe
     end
 
     def find_default_stripe_payment_method
-      if stripe_customer.invoice_settings.default_payment_method.nil?
-        nil
-      else
+      if stripe_customer && !stripe_customer.invoice_settings.default_payment_method.nil?
         Stripe::PaymentMethod.retrieve(stripe_customer.invoice_settings.default_payment_method)
       end
     end
