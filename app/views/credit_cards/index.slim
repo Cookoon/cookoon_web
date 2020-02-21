@@ -4,13 +4,14 @@
   .cookoon-card.p-4
     h3 <i class='co icon-losange small text-primary mr-2'></i> Mes cartes
 
+
     - if @credit_cards.blank?
       .information-card
         .information-card-title
           p Aucune carte associée pour l'instant
 
     - else
-      - @credit_cards.data.each_with_index do |card_data, index|
+      - @credit_cards.each_with_index do |card_data, index|
         .d-flex-default.pt-1
           .h5
             = render_credit_card_for card_data
