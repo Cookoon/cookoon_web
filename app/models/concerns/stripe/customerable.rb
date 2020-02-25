@@ -25,12 +25,21 @@ module Stripe
       link_payment_method(payment_method)
     end
 
+    def link_stripe_source_for_sepa(token)
+      link_source_for_sepa(token)
+    end
+
     # can pass source instead of card to retrive sepa
     # def retrieve_stripe_sources(object = 'card')
     def retrieve_stripe_payment_methods(object = 'card')
       return [] unless stripe_customer
       # Stripe::Customer.list_sources(stripe_customer.id, { object: object })
       Stripe::PaymentMethod.list({ customer: stripe_customer.id, type: object })
+    end
+
+    def retrieve_stripe_sources_for_sepa(object = 'source')
+      return [] unless stripe_customer
+      Stripe::Customer.list_sources(stripe_customer.id, { object: object })
     end
 
     # def destroy_stripe_source(source)
@@ -92,6 +101,15 @@ module Stripe
       false
     end
 
+    def link_source_for_sepa(token)
+    Stripe::Customer.create_source(stripe_customer.id, { source: token })
+    rescue Stripe::CardError, Stripe::InvalidRequestError => e
+      Rails.logger.error("Failed to create stripe source for #{customerable_label}")
+      Rails.logger.error(e.message)
+      errors.add(:stripe_source, e.message)
+      false
+    end
+
     def create_sepa_source
       Stripe::Source.create({
         type: 'sepa_credit_transfer',
@@ -104,7 +122,7 @@ module Stripe
     end
 
     def persist_sepa_source
-      sources = retrieve_stripe_sources('source')
+      sources = retrieve_stripe_sources_for_sepa('source')
       return nil if sources.empty?
       sepa_infos = sources.data.first['sepa_credit_transfer']
       if sepa_infos
