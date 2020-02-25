@@ -1,16 +1,60 @@
-<!-- Code Alice -->
-<div>
+<div data-controller="stripe-payments"
+     data-stripe-payments-publishable-key="<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>"
+     data-stripe-payments-url="/credit_cards/secret.json"
+>
   <%= simple_form_for :credit_card,
+                      url: credit_cards_path,
+                      remote: true,
+                      authenticity_token: true,
+                      html: {
+                        data: {
+                          target: 'stripe-payments.form'
+                        }
+                      } do |f| %>
+    <%= f.input :cardholder_name, type:"text", class:"d-flex-default", placeholder:"Nom du porteur de carte", label: false, input_html: { data: { target: 'stripe-payments.cardholderInput' } } %>
+    <div data-target="stripe-payments.cardElement"></div>
+    <div class="text-danger py-3" data-target='stripe-payments.cardError' role="alert"></div>
+    <%= f.input :stripe_token, as: :hidden, input_html: { data: { target: 'stripe-payments.tokenInput' } } %>
+
+    <div class="d-flex-default py-3">
+      <p>Utiliser comme carte principale</p>
+      <div class="form-group boolean optional">
+        <input value="0" type="hidden" name="credit_card[default]">
+        <input class="boolean optional d-none" type="checkbox" value="1" name="credit_card[default]" id="credit_card_default">
+        <label class="boolean optional toggle" for="credit_card_default">
+          <span class="toggle-handler"></span>
+        </label>
+      </div>
+    </div>
+    <p>En cliquant sur ce bouton, vous acceptez que vos coordonnées de carte bancaire soient stockées auprès de notre partenaire de paiement Stripe, qui utilise un cryptage de qualité bancaire.</p>
+    <div class="py-3 text-center">
+      <%= f.button :button,
+                   'Ajouter une carte',
+                   type: :submit,
+                   class: 'btn-cookoon btn-cookoon-primary',
+                   data: {
+                     disable_with: '<i class="fas fa-spinner fa-spin" style="margin-right: 10px;"></i>Chargement'.html_safe
+                   }
+      %>
+    </div>
+  <% end %>
+</div>
+
+
+
+<!-- Code Alice avant transfert dans stripe-payments-controller -->
+<!-- <div>
+  <%#= simple_form_for :credit_card,
                       url: credit_cards_path,
                       remote: true,
                       authenticity_token: true,
                       html: {
                         id: "credit_card_form"
                       } do |f| %>
-    <%= f.input :cardholder_name, type:"text", class:"d-flex-default", placeholder:"Nom du porteur de carte", label: false %>
+    <%#= f.input :cardholder_name, type:"text", class:"d-flex-default", placeholder:"Nom du porteur de carte", label: false %>
     <div id="card-element"></div>
     <div id="card-errors" role="alert"></div>
-    <%= f.input :stripe_payment_method, as:"hidden", label: false %>
+    <%#= f.input :stripe_payment_method, as:"hidden", label: false %>
     <div class="d-flex-default py-3">
       <p>Utiliser comme carte principale</p>
       <div class="form-group boolean optional">
@@ -22,20 +66,20 @@
       </div>
     </div>
     <div class="py-3 text-center">
-      <%= f.button :button,
+      <%#= f.button :button,
                    'Ajouter une carte',
                    type: :submit,
                    class: 'btn-cookoon btn-cookoon-primary',
                    id:'button_confirm_credit_card'
       %>
     </div>
-  <% end %>
-</div>
+  <%# end %>
+</div> -->
 
 <!-- <script src="https://js.stripe.com/v3/"></script> -->
 
-<script>
-    const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
+<!-- <script>
+    const stripe = Stripe('<%#= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
 
     // create elements
     const elements = stripe.elements();
@@ -119,45 +163,6 @@
       });
     })
 
-</script>
+</script> -->
 
-<!-- Code Charles -->
 
-<!-- <div data-controller="stripe-payments"
-     data-stripe-payments-publishable-key="<%#= ENV['STRIPE_PUBLISHABLE_KEY'] %>"
->
-  <%#= simple_form_for :credit_card,
-                      url: credit_cards_path,
-                      remote: true,
-                      authenticity_token: true,
-                      html: {
-                        data: {
-                          target: 'stripe-payments.form'
-                        }
-                      } do |f| %>
-    <div data-target="stripe-payments.cardElement"></div>
-    <div class="text-danger py-3" data-target='stripe-payments.cardError' role="alert"></div>
-    <%#= f.input :stripe_token, as: :hidden, input_html: { data: { target: 'stripe-payments.tokenInput' } } %>
-
-    <div class="d-flex-default py-3">
-      <p>Utiliser comme carte principale</p>
-      <div class="form-group boolean optional">
-        <input value="0" type="hidden" name="credit_card[default]">
-        <input class="boolean optional d-none" type="checkbox" value="1" name="credit_card[default]" id="credit_card_default">
-        <label class="boolean optional toggle" for="credit_card_default">
-          <span class="toggle-handler"></span>
-        </label>
-      </div>
-    </div>
-    <div class="py-3 text-center">
-      <%#= f.button :button,
-                   'Ajouter une carte',
-                   type: :submit,
-                   class: 'btn-cookoon btn-cookoon-primary',
-                   data: {
-                     disable_with: '<i class="fas fa-spinner fa-spin" style="margin-right: 10px;"></i>Chargement'.html_safe
-                   }
-      %>
-    </div>
-  <%# end %>
-</div> -->

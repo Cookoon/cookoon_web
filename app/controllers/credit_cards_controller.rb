@@ -15,8 +15,9 @@ class CreditCardsController < ApplicationController
   end
 
   def create
-    # card = credit_card.add(credit_card_params[:stripe_token])
-    card = credit_card.add(credit_card_params[:stripe_payment_method])
+    # raise
+    card = credit_card.add(credit_card_params[:stripe_token])
+    # card = credit_card.add(credit_card_params[:stripe_payment_method])
     credit_card.default(card) if set_card_as_default?
     handle_redirection(card)
   end
