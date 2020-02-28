@@ -7,11 +7,19 @@ class StripeAccountsController < ApplicationController
   def create
     if @service.create_and_link_account
       flash[:notice] = 'Votre compte est maintenant lié avec Stripe. Vous pourrez prochainement récupérer vos paiements en attente'
-      redirect_to edit_users_path
+      redirect_to "#{@service.stripe_account_link_id_verification.url}"
     else
       flash.now[:alert] = @service.error_messages
       render :new
     end
+
+    # if @service.create_and_link_account
+    #   flash[:notice] = 'Votre compte est maintenant lié avec Stripe. Vous pourrez prochainement récupérer vos paiements en attente'
+    #   redirect_to edit_users_path
+    # else
+    #   flash.now[:alert] = @service.error_messages
+    #   render :new
+    # end
   end
 
   private
