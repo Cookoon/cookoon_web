@@ -78,7 +78,10 @@ class StripeAccountService
       type: 'custom',
       country: 'FR',
       email: user.email,
-      account_token: params[:account_token]
+      account_token: params[:account_token],
+      # add requested_capabilities because required
+      # transfers : new api / legacy_payments : old one but old accounts were created with that
+      requested_capabilities: ['transfers', 'legacy_payments']
     }
   end
 
@@ -92,4 +95,5 @@ class StripeAccountService
       ERROR
     end
   end
+
 end
