@@ -110,8 +110,8 @@ class StripeAccountService
   def prepare_account_link
     {
       account: user.stripe_account_id,
-      failure_url: 'http://localhost:3000/reservations',
-      success_url: 'http://localhost:3000/users/invitation/new',
+      failure_url: "http://localhost:3000/",
+      success_url: "http://localhost:3000/",
       type: 'custom_account_verification',
       collect: 'currently_due'
     }
