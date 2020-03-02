@@ -143,7 +143,7 @@ export default class extends Controller {
     this.bankAccountTokenInputTarget.value = bankAccountToken.id;
 
     this.formTarget.removeEventListener('submit', this.handleSubmit);
-    Rails.fire(this.formTarget, 'submit');
-    // this.formTarget.submit();
+    // Rails.fire(this.formTarget, 'submit');
+    this.formTarget.submit();
   };
 }
