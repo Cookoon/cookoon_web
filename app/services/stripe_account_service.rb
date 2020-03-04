@@ -1,5 +1,7 @@
 class StripeAccountService
-  attr_reader :params, :user, :errors, :account, :stripe_account_link_id_verification
+  attr_reader :params, :user, :errors, :account
+  # # To implement later :
+  # , :stripe_account_link_id_verification
 
   def initialize(attributes)
     @params = attributes[:params]
@@ -12,7 +14,8 @@ class StripeAccountService
     retrieve_or_create_account
     account_updated = link_bank_account
     user.update(stripe_account_id: account.id) if account_updated
-    create_stripe_url_id_verification
+    # # To implement later
+    # create_stripe_url_id_verification
   end
 
   def error_messages
@@ -23,15 +26,11 @@ class StripeAccountService
     retrieve_account
   end
 
-  def create_stripe_url_id_verification
-    return false unless account
-    @stripe_account_link_id_verification = Stripe::AccountLink.create(prepare_account_link)
-  rescue Stripe::InvalidRequestError => e
-    Rails.logger.error('Failed to create link to verify identity')
-    Rails.logger.error(e.message)
-    @errors << e.message
-    false
-  end
+  # # To implement later
+  # def add_identity_documents_for_existing_accounts
+  #   retrieve_stripe_account
+  #   create_stripe_url_id_verification
+  # end
 
   private
 
@@ -107,13 +106,25 @@ class StripeAccountService
     end
   end
 
-  def prepare_account_link
-    {
-      account: user.stripe_account_id,
-      failure_url: "http://localhost:3000/",
-      success_url: "http://localhost:3000/",
-      type: 'custom_account_verification',
-      collect: 'currently_due'
-    }
-  end
+  # # To implement later
+  # def create_stripe_url_id_verification
+  #   return false unless account
+  #   @stripe_account_link_id_verification = Stripe::AccountLink.create(prepare_account_link)
+  # rescue Stripe::InvalidRequestError => e
+  #   Rails.logger.error('Failed to create link to verify identity')
+  #   Rails.logger.error(e.message)
+  #   @errors << e.message
+  #   false
+  # end
+
+  # # To implement later
+  # def prepare_account_link
+  #   {
+  #     account: user.stripe_account_id,
+  #     failure_url: "http://localhost:3000/",
+  #     success_url: "http://localhost:3000/",
+  #     type: 'custom_account_verification',
+  #     collect: 'currently_due'
+  #   }
+  # end
 end
