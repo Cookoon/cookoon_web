@@ -30,11 +30,11 @@
     <div class="text-danger py-3" data-target='stripe-accounts.accountError' role="alert"></div>
 
     <p>
-      En cliquant sur ce bouton, vous acceptez nos <%= link_to "Conditions Générales d'Utilisation", '../general_conditions', target: '_blank' %>
-      ainsi que les <%= link_to "Conditions d'Utilisation des Comptes Connectés Stripe", 'https://stripe.com/fr/connect-account/legal#translation', target: '_blank' %>
+      En cliquant sur ce bouton, vous acceptez nos <%= link_to "Conditions Générales d'Utilisation", '../general_conditions', target: '_blank', class: "a_gold" %>,
+      ainsi que les <%= link_to "Conditions d'Utilisation des Comptes Connectés Stripe", 'https://stripe.com/fr/connect-account/legal#translation', target: '_blank', class: "a_gold" %> et <%= link_to "Conditions générales d'utilisation Stripe", 'https://stripe.com/fr/legal#translation', target: '_blank', class: "a_gold" %> appelées <%= link_to "\"Stripe Services Agreement\"", 'https://stripe.com/fr/legal#translation', target: '_blank', class: "a_gold" %>
     </p>
-    <div class="pb-3">
-      <%= f.button :submit, 'Connecter mon compte', class: 'button button-blue slowLoad' %>
+    <div class="pb-3 text-center">
+      <%= f.button :submit, 'Connecter mon compte', class: 'btn-cookoon btn-cookoon-primary', data: { disable_with: '<i class="fas fa-spinner fa-spin" style="margin-right: 10px;"></i>Chargement'.html_safe } %>
     </div>
   <% end %>
 </div>
