@@ -3,7 +3,7 @@
   <b>Vos moyens de paiement</b>
   <div class="credit-card-select payment-block">
     <i class="co co-cb"></i>
-    <%= f.input :source, collection: @credit_cards, selected: :first, label: false, label_method: ->(card){ credit_card_label_for card }, value_method: ->(card){ card.id } %>
+    <%= f.input :source, collection: @credit_cards, selected: @payment_method_to_display_first.id, label: false, label_method: ->(card){ credit_card_label_for card }, value_method: ->(card){ card.id } %>
   </div>
 
   <div class="text-center mb-5 text-uppercase">
@@ -19,3 +19,27 @@
                }
   %>
 <% end %>
+
+<!-- Code Charles -->
+<%#= simple_form_for :payment, url: reservation_payments_path(@reservation), remote: true do |f| %>
+
+<!--   <b>Vos moyens de paiement</b>
+  <div class="credit-card-select payment-block">
+    <i class="co co-cb"></i> -->
+    <%#= f.input :source, collection: @credit_cards, selected: :first, label: false, label_method: ->(card){ credit_card_label_for card }, value_method: ->(card){ card.id } %>
+<!--   </div>
+
+  <div class="text-center mb-5 text-uppercase">
+ -->
+    <%#= link_to 'Ajouter une carte de paiement', "#", class: 'text-secondary', data: {toggle: "modal", target: "#credit-card-modal"} %>
+<!--   </div>
+ -->
+  <%#= f.button :submit,
+               'PAYER',
+               class: 'btn-cookoon btn-cookoon-primary btn-block',
+               data: {
+                 controller: 'analytics-events',
+                 action: 'click->analytics-events#reservationPaymentSubmit'
+               }
+  %>
+<%# end %>

@@ -5,6 +5,8 @@ class PaymentsController < ApplicationController
   def new
     @credit_cards = current_user.credit_cards
     @cookoon = @reservation.cookoon.decorate
+
+    @payment_method_to_display_first = current_user.find_default_stripe_payment_method || @credit_cards.first
   end
 
   def create
