@@ -3,11 +3,11 @@ class Reservation
     include Stripe::Transferable
     alias_method :reservation, :payable
 
-   private
+    def charge
+      reservation.charge! if errors.empty?
+    end
 
-    # def after_proceed
-    #   reservation.charge! if errors.empty?
-    # end
+    private
 
     # def should_capture?
     #   ActiveModel::Type::Boolean.new.cast(options[:capture]) || false
