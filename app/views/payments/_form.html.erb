@@ -1,5 +1,9 @@
-<%= simple_form_for :payment, url: reservation_payments_path(@reservation), remote: true do |f| %>
-
+<%#= simple_form_for :payment, url: reservation_payments_path(@reservation), remote: true do |f| %>
+<%= simple_form_for :payment,
+                    url: reservation_payments_path(@reservation),
+                    html: {
+                      id: "payment_form"
+                    } do |f| %>
   <b>Vos moyens de paiement</b>
   <div class="credit-card-select payment-block">
     <i class="co co-cb"></i>
@@ -7,11 +11,74 @@
     <%= f.input :source, collection: @credit_cards, selected: @payment_method_to_display_first.id, label: false, label_method: ->(card){ credit_card_label_for card }, value_method: ->(card){ card.id } %>
   </div>
 
+  <!-- We'll put the error messages in this element -->
+  <div id="card-errors" role="alert"></div>
+
   <div class="text-center mb-5 text-uppercase">
     <%= link_to 'Ajouter une carte de paiement', "#", class: 'text-secondary', data: {toggle: "modal", target: "#credit-card-modal"} %>
   </div>
 
   <%= f.button :submit,
+               'PAYER',
+               class: 'btn-cookoon btn-cookoon-primary btn-block'
+               # data: {
+               #   controller: 'analytics-events',
+               #   action: 'click->analytics-events#reservationPaymentSubmit'
+               # }
+  %>
+<% end %>
+
+<%= console %>
+
+<script src="https://js.stripe.com/v3/"></script>
+
+<script>
+  const stripe = Stripe('<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>');
+</script>
+
+<script>
+  const displayError = document.getElementById('card-errors');
+  const form = document.getElementById('payment_form');
+  const cardSelected = document.getElementById("payment_source").selectedOptions[0].value
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    // get the setupintent secret from payments/secret.json
+    const response = await fetch(window.location.href.replace('/new', '/secret.json'));
+    // console.log(response);
+
+    const data = await response.json();
+    // console.log(data);
+
+    const result = await stripe.confirmCardPayment (data.client_secret, { payment_method: cardSelected });
+    // console.log(result);
+    // console.log(result.error);
+    if (result.error) {
+      // Inform the customer that there was an error
+      displayError.textContent = result.error.message;
+    } else {
+      // Send the payment to your server
+      form.submit();
+    }
+  });
+</script>
+
+<!-- Code Charles -->
+<!-- <%#= simple_form_for :payment, url: reservation_payments_path(@reservation), remote: true do |f| %>
+
+  <b>Vos moyens de paiement</b>
+  <div class="credit-card-select payment-block">
+    <i class="co co-cb"></i>
+    <%#= f.input :source, collection: @credit_cards, selected: :first, label: false, label_method: ->(card){ credit_card_label_for card }, value_method: ->(card){ card.id } %>
+  </div>
+
+  <div class="text-center mb-5 text-uppercase">
+    <%#= link_to 'Ajouter une carte de paiement', "#", class: 'text-secondary', data: {toggle: "modal", target: "#credit-card-modal"} %>
+  </div>
+
+  <%#= f.button :submit,
                'PAYER',
                class: 'btn-cookoon btn-cookoon-primary btn-block',
                data: {
@@ -19,4 +86,4 @@
                  action: 'click->analytics-events#reservationPaymentSubmit'
                }
   %>
-<% end %>
+<%# end %> -->
