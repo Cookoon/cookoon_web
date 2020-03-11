@@ -17,13 +17,7 @@ class Payment
 
   def create
     create_stripe_intent if charge_needed?
-    # after_create
   end
-  # def proceed
-  #   before_proceed
-  #   create_stripe_charge if charge_needed?
-  #   after_proceed
-  # end
 
   def retrieve_and_update
     retrieve_and_update_stripe_intent
