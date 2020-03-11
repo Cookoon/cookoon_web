@@ -21,14 +21,17 @@ class PaymentsController < ApplicationController
 
   def create
     payment = Reservation::Payment.new(@reservation.object)
-    if payment.proceed
-      @reservation.notify_users_after_payment
-      redirect_to new_reservation_message_path(@reservation)
-    else
-      @credit_cards = current_user.credit_cards
-      flash.now.alert = payment.displayable_errors
-      render :new
-    end
+    payment.charge
+    @reservation.notify_users_after_payment
+    redirect_to new_reservation_message_path(@reservation)
+    # if payment.proceed
+    #   @reservation.notify_users_after_payment
+    #   redirect_to new_reservation_message_path(@reservation)
+    # else
+    #   @credit_cards = current_user.credit_cards
+    #   flash.now.alert = payment.displayable_errors
+    #   render :new
+    # end
   end
 
   def amounts
