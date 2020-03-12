@@ -1,6 +1,6 @@
-<div data-controller="stripe-payments"
-     data-stripe-payments-publishable-key="<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>"
-     data-stripe-payments-url="/credit_cards/secret.json"
+<div data-controller="stripe-credit-cards"
+     data-stripe-credit-cards-publishable-key="<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>"
+     data-stripe-credit-cards-url="/credit_cards/secret.json"
 >
   <%= simple_form_for :credit_card,
                       url: credit_cards_path,
@@ -8,13 +8,13 @@
                       authenticity_token: true,
                       html: {
                         data: {
-                          target: 'stripe-payments.form'
+                          target: 'stripe-credit-cards.form'
                         }
                       } do |f| %>
-    <%= f.input :cardholder_name, type:"text", class:"d-flex-default", placeholder:"Nom du porteur de carte", label: false, input_html: { data: { target: 'stripe-payments.cardholderInput' } } %>
-    <div data-target="stripe-payments.cardElement"></div>
-    <div class="text-danger py-3" data-target='stripe-payments.cardError' role="alert"></div>
-    <%= f.input :stripe_token, as: :hidden, input_html: { data: { target: 'stripe-payments.tokenInput' } } %>
+    <%= f.input :cardholder_name, type:"text", class:"d-flex-default", placeholder:"Nom du porteur de carte", label: false, input_html: { data: { target: 'stripe-credit-cards.cardholderInput' } } %>
+    <div data-target="stripe-credit-cards.cardElement"></div>
+    <div class="text-danger py-3" data-target='stripe-credit-cards.cardError' role="alert"></div>
+    <%= f.input :stripe_token, as: :hidden, input_html: { data: { target: 'stripe-credit-cards.tokenInput' } } %>
 
     <div class="d-flex-default py-3">
       <p>Utiliser comme carte principale</p>
@@ -41,7 +41,7 @@
 </div>
 
 
-
+<!-- stripe-payments-controller changed in stripe-credit-cards-controller -->
 <!-- Code Alice avant transfert dans stripe-payments-controller -->
 <!-- <div>
   <%#= simple_form_for :credit_card,
