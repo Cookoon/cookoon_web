@@ -29,9 +29,12 @@ h1.text-center.my-4 Votre réservation
           - else
             b.text-primary #{humanized_money_with_symbol @reservation.total_price} HT
 
-      = render 'credit_cards/selection'
+      - if @reservation.object.aasm_state == "services_selected"
+        = render 'credit_cards/selection'
 
-      - if @reservation.business?
-        .text-center.mb-4
-          p Vous pouvez aussi demander un devis
-          = link_to 'Demander un Devis', ask_quotation_reservation_path(@reservation), class: 'btn-cookoon btn-cookoon-primary btn-block', method: :patch
+        - if @reservation.business?
+          .text-center.mb-4
+            p Vous pouvez aussi demander un devis
+            = link_to 'Demander un Devis', ask_quotation_reservation_path(@reservation), class: 'btn-cookoon btn-cookoon-primary btn-block', method: :patch
+
+      = console
