@@ -21,9 +21,13 @@ class PaymentsController < ApplicationController
 
   def create
     payment = Reservation::Payment.new(@reservation.object)
-    payment.charge
-    @reservation.notify_users_after_payment
-    redirect_to new_reservation_message_path(@reservation)
+    if payment.charge
+      @reservation.notify_users_after_payment
+      redirect_to new_reservation_message_path(@reservation)
+    else
+      flash.alert = "Une erreur est survenue, néanmoins votre demande de paiement est bien effective. Veuillez contacter notre service d'aide"
+      redirect_to home_path
+    end
     # if payment.proceed
     #   @reservation.notify_users_after_payment
     #   redirect_to new_reservation_message_path(@reservation)
