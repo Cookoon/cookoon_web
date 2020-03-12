@@ -3,7 +3,9 @@
                     url: reservation_payments_path(@reservation),
                     html: {
                       id: "payment_form"
-                    } do |f| %>
+                    },
+                    authenticity_token: true,
+                    remote: true do |f| %>
   <b>Vos moyens de paiement</b>
   <div class="credit-card-select payment-block">
     <i class="co co-cb"></i>
@@ -20,11 +22,11 @@
 
   <%= f.button :submit,
                'PAYER',
-               class: 'btn-cookoon btn-cookoon-primary btn-block'
-               # data: {
-               #   controller: 'analytics-events',
-               #   action: 'click->analytics-events#reservationPaymentSubmit'
-               # }
+               class: 'btn-cookoon btn-cookoon-primary btn-block',
+               data: {
+                 controller: 'analytics-events',
+                 action: 'click->analytics-events#reservationPaymentSubmit'
+               }
   %>
 <% end %>
 
