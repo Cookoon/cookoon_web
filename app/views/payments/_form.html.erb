@@ -1,4 +1,3 @@
-<%#= simple_form_for :payment, url: reservation_payments_path(@reservation), remote: true do |f| %>
 <%= simple_form_for :payment,
                     url: reservation_payments_path(@reservation),
                     html: {
@@ -9,7 +8,6 @@
   <b>Vos moyens de paiement</b>
   <div class="credit-card-select payment-block">
     <i class="co co-cb"></i>
-    <%#= f.input :source, collection: @credit_cards, selected: :first, label: false, label_method: ->(card){ credit_card_label_for card }, value_method: ->(card){ card.id } %>
     <%= f.input :source, collection: @credit_cards, selected: @payment_method_to_display_first.id, label: false, label_method: ->(card){ credit_card_label_for card }, value_method: ->(card){ card.id } %>
   </div>
 
