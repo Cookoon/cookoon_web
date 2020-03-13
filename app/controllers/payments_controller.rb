@@ -13,6 +13,7 @@ class PaymentsController < ApplicationController
   end
 
   def new
+    @url_intent_secret = "/reservations/#{@reservation.id}/payments/secret.json"
     @credit_cards = current_user.credit_cards
     @cookoon = @reservation.cookoon.decorate
 
