@@ -37,5 +37,12 @@
     <%= yield %>
 
     <%= render 'shared/footer' %>
+
+    <!-- Force reloading page if navigation from browser arrows -->
+    <script>
+      if (performance.navigation.type === 2) {
+        location.reload(true);
+      }
+    </script>
   </body>
 </html>
