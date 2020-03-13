@@ -2,33 +2,17 @@ import { Controller } from 'stimulus';
 import Rails from 'rails-ujs';
 
 export default class extends Controller {
-  static targets = ['cardElement', 'cardError', 'form', 'tokenInput', 'cardholderInput'];
+  static targets = ['paymentForm', 'paymentSelection', 'paymentError', 'paymentSuccess'];
 
   stripe = Stripe(this.data.get('publishableKey'));
 
-  style = {
-    base: {
-      fontSize: '16px',
-      color: '#2C2C2C',
-      iconColor: '#2C2C2C',
-      '::placeholder': {
-        color: '#c9c9c9'
-      }
-    }
-  };
-
   connect() {
-    // Create an instance of the card Element
-    const elements = this.stripe.elements();
-    this.card = elements.create('card', { style: this.style });
-
-    // Add an instance of the card Element into the cardElementTarget
-    this.card.mount(this.cardElementTarget);
-
-    this.card.addEventListener('change', this.handleCardError);
-
-    // Create a token or display an error when the form is submitted.
-    this.formTarget.addEventListener('submit', this.handleSubmit);
+    // Confirm the payment intent or display an error when the form is submitted.
+    this.paymentFormTarget.addEventListener('submit', this.handleSubmit);
+    // console.log(this.paymentFormTarget);
+    // console.log(this.paymentSelectionTarget);
+    // console.log(this.paymentErrorTarget);
+    // console.log(this.paymentSuccessTarget);
 
     // iOS keyboard fix
     $('#credit-card-modal').on('hide.bs.modal', function () {
@@ -38,56 +22,56 @@ export default class extends Controller {
   }
 
   disconnect() {
-    this.card.removeEventListener('change', this.handleCardError);
-    this.formTarget.removeEventListener('submit', this.handleSubmit);
-    this.card = null;
+    this.paymentFormTarget.removeEventListener('submit', this.handleSubmit);
   }
 
-  handleCardError = ({ error }) => {
-    if (error) {
-      this.cardErrorTarget.textContent = error.message;
-    } else {
-      this.cardErrorTarget.textContent = '';
-    }
-  };
+  disableButton() {
+    this.paymentFormTarget.button.innerHTML = "<i class='fas fa-spinner fa-spin' style='margin-right: 10px;'></i>Chargement";
+    this.paymentFormTarget.button.disabled = true;
+  }
+
+  enableButton() {
+    this.paymentFormTarget.button.innerHTML = "Payer";
+    this.paymentFormTarget.button.disabled = false;
+  }
 
   handleSubmit = async (event) => {
     event.stopPropagation();
     event.preventDefault();
 
+    this.disableButton();
+
     const response = await fetch(this.data.get("url"));
-    // console.log(response);
+    console.log(response);
 
     const data = await response.json();
-    // console.log(data.client_secret);
+    console.log(data.client_secret);
 
-    const token = await this.stripe.confirmCardSetup(data.client_secret, {
-      payment_method: {
-        card: this.card,
-        billing_details: {
-          name: this.cardholderInputTarget.value,
-        },
-      },
-    });
+    // this.paymentSelected = this.paymentSelectionTarget.selectedOptions[0].innerHTML;
+    this.paymentSelected = this.paymentSelectionTarget.selectedOptions[0].value;
+    // console.log(this.paymentSelected);
 
-    // console.log(token);
-    // console.log(token.error);
-    if (token.error) {
+    const result = await this.stripe.confirmCardPayment(data.client_secret, {
+      payment_method: this.paymentSelected
+      }
+    );
+    // console.log(result);
+
+    if (result.error) {
       // Inform the customer that there was an error
-      this.cardErrorTarget.textContent = token.error.message;
+      this.paymentErrorTarget.classList.add("my-4");
+      this.paymentErrorTarget.textContent = result.error.message;
+      this.enableButton();
     } else {
-      // Send the token to your server
-      this.handleStripeToken(token);
+      this.paymentFormTarget.removeEventListener('submit', this.handleSubmit);
+      // Hide paymentForm
+      this.paymentFormTarget.style.display = "none";
+      // Add a success payment message
+      this.paymentSuccessTarget.classList.add("mb-4");
+      this.paymentSuccessTarget.textContent = "Votre paiement a bien été enregistré";
+      // Submit the form
+      Rails.fire(this.paymentFormTarget, 'submit');
+      // this.paymentFormTarget.submit();
     }
-  };
-
-  handleStripeToken = token => {
-    // console.log(token);
-    // Insert the token ID into the form so it gets submitted to the server
-    this.tokenInputTarget.value = token.setupIntent.payment_method;
-
-    // Submit the form
-    this.formTarget.removeEventListener('submit', this.handleSubmit);
-    Rails.fire(this.formTarget, 'submit');
   };
 };
