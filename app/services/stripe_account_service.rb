@@ -1,7 +1,5 @@
 class StripeAccountService
   attr_reader :params, :user, :errors, :account
-  # # To implement later :
-  # , :stripe_account_link_id_verification
 
   def initialize(attributes)
     @params = attributes[:params]
@@ -14,8 +12,6 @@ class StripeAccountService
     retrieve_or_create_account
     account_updated = link_bank_account
     user.update(stripe_account_id: account.id) if account_updated
-    # # To implement later
-    # create_stripe_url_id_verification
   end
 
   def error_messages
@@ -25,12 +21,6 @@ class StripeAccountService
   def retrieve_stripe_account
     retrieve_account
   end
-
-  # # To implement later
-  # def add_identity_documents_for_existing_accounts
-  #   retrieve_stripe_account
-  #   create_stripe_url_id_verification
-  # end
 
   private
 
@@ -88,10 +78,7 @@ class StripeAccountService
       type: 'custom',
       country: 'FR',
       email: user.email,
-      account_token: params[:account_token],
-      # add requested_capabilities because required
-      # transfers : new api / legacy_payments : old one but old accounts were created with that
-      requested_capabilities: ['transfers', 'legacy_payments']
+      account_token: params[:account_token]
     }
   end
 
@@ -105,26 +92,4 @@ class StripeAccountService
       ERROR
     end
   end
-
-  # # To implement later
-  # def create_stripe_url_id_verification
-  #   return false unless account
-  #   @stripe_account_link_id_verification = Stripe::AccountLink.create(prepare_account_link)
-  # rescue Stripe::InvalidRequestError => e
-  #   Rails.logger.error('Failed to create link to verify identity')
-  #   Rails.logger.error(e.message)
-  #   @errors << e.message
-  #   false
-  # end
-
-  # # To implement later
-  # def prepare_account_link
-  #   {
-  #     account: user.stripe_account_id,
-  #     failure_url: "http://localhost:3000/",
-  #     success_url: "http://localhost:3000/",
-  #     type: 'custom_account_verification',
-  #     collect: 'currently_due'
-  #   }
-  # end
 end

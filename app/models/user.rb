@@ -127,25 +127,4 @@ class User < ApplicationRecord
     }
     UpsertMailchimpSubscriptionJob.perform_later(email, ENV['MAILCHIMP_LIST_ID'], body)
   end
-
-  # # To implement later
-  # def stripe_account?
-  #   stripe_account.present?
-  # end
-
-  # def stripe_bank_account?
-  #   stripe_account? && !stripe_account.external_accounts.empty?
-  #   # stripe_account.external_accounts
-  # end
-
-  # def stripe_account_requirements?
-  #   stripe_account? && !stripe_account.requirements.currently_due.empty?
-  #   # stripe_account.requirements
-  # end
-
-  # def stripe_account_identity_requirements?
-  #   return false unless stripe_account_requirements?
-  #   stripe_account_identity_requirements = ["business_profile.url", "individual.verification.additional_document", "individual.verification.document"]
-  #   stripe_account.requirements.currently_due.any? {|requirement| stripe_account_identity_requirements.include?(requirement)}
-  # end
 end

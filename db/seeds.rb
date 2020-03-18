@@ -74,7 +74,7 @@ puts "Cookoons done"
 
 puts 'Seeding Companies'
 Company.create!(name: "Réceptions Nouvelles", address: "12 rue Lincoln, 75008 Paris", siren: 821316239, siret: 82131623900010, vat: "FR 28 821316239", referent_email: 'gregory@cookoon.fr')
-puts 'Companies done'
+# puts 'Companies done'
 
 Menu.destroy_all
 Chef.destroy_all
@@ -83,17 +83,17 @@ chef_attributes = [
   {
     name: 'Hélène Darroze',
     description: <<-DESCRIPTION
-      Elle officie dans son restaurant gastronomique du 6e arrondissement de Paris, le Marsan (qui portait auparavant son nom).
-      Sa cuisine est récompensée d'une note de 15/20 au Gault-Millau et l'obtention de deux étoiles au Guide Michelin en 2003.
+      Elle officie dans son restaurant gastronomique du 6e arrondissement de Paris, le Marsan (qui portait auparavant son nom). 
+      Sa cuisine est récompensée d'une note de 15/20 au Gault-Millau et l'obtention de deux étoiles au Guide Michelin en 2003. 
       Cela en fait une des seules cheffes étoilées en activité avec Anne-Sophie Pic et Julia Sedefdjian.
     DESCRIPTION
   },
   {
     name: 'Gordon Ramsay',
     description: <<-DESCRIPTION
-      Également présentateur de plusieurs émissions télévisées consacrées à la cuisine ou à la restauration,
-      telles que The F Word, MasterChef, ou encore la célèbre émission Ramsay's Kitchen Nightmares
-      (diffusée en France sous le nom de Cauchemar en cuisine), il compte parmi les trois cuisiniers ayant été gratifiés
+      Également présentateur de plusieurs émissions télévisées consacrées à la cuisine ou à la restauration, 
+      telles que The F Word, MasterChef, ou encore la célèbre émission Ramsay's Kitchen Nightmares 
+      (diffusée en France sous le nom de Cauchemar en cuisine), il compte parmi les trois cuisiniers ayant été gratifiés 
       de trois étoiles en une fois par l'édition britannique du Guide Michelin.
     DESCRIPTION
   }
