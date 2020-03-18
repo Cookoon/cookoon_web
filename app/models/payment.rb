@@ -27,9 +27,9 @@ class Payment
   #   refund_stripe_charge
   # end
 
-  # def capture
-  #   capture_stripe_charge
-  # end
+  def capture
+    capture_stripe_intent
+  end
 
   def displayable_errors
     if errors.any?

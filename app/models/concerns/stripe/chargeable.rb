@@ -14,9 +14,9 @@ module Stripe
       return_client_secret
     end
 
-  #   def capture_stripe_charge
-  #     capture_charge
-  #   end
+    def capture_stripe_intent
+      capture_intent
+    end
 
   #   def refund_stripe_charge
   #     refund_charge
@@ -31,15 +31,15 @@ module Stripe
   #     charge.refund
   #   end
 
-  #   def capture_charge
-  #     return false unless charge
-  #     charge.capture
-  #   end
+    def capture_intent
+      return false unless intent
+      intent.capture
+    end
 
-  #   def charge
-  #     return false unless payable.stripe_charge_id
-  #     @charge ||= Stripe::Charge.retrieve(payable.stripe_charge_id)
-  #   end
+    def intent
+      return false unless payable.stripe_charge_id
+      @intent ||= Stripe::PaymentIntent.retrieve(payable.stripe_charge_id)
+    end
 
     def persist_intent
       payable.update(stripe_charge_id: stripe_intent.id) if stripe_intent
