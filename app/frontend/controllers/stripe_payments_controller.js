@@ -42,10 +42,10 @@ export default class extends Controller {
     this.disableButton();
 
     const response = await fetch(this.data.get("url"));
-    console.log(response);
+    // console.log(response);
 
     const data = await response.json();
-    console.log(data.client_secret);
+    // console.log(data.client_secret);
 
     // this.paymentSelected = this.paymentSelectionTarget.selectedOptions[0].innerHTML;
     this.paymentSelected = this.paymentSelectionTarget.selectedOptions[0].value;
