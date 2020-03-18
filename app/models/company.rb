@@ -20,7 +20,7 @@ class Company < ApplicationRecord
     if stripe_customer_id.blank?
       create_stripe_customer
       source = create_sepa_source
-      link_stripe_source_for_sepa(source.id)
+      link_stripe_source(source.id)
     end
     persist_sepa_source
   end

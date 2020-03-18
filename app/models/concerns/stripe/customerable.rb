@@ -19,52 +19,28 @@ module Stripe
       customer
     end
 
-    # def link_stripe_source(token)
-    def link_stripe_payment_method(payment_method)
-      # link_source(token)
-      link_payment_method(payment_method)
-    end
-
-    def link_stripe_source_for_sepa(token)
-      link_source_for_sepa(token)
+    def link_stripe_source(token)
+      link_source(token)
     end
 
     # can pass source instead of card to retrive sepa
-    # def retrieve_stripe_sources(object = 'card')
-    def retrieve_stripe_payment_methods(object = 'card')
-      return [] unless stripe_customer
-      # Stripe::Customer.list_sources(stripe_customer.id, { object: object })
-      Stripe::PaymentMethod.list({ customer: stripe_customer.id, type: object })
-    end
-
-    def retrieve_stripe_sources_for_sepa(object = 'source')
+    def retrieve_stripe_sources(object = 'card')
       return [] unless stripe_customer
       Stripe::Customer.list_sources(stripe_customer.id, { object: object })
     end
 
-    # def destroy_stripe_source(source)
-    def detach_stripe_payment_method(payment_method)
-      # Stripe::Customer.delete_source(stripe_customer.id, source)
-      Stripe::PaymentMethod.detach(payment_method)
+    def destroy_stripe_source(source)
+      Stripe::Customer.delete_source(stripe_customer.id, source)
     end
 
-    # def default_stripe_source(card)
-    def default_stripe_payment_method(card)
+    def default_stripe_source(card)
       return false unless card
-      # stripe_customer.default_source = card.id
-      stripe_customer.invoice_settings.default_payment_method = card.id
-      # Stripe::Customer.update(stripe_customer_id, { invoice_settings { default_payment_method: card.id }});
+      stripe_customer.default_source = card.id
       stripe_customer.save
     end
 
     def stripe_customer?
       stripe_customer_id.present?
-    end
-
-    def find_default_stripe_payment_method
-      if stripe_customer && !stripe_customer.invoice_settings.default_payment_method.nil?
-        Stripe::PaymentMethod.retrieve(stripe_customer.invoice_settings.default_payment_method)
-      end
     end
 
     private
@@ -89,20 +65,8 @@ module Stripe
       )
     end
 
-    # def link_source(token)
-    def link_payment_method(payment_method)
-      # Stripe::Customer.create_source(stripe_customer.id, { source: token })
-      Stripe::PaymentMethod.attach(payment_method, { customer: stripe_customer.id })
-    rescue Stripe::CardError, Stripe::InvalidRequestError => e
-      Rails.logger.error("Failed to create stripe source for #{customerable_label}")
-      Rails.logger.error(e.message)
-      # errors.add(:stripe_source, e.message)
-      errors.add(:stripe_payment_method, e.message)
-      false
-    end
-
-    def link_source_for_sepa(token)
-    Stripe::Customer.create_source(stripe_customer.id, { source: token })
+    def link_source(token)
+      Stripe::Customer.create_source(stripe_customer.id, { source: token })
     rescue Stripe::CardError, Stripe::InvalidRequestError => e
       Rails.logger.error("Failed to create stripe source for #{customerable_label}")
       Rails.logger.error(e.message)
@@ -122,7 +86,7 @@ module Stripe
     end
 
     def persist_sepa_source
-      sources = retrieve_stripe_sources_for_sepa('source')
+      sources = retrieve_stripe_sources('source')
       return nil if sources.empty?
       sepa_infos = sources.data.first['sepa_credit_transfer']
       if sepa_infos

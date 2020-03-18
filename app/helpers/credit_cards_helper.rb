@@ -10,11 +10,11 @@ module CreditCardsHelper
   private
 
   def brand_for(stripe_card)
-    return 'Amex' if stripe_card.card.brand == 'American Express'
-    stripe_card.card.brand
+    return 'Amex' if stripe_card.brand == 'American Express'
+    stripe_card.brand
   end
 
   def safe_number_for(stripe_card)
-    "•••• #{stripe_card.card.last4}"
+    "•••• #{stripe_card.last4}"
   end
 end
