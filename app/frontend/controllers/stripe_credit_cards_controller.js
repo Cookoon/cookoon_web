@@ -43,6 +43,16 @@ export default class extends Controller {
     this.card = null;
   }
 
+  disableButton() {
+    this.formTarget.button.innerHTML = "<i class='fas fa-spinner fa-spin' style='margin-right: 10px;'></i>Chargement";
+    this.formTarget.button.disabled = true;
+  }
+
+  enableButton() {
+    this.formTarget.button.innerHTML = "Payer";
+    this.formTarget.button.disabled = false;
+  }
+
   handleCardError = ({ error }) => {
     if (error) {
       this.cardErrorTarget.textContent = error.message;
@@ -54,6 +64,8 @@ export default class extends Controller {
   handleSubmit = async (event) => {
     event.stopPropagation();
     event.preventDefault();
+
+    this.disableButton();
 
     const response = await fetch(this.data.get("url"));
     // console.log(response);
@@ -75,6 +87,7 @@ export default class extends Controller {
     if (token.error) {
       // Inform the customer that there was an error
       this.cardErrorTarget.textContent = token.error.message;
+      this.enableButton();
     } else {
       // Send the token to your server
       this.handleStripeToken(token);
