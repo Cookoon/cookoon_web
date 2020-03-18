@@ -4,9 +4,9 @@ h1.text-center.my-4 Votre réservation
   .d-flex
     .d-none.d-md-block.mr-2
       = link_to '< Retour au choix', reservation_cookoon_path(@reservation, @reservation.cookoon), class: 'btn-cookoon btn-block btn-cookoon-secondary-gold mb-2 small'
-      = render 'reservations/search_recap', reservation: @reservation 
+      = render 'reservations/search_recap', reservation: @reservation
 
-    .container       
+    .container
       = render 'reservations/recap_string', reservation: @reservation
 
       .mb-4
@@ -28,10 +28,11 @@ h1.text-center.my-4 Votre réservation
               p soit #{humanized_money_with_symbol(@reservation.total_full_price_per_person)} / personne
           - else
             b.text-primary #{humanized_money_with_symbol @reservation.total_price} HT
-    
-      = render 'credit_cards/selection'
 
-      - if @reservation.business?
-        .text-center.mb-4
-          p Vous pouvez aussi demander un devis
-          = link_to 'Demander un Devis', ask_quotation_reservation_path(@reservation), class: 'btn-cookoon btn-cookoon-primary btn-block', method: :patch
+      - if @reservation.object.aasm_state == "services_selected"
+        = render 'credit_cards/selection'
+
+        - if @reservation.business?
+          .text-center.mb-4
+            p Vous pouvez aussi demander un devis
+            = link_to 'Demander un Devis', ask_quotation_reservation_path(@reservation), class: 'btn-cookoon btn-cookoon-primary btn-block', method: :patch

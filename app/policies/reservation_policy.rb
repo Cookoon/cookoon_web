@@ -40,6 +40,10 @@ class ReservationPolicy < ApplicationPolicy
     true
   end
 
+  def secret?
+    record.user == user
+  end
+
   class Scope < Scope
     def resolve
       scope.for_tenant(user).displayable

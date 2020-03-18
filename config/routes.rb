@@ -32,7 +32,11 @@ Rails.application.routes.draw do
     post :stop_impersonating, on: :collection
   end
 
-  resources :credit_cards, only: %i[index create destroy]
+  resources :credit_cards, only: %i[index create destroy] do
+    collection do
+      get 'secret', to: 'credit_cards#secret'
+    end
+  end
   resources :stripe_accounts, only: %i[new create]
 
   resources :cookoons, only: %i[new create update] do
@@ -46,7 +50,11 @@ Rails.application.routes.draw do
       end
     end
     resources :chefs, only: :index
-    resources :payments, only: %i[new create]
+    resources :payments, only: %i[new create] do
+      collection do
+        get 'secret', to: 'payments#secret'
+      end
+    end
     patch 'menus/:id', to: 'reservations#select_menu', as: :select_menu
     patch :reset_menu, on: :member
     patch :ask_quotation, on: :member
