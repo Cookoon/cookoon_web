@@ -29,7 +29,14 @@
       <%= link_to 'Ajouter une carte de paiement', "#", class: 'text-secondary', data: {toggle: "modal", target: "#credit-card-modal"} %>
     </div>
 
-    <%= f.button :submit, 'PAYER', class: 'btn-cookoon btn-cookoon-primary btn-block', data: { controller: 'analytics-events', action: 'click->analytics-events#reservationPaymentSubmit'}
+    <%= f.button :button,
+                'PAYER',
+                type: :submit,
+                class: 'btn-cookoon btn-cookoon-primary btn-block',
+                data: {
+                  controller: 'analytics-events',
+                  action: 'click->analytics-events#reservationPaymentSubmit'
+               }
     %>
 
     <div class="text-center">
