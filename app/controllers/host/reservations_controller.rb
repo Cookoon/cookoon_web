@@ -9,7 +9,8 @@ module Host
     end
 
     def update
-      params['accept'].present? ? capture_payment_and_notify : refund_payment_and_notify
+      # params['accept'].present? ? capture_payment_and_notify : refund_payment_and_notify
+      params['accept'].present? ? capture_payment_and_notify : cancel_payment_and_notify
       redirect_to host_reservations_path
     end
 
@@ -32,8 +33,10 @@ module Host
       end
     end
 
-    def refund_payment_and_notify
-      @reservation.payment.refund
+    # def refund_payment_and_notify
+    def cancel_payment_and_notify
+      # @reservation.payment.refund
+      @reservation.payment.cancel
       @reservation.refuse!
       ReservationMailer.refused_to_tenant(@reservation).deliver_later
       flash[:notice] = 'Vous avez refusé la réservation'

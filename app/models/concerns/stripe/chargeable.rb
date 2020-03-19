@@ -18,18 +18,23 @@ module Stripe
       capture_intent
     end
 
-  #   def refund_stripe_charge
-  #     refund_charge
-  #   end
+    # def refund_stripe_charge
+    def cancel_stripe_intent
+      cancel_intent
+      # refund_charge
+    end
 
     private
 
     attr_reader :stripe_intent
 
-  #   def refund_charge
-  #     return false unless charge
-  #     charge.refund
-  #   end
+    # def refund_charge
+    def cancel_intent
+      return false unless intent
+      intent.cancel
+      # return false unless charge
+      # charge.refund
+    end
 
     def capture_intent
       return false unless intent
