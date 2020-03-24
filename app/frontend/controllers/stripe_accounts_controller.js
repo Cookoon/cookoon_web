@@ -68,8 +68,8 @@ export default class extends Controller {
       token: accountToken,
       error: accountError
     } = await this.stripe.createToken('account', {
-      legal_entity: {
-        type: 'individual',
+      business_type: 'individual',
+      individual: {
         first_name: this.firstNameInputTarget.value,
         last_name: this.lastNameInputTarget.value,
         dob: {
@@ -88,6 +88,31 @@ export default class extends Controller {
       tos_shown_and_accepted: true
     });
 
+    // // Old code for this function
+    //     const {
+    //       token: accountToken,
+    //       error: accountError
+    //     } = await this.stripe.createToken('account', {
+    //       legal_entity: {
+    //         type: 'individual',
+    //         first_name: this.firstNameInputTarget.value,
+    //         last_name: this.lastNameInputTarget.value,
+    //         dob: {
+    //           day: parseInt(document.getElementById('stripe_account_dob_3i').value),
+    //           month: parseInt(
+    //             document.getElementById('stripe_account_dob_2i').value
+    //           ),
+    //           year: parseInt(document.getElementById('stripe_account_dob_1i').value)
+    //         },
+    //         address: {
+    //           line1: this.addressInputTarget.value,
+    //           postal_code: this.postalCodeInputTarget.value,
+    //           city: this.cityInputTarget.value
+    //         }
+    //       },
+    //       tos_shown_and_accepted: true
+    //     });
+
     const {
       token: bankAccountToken,
       error: bankAccountError
@@ -100,6 +125,8 @@ export default class extends Controller {
     });
 
     if (accountError || bankAccountError) {
+      // console.log(accountError);
+      // console.log(bankAccountError);
       document.getElementById('loader').style = null;
 
       this.accountErrorTarget.textContent =
@@ -116,6 +143,7 @@ export default class extends Controller {
     this.bankAccountTokenInputTarget.value = bankAccountToken.id;
 
     this.formTarget.removeEventListener('submit', this.handleSubmit);
-    Rails.fire(this.formTarget, 'submit');
+    // Rails.fire(this.formTarget, 'submit');
+    this.formTarget.submit();
   };
 }

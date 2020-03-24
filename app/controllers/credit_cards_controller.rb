@@ -3,12 +3,21 @@ class CreditCardsController < ApplicationController
   skip_after_action :verify_policy_scoped
   skip_after_action :verify_authorized
 
+  def secret
+    set_up_intent = Stripe::SetupIntent.create()
+    @set_up_intent_json = {client_secret: set_up_intent.client_secret}.to_json
+  end
+
   def index
+    # @credit_cards = current_user.credit_cards
     @credit_cards = current_user.credit_cards
+    @default_payment_method = credit_card.find_default_payment_method
   end
 
   def create
+    # raise
     card = credit_card.add(credit_card_params[:stripe_token])
+    # card = credit_card.add(credit_card_params[:stripe_payment_method])
     credit_card.default(card) if set_card_as_default?
     handle_redirection(card)
   end
