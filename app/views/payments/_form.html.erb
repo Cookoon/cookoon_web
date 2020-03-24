@@ -1,16 +1,65 @@
-<%= simple_form_for :payment, url: reservation_payments_path(@reservation), remote: true do |f| %>
+<div data-controller="stripe-payments"
+     data-stripe-payments-publishable-key="<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>"
+     data-stripe-payments-url="<%= @url_intent_secret %>">
+
+  <%= simple_form_for :payment, url: reservation_payments_path(@reservation), html: { data: { target: 'stripe-payments.paymentForm' } }, authenticity_token: true, remote: true do |f| %>
+
+    <b>Vos moyens de paiement</b>
+
+    <div class="credit-card-select payment-block">
+      <i class="co co-cb"></i>
+      <%= f.input :source,
+                  input_html: {
+                    data: {
+                      target: 'stripe-payments.paymentSelection'
+                    }
+                  },
+                  collection: @credit_cards,
+                  selected: @payment_method_to_display_first.id,
+                  label: false,
+                  label_method: ->(card){ credit_card_label_for card },
+                  value_method: ->(card){ card.id }
+      %>
+    </div>
+
+    <!-- We'll put the error messages in this element -->
+    <div class="text-danger" data-target='stripe-payments.paymentError' role="alert"></div>
+
+    <div class="text-center mb-5 text-uppercase">
+      <%= link_to 'Ajouter une carte de paiement', "#", class: 'text-secondary', data: {toggle: "modal", target: "#credit-card-modal"} %>
+    </div>
+
+    <%= f.button :submit, 'PAYER', class: 'btn-cookoon btn-cookoon-primary btn-block', data: { controller: 'analytics-events', action: 'click->analytics-events#reservationPaymentSubmit'}
+    %>
+
+    <div class="text-center">
+      <div style="font-size:12px; margin-top: 15px">
+        <p>Votre carte bleue ne sera débitée que si l'Hôte accepte votre demande de location.</p>
+        <p>Attention : nous procédons tout de même à une demande d'autorisation de paiement sur votre compte.</p>
+      </div>
+    </div>
+  <% end %>
+
+  <!-- We'll put the succes messages in this element -->
+  <div class="text-center">
+    <div class="text-success" data-target='stripe-payments.paymentSuccess' role="alert"></div>
+  </div>
+<%= console %>
+
+<!-- Code Charles -->
+<!-- <%#= simple_form_for :payment, url: reservation_payments_path(@reservation), remote: true do |f| %>
 
   <b>Vos moyens de paiement</b>
   <div class="credit-card-select payment-block">
     <i class="co co-cb"></i>
-    <%= f.input :source, collection: @credit_cards, selected: :first, label: false, label_method: ->(card){ credit_card_label_for card }, value_method: ->(card){ card.id } %>
+    <%#= f.input :source, collection: @credit_cards, selected: :first, label: false, label_method: ->(card){ credit_card_label_for card }, value_method: ->(card){ card.id } %>
   </div>
 
   <div class="text-center mb-5 text-uppercase">
-    <%= link_to 'Ajouter une carte de paiement', "#", class: 'text-secondary', data: {toggle: "modal", target: "#credit-card-modal"} %>
+    <%#= link_to 'Ajouter une carte de paiement', "#", class: 'text-secondary', data: {toggle: "modal", target: "#credit-card-modal"} %>
   </div>
 
-  <%= f.button :submit,
+  <%#= f.button :submit,
                'PAYER',
                class: 'btn-cookoon btn-cookoon-primary btn-block',
                data: {
@@ -18,4 +67,6 @@
                  action: 'click->analytics-events#reservationPaymentSubmit'
                }
   %>
-<% end %>
+<%# end %> -->
+
+

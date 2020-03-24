@@ -8,30 +8,33 @@
                       data: {
                         target: 'stripe-accounts.form'
                       } do |f| %>
-    <%= f.input :first_name, input_html: { value: current_user.first_name, data: { target: 'stripe-accounts.firstNameInput' } } %>
-    <%= f.input :last_name, input_html: { value: current_user.last_name, data: { target: 'stripe-accounts.lastNameInput' } } %>
+    <%= f.input :first_name, label: "Votre prénom", input_html: { value: current_user.first_name, data: { target: 'stripe-accounts.firstNameInput' } } %>
+    <%= f.input :last_name, label: "Votre nom de famille", input_html: { value: current_user.last_name, data: { target: 'stripe-accounts.lastNameInput' } } %>
     <%= f.input :dob, as: :date, start_year: Date.today.year - 90, end_year: Date.today.year - 12, selected: current_user.born_on || Date.new(1965, 1, 1), label: 'Votre date de naissance'  %>
 
     <%= f.simple_fields_for :address do |a| %>
       <%= a.input :line1, label: 'Votre addresse de résidence (numéro et rue)', input_html: { data: { target: 'stripe-accounts.addressInput' } } %>
       <%= a.input :postal_code, label: 'Votre code postal', input_html: { data: { target: 'stripe-accounts.postalCodeInput' } } %>
       <%= a.input :city, label: 'Votre ville de résidence', input_html: { data: { target: 'stripe-accounts.cityInput' } } %>
+      <%#= a.input :line1, label: 'Votre addresse de résidence (numéro et rue)', input_html: { value: "8 rue de la Vrillière", data: { target: 'stripe-accounts.addressInput' } } %>
+      <%#= a.input :postal_code, label: 'Votre code postal', input_html: { value: "75001", data: { target: 'stripe-accounts.postalCodeInput' } } %>
+      <%#= a.input :city, label: 'Votre ville de résidence', input_html: { value: "Paris", data: { target: 'stripe-accounts.cityInput' } } %>
     <% end %>
     <%= f.input :account_token, as: :hidden, input_html: { data: { target: 'stripe-accounts.accountTokenInput' } } %>
 
     <%= f.label :bank_account_token, label: 'Votre IBAN' %>
-    <div data-target="stripe-accounts.ibanElement"></div>
+    <div style="padding: 0.375rem 0.75rem; margin: 5px 0;" data-target="stripe-accounts.ibanElement"></div>
     <%= f.input :bank_account_token, as: :hidden, input_html: { data: { target: 'stripe-accounts.bankAccountTokenInput' } } %>
 
     <div class="text-danger" data-target='stripe-accounts.ibanElementError' role="alert"></div>
     <div class="text-danger py-3" data-target='stripe-accounts.accountError' role="alert"></div>
 
     <p>
-      En cliquant sur ce bouton, vous acceptez nos <%= link_to "Conditions Générales d'Utilisation", '../general_conditions', target: '_blank' %>
-      ainsi que les <%= link_to "Conditions d'Utilisation des Comptes Connectés Stripe", 'https://stripe.com/fr/connect-account/legal#translation', target: '_blank' %>
+      En cliquant sur ce bouton, vous acceptez nos <%= link_to "Conditions Générales d'Utilisation", '../general_conditions', target: '_blank', class: "a_gold" %>,
+      ainsi que les <%= link_to "Conditions d'Utilisation des Comptes Connectés Stripe", 'https://stripe.com/fr/connect-account/legal#translation', target: '_blank', class: "a_gold" %> et <%= link_to "Conditions générales d'utilisation Stripe", 'https://stripe.com/fr/legal#translation', target: '_blank', class: "a_gold" %> appelées <%= link_to "\"Stripe Services Agreement\"", 'https://stripe.com/fr/legal#translation', target: '_blank', class: "a_gold" %>
     </p>
-    <div class="pb-3">
-      <%= f.button :submit, 'Connecter mon compte', class: 'button button-blue slowLoad' %>
+    <div class="pb-3 text-center">
+      <%= f.button :submit, 'Connecter mon compte', class: 'btn-cookoon btn-cookoon-primary', data: { disable_with: '<i class="fas fa-spinner fa-spin" style="margin-right: 10px;"></i>Chargement'.html_safe } %>
     </div>
   <% end %>
 </div>

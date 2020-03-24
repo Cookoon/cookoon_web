@@ -1,16 +1,12 @@
-<div class="card-bottom pt-5 pb-3">
-  <div class="card-bottom-title">
-    <h3><i class='co icon-losange text-primary mr-2'></i> Recevez vos paiements !</h3>
-  </div>
-  <div class="card-bottom-content">
-    <p>
-      Pour recevoir vos paiements, vous devez renseigner des informations supplémentaires,
-      comme votre adresse et votre IBAN.
-    </p>
-  </div>
-  <div class="card-bottom-footer">
-    <%= link_to "AJOUTER MES INFORMATIONS", new_stripe_account_path %>
-  </div>
+<h3><i class='co icon-losange text-primary mr-2'></i> Recevez vos paiements !</h3>
+<div class="card-bottom-content">
+  <p>
+    Pour recevoir vos paiements, vous devez renseigner des informations supplémentaires,
+    comme votre adresse et votre IBAN.
+  </p>
+</div>
+<div class="pt-4 pb-3 text-right">
+  <%= link_to "AJOUTER MES INFORMATIONS", new_stripe_account_path, class: 'btn-cookoon btn-cookoon-primary' %>
 </div>
 
 <hr>
