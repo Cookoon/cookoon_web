@@ -2,7 +2,8 @@ import { Controller } from 'stimulus';
 import Rails from 'rails-ujs';
 
 export default class extends Controller {
-  static targets = ['paymentForm', 'paymentSelection', 'paymentError', 'paymentSuccess'];
+  static targets = ['paymentForm', 'paymentSelection', 'paymentError'];
+  // static targets = ['paymentForm', 'paymentSelection', 'paymentError', 'paymentSuccess'];
 
   stripe = Stripe(this.data.get('publishableKey'));
 
@@ -42,10 +43,10 @@ export default class extends Controller {
     this.disableButton();
 
     const response = await fetch(this.data.get("url"));
-    console.log(response);
+    // console.log(response);
 
     const data = await response.json();
-    console.log(data.client_secret);
+    // console.log(data.client_secret);
 
     // this.paymentSelected = this.paymentSelectionTarget.selectedOptions[0].innerHTML;
     this.paymentSelected = this.paymentSelectionTarget.selectedOptions[0].value;
@@ -66,9 +67,9 @@ export default class extends Controller {
       this.paymentFormTarget.removeEventListener('submit', this.handleSubmit);
       // Hide paymentForm
       this.paymentFormTarget.style.display = "none";
-      // Add a success payment message
-      this.paymentSuccessTarget.classList.add("mb-4");
-      this.paymentSuccessTarget.textContent = "Votre paiement a bien été enregistré";
+      // // Add a success payment message
+      // this.paymentSuccessTarget.classList.add("mb-4");
+      // this.paymentSuccessTarget.textContent = "Votre paiement a bien été enregistré";
       // Submit the form
       Rails.fire(this.paymentFormTarget, 'submit');
       // this.paymentFormTarget.submit();

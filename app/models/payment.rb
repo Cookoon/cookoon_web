@@ -24,12 +24,14 @@ class Payment
   end
 
   # def refund
-  #   refund_stripe_charge
-  # end
+  def cancel
+    # refund_stripe_charge
+    cancel_stripe_intent
+  end
 
-  # def capture
-  #   capture_stripe_charge
-  # end
+  def capture
+    capture_stripe_intent
+  end
 
   def displayable_errors
     if errors.any?
