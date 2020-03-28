@@ -6,22 +6,22 @@
       h3.mb-4 <i class='co icon-losange small text-primary mr-2'></i> Parrainez vos proches
 
       - if current_user.invitation_limit > 0
-        p 
+        p
           | Vous disposez de <strong>#{current_user.invitation_limit} invitations </strong>
           | pour convier vos proches à rejoindre Cookoon.
           | <br>Vous serez responsable de vos filleuls. Choisissez les bien !
         = link_to 'Invitez un filleul', '#', class: 'btn-cookoon btn-cookoon-primary', data: {toggle: "modal", target: "#invitation-modal"}
       - else
-        p 
+        p
           | Vos proches souhaitent rejoindre Cookoon ?
           | <br>Vous pourrez les parrainer dès que vous disposerez d'invitations.
-          | <br><strong>Choisissez les bien !</strong>
+          | <br><strong>Choisissez-les bien !</strong>
 
-      hr.my-4 
+      hr.my-4
 
       h3.mb-4 <i class='co icon-losange small text-primary mr-2'></i> Obtenir des invitations
 
-      p 
+      p
         | Vous disposez d'une très belle propriété ?
         | <br>Proposez-la sur <strong>Cookoon</strong>, vous pourrez obtenir des invitations pour parrainer vos proches.
       = link_to 'Devenir Hôte', 'https://cookoon.typeform.com/to/iY7Heh', class: 'btn-cookoon btn-cookoon-secondary-gold'
