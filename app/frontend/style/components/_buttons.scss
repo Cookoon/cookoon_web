@@ -43,16 +43,24 @@
     background: none;
     border: none;
     cursor: inherit;
-    &-container {
+    &-container, &-container-submit {
       display: flex;
       flex-direction: column;
       justify-content: space-around;
       width: 200px;
       height: 200px;
-      background: $primary;
+      // background: $primary;
       cursor: pointer;
-      &:hover {
-        background: darken($primary, 5%)
+      &-submit {
+        padding: 56px 60px 64px;
+        &:hover {
+          // background: darken($primary, 5%)
+          transition-duration: 0.5s;
+          padding: 40px 44px 48px;
+        }
+      }
+      &:focus {
+        outline: none
       }
     }
   }
@@ -67,10 +75,19 @@
     padding: 10px 20px;
   }
 
-  .btn-cookoon-search-container {
+  .btn-cookoon-search-container, .btn-cookoon-search-container-submit {
     width: 100%;
     height: 80px;
     display: flex;
     justify-content: space-around;
+    &-submit {
+      padding: 16px;
+      width: 80px;
+      &:hover {
+        // background: darken($primary, 5%)
+        transition-duration: 0.5s;
+        padding: 8px;
+      }
+    }
   }
 }
