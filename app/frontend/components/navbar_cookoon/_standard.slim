@@ -7,7 +7,7 @@
       / .d-block.d-md-none
       /   | <a href="tel:+33612121212">Conciergerie</a>
     .cookoon-nav-infos-user.bg-primary.pointer(
-      id="navigationDropdownMenu" 
+      id="navigationDropdownMenu"
       aria={ haspopup: "true", expanded: "false" }
       data={ target: 'dropdowns.trigger', action: "click->dropdowns#toggle" }
     )
@@ -35,7 +35,8 @@
       .menu.d-none.d-md-block
         ul.list-inline.text-center
           li.list-inline-item.px-2 = link_to 'Mes réservations', reservations_path
-          li.list-inline-item.px-2 = link_to 'Mes invitations', new_user_invitation_path
+          li.list-inline-item.px-2 = link_to 'Mes filleuls', new_user_invitation_path
+          li.list-inline-item.px-2 = link_to 'Mes demandes de réservation', host_reservations_path
 
     .cookoon-nav-hostlink
       .d-none.d-md-block

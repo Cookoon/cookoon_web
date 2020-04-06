@@ -61,3 +61,7 @@ label.collection_check_boxes {
 .form-check-input {
   margin-top: 0.1rem;
 }
+
+#new_reservation > .form-group.hidden {
+  margin-bottom: 0 !important;
+}
