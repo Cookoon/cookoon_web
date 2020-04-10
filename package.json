@@ -20,7 +20,7 @@
     "redis": "^2.8.0",
     "stimulus": "^1.0.0",
     "sweetalert2": "^7.20.10",
-    "swiper": "^4.1.6",
+    "swiper": "^4.5.1",
     "turbolinks": "^5.1.1"
   },
   "devDependencies": {
