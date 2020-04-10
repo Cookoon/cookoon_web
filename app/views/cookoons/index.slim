@@ -6,5 +6,5 @@ div class=classnames(container: desktop_view?)
       = render 'reservations/search_recap', reservation: @reservation
     .row
       - @cookoons.each do |cookoon|
-        .col-12.col-md-6
+        .col-12.col-md-6 style="box-sizing: content-box"
           = render 'card', cookoon: cookoon
