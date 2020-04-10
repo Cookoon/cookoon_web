@@ -6,8 +6,14 @@ footer.text-white
         p.m-0 <i class='co icon-mail'></i> Relations Presse
       p.m-0 <i class='co icon-payment'></i> Paiement sécurisé
 
-      a href='general_conditions'
-        p.m-0 <i class='co icon-cookoon-logo'></i> Condition générales
+      = link_to general_conditions_path do
+        p.m-0
+          i.co.icon-cookoon-logo
+          | &nbsp;
+          | Conditions générales
+
+      /a href='general_conditions'
+      /  p.m-0 <i class='co icon-cookoon-logo'></i> Condition générales
 
       .pt-4
         p <i class='co icon-cookoon-logo text-primary mr-2'></i> COOKOON  -  Copyright 2019 - Mentions légales
