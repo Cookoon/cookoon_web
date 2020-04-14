@@ -21,7 +21,8 @@ module CarouselHelper
     private
 
     attr_accessor :view, :images
-    delegate :content_tag, :cl_image_path, :safe_join, to: :view
+    # delegate :content_tag, :cl_image_path, :safe_join, to: :view
+    delegate :content_tag, :cl_image_path, :safe_join, :image_url, to: :view
 
     def wrapper
       slides = images.map { |image| slide(image) }
@@ -29,16 +30,28 @@ module CarouselHelper
     end
 
     def slide(image)
-      image_url = cl_image_path(
-        image.path,
-        width: 800, height: 450, crop: :fill
-      )
+      # image_url = cl_image_path(
+      #   image.path,
+      #   width: 800, height: 450, crop: :fill
+      # )
+
+      if image.class == String
+        # renvoie l'url de l'image contenue dans la base
+        image_full_url = image_url(image)
+      else
+        # renvoie l'url de l'image contenue dans cloudinary
+        image_full_url = cl_image_path(
+          image.path,
+          width: 800, height: 450, crop: :fill
+        )
+      end
 
       content_tag(
         :div,
         nil,
         class: 'swiper-slide',
-        style: "background-image:url(#{image_url})"
+          # style: "background-image:url(#{image_url})"
+        style: "background-image:url(#{image_full_url})"
       )
     end
 
@@ -51,7 +64,9 @@ module CarouselHelper
     end
 
     def button(navigation)
-      content_tag(:div, nil, class: "swiper-button-#{navigation} swiper-button-cookoon-blue d-none d-sm-block")
+      # content_tag(:div, nil, class: "swiper-button-#{navigation} swiper-button-cookoon-blue d-none d-sm-block")
+      # d-none removed because buttons were not displayed on phone
+      content_tag(:div, nil, class: "swiper-button-#{navigation} swiper-button-cookoon-blue d-sm-block")
     end
   end
 end
