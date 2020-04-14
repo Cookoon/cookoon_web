@@ -10,6 +10,14 @@ export default class extends Controller {
       observer: true,
       observeParents: true,
 
+      // transition-duration between 2 slides
+      speed: 1000,
+
+      // autoplay duration
+      autoplay: {
+        delay: 2500,
+      },
+
       pagination: {
         el: '.swiper-pagination'
       },
