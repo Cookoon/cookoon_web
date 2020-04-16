@@ -36,7 +36,8 @@
         ul.list-inline.text-center
           li.list-inline-item.px-2 = link_to 'Mes réservations', reservations_path
           li.list-inline-item.px-2 = link_to 'Mes filleuls', new_user_invitation_path
-          li.list-inline-item.px-2 = link_to 'Mes demandes de réservation', host_reservations_path
+          - if !current_user.cookoons.blank?
+            li.list-inline-item.px-2 = link_to "Les réservations de mes demeures#{render 'shared/pending_reservations_count'}", host_reservations_path
 
     .cookoon-nav-hostlink
       .d-none.d-md-block
