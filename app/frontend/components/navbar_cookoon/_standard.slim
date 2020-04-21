@@ -36,9 +36,10 @@
         ul.list-inline.text-center
           li.list-inline-item.px-2 = link_to 'Mes réservations', reservations_path
           li.list-inline-item.px-2 = link_to 'Mes filleuls', new_user_invitation_path
-          - if !current_user.cookoons.blank?
-            li.list-inline-item.px-2 = link_to "Les réservations de mes demeures#{render 'shared/pending_reservations_count'}", host_reservations_path
 
     .cookoon-nav-hostlink
       .d-none.d-md-block
-        = link_to raw('Devenir Hôte <i class="fas fa-arrow-right"></i>'), 'https://cookoon.typeform.com/to/iY7Heh', class: 'btn-cookoon btn-cookoon-secondary'
+        - if !current_user.cookoons.blank?
+          = link_to raw("Mes demeures#{render 'shared/pending_reservations_count'} <i class='fas fa-arrow-right'></i>"), host_reservations_path, class: 'btn-cookoon btn-cookoon-secondary'
+        - else
+          = link_to raw('Devenir Hôte <i class="fas fa-arrow-right"></i>'), 'https://cookoon.typeform.com/to/iY7Heh', class: 'btn-cookoon btn-cookoon-secondary'
