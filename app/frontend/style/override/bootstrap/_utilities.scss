@@ -1,7 +1,19 @@
 body {
   position: relative;
   min-height: 100vh;
+
+  /* Keep the footer at the end of the page */
+  display: flex;
+  flex-direction: column;
+  /* End of Keep the footer at the end of the page */
 }
+
+footer {
+  /* Keep the footer at the end of the page */
+  margin-top: auto;
+  /* End of Keep the footer at the end of the page */
+}
+
 main {
   min-height: calc(100vh - 369px);
 }
