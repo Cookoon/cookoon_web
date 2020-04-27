@@ -52,11 +52,16 @@
       // background: $primary;
       cursor: pointer;
       &-submit {
-        padding: 56px 60px 64px;
+        padding: 80px;
+        // padding: 56px 60px 64px;
+        @media (min-width: 577px) {
+          border-left: 1px solid lightgray;
+        }
         &:hover {
           // background: darken($primary, 5%)
           transition-duration: 0.5s;
-          padding: 40px 44px 48px;
+          // padding: 40px 44px 48px;
+          background: lighten($primary, 20%);
         }
       }
       &:focus {
@@ -81,7 +86,7 @@
     display: flex;
     justify-content: space-around;
     &-submit {
-      padding: 16px;
+      padding: 24px;
       width: 80px;
       &:hover {
         // background: darken($primary, 5%)
