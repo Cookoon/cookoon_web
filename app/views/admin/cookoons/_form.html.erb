@@ -1,0 +1,39 @@
+<%= simple_form_for @cookoon,
+                    url: admin_cookoon_path,
+                    remote: true,
+                    html: {
+                      class: 'pb-3',
+                      data: {
+                        controller: 'google-maps-autocomplete'
+                      }
+                    } do |f| %>
+  <%= f.input :name, label: 'Nom du Cookoon' %>
+  <%= f.input :status, as: :select, collection: Cookoon.statuses.keys, label: 'Statut', selected: Cookoon.statuses.key(Cookoon.statuses[@cookoon.status]), input_html: {style: "-webkit-appearance: checkbox;"} %>
+  <%= f.input :surface, label: 'Surface de réception en m²' %>
+  <%= f.input :price, label: 'Prix / heure' %>
+  <%= f.input :address,
+              label: 'Adresse',
+              placeholder: '',
+              input_html: {
+                data: {
+                  target: 'google-maps-autocomplete.addressInput google-maps-autocomplete.formattedAddress'
+                }
+              }
+  %>
+  <%= f.input :capacity, label: "Capacité d'accueil" %>
+  <%= f.input :category, label: 'Categorie', collection: Cookoon::CATEGORIES %>
+  <%= f.input :photos, as: :attachinary, input_html: { data: { controller: 'attachinary' } } %>
+
+  <h5 class="mt-3">Informations pratiques</h5>
+  <%= f.input :digicode %>
+  <%= f.input :building_number %>
+  <%= f.input :floor_number %>
+  <%= f.input :door_number %>
+  <%= f.input :wifi_network %>
+  <%= f.input :wifi_code %>
+  <%= f.input :caretaker_instructions, input_html: { rows: 3 } %>
+
+  <div class="text-center">
+    <%= f.submit 'ENREGISTRER LES MODIFICATIONS', class: 'btn-cookoon btn-cookoon-primary btn-lg btn-block' %>
+  </div>
+<% end %>

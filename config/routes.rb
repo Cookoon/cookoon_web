@@ -80,6 +80,9 @@ Rails.application.routes.draw do
   # Sidekiq Web UI, only for admins
   authenticate :user, ->(user) { user.admin } do
     mount Sidekiq::Web, at: :sidekiq
+    namespace :admin do
+      resources :cookoons, only: %i[index edit update]
+    end
   end
 
   # ForestAdmin
