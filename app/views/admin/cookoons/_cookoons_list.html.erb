@@ -1,0 +1,25 @@
+<div class="d-flex justify-content-center">
+  <div class="row">
+    <% apparts.each do |appart| %>
+      <div class="col-12 col-md-4 px-0 px-sm-3 px-md-3 px-lg-3 px-xl-3">
+        <div class="cookoon-card">
+          <div class="cookoon-card-image" style="background-image: url(<%= cl_image_path(appart.photos.first.path, height: 250, crop: :fill)%>">
+            <div class="btn-cookoon btn-cookoon-primary">
+              <%= link_to "Modifier", edit_admin_cookoon_path(appart) %>
+            </div>
+            <p class="address-info">
+              <i class="fas fa-map-marker-alt"></i>
+              <%= appart.address %>
+            </p>
+          </div>
+          <div class="cookoon-card-body">
+            <h4><%= appart.name %></h4>
+            <p><%= "Id : #{appart.id}" %></p>
+            <p><%= "Status : #{appart.status}" %></p>
+            <p><%= appart.description %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
