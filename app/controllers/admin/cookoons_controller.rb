@@ -26,7 +26,7 @@ module Admin
         :name, :surface, :price, :address, :capacity, :category,
         :digicode, :building_number, :floor_number, :door_number,
         :wifi_network, :wifi_code, :caretaker_instructions, :status,
-        photos: []
+        :description, photos: []
       )
     end
 
