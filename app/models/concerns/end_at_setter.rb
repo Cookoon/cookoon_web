@@ -13,6 +13,19 @@ module EndAtSetter
   end
 
   def set_end_at
-    self.end_at = start_at.in(duration.hours)
+    self.end_at = start_at.in(duration.hours - preparation_tidy_time[self.type_name.to_sym].hours)
+  end
+
+  def preparation_tidy_time
+    {
+      breakfast: 1,
+      brunch: 1.5,
+      lunch: 2,
+      diner: 3,
+      cocktail: 2.5,
+      morning: 1,
+      afternoon: 1,
+      day: 1,
+    }
   end
 end
