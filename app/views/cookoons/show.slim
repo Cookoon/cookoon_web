@@ -11,7 +11,6 @@ div class=classnames(container: desktop_view?)
         = carousel_for(@cookoon.photos)
 
       = render 'presentation', cookoon: @cookoon
-      = render 'reservations/recap_string', reservation: @reservation
 
       #reservation-menus
         = render 'chefs/selection', chefs: @chefs if @reservation.needs_chef?
@@ -19,14 +18,15 @@ div class=classnames(container: desktop_view?)
       #reservation-services
         h3 Les services intégrés
 
-        = simple_form_for :reservation, url: select_services_reservation_path(@reservation), method: :patch do |f| 
-          = f.input :services, 
-              as: :check_boxes, 
+        = simple_form_for :reservation, url: select_services_reservation_path(@reservation), method: :patch do |f|
+          = f.input :services,
+              as: :check_boxes,
               collection: @reservation.services_collection_for_view,
               checked: @reservation.builtin_services,
-              label_method: :first, 
+              label_method: :first,
               value_method: :second,
               item_wrapper_class: "font-weight-bold pl-5 py-1"
 
+          = render 'reservations/recap_string', reservation: @reservation
 
           = f.submit 'Confirmer', class: 'btn-cookoon btn-cookoon-primary btn-lg btn-block mb-4'
