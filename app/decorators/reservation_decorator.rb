@@ -3,7 +3,11 @@ class ReservationDecorator < Draper::Decorator
 
   def recap_string
     # "Votre maitre d'hôtel vous accueillera le #{start_at.day} #{I18n.t('date.month_names')[start_at.month]} pour un #{type_name} à #{start_at.strftime('%HH%M')} avec #{people_count_text}"
-    "Votre maitre d'hôtel vous accueillera le #{I18n.l Time.now, format: '%A %d %B'} pour un #{type_name} de #{start_at.strftime('%HH%M')} à #{end_at.strftime('%HH%M')} avec #{people_count_text}"
+    "Votre maitre d'hôtel vous accueillera le #{I18n.l Time.now, format: '%A %d %B'} pour un #{humanized_type_name} à #{start_at.strftime('%HH%M')} de #{people_count_text}."
+  end
+
+  def recap_string_end_time
+    "Votre réception se prolongera jusqu'à #{end_at.strftime('%HH%M')}."
   end
 
   def default_people_count
