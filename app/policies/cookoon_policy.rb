@@ -8,7 +8,7 @@ class CookoonPolicy < ApplicationPolicy
   end
 
   def update?
-    record.user == user || user.admin?
+    record.user
   end
 
   class Scope < Scope
