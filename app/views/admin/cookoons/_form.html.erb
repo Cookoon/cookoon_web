@@ -7,6 +7,9 @@
                         controller: 'google-maps-autocomplete'
                       }
                     } do |f| %>
+  <p class="form-control-label">
+    <strong>Hôte: </strong><%= "#{@cookoon.user.first_name} #{@cookoon.user.last_name} / Email: #{@cookoon.user.email} / Tél: #{@cookoon.user.phone_number}"%>
+    </p>
   <%= f.input :name, label: 'Nom du Cookoon' %>
   <%= f.input :status, as: :select, collection: Cookoon.statuses.keys, label: 'Statut', selected: Cookoon.statuses.key(Cookoon.statuses[@cookoon.status]), input_html: {style: "-webkit-appearance: checkbox;"} %>
   <%= f.input :surface, label: 'Surface de réception en m²' %>
