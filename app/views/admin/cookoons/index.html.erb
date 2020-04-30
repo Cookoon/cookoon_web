@@ -19,15 +19,14 @@
 
     <div class="tab-content py-3">
       <div class="tab-pane fade show active" id="approved" role="tabpanel">
-        <%= render "cookoons_list", apparts: Cookoon.where(status: "approved") %>
+        <%= render "cookoons_list", apparts: @cookoons_approved %>
       </div>
       <div class="tab-pane fade" id="suspended" role="tabpanel">
-        <%= render "cookoons_list", apparts: Cookoon.where(status: "suspended") %>
+        <%= render "cookoons_list", apparts: @cookoons_suspended %>
       </div>
       <div class="tab-pane fade" id="under_review" role="tabpanel">
-        <%= render "cookoons_list", apparts: Cookoon.where(status: "under_review") %>
+        <%= render "cookoons_list", apparts: @cookoons_under_review %>
       </div>
     </div>
   </div>
-
 </div>
