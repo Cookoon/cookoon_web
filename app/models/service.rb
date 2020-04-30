@@ -9,7 +9,7 @@ class Service < ApplicationRecord
   monetize :price_cents
 
   enum status: %i[quote paid]
-  enum category: %i[special sommelier parking corporate catering breakfast]
+  enum category: %i[special sommelier parking corporate catering breakfast flowers]
 
   before_create :set_price_cents, :set_name_from_category
 
@@ -22,7 +22,8 @@ class Service < ApplicationRecord
     parking: { base_price: 0, unit_price: 8250 },
     corporate: { base_price: 0, unit_price: 2500 },
     catering: { base_price: 0, unit_price: 3500 },
-    breakfast: { base_price: 0, unit_price: 2500 }
+    breakfast: { base_price: 0, unit_price: 2500 },
+    flowers: { base_price: 0, unit_price: 0 }
   }.freeze
 
   def payment(options = {})
@@ -50,6 +51,8 @@ class Service < ApplicationRecord
       self.name = 'Plateaux repas'
     when 'breakfast'
       self.name = 'Petit déjeuner'
+    when 'flowers'
+      self.name = 'Composition florale'
     end
   end
 

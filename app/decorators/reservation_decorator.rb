@@ -84,7 +84,8 @@ class ReservationDecorator < Draper::Decorator
       ['Sommelier', :sommelier],
       ['Voiturier', :parking],
       ['Kit professionnel', :corporate],
-      ['Plateaux repas', :catering]
+      ['Plateaux repas', :catering],
+      ['Composition florale', :flowers]
     ]
   end
 
@@ -106,7 +107,7 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def builtin_services
-    if object.services.where(category: [:sommelier, :parking, :corporate, :catering]).any?
+    if object.services.where(category: [:sommelier, :parking, :corporate, :catering, :flowers]).any?
       object.services.pluck(:category)
     else
       case object.type_name

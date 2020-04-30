@@ -20,19 +20,19 @@ module ReservationStateMachine
       state :dead
 
       event :select_cookoon do
-        transitions from: [:initial, :menu_selected, :cookoon_selected, :services_selected], 
-          to: :cookoon_selected, 
+        transitions from: [:initial, :menu_selected, :cookoon_selected, :services_selected],
+          to: :cookoon_selected,
           after: [:set_cookoon, :set_prices]
       end
 
       event :select_menu do
-        transitions from: [:cookoon_selected, :menu_selected], 
-          to: :menu_selected, 
+        transitions from: [:cookoon_selected, :menu_selected],
+          to: :menu_selected,
           after: [:set_menu, :set_prices]
       end
 
       event :select_services do
-        transitions from: [:cookoon_selected, :services_selected], 
+        transitions from: [:cookoon_selected, :services_selected],
           to: :services_selected,
           after: [:set_services, :set_prices]
       end
@@ -65,11 +65,11 @@ module ReservationStateMachine
         transitions from: :accepted, to: :ongoing
       end
 
-      event :close do 
+      event :close do
         transitions from: :ongoing, to: :passed
       end
 
-      event :kill do 
+      event :kill do
         transitions from: [:initial, :cookoon_selected, :menu_selected, :services_selected, :charged, :quotation_asked, :quotation_proposed, :accepted, :refused, :ongoing, :passed, :dead], to: :dead
       end
     end
@@ -78,13 +78,13 @@ module ReservationStateMachine
   def set_cookoon(cookoon)
     self.cookoon = cookoon
   end
-  
+
   def set_menu(menu)
     self.menu = menu
   end
 
   def set_services(service_categories)
-    services.where(category: [:sommelier, :parking, :corporate, :catering]).each(&:destroy)
+    services.where(category: [:sommelier, :parking, :corporate, :catering, :flowers]).each(&:destroy)
     service_categories.each do |service_category|
       services.create(category: service_category, payment_tied_to_reservation: true)
     end
