@@ -1,17 +1,19 @@
 module Admin
   class CookoonsController < ApplicationController
-    before_action :require_admin
+    # not necessary because it is specified directly in routes
+    # before_action :require_admin
+    before_action :find_cookoon, only: %i[edit update]
 
     def index
-      @cookoons = Cookoon.all
+      @cookoons_approved = cookoons.where(status: "approved")
+      @cookoons_suspended = cookoons.where(status: "suspended")
+      @cookoons_under_review = cookoons.where(status: "under_review")
     end
 
     def edit
-      @cookoon = Cookoon.find(params[:id])
     end
 
     def update
-      @cookoon = Cookoon.find(params[:id])
       if @cookoon.update(cookoon_params)
         redirect_to admin_cookoons_path, notice: 'Le Cookoon a été édité !'
       else
@@ -30,8 +32,17 @@ module Admin
       )
     end
 
-    def require_admin
-      current_user.admin == true
+    # def require_admin
+    #   current_user.admin == true
+    # end
+
+    def find_cookoon
+      @cookoon = Cookoon.find(params[:id]).decorate
+      authorize @cookoon, policy_class: Admin::CookoonPolicy
+    end
+
+    def cookoons
+      policy_scope([:admin, Cookoon]).includes(:user)
     end
 
   end
