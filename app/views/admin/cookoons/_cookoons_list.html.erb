@@ -1,8 +1,8 @@
 <div class="d-flex justify-content-center">
   <div class="row">
     <% apparts.each do |appart| %>
-      <div class="col-12 col-md-4 px-0 px-sm-3 px-md-3 px-lg-3 px-xl-3" style="padding-bottom: 20px;">
-        <div class="cookoon-card" style="margin-bottom: 0; padding-bottom: 0; height: 100%">
+      <div class="col-12 col-md-4 px-0 px-sm-3 pb-4">
+        <div class="cookoon-card mb-0 h-100">
           <div class="cookoon-card-image" style="background-image: url(<%= cl_image_path(appart.photos.first.path, height: 250, crop: :fill)%>">
             <div class="btn-cookoon btn-cookoon-primary">
               <%= link_to "Modifier", edit_admin_cookoon_path(appart) %>
@@ -14,10 +14,10 @@
           </div>
           <div class="cookoon-card-body">
             <h4 style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"><%= appart.name %></h4>
-            <p style="margin-bottom: 0.5rem"><%= "Hôte : #{appart.user.first_name} #{appart.user.last_name}" %></p>
-            <p style="margin-bottom: 0.5rem"><%= "E-mail : #{appart.user.email}" %></p>
-            <p style="margin-bottom: 0.5rem"><%= "Tél : #{appart.user.phone_number}" %></p>
-            <p style="margin-bottom: 0; overflow: hidden; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical;"><%= appart.description %></p>
+            <p class="mb-1"><%= "Hôte : #{appart.user.first_name} #{appart.user.last_name}" %></p>
+            <p class="mb-1"><%= "E-mail : #{appart.user.email}" %></p>
+            <p class="mb-1"><%= "Tél : #{appart.user.phone_number}" %></p>
+            <p class="mb-0" style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical;"><%= appart.description %></p>
           </div>
         </div>
       </div>
