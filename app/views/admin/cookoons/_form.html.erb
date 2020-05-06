@@ -25,8 +25,18 @@
   %>
   <%= f.input :description, label: "Description" %>
   <%= f.input :capacity, label: "Capacité d'accueil" %>
-  <%= f.input :category, label: 'Catégorie', collection: Cookoon::CATEGORIES %>
+  <%= f.input :category, label: 'Catégorie', collection: Cookoon::CATEGORIES, as: :select, selected: @cookoon.category, input_html: {style: "-webkit-appearance: checkbox;"}%>
   <%= f.input :photos, as: :attachinary, input_html: { data: { controller: 'attachinary' } } %>
+
+  <% if @cookoon.perks.any? %>
+    <h5 class="mt-3">Spécifications sélectionnées</h5>
+    <%= render 'cookoons/perks', perks: @perks_selected %>
+  <% end %>
+
+  <h5 class="mt-3">Spécifications non sélectionnées</h5>
+  <div class="d-flex" style="flex-wrap: wrap">
+    <%= render 'cookoons/perks', perks: @perks_not_selected %>
+  </div>
 
   <h5 class="mt-3">Informations pratiques</h5>
   <%= f.input :digicode %>

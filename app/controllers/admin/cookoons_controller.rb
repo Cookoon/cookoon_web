@@ -11,6 +11,9 @@ module Admin
     end
 
     def edit
+      @perks_selected = @cookoon.perks.includes(:perk_specification)
+      # @perks_available = PerkSpecification.where.not(name: @perks_selected).pluck(:name, :icon_name)
+      @perks_not_selected = PerkSpecification.where.not(id: @cookoon.perks.pluck(:perk_specification_id))
     end
 
     def update
@@ -42,6 +45,7 @@ module Admin
     end
 
     def cookoons
+      # policy_scope([:admin, Cookoon]).includes(:user, :perk_specifications)
       policy_scope([:admin, Cookoon]).includes(:user)
     end
 
