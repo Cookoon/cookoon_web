@@ -20,6 +20,7 @@ class CookoonsController < ApplicationController
   def show
     @reservation.select_cookoon!(@cookoon)
     @chefs = policy_scope(Chef).includes(:menus).decorate
+    @perks = @cookoon.perks.includes(:perk_specification)
   end
 
   def new
