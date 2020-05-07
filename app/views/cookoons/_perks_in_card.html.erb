@@ -1,0 +1,36 @@
+<!--
+Variables :
+number_of_perks => number of perks displayed
+perks => perks that we want to be displayed
+p_style: style rules to apply
+div_style => style of div
+-->
+<!-- &nbsp: white space -->
+
+<div style="<%= div_style %>">
+  <p style="<%= p_style %>">
+    <%# perks.limit("#{number_of_perks}".to_i).each do |perk| %>
+    <% perks.each do |perk| %>
+      <i class="<%= "#{perk.icon_name}" %> text-primary"></i>
+      <%= "#{perk.name}" %>&nbsp
+    <% end %>
+  </p>
+</div>
+
+<!-- Ancien code -->
+
+<!-- Variables :
+number_of_perks => number of perks displayed
+row_height => height of row if it must be fixed
+perks => perks that we want to be displayed -->
+
+<!-- <div style="display: grid; grid-template-columns: repeat(<%#= number_of_perks %>, auto); grid-gap: 0.5rem; grid-template-rows: <%#= row_height %>; justify-content: start;">
+  <%# perks.limit("#{number_of_perks}".to_i).each do |perk| %>
+    <div>
+      <p style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">
+        <i class="<%#= "#{perk.icon_name}" %> text-primary mr-2"></i>
+        <%#= "#{perk.name}" %>
+      </p>
+    </div>
+  <%# end %>
+</div> -->
