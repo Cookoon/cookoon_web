@@ -1,7 +1,29 @@
 puts 'Destroying'
 Reservation.destroy_all
+Perk.destroy_all
 Cookoon.destroy_all
+PerkSpecification.destroy_all
 User.destroy_all
+
+perks_specification_attributes = [
+  { name: "Écran", icon_name: "fas fa-tv" },
+  { name: "Système son", icon_name: "fas fa-music" },
+  { name: "Cuisine équipée", icon_name: "fas fa-utensils" },
+  { name: "Ascenseur", icon_name: "fas fa-level-up-alt" },
+  { name: "Barbecue", icon_name: "fas fa-hotdog" },
+  { name: "Cheminée", icon_name: "fas fa-fire" },
+  { name: "Chromecast", icon_name: "fab fa-chrome" },
+  { name: "Apple TV", icon_name: "fab fa-apple" },
+  { name: "Jacuzzi", icon_name: "fas fa-swimming-pool" },
+  { name: "Sauna", icon_name: "fas fa-hot-tub" },
+  { name: "Rooftop", icon_name: "fas fa-chess-rook" },
+  { name: "Piscine", icon_name: "fas fa-swimmer" },
+  { name: "Oeuvres d'art", icon_name: "fas fa-palette" },
+  { name: "Accessible handicapé", icon_name: "fas fa-wheelchair" }
+]
+puts "Seeding Perks Specification"
+perks_specification_attributes.each { |attributes| PerkSpecification.create! attributes }
+puts "Perks Specification done"
 
 users_attributes = [
   { email: 'quentin@cookoon.fr', password: 'plopplop', first_name: 'Quentin', last_name: 'Pernez', description: 'Un bon user', phone_number: '0636686565', photo_url: "https://ca.slack-edge.com/T0A4A3AQZ-U0A5L9L8K-7eda5a7e311c-512", admin: true },
@@ -71,6 +93,16 @@ cookoons_attributes = [
 puts "Seeding Cookoons"
 Cookoon.create! cookoons_attributes
 puts "Cookoons done"
+
+perks_attributes = [
+  { cookoon: Cookoon.first, perk_specification: PerkSpecification.first },
+  { cookoon: Cookoon.first, perk_specification: PerkSpecification.last },
+  { cookoon: Cookoon.last, perk_specification: PerkSpecification.first },
+  { cookoon: Cookoon.last, perk_specification: PerkSpecification.second },
+]
+puts "Seeding Perks"
+perks_attributes.each { |attributes| Perk.create! attributes }
+puts "Perks done"
 
 puts 'Seeding Companies'
 Company.create!(name: "Réceptions Nouvelles", address: "12 rue Lincoln, 75008 Paris", siren: 821316239, siret: 82131623900010, vat: "FR 28 821316239", referent_email: 'gregory@cookoon.fr')

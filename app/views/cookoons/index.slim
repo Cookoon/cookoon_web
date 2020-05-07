@@ -1,4 +1,4 @@
-h1.text-center.my-4 Les annonces
+h1.text-center.my-4 Les décors
 
 div class=classnames(container: desktop_view?)
   .d-flex.justify-content-center
@@ -6,5 +6,6 @@ div class=classnames(container: desktop_view?)
       = render 'reservations/search_recap', reservation: @reservation
     .row
       - @cookoons.each do |cookoon|
-        .col-12.col-md-6.px-0.px-sm-3.px-md-3.px-lg-3.px-xl-3
+        //.col-12.col-md-6.px-0.px-sm-3.px-md-3.px-lg-3.px-xl-3
+        .col-12.col-md-6.px-0.px-sm-3.pb-4
           = render 'card', cookoon: cookoon

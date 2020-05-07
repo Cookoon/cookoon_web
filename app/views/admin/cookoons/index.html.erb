@@ -1,32 +1,30 @@
-<h1 class="text-center my-4">Les cookoons</h1>
+<h1 class="text-center my-4">Les décors</h1>
+<div class="<%= classnames(container: desktop_view?) %>">
 
-<div class="container">
+  <ul class="nav nav-pills mb-2">
+    <li class="nav-item">
+      <a href="#approved" class="nav-link active" data-toggle="pill" role="tab">Approved</a>
+    </li>
 
-  <div class="container">
-    <ul class="nav nav-pills mb-2">
-      <li class="nav-item">
-        <a href="#approved" class="nav-link active" data-toggle="pill" role="tab">Approved</a>
-      </li>
+    <li class="nav-item">
+      <a href="#suspended" class="nav-link" data-toggle="pill" role="tab">Suspended</a>
+    </li>
 
-      <li class="nav-item">
-        <a href="#suspended" class="nav-link" data-toggle="pill" role="tab">Suspended</a>
-      </li>
+    <li class="nav-item">
+      <a href="#under_review" class="nav-link" data-toggle="pill" role="tab">Under review</a>
+    </li>
+  </ul>
 
-      <li class="nav-item">
-        <a href="#under_review" class="nav-link" data-toggle="pill" role="tab">Under review</a>
-      </li>
-    </ul>
-
-    <div class="tab-content py-3">
-      <div class="tab-pane fade show active" id="approved" role="tabpanel">
-        <%= render "cookoons_list", apparts: @cookoons_approved %>
-      </div>
-      <div class="tab-pane fade" id="suspended" role="tabpanel">
-        <%= render "cookoons_list", apparts: @cookoons_suspended %>
-      </div>
-      <div class="tab-pane fade" id="under_review" role="tabpanel">
-        <%= render "cookoons_list", apparts: @cookoons_under_review %>
-      </div>
+  <div class="tab-content py-3">
+    <div class="tab-pane fade show active" id="approved" role="tabpanel">
+      <%= render "cookoons_list", apparts: @cookoons_approved %>
+    </div>
+    <div class="tab-pane fade" id="suspended" role="tabpanel">
+      <%= render "cookoons_list", apparts: @cookoons_suspended %>
+    </div>
+    <div class="tab-pane fade" id="under_review" role="tabpanel">
+      <%= render "cookoons_list", apparts: @cookoons_under_review %>
     </div>
   </div>
+
 </div>

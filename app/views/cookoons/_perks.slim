@@ -1,8 +1,8 @@
-- if cookoon.perks.any?
-  strong.mb-2 L'équipement :
+/- if cookoon.perks.any?
+/  strong.mb-2 L'équipement :
 
-  .perks.my-3
-    - cookoon.perks.each do |perk|
-      .perks-card.text-center
-        i class=(perk.icon_name)
-        p = perk.name
+.perks.my-3
+  - perks.each do |perk|
+    .perks-card.text-center
+      i class=(perk.icon_name)
+      p = perk.name
