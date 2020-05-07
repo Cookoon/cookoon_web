@@ -17,16 +17,7 @@
             <p class="mb-1"><%= "Hôte : #{appart.user.first_name} #{appart.user.last_name}" %></p>
             <p class="mb-1"><%= "E-mail : #{appart.user.email}" %></p>
             <p class="mb-1"><%= "Tél : #{appart.user.phone_number}" %></p>
-            <div style="display: grid; grid-template-columns: repeat(2, auto); grid-gap: 0.5rem; grid-template-rows: minmax(2.6rem, 2.6rem); justify-content: start;">
-              <% appart.perk_specifications.limit(2).each do |perk| %>
-                <div>
-                  <p style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">
-                    <i class="<%= "#{perk.icon_name}" %> text-primary mr-2"></i>
-                    <%= "#{perk.name}" %>
-                  </p>
-                </div>
-              <% end %>
-            </div>
+            <%= render 'cookoons/perks_in_card', div_style: "height: 2.6rem", perks: appart.perk_specifications, p_style: "overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;" %>
             <p class="mb-0" style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical;"><%= appart.description %></p>
           </div>
         </div>
