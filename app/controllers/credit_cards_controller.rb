@@ -9,15 +9,12 @@ class CreditCardsController < ApplicationController
   end
 
   def index
-    # @credit_cards = current_user.credit_cards
     @credit_cards = current_user.credit_cards
     @default_payment_method = credit_card.find_default_payment_method
   end
 
   def create
-    # raise
     card = credit_card.add(credit_card_params[:stripe_token])
-    # card = credit_card.add(credit_card_params[:stripe_payment_method])
     credit_card.default(card) if set_card_as_default?
     handle_redirection(card)
   end
