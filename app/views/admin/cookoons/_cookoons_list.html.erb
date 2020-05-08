@@ -17,7 +17,6 @@
             <p class="mb-1"><%= "Hôte : #{appart.user.first_name} #{appart.user.last_name}" %></p>
             <p class="mb-1"><%= "E-mail : #{appart.user.email}" %></p>
             <p class="mb-1"><%= "Tél : #{appart.user.phone_number}" %></p>
-            <%#= render 'cookoons/perks_in_card', number_of_perks: 4, div_height: "2.6rem", perks: appart.perk_specifications %>
             <%= render 'cookoons/perks_in_card', div_style: "height: 2.6rem", perks: appart.perk_specifications, p_style: "overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;" %>
             <p class="mb-0" style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical;"><%= appart.description %></p>
           </div>
