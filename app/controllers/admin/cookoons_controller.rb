@@ -45,7 +45,7 @@ module Admin
     end
 
     def cookoons
-      policy_scope([:admin, Cookoon]).includes(:user, :perks, :perk_specifications)
+      policy_scope([:admin, Cookoon]).includes(:user, :perk_specifications)
     end
 
   end
