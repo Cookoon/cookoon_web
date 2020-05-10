@@ -4,19 +4,17 @@
       <div class="col-12 col-md-4 px-0 px-sm-3 pb-4">
         <div class="cookoon-card mb-0 h-100">
           <div class="cookoon-card-image" style="background-image: url(<%= cl_image_path(appart.photos.first.path, height: 250, crop: :fill)%>">
-            <div class="btn-cookoon btn-cookoon-primary">
-              <%= link_to "Modifier", edit_admin_cookoon_path(appart) %>
-            </div>
-            <p class="address-info">
-              <i class="fas fa-map-marker-alt"></i>
-              <%= appart.address %>
-            </p>
+          </div>
+          <div class="btn-cookoon btn-cookoon-primary text-center" style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;">
+            <%= link_to "Modifier", edit_admin_cookoon_path(appart) %>
           </div>
           <div class="cookoon-card-body">
             <h4 style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"><%= appart.name %></h4>
             <p class="mb-1"><%= "Hôte : #{appart.user.first_name} #{appart.user.last_name}" %></p>
             <p class="mb-1"><%= "E-mail : #{appart.user.email}" %></p>
             <p class="mb-1"><%= "Tél : #{appart.user.phone_number}" %></p>
+            <p class="mb-1"><i class="fas fa-map-marker-alt"></i> <%= appart.address %>
+            </p>
             <%= render 'cookoons/perks_in_card', div_style: "height: 2.6rem", perks: appart.perk_specifications, p_style: "overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;" %>
             <p class="mb-0" style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical;"><%= appart.description %></p>
           </div>
