@@ -6,16 +6,16 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    position: relative;
-    .address-info {
-      position: absolute;
-      color: white;
-      bottom: 0;
-      left: 25px;
-    }
+    // position: relative;
+    // .address-info {
+    //   position: absolute;
+    //   color: white;
+    //   bottom: 0;
+    //   left: 25px;
+    // }
   }
   &-body {
-    padding: 20px;
+    padding: 1rem;
   }
 
   &-services {
