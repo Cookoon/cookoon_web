@@ -1,38 +1,41 @@
-h1.text-center.my-4 Votre réservation
-
 .container
-  .d-flex
-    .d-none.d-md-block.mr-2
-      = link_to '< Retour au choix', reservation_cookoon_path(@reservation, @reservation.cookoon), class: 'btn-cookoon btn-block btn-cookoon-secondary-gold mb-2 small'
-      = render 'reservations/search_recap', reservation: @reservation
+  h1.text-center.my-4 Votre réservation
 
-    .container
-      = render 'reservations/recap_string', reservation: @reservation
+.container.d-flex.justify-content-center.px-0
+  .row
+    .d-none.d-md-block.col-md-4.col-lg-3.px-md-2
+      .px-md-2.px-lg-0
+        = link_to '< Retour au choix', reservation_cookoon_path(@reservation, @reservation.cookoon), class: 'btn-cookoon btn-block btn-cookoon-secondary-gold mb-2 small'
+        = render 'reservations/search_recap', reservation: @reservation
 
-      .mb-4
-        .d-flex-default
-          b Mise à disposition du lieu
-          b <span>#{humanized_money_with_symbol @reservation.cookoon_price}</span>
-        .ml-3 = @cookoon.address
+    .col-12.col-md-8.col-lg-9.px-0.px-md-2.pr-lg-0
+      .px-0.px-md-2.pb-4
+        = render 'reservations/recap_string', reservation: @reservation
 
-        .m-2
-          = render 'reservations/services_prices'
+        .mb-4
+          .d-flex-default
+            b Mise à disposition du lieu
+            b <span>#{humanized_money_with_symbol @reservation.cookoon_price}</span>
+          .ml-3 = @cookoon.address
 
-        hr
+          .m-2
+            = render 'reservations/services_prices'
 
-        .d-flex-default.mb-2
-          b TOTAL
-          - if @reservation.customer?
-            .text-right
-              b.text-primary #{humanized_money_with_symbol @reservation.total_full_price} TTC
-              p soit #{humanized_money_with_symbol(@reservation.total_full_price_per_person)} / personne
-          - else
-            b.text-primary #{humanized_money_with_symbol @reservation.total_price} HT
+          hr
 
-      - if @reservation.object.aasm_state == "services_selected"
-        = render 'credit_cards/selection'
+          .d-flex-default.mb-2
+            b TOTAL
+            - if @reservation.customer?
+              .text-right
+                b.text-primary #{humanized_money_with_symbol @reservation.total_full_price} TTC
+                p soit #{humanized_money_with_symbol(@reservation.total_full_price_per_person)} / personne
+            - else
+              b.text-primary #{humanized_money_with_symbol @reservation.total_price} HT
 
-        - if @reservation.business?
-          .text-center.mb-4
-            p Vous pouvez aussi demander un devis
-            = link_to 'Demander un Devis', ask_quotation_reservation_path(@reservation), class: 'btn-cookoon btn-cookoon-primary btn-block', method: :patch
+        - if @reservation.object.aasm_state == "services_selected"
+          = render 'credit_cards/selection'
+
+          - if @reservation.business?
+            .text-center.mb-4
+              p Vous pouvez aussi demander un devis
+              = link_to 'Demander un Devis', ask_quotation_reservation_path(@reservation), class: 'btn-cookoon btn-cookoon-primary btn-block', method: :patch
