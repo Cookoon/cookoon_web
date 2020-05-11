@@ -114,20 +114,18 @@ Chef.destroy_all
 chef_attributes = [
   {
     name: 'Hélène Darroze',
-    description: <<-DESCRIPTION
-      Elle officie dans son restaurant gastronomique du 6e arrondissement de Paris, le Marsan (qui portait auparavant son nom).
+    description: "Elle officie dans son restaurant gastronomique du 6e arrondissement de Paris, le Marsan (qui portait auparavant son nom).
       Sa cuisine est récompensée d'une note de 15/20 au Gault-Millau et l'obtention de deux étoiles au Guide Michelin en 2003.
-      Cela en fait une des seules cheffes étoilées en activité avec Anne-Sophie Pic et Julia Sedefdjian.
-    DESCRIPTION
+      Cela en fait une des seules cheffes étoilées en activité avec Anne-Sophie Pic et Julia Sedefdjian.",
+    picture_url: "https://ca.slack-edge.com/T0A4A3AQZ-U0A5L9L8K-7eda5a7e311c-512"
   },
   {
     name: 'Gordon Ramsay',
-    description: <<-DESCRIPTION
-      Également présentateur de plusieurs émissions télévisées consacrées à la cuisine ou à la restauration,
+    description: "Également présentateur de plusieurs émissions télévisées consacrées à la cuisine ou à la restauration,
       telles que The F Word, MasterChef, ou encore la célèbre émission Ramsay's Kitchen Nightmares
       (diffusée en France sous le nom de Cauchemar en cuisine), il compte parmi les trois cuisiniers ayant été gratifiés
-      de trois étoiles en une fois par l'édition britannique du Guide Michelin.
-    DESCRIPTION
+      de trois étoiles en une fois par l'édition britannique du Guide Michelin.",
+    picture_url: "https://upload.wikimedia.org/wikipedia/commons/6/6f/Gordon_Ramsay.jpg"
   }
 ]
 
