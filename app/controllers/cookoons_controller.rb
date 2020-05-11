@@ -12,7 +12,7 @@ class CookoonsController < ApplicationController
     }
 
     @cookoons = policy_scope(Cookoon)
-                .includes(:photo_files)
+                .includes(:photo_files, :perk_specifications, :perks)
                 .filtrate(filtering_params)
                 .decorate
   end
