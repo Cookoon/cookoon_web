@@ -1,5 +1,5 @@
 .chef-card
-  .row.mb-3.mx-0
+  .row.pb-3.mx-0
     .col-12.col-md-6
       .chef-card-image style="background-image: url(#{chef.picture_url});"
     .col-12.col-md-6
@@ -8,18 +8,16 @@
         h4 <i>#{chef.name}</i>
         a.text-primary href="#chefSelection" role="button" data-slide="next" >
 
-      p = chef.description
+      p.mb-0 = chef.description
 
   .row.mx-0
     - chef.menus.each do |menu|
-      .col-12.col-md-6
-        .row.h-100.mx-0
-          .chef-card-menu.mb-3.mb-md-0.d-flex.flex-column.justify-content-between
-            .align-self-start
-              p = simple_format menu.description
-            = link_to 'Choisir ce menu', reservation_select_menu_path(@reservation, menu), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
+      .col-12.col-md-6.pb-3
+        .chef-card-menu
+          = simple_format(menu.description)
+          = link_to 'Choisir ce menu', reservation_select_menu_path(@reservation, menu), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
 
-    .col-12.col-md-6.offset-md-6.text-center.my-4.mb-0.mb-md-4
+    .col-12.col-md-6.offset-md-6.text-center.pb-3
       = link_to 'Je souhaite cuisiner moi-même', '#', class: 'btn-cookoon btn-block btn-gray text-black', data: { action: "collapses#toggle" }
 
 
