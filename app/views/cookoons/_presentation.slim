@@ -6,9 +6,9 @@
     div.d-none.d-md-flex
       p <i class="fas fa-map-marker-alt"></i> #{cookoon.address}
 
-  / CAN BE REVEALED IF WE WANT TO LIST PERKS
   - if @cookoon.perks.any?
-    = render 'perks', perks: @perks
+    /= render 'perks', perks: @perks
+    = render 'cookoons/perks_in_card', div_style: "", perks: @perks, p_style: ""
 
   p = @cookoon.description
 
