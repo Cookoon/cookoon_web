@@ -30,12 +30,14 @@
 
   <% if @cookoon.perks.any? %>
     <h5 class="mt-3">Spécifications sélectionnées</h5>
-    <%= render 'cookoons/perks', perks: @perks_selected %>
+    <%#= render 'cookoons/perks', perks: @perks_selected %>
+    <%= render 'cookoons/perks_in_card', div_style: "", perks: @cookoon.perk_specifications, p_style: "" %>
   <% end %>
 
   <h5 class="mt-3">Spécifications non sélectionnées</h5>
   <div class="d-flex" style="flex-wrap: wrap">
-    <%= render 'cookoons/perks', perks: @perks_not_selected %>
+    <%#= render 'cookoons/perks', perks: @perks_not_selected %>
+    <%= render 'cookoons/perks_in_card', div_style: "", perks: @perks_not_selected, p_style: "" %>
   </div>
 
   <h5 class="mt-3">Informations pratiques</h5>
