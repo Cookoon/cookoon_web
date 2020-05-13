@@ -85,7 +85,7 @@ Rails.application.routes.draw do
         get :dashboard
       end
       resources :cookoons, only: %i[index edit update]
-      resources :chefs, only: %i[index show]
+      resources :chefs, only: %i[index]
     end
   end
 
