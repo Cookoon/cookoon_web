@@ -1,0 +1,16 @@
+.container
+  h1.my-4 Espace administrateur
+
+  .pb-3
+    h3 <i class='co icon-losange small text-primary mr-2'></i> Les demeures
+    p Visualisez toutes les demeures
+    .pt-4.pb-3.text-right
+      = link_to 'Les demeures', admin_cookoons_path, class: 'btn-cookoon btn-cookoon-primary'
+
+    hr
+
+  .pb-3
+    h3 <i class='co icon-losange small text-primary mr-2'></i> Les Chefs
+    p Visualisez tous les chefs & menus
+    .pt-4.pb-3.text-right
+      = link_to 'Les chefs', admin_chefs_path, class: 'btn-cookoon btn-cookoon-primary'

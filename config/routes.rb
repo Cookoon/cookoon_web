@@ -81,7 +81,11 @@ Rails.application.routes.draw do
   authenticate :user, ->(user) { user.admin } do
     mount Sidekiq::Web, at: :sidekiq
     namespace :admin do
+      controller :pages do
+        get :dashboard
+      end
       resources :cookoons, only: %i[index edit update]
+      resources :chefs, only: %i[index]
     end
   end
 
