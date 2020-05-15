@@ -10,7 +10,10 @@ export default class extends Controller {
     'typeInput',
     'dateSelection',
     'dateText',
-    'dateInput'
+    'dateInput',
+    // Added by Alice
+    'submitForm',
+    'submitFormLogo'
   ]
 
   static dateOptions = {
@@ -64,5 +67,28 @@ export default class extends Controller {
   selectDate(selectedDates, dateStr) {
     this.dateTextTarget.innerHTML = selectedDates[0].toLocaleString('fr', this.constructor.dateOptions)
     this.dateInputTarget.value = dateStr
+  }
+
+  // Added by Alice: submit when clicking on the form (not only on the img)
+  submitForm() {
+    this.submitFormTarget.submit();
+  }
+
+  // Added by Alice to change background-color and img
+  changeImageAndToggleBg(imagePath) {
+    this.submitFormTarget.style = "transition-duration: 1s;"
+    this.submitFormTarget.classList.toggle("bg-white");
+    this.submitFormTarget.classList.toggle("bg-primary");
+    this.submitFormLogoTarget.setAttribute("src", imagePath);
+  }
+
+  logoWhiteBackgroundBold() {
+    const logo = this.submitFormLogoTarget.dataset.logoWhite;
+    this.changeImageAndToggleBg(logo);
+  }
+
+  logoBoldBackgroundWhite() {
+    const logo = this.submitFormLogoTarget.dataset.logoBold;
+    this.changeImageAndToggleBg(logo);
   }
 }
