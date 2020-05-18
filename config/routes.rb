@@ -60,7 +60,7 @@ Rails.application.routes.draw do
     patch :ask_quotation, on: :member
     patch :select_services, on: :member
     resources :invoices, only: :create
-    resource :services, only: %i[index show create]
+    resources :services, only: %i[index show create]
     resources :messages, controller: 'reservations/messages', only: %i[new create]
   end
 
