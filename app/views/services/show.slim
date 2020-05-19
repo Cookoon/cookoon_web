@@ -1,5 +1,27 @@
 .container
   h1.my-4 Payez vos options de réservation
+  div
+    p Récapitulatif :
+
+    .mb-4
+      = @service.name
+
+      hr
+
+      .d-flex-default
+        b(data-target="payments.chargeAmountLabel") TOTAL
+        b(data-target="payments.chargeAmount") = humanized_money_with_symbol @service.price
+
+  - if @service.status == 'quote'
+    = render 'services/payments/form'
+  - else
+    div style="height: 60vh"
+      p Ce service est déjà réglé !
+
+= console
+
+//.container
+  h1.my-4 Payez vos options de réservation
 
   - if @service
     div
