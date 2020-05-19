@@ -3,8 +3,10 @@ class PaymentsController < ApplicationController
   before_action :find_cookoon, only: %i[amounts]
 
   def secret
-    payment = Reservation::Payment.new(@reservation.object)
-    if payment.create_or_retrieve_and_update
+    # payment = Reservation::Payment.new(@reservation.object)
+    # if payment.create_or_retrieve_and_update
+    payment = Reservation::Payment.new(@reservation.object, options = { capture_method: 'manual'})
+    if payment.create_or_retrieve_and_update(:stripe_charge_id)
       @intent_secret_json = {client_secret: payment.return_stripe_client_secret}.to_json
     else
       flash.alert = payment.displayable_errors

@@ -23,7 +23,8 @@ module Host
 
     def capture_payment_and_notify
       payment = @reservation.payment
-      if payment.capture
+      # if payment.capture
+      if payment.capture(:stripe_charge_id)
         @reservation.accept!
         @reservation.notify_users_after_confirmation
         flash[:notice] = 'Vous avez accepté la réservation'
@@ -36,7 +37,8 @@ module Host
     # def refund_payment_and_notify
     def cancel_payment_and_notify
       # @reservation.payment.refund
-      @reservation.payment.cancel
+      # @reservation.payment.cancel
+      @reservation.payment.cancel(:stripe_charge_id)
       @reservation.refuse!
       ReservationMailer.refused_to_tenant(@reservation).deliver_later
       flash[:notice] = 'Vous avez refusé la réservation'

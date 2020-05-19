@@ -11,26 +11,36 @@ class Payment
     @errors = []
   end
 
-  def create_or_retrieve_and_update
-    payable.stripe_charge_id.nil? ? create : retrieve_and_update
+  # def create_or_retrieve_and_update
+  def create_or_retrieve_and_update(cookoon_stripe_intent_id)
+    # payable.stripe_charge_id.nil? ? create : retrieve_and_update
+    payable[cookoon_stripe_intent_id].nil? ? create(cookoon_stripe_intent_id) : retrieve_and_update(cookoon_stripe_intent_id)
   end
 
-  def create
-    create_stripe_intent if charge_needed?
+  # def create
+  def create(cookoon_stripe_intent_id)
+    # create_stripe_intent if charge_needed?
+    create_stripe_intent(cookoon_stripe_intent_id) if charge_needed?
   end
 
-  def retrieve_and_update
-    retrieve_and_update_stripe_intent
+  # def retrieve_and_update
+  def retrieve_and_update(cookoon_stripe_intent_id)
+    # retrieve_and_update_stripe_intent
+    retrieve_and_update_stripe_intent(cookoon_stripe_intent_id)
   end
 
   # def refund
-  def cancel
+  # def cancel
+  def cancel(cookoon_stripe_intent_id)
     # refund_stripe_charge
-    cancel_stripe_intent
+    # cancel_stripe_intent
+    cancel_stripe_intent(cookoon_stripe_intent_id)
   end
 
-  def capture
-    capture_stripe_intent
+  # def capture
+  def capture(cookoon_stripe_intent_id)
+    # capture_stripe_intent
+    capture_stripe_intent(cookoon_stripe_intent_id)
   end
 
   def displayable_errors
