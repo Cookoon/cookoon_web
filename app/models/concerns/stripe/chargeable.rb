@@ -1,26 +1,35 @@
 module Stripe
   module Chargeable
-    def create_stripe_intent
+    # def create_stripe_intent
+    def create_stripe_intent(cookoon_stripe_intent_id)
       create_intent
-      persist_intent
+      # persist_intent
+      persist_intent(cookoon_stripe_intent_id)
     end
 
-    def retrieve_and_update_stripe_intent
-      retrieve_and_update_intent
-      persist_intent
+    # def retrieve_and_update_stripe_intent
+    def retrieve_and_update_stripe_intent(cookoon_stripe_intent_id)
+      # retrieve_and_update_intent
+      retrieve_and_update_intent(cookoon_stripe_intent_id)
+      # persist_intent
+      persist_intent(cookoon_stripe_intent_id)
     end
 
     def return_stripe_client_secret
       return_client_secret
     end
 
-    def capture_stripe_intent
-      capture_intent
+    # def capture_stripe_intent
+    def capture_stripe_intent(cookoon_stripe_intent_id)
+      # capture_intent
+      capture_intent(cookoon_stripe_intent_id)
     end
 
     # def refund_stripe_charge
-    def cancel_stripe_intent
-      cancel_intent
+    # def cancel_stripe_intent
+    def cancel_stripe_intent(cookoon_stripe_intent_id)
+      # cancel_intent
+      cancel_intent(cookoon_stripe_intent_id)
       # refund_charge
     end
 
@@ -29,25 +38,36 @@ module Stripe
     attr_reader :stripe_intent
 
     # def refund_charge
-    def cancel_intent
-      return false unless intent
-      intent.cancel
+    # def cancel_intent
+    def cancel_intent(cookoon_stripe_intent_id)
+      # return false unless intent
+      return false unless intent(cookoon_stripe_intent_id)
+      # intent.cancel
+      intent(cookoon_stripe_intent_id).cancel
       # return false unless charge
       # charge.refund
     end
 
-    def capture_intent
-      return false unless intent
-      intent.capture
+    # def capture_intent
+    def capture_intent(cookoon_stripe_intent_id)
+      # return false unless intent
+      return false unless intent(cookoon_stripe_intent_id)
+      # intent.capture
+      intent(cookoon_stripe_intent_id).capture
     end
 
-    def intent
-      return false unless payable.stripe_charge_id
-      @intent ||= Stripe::PaymentIntent.retrieve(payable.stripe_charge_id)
+    # def intent
+      def intent(cookoon_stripe_intent_id)
+      # return false unless payable.stripe_charge_id
+      return false unless payable[cookoon_stripe_intent_id]
+      # @intent ||= Stripe::PaymentIntent.retrieve(payable.stripe_charge_id)
+      @intent ||= Stripe::PaymentIntent.retrieve(payable[cookoon_stripe_intent_id])
     end
 
-    def persist_intent
-      payable.update(stripe_charge_id: stripe_intent.id) if stripe_intent
+    # def persist_intent
+    def persist_intent(cookoon_stripe_intent_id)
+      # payable.update(stripe_charge_id: stripe_intent.id) if stripe_intent
+      payable.update("#{cookoon_stripe_intent_id}": stripe_intent.id) if stripe_intent
     end
 
     def create_intent
@@ -68,15 +88,19 @@ module Stripe
         customer: stripe_customer.id,
         description: intent_description,
         metadata: intent_metadata,
-        capture_method: 'manual',
+        # capture_method: 'manual',
+        capture_method: options[:capture_method],
         # source: options[:source],
         # capture: should_capture?
       }
     end
 
-    def retrieve_and_update_intent
-      return false unless payable.stripe_charge_id
-      @stripe_intent = Stripe::PaymentIntent.update(payable.stripe_charge_id, intent_attributes_update)
+    # def retrieve_and_update_intent
+    def retrieve_and_update_intent(cookoon_stripe_intent_id)
+      # return false unless payable.stripe_charge_id
+      return false unless payable[cookoon_stripe_intent_id]
+      # @stripe_intent = Stripe::PaymentIntent.update(payable.stripe_charge_id, intent_attributes_update)
+      @stripe_intent = Stripe::PaymentIntent.update(payable[cookoon_stripe_intent_id], intent_attributes_update)
     rescue Stripe::InvalidRequestError => e
       Rails.logger.error('Failed to retrieve Stripe Payment Intent')
       Rails.logger.error(e.message)
