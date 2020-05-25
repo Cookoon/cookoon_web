@@ -13,6 +13,7 @@ module ReservationStateMachine
       state :quotation_asked
       state :quotation_proposed
       state :accepted
+      state :services_paid
       state :refused
       state :cancelled
       state :ongoing
@@ -39,6 +40,10 @@ module ReservationStateMachine
 
       event :charge do
         transitions from: :services_selected, to: :charged
+      end
+
+      event :pay_services do
+        transitions from: :accepted, to: :services_paid
       end
 
       event :ask_quotation do
