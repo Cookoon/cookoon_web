@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_04_081116) do
+ActiveRecord::Schema.define(version: 2020_05_22_200906) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -159,6 +159,7 @@ ActiveRecord::Schema.define(version: 2019_09_04_081116) do
     t.integer "services_with_tax_cents", default: 0, null: false
     t.integer "total_tax_cents", default: 0, null: false
     t.integer "total_with_tax_cents", default: 0, null: false
+    t.string "stripe_services_id"
     t.index ["cookoon_id"], name: "index_reservations_on_cookoon_id"
     t.index ["menu_id"], name: "index_reservations_on_menu_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
