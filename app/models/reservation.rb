@@ -146,7 +146,8 @@ class Reservation < ApplicationRecord
 
   def services_need_update?
     return unless saved_change_to_aasm_state?
-    saved_change_to_aasm_state.last == 'charged'
+    # saved_change_to_aasm_state.last == 'charged'
+    saved_change_to_aasm_state.last == 'services_paid'
   end
 
   def update_services
