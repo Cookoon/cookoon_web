@@ -58,7 +58,7 @@ class Payment
   # def after_proceed; end
 
   def charge_needed?
-    charge_amount_cents.positive?
+    options[:charge_amount_cents].positive?
   end
 
   # def charge_amount_cents
