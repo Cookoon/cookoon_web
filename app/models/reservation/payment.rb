@@ -7,15 +7,19 @@ class Reservation
       reservation.charge! if errors.empty?
     end
 
+    def pay_services
+      reservation.pay_services! if errors.empty?
+    end
+
     private
 
     # def should_capture?
     #   ActiveModel::Type::Boolean.new.cast(options[:capture]) || false
     # end
 
-    def charge_amount_cents
-      reservation.business? ? reservation.total_price_cents : reservation.total_with_tax_cents
-    end
+    # def charge_amount_cents
+    #   reservation.business? ? reservation.total_price_cents : reservation.total_with_tax_cents
+    # end
 
     def intent_description
       "Paiement pour #{reservation.cookoon.name}"
@@ -24,7 +28,7 @@ class Reservation
     def intent_metadata
       {
         reservation_id: reservation.id,
-        reservation_price: charge_amount_cents,
+        reservation_price: options[:charge_amount_cents],
         reservation_services_price: reservation.services_with_tax_cents,
         reservation_services: reservation.services.payment_tied_to_reservation.pluck(:name).join(' · ')
       }

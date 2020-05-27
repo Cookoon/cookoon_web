@@ -83,7 +83,7 @@ module Stripe
 
     def intent_attributes_creation
       {
-        amount: charge_amount_cents,
+        amount: options[:charge_amount_cents],
         currency: 'eur',
         customer: stripe_customer.id,
         description: intent_description,
@@ -110,7 +110,7 @@ module Stripe
 
     def intent_attributes_update
       {
-        amount: charge_amount_cents,
+        amount: options[:charge_amount_cents],
         currency: 'eur',
         customer: stripe_customer.id,
         description: intent_description,

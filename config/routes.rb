@@ -50,9 +50,11 @@ Rails.application.routes.draw do
       end
     end
     resources :chefs, only: :index
+
     resources :payments, only: %i[new create] do
       collection do
         get 'secret', to: 'payments#secret'
+        get 'secret_services', to: 'payments#secret_services'
       end
     end
     patch 'menus/:id', to: 'reservations#select_menu', as: :select_menu
