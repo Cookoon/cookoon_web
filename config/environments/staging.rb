@@ -77,7 +77,6 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'cookoon-staging.herokuapp.com' }
   config.roadie.url_options = { host: 'cookoon-staging.herokuapp.com', scheme: 'https' }
   config.action_mailer.asset_host = nil
-  config.action_mailer.preview_path = 'spec/mailers/previews'
 
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
