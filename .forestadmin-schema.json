@@ -4366,9 +4366,9 @@
   }],
   "meta": {
     "database_type": "postgresql",
-    "framework_version": "5.2.3",
+    "framework_version": "5.2.4.3",
     "liana": "forest-rails",
     "liana_version": "3.2.0",
-    "orm_version": "5.2.3"
+    "orm_version": "5.2.4.3"
   }
 }
