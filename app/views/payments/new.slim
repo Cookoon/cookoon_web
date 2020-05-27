@@ -5,37 +5,71 @@
   .row
     .d-none.d-md-block.col-md-4.col-lg-3.px-md-2
       .px-md-2.px-lg-0
-        = link_to '< Retour au choix', reservation_cookoon_path(@reservation, @reservation.cookoon), class: 'btn-cookoon btn-block btn-cookoon-secondary-gold mb-2 small'
+        - if @reservation.cookoon_selected? || @reservation.services_selected?
+          = link_to '< Retour aux choix', reservation_cookoon_path(@reservation, @reservation.cookoon), class: 'btn-cookoon btn-block btn-cookoon-secondary-gold mb-2 small'
         = render 'reservations/search_recap', reservation: @reservation
 
     .col-12.col-md-8.col-lg-9.px-0.px-md-2.pr-lg-0
       .px-0.px-md-2.pb-4
-        = render 'reservations/recap_string', reservation: @reservation
+        .pb-4
+          = render 'reservations/recap_string', reservation: @reservation
 
-        .mb-4
+        div.mb-3
+          p.mb-3.font-weight-bold Votre décor et le service
+          p.mb-1
+            |
+              - L'adresse: #{@cookoon.address}
+          p.mb-1
+            |
+              - Le(s) maître(s) d'hôtel
+        div.mb-4
           .d-flex-default
-            b Mise à disposition du lieu
-            b <span>#{humanized_money_with_symbol @reservation.cookoon_price}</span>
-          .ml-3 = @cookoon.address
+            b Montant
+            b #{humanized_money_with_symbol(@reservation.cookoon_price)}TTC
+          .d-flex.justify-content-end
+            i
+              |
+                (soit #{humanized_money_with_symbol(@reservation.cookoon_price)}HT)
 
-          .m-2
-            = render 'reservations/services_prices'
+        hr
 
+        div.mb-3
+          p.mb-3.font-weight-bold Vos souhaits de service
+          - @reservation.services.each do |service|
+            p.mb-1
+              |
+                - &nbsp
+              =service.name
+        div.mb-4
+          .d-flex-default
+            b Montant
+            b #{humanized_money_with_symbol(@reservation.services_with_tax)}TTC
+          .d-flex.justify-content-end
+            i
+              |
+                (soit #{humanized_money_with_symbol(@reservation.services_price)}HT)
+
+        - if @reservation.services_selected? || @reservation.cookoon_selected?
           hr
-
-          .d-flex-default.mb-2
-            b TOTAL
-            - if @reservation.customer?
-              .text-right
-                b.text-primary #{humanized_money_with_symbol @reservation.total_full_price} TTC
-                p soit #{humanized_money_with_symbol(@reservation.total_full_price_per_person)} / personne
-            - else
-              b.text-primary #{humanized_money_with_symbol @reservation.total_price} HT
-
-        - if @reservation.object.aasm_state == "services_selected"
+          hr
+          p.mb-3.font-weight-bold.text-center Régler #{humanized_money_with_symbol(@reservation.cookoon_price)}TTC
           = render 'credit_cards/selection'
+        - if @reservation.accepted?
+          hr
+          hr
+          p.mb-3.font-weight-bold.text-center Régler #{humanized_money_with_symbol(@reservation.services_with_tax)}TTC
+          = render 'credit_cards/selection_services'
 
-          - if @reservation.business?
-            .text-center.mb-4
+        - if @reservation.business?
+          hr
+          hr
+          .text-center.mb-4
+            - if @reservation.services_selected? || @reservation.cookoon_selected?
               p Vous pouvez aussi demander un devis
               = link_to 'Demander un Devis', ask_quotation_reservation_path(@reservation), class: 'btn-cookoon btn-cookoon-primary btn-block', method: :patch
+            - elsif @reservation.quotation_asked?
+              p Votre demande de devis est en cours
+            - elsif @reservation.quotation_proposed?
+              p Nous sommes en attente de votre validation du devis
+            - elsif @reservation.quotation_accepted?
+              p Vous avez validé le devis
