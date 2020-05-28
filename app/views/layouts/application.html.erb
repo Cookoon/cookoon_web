@@ -27,7 +27,7 @@
 
   <body class="<%= yield(:body_class) %>" data-controller="application-navigation" >
     <%= c 'navbar_cookoon',
-          type: content_for?(:navbar_type) ? yield(:navbar_type) : :standard %>
+          type: content_for?(:navbar_type) ? yield(:navbar_type) : :standard if current_user %>
 
     <%= render 'shared/pretender_infos' %>
     <div id="flash">
