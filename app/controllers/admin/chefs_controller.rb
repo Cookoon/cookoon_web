@@ -8,12 +8,10 @@ module Admin
       @chefs = policy_scope([:admin, Chef]).includes(:menus)
     end
 
-    # def show
-    # end
-
     private
 
-    # def find_chef
+    # def require_admin
+    #   current_user.admin == true
     # end
 
   end
