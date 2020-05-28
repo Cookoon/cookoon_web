@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row align-items-center">
+    <%#= render 'admin/back_button', button_title: 'Retour au dashboard', path: admin_dashboard_path %>
+    <div class="col-12 col-md-9 col-lg-10 px-0 px-md-2 px-lg-3">
+      <h1 class="my-4 text-center">Les réservations</h1>
+    </div>
+  </div>
+</div>
+
+<div class="<%= classnames(container: desktop_view?) %>">
+
+  <ul class="nav nav-pills mb-2">
+    <li class="nav-item">
+      <a href="#charged" class="nav-link active" data-toggle="pill" role="tab">Charged</a>
+    </li>
+
+    <li class="nav-item">
+      <a href="#accepted" class="nav-link" data-toggle="pill" role="tab">Accepted</a>
+    </li>
+
+    <li class="nav-item">
+      <a href="#all" class="nav-link" data-toggle="pill" role="tab">All</a>
+    </li>
+  </ul>
+
+  <div class="tab-content py-3">
+    <div class="tab-pane fade show active" id="charged" role="tabpanel">
+      <%= render "reservations_list", resas: @reservations_charged %>
+    </div>
+    <div class="tab-pane fade" id="accepted" role="tabpanel">
+      <%= render "reservations_list", resas: @reservations_accepted %>
+    </div>
+    <div class="tab-pane fade" id="accepted" role="tabpanel">
+      <%= render "reservations_list", resas: @reservations_all %>
+    </div>
+  </div>
+
+</div>
