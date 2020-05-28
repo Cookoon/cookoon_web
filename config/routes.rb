@@ -88,6 +88,7 @@ Rails.application.routes.draw do
       end
       resources :cookoons, only: %i[index edit update]
       resources :chefs, only: %i[index]
+      resources :reservations, only: %i[index show]
     end
   end
 
