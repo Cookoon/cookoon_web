@@ -1,5 +1,9 @@
 .container
-  h1.my-4.text-center Les chefs
+  .row.align-items-center
+    = render 'admin/back_button', button_title: 'Retour au dashboard', path: admin_dashboard_path
+    .col-12.col-md-9.col-lg-10.px-0.px-md-2.px-lg-3
+      h1.my-4.text-center Les chefs
+
   .row.d-flex.justify-content-center
 
     - @chefs.each do |chef|
