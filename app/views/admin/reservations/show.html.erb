@@ -4,7 +4,7 @@
 
 <div class="container d-flex justify-content-center">
   <div class="row">
-    <%#= render 'admin/back_button', button_title: 'Retour aux réservations', path: admin_reservations_path %>
+    <%= render 'admin/back_button', button_title: 'Retour aux réservations', path: admin_reservations_path %>
     <div class="col-12 col-md-9 col-lg-10 px-0 px-md-2 px-lg-3">
       <div class="text-center">
         <%= carousel_for(@reservation.cookoon.photos) %>
