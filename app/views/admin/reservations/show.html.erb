@@ -18,11 +18,11 @@
           <strong>Hôte: </strong>
           <%= "#{@reservation.cookoon.user.first_name} #{@reservation.cookoon.user.last_name} / Email: #{@reservation.cookoon.user.email} / Tél: #{@reservation.cookoon.user.phone_number}"%>
         </p>
-        <% if !@reservation.menu.blank? %>
+        <% if @reservation.menu.present? %>
           <h3>Chef et menu</h3>
           <%= render "chef_card", chef: @reservation.menu.chef, menu: @reservation.menu %>
         <% end %>
-        <% if !@reservation.services.blank? %>
+        <% if @reservation.services.present? %>
           <h3>Services</h3>
           <% @reservation.services.each do |service| %>
             <p><%= service.category %></p>
