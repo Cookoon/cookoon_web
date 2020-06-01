@@ -14,6 +14,7 @@
     cursor: not-allowed;
   }
   &-primary {
+    border: none;
     background: $primary;
     color: white !important;
     &:hover:not([disabled]) {
