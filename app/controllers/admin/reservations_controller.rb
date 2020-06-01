@@ -8,7 +8,6 @@ module Admin
       @reservations = policy_scope([:admin, Reservation]).includes(:cookoon, :user, cookoon: [:user])
       @reservations_charged = @reservations.charged.decorate
       @reservations_accepted = @reservations.accepted.decorate
-      @reservations_all = @reservations.decorate
     end
 
     def show
