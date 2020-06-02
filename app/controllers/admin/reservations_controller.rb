@@ -17,7 +17,7 @@ module Admin
 
     def find_reservation
       @reservation = Reservation.find(params[:id]).decorate
-      authorize @reservation
+      authorize @reservation, policy_class: Admin::ReservationPolicy
     end
 
     # def require_admin
