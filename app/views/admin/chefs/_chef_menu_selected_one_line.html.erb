@@ -1,0 +1,5 @@
+<% if menu.present?  %>
+  <p>Chef : <%= "#{menu.chef.name} avec le menu #{menu.id}" %></p>
+<% else %>
+  <p>Pas de menu sélectionné</p>
+<% end %>

@@ -5,7 +5,7 @@ module Admin
     before_action :find_reservation, only: %i[show]
 
     def index
-      @reservations = policy_scope([:admin, Reservation]).includes(:cookoon, :user, cookoon: [:user])
+      @reservations = policy_scope([:admin, Reservation]).includes(:cookoon, :user, :menu, cookoon: [:user])
       @reservations_charged = @reservations.charged.decorate
       @reservations_accepted = @reservations.accepted.decorate
     end

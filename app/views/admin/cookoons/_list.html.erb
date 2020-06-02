@@ -16,11 +16,7 @@
               <p style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical;"><%= appart.description %></p>
             </div>
           </div>
-          <div class="cookoon-card-body pt-0">
-            <div class="btn-cookoon btn-cookoon-primary text-center">
-              <%= link_to "Modifier", edit_admin_cookoon_path(appart) %>
-            </div>
-          </div>
+          <%= link_to "Modifier", edit_admin_cookoon_path(appart), class: "btn-cookoon btn-cookoon-primary text-center" %>
         </div>
       </div>
     <% end %>
