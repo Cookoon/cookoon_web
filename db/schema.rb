@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_02_132324) do
+ActiveRecord::Schema.define(version: 2020_06_02_133004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -162,6 +162,10 @@ ActiveRecord::Schema.define(version: 2020_06_02_132324) do
     t.string "stripe_services_id"
     t.integer "cookoon_butler_price_cents", default: 0, null: false
     t.integer "menu_price_cents", default: 0, null: false
+    t.integer "cookoon_butler_tax_cents", default: 0, null: false
+    t.integer "menu_tax_cents", default: 0, null: false
+    t.integer "cookoon_butler_with_tax_cents", default: 0, null: false
+    t.integer "menu_with_tax_cents", default: 0, null: false
     t.index ["cookoon_id"], name: "index_reservations_on_cookoon_id"
     t.index ["menu_id"], name: "index_reservations_on_menu_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
