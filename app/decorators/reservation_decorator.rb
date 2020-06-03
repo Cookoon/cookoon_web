@@ -80,6 +80,42 @@ class ReservationDecorator < Draper::Decorator
     h.humanized_money_with_symbol object.total_tax
   end
 
+  def menu_price
+    h.humanized_money_with_symbol object.menu_price
+  end
+
+  def menu_tax
+    h.humanized_money_with_symbol object.menu_tax
+  end
+
+  def menu_full_price
+    h.humanized_money_with_symbol object.menu_with_tax
+  end
+
+  def cookoon_butler_price
+    h.humanized_money_with_symbol object.cookoon_butler_price
+  end
+
+  def cookoon_butler_tax
+    h.humanized_money_with_symbol object.cookoon_butler_tax
+  end
+
+  def cookoon_butler_full_price
+    h.humanized_money_with_symbol object.cookoon_butler_with_tax
+  end
+
+  def butler_price
+    h.humanized_money_with_symbol object.butler_price
+  end
+
+  def butler_tax
+    h.humanized_money_with_symbol object.butler_tax
+  end
+
+  def butler_full_price
+    h.humanized_money_with_symbol object.butler_with_tax
+  end
+
   def services_collection_for_view
     # Can filter depending on reservation type
     [
