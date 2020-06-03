@@ -23,8 +23,8 @@ class Service < ApplicationRecord
     corporate: { base_price: 0, unit_price: 2500, margin: 1.25 },
     catering: { base_price: 0, unit_price: 3500, margin: 1.25 },
     breakfast: { base_price: 0, unit_price: 2500, margin: 3 },
-    flowers: { base_price: 0, unit_price: 0, margin: 3  }
-    wine: { base_price: 0, unit_price: 0, margin: 3  }
+    flowers: { base_price: 0, unit_price: 0, margin: 3 },
+    wine: { base_price: 0, unit_price: 0, margin: 3 }
   }.freeze
 
   def payment(options = {})
