@@ -47,6 +47,17 @@ class Reservation < ApplicationRecord
   monetize :total_tax_cents
   monetize :total_with_tax_cents
 
+  monetize :butler_price_cents
+  monetize :butler_tax_cents
+  monetize :butler_with_tax_cents
+  monetize :cookoon_butler_price_cents
+  monetize :cookoon_butler_tax_cents
+  monetize :cookoon_butler_with_tax_cents
+  monetize :menu_price_cents
+  monetize :menu_tax_cents
+  monetize :menu_with_tax_cents
+
+
   validates :start_at, presence: true
   validates :start_at, in_future: true, after_notice_period: true, on: :create
   validates :duration, presence: true
@@ -56,7 +67,8 @@ class Reservation < ApplicationRecord
   validate :tenant_is_not_host
 
   before_validation :configure_from_type_name, on: :create
-  before_save :assign_prices, if: :assign_prices_needed?
+  # before_save :assign_prices, if: :assign_prices_needed?
+  before_save :assign_prices_for_cookoon_butler_menu, if: :assign_prices_needed_for_cookoon_butler_menu?
 
   # need to connect this to another condiction
   after_save :report_to_slack, if: :saved_change_to_aasm_state?
@@ -126,8 +138,16 @@ class Reservation < ApplicationRecord
     ongoing? || passed?
   end
 
-  def assign_prices
-    assign_attributes(computed_price_attributes)
+  # def assign_prices
+  #   assign_attributes(computed_price_attributes)
+  # end
+
+  def assign_prices_for_cookoon_butler_menu
+    assign_attributes(
+      computed_price_attributes.fetch_values(
+        :cookoon, :butler, :cookoon_butler, :menu, :total
+      ).reduce(:merge)
+    )
   end
 
   def host_payout_price_cents
@@ -154,7 +174,11 @@ class Reservation < ApplicationRecord
     services.payment_tied_to_reservation.each(&:paid!)
   end
 
-  def assign_prices_needed?
+  # def assign_prices_needed?
+  #   cookoon_selected? || menu_selected? || services_selected? || quotation_proposed?
+  # end
+
+  def assign_prices_needed_for_cookoon_butler_menu?
     cookoon_selected? || menu_selected? || services_selected? || quotation_proposed?
   end
 

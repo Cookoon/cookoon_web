@@ -101,6 +101,7 @@ module ReservationStateMachine
   end
 
   def set_prices
-    assign_prices
+    # assign_prices
+    assign_prices_for_cookoon_butler_menu
   end
 end
