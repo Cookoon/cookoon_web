@@ -9,21 +9,22 @@ class Service < ApplicationRecord
   monetize :price_cents
 
   enum status: %i[quote paid]
-  enum category: %i[special sommelier parking corporate catering breakfast flowers]
+  enum category: %i[special sommelier parking corporate catering breakfast flowers wine]
 
   before_create :set_price_cents, :set_name_from_category
 
-  validates :category, presence: true
-  validates :category, uniqueness: { scope: :reservation }
+  # validates :category, presence: true
+  validates :category, uniqueness: { scope: :reservation }, unless: :wine?
 
   PRICES = {
-    special: { base_price: 0, unit_price: 0 },
-    sommelier: { base_price: 0, unit_price: 0 },
-    parking: { base_price: 0, unit_price: 8250 },
-    corporate: { base_price: 0, unit_price: 2500 },
-    catering: { base_price: 0, unit_price: 3500 },
-    breakfast: { base_price: 0, unit_price: 2500 },
-    flowers: { base_price: 0, unit_price: 0 }
+    special: { base_price: 0, unit_price: 0, margin: 3 },
+    sommelier: { base_price: 0, unit_price: 0, margin: 3 },
+    parking: { base_price: 0, unit_price: 8250, margin: 1.25 },
+    corporate: { base_price: 0, unit_price: 2500, margin: 1.25 },
+    catering: { base_price: 0, unit_price: 3500, margin: 1.25 },
+    breakfast: { base_price: 0, unit_price: 2500, margin: 3 },
+    flowers: { base_price: 0, unit_price: 0, margin: 3 },
+    wine: { base_price: 0, unit_price: 0, margin: 3 }
   }.freeze
 
   def payment(options = {})
@@ -31,6 +32,10 @@ class Service < ApplicationRecord
   end
 
   private
+
+  def wine?
+    self.category == "wine"
+  end
 
   def set_price_cents
     return if sommelier? || special?
@@ -53,6 +58,8 @@ class Service < ApplicationRecord
       self.name = 'Petit déjeuner'
     when 'flowers'
       self.name = 'Composition florale'
+    when 'wine'
+      self.name = "Vin"
     end
   end
 
