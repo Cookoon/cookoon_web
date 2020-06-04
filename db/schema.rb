@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_03_105536) do
+ActiveRecord::Schema.define(version: 2020_06_04_152331) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -190,6 +190,9 @@ ActiveRecord::Schema.define(version: 2020_06_03_105536) do
     t.string "name"
     t.integer "quantity"
     t.integer "unit_price_cents", default: 0, null: false
+    t.integer "quantity_base", default: 0, null: false
+    t.float "margin", default: 0.0, null: false
+    t.integer "base_price_cents", default: 0, null: false
     t.index ["reservation_id"], name: "index_services_on_reservation_id"
   end
 

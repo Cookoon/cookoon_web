@@ -2614,21 +2614,19 @@
         "corporate",
         "catering",
         "breakfast",
-        "flowers"
+        "flowers",
+        "wine"
       ],
       "integration": null,
       "is_filterable": true,
       "is_read_only": false,
-      "is_required": true,
+      "is_required": false,
       "is_sortable": true,
       "is_virtual": false,
       "reference": null,
       "inverse_of": null,
       "widget": null,
-      "validations": [{
-        "message": null,
-        "type": "is present"
-      }]
+      "validations": []
     }, {
       "field": "payment_tied_to_reservation",
       "type": "Boolean",
@@ -2678,6 +2676,36 @@
       "field": "unit_price_cents",
       "type": "Number",
       "default_value": "0",
+      "enums": null,
+      "integration": null,
+      "is_filterable": true,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": null,
+      "inverse_of": null,
+      "widget": null,
+      "validations": []
+    }, {
+      "field": "quantity_base",
+      "type": "Number",
+      "default_value": "0",
+      "enums": null,
+      "integration": null,
+      "is_filterable": true,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": null,
+      "inverse_of": null,
+      "widget": null,
+      "validations": []
+    }, {
+      "field": "margin",
+      "type": "Number",
+      "default_value": "0.0",
       "enums": null,
       "integration": null,
       "is_filterable": true,
