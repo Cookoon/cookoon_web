@@ -7,6 +7,7 @@ class Service < ApplicationRecord
 
   monetize :unit_price_cents
   monetize :price_cents
+  monetize :base_price_cents
 
   enum status: %i[quote paid]
   enum category: %i[special sommelier parking corporate catering breakfast flowers wine]
