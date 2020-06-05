@@ -61,7 +61,7 @@ class Reservation < ApplicationRecord
   validates :start_at, presence: true
   validates :start_at, in_future: true, after_notice_period: true, on: :create
   validates :duration, presence: true
-  validates :people_count, presence: true
+  validates :people_count, presence: true, numericality: { greater_than: 0 }
   validates :type_name, inclusion: { in: %w[breakfast brunch lunch diner cocktail morning afternoon day], message: "Ce type de réservation n'est pas valide" }
 
   validate :tenant_is_not_host
@@ -121,12 +121,14 @@ class Reservation < ApplicationRecord
   end
 
   def butler_count
-    # 10 people per butler for business
-    # 8 people per butler for customer
+    # 8 people per butler for business
+    # 10 people per butler for customer
     # Magic numbers can be stored in ::DEFAULT
     return 1 unless people_count
-    customer_per_butler = business? ? 9 : 11
-    1 + (people_count / customer_per_butler)
+    # customer_per_butler = business? ? 9 : 11
+    customer_per_butler = business? ? 8 : 10
+    # 1 + (people_count / customer_per_butler)
+    1 + ((people_count - 1) / customer_per_butler)
   end
 
   def send_ending_surveys
