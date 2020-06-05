@@ -55,7 +55,6 @@ class Reservation
       Money.new(TAX * item)
     end
 
-
     # COMPUTE PRICE
     def compute_cookoon_price
       return 0 unless duration.present? && cookoon.present?
@@ -89,7 +88,7 @@ class Reservation
 
     def compute_services_price
       # return 0 unless services.present?
-      Money.new(services.pluck(:price_cents).sum)
+      Money.new(services.where.not(status: "initial").pluck(:price_cents).sum)
     end
 
     def compute_total_price
