@@ -57,7 +57,7 @@ RSpec.describe Reservation::PriceComputer do
     it 'computes services_price' do
       # puts reservation.services.pluck(:price_cents) unless reservation.services.nil?
       # puts prices[:services][:services_price]
-      expect(prices[:services][:services_price]).to eq(Money.new 78500, 'EUR')
+      expect(prices[:services][:services_price]).to eq(Money.new 0, 'EUR')
     end
 
     it 'computes total_price' do
@@ -65,7 +65,7 @@ RSpec.describe Reservation::PriceComputer do
       # puts prices[:menu][:menu_price]
       # puts prices[:services][:services_price]
       # puts prices[:total][:total_price]
-      expect(prices[:total][:total_price]).to eq(Money.new 137000, 'EUR')
+      expect(prices[:total][:total_price]).to eq(Money.new 58500, 'EUR')
     end
 
     it 'computes butler_tax' do
@@ -82,7 +82,7 @@ RSpec.describe Reservation::PriceComputer do
     end
 
     it 'computes services_tax' do
-      expect(prices[:services][:services_tax]).to eq(Money.new 15700, 'EUR')
+      expect(prices[:services][:services_tax]).to eq(Money.new 0, 'EUR')
     end
 
     it 'computes total_tax' do
@@ -90,7 +90,7 @@ RSpec.describe Reservation::PriceComputer do
       # puts prices[:menu][:menu_tax]
       # puts prices[:services][:services_tax]
       # puts prices[:total][:total_tax]
-      expect(prices[:total][:total_tax]).to eq(Money.new 22000, 'EUR')
+      expect(prices[:total][:total_tax]).to eq(Money.new 6300, 'EUR')
     end
 
     it 'computes butler_with_tax' do
@@ -111,12 +111,12 @@ RSpec.describe Reservation::PriceComputer do
 
     it 'computes services_with_tax' do
       # puts prices[:services]
-      expect(prices[:services][:services_with_tax]).to eq(Money.new 94200, 'EUR')
+      expect(prices[:services][:services_with_tax]).to eq(Money.new 0, 'EUR')
     end
 
     it 'computes total_with_tax' do
       # puts prices[:total]
-      expect(prices[:total][:total_with_tax]).to eq(Money.new 159000, 'EUR')
+      expect(prices[:total][:total_with_tax]).to eq(Money.new 64800, 'EUR')
     end
   end
 end
