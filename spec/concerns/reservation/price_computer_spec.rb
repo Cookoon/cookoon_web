@@ -1,3 +1,4 @@
+# rspec spec/concerns/reservation/price_computer_spec.rb
 require 'rails_helper'
 
 RSpec.describe Reservation::PriceComputer do
@@ -27,9 +28,9 @@ RSpec.describe Reservation::PriceComputer do
     end
 
     it 'computes cookoon_price' do
-      puts reservation.cookoon.price_cents
-      puts reservation.duration
-      puts prices[:cookoon][:cookoon_price]
+      # puts reservation.cookoon.price_cents
+      # puts reservation.duration
+      # puts prices[:cookoon][:cookoon_price]
       expect(prices[:cookoon][:cookoon_price]).to eq(Money.new 27000, 'EUR')
     end
 
@@ -56,7 +57,7 @@ RSpec.describe Reservation::PriceComputer do
     it 'computes services_price' do
       # puts reservation.services.pluck(:price_cents) unless reservation.services.nil?
       # puts prices[:services][:services_price]
-      expect(prices[:services][:services_price]).to eq(Money.new 50000, 'EUR')
+      expect(prices[:services][:services_price]).to eq(Money.new 78500, 'EUR')
     end
 
     it 'computes total_price' do
@@ -64,7 +65,7 @@ RSpec.describe Reservation::PriceComputer do
       # puts prices[:menu][:menu_price]
       # puts prices[:services][:services_price]
       # puts prices[:total][:total_price]
-      expect(prices[:total][:total_price]).to eq(Money.new 108500, 'EUR')
+      expect(prices[:total][:total_price]).to eq(Money.new 137000, 'EUR')
     end
 
     it 'computes butler_tax' do
@@ -81,7 +82,7 @@ RSpec.describe Reservation::PriceComputer do
     end
 
     it 'computes services_tax' do
-      expect(prices[:services][:services_tax]).to eq(Money.new 10000, 'EUR')
+      expect(prices[:services][:services_tax]).to eq(Money.new 15700, 'EUR')
     end
 
     it 'computes total_tax' do
@@ -89,7 +90,7 @@ RSpec.describe Reservation::PriceComputer do
       # puts prices[:menu][:menu_tax]
       # puts prices[:services][:services_tax]
       # puts prices[:total][:total_tax]
-      expect(prices[:total][:total_tax]).to eq(Money.new 16300, 'EUR')
+      expect(prices[:total][:total_tax]).to eq(Money.new 22000, 'EUR')
     end
 
     it 'computes butler_with_tax' do
@@ -109,15 +110,13 @@ RSpec.describe Reservation::PriceComputer do
     end
 
     it 'computes services_with_tax' do
-      expect(prices[:services][:services_with_tax]).to eq(Money.new 60000, 'EUR')
+      # puts prices[:services]
+      expect(prices[:services][:services_with_tax]).to eq(Money.new 94200, 'EUR')
     end
 
     it 'computes total_with_tax' do
-      # puts prices[:cookoon_butler][:cookoon_butler_with_tax]
-      # puts prices[:menu][:menu_with_tax]
-      # puts prices[:services][:services_with_tax]
-      # puts prices[:total][:total_with_tax]
-      expect(prices[:total][:total_with_tax]).to eq(Money.new 124800, 'EUR')
+      # puts prices[:total]
+      expect(prices[:total][:total_with_tax]).to eq(Money.new 159000, 'EUR')
     end
   end
 end
