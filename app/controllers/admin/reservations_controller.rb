@@ -14,7 +14,7 @@ module Admin
     end
 
     def require_payment_for_menu
-      if @reservation.update(menu_payment_status: "payment_required")
+      if @reservation.update(menu_status: "payment_required")
         flash.notice = "Le statut de la réservation a bien été mis à jour"
         # TO DO send email to user to require payment
         render :show
