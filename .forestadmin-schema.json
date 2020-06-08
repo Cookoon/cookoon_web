@@ -2316,7 +2316,7 @@
       "widget": null,
       "validations": []
     }, {
-      "field": "menu_payment_status",
+      "field": "menu_status",
       "type": "String",
       "default_value": "initial",
       "enums": null,
