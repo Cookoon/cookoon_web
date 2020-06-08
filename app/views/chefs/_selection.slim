@@ -1,7 +1,26 @@
-- if @reservation.menu_id.present?
+h3 id="reservation-menus-title" Choisissez un chef
+
+- if @reservation.menu_status == "initial"
+  .carousel.slide id="chefSelection" data-ride="false" data-interval="false"
+      .carousel-inner
+        - chefs.each_with_index do |chef, index|
+          .carousel-item class=classnames('active': index.zero?)
+            = render 'chefs/card', chef: chef
+
+- elsif @reservation.menu_status == "selected"
   = render 'menus/recap', menu: @reservation.menu
 
-- else
+- elsif @reservation.menu_status == "cooking_by_user"
+  .col-12.mb-4
+    p Vous avez choisi de cuisiner vous-même
+    = link_to 'Annuler le choix', reset_cooking_by_user_reservation_path(@reservation), class: 'btn-cookoon btn-cookoon-primary', method: :patch, remote: true
+
+
+/ code Charles
+//- if @reservation.menu_id.present?
+  = render 'menus/recap', menu: @reservation.menu
+
+//- else
   div data={controller: "collapses", target: 'collapses.body'}
     h3 Choisissez un chef
 
