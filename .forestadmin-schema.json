@@ -2316,7 +2316,7 @@
       "widget": null,
       "validations": []
     }, {
-      "field": "menu_payment_status",
+      "field": "menu_status",
       "type": "String",
       "default_value": "initial",
       "enums": null,
@@ -2547,7 +2547,12 @@
       "field": "status",
       "type": "Enum",
       "default_value": "0",
-      "enums": ["quote", "paid"],
+      "enums": [
+        "initial",
+        "quote",
+        "captured",
+        "paid"
+      ],
       "integration": null,
       "is_filterable": true,
       "is_read_only": false,
@@ -2706,6 +2711,21 @@
       "field": "margin",
       "type": "Number",
       "default_value": "0.0",
+      "enums": null,
+      "integration": null,
+      "is_filterable": true,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": null,
+      "inverse_of": null,
+      "widget": null,
+      "validations": []
+    }, {
+      "field": "base_price_cents",
+      "type": "Number",
+      "default_value": "0",
       "enums": null,
       "integration": null,
       "is_filterable": true,

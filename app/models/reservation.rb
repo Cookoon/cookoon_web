@@ -63,7 +63,7 @@ class Reservation < ApplicationRecord
   validates :duration, presence: true
   validates :people_count, presence: true, numericality: { greater_than: 0 }
   validates :type_name, inclusion: { in: %w[breakfast brunch lunch diner cocktail morning afternoon day], message: "Ce type de réservation n'est pas valide" }
-  validates :menu_payment_status, inclusion: { in: %w[initial selected payment_required captured paid], message: "Le statut du menu n'est pas valide" }
+  validates :menu_status, inclusion: { in: %w[initial selected cooking_by_user payment_required captured paid], message: "Le statut du menu n'est pas valide" }
 
   validate :tenant_is_not_host
 

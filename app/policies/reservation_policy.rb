@@ -29,15 +29,23 @@ class ReservationPolicy < ApplicationPolicy
   end
 
   def select_menu?
-    true
+    record.user == user
   end
 
   def reset_menu?
-    true
+    record.user == user
+  end
+
+  def cooking_by_user?
+    record.user == user
+  end
+
+  def reset_cooking_by_user?
+    record.user == user
   end
 
   def select_services?
-    true
+    record.user == user
   end
 
   def secret?
