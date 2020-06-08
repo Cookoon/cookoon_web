@@ -22,7 +22,7 @@
         #reservation-services
           h3 Les services intégrés
 
-          = simple_form_for :reservation, url: select_services_reservation_path(@reservation), method: :patch do |f|
+          = simple_form_for :reservation, url: select_services_reservation_path(@reservation), method: :patch, remote: true do |f|
             = f.input :services,
                 as: :check_boxes,
                 collection: @reservation.services_collection_for_view,
