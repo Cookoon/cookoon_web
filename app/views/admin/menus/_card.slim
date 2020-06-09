@@ -1,3 +1,4 @@
 .chef-card-menu
+  p Prix unitaire: #{menu.unit_price}
   = simple_format(menu.description)
   = link_to 'Editer ce menu', admin_chefs_path, class: 'btn-cookoon btn-block btn-cookoon-primary'
