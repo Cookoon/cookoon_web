@@ -49,7 +49,6 @@ Rails.application.routes.draw do
         post :amounts, on: :collection
       end
     end
-    resources :chefs, only: :index
 
     resources :payments, only: %i[new create] do
       collection do
@@ -89,7 +88,9 @@ Rails.application.routes.draw do
         get :dashboard
       end
       resources :cookoons, only: %i[index edit update]
-      resources :chefs, only: %i[index]
+      resources :chefs, only: %i[index show new create edit update] do
+        resources :menus, only: %i[create update]
+      end
       resources :reservations, only: %i[index show]
       patch 'reservations/:id', to: 'reservations#require_payment_for_menu', as: :require_payment_for_menu
     end
