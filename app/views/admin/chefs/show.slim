@@ -17,10 +17,7 @@
 
         h3 Le chef
         .text-center
-          - if @chef.photos?
-            = carousel_for(@chef.photos)
-          - elsif @chef.picture_url?
-            = carousel_for([@chef.picture_url])
+          = carousel_for(@chef.photos)
 
         p = @chef.description
 
