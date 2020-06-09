@@ -1,10 +1,15 @@
 .container
-  .row.align-items-center
-    = render 'admin/back_button', button_title: 'Retour au dashboard', path: admin_dashboard_path
-    .col-12.col-md-9.col-lg-10.px-0.px-md-2.px-lg-3
-      h1.my-4.text-center Les chefs
+  .row.d-flex.justify-content-between.align-items-center.mx-0.my-4
+    .d-none.d-md-block.col-md-3.col-lg-2.px-md-2.px-lg-3
+      = render 'admin/back_button', button_title: 'Retour au dashboard', path: admin_dashboard_path
+    .col-12.col-md-6.col-lg-8
+      h1.text-center Les chefs
+    .d-none.d-md-block.col-md-3.col-lg-2.px-md-2.px-lg-3
+      - if policy([:admin, Chef]).create?
+        = render 'admin/button', button_title: 'Nouveau chef', path: new_admin_chef_path
 
-  .row.d-flex.justify-content-center
-
-    - @chefs.each do |chef|
-      = render 'chef_menu_selected_card', chef: chef
+  .col-12
+    .row.m-0
+      - @chefs.each do |chef|
+        .col-12.col-md-4.px-0.px-sm-3.pb-4
+          = render 'card_only_chef', chef: chef

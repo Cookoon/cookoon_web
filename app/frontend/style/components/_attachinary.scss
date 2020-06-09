@@ -34,6 +34,10 @@ label.attachinary {
   }
 }
 
+.attachinary > .invalid-feedback {
+  display: block;
+}
+
 @media (min-width: 500px) {
   .attachinary_container {
     justify-content: flex-start;

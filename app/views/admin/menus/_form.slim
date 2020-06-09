@@ -1,0 +1,11 @@
+/ works but not redirect to anchor tag
+/= simple_form_for [:admin, chef, menu] do |f|
+
+= simple_form_for [:admin, chef, menu], url: admin_chef_menus_path(chef, anchor: 'new_menu') do |f|
+  .form-inputs
+    = f.input :description
+    = f.input :unit_price
+
+  .form-actions.mb-4
+    .text-right
+      = f.submit class: 'btn-cookoon btn-cookoon-primary px-5'
