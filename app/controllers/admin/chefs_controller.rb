@@ -33,7 +33,7 @@ module Admin
     def update
       # raise
       if @chef.update(chef_params)
-        redirect_to admin_chef_path(@chef), notice: 'Le Cookoon a été édité !'
+        redirect_to admin_chef_path(@chef), notice: 'Le Chef a été édité !'
       else
         render :edit
       end
