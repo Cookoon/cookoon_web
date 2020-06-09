@@ -6,6 +6,7 @@ class Chef < ApplicationRecord
   validates :name, presence: true
   validates :description, presence: true
   validates :photos, presence: true
+  validates_length_of :photos, minimum: 2, maximum: 5, message: "Vous devez télécharger au moins 2 photos et au plus 5 photos"
   validates :base_price, numericality: { greater_than_or_equal_to: 0 }
   validates :min_price, numericality: { greater_than_or_equal_to: 0 }
 
