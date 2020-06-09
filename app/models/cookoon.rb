@@ -40,6 +40,8 @@ class Cookoon < ApplicationRecord
   validates :photos,   presence: true
   validate :count_per_user, on: :create
 
+  validates_length_of :photos, minimum: 2, maximum: 5, message: "Vous devez télécharger au moins 2 photos et au plus 5 photos"
+
   after_validation :geocode, if: :address_changed?
   after_update :award_invite_to_user, if: :saved_change_to_status?
 
