@@ -6,4 +6,7 @@ class Chef < ApplicationRecord
   validates :name, presence: true
   validates :description, presence: true
   validates :photos, presence: true
+
+  monetize :base_price_cents
+  monetize :min_price_cents
 end
