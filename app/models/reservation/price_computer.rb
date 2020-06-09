@@ -80,10 +80,12 @@ class Reservation
     end
 
     def compute_menu_price
-      # (1 + marge) * prix unitaire du menu * nombre de personne
-      # minimun 500 euros
       return 0 unless menu.present?
-      Money.new([(1 + MARGIN[:menu]) * (menu.unit_price_cents * people_count), 50000].max)
+      if menu.chef.base_price_cents.positive?
+        Money.new((1 + MARGIN[:menu]) * (menu.chef.base_price_cents + (menu.unit_price_cents * people_count)))
+      elsif menu.chef.min_price_cents.positive?
+        Money.new((1 + MARGIN[:menu]) * ([menu.chef.min_price_cents, (menu.unit_price_cents * people_count)].max))
+      end
     end
 
     def compute_services_price

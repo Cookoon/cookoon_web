@@ -3,6 +3,8 @@
     = f.input :photos, as: :attachinary, input_html: { data: { controller: 'attachinary' } }
     = f.input :name
     = f.input :description
+    = f.input :base_price, label: "Prix de prestation: C'est le tarif de base du Chef, auquel sera ajouté le prix du menu x le nombre de personnes"
+    = f.input :min_price, label: "Prix minimum:  C'est la somme minimale qui sera reversée au Chef, si le prix du menu x le nombre de personnes n'atteint pas cette somme"
 
   .form-actions.mb-4
     .text-right

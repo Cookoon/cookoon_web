@@ -117,7 +117,8 @@ chef_attributes = [
     description: "Elle officie dans son restaurant gastronomique du 6e arrondissement de Paris, le Marsan (qui portait auparavant son nom).
       Sa cuisine est récompensée d'une note de 15/20 au Gault-Millau et l'obtention de deux étoiles au Guide Michelin en 2003.
       Cela en fait une des seules cheffes étoilées en activité avec Anne-Sophie Pic et Julia Sedefdjian.",
-    picture_url: "https://ca.slack-edge.com/T0A4A3AQZ-U0A5L9L8K-7eda5a7e311c-512"
+    photo_urls: ["https://static.lexpress.fr/medias_11664/w_2048,h_1146,c_crop,x_0,y_0/w_1000,h_563,c_fill,g_north/v1509987362/helene-darroze-portrait_5972444.jpg"],
+    min_price: 500
   },
   {
     name: 'Gordon Ramsay',
@@ -125,7 +126,8 @@ chef_attributes = [
       telles que The F Word, MasterChef, ou encore la célèbre émission Ramsay's Kitchen Nightmares
       (diffusée en France sous le nom de Cauchemar en cuisine), il compte parmi les trois cuisiniers ayant été gratifiés
       de trois étoiles en une fois par l'édition britannique du Guide Michelin.",
-    picture_url: "https://upload.wikimedia.org/wikipedia/commons/6/6f/Gordon_Ramsay.jpg"
+    photo_urls: ["https://upload.wikimedia.org/wikipedia/commons/6/6f/Gordon_Ramsay.jpg"],
+    min_price: 500
   }
 ]
 

@@ -17,12 +17,17 @@
 
         h3 Le chef
         .text-center
-          - if @chef.photos?
-            = carousel_for(@chef.photos)
-          - elsif @chef.picture_url?
-            = carousel_for([@chef.picture_url])
+          = carousel_for(@chef.photos)
 
         p = @chef.description
+
+        p
+          strong Prix de prestation: #{ humanized_money_with_symbol(@chef.base_price) }
+          | &nbsp (c'est le tarif de base du Chef, auquel sera ajouté le prix du menu x le nombre de personnes)
+
+        p
+          strong Prix minimum: #{ humanized_money_with_symbol(@chef.min_price) }
+          | &nbsp (c'est la somme minimale qui sera reversée au Chef, si le prix du menu x le nombre de personnes n'atteint pas cette somme)
 
         h3 Les menus
         .row.mx-0

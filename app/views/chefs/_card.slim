@@ -1,7 +1,7 @@
 .chef-card
   .row.pb-3.mx-0
     .col-12.col-md-6
-      .chef-card-image style="background-image: url(#{chef.picture_url});"
+      .chef-card-image style="background: url(#{cl_image_path(chef.photos.first.path, height: 250, crop: :fill)}); background-size: cover;"
     .col-12.col-md-6
       .d-flex-default.mt-3.mt-md-0
         a.text-primary href="#chefSelection" role="button" data-slide="prev" <

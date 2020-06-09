@@ -31,8 +31,9 @@ module Admin
     end
 
     def update
+      # raise
       if @chef.update(chef_params)
-        redirect_to admin_chef_path(@chef), notice: 'Le Cookoon a été édité !'
+        redirect_to admin_chef_path(@chef), notice: 'Le Chef a été édité !'
       else
         render :edit
       end
@@ -51,7 +52,7 @@ module Admin
 
     def chef_params
       params.require(:chef).permit(
-        :name, :description, photos: []
+        :name, :description, :min_price, :base_price, photos: []
       )
     end
 
