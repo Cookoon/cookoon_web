@@ -1,0 +1,35 @@
+= console
+.container
+  .row.d-flex.justify-content-between.align-items-center.mx-0.my-4
+    .d-none.d-md-block.col-md-3.col-lg-2.px-md-2.px-lg-3
+      = render 'admin/back_button', button_title: 'Retour aux Chefs', path: admin_chefs_path
+    .d-none.d-md-block.col-md-3.col-lg-2.px-md-2.px-lg-3
+      - if policy([:admin, Chef]).update?
+        = render 'admin/button', button_title: 'Modifier ce chef', path: edit_admin_chef_path(@chef)
+
+.container
+  h1.text-center.my-4 = @chef.name
+
+.container.d-flex.justify-content-center.px-0
+  .row
+
+    .col-12
+      .px-0.px-md-2.pb-4
+
+        h3 Le chef
+        .text-center
+          - if @chef.photos?
+            = carousel_for(@chef.photos)
+          - elsif @chef.picture_url?
+            = carousel_for([@chef.picture_url])
+
+        p = @chef.description
+
+        h3 Les menus
+        .row.mx-0
+          - if @chef.menus.present?
+            - @chef.menus.each do |menu|
+              .col-12.col-md-6.pb-3
+                = render 'admin/menus/card', menu: menu
+          - if @chef.menus.count < 2
+            = render 'admin/menus/form', chef: @chef, menu: @menu
