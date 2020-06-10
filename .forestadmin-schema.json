@@ -1422,16 +1422,9 @@
       }]
     }, {
       "field": "category",
-      "type": "Enum",
+      "type": "String",
       "default_value": null,
-      "enums": [
-        "aperitif",
-        "amuse_bouches",
-        "starter",
-        "course",
-        "entremets",
-        "dessert"
-      ],
+      "enums": null,
       "integration": null,
       "is_filterable": true,
       "is_read_only": false,
