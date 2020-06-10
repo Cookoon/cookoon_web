@@ -1,15 +1,16 @@
 .container
-  .row.d-flex.justify-content-between.align-items-center.mx-0.my-4
-    .d-none.d-md-block.col-md-3.col-lg-2.px-md-2.px-lg-3
-      = render 'admin/back_button', button_title: 'Retour au dashboard', path: admin_dashboard_path
-    .col-12.col-md-6.col-lg-8
-      h1.text-center Les chefs
-    .d-none.d-md-block.col-md-3.col-lg-2.px-md-2.px-lg-3
-      - if policy([:admin, Chef]).create?
-        = render 'admin/button', button_title: 'Nouveau chef', path: new_admin_chef_path
+  h1.text-center.my-4 Les chefs
 
-  .col-12
-    .row.m-0
-      - @chefs.each do |chef|
-        .col-12.col-md-4.px-0.px-sm-3.pb-4
-          = render 'card_only_chef', chef: chef
+.container.d-flex.justify-content-center.px-0
+  .row
+    .d-none.d-md-block.col-md-4.col-lg-3.px-md-2
+      .px-md-2.px-lg-0
+        = render 'admin/back_button', button_title: 'Retour au dashboard', path: admin_dashboard_path
+        - if policy([:admin, Chef]).create?
+          = render 'admin/button', button_title: 'Nouveau chef', path: new_admin_chef_path
+
+    .col-12.col-md-8.col-lg-9.px-0.px-md-2.pr-lg-0
+      .row.m-0
+        - @chefs.each do |chef|
+          .col-12.col-md-6.px-0.px-md-2.pb-4
+            = render 'card_only_chef', chef: chef

@@ -1,0 +1,26 @@
+= link_to edit_admin_cookoon_path(appart) do
+  .cookoon-card.mb-0.h-100.d-flex.flex-column.justify-content-between
+    div
+      .cookoon-card-image style="background: url(#{cl_image_path(appart.photos.first.path, height: 250, crop: :fill)});"
+
+      .cookoon-card-body.pb-0
+        h4 style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"
+          = appart.name
+
+        p.mb-1 Hôte : #{ appart.user.first_name } #{ appart.user.last_name }
+
+        p.mb-1 E-mail : #{ appart.user.email }
+
+        p.mb-1 Tél : #{ appart.user.phone_number }
+
+        p.mb-2 style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"
+          <i class="fas fa-map-marker-alt"></i> &nbsp
+          = appart.address
+
+        = render 'cookoons/perks_in_card', div_style: "height: 2rem", perks: appart.perk_specifications, p_style: "overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"
+
+        p style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical;"
+          = appart.description
+
+    .cookoon-card-body.pt-0
+      .btn-cookoon.btn-cookoon-primary.text-center Modifier

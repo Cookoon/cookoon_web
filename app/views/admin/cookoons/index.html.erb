@@ -1,38 +1,49 @@
 <div class="container">
-  <div class="row align-items-center">
-    <%= render 'admin/back_button', button_title: 'Retour au dashboard', path: admin_dashboard_path %>
-    <div class="col-12 col-md-9 col-lg-10 px-0 px-md-2 px-lg-3">
-      <h1 class="my-4 text-center">Les demeures</h1>
-    </div>
-  </div>
+  <h1 class="text-center my-4">Les décors</h1>
 </div>
 
-<div class="<%= classnames(container: desktop_view?) %>">
+<div class="container d-flex justify-content-center px-0">
+  <div class="row">
 
-  <ul class="nav nav-pills mb-2">
-    <li class="nav-item">
-      <a href="#approved" class="nav-link active" data-toggle="pill" role="tab">Approved</a>
-    </li>
-
-    <li class="nav-item">
-      <a href="#suspended" class="nav-link" data-toggle="pill" role="tab">Suspended</a>
-    </li>
-
-    <li class="nav-item">
-      <a href="#under_review" class="nav-link" data-toggle="pill" role="tab">Under review</a>
-    </li>
-  </ul>
-
-  <div class="tab-content py-3">
-    <div class="tab-pane fade show active" id="approved" role="tabpanel">
-      <%= render "list", apparts: @cookoons_approved %>
+    <div class="d-none d-md-block col-md-4 col-lg-3 px-md-2">
+      <div class="px-md-2 px-lg-0">
+        <%= render 'admin/back_button', button_title: 'Retour au dashboard', path: admin_dashboard_path %>
+      </div>
     </div>
-    <div class="tab-pane fade" id="suspended" role="tabpanel">
-      <%= render "list", apparts: @cookoons_suspended %>
-    </div>
-    <div class="tab-pane fade" id="under_review" role="tabpanel">
-      <%= render "list", apparts: @cookoons_under_review %>
+
+    <div class="col-12 col-md-8 col-lg-9 px-0 px-md-2 pr-lg-0">
+      <div class="row m-0">
+
+        <ul class="nav nav-pills mb-2">
+          <li class="nav-item">
+            <a href="#approved" class="nav-link active" data-toggle="pill" role="tab">Approved</a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#suspended" class="nav-link" data-toggle="pill" role="tab">Suspended</a>
+          </li>
+
+          <li class="nav-item">
+            <a href="#under_review" class="nav-link" data-toggle="pill" role="tab">Under review</a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="row m-0">
+
+        <div class="tab-content py-3 w-100">
+          <div class="tab-pane fade show active" id="approved" role="tabpanel">
+            <%= render "list", apparts: @cookoons_approved %>
+          </div>
+          <div class="tab-pane fade" id="suspended" role="tabpanel">
+            <%= render "list", apparts: @cookoons_suspended %>
+          </div>
+          <div class="tab-pane fade" id="under_review" role="tabpanel">
+            <%= render "list", apparts: @cookoons_under_review %>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
-
 </div>
