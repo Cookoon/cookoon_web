@@ -5,8 +5,6 @@ class Dish < ApplicationRecord
   validates :category, presence: true, inclusion: { in: %w(aperitif amuse_bouches starter course entremets dessert) }
   validates :order, presence: true, numericality: { greater_than: 0 }
 
-  # enum category: %i[aperitif amuse_bouches starter course entremets dessert]
-
   after_initialize do |dish|
     dish.order = count_dishes + 1
   end
