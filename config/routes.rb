@@ -89,7 +89,9 @@ Rails.application.routes.draw do
       end
       resources :cookoons, only: %i[index edit update]
       resources :chefs, only: %i[index show new create edit update] do
-        resources :menus, only: %i[create update]
+        resources :menus, only: %i[new create edit update show] do
+          resources :dishes, only: %i[create destroy]
+        end
       end
       resources :reservations, only: %i[index show]
       patch 'reservations/:id', to: 'reservations#require_payment_for_menu', as: :require_payment_for_menu
