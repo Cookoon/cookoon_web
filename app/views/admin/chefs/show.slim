@@ -29,6 +29,10 @@
         - if @chef.menus.present?
           - @chef.menus.each do |menu|
             .col-12.col-md-6.pb-3
-              = render 'admin/menus/card', menu: menu
+              = render 'admin/menus/card', menu: menu, chef: @chef
+        - else
+          p Il n'y a pas de menu créé pour ce Chef
+
         - if @chef.menus.count < 2
-          = render 'admin/menus/form', chef: @chef, menu: @menu
+          .btn-cookoon.btn-block.btn-cookoon-primary.text-center.mb-4
+            = link_to 'Ajouter un menu', new_admin_chef_menu_path(@chef)

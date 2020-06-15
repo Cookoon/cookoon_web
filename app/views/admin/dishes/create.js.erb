@@ -1,0 +1,16 @@
+function refreshForm(innerHTML) {
+  const newDishForm = document.getElementById('new_dish');
+  newDishForm.innerHTML = innerHTML;
+}
+
+function addDish(dishHTML) {
+  const dishes = document.getElementById('dishes');
+  dishes.insertAdjacentHTML('beforeend', dishHTML);
+}
+
+<% if @dish.errors.any? %>
+  refreshForm('<%= j render "admin/dishes/form", chef: @chef, menu: @menu, dish: @dish %>');
+<% else %>
+  addDish('<%= j render "admin/dishes/show", dish: @dish %>');
+  refreshForm('<%= j render "admin/dishes/form", chef: @chef, menu: @menu, dish: Dish.new %>');
+<% end %>

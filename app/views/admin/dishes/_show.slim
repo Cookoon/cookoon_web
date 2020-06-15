@@ -1,0 +1,3 @@
+.d-flex data-dish-id=dish.id
+  p #{ dish.order } (#{ Dish::FRENCH_CATEGORIES[dish.category.to_sym] }): #{ dish.name } &nbsp
+  p = link_to "", admin_chef_menu_dish_path(@chef, @menu, dish), method: :delete, class: "fas fa-times fa-lg", remote: true

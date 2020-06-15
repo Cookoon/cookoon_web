@@ -1,0 +1,12 @@
+= simple_form_for [:admin, chef, menu, dish], remote: true do |f|
+  .form-inputs
+    - if dish.order.present?
+      = f.input :order
+    - else
+      = f.input :order, input_html: { value: menu.dishes.count + 1 }
+    = f.input :category, as: :select, collection: Dish::CATEGORIES, selected: Dish::CATEGORIES.first
+    = f.input :name
+
+  .form-actions.mb-4
+    .text-center
+      = f.submit class: 'btn-cookoon btn-cookoon-primary px-5'
