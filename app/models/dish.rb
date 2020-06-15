@@ -5,11 +5,16 @@ class Dish < ApplicationRecord
   validates :category, presence: true, inclusion: { in: %w(aperitif amuse_bouches starter course entremets dessert) }
   validates :order, presence: true, numericality: { greater_than: 0 }
 
-  after_initialize do |dish|
-    dish.order = count_dishes + 1
-  end
+  CATEGORIES = [
+    [ "Canapé", :aperitif ],
+    [ "Amuse-bouches", :amuse_bouches ],
+    [ "Entrée", :starter ],
+    [ "Plat", :course ],
+    [ "Entremets", :entremets ],
+    [ "Dessert", :dessert ],
+  ].freeze
 
-  CATEGORIES = {
+  FRENCH_CATEGORIES = {
     aperitif: "Canapé",
     amuse_bouches: "Amuse-bouches",
     starter: "Entrée",
@@ -18,9 +23,4 @@ class Dish < ApplicationRecord
     dessert: "Dessert",
   }.freeze
 
-  private
-
-  def count_dishes
-    self.menu.dishes.count
-  end
 end
