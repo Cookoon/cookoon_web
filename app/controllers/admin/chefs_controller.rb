@@ -21,7 +21,7 @@ module Admin
       @chef = Chef.new(chef_params)
       authorize @chef, policy_class: Admin::ChefPolicy
       if @chef.save
-        redirect_to admin_chef_path(@chef), notice: 'Le Chef a été créé ! Ajoutez les menus'
+        redirect_to new_admin_chef_menu_path(@chef), notice: 'Le Chef a été créé ! Ajoutez un menu'
       else
         render :new, alert: 'il y eu un problème, veuillez réessayer'
       end
