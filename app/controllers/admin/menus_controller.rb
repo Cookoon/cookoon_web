@@ -3,12 +3,10 @@ module Admin
     # not necessary because it is specified directly in routes
     # before_action :require_admin
     before_action :find_chef, only: %i[show new create edit update]
-    before_action :find_menu, only: %i[edit update]
+    before_action :find_menu, only: %i[show edit update]
 
     def show
-      @menu = Menu.find(params[:id])
-      authorize @menu, policy_class: Admin::MenuPolicy
-      @dishes = Dish.where(menu: @menu).order(order: :asc)
+      @dishes = @menu.dishes.order(order: :asc)
       @dish = Dish.new(menu: @menu)
       # authorize @dish, policy_class: Admin::DishPolicy
     end
@@ -26,7 +24,6 @@ module Admin
         redirect_to admin_chef_menu_path(@chef, @menu), notice: 'Le menu a bien été créé ! Ajoutez les plats'
       else
         render :new
-        # redirect_to new_admin_chef_menu_path(@chef), alert: @menu.errors.full_messages
       end
     end
 
@@ -57,9 +54,7 @@ module Admin
     end
 
     def menu_params
-      params.require(:menu).permit(
-        :description, :unit_price, :status
-      )
+      params.require(:menu).permit(:description, :unit_price)
     end
 
   end
