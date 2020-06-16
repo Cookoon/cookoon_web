@@ -26,6 +26,6 @@ class Chef < ApplicationRecord
   end
 
   def reached_max_active_menus_count?
-    menus.where(status: "active").count > Menu::MAX_PER_CHEF
+    menus.where(status: "active").count >= Menu::MAX_PER_CHEF
   end
 end
