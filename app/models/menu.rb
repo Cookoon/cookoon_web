@@ -11,7 +11,7 @@ class Menu < ApplicationRecord
 
   validates :description, presence: true
   validates :unit_price, presence: true, numericality: { greater_than: 0 }
-  validates :status, presence: true, inclusion: { in: Menu::STATUSES }
+  validates :status, presence: true
   validate :count_active_menus_per_chef?, if: :status_is_active?
 
   private
