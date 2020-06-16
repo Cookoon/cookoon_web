@@ -9,7 +9,6 @@ module Admin
     end
 
     def show
-      @menu = Menu.new(chef: @chef)
     end
 
     def new

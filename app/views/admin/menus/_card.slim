@@ -1,4 +1,12 @@
-.chef-card-menu
-  p Prix unitaire: #{menu.unit_price}
-  = simple_format(menu.description)
+.chef-card-menu.d-flex-default
+  .div
+    h5 = menu.description
+    p -----
+    p Prix unitaire: #{menu.unit_price} €
+    p Statut: #{menu.status}
+    p -----
+    /= simple_format(menu.description)
+    - if menu.dishes.present?
+      - menu.dishes.each do |dish|
+        p = dish.name
   = link_to 'Editer ce menu', edit_admin_chef_menu_path(chef, menu), class: 'btn-cookoon btn-block btn-cookoon-primary'

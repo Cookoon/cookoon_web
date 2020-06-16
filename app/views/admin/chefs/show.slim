@@ -27,7 +27,7 @@
       h3 Les menus
       .row.mx-0
         - if @chef.menus.present?
-          - @chef.menus.each do |menu|
+          - @chef.menus.includes(:dishes).each do |menu|
             .col-12.col-md-6.pb-3
               = render 'admin/menus/card', menu: menu, chef: @chef
         - else
