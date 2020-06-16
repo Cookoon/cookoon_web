@@ -26,6 +26,7 @@ module Admin
         redirect_to admin_chef_menu_path(@chef, @menu), notice: 'Le menu a bien été créé ! Ajoutez les plats'
       else
         render :new
+        # redirect_to new_admin_chef_menu_path(@chef), alert: @menu.errors.full_messages
       end
     end
 
@@ -57,7 +58,7 @@ module Admin
 
     def menu_params
       params.require(:menu).permit(
-        :description, :unit_price
+        :description, :unit_price, :status
       )
     end
 
