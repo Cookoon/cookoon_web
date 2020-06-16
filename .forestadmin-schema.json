@@ -1794,9 +1794,9 @@
       "validations": []
     }, {
       "field": "status",
-      "type": "Enum",
+      "type": "String",
       "default_value": null,
-      "enums": ["active", "archived"],
+      "enums": null,
       "integration": null,
       "is_filterable": true,
       "is_read_only": false,
