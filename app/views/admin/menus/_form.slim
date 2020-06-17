@@ -1,7 +1,6 @@
-= simple_form_for [:admin, chef, menu] do |f|
+= simple_form_for [:admin, chef, menu], remote: true do |f|
   .form-inputs
     = f.input :description, label: "Title"
-    = f.input :status, as: :select, collection: Menu::STATUSES, selected: menu.status
     = f.input :unit_price
 
   .form-actions.mb-4

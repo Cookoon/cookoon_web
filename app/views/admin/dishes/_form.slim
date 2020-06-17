@@ -4,7 +4,7 @@
       = f.input :order
     - else
       = f.input :order, input_html: { value: menu.dishes.count + 1 }
-    = f.input :category, as: :select, collection: Dish::CATEGORIES, selected: Dish::CATEGORIES.first
+    = f.input :category, as: :select, collection: Dish::CATEGORIES, prompt: "Veuillez sélectionner une catégorie"
     = f.input :name
 
   .form-actions.mb-4
