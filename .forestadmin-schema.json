@@ -1795,7 +1795,7 @@
     }, {
       "field": "status",
       "type": "String",
-      "default_value": null,
+      "default_value": "initial",
       "enums": null,
       "integration": null,
       "is_filterable": true,
