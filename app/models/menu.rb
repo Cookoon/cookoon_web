@@ -12,18 +12,17 @@ class Menu < ApplicationRecord
   validates :description, presence: true
   validates :unit_price, presence: true, numericality: { greater_than: 0 }
   validates :status, presence: true, inclusion: { in: Menu::STATUSES }
-  validate :count_active_menus_per_chef?, if: :status_is_active?
 
-  private
-
-  def count_active_menus_per_chef?
-    if chef&.reached_max_active_menus_count?
-      errors.add(:status, :max_active_menus_count)
-    end
+  def active?
+    status == "active"
   end
 
-  def status_is_active?
-    status == "active"
+  def archived?
+    status == "archived"
+  end
+
+  def initial?
+    status == "initial"
   end
 
 end

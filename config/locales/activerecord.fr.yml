@@ -37,10 +37,6 @@ fr:
           attributes:
             user:
               max_cookoons_count: 'Un maximum de deux cookoons par utilisateur est autorisé sur notre plateforme'
-        menu:
-          attributes:
-            status:
-              max_active_menus_count: "Un maximum de deux menus actifs par chef est autorisé. Archivez des menus"
         service:
           attributes:
             category:

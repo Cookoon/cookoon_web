@@ -20,6 +20,14 @@ class Admin::MenuPolicy < ApplicationPolicy
     user.admin == true
   end
 
+  def validate_menu?
+    user.admin == true
+  end
+
+  def archive_menu?
+    user.admin == true
+  end
+
   class Scope < Scope
     def resolve
       scope.all
