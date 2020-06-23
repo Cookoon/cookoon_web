@@ -34,9 +34,8 @@ module Admin
       if @menu.update(menu_title_params)
         redirect_to admin_chef_path(@chef), notice: 'Le menu a bien été modifié !'
       else
-        redirect_to edit_admin_chef_menu_path(@chef, @menu), alert: @menu.errors.messages
+        render :edit
         # redirect_to admin_chef_path(@chef), alert: @menu.errors.messages
-        # render :edit
       end
     end
 
