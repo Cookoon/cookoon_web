@@ -21,6 +21,7 @@ module Admin
           format.html { render "admin/dishes/show" }
           format.js  # <-- will render `app/views/admin/dishes/create.js.erb`
         end
+        # render "admin/dishes/show"
         # rails routes
         # admin_chef_menu GET /admin/chefs/:chef_id/menus/:id(.:format) admin/menus#show
         # take admin/menus#show and replace # by /
