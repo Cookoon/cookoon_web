@@ -2,8 +2,8 @@ module Admin
   class MenusController < ApplicationController
     # not necessary because it is specified directly in routes
     # before_action :require_admin
-    before_action :find_chef, only: %i[show new create edit update]
-    before_action :find_menu, only: %i[show edit update]
+    before_action :find_chef, only: %i[show new create edit update validate_menu archive_menu]
+    before_action :find_menu, only: %i[show edit update validate_menu archive_menu]
 
     def show
       @dishes = @menu.dishes.order(order: :asc)
@@ -31,10 +31,34 @@ module Admin
     end
 
     def update
-      if @menu.update(menu_params)
-        redirect_to admin_chef_menu_path(@chef, @menu), notice: 'Le menu a bien été modifié ! Modifiez les plats'
+      if @menu.update(menu_title_params)
+        redirect_to admin_chef_path(@chef), notice: 'Le menu a bien été modifié !'
       else
-        render :edit
+        redirect_to edit_admin_chef_menu_path(@chef, @menu), alert: @menu.errors.messages
+        # redirect_to admin_chef_path(@chef), alert: @menu.errors.messages
+        # render :edit
+      end
+    end
+
+    def validate_menu
+      if @chef.reached_max_active_menus_count?
+        @menu.errors.messages[:status] = "Un maximum de deux menus actifs par chef est autorisé. Archivez des menus"
+        redirect_to admin_chef_path(@chef), alert: @menu.errors.messages
+        # render 'admin/chefs/show', anchor: "menu-id-#{@menu.id}"
+      else
+        if @menu.update(status: "active")
+          redirect_to admin_chef_path(@chef), notice: 'Le statut du menu est maintenant actif !'
+        else
+          redirect_to admin_chef_path(@chef), alert: @menu.errors.messages
+        end
+      end
+    end
+
+    def archive_menu
+      if @menu.update(status: "archived")
+        redirect_to admin_chef_path(@chef), notice: 'Le statut du menu est maintenant archivé !'
+      else
+        redirect_to admin_chef_path(@chef), alert: @menu.errors.messages
       end
     end
 
@@ -50,11 +74,15 @@ module Admin
 
     def find_menu
       @menu = Menu.find(params[:id])
-      authorize @menu, policy_class: Admin::ChefPolicy
+      authorize @menu, policy_class: Admin::MenuPolicy
     end
 
     def menu_params
       params.require(:menu).permit(:description, :unit_price)
+    end
+
+    def menu_title_params
+      params.require(:menu).permit(:description)
     end
 
   end
