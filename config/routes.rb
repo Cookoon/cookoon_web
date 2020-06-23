@@ -92,6 +92,8 @@ Rails.application.routes.draw do
         resources :menus, only: %i[new create edit update show] do
           resources :dishes, only: %i[create destroy]
         end
+        patch 'menus/:id/validate_menu', to: 'menus#validate_menu', as: :validate_menu
+        patch 'menus/:id/archive_menu', to: 'menus#archive_menu', as: :archive_menu
       end
       resources :reservations, only: %i[index show]
       patch 'reservations/:id', to: 'reservations#require_payment_for_menu', as: :require_payment_for_menu
