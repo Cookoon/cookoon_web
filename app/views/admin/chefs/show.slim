@@ -1,5 +1,14 @@
-.container
-  h1.text-center.my-4 = @chef.name
+/.container
+  /h1.text-center.my-4 = @chef.name
+
+.container.d-flex.justify-content-center.px-0
+  .row
+    .d-none.d-md-block.col-md-4.col-lg-3.px-md-2
+
+    .col-12.col-md-8.col-lg-9.px-0.px-md-2.pr-lg-0
+      h2.mt-4.mb-0 style="padding-left: 8vw; color: lightgray;" Votre dîner
+      h2.mb-0 style="padding-left: 11vw; color: darkgray;" Avenue de la Bourdonnais
+      h2.mb-4 style="padding-left: 5vw; color: gray;" Avec #{ @chef.name }
 
 .container.d-flex.justify-content-center.px-0
   .row
@@ -8,13 +17,22 @@
         = render 'admin/back_button', button_title: 'Retour au dashboard', path: admin_dashboard_path
         - if policy([:admin, Chef]).update?
           = render 'admin/button', button_title: 'Modifier ce chef', path: edit_admin_chef_path(@chef)
+        .mt-4
+          p.mb-0 style="color: #CDBB8A; text-transform: uppercase; font-size: 80%" Votre décor
+          p.mb-0 style="color: #CDBB8A; text-transform: uppercase; font-size: 80%" Avenue de la Bourdonnais
+          = cl_image_tag(@chef.photos.first.path, width: "100%")
 
     .col-12.col-md-8.col-lg-9.px-0.px-md-2.pr-lg-0
-      h3 Le chef
       .text-center
         = carousel_for(@chef.photos)
 
-      p.mt-3 = @chef.description
+      p.mt-3
+        i.fas.fa-angle-double-left style="font-size: large; color: gray" &nbsp
+        /span style="font-size: 3rem; font-weight: light" «
+        = @chef.description
+        | &nbsp
+        i.fas.fa-angle-double-right style="font-size: large; color: gray"
+
 
       p
         strong Prix de prestation: #{ humanized_money_with_symbol(@chef.base_price) }
