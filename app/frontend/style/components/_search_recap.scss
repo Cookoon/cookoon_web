@@ -84,3 +84,14 @@
     border-top: 1px solid lightgray;
   }
 }
+
+.search-details {
+  > p {
+    margin-bottom: 0;
+    color: $primary;
+    text-transform: uppercase;
+  }
+  > img {
+    width: 100%;
+  }
+}

@@ -1,0 +1,28 @@
+.breadcrumbs {
+  > h1 {
+    font-size: 3rem;
+    margin-bottom: 0;
+    line-height: 0.75;
+  }
+}
+
+.first-title {
+  padding-left: 8vw;
+  color: lightgray;
+}
+
+.second-title {
+  padding-left: 11vw;
+  color: darkgray;
+}
+
+.third-title {
+  padding-left: 5vw;
+  color: gray;
+}
+
+@media (max-width: 768px) {
+  .breadcrumbs > h1 {
+    font-size: 2rem;
+  }
+}
