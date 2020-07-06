@@ -15,7 +15,7 @@ class Admin::ChefPerkSpecificationsController < ApplicationController
     @chef_perk_specification = ChefPerkSpecification.new(chef_perk_specification_params)
     authorize @chef_perk_specification, policy_class: Admin::ChefPerkSpecificationPolicy
     if @chef_perk_specification.save
-      redirect_to admin_chef_perk_specifications_path, notice: 'La perk a bien été créée !'
+      redirect_to admin_chef_perk_specifications_path, notice: 'La spécification a bien été créée !'
     else
       render :new
     end
@@ -23,7 +23,7 @@ class Admin::ChefPerkSpecificationsController < ApplicationController
 
   def destroy
     @chef_perk_specification.destroy
-    redirect_to admin_chef_perk_specifications_path, notice: 'La perk a bien été supprimée !'
+    redirect_to admin_chef_perk_specifications_path, notice: 'La spécification a bien été supprimée !'
   end
 
   private

@@ -1,0 +1,8 @@
+= simple_form_for([:admin, perk_specification]) do |f|
+  .form-inputs
+    = f.input :name
+    = f.input :icon_name, placeholder: "Ex: fas fa-address-card // A chercher sur https://fontawesome.com/"
+
+  .form-actions.mb-4
+    .text-center
+      = f.submit class: 'btn-cookoon btn-cookoon-primary px-5'
