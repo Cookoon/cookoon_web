@@ -52,9 +52,9 @@
 
 
       h3 Les perks
+      = render 'admin/chef_perks/index', chef_perks: @chef.chef_perks
       .btn-cookoon.btn-block.btn-cookoon-primary.text-center.mb-4
         = link_to 'Ajouter/Supprimer des perks', new_admin_chef_chef_perk_path(@chef)
-
 
       h3 Les menus
       .btn-cookoon.btn-block.btn-cookoon-primary.text-center.mb-4
