@@ -1,0 +1,15 @@
+.container
+  h1.text-center.my-4 Les perks pour les chefs
+
+.container.d-flex.justify-content-center.px-0
+  .row
+    .d-none.d-md-block.col-md-4.col-lg-3.px-md-2
+      .px-md-2.px-lg-0
+        = render 'admin/back_button', button_title: 'Retour au dashboard', path: admin_dashboard_path
+
+    .col-12.col-md-8.col-lg-9.px-0.px-md-2.pr-lg-0
+      - @chef_perk_specifications.each do |chef_perk_specification|
+        = render 'show', perk: chef_perk_specification
+
+      .btn-cookoon.btn-block.btn-cookoon-primary.text-center.mb-4
+        = link_to 'Créer une nouvelle perk', new_admin_chef_perk_specification_path

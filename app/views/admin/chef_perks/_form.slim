@@ -1,0 +1,7 @@
+= simple_form_for([:admin, chef, chef_perk]) do |f|
+  .form-inputs
+    = f.input :chef_perk_specification_id, as: :select, collection: ChefPerkSpecification.all, selected: ChefPerkSpecification.first
+
+  .form-actions.mb-4
+    .text-center
+      = f.submit class: 'btn-cookoon btn-cookoon-primary px-5'
