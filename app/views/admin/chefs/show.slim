@@ -29,8 +29,7 @@
         = carousel_for(@chef.photos)
 
       .d-flex.mt-2
-        - @chef.chef_perks.includes(:chef_perk_specification).each do |chef_perk|
-          p.chef_perks.pr-3 = chef_perk.name
+        = render 'chefs/perks', chef_perks: @chef.chef_perks.includes(:chef_perk_specification)
 
       p
         = image_tag("quote-begin.png", style: "height: 3rem; vertical-align: bottom;")
