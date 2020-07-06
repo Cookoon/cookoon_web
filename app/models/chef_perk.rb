@@ -4,5 +4,5 @@ class ChefPerk < ApplicationRecord
 
   delegate :name, to: :chef_perk_specification, allow_nil: true
 
-  validates :chef_perk_specification_id, presence: true, uniqueness: true
+  validates :chef_perk_specification_id, presence: true, uniqueness: { scope: [:chef_id] }
 end
