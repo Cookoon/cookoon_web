@@ -1,0 +1,10 @@
+- if perks.present?
+  - perks.each do |perk|
+    .d-flex data-perk-id = perk.id
+      p
+        i.mr-1 class = perk.icon_name
+        span.mr-3 = perk.name
+        span = link_to "", admin_cookoon_perk_path(@cookoon, perk), method: :delete, class: "fas fa-times fa-lg"
+- else
+  p Il n'y a pas encore de spécification indiquée pour ce décor
+
