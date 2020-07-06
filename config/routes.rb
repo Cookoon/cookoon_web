@@ -87,6 +87,7 @@ Rails.application.routes.draw do
       controller :pages do
         get :dashboard
       end
+      resources :perk_specifications, only: %i[index new create destroy]
       resources :cookoons, only: %i[index edit update]
       resources :chef_perk_specifications, only: %i[index new create destroy]
       resources :chefs, only: %i[index show new create edit update] do
