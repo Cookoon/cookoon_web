@@ -1,5 +1,7 @@
 class Chef < ApplicationRecord
   has_many :menus
+  has_many :chef_perks, dependent: :destroy
+  has_many :chef_perk_specifications, through: :chef_perks
 
   has_attachments :photos, maximum: 5, order: 'id ASC'
 
