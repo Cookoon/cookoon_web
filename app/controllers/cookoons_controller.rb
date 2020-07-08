@@ -12,7 +12,7 @@ class CookoonsController < ApplicationController
     }
 
     @cookoons = policy_scope(Cookoon)
-                .includes(:photo_files, :perk_specifications, :perks)
+                .includes(:photo_files, :perks)
                 .filtrate(filtering_params)
                 .decorate
   end
@@ -20,7 +20,6 @@ class CookoonsController < ApplicationController
   def show
     @reservation.select_cookoon!(@cookoon)
     @chefs = policy_scope(Chef).includes(:menus).decorate
-    @perks = @cookoon.perks.includes(:perk_specification)
   end
 
   def new

@@ -10,7 +10,7 @@
         p.mb-2 style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"
           <i class="fas fa-map-marker-alt"></i> #{cookoon.address}
 
-        = render 'cookoons/perks_in_card', div_style: "height: 2rem", perks: cookoon.perk_specifications, p_style: "overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"
+        = render 'cookoons/perks_in_card', perks: cookoon.perks, div_style: "height: 2rem", p_style: "overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"
 
         p style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical;"
             = cookoon.description

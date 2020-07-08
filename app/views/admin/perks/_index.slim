@@ -1,4 +1,4 @@
-- if perks.present?
+- if perks.includes(:perk_specification).present?
   - perks.each do |perk|
     .d-flex data-perk-id = perk.id
       p

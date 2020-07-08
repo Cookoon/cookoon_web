@@ -1,0 +1,25 @@
+.container
+  h1.text-center.my-4 #{ @cookoon.name }
+
+.container.d-flex.justify-content-center.px-0
+  .row
+    .d-none.d-md-block.col-md-4.col-lg-3.px-md-2
+      .px-md-2.px-lg-0
+        = render 'admin/back_button', button_title: 'Retour aux décors', path: admin_cookoons_path
+        - if policy([:admin, Cookoon]).update?
+          = render 'admin/button', button_title: 'Modifier ce décor', path: edit_admin_cookoon_path(@cookoon)
+
+    .col-12.col-md-8.col-lg-9.px-0.px-md-2.pr-lg-0
+      .text-center
+        = carousel_for(@cookoon.photos)
+      .col-12
+        = render 'cookoons/presentation', cookoon: @cookoon, perks: @cookoon.perks
+
+        h5.mt-3 Spécifications sélectionnées
+        = render 'admin/perks/index', perks: @cookoon.perks
+        .btn-cookoon.btn-block.btn-cookoon-primary.text-center.mb-4
+          = link_to 'Ajouter/Supprimer des spécifications', new_admin_cookoon_perk_path(@cookoon)
+
+        h5.mt-3 Spécifications non sélectionnées
+        .d-flex style="flex-wrap: wrap"
+          = render 'cookoons/perks_in_card', div_style: "", perks: @perks_not_selected, p_style: ""

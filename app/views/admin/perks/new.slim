@@ -8,5 +8,5 @@
         = render 'admin/back_button', button_title: 'Retour au décor', path: edit_admin_cookoon_path(@cookoon)
 
     .col-12.col-md-8.col-lg-9.px-0.px-md-2.pr-lg-0
-      = render 'admin/perks/index', perks: @cookoon.perks.includes(:perk_specification)
+      = render 'admin/perks/index', perks: @cookoon.perks
       = render 'form', cookoon: @cookoon, perk: @perk
