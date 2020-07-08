@@ -38,7 +38,7 @@ class Cookoon < ApplicationRecord
   validates :capacity, presence: true
   validates :category, presence: true
   validates :photos,   presence: true
-  validates :perks,    presence: true
+  # validates :perks,    presence: true
 
   validate :count_per_user, on: :create
 
