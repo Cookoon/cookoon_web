@@ -2,7 +2,32 @@ module Admin
   class CookoonsController < ApplicationController
     # not necessary because it is specified directly in routes
     # before_action :require_admin
-    before_action :find_cookoon, only: %i[edit update]
+    before_action :find_cookoon, only: %i[edit update show]
+    before_action :users_collection, only: %i[new create]
+    before_action :perk_spefications_collection, only: %i[new create]
+
+    def new
+      @cookoon = Cookoon.new
+      authorize @cookoon, policy_class: Admin::CookoonPolicy
+    end
+
+    def create
+      @cookoon = Cookoon.new(cookoon_params)
+      authorize @cookoon, policy_class: Admin::CookoonPolicy
+      @perks = []
+      perk_specifications.each do |perk_specification|
+        @perks << @cookoon.perks.build(perk_specification_id: perk_specification) if perk_specification.present?
+      end
+      if @cookoon.save
+        redirect_to admin_cookoons_path, notice: 'Le décor a été créé !'
+      else
+        render :new, alert: 'Il y eu un problème, veuillez réessayer'
+      end
+    end
+
+    def show
+      @perks_not_selected = PerkSpecification.where.not(id: @cookoon.perks.pluck(:perk_specification_id))
+    end
 
     def index
       @cookoons_approved = cookoons.where(status: "approved")
@@ -11,9 +36,6 @@ module Admin
     end
 
     def edit
-      @perks_selected = @cookoon.perks.includes(:perk_specification)
-      # @perks_available = PerkSpecification.where.not(name: @perks_selected).pluck(:name, :icon_name)
-      @perks_not_selected = PerkSpecification.where.not(id: @cookoon.perks.pluck(:perk_specification_id))
     end
 
     def update
@@ -28,11 +50,19 @@ module Admin
 
     def cookoon_params
       params.require(:cookoon).permit(
-        :name, :surface, :price, :address, :capacity, :category,
+        :user_id, :name, :surface, :price, :address, :capacity, :category,
         :digicode, :building_number, :floor_number, :door_number,
         :wifi_network, :wifi_code, :caretaker_instructions, :status,
         :description, photos: []
       )
+    end
+
+    def perk_params
+      params.require(:cookoon).permit(perk_ids: [])
+    end
+
+    def perk_specifications
+      perk_params[:perk_ids]
     end
 
     # def require_admin
@@ -45,8 +75,15 @@ module Admin
     end
 
     def cookoons
-      policy_scope([:admin, Cookoon]).includes(:user, :perk_specifications)
+      policy_scope([:admin, Cookoon]).includes(:user, :perks, perks: :perk_specification)
     end
 
+    def users_collection
+      @users = User.all.map { |user| [user.email, user.id] }
+    end
+
+    def perk_spefications_collection
+      @perk_specifications = PerkSpecification.all.map { |perk| [("<i class='mr-1 #{perk.icon_name}'></i> #{perk.name}").html_safe, perk.id] }
+    end
   end
 end
