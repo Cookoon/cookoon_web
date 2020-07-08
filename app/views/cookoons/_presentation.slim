@@ -6,14 +6,13 @@
     div.d-none.d-md-flex
       p <i class="fas fa-map-marker-alt"></i> #{cookoon.address}
 
-  - if @cookoon.perks.any?
-    /= render 'perks', perks: @perks
-    = render 'cookoons/perks_in_card', div_style: "", perks: @perks, p_style: ""
+  - if cookoon.perks.any?
+    = render 'cookoons/perks_in_card', div_style: "", perks: perks.includes(:perk_specification), p_style: ""
 
-  p = @cookoon.description
+  p = cookoon.description
 
-  - if @cookoon.architect_name
-    p = "Ce lieu a été pensé par #{@cookoon.architect_name}"
+  - if cookoon.architect_name
+    p = "Ce lieu a été pensé par #{cookoon.architect_name}"
 
 
 //.container.mt-3
