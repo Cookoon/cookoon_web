@@ -1,5 +1,5 @@
 - if chef_perks.present?
-  - chef_perks.each do |chef_perk|
+  - chef_perks.includes(:chef_perk_specification).each do |chef_perk|
     .d-flex data-chef-perk-id = chef_perk.id
       p
         span.mr-3 = chef_perk.name
