@@ -14,7 +14,6 @@
     h5.mt-3 Spécifications
     /= f.association :perks, as: :check_boxes, collection: PerkSpecification.all, include_hidden: false
     = f.association :perks, as: :check_boxes, collection: @perk_specifications
-    /= render 'admin/perks/index', perks: @cookoon.perks
 
     h5.mt-3 Informations pratiques
     = f.input :digicode
