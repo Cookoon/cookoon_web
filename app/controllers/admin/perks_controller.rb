@@ -13,15 +13,19 @@ class Admin::PerksController < ApplicationController
     authorize @perk, policy_class: Admin::PerkPolicy
     @perk.cookoon = @cookoon
     if @perk.save
-      redirect_to edit_admin_cookoon_path(@cookoon), notice: 'La spécification a bien été ajoutée !'
+      redirect_to admin_cookoon_path(@cookoon), notice: 'La spécification a bien été ajoutée !'
     else
       render :new
     end
   end
 
   def destroy
-    @perk.destroy
-    redirect_to edit_admin_cookoon_path(@cookoon), notice: 'La spécification a bien été supprimée !'
+    if @cookoon.perks.length < 2
+      redirect_to admin_cookoon_path(@cookoon), alert: "Un minimum d'une spécification est requis"
+    else
+      @perk.destroy
+      redirect_to admin_cookoon_path(@cookoon), notice: 'La spécification a bien été supprimée !'
+    end
   end
 
   private
