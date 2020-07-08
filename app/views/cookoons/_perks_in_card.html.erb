@@ -7,15 +7,15 @@ div_style => style of div
 -->
 <!-- &nbsp: white space -->
 
-<div style="<%= div_style %>">
-  <div class="mb-2" style="<%= p_style %>">
-    <%# perks.limit("#{number_of_perks}".to_i).each do |perk| %>
-    <% perks.each do |perk| %>
-      <i class="<%= "#{perk.icon_name}" %> text-primary"></i>
-      <%= "#{perk.name}" %>&nbsp
-    <% end %>
+  <div style="<%= div_style %>">
+    <div class="mb-2" style="<%= p_style %>">
+      <%# perks.limit("#{number_of_perks}".to_i).each do |perk| %>
+      <% perks.each do |perk| %>
+        <i class="<%= "#{perk.icon_name}" %> text-primary"></i>
+        <%= "#{perk.name}" %>&nbsp
+      <% end %>
+    </div>
   </div>
-</div>
 
 <!-- Ancien code -->
 
