@@ -14,7 +14,7 @@
         .text-center
           = carousel_for(@cookoon.photos)
         .col-12
-          = render 'presentation', cookoon: @cookoon
+          = render 'presentation', cookoon: @cookoon, perks: @cookoon.perks
 
         #reservation-menus
           = render 'chefs/selection', chefs: @chefs if @reservation.needs_chef?
