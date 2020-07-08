@@ -33,7 +33,6 @@ module Admin
     end
 
     def update
-      # raise
       if @chef.update(chef_params)
         redirect_to admin_chef_path(@chef), notice: 'Le Chef a été édité !'
       else
