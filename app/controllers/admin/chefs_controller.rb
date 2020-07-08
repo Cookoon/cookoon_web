@@ -9,9 +9,9 @@ module Admin
     end
 
     def show
-      @menus_initial = @chef.menus.where(status: "initial")
-      @menus_active = @chef.menus.where(status: "active")
-      @menus_archived = @chef.menus.where(status: "archived")
+      @menus_initial = @chef.menus.includes(:dishes).where(status: "initial")
+      @menus_active = @chef.menus.includes(:dishes).where(status: "active")
+      @menus_archived = @chef.menus.includes(:dishes).where(status: "archived")
     end
 
     def new
