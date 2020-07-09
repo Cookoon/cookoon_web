@@ -9,19 +9,19 @@ RSpec.describe Reservation::PriceComputer do
     let!(:service) { create(:service, reservation: reservation, category: 'corporate') }
     let(:prices) { reservation.computed_price_attributes }
 
-    it 'prints the instances' do
-      puts reservation.class.to_s.upcase
-      p reservation
-      puts "-------------"
-      puts "PRICES"
-      p prices
-      puts "-------------"
-      reservation.services.each do |service|
-        puts "#{service.class.to_s.upcase}: #{service.category.upcase}"
-        p service
-        puts "-------------"
-      end
-    end
+    # it 'prints the instances' do
+    #   puts reservation.class.to_s.upcase
+    #   p reservation
+    #   puts "-------------"
+    #   puts "PRICES"
+    #   p prices
+    #   puts "-------------"
+    #   reservation.services.each do |service|
+    #     puts "#{service.class.to_s.upcase}: #{service.category.upcase}"
+    #     p service
+    #     puts "-------------"
+    #   end
+    # end
 
     it 'returns a Hash' do
       expect(prices).to be_a(Hash)

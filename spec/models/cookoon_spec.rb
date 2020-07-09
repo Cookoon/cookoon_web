@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Cookoon, type: :model do
-  it 'is valid with a user, name, surface, price, address, capacity, category and photos' do
+  it 'is valid with a user, name, surface, price, address, capacity, category, perks and photos' do
     cookoon = build(:cookoon)
     expect(cookoon).to be_valid
   end
@@ -65,7 +65,7 @@ RSpec.describe Cookoon, type: :model do
   context 'user already has cookoons' do
     let(:user) { create(:user)}
 
-    it 'is valid when user has one cookoon' do 
+    it 'is valid when user has one cookoon' do
       create(:cookoon, user: user)
       cookoon = build(:cookoon, user: user)
       expect(cookoon).to be_valid

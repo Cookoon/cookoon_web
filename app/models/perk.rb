@@ -8,6 +8,6 @@ class Perk < ApplicationRecord
   scope :access, -> { includes(:perk_specification).where(perk_specifications: { name: PerkSpecification::ACCESS }) }
   scope :unusuals, -> { includes(:perk_specification).where(perk_specifications: { name: PerkSpecification::UNUSUALS }) }
 
-  validates :perk_specification_id, presence: true, uniqueness: { scope: [:cookoon] }
+  validates :perk_specification, presence: true, uniqueness: { scope: [:cookoon] }
 
 end
