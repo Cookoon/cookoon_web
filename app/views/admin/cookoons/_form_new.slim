@@ -1,14 +1,15 @@
-= simple_form_for([:admin, cookoon]) do |f|
+= simple_form_for([:admin, cookoon], html: { data: { controller: 'google-maps-autocomplete' } }) do |f|
+
   .form-inputs
-    = f.association :user, as: :select, collection: @users, selected: @users.first
+    = f.association :user, as: :select, collection: @users, prompt: true
     = f.input :name, label: 'Nom du Cookoon'
-    = f.input :status, as: :select, collection: Cookoon.statuses.keys, label: 'Statut', selected: Cookoon.statuses.key(Cookoon.statuses[@cookoon.status]), input_html: {style: "-webkit-appearance: checkbox;"}
+    = f.input :status, label: "Status", collection: Cookoon.statuses.keys, as: :select, prompt: true
     = f.input :surface, label: 'Surface de réception en m²'
     = f.input :price, label: 'Prix / heure'
-    = f.input :address, label: 'Adresse'
+    = f.input :address, label: 'Adresse', input_html: { data: { target: 'google-maps-autocomplete.addressInput google-maps-autocomplete.formattedAddress' } }
     = f.input :description, label: "Description"
     = f.input :capacity, label: "Capacité d'accueil"
-    = f.input :category, label: "Catégorie", collection: Cookoon::CATEGORIES, as: :select, selected: @cookoon.category, input_html: {style: "-webkit-appearance: checkbox;"}
+    = f.input :category, label: "Catégorie", collection: Cookoon::CATEGORIES, as: :select, prompt: true
     = f.input :photos, as: :attachinary, input_html: { data: { controller: 'attachinary' } }
 
     h5.mt-3 Spécifications
