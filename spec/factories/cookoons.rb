@@ -1,6 +1,9 @@
 FactoryBot.define do
   factory :cookoon do
     after(:build) { |cookoon| cookoon.define_singleton_method(:geocode) {} }
+    after(:build) do |cookoon|
+      cookoon.perks.build(cookoon: cookoon, perk_specification: build(:perk_specification))
+    end
     before(:create) { Attachinary::File.define_method(:remove_temporary_tag) {} }
 
     association :user
