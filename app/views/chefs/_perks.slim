@@ -1,3 +1,12 @@
-.d-flex.mt-2
+.d-flex.pt-2.pb-4
   - chef_perks.includes(:chef_perk_specification).each do |chef_perk|
-    p.chef_perks.mr-3 = chef_perk.name
+    span.chef_perks = cl_image_tag(chef_perk.chef_perk_specification.image.path, height: 25)
+
+// Code pour avoir les initiales encadrées au lieu des logos
+//div.pb-2 style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; line-height: 3rem"
+  span
+    span.mr-1 style="font-family: 'cochinitalic', serif; color: #CDBB8A; font-size : 1rem; border: 1px solid #CDBB8A; border-radius: 0; padding: 0.5rem 0.5rem 0.25rem 0.5rem" IPB
+    span.mr-3 Institut Paul Bocuse
+  span
+    span.mr-1 style="font-family: 'cochinitalic', serif; color: #CDBB8A; font-size : 1rem; border: 1px solid #CDBB8A; border-radius: 0; padding: 0.5rem 0.5rem 0.25rem 0.5rem" TP
+    span.mr-3 Top Chef
