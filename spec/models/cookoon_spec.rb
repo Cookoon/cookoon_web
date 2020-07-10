@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Cookoon, type: :model do
-  it 'is valid with a user, name, surface, price, address, capacity, category, perks and photos' do
+  it 'is valid with a user, name, surface, price, address, capacity, category, perks, description, citation and photos' do
     cookoon = build(:cookoon)
     expect(cookoon).to be_valid
   end

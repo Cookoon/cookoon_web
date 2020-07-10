@@ -21,6 +21,8 @@ FactoryBot.define do
         ]
       CLOUDINARY
     }
+    citation { "Un coin de verdure dans Paris" }
+    description { "Au sommet d'un des plus hauts immeubles des batignolles, l'appartement de Laura & Grégory offre une vue à 180 ° sur tout Paris, de Montmartre à la Tour Eiffel. Il pourra ainsi aussi bien accueillir une réunion de travail pour 6 personnes, un dîner entre amis ou un tête à tête romantique." }
 
     trait :with_photos_upload do
       photo_urls { %w[https://picsum.photos/400/300 https://picsum.photos/400/300] }
