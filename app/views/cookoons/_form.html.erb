@@ -1,12 +1,12 @@
 <%= simple_form_for @cookoon,
-                    remote: true,
                     html: {
                       class: 'pb-3',
                       data: {
                         controller: 'google-maps-autocomplete'
                       }
                     } do |f| %>
-  <%= f.input :name, label: 'Nom du Cookoon', placeholder: 'Ex: Aux Abbesses chez Noémie et Thomas' %>
+  <%= f.input :name, label: 'Nom du décor', placeholder: 'Ex: Avenue de la Bourdonnais' %>
+  <%= f.input :citation, label: 'Citation', placeholder: 'Ex: Un écrin de verdure dans Paris' %>
   <%= f.input :surface, label: 'Surface de réception en m²' %>
   <%= f.input :price, label: 'Prix / heure' %>
   <%= f.input :address,

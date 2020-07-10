@@ -1,6 +1,5 @@
 <%= simple_form_for @cookoon,
                     url: admin_cookoon_path,
-                    remote: true,
                     html: {
                       class: 'pb-3',
                       data: {
@@ -10,7 +9,8 @@
   <p class="form-control-label">
     <strong>Hôte: </strong><%= "#{@cookoon.user.first_name} #{@cookoon.user.last_name} / Email: #{@cookoon.user.email} / Tél: #{@cookoon.user.phone_number}"%>
     </p>
-  <%= f.input :name, label: 'Nom du Cookoon' %>
+  <%= f.input :name, label: 'Nom du décor', placeholder: 'Ex: Avenue de la Bourdonnais' %>
+  <%= f.input :citation, label: 'Citation', placeholder: 'Ex: Un écrin de verdure dans Paris' %>
   <%= f.input :status, as: :select, collection: Cookoon.statuses.keys, label: 'Statut', selected: Cookoon.statuses.key(Cookoon.statuses[@cookoon.status]) %>
   <%= f.input :surface, label: 'Surface de réception en m²' %>
   <%= f.input :price, label: 'Prix / heure' %>

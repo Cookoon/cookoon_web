@@ -2,8 +2,9 @@
 
   .form-inputs
     = f.association :user, as: :select, collection: @users, prompt: true
-    = f.input :name, label: 'Nom du Cookoon'
-    = f.input :status, label: "Status", collection: Cookoon.statuses.keys, as: :select, prompt: true
+    = f.input :name, label: 'Nom du décor', placeholder: 'Ex: Avenue de la Bourdonnais'
+    = f.input :citation, label: 'Citation', placeholder: 'Ex: Un écrin de verdure dans Paris'
+    = f.input :status, label: "Statut", collection: Cookoon.statuses.keys, as: :select, prompt: true
     = f.input :surface, label: 'Surface de réception en m²'
     = f.input :price, label: 'Prix / heure'
     = f.input :address, label: 'Adresse', input_html: { data: { target: 'google-maps-autocomplete.addressInput google-maps-autocomplete.formattedAddress' } }
