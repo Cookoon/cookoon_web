@@ -29,9 +29,7 @@ class Admin::ChefPerkSpecificationsController < ApplicationController
   private
 
   def chef_perk_specification_params
-    params.require(:chef_perk_specification).permit(
-      :name
-    )
+    params.require(:chef_perk_specification).permit(:name, :image)
   end
 
   def find_chef_perk_specification
