@@ -39,7 +39,7 @@ class Cookoon < ApplicationRecord
   validates :description, presence: true
   validates :capacity, presence: true, numericality: { greater_than: 0 }
   validates :category, presence: true
-  validates :photos,   presence: true, length: {minimum: 2, maximum: 5, message: "Vous devez télécharger au moins 2 photos et au plus 5 photos"}
+  validates :photos,   presence: true, length: { minimum: 3, maximum: 10, message: "Vous devez télécharger au moins 3 photos et au plus 10 photos" }
   validates :perks,    presence: true
 
 
