@@ -21,7 +21,8 @@ module Admin
       if @cookoon.save
         redirect_to admin_cookoons_path, notice: 'Le décor a été créé !'
       else
-        render :new, alert: 'Il y eu un problème, veuillez réessayer'
+        flash.alert = "Une erreur est survenue. Veuillez vérifier votre saisie et soumettre à nouveau le formulaire"
+        render :new
       end
     end
 
@@ -42,6 +43,7 @@ module Admin
       if @cookoon.update(cookoon_params)
         redirect_to admin_cookoons_path, notice: 'Le Cookoon a été édité !'
       else
+        flash.alert = "Une erreur est survenue. Veuillez vérifier votre saisie et soumettre à nouveau le formulaire"
         render :edit
       end
     end
@@ -53,7 +55,7 @@ module Admin
         :user_id, :name, :surface, :price, :address, :capacity, :category,
         :digicode, :building_number, :floor_number, :door_number,
         :wifi_network, :wifi_code, :caretaker_instructions, :status,
-        :description, photos: []
+        :description, :citation, photos: []
       )
     end
 

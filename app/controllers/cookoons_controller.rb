@@ -40,8 +40,11 @@ class CookoonsController < ApplicationController
         redirect_to new_stripe_account_path
       end
     else
-      # other error messages are already displayed on form
-      flash.now.alert = @cookoon.errors.messages[:user].join
+      if @cookoon.errors.messages[:user].present?
+        flash.now.alert = @cookoon.errors.messages[:user].join(" / ")
+      else
+        flash.now.alert = "Une erreur est survenue. Veuillez vérifier votre saisie et soumettre à nouveau le formulaire"
+      end
       render :new
     end
   end
@@ -71,7 +74,7 @@ class CookoonsController < ApplicationController
     params.require(:cookoon).permit(
       :name, :surface, :price, :address, :capacity, :category,
       :digicode, :building_number, :floor_number, :door_number,
-      :wifi_network, :wifi_code, :caretaker_instructions,
+      :wifi_network, :wifi_code, :caretaker_instructions, :citation,
       photos: []
     )
   end
