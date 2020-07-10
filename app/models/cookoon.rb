@@ -32,17 +32,20 @@ class Cookoon < ApplicationRecord
   monetize :price_cents
 
   validates :name,     presence: true
-  validates :surface,  presence: true
-  validates :price,    numericality: { greater_than: 0 }
+  validates :citation, presence: true
+  validates :surface,  presence: true, numericality: { greater_than: 0 }
+  validates :price,    presence: true, numericality: { greater_than: 0 }
   validates :address,  presence: true
-  validates :capacity, presence: true
+  validates :description, presence: true
+  validates :capacity, presence: true, numericality: { greater_than: 0 }
   validates :category, presence: true
-  validates :photos,   presence: true
+  validates :photos,   presence: true, length: {minimum: 2, maximum: 5, message: "Vous devez télécharger au moins 2 photos et au plus 5 photos"}
   validates :perks,    presence: true
+
 
   validate :count_per_user, on: :create
 
-  validates_length_of :photos, minimum: 2, maximum: 5, message: "Vous devez télécharger au moins 2 photos et au plus 5 photos"
+  # validates_length_of :photos, minimum: 2, maximum: 5, message: "Vous devez télécharger au moins 2 photos et au plus 5 photos"
 
   after_validation :geocode, if: :address_changed?
   after_update :award_invite_to_user, if: :saved_change_to_status?
