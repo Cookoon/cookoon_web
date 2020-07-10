@@ -81,6 +81,7 @@ cookoons_attributes = [
     status: :approved,
     description: "La rue Montorgueil, Numa, les Start up et l'appartement de Marie & Guillaume, nous sommes dans le Sentier. A quelques minutes du métro (Sentier, ligne 3), l'appartement a bénéficié des talents d'architecte d'intérieur de Marie qui a su conférer un style année 30 modernisé à son intérieur. Ici tout est ouvert, la cuisine est séparée du salon par un bar qui cotoie également la partie salle à manger. Un lieu idéal pour une journée de formation, un rdv professionnel mais également un dîner entre amis.",
     photo_urls: ["https://images.unsplash.com/photo-1469022563428-aa04fef9f5a2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60", "https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"]
+
   },
   {
     user: User.second,
@@ -96,19 +97,21 @@ cookoons_attributes = [
     photo_urls: ["https://images.unsplash.com/photo-1499916078039-922301b0eb9b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60", "https://images.unsplash.com/photo-1536376072261-38c75010e6c9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"]
   },
 ]
-puts "Seeding Cookoons"
-Cookoon.create! cookoons_attributes
-puts "Cookoons done"
 
 perks_attributes = [
-  { cookoon: Cookoon.first, perk_specification: PerkSpecification.first },
-  { cookoon: Cookoon.first, perk_specification: PerkSpecification.last },
-  { cookoon: Cookoon.last, perk_specification: PerkSpecification.first },
-  { cookoon: Cookoon.last, perk_specification: PerkSpecification.second },
+  { perk_specification: PerkSpecification.first },
+  { perk_specification: PerkSpecification.last },
 ]
-puts "Seeding Perks"
-perks_attributes.each { |attributes| Perk.create! attributes }
-puts "Perks done"
+
+puts "Seeding Cookoons"
+# Cookoon.create! cookoons_attributes
+cookoons_attributes.each do |cookoon_attribute|
+  cookoon = Cookoon.new(cookoon_attribute)
+  cookoon.perks.build(perk_specification: PerkSpecification.first)
+  cookoon.perks.build(perk_specification: PerkSpecification.last)
+  cookoon.save
+end
+puts "Cookoons done"
 
 puts 'Seeding Companies'
 Company.create!(name: "Réceptions Nouvelles", address: "12 rue Lincoln, 75008 Paris", siren: 821316239, siret: 82131623900010, vat: "FR 28 821316239", referent_email: 'gregory@cookoon.fr')
@@ -255,13 +258,24 @@ puts 'Dishes done'
 
 chef_perk_specification_attributes = [
   {
-    name: "***",
+    name: "Une étoile Michelin",
+    image_url: "https://res.cloudinary.com/cookoon-dev/image/upload/v1594320890/Michelin_1etoile_v5izse.png"
+  },
+  {
+    name: "Deux étoiles Michelin",
+    image_url: "https://res.cloudinary.com/cookoon-dev/image/upload/v1594320889/Michelin_2etoiles_pw4tiu.png"
+  },
+  {
+    name: "Trois étoiles Michelin",
+    image_url: "https://res.cloudinary.com/cookoon-dev/image/upload/v1594320890/Michelin_3etoiles_fjlope.png"
   },
   {
     name: "Top Chef",
+    image_url: "https://res.cloudinary.com/cookoon-dev/image/upload/v1594320889/TopChef_grzwuw.png"
   },
   {
-    name: "Meilleur ouvrier de France",
+    name: "Institut Paul Bocuse",
+    image_url: "https://res.cloudinary.com/cookoon-dev/image/upload/v1594320889/InstitutPaulBocuse_hrupla.png"
   },
 ]
 
@@ -272,11 +286,11 @@ puts 'Chef perk specifications done'
 chef_perk_attributes = [
   {
     chef: Chef.first,
-    chef_perk_specification: ChefPerkSpecification.first,
+    chef_perk_specification: ChefPerkSpecification.fourth,
   },
   {
     chef: Chef.first,
-    chef_perk_specification: ChefPerkSpecification.second,
+    chef_perk_specification: ChefPerkSpecification.first,
   },
   {
     chef: Chef.first,
