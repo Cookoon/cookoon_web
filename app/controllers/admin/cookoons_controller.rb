@@ -28,6 +28,7 @@ module Admin
 
     def show
       @perks_not_selected = PerkSpecification.where.not(id: @cookoon.perks.pluck(:perk_specification_id))
+      @photos = @cookoon.photos.sample(3)
     end
 
     def index
@@ -77,7 +78,7 @@ module Admin
     end
 
     def cookoons
-      policy_scope([:admin, Cookoon]).includes(:user, :perks, perks: :perk_specification)
+      policy_scope([:admin, Cookoon]).includes(:user)
     end
 
     def users_collection
