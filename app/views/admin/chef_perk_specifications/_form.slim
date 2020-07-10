@@ -1,6 +1,7 @@
 = simple_form_for([:admin, chef_perk_specification]) do |f|
   .form-inputs
     = f.input :name
+    = f.input :image, as: :attachinary, input_html: { data: { controller: 'attachinary' } }
 
   .form-actions.mb-4
     .text-center
