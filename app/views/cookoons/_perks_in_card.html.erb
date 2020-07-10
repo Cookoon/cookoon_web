@@ -10,7 +10,7 @@ div_style => style of div
   <div style="<%= div_style %>">
     <div class="mb-2" style="<%= p_style %>">
       <%# perks.limit("#{number_of_perks}".to_i).each do |perk| %>
-      <% perks.each do |perk| %>
+      <% perks.includes(:perk_specification).each do |perk| %>
         <i class="<%= "#{perk.icon_name}" %> text-primary"></i>
         <%= "#{perk.name}" %>&nbsp
       <% end %>
