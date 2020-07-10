@@ -1,0 +1,9 @@
+//<%# perks.limit("#{number_of_perks}".to_i).each do |perk| %>
+//<% perks.each do |perk| %>
+  <i class="<%= "#{perk.icon_name}" %> text-primary"></i>
+  <%= "#{perk.name}" %>&nbsp
+
+.pb-4
+  - perks.includes(:perk_specification).each do |perk|
+    span.text-primary.pr-1 class="#{perk.icon_name}"
+    span.pr-2 = perk.name
