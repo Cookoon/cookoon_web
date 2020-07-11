@@ -21,33 +21,32 @@
 .container.d-flex.justify-content-center.px-0.pb-5.pt-md-3
   .row
     .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
-      .px-0
-        = render 'admin/back_button', button_title: 'Retour aux décors', path: admin_cookoons_path
-        - if policy([:admin, Cookoon]).update?
-          = render 'admin/button', button_title: 'Modifier ce décor', path: edit_admin_cookoon_path(@cookoon)
+      = render 'admin/back_button', button_title: 'Retour aux décors', path: admin_cookoons_path
+      - if policy([:admin, Cookoon]).update?
+        = render 'admin/button', button_title: 'Modifier ce décor', path: edit_admin_cookoon_path(@cookoon)
 
     .col-12.col-md-8.col-lg-9.px-0
-      .row.d-flex.align-items-stretch.mx-0
-        .col-12.col-lg-6.px-0.px-md-auto
+      .row.mx-0
+        .col-12.col-lg-6.px-0
           p.text-primary Vous regardez...
           h1 = @cookoon.name
-          = cl_image_tag(@photos.first.path, width: "100%")
+          img src=cl_image_path(@photos.first.path) style="width: 100%; object-fit: cover"
           .d-flex.justify-content-between.pt-3.text-right
             p = @cookoon.category
             p.text-primary <i class="fas fa-map-marker-alt"></i> #{@cookoon.address}
-          = render 'cookoons/perks_in_show', perks: @cookoon.perks
+          div = render 'cookoons/perks_in_show', perks: @cookoon.perks
           p = @cookoon.description
 
         .col-12.col-lg-6.px-0.pl-lg-3
-          .row.h-100.mx-0
+          .row.mx-0.h-100
             .col-4.d-flex.flex-column.px-0.pr-3
-              img src=cl_image_path(@photos.second.path) style="height: 100%; object-fit: cover"
+              img src=cl_image_path(@photos.second.path) style="object-fit: cover; min-height: -webkit-fill-available;"
             .col-8.d-flex.flex-column.justify-content-end.px-0
               p
                 = image_tag("quote-begin.png", style: "height: 1rem; vertical-align: baseline;")
                 span.font-italic.pr-1 = @cookoon.citation
                 = image_tag("quote-end.png", style: "height: 1rem; vertical-align: baseline")
-              img src=cl_image_path(@photos.last.path) style="height: 50%; object-fit: cover"
+              img src=cl_image_path(@photos.third.path) style="height: 50%; object-fit: cover"
               .btn-cookoon.btn-cookoon-primary.text-center.align-self-end.mt-3 style="width:fit-content"
                 = link_to 'Modifier', edit_admin_cookoon_path(@cookoon)
 
