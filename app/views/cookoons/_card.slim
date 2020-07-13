@@ -1,7 +1,21 @@
 = link_to reservation_cookoon_path(@reservation, cookoon) do
   .cookoon-card.mb-0.h-100.d-flex.flex-column.justify-content-between
     div
-      .cookoon-card-image style="background: url(#{cl_image_path(cookoon.photos.first.path, height: 250, crop: :fill)});"
+      .cookoon-card-image-div-squared
+        .cookoon-card-image style="background-image: url(#{cl_image_path(cookoon.photos.first.path)}); background-size: cover; background-position: center"
+
+      .cookoon-card-body.pb-0
+        h4.text-center style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"
+          = cookoon.title_depending_on_reservation(@reservation)
+
+        = render 'cookoons/perks_in_card', perks: cookoon.perks, div_style: "height: 2rem", p_style: "overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"
+
+// V2
+//= link_to reservation_cookoon_path(@reservation, cookoon) do
+  .cookoon-card.mb-0.h-100.d-flex.flex-column.justify-content-between
+    div
+      .cookoon-card-image-div-squared
+        .cookoon-card-image style="background-image: url(#{cl_image_path(cookoon.photos.first.path)}); background-size: cover; background-position: center"
 
       .cookoon-card-body.pb-0
         h4 style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"
@@ -18,7 +32,7 @@
     .cookoon-card-body.pt-0
       .btn-cookoon.btn-cookoon-primary.text-center Entrer
 
-
+// V1
 //= link_to reservation_cookoon_path(@reservation, cookoon) do
   .cookoon-card
     .cookoon-card-image style="background: url(#{cl_image_path(cookoon.photos.first.path, height: 250, crop: :fill)});"
