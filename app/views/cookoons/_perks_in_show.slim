@@ -4,6 +4,7 @@
   <%= "#{perk.name}" %>&nbsp
 
 .pb-4
-  - perks.includes(:perk_specification).each do |perk|
-    span.text-primary.pr-1 class="#{perk.icon_name}"
-    span.pr-2 = perk.name
+  - perks.each do |perk|
+    span style = "white-space: nowrap;"
+      .text-primary.pr-1 class="#{perk.icon_name}"
+      span.pr-2 = perk.name

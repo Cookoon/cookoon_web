@@ -1,5 +1,5 @@
-- if perks.includes(:perk_specification).present?
-  - perks.each do |perk|
+- if perks.present?
+  - perks.includes(:perk_specification).each do |perk|
     .d-flex data-perk-id = perk.id
       p
         i.mr-1 class = perk.icon_name
