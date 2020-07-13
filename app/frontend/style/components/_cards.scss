@@ -1,19 +1,58 @@
+.cookoon-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1rem;
+  }
+}
+
 .cookoon-card {
   border: 1px solid lightgray;
   margin-bottom: 10px;
-  &-image {
-    height: 250px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    // position: relative;
-    // .address-info {
-    //   position: absolute;
-    //   color: white;
-    //   bottom: 0;
-    //   left: 25px;
-    // }
+  width: 100%;
+  @media (max-width: 767px) {
+    margin-top: 1rem;
   }
+  &-image-div-squared {
+    @media (min-width: 768px) {
+      position: relative;
+    }
+    @media (max-width: 767px) {
+      height: 250px;
+    }
+  }
+  &-image-div-squared:before {
+    @media (min-width: 768px) {
+      content: "";
+      display: block;
+      padding-top: 100%;
+    }
+  }
+  &-image {
+    @media (min-width: 768px) {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      right: 0;
+    }
+    @media (max-width: 767px) {
+      height: 250px;
+    }
+  }
+      // height: 250px;
+      // display: flex;
+      // justify-content: space-around;
+      // align-items: center;
+      // position: relative;
+      // .address-info {
+      //   position: absolute;
+      //   color: white;
+      //   bottom: 0;
+      //   left: 25px;
+      // }
+
   &-body {
     padding: 1rem;
   }

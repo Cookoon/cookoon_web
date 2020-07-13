@@ -1,7 +1,37 @@
-.container
+.container.px-0
+  .row.mx-0
+    .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
+
+    .col-12.col-md-8.col-lg-9.px-0
+      .breadcrumbs.my-4.my-md-5
+        h1.text-center.first-title Votre #{@reservation.humanized_type_name}
+        /h1.text-center.second-title A ..
+        /h1.text-center.third-title Avec ...
+      hr.gold.mb-3.mb-md-5 style = "width: 5vw"
+
+.container.d-flex.justify-content-center.px-0.pb-5.pt-md-3
+  .row
+    .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
+      = render 'reservations/search_recap', reservation: @reservation
+
+    .col-12.col-md-8.col-lg-9.px-0
+      .row.mx-0
+        .col-12.col-md-9.col-lg-6.px-0
+          h1 Choisissez le décor de votre réception
+      .row.mx-0
+        .col-12.px-0
+          p.text-primary.mb-0.mb-md-3 Un décor unique se fabrique dans un décor unique... Chacun de nos lieux présente une atmosphère et un caractère propre. Choisissez celui qui correspond le mieux à l'expérience que vous souhaitez vivre avec vos convives.
+      .row.mx-0
+        .col-12.px-0
+          .cookoon-cards
+            - @cookoons.each do |cookoon|
+              = render 'card', cookoon: cookoon
+
+// V2
+//.container
   h1.text-center.my-4 Les décors
 
-.container.d-flex.justify-content-center.px-0
+//.container.d-flex.justify-content-center.px-0
   .row
     .d-none.d-md-block.col-md-4.col-lg-3.px-md-2
       .px-md-2.px-lg-0
@@ -12,6 +42,7 @@
           .col-12.col-md-6.px-0.px-md-2.pb-4
             = render 'card', cookoon: cookoon
 
+// V1
 //h1.text-center.my-4 Les décors
 
 //div class=classnames(container: desktop_view?)
@@ -22,3 +53,6 @@
       - @cookoons.each do |cookoon|
         .col-12.col-md-6
           = render 'card', cookoon: cookoon
+
+
+
