@@ -46,9 +46,9 @@
             .col-8.d-flex.flex-column.justify-content-end.px-0.pt-5
               div#part_three
                 p
-                  = image_tag("quote-begin.png", style: "height: 1rem; vertical-align: baseline;")
+                  = image_tag("quote-begin-gold.png", style: "height: 1rem; vertical-align: baseline;")
                   span.font-italic.pr-1 = @cookoon.citation
-                  = image_tag("quote-end.png", style: "height: 1rem; vertical-align: baseline")
+                  = image_tag("quote-end-gold.png", style: "height: 1rem; vertical-align: baseline")
                 img src=cl_image_path(@photos.third.path) style="width: 100%"
                 .btn-cookoon.btn-cookoon-primary.text-center.align-self-end.mt-3 style="width:fit-content"
                   = link_to 'Modifier', edit_admin_cookoon_path(@cookoon)
