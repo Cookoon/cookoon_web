@@ -28,27 +28,30 @@
     .col-12.col-md-8.col-lg-9.px-0
       .row.mx-0
         .col-12.col-lg-6.px-0
-          p.text-primary Vous regardez...
-          h1 = @cookoon.name
-          img src=cl_image_path(@photos.first.path) style="width: 100%; object-fit: cover"
-          .d-flex.justify-content-between.pt-3.text-right
-            p = @cookoon.category
-            p.text-primary <i class="fas fa-map-marker-alt"></i> #{@cookoon.address}
-          div = render 'cookoons/perks_in_show', perks: @cookoon.perks
-          p = @cookoon.description
+          div#part_one
+            p.text-primary Vous regardez...
+            h1 = @cookoon.name
+            img src=cl_image_path(@photos.first.path) style="width: 100%; object-fit: cover"
+            .d-flex.justify-content-between.pt-3.text-right
+              p = @cookoon.category
+              p.text-primary <i class="fas fa-map-marker-alt"></i> #{@cookoon.address}
+            div = render 'cookoons/perks_in_show', perks: @cookoon.perks
+            p = @cookoon.description
 
         .col-12.col-lg-6.px-0.pl-lg-3
           .row.mx-0.h-100
-            .col-4.d-flex.flex-column.px-0.pr-3
-              img src=cl_image_path(@photos.second.path) style="object-fit: cover; min-height: -webkit-fill-available; max-height: -webkit-fill-available;"
-            .col-8.d-flex.flex-column.justify-content-end.px-0
-              p
-                = image_tag("quote-begin.png", style: "height: 1rem; vertical-align: baseline;")
-                span.font-italic.pr-1 = @cookoon.citation
-                = image_tag("quote-end.png", style: "height: 1rem; vertical-align: baseline")
-              img src=cl_image_path(@photos.third.path) style="height: 50%; object-fit: cover"
-              .btn-cookoon.btn-cookoon-primary.text-center.align-self-end.mt-3 style="width:fit-content"
-                = link_to 'Modifier', edit_admin_cookoon_path(@cookoon)
+            .col-4.px-0.pr-3
+              div.p-0.h-100#part_two data={ controller: "background-image", image: "#{cl_image_path(@photos.second.path)}", target:"background-image.div" }
+
+            .col-8.d-flex.flex-column.justify-content-end.px-0.pt-5
+              div#part_three
+                p
+                  = image_tag("quote-begin.png", style: "height: 1rem; vertical-align: baseline;")
+                  span.font-italic.pr-1 = @cookoon.citation
+                  = image_tag("quote-end.png", style: "height: 1rem; vertical-align: baseline")
+                img src=cl_image_path(@photos.third.path) style="width: 100%"
+                .btn-cookoon.btn-cookoon-primary.text-center.align-self-end.mt-3 style="width:fit-content"
+                  = link_to 'Modifier', edit_admin_cookoon_path(@cookoon)
 
 // Old code
   .container

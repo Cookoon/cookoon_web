@@ -42,7 +42,7 @@ module Admin
 
     def update
       if @cookoon.update(cookoon_params)
-        redirect_to admin_cookoons_path, notice: 'Le Cookoon a été édité !'
+        redirect_to admin_cookoon_path(@cookoon), notice: 'Le Cookoon a été édité !'
       else
         flash.alert = "Une erreur est survenue. Veuillez vérifier votre saisie et soumettre à nouveau le formulaire"
         render :edit
