@@ -32,9 +32,9 @@
         = render 'chefs/perks', chef_perks: @chef.chef_perks
 
       p
-        = image_tag("quote-begin.png", style: "height: 3rem; vertical-align: bottom;")
+        = image_tag("quote-begin-gold.png", style: "height: 3rem; vertical-align: bottom;")
         span.font-italic.pr-1 = @chef.description
-        = image_tag("quote-end.png", style: "height: 1rem; vertical-align: baseline")
+        = image_tag("quote-end-gold.png", style: "height: 1rem; vertical-align: baseline")
 
         p = simple_format(@chef.references)
 
