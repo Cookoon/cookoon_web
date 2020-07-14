@@ -1,0 +1,18 @@
+.citation {
+  &::before, &::after {
+    content: ' ';
+    display: inline-block;
+    background-repeat: no-repeat;
+    background-size: contain;
+    width: 2rem;
+    height: 2rem;
+  }
+  &::before {
+    background-image: url(../../assets/images/quote-begin-gold.png);
+    // content: url('https://api.iconify.design/icomoon-free:quotes-right.svg') no-repeat center center / contain;
+  }
+  &::after {
+    background-image: url(../../assets/images/quote-end-gold.png);
+    // content: url('https://api.iconify.design/icomoon-free:quotes-right.svg?height=16');
+  }
+}
