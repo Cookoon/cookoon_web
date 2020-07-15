@@ -6,11 +6,10 @@
     .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
 
     .col-12.col-md-8.col-lg-9.px-0
-      .breadcrumbs.my-4.my-md-5
-        h1.text-center.first-title Dîner
-        h1.text-center.second-title A #{ @cookoon.name }
-        h1.text-center.third-title Avec ...
-      hr.gold.mb-3.mb-md-5 style = "width: 5vw"
+      .breadcrumbs.mt-4.mt-md-5.mb-3.mb-md-4
+        h1.text-center.first-title Votre dîner
+        h1.text-center.second-title = @cookoon.name
+      hr.breadcrumbs-hr
       //.d-flex.justify-content-center.mb-5
         .pt-1 = image_tag("cookoon-losange.png", size: '24')
         hr.gold.mx-2 style = "width: 5vw"
@@ -29,13 +28,14 @@
       .row.mx-0
         .col-12.col-lg-6.px-0
           div
-            p.text-primary Vous regardez...
-            h1 = @cookoon.name
+            p.text-primary.mb-1 Vous visitez...
+            /h1 = @cookoon.name
+            h1 style = "font-size: 2rem; font-style: italic; font-family: 'Avenir', serif" = @cookoon.name
             img src=cl_image_path(@cookoon.main_photo.path) style="height:250px; width: 100%; object-fit: cover"
-            .d-flex.justify-content-between.pt-3.text-right
+            .d-flex.justify-content-between.pt-2.text-right
               p = @cookoon.category
               p.text-primary <i class="fas fa-map-marker-alt"></i> #{@cookoon.address}
-            div = render 'cookoons/perks_in_show', perks: @cookoon.perks.includes(:perk_specification)
+            .pb-3 = render 'cookoons/perks_in_show', perks: @cookoon.perks.includes(:perk_specification)
             p.mb-lg-0 = @cookoon.description
 
         .col-12.col-lg-6.px-0.pl-lg-3
@@ -45,8 +45,8 @@
 
             .col-8.d-flex.flex-column.justify-content-end.px-0.pt-5
               div
-                .citation
-                  span.font-italic.pr-1 style="font-size: 2rem" = @cookoon.citation
+                .citation.mb-2
+                  span = @cookoon.citation
                 img src=cl_image_path(@photos.first.path) style="height:250px; width: 100%; object-fit: cover"
                 .col-12.col-lg-6.px-0
                   .btn-cookoon.btn-cookoon-primary.text-center.px-0.mt-3
