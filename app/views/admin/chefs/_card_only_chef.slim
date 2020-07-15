@@ -5,13 +5,7 @@
         .cookoon-card-image style="background-image: url(#{cl_image_path(chef.photos.first.path)}); background-size: cover; background-position: center"
 
       .cookoon-card-body.pb-0
-        h4 style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"
+        h4.text-center style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"
           = chef.name
 
-        = render 'chefs/perks_in_card', div_style: "height: 2rem", chef_perks: chef.chef_perks, p_style: "overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"
-
-        p style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 5; -webkit-box-orient: vertical;"
-          = chef.description
-
-    .cookoon-card-body.pt-0
-      .btn-cookoon.btn-cookoon-primary.text-center Voir ce Chef
+        .text-center = render 'chefs/perks_in_card', div_style: "", chef_perks: chef.chef_perks, p_style: "overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"
