@@ -10,8 +10,7 @@
     .col-12.col-md-8.col-lg-9.px-0.px-md-2.pr-lg-0
       - @chef_perk_specifications.each do |chef_perk_specification|
         p
-          span.mr-3 = cl_image_tag(chef_perk_specification.image.path, height: 20)
-          span.mr-3 = chef_perk_specification.name
+          span.mr-3 = cl_image_tag(chef_perk_specification.image.path, height: 40)
           span = link_to "", admin_chef_perk_specification_path(chef_perk_specification), method: :delete, class: "fas fa-times fa-lg"
 
       .btn-cookoon.btn-block.btn-cookoon-primary.text-center.mb-4
