@@ -34,8 +34,15 @@ export default class extends Controller {
     //   }
     // });
 
-    $(document).on('attachinary:fileremoved', function() {
-      $('label.attachinary').addClass('upload-zone');
-    })
+    // Add upload-zone if picture deleted
+    $('.attachinary-input').each(function() {
+      $(this).on('attachinary:fileremoved', function(event) {
+        $("label[for='"+$(this).attr('id')+"']").addClass('upload-zone');
+      });
+    });
+    // Old code that was ok for only one attachinary input
+    // $(document).on('attachinary:fileremoved', function() {
+    //   $('label.attachinary').addClass('upload-zone');
+    // })
   }
 }
