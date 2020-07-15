@@ -291,23 +291,27 @@ puts 'Dishes done'
 chef_perk_specification_attributes = [
   {
     name: "Une étoile Michelin",
-    image_url: "https://res.cloudinary.com/cookoon-dev/image/upload/v1594320890/Michelin_1etoile_v5izse.png"
+    image_url: "https://res.cloudinary.com/cookoon-dev/image/upload/v1594812803/ojnzwrmlbbinexavocru.png"
   },
   {
     name: "Deux étoiles Michelin",
-    image_url: "https://res.cloudinary.com/cookoon-dev/image/upload/v1594320889/Michelin_2etoiles_pw4tiu.png"
+    image_url: "https://res.cloudinary.com/cookoon-dev/image/upload/v1594812830/dm8a6csrled1dkgl8etk.png"
   },
   {
     name: "Trois étoiles Michelin",
-    image_url: "https://res.cloudinary.com/cookoon-dev/image/upload/v1594320890/Michelin_3etoiles_fjlope.png"
+    image_url: "https://res.cloudinary.com/cookoon-dev/image/upload/v1594812853/hmtcycc8zxnpgpz7p3wx.png"
   },
   {
-    name: "Top Chef",
-    image_url: "https://res.cloudinary.com/cookoon-dev/image/upload/v1594320889/TopChef_grzwuw.png"
+    name: "Jury Top Chef",
+    image_url: "https://res.cloudinary.com/cookoon-dev/image/upload/v1594812888/qbpuldfxz4klia6fzvtc.png"
+  },
+  {
+    name: "Candidat Top Chef",
+    image_url: "https://res.cloudinary.com/cookoon-dev/image/upload/v1594812917/wxszfl8bqelshwafrs2k.png"
   },
   {
     name: "Institut Paul Bocuse",
-    image_url: "https://res.cloudinary.com/cookoon-dev/image/upload/v1594320889/InstitutPaulBocuse_hrupla.png"
+    image_url: "https://res.cloudinary.com/cookoon-dev/image/upload/v1594812935/qwz7dwhoeph1mdkcw08a.png"
   },
 ]
 
