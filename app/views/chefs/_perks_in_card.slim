@@ -1,4 +1,4 @@
-.my-3 style="#{div_style}"
+.mb-3 style="#{div_style}"
   div style="#{p_style}"
     - chef_perks.each do |chef_perk|
-      span.chef_perks = cl_image_tag(chef_perk.chef_perk_specification.image.path, height: '20')
+      span.chef_perks = cl_image_tag(chef_perk.chef_perk_specification.image.path)
