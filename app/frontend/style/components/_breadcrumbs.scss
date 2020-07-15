@@ -4,6 +4,16 @@
     margin-bottom: 0;
     line-height: 0.75;
   }
+  &-hr {
+    border-top-color: $primary;
+    width: 5vw;
+    @media (min-width: 768px) {
+      margin-bottom: 1.5rem !important;
+    }
+    @media (max-width: 767px) {
+      margin-bottom: 1rem !important;
+    }
+  }
 }
 
 .first-title {
