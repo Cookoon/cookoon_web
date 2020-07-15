@@ -3,6 +3,7 @@ class CookoonsController < ApplicationController
 
   before_action :find_reservation, only: %i[index show]
   before_action :find_cookoon, only: %i[show edit update]
+  before_action :perk_spefications_collection, only: %i[new create]
 
   def index
     filtering_params = {
@@ -12,7 +13,7 @@ class CookoonsController < ApplicationController
     }
 
     @cookoons = policy_scope(Cookoon)
-                .includes(:photo_files)
+                .includes(:main_photo_files)
                 .filtrate(filtering_params)
                 .decorate
   end
@@ -30,6 +31,11 @@ class CookoonsController < ApplicationController
   def create
     @cookoon = current_user.cookoons.new(cookoon_params)
     authorize @cookoon
+    @cookoon.status = "under_review"
+    @perks = []
+    perk_specifications.each do |perk_specification|
+      @perks << @cookoon.perks.build(perk_specification_id: perk_specification) if perk_specification.present?
+    end
 
     if @cookoon.save
       if current_user.stripe_account_id
@@ -75,7 +81,7 @@ class CookoonsController < ApplicationController
       :name, :surface, :price, :address, :capacity, :category,
       :digicode, :building_number, :floor_number, :door_number,
       :wifi_network, :wifi_code, :caretaker_instructions, :citation,
-      photos: []
+      :main_photo, :long_photo, :description, photos: []
     )
   end
 
@@ -83,5 +89,17 @@ class CookoonsController < ApplicationController
     @markers = @cookoons.map do |cookoon|
       { lat: cookoon.latitude, lng: cookoon.longitude }
     end
+  end
+
+  def perk_params
+    params.require(:cookoon).permit(perk_ids: [])
+  end
+
+  def perk_specifications
+    perk_params[:perk_ids]
+  end
+
+  def perk_spefications_collection
+    @perk_specifications = PerkSpecification.all.map { |perk| [("<i class='mr-1 #{perk.icon_name}'></i> #{perk.name}").html_safe, perk.id] }
   end
 end

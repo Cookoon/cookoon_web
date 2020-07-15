@@ -25,7 +25,9 @@ class Cookoon < ApplicationRecord
   has_many :perks, dependent: :destroy
   has_many :perk_specifications, through: :perks
 
-  has_attachments :photos, maximum: 5, order: 'id ASC'
+  has_attachments :photos, minimum: 4, maximum: 10, order: 'id ASC'
+  has_attachment :main_photo
+  has_attachment :long_photo
 
   enum status: %i[under_review approved suspended]
   geocoded_by :address
@@ -39,9 +41,10 @@ class Cookoon < ApplicationRecord
   validates :description, presence: true
   validates :capacity, presence: true, numericality: { greater_than: 0 }
   validates :category, presence: true
-  validates :photos,   presence: true, length: { minimum: 3, maximum: 10, message: "Vous devez télécharger au moins 3 photos et au plus 10 photos" }
+  validates :photos,   presence: true, length: { minimum: 4, maximum: 10, message: "Vous devez télécharger au moins 4 photos et au plus 10 photos" }
   validates :perks,    presence: true
-
+  validates :main_photo, presence: true
+  validates :long_photo, presence: true
 
   validate :count_per_user, on: :create
 

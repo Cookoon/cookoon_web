@@ -31,7 +31,7 @@
           div
             p.text-primary Vous regardez...
             h1 = @cookoon.name
-            img src=cl_image_path(@photos.first.path) style="height:250px; width: 100%; object-fit: cover"
+            img src=cl_image_path(@cookoon.main_photo.path) style="height:250px; width: 100%; object-fit: cover"
             .d-flex.justify-content-between.pt-3.text-right
               p = @cookoon.category
               p.text-primary <i class="fas fa-map-marker-alt"></i> #{@cookoon.address}
@@ -41,13 +41,13 @@
         .col-12.col-lg-6.px-0.pl-lg-3
           .row.mx-0.h-100
             .col-4.px-0.pr-3
-              div.p-0.h-100 data={ controller: "background-image", image: "#{cl_image_path(@photos.second.path)}", target:"background-image.div" }
+              div.p-0.h-100 data={ controller: "background-image", image: "#{cl_image_path(@cookoon.long_photo.path)}", target:"background-image.div" }
 
             .col-8.d-flex.flex-column.justify-content-end.px-0.pt-5
               div
                 .citation
                   span.font-italic.pr-1 style="font-size: 2rem" = @cookoon.citation
-                img src=cl_image_path(@photos.third.path) style="height:250px; width: 100%; object-fit: cover"
+                img src=cl_image_path(@photos.first.path) style="height:250px; width: 100%; object-fit: cover"
                 .col-12.col-lg-6.px-0
                   .btn-cookoon.btn-cookoon-primary.text-center.px-0.mt-3
                     = link_to 'Modifier', edit_admin_cookoon_path(@cookoon)
@@ -56,11 +56,10 @@
         /.col-12.col-lg-4.px-0
         .col-6.col-lg-4.px-0.pr-3
           div style="display: grid; grid-template-column: 1fr; grid-template-rows: 150px 150px; grid-row-gap: 1rem"
-            div style="grid-column: 1; grid-row: 1; background-image:url(#{cl_image_path(@photos.first.path)}); background-size:cover; background-position: center"
-            div style="grid-column: 1; grid-row: 2; background-image:url(#{cl_image_path(@photos.last.path)}); background-size:cover; background-position: center; "
+            div style="grid-column: 1; grid-row: 1; background-image:url(#{cl_image_path(@photos.second.path)}); background-size:cover; background-position: center"
+            div style="grid-column: 1; grid-row: 2; background-image:url(#{cl_image_path(@photos.third.path)}); background-size:cover; background-position: center; "
         .col-6.col-lg-6.px-0
-          .h-100.mr-lg-n2 style="background-image: url(#{cl_image_path(@photos.first.path)}); background-size: cover; background-position: center"
-          /img src=cl_image_path(@photos.last.path) style="width: 100%; object-fit: cover"
+          .h-100.mr-lg-n2 style="background-image: url(#{cl_image_path(@photos.fourth.path)}); background-size: cover; background-position: center"
 
       .row.mx-0.mt-5
         h5.mt-3 Spécifications non sélectionnées
