@@ -1,4 +1,10 @@
 .breadcrumbs {
+  @media (min-width: 768px) {
+    margin-top: 3rem !important;
+  }
+  @media (max-width: 767px) {
+    margin-top: 1.5rem !important;
+  }
   > h1 {
     font-size: 3rem;
     margin-bottom: 0;
@@ -7,11 +13,17 @@
   &-hr {
     border-top-color: $primary;
     width: 5vw;
-    @media (min-width: 768px) {
-      margin-bottom: 1.5rem !important;
-    }
     @media (max-width: 767px) {
+      margin-top: 1.5rem !important;
       margin-bottom: 1rem !important;
+    }
+    @media (min-width: 768px) {
+      margin-top: 2rem !important;
+      margin-bottom: 2rem !important;
+    }
+    @media (min-width: 992px) {
+      margin-top: 2rem !important;
+      margin-bottom: 3rem !important;
     }
   }
 }
