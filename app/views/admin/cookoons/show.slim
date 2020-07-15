@@ -6,7 +6,7 @@
     .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
 
     .col-12.col-md-8.col-lg-9.px-0
-      .breadcrumbs.mt-4.mt-md-5.mb-3.mb-md-4
+      .breadcrumbs
         h1.text-center.first-title Votre dîner
         h1.text-center.second-title = @cookoon.name
       hr.breadcrumbs-hr
@@ -17,7 +17,7 @@
         hr.gold.mx-2 style = "width: 5vw"
         .pt-1 = image_tag("cookoon-losange.png", size: '24')
 
-.container.d-flex.justify-content-center.px-0.pb-5.pt-md-3
+.container.d-flex.justify-content-center.px-0.pb-5
   .row
     .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
       = render 'admin/back_button', button_title: 'Retour aux décors', path: admin_cookoons_path

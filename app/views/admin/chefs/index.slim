@@ -3,11 +3,11 @@
     .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
 
     .col-12.col-md-8.col-lg-9.px-0
-      .breadcrumbs.my-4.my-md-5
+      .breadcrumbs
         h1.text-center.first-title Les chefs
-      hr.gold.mb-3.mb-md-5 style = "width: 5vw"
+      hr.breadcrumbs-hr
 
-.container.d-flex.justify-content-center.px-0.pb-5.pt-md-3
+.container.d-flex.justify-content-center.px-0.pb-5
   .row
     .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
       = render 'admin/back_button', button_title: 'Retour au dashboard', path: admin_dashboard_path
