@@ -1,9 +1,9 @@
 .d-flex.flex-row.flex-wrap.pb-3
   - if chef_perks.present?
     - chef_perks.includes(:chef_perk_specification).each do |chef_perk|
-      div.pr-4 data-chef-perk-id = chef_perk.id
-        span.mr-2 = cl_image_tag(chef_perk.chef_perk_specification.image.path, height: 40)
-        span = link_to "", admin_chef_chef_perk_path(@chef, chef_perk), method: :delete, class: "fas fa-times fa-lg"
+      .chef_perks.pr-4 data-chef-perk-id = chef_perk.id
+        = cl_image_tag(chef_perk.chef_perk_specification.image.path)
+        = link_to "", admin_chef_chef_perk_path(@chef, chef_perk), method: :delete, class: "fas fa-times fa-lg"
   - else
     p Il n'y a pas encore de spécification indiquée pour ce chef
 
