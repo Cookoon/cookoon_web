@@ -1,6 +1,3 @@
-//.container
-  h1.text-center.my-4 #{ @cookoon.name }
-
 .container.px-0
   .row.mx-0
     .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
@@ -47,13 +44,33 @@
               div
                 .citation.mb-2
                   span = @cookoon.citation
-                img src=cl_image_path(@photos.first.path) style="height:250px; width: 100%; object-fit: cover"
-                .col-12.col-lg-6.px-0
+                img src=cl_image_path(@cookoon.sample_photos.first.path) style="height:250px; width: 100%; object-fit: cover"
+                //.col-12.col-lg-6.px-0
                   .btn-cookoon.btn-cookoon-primary.text-center.px-0.mt-3
                     = link_to 'Modifier', edit_admin_cookoon_path(@cookoon)
 
       .row.mx-0.mt-3
-        /.col-12.col-lg-4.px-0
+        .d-none.d-md-block.col-md-6.col-lg-4.px-0.pr-md-3
+          div style="display: grid; grid-template-rows: 26rem"
+            div style="grid-column: 1; grid-row: 1; background-image:url(#{cl_image_path(@cookoon.sample_photos.second.path)}); background-size:cover; background-position: center"
+        .col-12.col-md-6.col-lg-8.px-0
+          div style="display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 12.5rem); grid-gap: 1rem"
+            div style="grid-column: 1 / span 3; background-image:url(#{cl_image_path(@cookoon.sample_photos.third.path)}); background-size:cover; background-position: center"
+
+            div style="grid-column: 1 / span 2; background-image:url(#{cl_image_path(@cookoon.sample_photos.fourth.path)}); background-size:cover; background-position: center"
+
+            .d-flex.flex-column.justify-content-end
+              div.text-center.pb-3
+                p = link_to "+", "#", style: "color: #CDBB8A; border: 1px solid #CDBB8A; padding: 0.25rem 0.5rem; font-size: 1.5rem", data: {toggle: "modal", target: "#cookoon-photos-modal"}
+
+                p.text-center = link_to "Voir les photos", "#", style: "text-transform: uppercase", data: {toggle: "modal", target: "#cookoon-photos-modal"}
+
+                = render 'cookoons/modal', photos: @cookoon.all_photos
+
+              .btn-cookoon.btn-cookoon-primary.text-center.px-0.mt-0
+                = link_to 'Modifier', edit_admin_cookoon_path(@cookoon)
+
+      //.row.mx-0.mt-3
         .col-6.col-lg-4.px-0.pr-3
           div style="display: grid; grid-template-column: 1fr; grid-template-rows: 150px 150px; grid-row-gap: 1rem"
             div style="grid-column: 1; grid-row: 1; background-image:url(#{cl_image_path(@photos.second.path)}); background-size:cover; background-position: center"
@@ -61,36 +78,9 @@
         .col-6.col-lg-6.px-0
           .h-100.mr-lg-n2 style="background-image: url(#{cl_image_path(@photos.fourth.path)}); background-size: cover; background-position: center"
 
-      .row.mx-0.mt-5
+      //.row.mx-0.mt-5
         h5.mt-3 Spécifications non sélectionnées
         .d-flex style="flex-wrap: wrap"
           = render 'cookoons/perks_in_show', perks: @perk_specifications_not_selected
         .btn-cookoon.btn-block.btn-cookoon-primary.text-center.mb-4
           = link_to 'Ajouter/Supprimer des spécifications', new_admin_cookoon_perk_path(@cookoon)
-
-// Old code
-  .container
-    h1.text-center.my-4 #{ @cookoon.name }
-
-  .container.d-flex.justify-content-center.px-0
-    .row
-      .d-none.d-md-block.col-md-4.col-lg-3.px-md-2
-        .px-md-2.px-lg-0
-          = render 'admin/back_button', button_title: 'Retour aux décors', path: admin_cookoons_path
-          - if policy([:admin, Cookoon]).update?
-            = render 'admin/button', button_title: 'Modifier ce décor', path: edit_admin_cookoon_path(@cookoon)
-
-      .col-12.col-md-8.col-lg-9.px-0.px-md-2.pr-lg-0
-        .text-center
-          = carousel_for(@cookoon.photos)
-        .col-12
-          = render 'cookoons/presentation', cookoon: @cookoon, perks: @cookoon.perks
-
-          h5.mt-3 Spécifications sélectionnées
-          = render 'admin/perks/index', perks: @cookoon.perks
-          .btn-cookoon.btn-block.btn-cookoon-primary.text-center.mb-4
-            = link_to 'Ajouter/Supprimer des spécifications', new_admin_cookoon_perk_path(@cookoon)
-
-          h5.mt-3 Spécifications non sélectionnées
-          .d-flex style="flex-wrap: wrap"
-            = render 'cookoons/perks_in_card', div_style: "", perks: @perks_not_selected, p_style: ""
