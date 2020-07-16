@@ -1,0 +1,22 @@
+.modal-photos {
+  .modal-dialog {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+  .modal-content {
+    margin-bottom: 25vh;
+  }
+  .modal-body {
+    padding: 0.25rem;
+  }
+  button.close {
+    position: relative;
+    top: 20px;
+    right: 10px;
+    z-index: 2;
+    line-height: 0;
+    color: white;
+    opacity: 0.5;
+  }
+}
