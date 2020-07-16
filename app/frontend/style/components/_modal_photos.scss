@@ -1,11 +1,9 @@
 .modal-photos {
   .modal-dialog {
-    display: flex;
-    align-items: center;
-    height: 100%;
-  }
-  .modal-content {
-    margin-bottom: 25vh;
+    @media (min-width: 576px) and (max-width: 768px){
+      max-width: unset;
+      margin: 0.5rem;
+    }
   }
   .modal-body {
     padding: 0.25rem;
@@ -18,5 +16,9 @@
     line-height: 0;
     color: white;
     opacity: 0.5;
+  }
+  .swiper-container.carousel {
+    max-width: 100vw;
+    max-height: calc(0.75 * 100vh);
   }
 }
