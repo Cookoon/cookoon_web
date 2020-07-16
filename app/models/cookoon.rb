@@ -62,6 +62,10 @@ class Cookoon < ApplicationRecord
     perks.map(&:name).join(' / ')
   end
 
+  def all_photos
+    self.photos.shuffle.unshift(self.main_photo, self.long_photo)
+  end
+
   private
 
   def overlapping_reservations(date_range)
