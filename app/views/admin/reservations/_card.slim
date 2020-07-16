@@ -1,0 +1,30 @@
+= link_to admin_reservation_path(resa) do
+  .cookoon-card.mb-0.h-100.d-flex.flex-column.justify-content-between
+    div
+      .cookoon-card-image-div-squared
+        .cookoon-card-image style="background-image: url(#{cl_image_path(resa.cookoon.main_photo.path)}); background-size: cover; background-position: center"
+
+      .cookoon-card-body.pb-0
+        p.mb-1
+          strong Reservation id: &nbsp
+          = resa.id
+        hr
+        = render 'admin/cookoons/name_address', cookoon: resa.cookoon
+        hr
+        p
+          = resa.humanized_type_name
+          | : &nbsp
+          = I18n.l resa.start_at, format: '%A %d %B'
+        hr
+        p.text-center Utilisateur
+        = render "admin/users/form", user: resa.user
+        hr
+        p.text-center Hôte
+        = render "admin/users/form", user: resa.cookoon.user
+        hr
+        p.text-center Menu
+        = render 'admin/chefs/chef_menu_selected_one_line', menu: resa.menu
+
+
+
+
