@@ -6,12 +6,6 @@
       .breadcrumbs
         h1.text-center.first-title Votre dîner
       hr.breadcrumbs-hr
-      //.d-flex.justify-content-center.mb-5
-        .pt-1 = image_tag("cookoon-losange.png", size: '24')
-        hr.gold.mx-2 style = "width: 5vw"
-        .pt-1 = image_tag("cookoon-losange.png", size: '24')
-        hr.gold.mx-2 style = "width: 5vw"
-        .pt-1 = image_tag("cookoon-losange.png", size: '24')
 
 .container.d-flex.justify-content-center.px-0.pb-5
   .row
@@ -25,7 +19,6 @@
         .col-12.col-lg-6.px-0
           div
             p.text-primary.mb-1 Vous visitez...
-            /h1 = @cookoon.name
             h1 style = "font-size: 2rem; font-style: italic; font-family: 'Avenir', serif" = @cookoon.name
             img src=cl_image_path(@cookoon.main_photo.path) style="height:250px; width: 100%; object-fit: cover"
             .d-flex.justify-content-between.pt-2.text-right
@@ -43,41 +36,29 @@
               div
                 .citation.mb-2
                   span = @cookoon.citation
-                img src=cl_image_path(@cookoon.sample_photos.first.path) style="height:250px; width: 100%; object-fit: cover"
-                //.col-12.col-lg-6.px-0
-                  .btn-cookoon.btn-cookoon-primary.text-center.px-0.mt-3
-                    = link_to 'Modifier', edit_admin_cookoon_path(@cookoon)
+                img src=cl_image_path(@sample_photos.first.path) style="height:250px; width: 100%; object-fit: cover"
 
-      .row.mx-0.mt-3
-        .d-none.d-md-block.col-md-6.col-lg-4.px-0.pr-md-3
-          div style="display: grid; grid-template-rows: 26rem"
-            div style="grid-column: 1; grid-row: 1; background-image:url(#{cl_image_path(@cookoon.sample_photos.second.path)}); background-size:cover; background-position: center"
-        .col-12.col-md-6.col-lg-8.px-0
-          div style="display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(2, 12.5rem); grid-gap: 1rem"
-            div style="grid-column: 1 / span 3; background-image:url(#{cl_image_path(@cookoon.sample_photos.third.path)}); background-size:cover; background-position: center"
+      .five_elements_block
+        - if (@cookoon.architect_name || @cookoon.architect_build_year || @cookoon.architect_url || @cookoon.architect_title).present?
+          .first_element
+            = render 'cookoons/architect', cookoon: @cookoon
+          .second_element style="background-image:url(#{cl_image_path(@sample_photos.second.path)})"
+          .third_element style="background-image:url(#{cl_image_path(@sample_photos.third.path)})"
+        - else
+          .second_element_full_column style="background-image:url(#{cl_image_path(@sample_photos.second.path)})"
+          .third_element_full_row style="background-image:url(#{cl_image_path(@sample_photos.third.path)})"
 
-            div style="grid-column: 1 / span 2; background-image:url(#{cl_image_path(@cookoon.sample_photos.fourth.path)}); background-size:cover; background-position: center"
+        .fourth_element style="background-image:url(#{cl_image_path(@sample_photos.fourth.path)})"
 
-            .d-flex.flex-column.justify-content-end
-              div.text-center.pb-3
-                p = link_to "+", "#", style: "color: #CDBB8A; border: 1px solid #CDBB8A; padding: 0.25rem 0.5rem; font-size: 1.5rem", data: {toggle: "modal", target: "#cookoon-photos-modal"}
+        .fifth_element
+          = link_to "", data: {toggle: "modal", target: "#cookoon-photos-modal"}, class: "see_pictures_card " do
+            p.see_pictures_card_button +
+            p.see_pictures_card_text Voir les photos
+          = render 'cookoons/modal', photos: @cookoon.all_photos
+          .btn-cookoon.btn-cookoon-primary.text-center.px-0.mt-0
+            = link_to 'Modifier', edit_admin_cookoon_path(@cookoon)
 
-                p.text-center = link_to "Voir les photos", "#", style: "text-transform: uppercase", data: {toggle: "modal", target: "#cookoon-photos-modal"}
-
-                = render 'cookoons/modal', photos: @cookoon.all_photos
-
-              .btn-cookoon.btn-cookoon-primary.text-center.px-0.mt-0
-                = link_to 'Modifier', edit_admin_cookoon_path(@cookoon)
-
-      //.row.mx-0.mt-3
-        .col-6.col-lg-4.px-0.pr-3
-          div style="display: grid; grid-template-column: 1fr; grid-template-rows: 150px 150px; grid-row-gap: 1rem"
-            div style="grid-column: 1; grid-row: 1; background-image:url(#{cl_image_path(@photos.second.path)}); background-size:cover; background-position: center"
-            div style="grid-column: 1; grid-row: 2; background-image:url(#{cl_image_path(@photos.third.path)}); background-size:cover; background-position: center; "
-        .col-6.col-lg-6.px-0
-          .h-100.mr-lg-n2 style="background-image: url(#{cl_image_path(@photos.fourth.path)}); background-size: cover; background-position: center"
-
-      //.row.mx-0.mt-5
+      .row.mx-0.mt-5
         h5.mt-3 Spécifications non sélectionnées
         .d-flex style="flex-wrap: wrap"
           = render 'cookoons/perks_in_show', perks: @perk_specifications_not_selected

@@ -81,7 +81,9 @@ class CookoonsController < ApplicationController
       :name, :surface, :price, :address, :capacity, :category,
       :digicode, :building_number, :floor_number, :door_number,
       :wifi_network, :wifi_code, :caretaker_instructions, :citation,
-      :main_photo, :long_photo, :description, photos: []
+      :main_photo, :long_photo, :description, :architect_name,
+      :architect_title, :architect_url, :architect_build_year,
+      photos: []
     )
   end
 

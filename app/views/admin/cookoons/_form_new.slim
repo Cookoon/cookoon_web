@@ -19,6 +19,12 @@
       = f.input :long_photo, as: :attachinary
       = f.input :photos, as: :attachinary
 
+    h5.mt-3 Architecte d'intérieur
+    = f.input :architect_name, label: "Nom de l'architecte"
+    = f.input :architect_title, label: "Titre de l' architecte"
+    = f.input :architect_build_year, label: "Année de rénovation par l'architecte"
+    = f.input :architect_url, label: "Site web de votre architecte", placeholder: 'Ex: https://cookoon.club'
+
     h5.mt-3 Spécifications
     /= f.association :perks, as: :check_boxes, collection: PerkSpecification.all, include_hidden: false
     = f.association :perks, as: :check_boxes, collection: @perk_specifications

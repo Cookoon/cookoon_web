@@ -1,0 +1,29 @@
+.architect_card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border:2px solid #CDBB8A;
+  height: 100%;
+  &_build_year {
+    width: fit-content;
+    margin-top: -0.6rem;
+    background-color: white;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    color: #CDBB8A;
+  }
+  &_name {
+    text-align: center;
+    font-size: 2rem;
+    font-style: italic;
+    font-family: 'Avenir', serif;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+  &_title {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    text-align: center;
+  }
+}

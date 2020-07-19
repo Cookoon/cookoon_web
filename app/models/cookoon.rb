@@ -66,10 +66,6 @@ class Cookoon < ApplicationRecord
     self.photos.shuffle.unshift(self.main_photo, self.long_photo)
   end
 
-  def sample_photos
-    self.photos.sample(4)
-  end
-
   private
 
   def overlapping_reservations(date_range)
