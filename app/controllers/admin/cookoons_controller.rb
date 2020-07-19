@@ -28,7 +28,7 @@ module Admin
 
     def show
       @perk_specifications_not_selected = PerkSpecification.where.not(id: @cookoon.perks.pluck(:perk_specification_id))
-      @sample_photos = @cookoon.photos.sample(4)
+      @sample_photos = @cookoon.sample_photos
     end
 
     def index
