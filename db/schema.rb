@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_10_110246) do
+ActiveRecord::Schema.define(version: 2020_07_18_203215) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -114,6 +114,9 @@ ActiveRecord::Schema.define(version: 2020_07_10_110246) do
     t.string "architect_name"
     t.string "additionnal_address"
     t.string "citation"
+    t.integer "architect_build_year"
+    t.string "architect_title"
+    t.string "architect_url"
     t.index ["user_id"], name: "index_cookoons_on_user_id"
   end
 
