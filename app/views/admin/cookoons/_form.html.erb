@@ -32,6 +32,12 @@
     <%= f.input :photos, as: :attachinary %>
   </div>
 
+  <h5 class="mt-3">Architecte d'intérieur</h5>
+  <%= f.input :architect_name, label: "Nom de l'architecte" %>
+  <%= f.input :architect_title, label: "Titre de l' architecte" %>
+  <%= f.input :architect_build_year, label: "Année de rénovation par l'architecte" %>
+  <%= f.input :architect_url, label: "Site web de votre architecte", placeholder: 'Ex: https://cookoon.club'%>
+
   <h5 class="mt-3">Informations pratiques</h5>
   <%= f.input :digicode %>
   <%= f.input :building_number %>
