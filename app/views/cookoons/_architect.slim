@@ -1,0 +1,21 @@
+- if cookoon.architect_url.present?
+  = link_to cookoon.architect_url, target: "blank" do
+    .architect_card
+      .d-flex.justify-content-center
+        p.architect_card_build_year
+          - if cookoon.architect_build_year
+            span Décoré en #{cookoon.architect_build_year} par
+          - else
+            span Décoré par
+      h1.architect_card_name = cookoon.architect_name
+      p.architect_card_title = cookoon.architect_title
+- else
+  .architect_card
+    .d-flex.justify-content-center
+      p.architect_card_build_year
+        - if cookoon.architect_build_year
+          span Décoré en #{cookoon.architect_build_year}
+        - else
+          span Décoré par
+    h1.architect_card_name = cookoon.architect_name
+    p.architect_card_title = cookoon.architect_title
