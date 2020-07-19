@@ -1,0 +1,16 @@
+.see_pictures_card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &_button {
+    color: #CDBB8A;
+    border: 1px solid #CDBB8A;
+    padding: 0 0.5rem;
+    font-size: 1.5rem;
+    width: fit-content;
+  }
+  &_text {
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
