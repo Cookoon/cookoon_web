@@ -5,25 +5,27 @@
   align-items: center;
   border:2px solid #CDBB8A;
   height: 100%;
+  padding: 0 1rem;
   &_build_year {
+    text-align: center;
     width: fit-content;
     margin-top: -0.6rem;
     background-color: white;
-    padding-left: 1rem;
-    padding-right: 1rem;
     color: #CDBB8A;
+    padding: 0 1rem;
+    @media (max-width: 767px) {
+      padding: 0 0.5rem;
+    }
   }
   &_name {
     text-align: center;
     font-size: 2rem;
     font-style: italic;
     font-family: 'Avenir', serif;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding: 0 0.5rem;
   }
   &_title {
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
+    padding: 0 0.5rem;
     text-align: center;
   }
 }
