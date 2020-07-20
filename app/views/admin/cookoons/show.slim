@@ -15,50 +15,11 @@
         = render 'admin/button', button_title: 'Modifier ce décor', path: edit_admin_cookoon_path(@cookoon)
 
     .col-12.col-md-8.col-lg-9.px-0
-      .row.mx-0
-        .col-12.col-lg-6.px-0
-          div
-            p.text-primary.mb-1 Vous visitez...
-            h1 style = "font-size: 2rem; font-style: italic; font-family: 'Avenir', serif" = @cookoon.name
-            img src=cl_image_path(@cookoon.main_photo.path) style="height:250px; width: 100%; object-fit: cover"
-            .d-flex.justify-content-between.pt-2.text-right
-              p = @cookoon.category
-              p.text-primary <i class="fas fa-map-marker-alt"></i> #{@cookoon.address}
-            .pb-3 = render 'cookoons/perks_in_show', perks: @cookoon.perks.includes(:perk_specification)
-            p.mb-lg-0 = @cookoon.description
+      = render 'cookoons/details_part', cookoon: @cookoon
 
-        .col-12.col-lg-6.px-0.pl-lg-3
-          .row.mx-0.h-100
-            .col-4.px-0.pr-3
-              div.p-0.h-100 data={ controller: "background-image", image: "#{cl_image_path(@cookoon.long_photo.path)}", target:"background-image.div" }
+      = render 'cookoons/architect_part', cookoon: @cookoon, sample_photos: @sample_photos
 
-            .col-8.d-flex.flex-column.justify-content-end.px-0.pt-5
-              div
-                .citation.mb-2
-                  span = @cookoon.citation
-                img src=cl_image_path(@sample_photos.first.path) style="height:250px; width: 100%; object-fit: cover"
-
-      .five_elements_block
-        - if (@cookoon.architect_name || @cookoon.architect_build_year || @cookoon.architect_url || @cookoon.architect_title).present?
-          .first_element
-            = render 'cookoons/architect', cookoon: @cookoon
-          .second_element style="background-image:url(#{cl_image_path(@sample_photos.second.path)})"
-          .third_element style="background-image:url(#{cl_image_path(@sample_photos.third.path)})"
-        - else
-          .second_element_full_column style="background-image:url(#{cl_image_path(@sample_photos.second.path)})"
-          .third_element_full_row style="background-image:url(#{cl_image_path(@sample_photos.third.path)})"
-
-        .fourth_element style="background-image:url(#{cl_image_path(@sample_photos.fourth.path)})"
-
-        .fifth_element
-          = link_to "", data: {toggle: "modal", target: "#cookoon-photos-modal"}, class: "see_pictures_card " do
-            p.see_pictures_card_button +
-            p.see_pictures_card_text Voir les photos
-          = render 'cookoons/modal', photos: @cookoon.all_photos
-          .btn-cookoon.btn-cookoon-primary.text-center.px-0.mt-0
-            = link_to 'Modifier', edit_admin_cookoon_path(@cookoon)
-
-      .row.mx-0.mt-5
+      .mt-5
         h5.mt-3 Spécifications non sélectionnées
         .d-flex style="flex-wrap: wrap"
           = render 'cookoons/perks_in_show', perks: @perk_specifications_not_selected
