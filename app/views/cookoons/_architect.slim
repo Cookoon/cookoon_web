@@ -4,9 +4,9 @@
       .d-flex.justify-content-center
         p.architect_card_build_year
           - if cookoon.architect_build_year
-            span Décoré en #{cookoon.architect_build_year} par
+            span Designé en #{cookoon.architect_build_year} par
           - else
-            span Décoré par
+            span Designé par
       h1.architect_card_name = cookoon.architect_name
       p.architect_card_title = cookoon.architect_title
 - else
@@ -14,8 +14,8 @@
     .d-flex.justify-content-center
       p.architect_card_build_year
         - if cookoon.architect_build_year
-          span Décoré en #{cookoon.architect_build_year}
+          span Designé en #{cookoon.architect_build_year} par
         - else
-          span Décoré par
+          span Designé par
     h1.architect_card_name = cookoon.architect_name
     p.architect_card_title = cookoon.architect_title
