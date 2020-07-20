@@ -1,0 +1,19 @@
+.five_elements_block
+  - if (cookoon.architect_name || cookoon.architect_build_year || cookoon.architect_url || cookoon.architect_title).present?
+    .first_element
+      = render 'cookoons/architect_card', cookoon: cookoon
+    .second_element style="background-image:url(#{cl_image_path(sample_photos.second.path)})"
+    .third_element style="background-image:url(#{cl_image_path(sample_photos.third.path)})"
+  - else
+    .second_element_full_column style="background-image:url(#{cl_image_path(sample_photos.second.path)})"
+    .third_element_full_row style="background-image:url(#{cl_image_path(sample_photos.third.path)})"
+
+  .fourth_element style="background-image:url(#{cl_image_path(sample_photos.fourth.path)})"
+
+  .fifth_element
+    = link_to "", data: {toggle: "modal", target: "#cookoon-photos-modal"}, class: "see_pictures_card " do
+      p.see_pictures_card_button +
+      p.see_pictures_card_text Voir les photos
+    = render 'cookoons/modal', photos: cookoon.all_photos
+    .btn-cookoon.btn-cookoon-primary.text-center.px-0.mt-0
+      = link_to 'Modifier', edit_admin_cookoon_path(cookoon)
