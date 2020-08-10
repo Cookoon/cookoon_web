@@ -5,7 +5,7 @@ module Admin
     before_action :find_chef, only: %i[show edit update]
 
     def index
-      @chefs = policy_scope([:admin, Chef]).includes(:photo_files, :chef_perks, chef_perks: :chef_perk_specification)
+      @chefs = policy_scope([:admin, Chef]).includes(:main_photo_files, :chef_perks, chef_perks: :chef_perk_specification)
     end
 
     def show
@@ -53,7 +53,8 @@ module Admin
 
     def chef_params
       params.require(:chef).permit(
-        :name, :description, :references, :min_price, :base_price, photos: []
+        :name, :description, :references, :min_price, :base_price,
+        :citation, :main_photo, photos: []
       )
     end
 
