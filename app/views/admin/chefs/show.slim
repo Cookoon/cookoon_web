@@ -1,5 +1,3 @@
-= console
-
 .container.px-0
   .row.mx-0
     .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
@@ -45,34 +43,34 @@
         strong Prix minimum: #{ humanized_money_with_symbol(@chef.min_price) }
         | &nbsp (c'est la somme minimale qui sera reversée au Chef, si le prix du menu x le nombre de personnes n'atteint pas cette somme)
 
-      //.text-center.my-4
+      .text-center.my-4
         - 3.times do
           = image_tag("cookoon-losange.png", size: '24')
 
-      //h3 Les spécifications
+      h3 Les spécifications
       = render 'admin/chef_perks/index', chef_perks: @chef.chef_perks
       .btn-cookoon.btn-block.btn-cookoon-primary.text-center.mb-4
         = link_to 'Ajouter/Supprimer des spécifications', new_admin_chef_chef_perk_path(@chef)
 
-      //h3 Les menus
+      h3 Les menus
       .btn-cookoon.btn-block.btn-cookoon-primary.text-center.mb-4
         = link_to 'Ajouter un menu', new_admin_chef_menu_path(@chef)
 
-      //h5 Les menus actifs
+      h5 Les menus actifs
       .row.mx-0
         - if @menus_active.present?
           = render 'admin/menus/list', menus: @menus_active, chef: @chef
         - else
           p Il n'y a pas de menu actif pour ce Chef
 
-      //h5 Les menus avec statut "initial"
+      h5 Les menus avec statut "initial"
       .row.mx-0
         - if @menus_initial.present?
           = render 'admin/menus/list', menus: @menus_initial, chef: @chef
         - else
           p Il n'y a pas de menu avec statut "initial" pour ce Chef
 
-      //h5 Les menus archivés
+      h5 Les menus archivés
       .row.mx-0
         - if @menus_archived.present?
           = render 'admin/menus/list', menus: @menus_archived, chef: @chef

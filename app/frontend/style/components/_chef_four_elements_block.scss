@@ -29,6 +29,12 @@
       grid-column: 1 / span 2 ;
       grid-row: 1 ;
     }
+
+    .chef_references {
+      * {
+        margin-bottom: 0;
+      }
+    }
   }
 
   >.second_element {
