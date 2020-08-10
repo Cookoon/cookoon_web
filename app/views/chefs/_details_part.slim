@@ -8,8 +8,9 @@
 
 .chef_four_elements_block.pb-5
   .first_element
-    p = chef.description
-    .chef_references = simple_format(@chef.references)
+    = chef.description
+    - if @chef.references.present?
+      .chef_references = simple_format(@chef.references)
   .second_element style="background-image: url(#{cl_image_path(chef.photos.first.path)})"
   .third_element style="background-image: url(#{cl_image_path(chef.photos.second.path)})"
   .fourth_element.d-flex.align-items-center
