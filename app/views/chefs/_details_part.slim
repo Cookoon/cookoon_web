@@ -1,0 +1,15 @@
+.mb-3
+  p.text-primary.mb-1 Vous rencontrez...
+  .d-flex.justify-content-between
+    h1.mb-0 style = "font-size: 2rem; font-style: italic; font-family: 'Avenir', serif" = chef.name
+    = render 'chefs/perks', chef_perks: chef.chef_perks
+  div style="height: 250px; background-image: url(#{cl_image_path(chef.main_photo.path)}); background-size: cover; background-position: center"
+
+
+.chef_four_elements_block.pb-5
+  .first_element
+    p.mb-0 = chef.description
+  .second_element style="background-image: url(#{cl_image_path(chef.photos.first.path)})"
+  .third_element style="background-image: url(#{cl_image_path(chef.photos.second.path)})"
+  .fourth_element.d-flex.align-items-center
+    .citation.mb-2.py-5 = chef.citation
