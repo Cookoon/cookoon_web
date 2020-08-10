@@ -3,11 +3,14 @@ class Chef < ApplicationRecord
   has_many :chef_perks, dependent: :destroy
   has_many :chef_perk_specifications, through: :chef_perks
 
-  has_attachments :photos, maximum: 5, order: 'id ASC'
+  has_attachments :photos, order: 'id ASC'
+  has_attachment :main_photo
 
   validates :name, presence: true
   validates :description, presence: true
+  validates :citation, presence: true
   validates :photos, presence: true, length: { minimum: 2, maximum: 10, message: "Vous devez télécharger au moins 2 photos et au plus 10 photos" }
+  validates :main_photo, presence: true
   validates :base_price, numericality: { greater_than_or_equal_to: 0 }
   validates :min_price, numericality: { greater_than_or_equal_to: 0 }
 
