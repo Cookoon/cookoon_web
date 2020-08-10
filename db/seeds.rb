@@ -6,6 +6,7 @@ PerkSpecification.destroy_all
 User.destroy_all
 Dish.destroy_all
 Menu.destroy_all
+Chef.destroy_all
 ChefPerk.destroy_all
 Chef.destroy_all
 ChefPerkSpecification.destroy_all
@@ -165,18 +166,17 @@ puts 'Seeding Companies'
 Company.create!(name: "Réceptions Nouvelles", address: "12 rue Lincoln, 75008 Paris", siren: 821316239, siret: 82131623900010, vat: "FR 28 821316239", referent_email: 'gregory@cookoon.fr')
 puts 'Companies done'
 
-Menu.destroy_all
-Chef.destroy_all
-
 chef_attributes = [
   {
     name: 'Hélène Darroze',
     description: "Elle officie dans son restaurant gastronomique du 6e arrondissement de Paris, le Marsan (qui portait auparavant son nom).
       Sa cuisine est récompensée d'une note de 15/20 au Gault-Millau et l'obtention de deux étoiles au Guide Michelin en 2003.
       Cela en fait une des seules cheffes étoilées en activité avec Anne-Sophie Pic et Julia Sedefdjian.",
-    photo_urls: ["https://static.lexpress.fr/medias_11664/w_2048,h_1146,c_crop,x_0,y_0/w_1000,h_563,c_fill,g_north/v1509987362/helene-darroze-portrait_5972444.jpg", "https://images.unsplash.com/photo-1542197745-c70e10f66af8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"],
+    photo_urls: ["https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60", "https://images.unsplash.com/photo-1542197745-c70e10f66af8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"],
     min_price: 500,
-    references: "Restaurant : Hélène Darroze"
+    references: "Restaurant : Hélène Darroze",
+    main_photo_url: "https://static.lexpress.fr/medias_11664/w_2048,h_1146,c_crop,x_0,y_0/w_1000,h_563,c_fill,g_north/v1509987362/helene-darroze-portrait_5972444.jpg",
+    citation: "Je suis un super Chef"
   },
   {
     name: 'Gordon Ramsay',
@@ -184,9 +184,11 @@ chef_attributes = [
       telles que The F Word, MasterChef, ou encore la célèbre émission Ramsay's Kitchen Nightmares
       (diffusée en France sous le nom de Cauchemar en cuisine), il compte parmi les trois cuisiniers ayant été gratifiés
       de trois étoiles en une fois par l'édition britannique du Guide Michelin.",
-    photo_urls: ["https://upload.wikimedia.org/wikipedia/commons/6/6f/Gordon_Ramsay.jpg", "https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"],
+    photo_urls: ["https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60", "https://images.unsplash.com/photo-1542197745-c70e10f66af8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"],
     min_price: 500,
-    references: "Restaurant : le Gordon\nPublications: Mes meilleures recettes"
+    references: "Restaurant : le Gordon\nPublications: Mes meilleures recettes",
+    main_photo_url: "https://upload.wikimedia.org/wikipedia/commons/6/6f/Gordon_Ramsay.jpg",
+    citation: "Je suis un super Chef"
   }
 ]
 

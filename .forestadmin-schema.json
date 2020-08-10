@@ -510,6 +510,24 @@
       "widget": null,
       "validations": []
     }, {
+      "field": "citation",
+      "type": "String",
+      "default_value": null,
+      "enums": null,
+      "integration": null,
+      "is_filterable": true,
+      "is_read_only": false,
+      "is_required": true,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": null,
+      "inverse_of": null,
+      "widget": null,
+      "validations": [{
+        "message": null,
+        "type": "is present"
+      }]
+    }, {
       "field": "menus",
       "type": ["Number"],
       "default_value": null,
@@ -559,6 +577,22 @@
       "validations": []
     }, {
       "field": "photo_files",
+      "type": ["Number"],
+      "default_value": null,
+      "enums": null,
+      "integration": null,
+      "is_filterable": false,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": "Attachinary__File.id",
+      "inverse_of": null,
+      "relationship": "HasMany",
+      "widget": null,
+      "validations": []
+    }, {
+      "field": "main_photo_files",
       "type": ["Number"],
       "default_value": null,
       "enums": null,

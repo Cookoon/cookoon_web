@@ -1,4 +1,4 @@
-.three_elements_block {
+.cookoon_three_elements_block {
   display: grid;
   grid-gap: 1rem;
 
@@ -7,13 +7,13 @@
     background-position: center;
   }
 
-  // md lg
+  // lg
   @media (min-width: 992px) {
     grid-template-rows: 1fr;
     grid-template-columns: 3fr 1fr 2fr;
   }
 
-  // xs-sm
+  // xs-sm-md
   @media (max-width: 991px) {
     grid-template-rows: repeat(2, auto);
     grid-template-columns: repeat(3, 1fr);

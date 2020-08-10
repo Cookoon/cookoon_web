@@ -1,7 +1,10 @@
 = simple_form_for([:admin, chef]) do |f|
   .form-inputs
-    = f.input :photos, as: :attachinary, input_html: { data: { controller: 'attachinary' } }
+    div data-controller="attachinary"
+      = f.input :main_photo, as: :attachinary
+      = f.input :photos, as: :attachinary
     = f.input :name
+    = f.input :citation
     = f.input :description
     = f.input :references, placeholder: "Ex: Restaurant: Nom du restaurant..."
     = f.input :base_price, label: "Prix de prestation: C'est le tarif de base du Chef, auquel sera ajouté le prix du menu x le nombre de personnes"
