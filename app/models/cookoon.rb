@@ -25,7 +25,8 @@ class Cookoon < ApplicationRecord
   has_many :perks, dependent: :destroy
   has_many :perk_specifications, through: :perks
 
-  has_attachments :photos, minimum: 4, maximum: 10, order: 'id ASC'
+  # has_attachments :photos, minimum: 4, maximum: 10, order: 'id ASC'
+  has_attachments :photos, order: 'id ASC'
   has_attachment :main_photo
   has_attachment :long_photo
 
