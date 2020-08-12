@@ -1,5 +1,30 @@
-/.chef-card-menu.d-flex.flex-column.justify-content-between id="menu-id-#{menu.id}"
-.chef-card-menu.d-flex.flex-column.justify-content-between
+//.menu-card id="menu-id-#{menu.id}"
+.menu-card
+  h5.menu-card-name = menu.description
+  .menu-card-items
+    .text-primary.my-2
+      '*****
+    - if menu.dishes.present?
+      - menu.dishes.each do |dish|
+        p = dish.name
+    .text-primary.my-2
+      '*****
+  .menu-card-price.mb-4
+    .text-primary Prix:
+    span #{menu.unit_price} €
+    .text-primary.pt-3 Statut:
+    span #{menu.status}
+
+  = link_to 'Modifier le titre', edit_admin_chef_menu_path(chef, menu), class: 'btn-cookoon btn-block btn-cookoon-primary'
+  = link_to 'Ajouter, supprimer des plats', admin_chef_menu_path(chef, menu), class: 'btn-cookoon btn-block btn-cookoon-primary'
+  - if menu.archived? || menu.initial?
+    = link_to 'Valider', admin_chef_validate_menu_path(chef, menu), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
+  - if menu.active? || menu.initial?
+    = link_to 'Archiver', admin_chef_archive_menu_path(chef, menu), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
+
+
+//.chef-card-menu.d-flex.flex-column.justify-content-between id="menu-id-#{menu.id}"
+//.chef-card-menu.d-flex.flex-column.justify-content-between
   div
     h5 = menu.description
     p
