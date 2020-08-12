@@ -1,0 +1,15 @@
+.menu-card
+  h5.menu-card-name = menu.description
+  .menu-card-items
+    .text-primary.my-2
+      '*****
+    - if menu.dishes.present?
+      - menu.dishes.each do |dish|
+        p = dish.name
+    .text-primary.my-2
+      '*****
+  .menu-card-price.mb-4
+    .text-primary Prix:
+    span #{menu.unit_price} €
+
+  .btn-cookoon.btn-block.btn-cookoon-primary.text-center Choisir ce menu
