@@ -1,0 +1,44 @@
+.menu-cards {
+  display: grid;
+
+  // lg-xl
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 2rem 1rem;
+  }
+
+  // xs-sm-md
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+    grid-gap: 2rem;
+  }
+}
+
+.menu-card {
+  border:0.25px solid #CDBB8A;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  * {
+    text-align: center;
+  }
+  &-name {
+    max-width: 90%;
+    margin-top: -0.625rem;
+    background-color: white;
+    padding: 0 1rem;
+    @media (max-width: 767px) {
+      padding: 0 0.5rem;
+    }
+  }
+  &-items, &-price {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 0.5rem;
+  }
+  &-items {
+    height: 100%;
+    justify-content: space-between;
+  }
+}
