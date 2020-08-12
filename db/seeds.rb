@@ -202,7 +202,7 @@ menu_attributes = [
     status: "active",
     unit_price_cents: 3500,
     description: <<-DESCRIPTION
-      "Menu d'hiver"
+      Menu d'hiver
     DESCRIPTION
   },
   {
