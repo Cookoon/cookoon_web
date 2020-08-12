@@ -30,6 +30,10 @@ hr.half {
   width: 50%;
 }
 
+hr.primary {
+  border-top-color: $primary;
+}
+
 .link-unstyled,
 .link-unstyled:link,
 .link-unstyled:hover {
