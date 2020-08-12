@@ -65,7 +65,6 @@
         = link_to 'Ajouter un menu', new_admin_chef_menu_path(@chef)
 
       h5 Les menus actifs
-
       .row.mx-0
         - if @menus_active.present?
           = render 'admin/menus/list', menus: @menus_active, chef: @chef
