@@ -18,9 +18,13 @@ class CookoonsController < ApplicationController
                 .decorate
   end
 
+  # def show
+  #   @reservation.select_cookoon!(@cookoon)
+  #   @chefs = policy_scope(Chef).includes(:menus).decorate
+  # end
+
   def show
-    @reservation.select_cookoon!(@cookoon)
-    @chefs = policy_scope(Chef).includes(:menus).decorate
+    @sample_photos = @cookoon.sample_photos
   end
 
   def new
