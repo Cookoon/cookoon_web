@@ -48,6 +48,7 @@ Rails.application.routes.draw do
       resources :payments, only: [] do
         post :amounts, on: :collection
       end
+      patch :select_cookoon, to: 'reservations#select_cookoon', as: :select_cookoon
     end
 
     resources :payments, only: %i[new create] do

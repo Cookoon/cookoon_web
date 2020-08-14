@@ -32,6 +32,10 @@ class ReservationPolicy < ApplicationPolicy
     record.user == user
   end
 
+  def select_cookoon?
+    record.user == user
+  end
+
   def reset_menu?
     record.user == user
   end
