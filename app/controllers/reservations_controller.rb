@@ -1,5 +1,7 @@
 class ReservationsController < ApplicationController
   before_action :find_reservation, only: %i[update show ask_quotation reset_menu select_services cooking_by_user reset_cooking_by_user]
+  before_action :find_reservation_with_reservation_id, only: %i[select_cookoon select_menu]
+  before_action :find_cookoon, only: %i[select_cookoon]
 
   def index
     reservations = policy_scope(Reservation).includes(cookoon: :user)
@@ -35,6 +37,14 @@ class ReservationsController < ApplicationController
     redirect_to reservations_path
   end
 
+  def select_cookoon
+    if @reservation.select_cookoon!(@cookoon)
+      redirect_to reservation_cookoon_path(@reservation, @cookoon)
+    else
+      redirect_to reservation_cookoon_path(@reservation, @cookoon), alert: "Une erreur s'est produite, veuillez essayer à nouveau"
+    end
+  end
+
   def ask_quotation
     @reservation.ask_quotation!
     flash.notice = 'Votre demande de devis est enregistrée notre concierge reviendra vers vous rapidement par email !'
@@ -43,8 +53,6 @@ class ReservationsController < ApplicationController
   end
 
   def select_menu
-    @reservation = Reservation.find(params[:reservation_id]).decorate
-    authorize @reservation
     @reservation.select_menu!(Menu.find(params[:id]))
     @reservation.update(menu_status: "selected")
     redirect_to reservation_cookoon_path(@reservation, @reservation.cookoon, anchor: 'reservation-menus-title')
@@ -82,6 +90,15 @@ class ReservationsController < ApplicationController
   def find_reservation
     @reservation = Reservation.find(params[:id]).decorate
     authorize @reservation
+  end
+
+  def find_reservation_with_reservation_id
+    @reservation = Reservation.find(params[:reservation_id]).decorate
+    authorize @reservation
+  end
+
+  def find_cookoon
+    @cookoon = Cookoon.find(params[:cookoon_id]).decorate
   end
 
   def reservation_params

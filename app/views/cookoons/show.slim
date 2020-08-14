@@ -1,7 +1,25 @@
-.container
+.container.px-0
+  .row.mx-0
+    .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
+
+    .col-12.col-md-8.col-lg-9.px-0
+      = render 'reservations/breadcrumbs'
+
+.container.d-flex.justify-content-center.px-0.pb-5
+  .row
+    .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
+      = render 'shared/back_button_transparent', button_title: 'Retour aux décors', path: reservation_cookoons_path
+      = render 'reservations/search_recap', reservation: @reservation
+
+    .col-12.col-md-8.col-lg-9.px-0
+      = render 'cookoons/details_part', cookoon: @cookoon
+
+      = render 'cookoons/architect_part', cookoon: @cookoon, sample_photos: @sample_photos, button_title: 'Choisir', button_path: reservation_cookoon_select_cookoon_path(@reservation, @cookoon), button_method: :patch
+
+//.container
   h1.text-center.my-4 = @cookoon.name
 
-.container.d-flex.justify-content-center.px-0
+//.container.d-flex.justify-content-center.px-0
   .row
     .d-none.d-md-block.col-md-4.col-lg-3.px-md-2
       .px-md-2.px-lg-0
@@ -16,7 +34,7 @@
         .col-12
           = render 'presentation', cookoon: @cookoon, perks: @cookoon.perks
 
-        #reservation-menus
+        //#reservation-menus
           = render 'chefs/selection', chefs: @chefs if @reservation.needs_chef?
 
         #reservation-services

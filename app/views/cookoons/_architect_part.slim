@@ -15,5 +15,4 @@
       p.see_pictures_card_button +
       p.see_pictures_card_text Voir les photos
     = render 'cookoons/modal', photos: cookoon.all_photos
-    .btn-cookoon.btn-cookoon-primary.text-center.px-0.mt-0
-      = link_to button_title, button_path
+    = link_to button_title, button_path, method: button_method, class: "btn-cookoon btn-cookoon-primary text-center px-0 mt-0"
