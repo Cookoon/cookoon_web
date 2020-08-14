@@ -12,9 +12,9 @@
 .container.d-flex.justify-content-center.px-0.pb-5
   .row
     .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
-      = render 'admin/back_button', button_title: 'Retour aux chefs', path: admin_chefs_path
+      = render 'shared/back_button_transparent', button_title: 'Retour aux chefs', path: admin_chefs_path
       - if policy([:admin, Chef]).update?
-        = render 'admin/button', button_title: 'Modifier ce chef', path: edit_admin_chef_path(@chef)
+        = render 'shared/button_transparent', button_title: 'Modifier ce chef', path: edit_admin_chef_path(@chef)
       .search-details.mt-4
         p.small Votre décor
         p.small Avenue de la Bourdonnais

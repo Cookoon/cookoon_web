@@ -10,9 +10,9 @@
 .container.d-flex.justify-content-center.px-0.pb-5
   .row
     .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
-      = render 'admin/back_button', button_title: 'Retour aux décors', path: admin_cookoons_path
+      = render 'shared/back_button_transparent', button_title: 'Retour aux décors', path: admin_cookoons_path
       - if policy([:admin, Cookoon]).update?
-        = render 'admin/button', button_title: 'Modifier ce décor', path: edit_admin_cookoon_path(@cookoon)
+        = render 'shared/button_transparent', button_title: 'Modifier ce décor', path: edit_admin_cookoon_path(@cookoon)
 
     .col-12.col-md-8.col-lg-9.px-0
       = render 'cookoons/details_part', cookoon: @cookoon
