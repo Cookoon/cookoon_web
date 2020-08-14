@@ -1,0 +1,7 @@
+.breadcrumbs
+  h1.text-center.first-title Votre #{@reservation.humanized_type_name}
+  - if @reservation.cookoon.present?
+    h1.text-center.second-title = @reservation.cookoon.name
+  - if @reservation.menu.present?
+    h1.text-center.third-title Avec #{@reservation.menu.chef.name}
+hr.breadcrumbs-hr
