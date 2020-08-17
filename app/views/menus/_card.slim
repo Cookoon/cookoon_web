@@ -27,6 +27,6 @@
         '(soit #{chef.computed_base_price_with_margin}€HT)
 
   - if @reservation.present?
-    = link_to 'Choisir ce menu', reservation_select_menu_path(reservation, menu), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
+    = link_to 'Choisir ce menu', reservation_select_menu_path(@reservation, menu), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
   - else
     .btn-cookoon.btn-block.btn-cookoon-primary.text-center Choisir ce menu

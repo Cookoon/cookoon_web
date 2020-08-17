@@ -1,21 +1,29 @@
-<div class="container">
-  <h1 class="text-center my-4"><%= @reservation.cookoon.name %></h1>
+<div class="container px-0">
+  <div class="row mx-0">
+    <div class="d-none d-md-block col-md-4 col-lg-3 px-0 pr-3">
+    </div>
+    <div class="col-12 col-md-8 col-lg-9 px-0">
+      <div class="breadcrumbs">
+        <h1 class="text-center first-title"><%= @reservation.cookoon.name %></h1>
+      </div>
+      <hr class="breadcrumbs-hr">
+    </div>
+  </div>
 </div>
 
-<div class="container d-flex justify-content-center px-0">
+<div class="container d-flex justify-content-center px-0 pb-5">
   <div class="row">
-    <div class="d-none d-md-block col-md-4 col-lg-3 px-md-2">
-      <div class="px-md-2 px-lg-0">
-        <%= render 'shared/back_button_transparent', button_title: 'Retour aux réservations', path: admin_reservations_path %>
-      </div>
+
+    <div class="d-none d-md-block col-md-4 col-lg-3 px-0 pr-3">
+      <%= render 'shared/back_button_transparent', button_title: 'Retour aux réservations', path: admin_reservations_path %>
     </div>
 
-    <div class="col-12 col-md-8 col-lg-9 px-0 px-md-2 pr-lg-0">
+    <div class="col-12 col-md-8 col-lg-9 px-0">
       <div class="text-center">
         <%= carousel_for(@reservation.cookoon.photos) %>
       </div>
-      <div class="mt-5">
 
+      <div class="mt-5">
         <p>
           <strong>Utilisateur: </strong>
           <%= render 'admin/users/form_one_line', user: @reservation.user %>
@@ -28,12 +36,16 @@
 
         <h3>Chef et menu</h3>
         <% if @reservation.menu.present? %>
-          <%= render "admin/chefs/card", chef: @reservation.menu.chef, menu: @reservation.menu %>
+          <p>
+            <strong>Chef: </strong>
+            <%= @reservation.menu.chef.name %>
+          </p>
+          <%= render 'menus/card', menu: @reservation.menu, chef: @reservation.menu.chef %>
         <% else %>
-        <p>Aucun menu n'a été sélectionné</p>
+          <p>Aucun menu n'a été sélectionné</p>
         <% end %>
 
-        <h3>Services</h3>
+        <h3 class="mt-3">Services</h3>
         <% if @reservation.services.present? %>
           <% @reservation.services.each do |service| %>
             <p><%= service.category %></p>

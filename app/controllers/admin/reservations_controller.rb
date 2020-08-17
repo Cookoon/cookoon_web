@@ -6,8 +6,6 @@ module Admin
 
     def index
       @reservations = policy_scope([:admin, Reservation]).includes(:cookoon, :user, menu: [:chef], cookoon: [:user]).order(id: :desc)
-      @reservations_charged = @reservations.charged.decorate
-      @reservations_accepted = @reservations.accepted.decorate
     end
 
     def show
