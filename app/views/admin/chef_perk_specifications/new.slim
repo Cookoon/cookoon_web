@@ -1,11 +1,16 @@
-.container
-  h1.text-center.my-4 Nouvelle spécification pour les chefs
+.container.px-0
+  .row.mx-0
+    .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
 
-.container.d-flex.justify-content-center.px-0
+    .col-12.col-md-8.col-lg-9.px-0
+      .breadcrumbs
+        h1.text-center.first-title Nouvelle spécification pour les chefs
+      hr.breadcrumbs-hr
+
+.container.d-flex.justify-content-center.px-0.pb-5
   .row
-    .d-none.d-md-block.col-md-4.col-lg-3.px-md-2
-      .px-md-2.px-lg-0
-        = render 'shared/back_button_transparent', button_title: 'Retour aux spécifications', path: admin_chef_perk_specifications_path
+    .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
+      = render 'shared/back_button_transparent', button_title: 'Retour aux spécifications', path: admin_chef_perk_specifications_path
 
-    .col-12.col-md-8.col-lg-9.px-0.px-md-2.pr-lg-0
+    .col-12.col-md-8.col-lg-9.px-0
       = render 'form', chef_perk_specification: @chef_perk_specification
