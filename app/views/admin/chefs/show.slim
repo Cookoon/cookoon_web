@@ -65,24 +65,21 @@
         = link_to 'Ajouter un menu', new_admin_chef_menu_path(@chef)
 
       h5 Les menus actifs
-      .row.mx-0
-        - if @chef.menus.active.present?
-          = render 'admin/menus/list', menus: @chef.menus.active
+      - if @chef.menus.active.present?
+        = render 'admin/menus/list', menus: @chef.menus.active
 
-        - else
-          p Il n'y a pas de menu actif pour ce Chef
+      - else
+        p Il n'y a pas de menu actif pour ce Chef
 
       h5.pt-4 Les menus avec statut "initial"
-      .row.mx-0
-        - if @chef.menus.initial.present?
-          = render 'admin/menus/list', menus: @chef.menus.initial
-        - else
-          p Il n'y a pas de menu avec statut "initial" pour ce Chef
+      - if @chef.menus.initial.present?
+        = render 'admin/menus/list', menus: @chef.menus.initial
+      - else
+        p Il n'y a pas de menu avec statut "initial" pour ce Chef
 
       h5.pt-4 Les menus archivés
-      .row.mx-0
-        - if @chef.menus.archived.present?
-          = render 'admin/menus/list', menus: @chef.menus.archived
-        - else
-          p Il n'y a pas de menu archivé pour ce Chef
+      - if @chef.menus.archived.present?
+        = render 'admin/menus/list', menus: @chef.menus.archived
+      - else
+        p Il n'y a pas de menu archivé pour ce Chef
 
