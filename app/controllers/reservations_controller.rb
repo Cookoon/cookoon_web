@@ -39,7 +39,7 @@ class ReservationsController < ApplicationController
 
   def select_cookoon
     if @reservation.select_cookoon!(@cookoon)
-      redirect_to reservation_cookoon_path(@reservation, @cookoon)
+      redirect_to reservation_chefs_path
     else
       redirect_to reservation_cookoon_path(@reservation, @cookoon), alert: "Une erreur s'est produite, veuillez essayer à nouveau"
     end
@@ -52,28 +52,37 @@ class ReservationsController < ApplicationController
     redirect_to reservations_path
   end
 
+  # TO DO update redirect_to
   def select_menu
     @reservation.select_menu!(Menu.find(params[:id]))
     @reservation.update(menu_status: "selected")
-    redirect_to reservation_cookoon_path(@reservation, @reservation.cookoon, anchor: 'reservation-menus-title')
+    # redirect_to reservation_cookoon_path(@reservation, @reservation.cookoon, anchor: 'reservation-menus-title')
+    redirect_to reservation_chef_path(@reservation, @reservation.menu.chef), notice: "c'est ok"
   end
 
-  def reset_menu
-    @reservation.select_menu!(nil)
-    @reservation.update(menu_status: "initial")
-    redirect_to reservation_cookoon_path(@reservation, @reservation.cookoon, anchor: 'reservation-menus-title')
-  end
+  # TO DO
+  # def reset_menu
+  #   @reservation.select_menu!(nil)
+  #   @reservation.update(menu_status: "initial")
+  #   redirect_to reservation_cookoon_path(@reservation, @reservation.cookoon, anchor: 'reservation-menus-title')
+  # end
 
+  # TO DO update redirect_to
   def cooking_by_user
+    @reservation.select_menu!(nil)
     @reservation.update(menu_status: "cooking_by_user")
-    redirect_to reservation_cookoon_path(@reservation, @reservation.cookoon, anchor: 'reservation-menus-title')
+    # redirect_to reservation_cookoon_path(@reservation, @reservation.cookoon, anchor: 'reservation-menus-title')
+    redirect_to reservation_chefs_path(@reservation), notice: "c'est ok"
   end
 
-  def reset_cooking_by_user
-    @reservation.update(menu_status: "initial")
-    redirect_to reservation_cookoon_path(@reservation, @reservation.cookoon, anchor: 'reservation-menus-title')
-  end
+  # TO DO
+  # def reset_cooking_by_user
+  #   @reservation.select_menu!(nil)
+  #   @reservation.update(menu_status: "initial")
+  #   redirect_to reservation_cookoon_path(@reservation, @reservation.cookoon, anchor: 'reservation-menus-title')
+  # end
 
+  # TO DO update
   def select_services
     if @reservation.menu_status == "initial"
       flash.alert = "Vous devez choisir un menu ou indiquer si vous souhaitez cuisiner vous-même"
