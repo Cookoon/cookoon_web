@@ -19,6 +19,8 @@ class Chef < ApplicationRecord
   monetize :base_price_cents
   monetize :min_price_cents
 
+  scope :has_active_menus, -> { where(id: Menu.where(status: "active").pluck(:chef_id)) }
+
   def base_price_or_min_price_positive
     if base_price.positive? && min_price.positive?
       errors.add(:base_price, "ne peut pas être positif si le prix minimum est positif")
@@ -31,5 +33,39 @@ class Chef < ApplicationRecord
 
   def reached_max_active_menus_count?
     menus.where(status: "active").count >= Menu::MAX_PER_CHEF
+  end
+
+  def computed_min_price_with_margin
+    compute_min_price_with_margin
+  end
+
+  def computed_min_price_with_margin_and_taxes
+    compute_min_price_with_margin_and_taxes
+  end
+
+  def computed_base_price_with_margin
+    compute_base_price_with_margin
+  end
+
+  def computed_base_price_with_margin_and_taxes
+    compute_base_price_with_margin_and_taxes
+  end
+
+  private
+
+  def compute_min_price_with_margin
+    Money.new((1 + Reservation::MARGIN[:menu]) * self.min_price)
+  end
+
+  def compute_min_price_with_margin_and_taxes
+    (1 + Reservation::TAX) * compute_min_price_with_margin
+  end
+
+  def compute_base_price_with_margin
+    Money.new((1 + Reservation::MARGIN[:menu]) * self.base_price)
+  end
+
+  def compute_base_price_with_margin_and_taxes
+    (1 + Reservation::TAX) * compute_base_price_with_margin
   end
 end
