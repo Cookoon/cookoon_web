@@ -25,4 +25,4 @@
         .col-12.px-0
           .cookoon-cards
             - @chefs.each do |chef|
-              = render 'card_only_chef', chef: chef
+              = render 'chefs/card_only_chef', chef: chef, path: admin_chef_path(chef)
