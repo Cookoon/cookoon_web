@@ -25,12 +25,12 @@
       //.text-center
         = carousel_for(@chef.photos)
 
-      - if @menus_active.present?
+      - if @chef.menus.active.present?
         h2.text-center.mb-0 style = "font-family: 'Avenir'" Les menus
         hr.primary.mt-n1.mb-1
         p.text-primary.text-center.font-italic.pb-2 signés #{@chef.name}
 
-        = render 'menus/list', menus: @menus_active, chef: @chef
+        = render 'menus/list', menus: @chef.menus.active.includes(:dishes), chef: @chef
 
       //.mt-2
         = render 'chefs/perks', chef_perks: @chef.chef_perks
@@ -66,23 +66,23 @@
 
       h5 Les menus actifs
       .row.mx-0
-        - if @menus_active.present?
-          = render 'admin/menus/list', menus: @menus_active, chef: @chef
+        - if @chef.menus.active.present?
+          = render 'admin/menus/list', menus: @chef.menus.active
 
         - else
           p Il n'y a pas de menu actif pour ce Chef
 
       h5.pt-4 Les menus avec statut "initial"
       .row.mx-0
-        - if @menus_initial.present?
-          = render 'admin/menus/list', menus: @menus_initial, chef: @chef
+        - if @chef.menus.initial.present?
+          = render 'admin/menus/list', menus: @chef.menus.initial
         - else
           p Il n'y a pas de menu avec statut "initial" pour ce Chef
 
       h5.pt-4 Les menus archivés
       .row.mx-0
-        - if @menus_archived.present?
-          = render 'admin/menus/list', menus: @menus_archived, chef: @chef
+        - if @chef.menus.archived.present?
+          = render 'admin/menus/list', menus: @chef.menus.archived
         - else
           p Il n'y a pas de menu archivé pour ce Chef
 
