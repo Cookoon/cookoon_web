@@ -51,6 +51,8 @@ Rails.application.routes.draw do
       patch :select_cookoon, to: 'reservations#select_cookoon', as: :select_cookoon
     end
 
+    resources :chefs, only: %i[index show]
+
     resources :payments, only: %i[new create] do
       collection do
         get 'secret', to: 'payments#secret'
