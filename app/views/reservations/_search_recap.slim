@@ -11,5 +11,14 @@
       p.search-recap-box-data.month = reservation.start_at.day
       p <span class ='small'>#{t('date.month_names')[reservation.start_at.month]}</span>
   .fourth.search-recap-box
-    p.search-recap-box-data 
+    p.search-recap-box-data
       i.co.icon-cookoon-logo.fa-2x.text-primary
+.search-details
+  - if reservation.cookoon.present?
+    p.small.mt-4 Votre décor
+    p.small = reservation.cookoon.name
+    = cl_image_tag(reservation.cookoon.main_photo.path)
+  - if reservation.menu.present?
+    p.small.mt-4 Votre chef
+    p.small = reservation.menu.chef.name
+    = cl_image_tag(reservation.menu.chef.main_photo.path)
