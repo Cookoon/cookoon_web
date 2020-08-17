@@ -8,8 +8,25 @@
         p = dish.name
     .text-primary.my-2
       '*****
-  .menu-card-price.mb-4
+  .menu-card-price
     .text-primary Prix:
-    span #{menu.unit_price} €
+    span #{menu.computed_price_with_margin_and_taxes}€TTC
+    | &nbsp
+    span.text-primary.font-italic
+      '(soit #{menu.computed_price_with_margin}€HT)*
+    .text-primary.font-italic.small.text-left.mt-3
+      '*
+      ':
+      - if !chef.min_price.blank? && !chef.min_price.zero?
+        span minimum de facturation du chef de #{chef.computed_min_price_with_margin_and_taxes}€TTC
+        | &nbsp
+        '(soit #{chef.computed_min_price_with_margin}€HT)
+      - if !chef.base_price.blank? && !chef.base_price.zero?
+        span prestation du chef en sus de  #{chef.computed_base_price_with_margin_and_taxes}€TTC
+        | &nbsp
+        '(soit #{chef.computed_base_price_with_margin}€HT)
 
-  .btn-cookoon.btn-block.btn-cookoon-primary.text-center Choisir ce menu
+  - if @reservation.present?
+    = link_to 'Choisir ce menu', reservation_select_menu_path(reservation, menu), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
+  - else
+    .btn-cookoon.btn-block.btn-cookoon-primary.text-center Choisir ce menu
