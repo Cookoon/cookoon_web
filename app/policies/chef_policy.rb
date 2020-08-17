@@ -1,7 +1,7 @@
 class ChefPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.all
+      scope.has_active_menus
     end
   end
 end

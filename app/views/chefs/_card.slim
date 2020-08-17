@@ -15,7 +15,7 @@
       .col-12.col-md-6.pb-3
         .chef-card-menu
           = simple_format(menu.description)
-          = link_to 'Choisir ce menu', reservation_select_menu_path(@reservation, menu), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch, remote: true
+          = link_to 'Choisir ce menu', reservation_select_menu_path(reservation, menu), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
 
     .col-12.col-md-6.offset-md-6.text-center.pb-3
       //= link_to 'Je souhaite cuisiner moi-même', '#', class: 'btn-cookoon btn-block btn-gray text-black', data: { action: "collapses#toggle" }
