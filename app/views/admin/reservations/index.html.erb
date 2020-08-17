@@ -35,10 +35,10 @@
       <div class="row mx-0">
         <div class="tab-content py-0 py-md-3 w-100">
           <div class="tab-pane fade show active" id="charged" role="tabpanel">
-            <%= render "list", resas: @reservations.decorate %>
+            <%= render "list", resas: @reservations.charged.decorate %>
           </div>
           <div class="tab-pane fade" id="accepted" role="tabpanel">
-            <%= render "list", resas: @reservations.accepted %>
+            <%= render "list", resas: @reservations.accepted.decorate %>
           </div>
         </div>
       </div>
