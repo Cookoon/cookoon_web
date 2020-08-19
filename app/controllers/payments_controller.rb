@@ -34,7 +34,7 @@ class PaymentsController < ApplicationController
   def create
     # payment = Reservation::Payment.new(@reservation.object)
     payment = @reservation.payment
-    if @reservation.services_selected? || @reservation.cookoon_selected? || @reservation.menu_selected
+    if @reservation.services_selected? || @reservation.cookoon_selected? || @reservation.menu_selected?
       if payment.charge
         @reservation.notify_users_after_payment
         redirect_to new_reservation_message_path(@reservation)
