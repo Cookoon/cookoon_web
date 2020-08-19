@@ -2,16 +2,24 @@ class PaymentsController < ApplicationController
   before_action :find_reservation
   before_action :find_cookoon, only: %i[amounts]
 
-  def secret
-    # payment = Reservation::Payment.new(@reservation.object)
-    # if payment.create_or_retrieve_and_update
-    payment_cookoon = Reservation::Payment.new(@reservation.object, options = { capture_method: 'manual', charge_amount_cents: @reservation.object.cookoon_butler_with_tax_cents})
-    proceed_payment(payment_cookoon, :stripe_charge_id)
+  # def secret_cookoon_butler
+  #   # payment = Reservation::Payment.new(@reservation.object)
+  #   # if payment.create_or_retrieve_and_update
+  #   payment_cookoon = Reservation::Payment.new(@reservation.object, options = { capture_method: 'manual', charge_amount_cents: @reservation.object.cookoon_butler_with_tax_cents})
+  #   proceed_payment(payment_cookoon, :stripe_charge_id)
+  # end
+
+  # def secret_services
+  #   payment_services = Reservation::Payment.new(@reservation.object, options = { capture_method: 'automatic', charge_amount_cents: @reservation.object.services_with_tax_cents})
+  #   proceed_payment(payment_services, :stripe_services_id)
+  # end
+
+  def secret_cookoon_butler
+    secret('manual', @reservation.object.cookoon_butler_with_tax_cents, :stripe_charge_id)
   end
 
   def secret_services
-    payment_services = Reservation::Payment.new(@reservation.object, options = { capture_method: 'automatic', charge_amount_cents: @reservation.object.services_with_tax_cents})
-    proceed_payment(payment_services, :stripe_services_id)
+    secret('automatic', @reservation.object.services_with_tax_cents, :stripe_services_id)
   end
 
   def new
@@ -22,7 +30,7 @@ class PaymentsController < ApplicationController
       flash.alert = "Vous devez choisir un menu ou indiquer si vous souhaitez cuisiner vous-même"
       redirect_to reservation_chefs_path(@reservation)
     else
-      @url_intent_secret = "/reservations/#{@reservation.id}/payments/secret.json"
+      @url_intent_secret_cookoon_butler = "/reservations/#{@reservation.id}/payments/secret_cookoon_butler.json"
       @url_intent_secret_services = "/reservations/#{@reservation.id}/payments/secret_services.json"
 
       @credit_cards = current_user.credit_cards
@@ -87,6 +95,11 @@ class PaymentsController < ApplicationController
   def find_cookoon
     @cookoon = Cookoon.find(params[:cookoon_id])
     @reservation.select_cookoon(@cookoon)
+  end
+
+  def secret(capture_method_value, charge_amount_cents_value, stripe_charge_id_value)
+    payment = Reservation::Payment.new(@reservation.object, options = { capture_method: capture_method_value, charge_amount_cents: charge_amount_cents_value })
+    proceed_payment(payment, stripe_charge_id_value)
   end
 
   def proceed_payment(payment, stripe_intent)
