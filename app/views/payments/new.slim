@@ -1,44 +1,64 @@
-.container
-  h1.text-center.my-4 Votre réservation
+.container.px-0
+  .row.mx-0
+    .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
 
-.container.d-flex.justify-content-center.px-0
+    .col-12.col-md-8.col-lg-9.px-0
+      = render 'reservations/breadcrumbs'
+
+.container.d-flex.justify-content-center.px-0.pb-5
   .row
-    .d-none.d-md-block.col-md-4.col-lg-3.px-md-2
-      .px-md-2.px-lg-0
-        - if @reservation.cookoon_selected? || @reservation.services_selected?
-          = link_to '< Retour aux choix', reservation_cookoon_path(@reservation, @reservation.cookoon), class: 'btn-cookoon btn-block btn-cookoon-secondary-gold mb-2 small'
-        = render 'reservations/search_recap', reservation: @reservation
+    .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
+      = render 'shared/back_button_transparent', button_title: 'Retour aux décors', path: reservation_cookoons_path
+      = render 'shared/back_button_transparent', button_title: 'Retour aux chefs', path: reservation_chefs_path
+      = render 'shared/back_button_transparent', button_title: 'Retour aux services', path: reservation_services_path
+      = render 'reservations/search_recap', reservation: @reservation
 
-    .col-12.col-md-8.col-lg-9.px-0.px-md-2.pr-lg-0
-      .px-0.px-md-2.pb-4
-        .pb-4
-          = render 'reservations/recap_string', reservation: @reservation
+    .col-12.col-md-8.col-lg-9.px-0
+      = render 'reservations/recap_string', reservation: @reservation
 
+      div.mb-3
+        p.mb-3.font-weight-bold Votre décor et le service
+        p.mb-1
+          '- L'adresse: #{@reservation.cookoon.address}
+        p.mb-1
+          '- Le(s) maître(s) d'hôtel
+      div.mb-4
+        .d-flex-default
+          b Montant
+          b #{humanized_money_with_symbol(@reservation.cookoon_butler_with_tax)}TTC
+        .d-flex.justify-content-end
+          i
+            '(soit #{humanized_money_with_symbol(@reservation.cookoon_butler_price)}HT)
+
+      hr
+
+      = render 'menus/recap', reservation: @reservation
+
+      - if @reservation.menu.present?
         div.mb-3
-          p.mb-3.font-weight-bold Votre décor et le service
+          p.mb-3.font-weight-bold Vos souhaits de chef et de menu
           p.mb-1
-            |
-              - L'adresse: #{@cookoon.address}
+            '- Le(a) chef: #{@reservation.menu.chef.name}*
           p.mb-1
-            |
-              - Le(s) maître(s) d'hôtel
+            '- Le menu: #{@reservation.menu.description} (#{@reservation.menu.dishes.pluck(:name).join(' / ')})
         div.mb-4
           .d-flex-default
             b Montant
-            b #{humanized_money_with_symbol(@reservation.cookoon_price)}TTC
+            b #{humanized_money_with_symbol(@reservation.menu_with_tax)}TTC
           .d-flex.justify-content-end
             i
-              |
-                (soit #{humanized_money_with_symbol(@reservation.cookoon_price)}HT)
+              '(soit #{humanized_money_with_symbol(@reservation.menu_price)}HT)
+          p.mb-1.font-italic
+            '*: sous réserve de disponibilité du chef
 
-        hr
+      hr
 
+      - if @reservation.services.present?
         div.mb-3
           p.mb-3.font-weight-bold Vos souhaits de service
           - @reservation.services.each do |service|
             p.mb-1
-              |
-                - &nbsp
+              '- &nbsp
               =service.name
         div.mb-4
           .d-flex-default
@@ -46,30 +66,29 @@
             b #{humanized_money_with_symbol(@reservation.services_with_tax)}TTC
           .d-flex.justify-content-end
             i
-              |
-                (soit #{humanized_money_with_symbol(@reservation.services_price)}HT)
+              '(soit #{humanized_money_with_symbol(@reservation.services_price)}HT)
 
-        - if @reservation.services_selected? || @reservation.cookoon_selected?
-          hr
-          hr
-          p.mb-3.font-weight-bold.text-center Régler #{humanized_money_with_symbol(@reservation.cookoon_price)}TTC
-          = render 'credit_cards/selection'
-        - if @reservation.accepted?
-          hr
-          hr
-          p.mb-3.font-weight-bold.text-center Régler #{humanized_money_with_symbol(@reservation.services_with_tax)}TTC
-          = render 'credit_cards/selection_services'
+      - if @reservation.cookoon_selected? || @reservation.menu_selected? ||  @reservation.services_selected?
+        hr
+        hr
+        p.mb-3.font-weight-bold.text-center Régler #{humanized_money_with_symbol(@reservation.cookoon_butler_with_tax)}TTC
+        = render 'credit_cards/selection'
+      - if @reservation.accepted?
+        hr
+        hr
+        p.mb-3.font-weight-bold.text-center Régler #{humanized_money_with_symbol(@reservation.services_with_tax)}TTC
+        = render 'credit_cards/selection_services'
 
-        - if @reservation.business?
-          hr
-          hr
-          .text-center.mb-4
-            - if @reservation.services_selected? || @reservation.cookoon_selected?
-              p Vous pouvez aussi demander un devis
-              = link_to 'Demander un Devis', ask_quotation_reservation_path(@reservation), class: 'btn-cookoon btn-cookoon-primary btn-block', method: :patch
-            - elsif @reservation.quotation_asked?
-              p Votre demande de devis est en cours
-            - elsif @reservation.quotation_proposed?
-              p Nous sommes en attente de votre validation du devis
-            - elsif @reservation.quotation_accepted?
-              p Vous avez validé le devis
+      - if @reservation.business?
+        hr
+        hr
+        .text-center.mb-4
+          - if @reservation.cookoon_selected? || @reservation.menu_selected? ||  @reservation.services_selected?
+            p Vous pouvez aussi demander un devis
+            = link_to 'Demander un Devis', ask_quotation_reservation_path(@reservation), class: 'btn-cookoon btn-cookoon-primary btn-block', method: :patch
+          - elsif @reservation.quotation_asked?
+            p Votre demande de devis est en cours
+          - elsif @reservation.quotation_proposed?
+            p Nous sommes en attente de votre validation du devis
+          - elsif @reservation.quotation_accepted?
+            p Vous avez validé le devis
