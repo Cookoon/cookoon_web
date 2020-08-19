@@ -1,3 +1,7 @@
-.col-12.mb-4
-  p Vous avez choisi <strong>#{menu.chef.name}</strong> comme chef avec le menu ##{menu.id}
-  = link_to 'Annuler le choix', reset_menu_reservation_path(@reservation, cookoon_id: @cookoon.id), class: 'btn-cookoon btn-cookoon-primary', method: :patch, remote: true
+- if reservation.menu_status == "selected" && reservation.menu.present?
+  .reservation-recap-string
+    <i class='co icon-losange text-primary mr-2'></i> Vous avez choisi <strong>#{reservation.menu.chef.name}</strong> comme chef avec le menu "#{reservation.menu.description}"
+- elsif reservation.menu_status == "cooking_by_user"
+  .reservation-recap-string
+    <i class='co icon-losange text-primary mr-2'></i> Vous avez choisi de cuisiner vous-même
+    //= link_to 'Annuler le choix', reset_menu_reservation_path(@reservation, cookoon_id: @cookoon.id), class: 'btn-cookoon btn-cookoon-primary', method: :patch, remote: true

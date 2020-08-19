@@ -1,19 +1,14 @@
-h3 id="reservation-menus-title" Choisissez un chef
+//h3 id="reservation-menus-title" Choisissez un chef
 
-- if @reservation.menu_status == "initial"
+//- if @reservation.menu_status == "initial"
   .carousel.slide id="chefSelection" data-ride="false" data-interval="false"
-      .carousel-inner
-        - chefs.each_with_index do |chef, index|
-          .carousel-item class=classnames('active': index.zero?)
-            = render 'chefs/card', chef: chef
+    .carousel-inner
+      - chefs.each_with_index do |chef, index|
+        .carousel-item class=classnames('active': index.zero?)
+          = render 'chefs/card', chef: chef
 
-- elsif @reservation.menu_status == "selected"
-  = render 'menus/recap', menu: @reservation.menu
-
-- elsif @reservation.menu_status == "cooking_by_user"
-  .col-12.mb-4
-    p Vous avez choisi de cuisiner vous-même
-    = link_to 'Annuler le choix', reset_cooking_by_user_reservation_path(@reservation), class: 'btn-cookoon btn-cookoon-primary', method: :patch, remote: true
+//- elsif @reservation.menu_status == "selected" || @reservation.menu_status == "cooking_by_user"
+  = render 'menus/recap', reservation: @reservation
 
 
 / code Charles
