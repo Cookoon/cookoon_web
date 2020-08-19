@@ -62,17 +62,18 @@ Rails.application.routes.draw do
     patch 'menus/:id', to: 'reservations#select_menu', as: :select_menu
     patch :reset_menu, on: :member
     patch :cooking_by_user, on: :member
-    patch :reset_cooking_by_user, on: :member
+    # patch :reset_cooking_by_user, on: :member
     patch :ask_quotation, on: :member
     patch :select_services, on: :member
     resources :invoices, only: :create
-    resources :services, only: %i[index show create]
+    # resources :services, only: %i[index show create]
+    resources :services, only: %i[index]
     resources :messages, controller: 'reservations/messages', only: %i[new create]
   end
 
-  resources :services, only: [:destroy] do
-    resources :payments, controller: 'services/payments', only: :create
-  end
+  # resources :services, only: [:destroy] do
+  #   resources :payments, controller: 'services/payments', only: :create
+  # end
 
   # -------- HOST NAMESPACE ---------
   namespace :host do
