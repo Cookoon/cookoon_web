@@ -60,7 +60,7 @@ Rails.application.routes.draw do
       end
     end
     patch 'menus/:id', to: 'reservations#select_menu', as: :select_menu
-    patch :reset_menu, on: :member
+    # patch :reset_menu, on: :member
     patch :cooking_by_user, on: :member
     # patch :reset_cooking_by_user, on: :member
     patch :ask_quotation, on: :member
