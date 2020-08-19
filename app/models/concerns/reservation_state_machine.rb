@@ -42,7 +42,10 @@ module ReservationStateMachine
       end
 
       event :charge do
-        transitions from: :services_selected, to: :charged
+        # transitions from: :services_selected, to: :charged
+        transitions from: [:menu_selected, :cookoon_selected, :services_selected],
+        # transitions from: [:cookoon_selected, :services_selected],
+          to: :charged
       end
 
       event :pay_services do

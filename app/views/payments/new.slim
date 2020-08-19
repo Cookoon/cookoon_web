@@ -72,12 +72,12 @@
         hr
         hr
         p.mb-3.font-weight-bold.text-center Régler #{humanized_money_with_symbol(@reservation.cookoon_butler_with_tax)}TTC
-        = render 'credit_cards/selection'
+        = render 'credit_cards/selection', url_intent_secret: @url_intent_secret_cookoon_butler
       - if @reservation.accepted?
         hr
         hr
         p.mb-3.font-weight-bold.text-center Régler #{humanized_money_with_symbol(@reservation.services_with_tax)}TTC
-        = render 'credit_cards/selection_services'
+        = render 'credit_cards/selection', url_intent_secret: @url_intent_secret_services
 
       - if @reservation.business?
         hr
