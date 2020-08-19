@@ -1,1 +1,33 @@
-p Choix des services pour la résa #{@reservation.id}
+.container.px-0
+  .row.mx-0
+    .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
+
+    .col-12.col-md-8.col-lg-9.px-0
+      = render 'reservations/breadcrumbs'
+
+.container.d-flex.justify-content-center.px-0.pb-5
+  .row
+    .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
+      = render 'shared/back_button_transparent', button_title: 'Retour aux chefs', path: reservation_chefs_path
+      = render 'reservations/search_recap', reservation: @reservation
+
+    .col-12.col-md-8.col-lg-9.px-0
+      .row.mx-0
+        .col-12.col-md-9.col-lg-8.px-0
+          h1 Choisissez les services
+      .row.mx-0
+        .col-12.px-0
+          p.text-primary.mb-0.mb-md-3 Pour sublimer votre expérience, vous pouvez sélectionner des services complémentaires; nous vous contacterons afin de vous soumettre un choix et une tarification.
+      .row.mx-0
+        .col-12.px-0
+          = simple_form_for @reservation, url: select_services_reservation_path(@reservation), method: :patch do |f|
+            = f.input :services,
+              as: :check_boxes,
+              collection: @reservation.services_collection_for_view,
+              checked: @reservation.builtin_services,
+              label_method: :first,
+              value_method: :second,
+              item_wrapper_class: "font-weight-bold pl-5 py-1"
+            = f.submit 'Finaliser ma réservation', class: 'btn-cookoon btn-cookoon-primary px-5 w-50'
+
+//p Choix des services pour la résa #{@reservation.id}

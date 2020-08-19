@@ -1,5 +1,5 @@
 class ReservationsController < ApplicationController
-  before_action :find_reservation, only: %i[update show ask_quotation reset_menu select_services cooking_by_user reset_cooking_by_user]
+  before_action :find_reservation, only: %i[update show ask_quotation reset_menu select_services cooking_by_user]
   before_action :find_reservation_with_reservation_id, only: %i[select_cookoon select_menu]
   before_action :find_cookoon, only: %i[select_cookoon]
 
@@ -10,7 +10,6 @@ class ReservationsController < ApplicationController
   end
 
   def show
-    @cookoon = @reservation.cookoon
   end
 
   def new
@@ -52,12 +51,11 @@ class ReservationsController < ApplicationController
     redirect_to reservations_path
   end
 
-  # TO DO update redirect_to
   def select_menu
     @reservation.select_menu!(Menu.find(params[:id]))
     @reservation.update(menu_status: "selected")
     # redirect_to reservation_cookoon_path(@reservation, @reservation.cookoon, anchor: 'reservation-menus-title')
-    redirect_to reservation_chef_path(@reservation, @reservation.menu.chef), notice: "c'est ok"
+    redirect_to reservation_services_path(@reservation)
   end
 
   # TO DO
@@ -67,31 +65,18 @@ class ReservationsController < ApplicationController
   #   redirect_to reservation_cookoon_path(@reservation, @reservation.cookoon, anchor: 'reservation-menus-title')
   # end
 
-  # TO DO update redirect_to
   def cooking_by_user
     @reservation.select_menu!(nil)
     @reservation.update(menu_status: "cooking_by_user")
     # redirect_to reservation_cookoon_path(@reservation, @reservation.cookoon, anchor: 'reservation-menus-title')
-    redirect_to reservation_chefs_path(@reservation), notice: "c'est ok"
+    redirect_to reservation_services_path(@reservation)
   end
 
-  # TO DO
-  # def reset_cooking_by_user
-  #   @reservation.select_menu!(nil)
-  #   @reservation.update(menu_status: "initial")
-  #   redirect_to reservation_cookoon_path(@reservation, @reservation.cookoon, anchor: 'reservation-menus-title')
-  # end
-
-  # TO DO update
   def select_services
-    if @reservation.menu_status == "initial"
-      flash.alert = "Vous devez choisir un menu ou indiquer si vous souhaitez cuisiner vous-même"
-      redirect_to reservation_cookoon_path(@reservation, @reservation.cookoon)
-    else
-      service_categories = params[:reservation][:services].delete_if(&:blank?)
-      @reservation.select_services!(service_categories)
-      redirect_to new_reservation_payment_path(@reservation)
-    end
+    service_categories = params[:reservation][:services].delete_if(&:blank?)
+    @reservation.select_services!(service_categories)
+    # redirect_to new_reservation_payment_path(@reservation)
+    redirect_to new_reservation_payment_path(@reservation)
   end
 
   private
