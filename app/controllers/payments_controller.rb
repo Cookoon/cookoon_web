@@ -5,7 +5,7 @@ class PaymentsController < ApplicationController
   def secret
     # payment = Reservation::Payment.new(@reservation.object)
     # if payment.create_or_retrieve_and_update
-    payment_cookoon = Reservation::Payment.new(@reservation.object, options = { capture_method: 'manual', charge_amount_cents: @reservation.object.cookoon_price_cents})
+    payment_cookoon = Reservation::Payment.new(@reservation.object, options = { capture_method: 'manual', charge_amount_cents: @reservation.object.cookoon_butler_with_tax_cents})
     proceed_payment(payment_cookoon, :stripe_charge_id)
   end
 
@@ -15,18 +15,26 @@ class PaymentsController < ApplicationController
   end
 
   def new
-    @url_intent_secret = "/reservations/#{@reservation.id}/payments/secret.json"
-    @url_intent_secret_services = "/reservations/#{@reservation.id}/payments/secret_services.json"
-    @credit_cards = current_user.credit_cards
-    @cookoon = @reservation.cookoon.decorate
+    if @reservation.cookoon.blank?
+      flash.alert = "Vous devez choisir un décor"
+      redirect_to reservation_cookoons_path(@reservation)
+    elsif @reservation.menu_status == "initial"
+      flash.alert = "Vous devez choisir un menu ou indiquer si vous souhaitez cuisiner vous-même"
+      redirect_to reservation_chefs_path(@reservation)
+    else
+      @url_intent_secret = "/reservations/#{@reservation.id}/payments/secret.json"
+      @url_intent_secret_services = "/reservations/#{@reservation.id}/payments/secret_services.json"
 
-    @payment_method_to_display_first = current_user.find_default_stripe_payment_method || @credit_cards.first
+      @credit_cards = current_user.credit_cards
+
+      @payment_method_to_display_first = current_user.find_default_stripe_payment_method || @credit_cards.first
+    end
   end
 
   def create
     # payment = Reservation::Payment.new(@reservation.object)
     payment = @reservation.payment
-    if @reservation.services_selected? || @reservation.cookoon_selected?
+    if @reservation.services_selected? || @reservation.cookoon_selected? || @reservation.menu_selected
       if payment.charge
         @reservation.notify_users_after_payment
         redirect_to new_reservation_message_path(@reservation)
