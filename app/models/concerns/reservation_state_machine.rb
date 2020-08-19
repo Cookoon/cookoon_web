@@ -28,13 +28,15 @@ module ReservationStateMachine
       end
 
       event :select_menu do
-        transitions from: [:cookoon_selected, :menu_selected],
+        transitions from: [:initial, :menu_selected, :cookoon_selected, :services_selected],
+        # transitions from: [:cookoon_selected, :menu_selected],
           to: :menu_selected,
           after: [:set_menu, :set_prices]
       end
 
       event :select_services do
-        transitions from: [:cookoon_selected, :services_selected],
+        transitions from: [:initial, :menu_selected, :cookoon_selected, :services_selected],
+        # transitions from: [:cookoon_selected, :services_selected],
           to: :services_selected,
           after: [:set_services, :set_prices]
       end
