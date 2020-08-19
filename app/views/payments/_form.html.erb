@@ -1,6 +1,6 @@
-<div data-controller="stripe-payments"
-     data-stripe-payments-publishable-key="<%= ENV['STRIPE_PUBLISHABLE_KEY'] %>"
-     data-stripe-payments-url="<%= @url_intent_secret %>">
+<!-- <div data-controller="stripe-payments"
+     data-stripe-payments-publishable-key="<%#= ENV['STRIPE_PUBLISHABLE_KEY'] %>"
+     data-stripe-payments-url="<%#= @url_intent_secret_cookoon_butler %>"> -->
 
   <%= simple_form_for :payment, url: reservation_payments_path(@reservation), html: { data: { target: 'stripe-payments.paymentForm' } }, authenticity_token: true, remote: true do |f| %>
 
@@ -52,7 +52,7 @@
     <div class="text-success" data-target='stripe-payments.paymentSuccess' role="alert"></div>
   </div> -->
 
-</div>
+<!-- </div> -->
 
 <!-- Code Charles -->
 <!-- <%#= simple_form_for :payment, url: reservation_payments_path(@reservation), remote: true do |f| %>
