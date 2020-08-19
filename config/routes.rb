@@ -55,7 +55,7 @@ Rails.application.routes.draw do
 
     resources :payments, only: %i[new create] do
       collection do
-        get 'secret', to: 'payments#secret'
+        get 'secret_cookoon_butler', to: 'payments#secret_cookoon_butler'
         get 'secret_services', to: 'payments#secret_services'
       end
     end

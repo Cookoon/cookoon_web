@@ -52,7 +52,7 @@ class ReservationPolicy < ApplicationPolicy
     record.user == user
   end
 
-  def secret?
+  def secret_cookoon_butler?
     record.user == user
   end
 
