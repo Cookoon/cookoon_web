@@ -58,7 +58,6 @@ class ReservationsController < ApplicationController
     redirect_to reservation_services_path(@reservation)
   end
 
-  # TO DO
   # def reset_menu
   #   @reservation.select_menu!(nil)
   #   @reservation.update(menu_status: "initial")
