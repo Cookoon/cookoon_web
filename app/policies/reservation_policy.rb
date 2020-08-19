@@ -57,7 +57,7 @@ class ReservationPolicy < ApplicationPolicy
   end
 
   def secret_services?
-    secret?
+    secret_cookoon_butler?
   end
 
   class Scope < Scope
