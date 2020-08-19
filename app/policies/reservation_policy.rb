@@ -44,9 +44,9 @@ class ReservationPolicy < ApplicationPolicy
     record.user == user
   end
 
-  def reset_cooking_by_user?
-    record.user == user
-  end
+  # def reset_cooking_by_user?
+  #   record.user == user
+  # end
 
   def select_services?
     record.user == user
