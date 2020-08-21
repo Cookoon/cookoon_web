@@ -2,8 +2,8 @@ module Admin
   class ReservationsController < ApplicationController
     # not necessary because it is specified directly in routes
     # before_action :require_admin
-    before_action :find_reservation, only: %i[show require_payment_for_menu]
-
+    before_action :find_reservation, only: %i[show]
+    before_action :find_reservation_with_renservation_id, only: %i[ask_menu_payment validate_menu]
     def index
       @reservations = policy_scope([:admin, Reservation]).includes(:cookoon, :user, menu: [:chef], cookoon: [:user]).order(id: :desc)
     end
@@ -11,11 +11,21 @@ module Admin
     def show
     end
 
-    def require_payment_for_menu
-      if @reservation.update(menu_status: "payment_required")
-        flash.notice = "Le statut de la réservation a bien été mis à jour"
-        # TO DO send email to user to require payment
+    def validate_menu
+      if @reservation.update(menu_status: "validated")
+        flash.notice = "Le menu a bien été validé"
+        redirect_to admin_reservation_path(@reservation)
+      else
+        flash.alert = "Il y a eu un problème"
         render :show
+      end
+    end
+
+    def ask_menu_payment
+      if @reservation.update(menu_status: "payment_required")
+        flash.notice = "Le paiement du menu va bien être demandé"
+        # TO DO send email to user to require payment
+        redirect_to admin_reservation_path(@reservation)
       else
         flash.alert = "Il y a eu un problème"
         render :show
@@ -26,6 +36,11 @@ module Admin
 
     def find_reservation
       @reservation = Reservation.find(params[:id]).decorate
+      authorize @reservation, policy_class: Admin::ReservationPolicy
+    end
+
+    def find_reservation_with_renservation_id
+      @reservation = Reservation.find(params[:reservation_id]).decorate
       authorize @reservation, policy_class: Admin::ReservationPolicy
     end
 

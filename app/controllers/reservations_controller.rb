@@ -52,7 +52,7 @@ class ReservationsController < ApplicationController
   end
 
   def select_menu
-    @reservation.select_menu!(Menu.find(params[:id]))
+    @reservation.select_menu!(Menu.find(params[:menu_id]))
     @reservation.update(menu_status: "selected")
     # redirect_to reservation_cookoon_path(@reservation, @reservation.cookoon, anchor: 'reservation-menus-title')
     redirect_to reservation_services_path(@reservation)
