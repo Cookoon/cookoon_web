@@ -26,7 +26,9 @@
         | &nbsp
         '(soit #{chef.computed_base_price_with_margin}€HT)
 
-  - if @reservation.present?
-    = link_to 'Choisir ce menu', reservation_select_menu_path(@reservation, menu), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
-  - else
-    .btn-cookoon.btn-block.btn-cookoon-primary.text-center Choisir ce menu
+  - if policy(@reservation).select_menu?
+    = link_to 'Choisir ce menu', reservation_menu_select_menu_path(@reservation, menu), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
+  - if policy([:admin, @reservation]).validate_menu?
+    = link_to 'Valider', admin_reservation_validate_menu_path(@reservation), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
+  - if policy([:admin, @reservation]).ask_menu_payment?
+    = link_to 'Demander le paiement', admin_reservation_ask_menu_payment_path(@reservation), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
