@@ -59,7 +59,10 @@ Rails.application.routes.draw do
         get 'secret_services', to: 'payments#secret_services'
       end
     end
-    patch 'menus/:id', to: 'reservations#select_menu', as: :select_menu
+    resources :menus do
+      patch :select_menu, to: 'reservations#select_menu'
+    end
+    # patch 'menus/:id', to: 'reservations#select_menu', as: :select_menu // devrait être patch 'menus/:id/select_menu'...
     # patch :reset_menu, on: :member
     patch :cooking_by_user, on: :member
     # patch :reset_cooking_by_user, on: :member
@@ -104,8 +107,12 @@ Rails.application.routes.draw do
         patch 'menus/:id/validate_menu', to: 'menus#validate_menu', as: :validate_menu
         patch 'menus/:id/archive_menu', to: 'menus#archive_menu', as: :archive_menu
       end
-      resources :reservations, only: %i[index show]
-      patch 'reservations/:id', to: 'reservations#require_payment_for_menu', as: :require_payment_for_menu
+      resources :reservations, only: %i[index show] do
+        patch :ask_menu_payment
+        patch :validate_menu
+      end
+      # patch 'reservations/:id', to: 'reservations#require_payment_for_menus', as: :require_payment_for_menus
+      # patch 'reservations/:id', to: 'reservations#validate_menus', as: :validate_menus
     end
   end
 
