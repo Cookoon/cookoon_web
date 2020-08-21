@@ -29,7 +29,7 @@ class ReservationPolicy < ApplicationPolicy
   end
 
   def select_menu?
-    record.user == user
+    record.user == user && record.needs_menu_selection?
   end
 
   def select_cookoon?
