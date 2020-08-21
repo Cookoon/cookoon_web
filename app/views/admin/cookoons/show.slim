@@ -1,3 +1,4 @@
+= console
 .container.px-0
   .row.mx-0
     .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
@@ -11,7 +12,7 @@
   .row
     .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
       = render 'shared/back_button_transparent', button_title: 'Retour aux décors', path: admin_cookoons_path
-      - if policy([:admin, Cookoon]).update?
+      - if policy([:admin, @cookoon]).update?
         = render 'shared/button_transparent', button_title: 'Modifier ce décor', path: edit_admin_cookoon_path(@cookoon)
 
     .col-12.col-md-8.col-lg-9.px-0
