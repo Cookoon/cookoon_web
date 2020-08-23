@@ -18,6 +18,10 @@ class PaymentsController < ApplicationController
     secret('manual', @reservation.object.cookoon_butler_with_tax_cents, :stripe_charge_id)
   end
 
+  def secret_menu
+    secret('automatic', @reservation.object.menu_with_tax_cents, :stripe_menu_id)
+  end
+
   def secret_services
     secret('automatic', @reservation.object.services_with_tax_cents, :stripe_services_id)
   end
@@ -30,8 +34,13 @@ class PaymentsController < ApplicationController
       flash.alert = "Vous devez choisir un menu ou indiquer si vous souhaitez cuisiner vous-même"
       redirect_to reservation_chefs_path(@reservation)
     else
-      @url_intent_secret_cookoon_butler = "/reservations/#{@reservation.id}/payments/secret_cookoon_butler.json"
-      @url_intent_secret_services = "/reservations/#{@reservation.id}/payments/secret_services.json"
+      if policy(@reservation).secret_cookoon_butler?
+        @url_intent_secret_cookoon_butler = "/reservations/#{@reservation.id}/payments/secret_cookoon_butler.json"
+      elsif policy(@reservation).secret_menu?
+        @url_intent_secret_menu = "/reservations/#{@reservation.id}/payments/secret_menu.json"
+      elsif policy(@reservation).secret_services?
+        @url_intent_secret_services = "/reservations/#{@reservation.id}/payments/secret_services.json"
+      end
 
       @credit_cards = current_user.credit_cards
 
@@ -40,20 +49,29 @@ class PaymentsController < ApplicationController
   end
 
   def create
+    # TO DO ALICE : notify user after payment by mail
+    # @reservation.notify_users_after_payment
+
     # payment = Reservation::Payment.new(@reservation.object)
     payment = @reservation.payment
-    if @reservation.services_selected? || @reservation.cookoon_selected? || @reservation.menu_selected?
+    if @reservation.needs_cookoon_butler_payment?
       if payment.charge
-        @reservation.notify_users_after_payment
+        flash.notice = "Votre paiement a bien été effectué"
         redirect_to new_reservation_message_path(@reservation)
+      else
+        flash.alert = "Une erreur est survenue, néanmoins votre demande de paiement est bien effective. Veuillez contacter notre service d'aide"
+        redirect_to home_path
+      end
+    elsif @reservation.needs_menu_payment?
+      if payment.capture_menu_payment
+        flash.notice = "Votre paiement a bien été effectué"
+        redirect_to home_path
       else
         flash.alert = "Une erreur est survenue, néanmoins votre demande de paiement est bien effective. Veuillez contacter notre service d'aide"
         redirect_to home_path
       end
     elsif @reservation.accepted?
       if payment.pay_services
-        # TO DO ALICE : notify user after payment by mail
-        # @reservation.notify_users_after_payment
         flash.notice = "Votre paiement a bien été effectué"
         redirect_to home_path
       else
