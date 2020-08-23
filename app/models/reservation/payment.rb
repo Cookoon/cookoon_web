@@ -11,6 +11,10 @@ class Reservation
       reservation.pay_services! if errors.empty?
     end
 
+    def capture_menu_payment
+      reservation.capture_menu_payment! if errors.empty?
+    end
+
     private
 
     # def should_capture?
