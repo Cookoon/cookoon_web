@@ -73,6 +73,11 @@
         hr
         p.mb-3.font-weight-bold.text-center Régler le décor et le service:  #{humanized_money_with_symbol(@reservation.cookoon_butler_with_tax)}TTC
         = render 'credit_cards/selection', url_intent_secret: @url_intent_secret_cookoon_butler
+      - if @reservation.needs_menu_payment?
+        hr
+        hr
+        p.mb-3.font-weight-bold.text-center Régler le chef et le menu:  #{humanized_money_with_symbol(@reservation.menu_with_tax)}TTC
+        = render 'credit_cards/selection', url_intent_secret: @url_intent_secret_menu
       - if @reservation.accepted? && @reservation.services_with_tax > 0
         hr
         hr

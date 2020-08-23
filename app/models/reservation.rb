@@ -173,8 +173,12 @@ class Reservation < ApplicationRecord
     (charged? || accepted? ||  quotation_asked? || quotation_proposed? || quotation_accepted?) && menu_status == "selected"
   end
 
-  def needs_menu_payment?
+  def needs_menu_payment_asking?
     accepted? && menu_status == "validated"
+  end
+
+  def needs_menu_payment?
+    accepted? && menu_status == "payment_required"
   end
 
   private

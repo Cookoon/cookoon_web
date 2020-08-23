@@ -53,11 +53,15 @@ class ReservationPolicy < ApplicationPolicy
   end
 
   def secret_cookoon_butler?
-    record.user == user
+    record.user == user && record.needs_cookoon_butler_payment?
+  end
+
+  def secret_menu?
+    record.user == user && record.needs_menu_payment?
   end
 
   def secret_services?
-    secret_cookoon_butler?
+    # To do
   end
 
   class Scope < Scope

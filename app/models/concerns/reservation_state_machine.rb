@@ -11,6 +11,7 @@ module ReservationStateMachine
       state :services_selected
       state :charged
       state :accepted
+      state :menu_payment_captured
       state :services_paid
       state :quotation_asked
       state :quotation_proposed
@@ -46,6 +47,10 @@ module ReservationStateMachine
         transitions from: [:menu_selected, :cookoon_selected, :services_selected],
         # transitions from: [:cookoon_selected, :services_selected],
           to: :charged
+      end
+
+      event :capture_menu_payment do
+        transitions from: :accepted, to: :menu_payment_captured
       end
 
       event :pay_services do

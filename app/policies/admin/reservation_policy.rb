@@ -8,7 +8,7 @@ class Admin::ReservationPolicy < ApplicationPolicy
   end
 
   def ask_menu_payment?
-    user.admin == true && record.needs_menu_payment?
+    user.admin == true && record.needs_menu_payment_asking?
   end
 
   class Scope < Scope
