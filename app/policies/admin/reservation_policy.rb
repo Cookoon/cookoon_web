@@ -11,6 +11,14 @@ class Admin::ReservationPolicy < ApplicationPolicy
     user.admin == true && record.needs_menu_payment_asking?
   end
 
+  def validate_services?
+    user.admin == true && record.needs_services_validation?
+  end
+
+  def ask_services_payment?
+    user.admin == true && record.needs_services_payment_asking?
+  end
+
   class Scope < Scope
     def resolve
       scope.all
