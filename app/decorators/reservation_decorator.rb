@@ -128,6 +128,11 @@ class ReservationDecorator < Draper::Decorator
     ]
   end
 
+  def services_collection_available_for_view
+    services_affected = builtin_services.map {|element| element.to_sym}
+    services_collection_for_view.delete_if {|element| services_affected.include?(element[1]) unless element[1] == "wine".to_sym }
+  end
+
   def type_names
     {
       breakfast: 'Petit déjeuner',
