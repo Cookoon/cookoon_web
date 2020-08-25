@@ -2937,7 +2937,7 @@
       "widget": null,
       "validations": []
     }, {
-      "field": "services_payment_status",
+      "field": "services_status",
       "type": "String",
       "default_value": "initial",
       "enums": null,
@@ -3170,7 +3170,8 @@
       "default_value": "0",
       "enums": [
         "initial",
-        "quote",
+        "validated",
+        "payment_required",
         "captured",
         "paid"
       ],
