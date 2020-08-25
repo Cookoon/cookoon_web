@@ -64,12 +64,13 @@ class Reservation < ApplicationRecord
   validates :people_count, presence: true, numericality: { greater_than: 0 }
   validates :type_name, inclusion: { in: %w[breakfast brunch lunch diner cocktail morning afternoon day], message: "Ce type de réservation n'est pas valide" }
   validates :menu_status, inclusion: { in: %w[initial selected cooking_by_user validated payment_required captured paid], message: "Le statut du menu n'est pas valide" }
+  validates :services_status, inclusion: { in: %w[initial validated payment_required captured paid], message: "Le statut n'est pas valide" }
 
   validate :tenant_is_not_host
 
   before_validation :configure_from_type_name, on: :create
-  # before_save :assign_prices, if: :assign_prices_needed?
-  before_save :assign_prices_for_cookoon_butler_menu, if: :assign_prices_needed_for_cookoon_butler_menu?
+  before_save :assign_prices, if: :assign_prices_needed?
+  # before_save :assign_prices_for_cookoon_butler_menu, if: :assign_prices_needed_for_cookoon_butler_menu?
 
   # need to connect this to another condiction
   after_save :report_to_slack, if: :saved_change_to_aasm_state?
@@ -141,17 +142,26 @@ class Reservation < ApplicationRecord
     ongoing? || passed?
   end
 
+  def assign_prices
+    # assign_attributes(computed_price_attributes)
+    assign_attributes(
+      computed_price_attributes.fetch_values(
+        :cookoon, :butler, :cookoon_butler, :menu, :services, :total
+      ).reduce(:merge)
+    )
+  end
+
   # def assign_prices
   #   assign_attributes(computed_price_attributes)
   # end
 
-  def assign_prices_for_cookoon_butler_menu
-    assign_attributes(
-      computed_price_attributes.fetch_values(
-        :cookoon, :butler, :cookoon_butler, :menu, :total
-      ).reduce(:merge)
-    )
-  end
+  # def assign_prices_for_cookoon_butler_menu
+  #   assign_attributes(
+  #     computed_price_attributes.fetch_values(
+  #       :cookoon, :butler, :cookoon_butler, :menu, :total
+  #     ).reduce(:merge)
+  #   )
+  # end
 
   def host_payout_price_cents
     cookoon_price_cents
@@ -170,7 +180,7 @@ class Reservation < ApplicationRecord
   end
 
   def needs_menu_validation?
-    (charged? || accepted? ||  quotation_asked? || quotation_proposed? || quotation_accepted?) && menu_status == "selected"
+    (charged? || accepted? || quotation_asked?) && menu_status == "selected"
   end
 
   def needs_menu_payment_asking?
@@ -179,6 +189,18 @@ class Reservation < ApplicationRecord
 
   def needs_menu_payment?
     accepted? && menu_status == "payment_required"
+  end
+
+  def needs_services_validation?
+    services_status == "initial" && (charged? || accepted? || quotation_asked? || menu_payment_captured?)
+  end
+
+  def needs_services_payment_asking?
+    services_status == "validated" && ((accepted? && menu_status == "cooking_by_user") || menu_payment_captured?)
+  end
+
+  def accepts_new_service?
+    needs_services_validation?
   end
 
   private
@@ -197,13 +219,13 @@ class Reservation < ApplicationRecord
     services.payment_tied_to_reservation.each(&:paid!)
   end
 
-  # def assign_prices_needed?
-  #   cookoon_selected? || menu_selected? || services_selected? || quotation_proposed?
-  # end
-
-  def assign_prices_needed_for_cookoon_butler_menu?
+  def assign_prices_needed?
     cookoon_selected? || menu_selected? || services_selected? || quotation_proposed?
   end
+
+  # def assign_prices_needed_for_cookoon_butler_menu?
+  #   cookoon_selected? || menu_selected? || services_selected? || quotation_proposed?
+  # end
 
   def report_to_slack
     return unless Rails.env.production?
