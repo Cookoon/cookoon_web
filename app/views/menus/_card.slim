@@ -29,6 +29,6 @@
   - if policy(@reservation).select_menu?
     = link_to 'Choisir ce menu', reservation_menu_select_menu_path(@reservation, menu), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
   - if policy([:admin, @reservation]).validate_menu?
-    = link_to 'Valider', admin_reservation_validate_menu_path(@reservation), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
+    = link_to 'Valider ce menu', admin_reservation_validate_menu_path(@reservation), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
   - if policy([:admin, @reservation]).ask_menu_payment?
-    = link_to 'Demander le paiement', admin_reservation_ask_menu_payment_path(@reservation), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
+    = link_to 'Demander le paiement du menu', admin_reservation_ask_menu_payment_path(@reservation), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
