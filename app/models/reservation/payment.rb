@@ -12,8 +12,10 @@ class Reservation
     end
 
     def capture_menu_payment
-      reservation.capture_menu_payment! if errors.empty?
-      reservation.update(menu_status: "captured")
+      if errors.empty?
+        reservation.capture_menu_payment!
+        reservation.update(menu_status: "captured")
+      end
     end
 
     private
