@@ -54,7 +54,7 @@
               <p>Frais de service: <%= service.quantity_base %> x <%= service.base_price %></p>
               <p>Marge: <%= service.margin %></p>
               <p>Total HT avec marge: <%= service.price %></p>
-              <% if policy([:admin, service]).edit? %>
+              <% if @reservation.accepts_new_service? %>
                 <%= link_to 'Modifier', edit_admin_reservation_service_path(@reservation, service), :class => "btn-cookoon btn-cookoon-primary mb-4" %>
               <% end %>
             </div>
