@@ -12,7 +12,7 @@ module ReservationStateMachine
       state :charged
       state :accepted
       state :menu_payment_captured
-      state :services_paid
+      state :services_payment_captured
       state :quotation_asked
       state :quotation_proposed
       state :quotation_accepted
@@ -111,7 +111,7 @@ module ReservationStateMachine
   end
 
   def set_prices
-    # assign_prices
-    assign_prices_for_cookoon_butler_menu
+    assign_prices
+    # assign_prices_for_cookoon_butler_menu
   end
 end
