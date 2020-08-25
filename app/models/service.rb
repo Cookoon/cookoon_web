@@ -9,10 +9,14 @@ class Service < ApplicationRecord
   monetize :price_cents
   monetize :base_price_cents
 
-  enum status: %i[initial quote captured paid]
+  # enum status: %i[initial quote captured paid]
+  enum status: %i[initial validated payment_required captured paid]
   enum category: %i[special sommelier parking corporate catering breakfast flowers wine]
 
+  default_scope -> { order(id: :asc) }
+
   before_create :set_name_and_default_prices, :compute_price
+  before_update :compute_price
 
   # validates :category, presence: true
   validates :category, uniqueness: { scope: :reservation }, unless: :wine?
@@ -26,7 +30,8 @@ class Service < ApplicationRecord
   def set_name_and_default_prices
     case category
     when 'special'
-      self.assign_attributes(
+      # self.assign_attributes(
+        assign_attributes(
         name: 'Personnalisé',
         quantity_base: 0,
         base_price: 0,
@@ -35,7 +40,8 @@ class Service < ApplicationRecord
         margin: 0.25
       )
     when 'sommelier'
-      self.assign_attributes(
+      # self.assign_attributes(
+        assign_attributes(
         name: 'Sommelier',
         quantity_base: sommelier_count,
         base_price: 250,
@@ -44,7 +50,8 @@ class Service < ApplicationRecord
         margin: 0.25,
       )
     when 'parking'
-      self.assign_attributes(
+      # self.assign_attributes(
+        assign_attributes(
         name: 'Voiturier',
         quantity_base: 1,
         base_price: 75,
@@ -53,7 +60,8 @@ class Service < ApplicationRecord
         margin: 0.25,
       )
     when 'corporate'
-      self.assign_attributes(
+      # self.assign_attributes(
+        assign_attributes(
         name: 'Kit professionnel',
         quantity_base: 1,
         base_price: 100,
@@ -62,7 +70,8 @@ class Service < ApplicationRecord
         margin: 0.25,
       )
     when 'catering'
-      self.assign_attributes(
+      # self.assign_attributes(
+        assign_attributes(
         name: 'Plateaux repas',
         quantity_base: 1,
         base_price: 50,
@@ -71,7 +80,8 @@ class Service < ApplicationRecord
         margin: 0.25,
       )
     when 'breakfast'
-      self.assign_attributes(
+      # self.assign_attributes(
+        assign_attributes(
         name: 'Petit déjeuner',
         quantity_base: 1,
         base_price: 50,
@@ -80,7 +90,8 @@ class Service < ApplicationRecord
         margin: 2,
       )
     when 'flowers'
-      self.assign_attributes(
+      # self.assign_attributes(
+        assign_attributes(
         name: 'Composition florale',
         quantity_base: 1,
         base_price: 50,
@@ -89,7 +100,8 @@ class Service < ApplicationRecord
         margin: 2,
       )
     when 'wine'
-      self.assign_attributes(
+      # self.assign_attributes(
+        assign_attributes(
         name: 'Vin',
         quantity_base: 0,
         base_price: 0,
@@ -115,11 +127,13 @@ class Service < ApplicationRecord
   end
 
   def wine?
-    self.category == "wine"
+    # self.category == "wine"
+    category == "wine"
   end
 
   def compute_price
-    self.price = (1 + self.margin) * ((self.quantity_base * self.base_price) + (self.quantity * self.unit_price))
+    # self.price = (1 + self.margin) * ((self.quantity_base * self.base_price) + (self.quantity * self.unit_price))
+    assign_attributes(price: (1 + margin) * ((quantity_base * base_price) + (quantity * unit_price)))
   end
 
 end

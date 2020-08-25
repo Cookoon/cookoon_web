@@ -48,8 +48,25 @@
         <h3 class="mt-3">Services</h3>
         <% if @reservation.services.present? %>
           <% @reservation.services.each do |service| %>
-            <p><%= service.category %></p>
-            <p><%= service.unit_price %></p>
+            <div class="mb-5">
+              <p><%= service.name %></p>
+              <p>Tarif: <%= service.quantity %> x <%= service.unit_price %></p>
+              <p>Frais de service: <%= service.quantity_base %> x <%= service.base_price %></p>
+              <p>Marge: <%= service.margin %></p>
+              <p>Total HT avec marge: <%= service.price %></p>
+              <% if @reservation.accepts_new_service? %>
+                <%= link_to 'Modifier', edit_admin_reservation_service_path(@reservation, service), :class => "btn-cookoon btn-cookoon-primary mb-4" %>
+              <% end %>
+            </div>
+          <% end %>
+          <% if @reservation.accepts_new_service? %>
+            <%= link_to 'Ajouter un service', new_admin_reservation_service_path(@reservation), :class => "btn-cookoon btn-cookoon-primary mb-4" %>
+          <% end %>
+          <% if @reservation.needs_services_validation? %>
+            <%= link_to 'Valider les services', admin_reservation_validate_services_path(@reservation), :class => "btn-cookoon btn-cookoon-primary mb-4", method: :patch %>
+          <% end %>
+          <% if @reservation.needs_services_payment_asking? %>
+            <%= link_to 'Demander le paiement des services', admin_reservation_ask_services_payment_path(@reservation), :class => "btn-cookoon btn-cookoon-primary mb-4", method: :patch %>
           <% end %>
         <% else %>
           <p>Aucun service n'a été sélectionné</p>

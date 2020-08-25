@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_23_100809) do
+ActiveRecord::Schema.define(version: 2020_08_24_121106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -202,7 +202,7 @@ ActiveRecord::Schema.define(version: 2020_08_23_100809) do
     t.integer "menu_with_tax_cents", default: 0, null: false
     t.string "cookoon_butler_payment_status", default: "initial", null: false
     t.string "menu_status", default: "initial", null: false
-    t.string "services_payment_status", default: "initial", null: false
+    t.string "services_status", default: "initial", null: false
     t.integer "butler_price_cents", default: 0, null: false
     t.integer "butler_tax_cents", default: 0, null: false
     t.integer "butler_with_tax_cents", default: 0, null: false

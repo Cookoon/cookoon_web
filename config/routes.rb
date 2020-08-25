@@ -109,8 +109,11 @@ Rails.application.routes.draw do
         patch 'menus/:id/archive_menu', to: 'menus#archive_menu', as: :archive_menu
       end
       resources :reservations, only: %i[index show] do
-        patch :ask_menu_payment
         patch :validate_menu
+        patch :ask_menu_payment
+        resources :services, only: %i[new create edit update]
+        patch :validate_services
+        patch :ask_services_payment
       end
       # patch 'reservations/:id', to: 'reservations#require_payment_for_menus', as: :require_payment_for_menus
       # patch 'reservations/:id', to: 'reservations#validate_menus', as: :validate_menus
