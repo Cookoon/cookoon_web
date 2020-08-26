@@ -78,7 +78,7 @@
         hr
         p.mb-3.font-weight-bold.text-center Régler le chef et le menu:  #{humanized_money_with_symbol(@reservation.menu_with_tax)}TTC
         = render 'credit_cards/selection', url_intent_secret: @url_intent_secret_menu
-      - if @reservation.accepted? && @reservation.services_with_tax > 0
+      - if @reservation.needs_services_payment?
         hr
         hr
         p.mb-3.font-weight-bold.text-center Régler les services: #{humanized_money_with_symbol(@reservation.services_with_tax)}TTC

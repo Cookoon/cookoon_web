@@ -53,8 +53,8 @@ module ReservationStateMachine
         transitions from: :accepted, to: :menu_payment_captured
       end
 
-      event :pay_services do
-        transitions from: :accepted, to: :services_paid
+      event :capture_services_payment do
+        transitions from: [:accepted, :menu_payment_captured], to: :services_payment_captured
       end
 
       event :ask_quotation do

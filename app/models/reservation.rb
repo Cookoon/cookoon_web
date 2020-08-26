@@ -172,7 +172,7 @@ class Reservation < ApplicationRecord
   end
 
   def needs_cookoon_butler_payment?
-    (cookoon_selected? || menu_selected? || services_selected?) && cookoon_butler_with_tax > 0
+    cookoon_butler_with_tax > 0 && (cookoon_selected? || menu_selected? || services_selected?) && cookoon_butler_with_tax > 0
   end
 
   def needs_menu_selection?
@@ -184,7 +184,7 @@ class Reservation < ApplicationRecord
   end
 
   def needs_menu_payment_asking?
-    accepted? && menu_status == "validated"
+    menu_with_tax > 0 && accepted? && menu_status == "validated"
   end
 
   def needs_menu_payment?
@@ -196,7 +196,11 @@ class Reservation < ApplicationRecord
   end
 
   def needs_services_payment_asking?
-    services_status == "validated" && ((accepted? && menu_status == "cooking_by_user") || menu_payment_captured?)
+    services_with_tax > 0 && services_status == "validated" && ((accepted? && menu_status == "cooking_by_user") || menu_payment_captured?)
+  end
+
+  def needs_services_payment?
+    services_status == "payment_required" && ((accepted? && menu_status == "cooking_by_user") || menu_payment_captured?)
   end
 
   def accepts_new_service?

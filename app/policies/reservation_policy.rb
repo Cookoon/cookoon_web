@@ -61,7 +61,7 @@ class ReservationPolicy < ApplicationPolicy
   end
 
   def secret_services?
-    # To do
+    record.user == user && record.needs_services_payment?
   end
 
   class Scope < Scope

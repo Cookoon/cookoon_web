@@ -7,14 +7,17 @@ class Reservation
       reservation.charge! if errors.empty?
     end
 
-    def pay_services
-      reservation.pay_services! if errors.empty?
-    end
-
     def capture_menu_payment
       if errors.empty?
         reservation.capture_menu_payment!
         reservation.update(menu_status: "captured")
+      end
+    end
+
+    def capture_services_payment
+      if errors.empty?
+        reservation.capture_services_payment!
+        reservation.update(services_status: "captured")
       end
     end
 
