@@ -70,8 +70,8 @@ class PaymentsController < ApplicationController
         flash.alert = "Une erreur est survenue, néanmoins votre demande de paiement est bien effective. Veuillez contacter notre service d'aide"
         redirect_to home_path
       end
-    elsif @reservation.accepted?
-      if payment.pay_services
+    elsif @reservation.needs_services_payment?
+      if payment.capture_services_payment
         flash.notice = "Votre paiement a bien été effectué"
         redirect_to home_path
       else
