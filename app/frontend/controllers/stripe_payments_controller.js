@@ -46,13 +46,13 @@ export default class extends Controller {
     // console.log(response);
 
     const data = await response.json();
-    // console.log(data.client_secret);
+    // console.log(data.clientSecret);
 
     // this.paymentSelected = this.paymentSelectionTarget.selectedOptions[0].innerHTML;
     this.paymentSelected = this.paymentSelectionTarget.selectedOptions[0].value;
     // console.log(this.paymentSelected);
 
-    const result = await this.stripe.confirmCardPayment(data.client_secret, {
+    const result = await this.stripe.confirmCardPayment(data.clientSecret, {
       payment_method: this.paymentSelected
       }
     );
