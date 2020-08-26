@@ -15,7 +15,14 @@ module Admin
       authorize @service, policy_class: Admin::ServicePolicy
       @service.assign_attributes(service_params_category)
       if @service.save
-        redirect_to edit_admin_reservation_service_path(@reservation, @service)
+        @reservation.assign_prices
+        if @reservation.save
+          flash[:notice] = "Le service a bien été créé"
+          redirect_to edit_admin_reservation_service_path(@reservation, @service)
+        else
+          flash[:alert] = "Il y a eu un problème"
+          render :edit
+        end
       else
         flash[:alert] = "Il y a eu un problème"
         render :new
