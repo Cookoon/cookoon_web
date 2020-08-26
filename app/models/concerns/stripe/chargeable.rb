@@ -15,8 +15,12 @@ module Stripe
       persist_intent(cookoon_stripe_intent_id)
     end
 
-    def return_stripe_client_secret
-      return_client_secret
+    # def return_stripe_client_secret
+    #   return_client_secret
+    # end
+
+    def return_stripe_intent
+      return_intent
     end
 
     # def capture_stripe_intent
@@ -118,8 +122,12 @@ module Stripe
       }
     end
 
-    def return_client_secret
-      return stripe_intent.client_secret if stripe_intent
+    # def return_client_secret
+    #   return stripe_intent.client_secret if stripe_intent
+    # end
+
+    def return_intent
+      return stripe_intent if stripe_intent
     end
   end
 end
