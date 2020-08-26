@@ -122,7 +122,8 @@ class PaymentsController < ApplicationController
 
   def proceed_payment(payment, stripe_intent)
     if payment.create_or_retrieve_and_update(stripe_intent)
-      @stripe_intent_secret_json = {client_secret: payment.return_stripe_client_secret}.to_json
+      # @stripe_intent_secret_json = {client_secret: payment.return_stripe_client_secret}.to_json
+      @stripe_intent = payment.return_stripe_intent
     else
       flash.alert = payment.displayable_errors
       redirect_to new_reservation_payment_path(payment.payable)
