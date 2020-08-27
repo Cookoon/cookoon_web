@@ -67,8 +67,8 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method     = :postmark
   config.action_mailer.postmark_settings   = { api_token: ENV['POSTMARK_API_KEY'] }
-  config.action_mailer.default_url_options = { host: 'app.cookoon.fr' }
-  config.roadie.url_options = { host: 'app.cookoon.fr', scheme: 'https' }
+  config.action_mailer.default_url_options = { host: 'membre.cookoon.club' }
+  config.roadie.url_options = { host: 'membre.cookoon.club', scheme: 'https' }
   config.action_mailer.asset_host = nil
 
   # Ignore bad email addresses and do not raise email delivery errors.
