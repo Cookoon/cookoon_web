@@ -177,11 +177,11 @@ a {
 }
 
 .btn-primary table td {
-  background-color: #004254;
+  /*background-color: #004254;*/
 }
 
 .btn-primary a {
-  background-color: #004254;
+  /*background-color: #004254;*/
   border-color: #004254;
   color: #ffffff;
 }
@@ -262,13 +262,13 @@ hr {
   width: 100%;
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
-  background-color: #004254;
+  /*background-color: #004254;*/
 }
 .header img {
   display: block;
   border-top-left-radius: 7px;
   border-top-right-radius: 7px;
-  background-color: #004254;
+  /*background-color: #004254;*/
   color: #fff;
 }
 
