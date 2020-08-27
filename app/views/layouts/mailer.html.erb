@@ -10,6 +10,18 @@
           PRESERVE THESE STYLES IN THE HEAD
       ------------------------------------- */
       @media all {
+        h1, p, ul, ol, td, span, a {
+          font-family: 'Avenir', serif !important;
+        }
+        a {
+          color: #CDBB8A;
+          font-style: italic;
+        }
+        h4 {
+          color: #CDBB8A;
+          margin-block-start: 2em;
+          margin-block-end: 1em;
+        }
         .ExternalClass {
           width: 100%;
         }
@@ -100,11 +112,12 @@
           <div class="content">
 
             <!-- START CENTERED WHITE CONTAINER -->
-            <span class="preheader"><%= message.subject %></span>
+            <!-- <span class="preheader"><%= message.subject %></span> -->
             <table border="0" cellpadding="0" cellspacing="0" class="main">
               <tr>
                 <td align="center" class="header">
-                  <%= image_tag('mailer-header.jpg', alt: 'COOKOON') %>
+                  <%#= image_tag('mailer-header.jpg', alt: 'COOKOON') %>
+                  <%= link_to "#{image_tag('cookoon-logo-favicon.png', alt: 'COOKOON', style:'width: 75px; padding: 2rem 0')}".html_safe, 'https://membre.cookoon.club/', target: :_blank %>
                 </td>
               </tr>
 
@@ -116,11 +129,24 @@
                     <tr>
                       <td>
                         <%= yield %>
-                        <p>
+                        <!-- <p>
                           A très bientôt sur Cookoon,
                           <br>Quentin & Grégory
-                        </p>
-                        <%= yield :post_scriptum %>
+                        </p> -->
+                        <%#= yield :post_scriptum %>
+                        <div style="margin-block-start: 2em; margin-block-end: 1.5em; text-align: center;">
+                          <% 3.times do %>
+                            <%= image_tag("cookoon-losange.png", size: '18')%>
+                          <% end %>
+                        </div>
+                        <div>
+                          <p>Nous restons à votre entière disposition pour répondre à toutes vos questions. Vous pouvez répondre à cet email ou contacter la conciergerie au 01 83 62 91 72.</p>
+                          <p>A très bientôt,</p>
+                          <p>Valérie Winston
+                            <br>Accueil membres Cookoon
+                            <br><%= link_to 'membre.cookoon.club', 'https://membre.cookoon.club/', target: :_blank %>
+                          </p>
+                        </div>
                       </td>
                     </tr>
                   </table>
@@ -128,29 +154,29 @@
               </tr>
 
               <!-- END MAIN CONTENT AREA -->
-              <tr>
+              <!-- <tr>
                 <td align="center" class="prefooter">
                   <b>COOKOON</b>
-                  <br>Partagez vos expériences avec <%= link_to '#cookoonlife', 'https://twitter.com/search?f=tweets&q=%23cookoonlife', target: :_blank %>
+                  <br>Partagez vos expériences avec <%#= link_to '#cookoonlife', 'https://twitter.com/search?f=tweets&q=%23cookoonlife', target: :_blank %>
                   <div class="social-icons">
-                    <%= link_to 'https://www.facebook.com/groups/378511112571275', target: :_blank do %>
-                      <%= image_tag 'facebook-negative.png', alt: 'Facebook' %>
-                    <% end %>
-                    <%= link_to 'https://fr.linkedin.com/company/cookoon', target: :_blank do %>
-                      <%= image_tag 'linkedin-negative.png', alt: 'LinkedIn' %>
-                    <% end %>
+                    <%#= link_to 'https://www.facebook.com/groups/378511112571275', target: :_blank do %>
+                      <%#= image_tag 'facebook-negative.png', alt: 'Facebook' %>
+                    <%# end %>
+                    <%#= link_to 'https://fr.linkedin.com/company/cookoon', target: :_blank do %>
+                      <%#= image_tag 'linkedin-negative.png', alt: 'LinkedIn' %>
+                    <%# end %>
                   </div>
                 </td>
-              </tr>
+              </tr> -->
             </table>
 
             <!-- START FOOTER -->
-            <div class="footer">
-              <table border="0" cellpadding="0" cellspacing="0">
+            <div class="footer" style="margin-top: 1em;">
+              <table border="0" cellpadding="0" cellspacing="0" style="margin-left: auto; margin-right: auto">
                 <tr>
-                  <td class="content-block">
+                  <td class="content-block" style="text-align: center;">
                     <span class="apple-link">Réceptions Nouvelles SAS, 12 rue Lincoln, 75008 Paris</span>
-                    <br>Vous ne souhaitez plus recevoir nos emails ? <%= mail_to 'concierge@cookoon.fr', 'Dites-le nous', target: :_blank %>
+                    <br>Vous ne souhaitez plus recevoir nos emails ? <%= mail_to 'concierge@cookoon.fr', 'Dites-le nous', target: :_blank, subject: "Je ne souhaite plus recevoir d'e-mail", body: "Bonjour, \n \n je ne souhaite plus recevoir d'e-mail de la part de membre.cookoon.club." %>
                   </td>
                 </tr>
               </table>
