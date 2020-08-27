@@ -13,7 +13,7 @@
     "relation": ["delegate_permission/common.get_login_creds"],
     "target": {
       "namespace": "web",
-      "site": "https://membre.cookoon.club"
+      "site": "https://app.cookoon.fr"
     }
   },
   {
