@@ -1,4 +1,9 @@
-<p>Cher(e)<%= " #{@resource.first_name.capitalize}" if @resource.first_name.present? %>,</p>
+<% if @resource.first_name.present? %>
+  <p>Cher(e) <%= "#{@resource.first_name.capitalize}" %>,</p>
+<% else %>
+  <p>Bonjour,</p>
+<% end %>
+
 <p>Vous avez été convié(e) à rejoindre Cookoon par <b><%= @resource.invited_by&.full_name %></b>, nous sommes ravis de vous accueillir.</p>
 <p>Cookoon est un club qui rassemble des membres sensibles à la gastronomie, aux arts de la table et plus généralement à l'expression artistique sous différentes formes.</p>
 
@@ -6,12 +11,9 @@
 
 <p>Votre adresse pour vous connecter : <b><%= @resource.email %></b></p>
 
-<p>Pour créer votre compte, suivez le lien ci-dessous :</p>
-<table border="0" cellpadding="0" cellspacing="10" class="btn btn-primary"><tbody><tr>
-  <td align="center">
-    <%= link_to 'Je deviens membre Cookoon !', accept_invitation_url(@resource, invitation_token: @token), target: :_blank %>
-  </td>
-</tr></tbody></table>
+<p>Pour créer votre compte, suivez le lien ci-dessous :
+  <br><%= link_to 'Je deviens membre Cookoon !', accept_invitation_url(@resource, invitation_token: @token), target: :_blank %>
+</p>
 
 <h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> Recevoir chez Cookoon</h4>
 <p>Sur <%= link_to 'membre.cookoon.club', 'https://membre.cookoon.club/', target: :_blank %>, vous pourrez composer le repas ou le cocktail de vos rêves en choisissant un lieu exceptionnel, un chef talentueux et un menu. Cookoon vous fera ainsi vivre ainsi qu'à vos convives une expérience sur-mesure et unique.</p>
