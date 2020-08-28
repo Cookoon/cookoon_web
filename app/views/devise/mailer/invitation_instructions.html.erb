@@ -9,7 +9,9 @@
 
 <p>En étant membre Cookoon, vous pouvez organiser vos réceptions, proposer un lieu afin que d'autres membres puissent le louer ponctuellement pour un repas ou un cocktail, et enfin coopter d'autres membres lorsque nous vous octroyons des invitations.</p>
 
-<p>Votre adresse pour vous connecter : <b><%= @resource.email.to_s %></b></p>
+<p>Votre adresse pour vous connecter :
+  <a style="font-weight: bold; text-decoration: none; font-style: normal; color: black"><%= @resource.email %></a>
+</p>
 
 <p>Pour créer votre compte, suivez le lien ci-dessous :
   <br><%= link_to 'Je deviens membre Cookoon !', accept_invitation_url(@resource, invitation_token: @token), target: :_blank %>
