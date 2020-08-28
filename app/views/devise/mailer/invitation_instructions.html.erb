@@ -1,5 +1,5 @@
 <p>Cher(e)<%= " #{@resource.first_name.capitalize}" if @resource.first_name.present? %>,</p>
-<p>Vous avez été convié(e) à rejoindre Cookoon par <%= @resource.invited_by&.full_name %>, nous sommes ravis de vous accueillir.</p>
+<p>Vous avez été convié(e) à rejoindre Cookoon par <b><%= @resource.invited_by&.full_name %></b>, nous sommes ravis de vous accueillir.</p>
 <p>Cookoon est un club qui rassemble des membres sensibles à la gastronomie, aux arts de la table et plus généralement à l'expression artistique sous différentes formes.</p>
 
 <p>En étant membre Cookoon, vous pouvez organiser vos réceptions, proposer un lieu afin que d'autres membres puissent le louer ponctuellement pour un repas ou un cocktail, et enfin coopter d'autres membres lorsque nous vous octroyons des invitations.</p>
