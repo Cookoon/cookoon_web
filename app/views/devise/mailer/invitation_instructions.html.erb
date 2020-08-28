@@ -11,7 +11,7 @@
 
 <p>Votre adresse pour vous connecter :
   <!-- <a style="font-weight: bold; text-decoration: none; font-style: normal; color: black"><%#= @resource.email %></a> -->
-  <%= link_to "#{@resource.email}", accept_invitation_url(@resource, invitation_token: @token), target: :_blank, style: "font-weight: bold" %>
+  <%= link_to "#{@resource.email}", accept_invitation_url(@resource, invitation_token: @token), target: :_blank, style: "font-weight: bold; text-decoration: none; font-style: normal; color: black" %>
 </p>
 
 <p>Pour créer votre compte, suivez le lien ci-dessous :
