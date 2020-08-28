@@ -35,6 +35,9 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   config.action_mailer.delivery_method = :letter_opener
+  # To send mails, comment the line before and uncomment the two following lines
+  # config.action_mailer.delivery_method     = :postmark
+  # config.action_mailer.postmark_settings   = { api_token: ENV['POSTMARK_API_KEY'] }
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
   config.roadie.url_options = { host: 'localhost', scheme: 'http', port: 3000 }
 
