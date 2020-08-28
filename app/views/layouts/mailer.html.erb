@@ -30,11 +30,23 @@
           text-decoration: none !important;
         }
         .btn-primary table td:hover {
-          background-color: #095b70 !important;
+          /*background-color: #095b70 !important;*/
         }
         .btn-primary a:hover {
-          background-color: #095b70 !important;
-          border-color: #095b70 !important;
+          /*background-color: #095b70 !important;*/
+          /*border-color: #095b70 !important;*/
+        }
+        a {
+          color: #CDBB8A;
+        }
+        h1, h4, p, ul, ol, td, span, a {
+          font-family: 'Avenir', serif;
+          font-style: italic;
+        }
+        h4 {
+          color: #CDBB8A;
+          margin-block-start: 2em;
+          margin-block-end: 1em;
         }
       }
       /* -------------------------------------
@@ -105,7 +117,7 @@
               <tr>
                 <td align="center" class="header">
                   <%#= image_tag('mailer-header.jpg', alt: 'COOKOON') %>
-                  <%= link_to "#{image_tag('cookoon-logo-favicon.png', alt: 'COOKOON', style:'width: 75px; padding: 2rem 0')}".html_safe, 'https://membre.cookoon.club/', target: :_blank %>
+                  <%= link_to "#{image_tag('cookoon-logo-favicon.png', alt: 'COOKOON', style:'width: 75px; padding: 2rem 0')}".html_safe, 'https://cookoon.club/', target: :_blank %>
                 </td>
               </tr>
 
@@ -132,6 +144,7 @@
                           <p>Valérie Winston
                             <br>Accueil membres Cookoon
                             <br><%= link_to 'membre.cookoon.club', 'https://membre.cookoon.club/', target: :_blank %>
+                            <br><%= link_to 'cookoon.club', 'https://cookoon.club/', target: :_blank %>
                           </p>
                         </div>
                         <%= yield :post_scriptum %>
@@ -160,7 +173,7 @@
 
             <!-- START FOOTER -->
             <div class="footer">
-              <table border="0" cellpadding="0" cellspacing="0">
+              <table border="0" cellpadding="0" cellspacing="0" style="margin-right: auto; margin-left: auto;">
                 <tr>
                   <td class="content-block">
                     <span class="apple-link">Réceptions Nouvelles SAS, 12 rue Lincoln, 75008 Paris</span>
