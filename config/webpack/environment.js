@@ -18,6 +18,4 @@ environment.plugins.prepend(
   new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
 );
 
-environment.loaders.delete('nodeModules');
-
 module.exports = environment;
