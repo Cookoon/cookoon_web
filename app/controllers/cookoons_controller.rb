@@ -25,6 +25,12 @@ class CookoonsController < ApplicationController
 
   def show
     @sample_photos = @cookoon.sample_photos
+    if @cookoon.geocoded?
+      @marker = {
+        lat: @cookoon.latitude,
+        lng: @cookoon.longitude
+      }
+    end
   end
 
   def new

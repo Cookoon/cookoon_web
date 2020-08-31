@@ -110,7 +110,7 @@
     }
   }
 
-  >.fourth_element {
+  >.fourth_element, #map_container {
     @media (min-width: 992px) {
       grid-column: 4 / span 4 ;
       grid-row: 4 / span 3;
