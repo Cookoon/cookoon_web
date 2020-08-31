@@ -18,4 +18,7 @@ environment.plugins.prepend(
   new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
 );
 
+// Preventing Babel from transpiling NodeModules packages
+environment.loaders.delete('nodeModules');
+
 module.exports = environment;
