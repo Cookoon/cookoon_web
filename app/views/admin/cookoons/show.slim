@@ -17,7 +17,10 @@
     .col-12.col-md-8.col-lg-9.px-0
       = render 'cookoons/details_part', cookoon: @cookoon
 
-      = render 'cookoons/architect_part', cookoon: @cookoon, sample_photos: @sample_photos, button_title: 'Modifier', button_path: edit_admin_cookoon_path(@cookoon), button_method: :get
+      - if @cookoon.geocoded?
+        = render 'cookoons/architect_part', cookoon: @cookoon, sample_photos: @sample_photos, marker: @marker, button_title: 'Modifier', button_path: edit_admin_cookoon_path(@cookoon), button_method: :get
+      - else
+        = render 'cookoons/architect_part', cookoon: @cookoon, sample_photos: @sample_photos, button_title: 'Modifier', button_path: edit_admin_cookoon_path(@cookoon), button_method: :get
 
       .mt-5
         h5.mt-3 Spécifications non sélectionnées
