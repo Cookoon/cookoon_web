@@ -8,7 +8,10 @@
     .second_element_full_column style="background-image:url(#{cl_image_path(sample_photos.second.path)})"
     .third_element_full_row style="background-image:url(#{cl_image_path(sample_photos.third.path)})"
 
-  .fourth_element style="background-image:url(#{cl_image_path(sample_photos.fourth.path)})"
+  - if cookoon.geocoded?
+    div id='map_container' data-marker=marker.to_json data-mapbox-api-key=ENV['MAPBOX_API_KEY'] data-controller='mapbox' data-target='mapbox.map'
+  - else
+    .fourth_element style="background-image:url(#{cl_image_path(sample_photos.fourth.path)})"
 
   .fifth_element
     = link_to "", data: {toggle: "modal", target: "#cookoon-photos-modal"}, class: "see_pictures_card " do
