@@ -10,7 +10,7 @@
     "bootstrap-slider": "^10.0.0",
     "cloudinary-jquery-file-upload": "cloudinary/pkg-cloudinary-jquery-file-upload",
     "flatpickr": "^4.4.4",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "jquery-touchswipe": "^1.6.18",
     "jquery-ui": "^1.12.1",
     "mapbox-gl": "^1.12.0",
