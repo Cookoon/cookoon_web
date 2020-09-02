@@ -7,6 +7,7 @@ class User < ApplicationRecord
   scope :invited_in_day_range_around, ->(date_time) { pending_invitation.where invitation_sent_at: day_range(date_time) }
   scope :joined_in_day_range_around, ->(date_time) { where invitation_accepted_at: day_range(date_time) }
   scope :missing_stripe_account, -> { where(stripe_account_id: nil) }
+  scope :with_stripe_account, -> { where.not(stripe_account_id: nil) }
   scope :with_cookoon_created_in_day_range_around, ->(date_time) { joins(:cookoons).merge(Cookoon.created_in_day_range_around(date_time)).distinct }
   scope :with_reservation_in_day_range_around, ->(date_time) { joins(:reservations).merge(Reservation.created_in_day_range_around(date_time)).distinct }
   scope :with_reservation_finished_in_day_range_around, ->(date_time) { joins(:reservations).merge(Reservation.finished_in_day_range_around(date_time)).distinct }
@@ -99,6 +100,33 @@ class User < ApplicationRecord
     cookoons.count >= Cookoon::MAX_PER_USER
   end
 
+  def stripe_bank_account?
+    stripe_account? && stripe_account.external_accounts.present?
+  end
+
+  def stripe_bank_account_name
+    stripe_bank_account.data.first.bank_name
+  end
+
+  def stripe_bank_account_last_four
+    stripe_bank_account.data.first.last4
+  end
+
+  def stripe_account_requirements_currently_due?
+    stripe_account? && stripe_account.requirements.currently_due.present?
+  end
+
+  def stripe_account_requirements_currently_due
+    return false unless stripe_account_requirements_currently_due?
+    stripe_account.requirements.currently_due
+  end
+
+  def stripe_account_identity_requirements?
+    return false unless stripe_account_requirements_currently_due?
+    stripe_account_identity_requirements = ["business_profile.url", "individual.verification.additional_document", "individual.verification.document"]
+    stripe_account_requirements_currently_due.any? {|requirement| stripe_account_identity_requirements.include?(requirement)}
+  end
+
   private
 
   def report_to_slack
@@ -128,24 +156,12 @@ class User < ApplicationRecord
     UpsertMailchimpSubscriptionJob.perform_later(email, ENV['MAILCHIMP_LIST_ID'], body)
   end
 
-  # # To implement later
-  # def stripe_account?
-  #   stripe_account.present?
-  # end
+  def stripe_bank_account
+    stripe_account.external_accounts
+  end
 
-  # def stripe_bank_account?
-  #   stripe_account? && !stripe_account.external_accounts.empty?
-  #   # stripe_account.external_accounts
-  # end
+  def stripe_account?
+    stripe_account.present?
+  end
 
-  # def stripe_account_requirements?
-  #   stripe_account? && !stripe_account.requirements.currently_due.empty?
-  #   # stripe_account.requirements
-  # end
-
-  # def stripe_account_identity_requirements?
-  #   return false unless stripe_account_requirements?
-  #   stripe_account_identity_requirements = ["business_profile.url", "individual.verification.additional_document", "individual.verification.document"]
-  #   stripe_account.requirements.currently_due.any? {|requirement| stripe_account_identity_requirements.include?(requirement)}
-  # end
 end
