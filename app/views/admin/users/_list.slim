@@ -1,0 +1,13 @@
+- users.each do |user|
+  .row.mx-0
+    .mb-3
+      = user.full_name
+      - if user.stripe_bank_account?
+        ul.mb-0
+          li banque: #{user.stripe_bank_account_name}
+          li 4 derniers chiffres: #{user.stripe_bank_account_last_four}
+          - if user.stripe_account_requirements_currently_due?
+            .d-flex.flex-row.space-between
+            li documents manquants: #{user.stripe_account_requirements_currently_due})
+            - if user.stripe_account_identity_requirements?
+              = link_to "Ajouter les documents d'identité", admin_user_add_identity_documents_path(user), class: 'btn btn-cookoon btn-cookoon-primary', method: :patch

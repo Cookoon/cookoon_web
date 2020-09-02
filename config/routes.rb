@@ -115,6 +115,9 @@ Rails.application.routes.draw do
         patch :validate_services
         patch :ask_services_payment
       end
+      resources :users, only: %i[index] do
+        patch 'users', to: 'users#add_identity_documents', as: :add_identity_documents
+      end
       # patch 'reservations/:id', to: 'reservations#require_payment_for_menus', as: :require_payment_for_menus
       # patch 'reservations/:id', to: 'reservations#validate_menus', as: :validate_menus
     end
