@@ -1,7 +1,5 @@
 class StripeAccountService
-  attr_reader :params, :user, :errors, :account
-  # # To implement later :
-  # , :stripe_account_link_id_verification
+  attr_reader :params, :user, :errors, :account, :stripe_account_link_id_verification
 
   def initialize(attributes)
     @params = attributes[:params]
@@ -26,11 +24,10 @@ class StripeAccountService
     retrieve_account
   end
 
-  # # To implement later
-  # def add_identity_documents_for_existing_accounts
-  #   retrieve_stripe_account
-  #   create_stripe_url_id_verification
-  # end
+  def add_identity_documents_for_existing_account
+    retrieve_stripe_account
+    create_stripe_url_id_verification
+  end
 
   private
 
@@ -106,25 +103,34 @@ class StripeAccountService
     end
   end
 
-  # # To implement later
-  # def create_stripe_url_id_verification
-  #   return false unless account
-  #   @stripe_account_link_id_verification = Stripe::AccountLink.create(prepare_account_link)
-  # rescue Stripe::InvalidRequestError => e
-  #   Rails.logger.error('Failed to create link to verify identity')
-  #   Rails.logger.error(e.message)
-  #   @errors << e.message
-  #   false
-  # end
+  def create_stripe_url_id_verification
+    return false unless account
+    @stripe_account_link_id_verification = Stripe::AccountLink.create(prepare_account_link)
+  rescue Stripe::InvalidRequestError => e
+    Rails.logger.error('Failed to create link to verify identity')
+    Rails.logger.error(e.message)
+    @errors << e.message
+    false
+  end
 
-  # # To implement later
-  # def prepare_account_link
-  #   {
-  #     account: user.stripe_account_id,
-  #     failure_url: "http://localhost:3000/",
-  #     success_url: "http://localhost:3000/",
-  #     type: 'custom_account_verification',
-  #     collect: 'currently_due'
-  #   }
-  # end
+  def prepare_account_link
+    if Rails.env.development? # Rails.env == "development"
+      refresh_url = 'http://localhost:3000/admin/users'
+      return_url = 'http://localhost:3000/admin/users'
+    elsif Rails.env.staging?
+      refresh_url = 'https://cookoon-staging.herokuapp.com/admin/users'
+      return_url = 'https://cookoon-staging.herokuapp.com/admin/users'
+    elsif Rails.env.production?
+      refresh_url = 'https://membre.cookoon.club/admin/users'
+      return_url = 'https://membre.cookoon.club/admin/users'
+    end
+
+    {
+      account: user.stripe_account_id,
+      refresh_url: refresh_url, # redirection url if problem
+      return_url: return_url, # redirection url after completed
+      type: 'account_onboarding',
+      collect: 'currently_due'
+    }
+  end
 end
