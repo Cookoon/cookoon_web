@@ -19,7 +19,7 @@ class ReservationDecorator < Draper::Decorator
 
   def recap_string_butler_count
     butler_count == 1 ? butler = "maître d'hôtel" : butler = "maîtres d'hôtel"
-    "Votre service assuré par #{butler_count} #{butler}."
+    "Votre service assuré par #{butler_count.humanize} #{butler}."
   end
 
   def default_people_count
