@@ -23,4 +23,4 @@
           .cookoon-cards
             - @chefs.each do |chef|
               = render 'card_only_chef', chef: chef, path: reservation_chef_path(@reservation, chef)
-            .cookoon-card-in-last-column = link_to 'Je souhaite cuisiner moi-même', cooking_by_user_reservation_path(@reservation), class: 'btn-cookoon btn-block btn-gray text-black', method: :patch
+            .cookoon-card-in-last-column.text-center = link_to 'Je souhaite cuisiner moi-même', cooking_by_user_reservation_path(@reservation), class: 'btn-cookoon btn-block btn-gray text-black', method: :patch
