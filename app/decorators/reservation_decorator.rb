@@ -12,6 +12,16 @@ class ReservationDecorator < Draper::Decorator
     "Votre réception se prolongera jusqu'à #{end_at_time}."
   end
 
+  def recap_string_start_and_end_time
+    end_at.strftime('%kH%M') == " 0H00" ? end_at_time = "minuit" : end_at_time = end_at.strftime('%kH%M')
+    "Votre décor de #{start_at.strftime('%kH%M')} à #{end_at_time}."
+  end
+
+  def recap_string_butler_count
+    butler_count == 1 ? butler = "maître d'hôtel" : butler = "maîtres d'hôtel"
+    "Votre service assuré par #{butler_count} #{butler}."
+  end
+
   def default_people_count
     10
   end
