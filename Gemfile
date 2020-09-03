@@ -68,6 +68,7 @@ gem 'sidekiq'
 gem 'sidekiq-failures'
 gem 'simple_form'
 gem 'slim-rails'
+gem 'humanize'
 
 # Admin
 gem 'forest_liana'
