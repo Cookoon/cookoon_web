@@ -15,9 +15,9 @@
       = render 'cookoons/details_part', cookoon: @cookoon
 
       - if @cookoon.geocoded?
-        = render 'cookoons/architect_part', cookoon: @cookoon, sample_photos: @sample_photos, marker: @marker, button_title: 'Choisir', button_path: reservation_cookoon_select_cookoon_path(@reservation, @cookoon), button_method: :patch
+        = render 'cookoons/architect_part', cookoon: @cookoon, sample_photos: @sample_photos, marker: @marker, button_title: 'Choisir', button_path: reservation_cookoon_select_cookoon_path(@reservation, @cookoon), button_method: :patch, reservation: @reservation
       - else
-        = render 'cookoons/architect_part', cookoon: @cookoon, sample_photos: @sample_photos, button_title: 'Choisir', button_path: reservation_cookoon_select_cookoon_path(@reservation, @cookoon), button_method: :patch
+        = render 'cookoons/architect_part', cookoon: @cookoon, sample_photos: @sample_photos, button_title: 'Choisir', button_path: reservation_cookoon_select_cookoon_path(@reservation, @cookoon), button_method: :patch, reservation: @reservation
 
 //.container
   h1.text-center.my-4 = @cookoon.name
