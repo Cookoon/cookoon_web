@@ -160,6 +160,7 @@ GEM
       domain_name (~> 0.5)
     httparty (0.16.2)
       multi_xml (>= 0.5.2)
+    humanize (2.4.3)
     i18n (1.8.2)
       concurrent-ruby (~> 1.0)
     i18n-tasks (0.9.23)
@@ -496,6 +497,7 @@ DEPENDENCIES
   forest_liana
   geocoder
   gibbon
+  humanize
   i18n-tasks
   icalendar
   jbuilder (~> 2.5)
