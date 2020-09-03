@@ -89,10 +89,6 @@ cookoons_attributes = [
     long_photo_url: "https://images.unsplash.com/photo-1508502726440-477c94bc369e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
     main_photo_url: "https://images.unsplash.com/photo-1561024172-0ae2ebd65018?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
     citation: "Une vue splendide sur les toits de Paris",
-    architect_name: "Grégory Escure",
-    architect_title: "Architecte - décorateur",
-    architect_build_year: 2020,
-    architect_url: "htpps://membre.cookoon.club"
   },
   {
     user: User.second,
@@ -118,7 +114,6 @@ cookoons_attributes = [
     architect_title: "Architecte - décorateur",
     architect_build_year: 2020,
     architect_url: "htpps://membre.cookoon.club"
-
   },
   {
     user: User.second,
@@ -140,10 +135,6 @@ cookoons_attributes = [
     long_photo_url: "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
     main_photo_url: "https://images.unsplash.com/photo-1559310278-18a9192d909f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
     citation: "Un espace vivant",
-    architect_name: "Grégory Escure",
-    architect_title: "Architecte - décorateur",
-    architect_build_year: 2020,
-    architect_url: "htpps://membre.cookoon.club"
   },
 ]
 
