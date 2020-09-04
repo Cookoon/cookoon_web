@@ -40,7 +40,7 @@ module Host
       # @reservation.payment.cancel
       @reservation.payment.cancel(:stripe_charge_id)
       @reservation.refuse!
-      ReservationMailer.refused_to_tenant(@reservation).deliver_later
+      # ReservationMailer.refused_to_tenant(@reservation).deliver_later
       flash[:notice] = 'Vous avez refusé la réservation'
     end
   end

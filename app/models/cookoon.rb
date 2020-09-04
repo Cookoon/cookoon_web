@@ -83,7 +83,7 @@ class Cookoon < ApplicationRecord
 
   def notify_approved
     return unless saved_change_to_status == %w[under_review approved]
-    CookoonMailer.notify_approved(self).deliver_later
+    # CookoonMailer.notify_approved(self).deliver_later
   end
 
   def count_per_user

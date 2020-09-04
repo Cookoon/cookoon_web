@@ -8,7 +8,7 @@ module Forest
       users = ::User.where(id: ids)
       users.each do |user|
         user.invitation_limit += invitation_quantity
-        UserMailer.notify_invitations_awarded(user, invitation_quantity, message).deliver_later if user.invitation_accepted?
+        # UserMailer.notify_invitations_awarded(user, invitation_quantity, message).deliver_later if user.invitation_accepted?
         user.save(validate: false)
       end
 
