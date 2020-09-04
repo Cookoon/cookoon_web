@@ -6,7 +6,7 @@ class NotifyUserFiveDaysAfterInviteJob < ApplicationJob
     User.all_emails.invited_in_day_range_around(scheduled_date_time.ago(5.days)).each do |user|
       user.invite! { |u| u.skip_invitation = true }
       new_token = user.raw_invitation_token
-      UserMailer.notify_five_days_after_invite(user, new_token).deliver_later
+      # UserMailer.notify_five_days_after_invite(user, new_token).deliver_later
     end
   end
 end

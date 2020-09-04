@@ -105,18 +105,18 @@ class Reservation < ApplicationRecord
   end
 
   def notify_users_after_payment
-    ReservationMailer.paid_request_to_tenant(self).deliver_later
-    ReservationMailer.paid_request_to_host(self).deliver_later
+    # ReservationMailer.paid_request_to_tenant(self).deliver_later
+    # ReservationMailer.paid_request_to_host(self).deliver_later
   end
 
   def notify_users_after_confirmation
-    ReservationMailer.confirmed_to_tenant(self).deliver_later
-    ReservationMailer.confirmed_to_host(self).deliver_later
+    # ReservationMailer.confirmed_to_tenant(self).deliver_later
+    # ReservationMailer.confirmed_to_host(self).deliver_later
   end
 
   def admin_close
     payment.transfer
-    ReservationMailer.notify_payout_to_host(self).deliver_later
+    # ReservationMailer.notify_payout_to_host(self).deliver_later
 
     close!
     send_ending_surveys
@@ -134,8 +134,8 @@ class Reservation < ApplicationRecord
   end
 
   def send_ending_surveys
-    ReservationMailer.ending_survey_to_tenant(self).deliver_later
-    ReservationMailer.ending_survey_to_host(self).deliver_later
+    # ReservationMailer.ending_survey_to_tenant(self).deliver_later
+    # ReservationMailer.ending_survey_to_host(self).deliver_later
   end
 
   def invoice?
