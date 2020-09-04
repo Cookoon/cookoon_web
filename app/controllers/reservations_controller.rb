@@ -38,9 +38,10 @@ class ReservationsController < ApplicationController
 
   def select_cookoon
     if @reservation.select_cookoon!(@cookoon)
-      redirect_to reservation_chefs_path
+      # redirect_to reservation_chefs_path
+      redirect_to reservation_cookoon_path(@reservation, @cookoon)
     else
-      redirect_to reservation_cookoon_path(@reservation, @cookoon), alert: "Une erreur s'est produite, veuillez essayer à nouveau"
+      redirect_to reservation_cookoons_path(@reservation), alert: "Une erreur s'est produite, veuillez essayer à nouveau"
     end
   end
 
