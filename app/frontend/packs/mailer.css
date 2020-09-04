@@ -176,7 +176,7 @@ a {
   background-color: #ffffff;
   /*border: solid 1px #004254;*/
   border: solid 1px #CDBB8A;
-  border-radius: 25px;
+  /*border-radius: 25px;*/
   box-sizing: border-box;
   /*color: #004254;*/
   color: #CDBB8A;
@@ -184,7 +184,7 @@ a {
   display: inline-block;
   text-align: center;
   font-size: 14px;
-  font-weight: bold;
+  /*font-weight: bold;*/
   margin: 0;
   padding: 10px 20px;
   text-decoration: none;
@@ -192,6 +192,7 @@ a {
 
 .btn-primary table td {
   /*background-color: #004254;*/
+  background-color: #CDBB8A;
 }
 
 .btn-primary a {
