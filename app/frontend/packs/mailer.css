@@ -183,16 +183,23 @@ a {
   cursor: pointer;
   display: inline-block;
   text-align: center;
-  font-size: 14px;
+  /*font-size: 14px;*/
   /*font-weight: bold;*/
   margin: 0;
   padding: 10px 20px;
   text-decoration: none;
+  font-style: normal;
+  text-transform: uppercase;
 }
 
 .btn-primary table td {
   /*background-color: #004254;*/
   background-color: #CDBB8A;
+}
+
+.btn-primary table td {
+  /*background-color: #004254;*/
+  background-color: #ffffff;
 }
 
 .btn-primary a {
@@ -201,6 +208,14 @@ a {
   /*border-color: #004254;*/
   border-color: #CDBB8A;
   color: #ffffff;
+}
+
+.btn-secondary a {
+  /*background-color: #004254;*/
+  background-color: #ffffff;
+  /*border-color: #004254;*/
+  border-color: #CDBB8A;
+  color: #CDBB8A;
 }
 
 /* -------------------------------------
