@@ -1,4 +1,5 @@
-= link_to reservation_cookoon_path(@reservation, cookoon) do
+//= link_to reservation_cookoon_path(@reservation, cookoon) do
+= link_to reservation_cookoon_select_cookoon_path(@reservation, cookoon), method: :patch, remote: true do
   .cookoon-card.mb-0.h-100.d-flex.flex-column.justify-content-between
     div
       .cookoon-card-image-div-squared
