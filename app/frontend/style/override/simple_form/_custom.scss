@@ -26,6 +26,7 @@ input[type=checkbox] {
   width: 18px;
   background: #fff;
   border: 1px solid #ccc;
+
 }
 
 input[type="checkbox"]:checked {
@@ -64,4 +65,8 @@ label.collection_check_boxes {
 
 #new_reservation > .form-group.hidden {
   margin-bottom: 0 !important;
+}
+
+.form-check-label {
+  margin-left: 0.5rem;
 }
