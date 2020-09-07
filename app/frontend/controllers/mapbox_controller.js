@@ -34,6 +34,8 @@ export default class extends Controller {
     return new mapboxgl.Map({
       container: 'map_container',
       style: 'mapbox://styles/mapbox/streets-v11',
+      center: [2.3488, 48.8534], // starting position [lng, lat]
+      zoom: 10 // starting zoom
     });
   }
 
