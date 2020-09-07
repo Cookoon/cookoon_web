@@ -24,7 +24,7 @@
         hr.primary.mt-n1.mb-1
         p.text-primary.text-center.font-italic.pb-2 signés #{@chef.name}
 
-        = render 'menus/list', menus: @chef.menus.active.includes(:dishes), chef: @chef
+        = render 'admin/menus/list', menus: @chef.menus.active.includes(:dishes), chef: @chef
 
       //.mt-2
         = render 'chefs/perks', chef_perks: @chef.chef_perks
