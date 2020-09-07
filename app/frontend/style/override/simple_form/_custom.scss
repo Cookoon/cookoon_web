@@ -70,3 +70,12 @@ label.collection_check_boxes {
 .form-check-label {
   margin-left: 0.5rem;
 }
+
+.form-group.date.user_born_on > div.d-flex.flex-row.justify-content-between.align-items-center {
+  justify-content: flex-start !important;
+  > select {
+    width: fit-content;
+    margin-left: 0 !important;
+    margin-right: 0.75rem !important;
+  }
+}
