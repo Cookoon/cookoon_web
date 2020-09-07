@@ -64,6 +64,10 @@
   }
 
   >.fourth_element {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     @media (min-width: 768px) {
       grid-column: 2;
       grid-row: 4 / span 2;
