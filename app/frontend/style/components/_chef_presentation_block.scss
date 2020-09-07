@@ -1,0 +1,27 @@
+.chef_presentation_block {
+  .chef_main_picture {
+    background-position: center;
+    background-size: cover;
+
+    // lg-xl
+    @media (min-width: 992px) {
+      height: 50vh;
+    }
+
+    // md
+    @media (min-width: 768px) and (max-width: 991px) {
+      height: 50vh;
+      @media(orientation: landscape) {
+        height: 100vh;
+      }
+    }
+
+    // xs-sm
+    @media (max-width: 767px) {
+      height: 50vh;
+      @media(orientation: landscape) {
+        height: 100vh;
+      }
+    }
+  }
+}
