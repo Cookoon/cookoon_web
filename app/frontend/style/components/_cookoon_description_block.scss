@@ -44,6 +44,11 @@
   }
 
   >.third_element {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    text-align: center;
+
     @media (min-width: 992px) {
       grid-column: 3;
       grid-row: 1;
