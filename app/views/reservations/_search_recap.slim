@@ -14,11 +14,12 @@
     p.search-recap-box-data
       i.co.icon-cookoon-logo.fa-2x.text-primary
 .search-details
+  - if reservation.cookoon.present? || reservation.menu.present?
+    p.small.mt-5.text-primary.font-weight-bold Votre réservation
+    hr.w-50.ml-0
   - if reservation.cookoon.present?
-    p.small.mt-4 Votre décor
-    p.small = reservation.cookoon.name
+    p.small.mt-4 = reservation.cookoon.name
     = cl_image_tag(reservation.cookoon.main_photo.path)
   - if reservation.menu.present?
-    p.small.mt-4 Votre chef
-    p.small = reservation.menu.chef.name
+    p.small.mt-4 = reservation.menu.chef.name
     = cl_image_tag(reservation.menu.chef.main_photo.path)
