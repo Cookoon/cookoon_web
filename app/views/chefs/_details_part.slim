@@ -1,7 +1,7 @@
 .mb-3
   p.text-primary.mb-1 Vous rencontrez...
   .d-flex.justify-content-between
-    h2.font-italic.mb-0 style = "font-family: 'Avenir'" = chef.name
+    h2.mb-0 style = "font-family: 'Avenir'" = chef.name
     = render 'chefs/perks', chef_perks: chef.chef_perks
   div style="height: 250px; background-image: url(#{cl_image_path(chef.main_photo.path)}); background-size: cover; background-position: center"
 
