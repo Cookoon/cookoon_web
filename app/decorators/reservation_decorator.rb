@@ -145,14 +145,14 @@ class ReservationDecorator < Draper::Decorator
 
   def type_names
     {
-      breakfast: 'Petit déjeuner',
-      lunch: 'Déjeuner',
-      diner: 'Dîner',
-      cocktail: 'Cocktail',
-      morning: 'Matinée',
-      day: 'Journée',
-      afternoon: 'Après-midi',
-      brunch: 'Brunch'
+      breakfast: 'petit-déjeuner',
+      lunch: 'déjeuner',
+      diner: 'dîner',
+      cocktail: 'cocktail',
+      morning: 'matinée',
+      day: 'journée',
+      afternoon: 'après-midi',
+      brunch: 'brunch'
     }
   end
 

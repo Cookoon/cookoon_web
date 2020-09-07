@@ -33,6 +33,10 @@
           <li class="nav-item">
             <a href="#menu_payment_captured" class="nav-link" data-toggle="pill" role="tab">Menu payment captured</a>
           </li>
+
+          <li class="nav-item">
+            <a href="#services_payment_captured" class="nav-link" data-toggle="pill" role="tab">Services payment captured</a>
+          </li>
         </ul>
       </div>
 
@@ -46,6 +50,9 @@
           </div>
           <div class="tab-pane fade" id="menu_payment_captured" role="tabpanel">
             <%= render "list", resas: @reservations.menu_payment_captured.decorate %>
+          </div>
+          <div class="tab-pane fade" id="services_payment_captured" role="tabpanel">
+            <%= render "list", resas: @reservations.services_payment_captured.decorate %>
           </div>
         </div>
       </div>

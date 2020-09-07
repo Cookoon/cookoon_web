@@ -9,11 +9,11 @@
         p.mb-0.text-primary <i class="fas fa-map-marker-alt"></i> #{cookoon.address}
       img src=cl_image_path(cookoon.main_photo.path) style="height:250px; width: 100%; object-fit: cover"
       .mt-2 = render 'cookoons/perks_in_show', perks: cookoon.perks.includes(:perk_specification)
-    p.mb-0 = cookoon.description
+    p.mb-0.first-letter-bigger = cookoon.description
 
   .second_element style="background-image:url(#{cl_image_path(cookoon.long_photo.path)})"
 
-  .third_element.d-flex.flex-column.justify-content-end.pt-5
+  .third_element.pt-5
     .citation.mb-2
       span = cookoon.citation
     img src=cl_image_path(@sample_photos.first.path) style="height:250px; width: 100%; object-fit: cover"
