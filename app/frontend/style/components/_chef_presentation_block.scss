@@ -5,22 +5,25 @@
 
     // lg-xl
     @media (min-width: 992px) {
-      height: 50vh;
+      height: 60vh;
+      @media(orientation: portrait) {
+        height: 30vh;
+      }
     }
 
     // md
     @media (min-width: 768px) and (max-width: 991px) {
-      height: 50vh;
+      height: 30vh;
       @media(orientation: landscape) {
-        height: 100vh;
+        height: 80vh;
       }
     }
 
     // xs-sm
     @media (max-width: 767px) {
-      height: 50vh;
+      height: 30vh;
       @media(orientation: landscape) {
-        height: 100vh;
+        height: 80vh;
       }
     }
   }

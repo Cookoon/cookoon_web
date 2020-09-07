@@ -3,7 +3,7 @@
   .d-flex.justify-content-between
     h2.mb-0 style = "font-family: 'Avenir'" = chef.name
     = render 'chefs/perks', chef_perks: chef.chef_perks
-  .chef_main_picture style="background-image: url(#{cl_image_path(chef.main_photo.path, transformation:[{:gravity=>"face"}])})"
+  .chef_main_picture style="background-image: url(#{cl_image_path(chef.main_photo.path)})"
 
 
 .chef_four_elements_block.pb-5
