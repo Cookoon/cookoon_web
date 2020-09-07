@@ -8,8 +8,11 @@
 
 .chef_four_elements_block.pb-5
   .first_element
-    = chef.description
+    .first-letter-bigger = chef.description
     - if @chef.references.present?
+      .text-center.my-2
+        - 3.times do
+          = image_tag("cookoon-losange.png", size: '24')
       .chef_references = simple_format(@chef.references)
   .second_element style="background-image: url(#{cl_image_path(chef.photos.first.path)})"
   .third_element style="background-image: url(#{cl_image_path(chef.photos.second.path)})"

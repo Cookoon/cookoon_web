@@ -1,0 +1,7 @@
+.first-letter-bigger::first-letter {
+  font-size: 3.5rem;
+  float: left;
+  margin: -1rem 0.8rem -1.5rem 0; /* haut | droit | bas | gauche */
+  font-weight: 900;
+  text-transform: capitalize;
+}
