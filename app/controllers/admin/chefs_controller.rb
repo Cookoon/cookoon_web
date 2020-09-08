@@ -51,7 +51,7 @@ module Admin
     def chef_params
       params.require(:chef).permit(
         :name, :description, :references, :min_price, :base_price,
-        :citation, :main_photo, photos: []
+        :citation, :main_photo, :gender, photos: []
       )
     end
 
