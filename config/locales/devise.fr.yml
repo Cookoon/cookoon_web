@@ -10,10 +10,10 @@ fr:
       reset_password_instructions:
         action: Changer mon mot de passe
         greeting: Bonjour %{recipient},
-        instruction: "Pour changer votre mot de passe de connexion à l'application Cookoon, veuillez suivre le lien ci-dessous :"
-        instruction_2: Et laissez-vous guider !
-        instruction_3: Si vous n'avez pas demandé le renouvellement de votre mot de passe - changez-le vite, quelqu'un essaye peut-être d'utiliser votre compte.
-        subject: 'Cookoon : changez votre mot de passe !'
+        instruction: "Pour modifier votre mot de passe sur l'application Cookoon, veuillez suivre le lien ci-dessous :"
+        # instruction_2: Et laissez-vous guider !
+        instruction_3: Si vous n'avez pas demandé le renouvellement de votre mot de passe, nous vous conseillons de le modifier car quelqu'un essaie peut-être d'utiliser votre compte.
+        subject: 'Cookoon : modification de votre mot de passe'
     sessions:
       form:
         first_sign_in: Première Connexion ?
