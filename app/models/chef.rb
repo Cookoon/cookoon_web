@@ -6,6 +6,8 @@ class Chef < ApplicationRecord
   has_attachments :photos, order: 'id ASC'
   has_attachment :main_photo
 
+  GENDER = %w[male female]
+
   validates :name, presence: true
   validates :description, presence: true
   validates :citation, presence: true
@@ -13,6 +15,7 @@ class Chef < ApplicationRecord
   validates :main_photo, presence: true
   validates :base_price, numericality: { greater_than_or_equal_to: 0 }
   validates :min_price, numericality: { greater_than_or_equal_to: 0 }
+  validates :gender, presence: true, inclusion: { in: GENDER }
 
   validate :base_price_or_min_price_positive
 
@@ -49,6 +52,10 @@ class Chef < ApplicationRecord
 
   def computed_base_price_with_margin_and_taxes
     compute_base_price_with_margin_and_taxes
+  end
+
+  def female?
+    gender == "female"
   end
 
   private
