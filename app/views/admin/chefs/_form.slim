@@ -3,6 +3,7 @@
     div data-controller="attachinary"
       = f.input :main_photo, as: :attachinary
       = f.input :photos, as: :attachinary
+    = f.input :gender, label: "Genre", collection: Chef::GENDER, as: :select, prompt: true
     = f.input :name
     = f.input :citation
     = f.input :description
