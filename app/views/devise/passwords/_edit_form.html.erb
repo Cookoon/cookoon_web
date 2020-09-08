@@ -5,5 +5,7 @@
   <%= f.input :password, autocomplete: 'off' %>
   <%= f.input :password_confirmation, autocomplete: 'off' %>
 
-  <%= f.submit t('devise.passwords.edit.change_my_password'), class: 'button button-blue' %>
+  <div class="form-actions text-center">
+    <%= f.submit t('devise.passwords.edit.change_my_password'), class: 'btn btn-cookoon btn-cookoon-primary' %>
+  </div>
 <% end %>
