@@ -4,6 +4,7 @@ fr:
   devise:
     failure:
       invalid: Vous avez dû vous tromper d'email ou de mot de passe, essayez à nouveau
+      unauthenticated: ""
     mailer:
       reset_password_instructions:
         action: Changer mon mot de passe
