@@ -16,7 +16,7 @@ class UserMailer < ApplicationMailer
 
   def notify_two_days_after_join(user)
     @user = user
-    mail(to: @user.full_email, subject: 'Vous êtes membre de Cookoon ? Devenez Hôte !')
+    mail(to: @user.full_email, subject: 'Vous êtes membre de Cookoon ? Devenez Hôte')
   end
 
   def notify_five_days_after_invite(user, token)
@@ -39,10 +39,5 @@ class UserMailer < ApplicationMailer
   def notify_cookoon_pending_for_missing_stripe_account(user)
     @user = user
     mail(to: @user.full_email, subject: 'Renseignez vite vos informations bancaires pour recevoir vos paiements Cookoon !')
-  end
-
-  def notify_user_seven_days_after_accept(user)
-    @user = user
-    mail(to: @user.full_email, subject: 'Cookoon : proposez votre décor')
   end
 end
