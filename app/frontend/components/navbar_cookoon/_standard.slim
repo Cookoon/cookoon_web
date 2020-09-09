@@ -23,7 +23,8 @@
         = link_to raw("<i class='co icon-user text-primary'></i> Mon compte"), edit_users_path, class: 'navigation-dropdown-menu-item'
         = link_to raw("<i class='far fa-credit-card text-primary'></i> Mes moyens de paiement"), credit_cards_path, class: 'navigation-dropdown-menu-item'
         = link_to raw("<i class='co icon-cookoon-bibliotheque-pictogrammes_loft text-primary'></i> Hôte: mon espace"), host_dashboard_path, class: 'navigation-dropdown-menu-item'
-        = link_to raw("<i class='co icon-cookoon-bibliotheque-pictogrammes_loft text-primary'></i> Hôte: mes demandes de réservations#{render 'shared/pending_reservations_count'}"), host_reservations_path, class: 'navigation-dropdown-menu-item'
+        - if current_user.cookoons.any?
+          = link_to raw("<i class='co icon-cookoon-bibliotheque-pictogrammes_loft text-primary'></i> Hôte: mes demandes de réservations#{render 'shared/pending_reservations_count'}"), host_reservations_path, class: 'navigation-dropdown-menu-item'
         = link_to raw("<i class='fas fa-power-off text-primary'></i> Déconnexion"), destroy_user_session_path, class: 'navigation-dropdown-menu-item', method: 'delete'
         - if current_user.admin?
           = link_to raw("<i class='fas fa-users-cog text-primary'></i> Admin"), admin_dashboard_path, class: 'navigation-dropdown-menu-item'

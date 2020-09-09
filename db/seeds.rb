@@ -154,7 +154,7 @@ end
 puts "Cookoons done"
 
 puts 'Seeding Companies'
-Company.create!(name: "Réceptions Nouvelles", address: "12 rue Lincoln, 75008 Paris", siren: 821316239, siret: 82131623900010, vat: "FR 28 821316239", referent_email: 'gregory@cookoon.fr')
+Company.create!(name: "Réceptions Nouvelles", address: "30 rue des Dames, 75017 Paris", siren: 821316239, siret: 82131623900010, vat: "FR 28 821316239", referent_email: 'gregory@cookoon.fr')
 puts 'Companies done'
 
 chef_attributes = [
