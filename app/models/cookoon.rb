@@ -3,7 +3,16 @@ class Cookoon < ApplicationRecord
   include TimeRangeBuilder
 
   scope :displayable_on_index, -> { joins(:user).where.not(users: { stripe_account_id: nil }) }
-  scope :accomodates_for, ->(people_count) { where('capacity >= ?', people_count) }
+  # scope :accomodates_for, ->(people_count) { where('capacity >= ?', people_count) }
+  scope :accomodates_for, -> (reservation) {
+    if reservation.seated?
+      where('capacity >= ?', reservation.people_count)
+    elsif reservation.standing?
+      where('capacity_standing >= ?', reservation.people_count)
+    else
+      Cookoon.none
+    end
+  }
   scope :available_for, ->(user) { where.not(user: user) }
   scope :available_in, ->(range) { without_reservation_in(range).without_availabilty_in(range) }
   scope :without_reservation_in, ->(range) { where.not(id: Reservation.engaged.overlapping(range).pluck(:cookoon_id).uniq) }

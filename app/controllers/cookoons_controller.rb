@@ -7,7 +7,8 @@ class CookoonsController < ApplicationController
 
   def index
     filtering_params = {
-      accomodates_for: @reservation.people_count,
+      # accomodates_for: (@reservation.people_count),
+      accomodates_for: (@reservation),
       available_in: (@reservation.start_at..@reservation.end_at),
       available_for: current_user
     }

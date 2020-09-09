@@ -207,6 +207,14 @@ class Reservation < ApplicationRecord
     needs_services_validation?
   end
 
+  def seated?
+    type_name == 'diner' || type_name == 'lunch' || type_name == 'brunch'
+  end
+
+  def standing?
+    type_name == 'cocktail'
+  end
+
   private
 
   def configure_from_type_name
