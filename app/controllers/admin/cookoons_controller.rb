@@ -59,7 +59,7 @@ module Admin
 
     def cookoon_params
       params.require(:cookoon).permit(
-        :user_id, :name, :surface, :price, :address, :capacity, :category,
+        :user_id, :name, :surface, :price, :address, :capacity, :capacity_standing, :category,
         :digicode, :building_number, :floor_number, :door_number,
         :wifi_network, :wifi_code, :caretaker_instructions, :status,
         :description, :citation, :main_photo, :long_photo,

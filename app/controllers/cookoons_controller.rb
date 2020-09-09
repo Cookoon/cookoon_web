@@ -88,7 +88,7 @@ class CookoonsController < ApplicationController
 
   def cookoon_params
     params.require(:cookoon).permit(
-      :name, :surface, :price, :address, :capacity, :category,
+      :name, :surface, :price, :address, :capacity, :capacity_standing, :category,
       :digicode, :building_number, :floor_number, :door_number,
       :wifi_network, :wifi_code, :caretaker_instructions, :citation,
       :main_photo, :long_photo, :description, :architect_name,
