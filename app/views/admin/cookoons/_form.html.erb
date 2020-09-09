@@ -9,13 +9,12 @@
   <p class="form-control-label">
     <strong>Hôte: </strong><%= "#{@cookoon.user.first_name} #{@cookoon.user.last_name} / Email: #{@cookoon.user.email} / Tél: #{@cookoon.user.phone_number}"%>
     </p>
-  <%= f.input :name, label: 'Nom du décor', placeholder: 'Ex: Avenue de la Bourdonnais' %>
-  <%= f.input :citation, label: 'Citation', placeholder: 'Ex: Un écrin de verdure dans Paris' %>
-  <%= f.input :status, as: :select, collection: Cookoon.statuses.keys, label: 'Statut', selected: Cookoon.statuses.key(Cookoon.statuses[@cookoon.status]) %>
-  <%= f.input :surface, label: 'Surface de réception en m²' %>
-  <%= f.input :price, label: 'Prix / heure' %>
+  <%= f.input :name, placeholder: 'Ex: Avenue de la Bourdonnais' %>
+  <%= f.input :citation, placeholder: 'Ex: Un écrin de verdure dans Paris' %>
+  <%= f.input :status, as: :select, collection: Cookoon.statuses.keys, selected: Cookoon.statuses.key(Cookoon.statuses[@cookoon.status]) %>
+  <%= f.input :surface %>
+  <%= f.input :price %>
   <%= f.input :address,
-              label: 'Adresse',
               placeholder: '',
               input_html: {
                 data: {
@@ -23,9 +22,10 @@
                 }
               }
   %>
-  <%= f.input :description, label: "Description" %>
-  <%= f.input :capacity, label: "Capacité d'accueil" %>
-  <%= f.input :category, label: 'Catégorie', collection: Cookoon::CATEGORIES, as: :select, selected: @cookoon.category %>
+  <%= f.input :description %>
+  <%= f.input :capacity %>
+  <%= f.input :capacity_standing %>
+  <%= f.input :category, collection: Cookoon::CATEGORIES, as: :select, selected: @cookoon.category %>
   <div div data-controller="attachinary">
     <%= f.input :main_photo, as: :attachinary %>
     <%= f.input :long_photo, as: :attachinary %>
@@ -33,10 +33,10 @@
   </div>
 
   <h5 class="mt-3">Architecte d'intérieur</h5>
-  <%= f.input :architect_name, label: "Nom de l'architecte" %>
-  <%= f.input :architect_title, label: "Titre de l' architecte" %>
-  <%= f.input :architect_build_year, label: "Année de rénovation par l'architecte" %>
-  <%= f.input :architect_url, label: "Site web de votre architecte", placeholder: 'Ex: https://cookoon.club'%>
+  <%= f.input :architect_name %>
+  <%= f.input :architect_title %>
+  <%= f.input :architect_build_year %>
+  <%= f.input :architect_url, placeholder: 'Ex: https://cookoon.club'%>
 
   <h5 class="mt-3">Informations pratiques</h5>
   <%= f.input :digicode %>

@@ -4,15 +4,16 @@
 
   .form-inputs
     = f.association :user, as: :select, collection: @users, prompt: true
-    = f.input :name, label: 'Nom du décor', placeholder: 'Ex: Avenue de la Bourdonnais'
-    = f.input :citation, label: 'Citation', placeholder: 'Ex: Un écrin de verdure dans Paris'
-    = f.input :status, label: "Statut", collection: Cookoon.statuses.keys, as: :select, prompt: true
-    = f.input :surface, label: 'Surface de réception en m²'
-    = f.input :price, label: 'Prix / heure'
-    = f.input :address, label: 'Adresse', input_html: { data: { target: 'google-maps-autocomplete.addressInput google-maps-autocomplete.formattedAddress' } }
-    = f.input :description, label: "Description"
-    = f.input :capacity, label: "Capacité d'accueil"
-    = f.input :category, label: "Catégorie", collection: Cookoon::CATEGORIES, as: :select, prompt: true
+    = f.input :name, placeholder: 'Ex: Avenue de la Bourdonnais'
+    = f.input :citation, placeholder: 'Ex: Un écrin de verdure dans Paris'
+    = f.input :status, collection: Cookoon.statuses.keys, as: :select, prompt: true
+    = f.input :surface
+    = f.input :price
+    = f.input :address, input_html: { data: { target: 'google-maps-autocomplete.addressInput google-maps-autocomplete.formattedAddress' } }
+    = f.input :description
+    = f.input :capacity
+    = f.input :capacity_standing
+    = f.input :category, collection: Cookoon::CATEGORIES, as: :select, prompt: true
 
     div data-controller="attachinary"
       = f.input :main_photo, as: :attachinary
@@ -20,10 +21,10 @@
       = f.input :photos, as: :attachinary
 
     h5.mt-3 Architecte d'intérieur
-    = f.input :architect_name, label: "Nom de l'architecte"
-    = f.input :architect_title, label: "Titre de l' architecte"
-    = f.input :architect_build_year, label: "Année de rénovation par l'architecte"
-    = f.input :architect_url, label: "Site web de votre architecte", placeholder: 'Ex: https://cookoon.club'
+    = f.input :architect_name
+    = f.input :architect_title
+    = f.input :architect_build_year
+    = f.input :architect_url, placeholder: 'Ex: https://cookoon.club'
 
     h5.mt-3 Spécifications
     /= f.association :perks, as: :check_boxes, collection: PerkSpecification.all, include_hidden: false
