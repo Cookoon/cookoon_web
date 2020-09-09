@@ -26,4 +26,8 @@ class UserMailerPreview < ActionMailer::Preview
   def notify_cookoon_pending_for_missing_stripe_account
     UserMailer.notify_cookoon_pending_for_missing_stripe_account(User.joins(:cookoons).last)
   end
+
+  def notify_user_seven_days_after_accept
+    UserMailer.notify_user_seven_days_after_accept(User.last)
+  end
 end
