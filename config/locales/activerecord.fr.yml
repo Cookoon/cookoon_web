@@ -2,13 +2,33 @@ fr:
   activerecord:
     attributes:
       cookoon:
-        building_number: Bâtiment
-        caretaker_instructions: Instructions pour le concierge
+        user: Utilisateur
+        name: Nom du décor
+        surface: Surface de réception en m²
+        price_cents: Tarif par heure
+        address: Adresse
+        capacity: Capacité d'acceuil en repas assis
+        category: Catégorie
+        description: Description
+        status: Statut
         digicode: Code(s) Immeuble
-        door_number: Porte
+        building_number: Bâtiment
         floor_number: Etage
-        wifi_network: Réseau Wifi
-        wifi_code: Code Wifi
+        door_number: Porte
+        wifi_network: Réseau wifi
+        wifi_code: Code wifi
+        caretaker_instructions: Instructions pour le concierge
+        capacity_standing: Capacité d'acceuil en cocktail debout
+        architect_name: Nom de l'architecte
+        citation: Citation
+        architect_build_year: Année de rénovation par l'architecte
+        architect_title: Titre de l'architecte
+        architect_url: Site web de l'architecte
+        perks: Spécification(s)
+        main_photo: Photo principale en format paysage
+        long_photo: Photo en format portrait
+        photos: Photos en format paysage
+        price: Tarif par heure
       inventory:
         checkin_photos: Photos à l'entrée des lieux
         checkout_photos: Photos à la sortie des lieux
