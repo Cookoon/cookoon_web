@@ -40,9 +40,4 @@ class UserMailer < ApplicationMailer
     @user = user
     mail(to: @user.full_email, subject: 'Renseignez vite vos informations bancaires pour recevoir vos paiements Cookoon !')
   end
-
-  def notify_user_seven_days_after_accept(user)
-    @user = user
-    mail(to: @user.full_email, subject: 'Cookoon : proposez votre décor')
-  end
 end
