@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :company do
     name { 'Réceptions nouvelles' }
-    address { '12 rue lincoln - 75008 Paris' }
+    address { '30 rue des Dames - 75017 Paris' }
     referent_email { 'quentin@cookoon.fr' }
 
     after(:build) { |company| company.class.skip_callback(:create, :after, :stripe_prepare, raise: false) }
