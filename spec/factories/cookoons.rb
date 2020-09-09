@@ -12,6 +12,7 @@ FactoryBot.define do
     price { 3000 }
     address { "85 rue d'Aboukir, 75002 Paris" }
     capacity { 8 }
+    capacity_standing { 16 }
     category { 'Appartement' }
     photos {
       <<~CLOUDINARY
