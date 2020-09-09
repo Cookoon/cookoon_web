@@ -45,4 +45,15 @@ class CookoonDecorator < Draper::Decorator
       name
     end
   end
+
+  def address
+    "#{geocoder_address.street_number} #{geocoder_address.route}, #{geocoder_address.postal_code} #{geocoder_address.city}"
+  end
+
+  private
+
+  def geocoder_address
+    Geocoder.search(object.address).first
+  end
+
 end
