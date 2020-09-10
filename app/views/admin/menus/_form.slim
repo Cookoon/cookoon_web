@@ -2,6 +2,7 @@
   .form-inputs
     = f.input :description, label: "Title"
     = f.input :unit_price
+    = f.input :meal_type, collection: Menu::MEAL_TYPES, as: :select, prompt: true
 
   .form-actions.mb-4
     .text-center
