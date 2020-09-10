@@ -19,4 +19,4 @@
         hr.primary.mt-n1.mb-1
         p.text-primary.text-center.font-italic.pb-2 signés #{@chef.name}
 
-        = render 'menus/list', menus: @chef.menus.active
+        = render 'menus/list', menus: @chef.menus.active.order_by_asc_price
