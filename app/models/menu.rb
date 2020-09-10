@@ -1,7 +1,7 @@
 class Menu < ApplicationRecord
 
   STATUSES = %w[initial active archived].freeze
-  MEAL_TYPES = %w[seated_meal standing_meal].freeze
+  MEAL_TYPES = { "seated_meal" => "Repas assis", "standing_meal" => "Repas debout" }.freeze
   MAX_PER_CHEF = 2
 
   belongs_to :chef
@@ -13,7 +13,7 @@ class Menu < ApplicationRecord
   validates :description, presence: true
   validates :unit_price, presence: true, numericality: { greater_than: 0 }
   validates :status, presence: true, inclusion: { in: Menu::STATUSES }
-  validates :meal_type, presence: true, inclusion: { in: Menu::MEAL_TYPES }
+  validates :meal_type, presence: true, inclusion: { in: Menu::MEAL_TYPES.keys }
 
   default_scope -> { order(unit_price_cents: :asc) }
   scope :active, -> { where("status = 'active'") }
