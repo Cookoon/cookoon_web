@@ -22,7 +22,9 @@ class Chef < ApplicationRecord
   monetize :base_price_cents
   monetize :min_price_cents
 
-  scope :has_active_menus, -> { where(id: Menu.where(status: "active").pluck(:chef_id)) }
+  # scope :has_active_menus, -> { where(id: Menu.where(status: "active").pluck(:chef_id)) }
+  scope :has_active_seated_menus, -> { where(id: Menu.active.seated.pluck(:chef_id)) }
+  scope :has_active_standing_menus, -> { where(id: Menu.active.standing.pluck(:chef_id)) }
 
   def base_price_or_min_price_positive
     if base_price.positive? && min_price.positive?
