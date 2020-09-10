@@ -77,7 +77,7 @@ module Admin
     end
 
     def menu_params
-      params.require(:menu).permit(:description, :unit_price)
+      params.require(:menu).permit(:description, :unit_price, :type)
     end
 
     def menu_title_params
