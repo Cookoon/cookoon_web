@@ -15,7 +15,8 @@ class Menu < ApplicationRecord
   validates :status, presence: true, inclusion: { in: Menu::STATUSES }
   validates :meal_type, presence: true, inclusion: { in: Menu::MEAL_TYPES.keys }
 
-  default_scope -> { order(unit_price_cents: :asc) }
+  # default_scope -> { order(unit_price_cents: :asc) }
+  scope :order_by_asc_price, -> { order(unit_price_cents: :asc) }
   scope :active, -> { where("status = 'active'") }
   scope :initial, -> { where("status = 'initial'") }
   scope :archived, -> { where("status = 'archived'") }
