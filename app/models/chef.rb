@@ -34,8 +34,8 @@ class Chef < ApplicationRecord
     end
   end
 
-  def reached_max_active_menus_count?
-    menus.where(status: "active").count >= Menu::MAX_PER_CHEF
+  def reached_max_active_menus_count?(meal_type)
+    menus.active.where("meal_type = ?", meal_type).count >= Menu::MAX_PER_CHEF
   end
 
   def computed_min_price_with_margin
