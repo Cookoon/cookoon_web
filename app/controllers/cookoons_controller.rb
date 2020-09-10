@@ -49,8 +49,8 @@ class CookoonsController < ApplicationController
     end
 
     if @cookoon.save
-      if current_user.stripe_account_id
-        redirect_to @cookoon
+      if current_user.stripe_account_id?
+        redirect_to home_path
       else
         flash[:notice] = "Vous avez presque terminé ! Pour que votre Cookoon soit visible et recevoir des paiements, \
           vous devez connecter votre compte à notre organisme de paiement partenaire."

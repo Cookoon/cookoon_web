@@ -39,6 +39,10 @@ fr:
         phone_number: Téléphone portable
         born_on: Date de naissance
         reset_password_token: Votre lien de réinitialisation
+      menu:
+        description: Titre
+        meal_type: Type de repas (assis ou debout)
+        unit_price: Prix HT sans marge
     errors:
       models:
         availability:
