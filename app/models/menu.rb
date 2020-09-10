@@ -33,6 +33,14 @@ class Menu < ApplicationRecord
     status == "initial"
   end
 
+  def standing?
+    meal_type == "standing_meal"
+  end
+
+  def seated?
+    meal_type == "seated_meal"
+  end
+
   def computed_price_with_margin
     compute_price_with_margin
   end
