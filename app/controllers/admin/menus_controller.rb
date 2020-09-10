@@ -40,8 +40,8 @@ module Admin
     end
 
     def validate_menu
-      if @chef.reached_max_active_menus_count?
-        @menu.errors.messages[:status] = "Un maximum de deux menus actifs par chef est autorisé. Archivez des menus"
+      if ((@menu.standing? && @chef.reached_max_active_menus_count?("standing_meal")) || (@menu.seated? && @chef.reached_max_active_menus_count?("seated_meal")))
+        @menu.errors.messages[:status] = "2 menus actifs max en format debout par chef / 2 menus actifs max en format assis par chef. Archivez des menus"
         redirect_to admin_chef_path(@chef), alert: @menu.errors.messages
         # render 'admin/chefs/show', anchor: "menu-id-#{@menu.id}"
       else
