@@ -24,7 +24,7 @@
         hr.primary.mt-n1.mb-1
         p.text-primary.text-center.font-italic.pb-2 signés #{@chef.name}
 
-        = render 'admin/menus/list', menus: @chef.menus.active.includes(:dishes), chef: @chef
+        = render 'admin/menus/list', menus: @chef.menus.active.order_by_meal_type.order_by_asc_price.includes(:dishes), chef: @chef
 
       //.mt-2
         = render 'chefs/perks', chef_perks: @chef.chef_perks
@@ -60,20 +60,20 @@
 
       h5 Les menus actifs
       - if @chef.menus.active.present?
-        = render 'admin/menus/list', menus: @chef.menus.active
+        = render 'admin/menus/list', menus: @chef.menus.active.order_by_meal_type.order_by_asc_price
 
       - else
         p Il n'y a pas de menu actif pour ce Chef
 
       h5.pt-4 Les menus avec statut "initial"
       - if @chef.menus.initial.present?
-        = render 'admin/menus/list', menus: @chef.menus.initial
+        = render 'admin/menus/list', menus: @chef.menus.initial.order_by_meal_type.order_by_asc_price
       - else
         p Il n'y a pas de menu avec statut "initial" pour ce Chef
 
       h5.pt-4 Les menus archivés
       - if @chef.menus.archived.present?
-        = render 'admin/menus/list', menus: @chef.menus.archived
+        = render 'admin/menus/list', menus: @chef.menus.archived.order_by_meal_type.order_by_asc_price
       - else
         p Il n'y a pas de menu archivé pour ce Chef
 

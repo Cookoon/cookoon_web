@@ -171,7 +171,8 @@ chef_attributes = [
     min_price: 500,
     references: "Restaurant : Hélène Darroze",
     main_photo_url: "https://static.lexpress.fr/medias_11664/w_2048,h_1146,c_crop,x_0,y_0/w_1000,h_563,c_fill,g_north/v1509987362/helene-darroze-portrait_5972444.jpg",
-    citation: "Je suis un super Chef"
+    citation: "Je suis un super Chef",
+    gender: "female"
   },
   {
     name: 'Gordon Ramsay',
@@ -183,7 +184,8 @@ chef_attributes = [
     min_price: 500,
     references: "Restaurant : le Gordon\nPublications: Mes meilleures recettes",
     main_photo_url: "https://upload.wikimedia.org/wikipedia/commons/6/6f/Gordon_Ramsay.jpg",
-    citation: "Je suis un super Chef"
+    citation: "Je suis un super Chef",
+    gender: "male"
   }
 ]
 
@@ -195,7 +197,8 @@ menu_attributes = [
   {
     chef: Chef.first,
     status: "active",
-    unit_price_cents: 3500,
+    unit_price_cents: 5000,
+    meal_type: "seated_meal",
     description: <<-DESCRIPTION
       Menu d'hiver
     DESCRIPTION
@@ -203,20 +206,23 @@ menu_attributes = [
   {
     chef: Chef.first,
     status: "active",
-    unit_price_cents: 5000,
-    description: "Menu de printemps"
+    unit_price_cents: 3000,
+    description: "Menu de printemps",
+    meal_type: "seated_meal"
   },
   {
     chef: Chef.last,
     status: "active",
     unit_price_cents: 3500,
-    description: "Menu d'été"
+    description: "Menu d'été",
+    meal_type: "seated_meal"
   },
   {
     chef: Chef.last,
     status: "initial",
     unit_price_cents: 5000,
-    description: "Menu d'automne"
+    description: "Menu d'automne",
+    meal_type: "standing_meal"
   }
 ]
 
