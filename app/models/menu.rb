@@ -21,6 +21,8 @@ class Menu < ApplicationRecord
   scope :active, -> { where("status = 'active'") }
   scope :initial, -> { where("status = 'initial'") }
   scope :archived, -> { where("status = 'archived'") }
+  scope :seated, -> { where("meal_type = 'seated_meal'") }
+  scope :standing, -> { where("meal_type = 'standing_meal'") }
 
   def active?
     status == "active"
