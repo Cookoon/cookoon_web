@@ -17,6 +17,7 @@ class Menu < ApplicationRecord
 
   # default_scope -> { order(unit_price_cents: :asc) }
   scope :order_by_asc_price, -> { order(unit_price_cents: :asc) }
+  scope :order_by_meal_type, -> { order(meal_type: :asc) }
   scope :active, -> { where("status = 'active'") }
   scope :initial, -> { where("status = 'initial'") }
   scope :archived, -> { where("status = 'archived'") }
