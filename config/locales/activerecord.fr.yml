@@ -27,7 +27,7 @@ fr:
         perks: Spécification(s)
         main_photo: Photo principale en format paysage
         long_photo: Photo en format portrait
-        photos: Photos en format paysage
+        photos: Photos en format paysage (4 au minimum et 10 au maximum)
         price: Tarif par heure
       inventory:
         checkin_photos: Photos à l'entrée des lieux
