@@ -210,6 +210,10 @@ hr {
   padding: 1rem 0;
 }
 
+abbr[title="requis"], abbr[title="required"] {
+  text-decoration: none;
+}
+
 // Trick to disable zoom on iOS mobile devices
 @include media-breakpoint-down(sm) {
   input[type='color'],

@@ -20,6 +20,6 @@ fr:
         caretaker_instructions: 'exemples : emplacement du local poubelle, consigne de gestion des clés, etc.'
 
     required:
-      mark: ''
+      mark: '*'
       text: requis
     'yes': Oui
