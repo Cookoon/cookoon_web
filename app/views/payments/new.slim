@@ -21,7 +21,10 @@
         p.mb-1
           '- L'adresse: #{@reservation.cookoon.address}
         p.mb-1
-          '- Le(s) maître(s) d'hôtel
+          - if @reservation.butler_count > 1
+            '- Les #{@reservation.butler_count} maîtres d'hôtel
+          - else
+            '- Le maître d'hôtel
       div.mb-4
         .d-flex-default
           b Montant
@@ -38,7 +41,10 @@
         div.mb-3
           p.mb-3.font-weight-bold Vos souhaits de chef et de menu
           p.mb-1
-            '- Le(a) chef: #{@reservation.menu.chef.name}*
+            - if @reservation.menu.chef.gender == "female"
+              '- La chef: #{@reservation.menu.chef.name}*
+            - else
+              '- Le chef: #{@reservation.menu.chef.name}*
           p.mb-1
             '- Le menu: #{@reservation.menu.description} (#{@reservation.menu.dishes.pluck(:name).join(' / ')})
         div.mb-4
@@ -49,7 +55,10 @@
             i
               '(soit #{humanized_money_with_symbol(@reservation.menu_price)}HT)
           p.mb-1.font-italic
-            '*: sous réserve de disponibilité du chef
+            - if @reservation.menu.chef.gender == "female"
+              '*: sous réserve de disponibilité de la chef
+            - else
+              '*: sous réserve de disponibilité du chef
 
       hr
 
