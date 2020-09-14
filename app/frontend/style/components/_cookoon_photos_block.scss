@@ -17,7 +17,7 @@
 
   // xs-sm
   @media (max-width: 767px) {
-    grid-template-rows: repeat(3, 2fr) 3fr;
+    grid-template-rows: repeat(3, 3fr) 4fr;
     grid-template-columns: repeat(6, 1fr);
   }
 
