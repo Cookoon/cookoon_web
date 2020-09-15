@@ -58,7 +58,7 @@ module Host
       delete_perks
       build_perks
       if @cookoon.update(cookoon_params)
-        redirect_to host_cookoon_path(@cookoon), notice: 'Votre Cookoon a été édité !'
+        redirect_to host_cookoon_path(@cookoon)#, notice: 'Votre Cookoon a été édité !'
       else
         flash.now.alert = "Une erreur est survenue. Veuillez vérifier votre saisie et soumettre à nouveau le formulaire"
         render :new
