@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   end
   resources :stripe_accounts, only: %i[new create]
 
-  resources :cookoons, only: %i[new create update] do
+  resources :cookoons do
     resources :availabilities, only: %i[index create update], shallow: true
   end
 
@@ -84,6 +84,9 @@ Rails.application.routes.draw do
     get :dashboard, to: 'users#dashboard'
     resources :reservations, only: %i[index edit update] do
       resources :inventories, only: %i[new create edit update], shallow: true
+    end
+    resources :cookoons, only: %i[show new create edit update] do
+      # resources :availabilities, only: %i[index create update], shallow: true
     end
   end
 
