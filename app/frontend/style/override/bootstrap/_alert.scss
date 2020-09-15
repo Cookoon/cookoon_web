@@ -4,9 +4,11 @@
   text-align: center;
   color: $white;
   &-success {
-    background: $success;
+    // background: $success;
+    background: $primary
   }
   &-danger {
     background: $danger;
+    opacity: 0.25;
   }
 }
