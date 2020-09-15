@@ -32,10 +32,8 @@
           | &nbsp
           span.text-primary.font-italic
             '(soit #{reservation.cookoon_butler_price}HT)
-      - elsif controller_path == "admin/cookoons"
-        p.text-center Vous pouvez modifier
-        p.text-center le décor présenté en cliquant sur
-        p.text-center.mb-0 le lien ci-dessous
+      - elsif (controller_path == "admin/cookoons" || controller_path == "host/cookoons")
+        p.text-center style="line-height: 2rem" Vous pouvez modifier le décor présenté en cliquant sur le lien ci-dessous
     = link_to button_title, button_path, method: button_method, class: "btn-cookoon btn-cookoon-primary text-center"
 
 

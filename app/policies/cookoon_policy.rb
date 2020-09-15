@@ -1,14 +1,6 @@
 class CookoonPolicy < ApplicationPolicy
-  def show?
-    record.user == user || record.approved?
-  end
-
-  def create?
-    true
-  end
-
-  def update?
-    record.user
+  def show
+    record.approved?
   end
 
   class Scope < Scope

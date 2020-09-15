@@ -37,12 +37,14 @@
         = component 'card_cookoon',
                       title: cookoon.name,
                       title_class: :reverse,
-                      image_url: cl_image_path(cookoon.photos.first.path, width: 800, height: 450, crop: :fill)
+                      image_url: cl_image_path(cookoon.main_photo.path, width: 800, height: 450, crop: :fill),
+                      link_url: host_cookoon_url(cookoon.id)
 
   - unless @user.reached_max_cookoons_count?
     .py-3.text-right
       - button_text = @cookoons.any? ? 'Ajouter un autre Cookoon' : 'Proposer mon appartement'
-      = link_to button_text, 'https://cookoon.typeform.com/to/iY7Heh', class: 'btn-cookoon btn-cookoon-primary'
+      //= link_to button_text, 'https://cookoon.typeform.com/to/iY7Heh', class: 'btn-cookoon btn-cookoon-primary'
+      = link_to button_text, new_host_cookoon_path, class: 'btn-cookoon btn-cookoon-primary'
 
   // Pas plus de 2 demeures par hôte
   .py-3

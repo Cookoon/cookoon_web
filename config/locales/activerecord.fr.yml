@@ -75,6 +75,7 @@ fr:
 
     models:
       user: Utilisateur
+      cookoon: Décor
   attributes:
     description: Description
     email: Email
