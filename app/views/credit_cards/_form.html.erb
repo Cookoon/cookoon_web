@@ -12,13 +12,14 @@
                         }
                       } do |f| %>
     <%= f.input :cardholder_name, type:"text", class:"d-flex-default", placeholder:"Nom du porteur de carte", label: false, input_html: { data: { target: 'stripe-credit-cards.cardholderInput' } } %>
-    <div data-target="stripe-credit-cards.cardElement"></div>
-    <div class="text-danger py-3" data-target='stripe-credit-cards.cardError' role="alert"></div>
+    <div data-target="stripe-credit-cards.cardElement" class="mb-3"></div>
+    <div class="text-danger" data-target='stripe-credit-cards.cardError' role="alert"></div>
+
     <%= f.input :stripe_token, as: :hidden, input_html: { data: { target: 'stripe-credit-cards.tokenInput' } } %>
 
-    <div class="d-flex-default py-3">
-      <p>Utiliser comme carte principale</p>
-      <div class="form-group boolean optional">
+    <div class="d-flex-default py-3 mb-3">
+      <span>Utiliser comme carte principale</span>
+      <div class="form-group boolean optional mb-0">
         <input value="0" type="hidden" name="credit_card[default]">
         <input class="boolean optional d-none" type="checkbox" value="1" name="credit_card[default]" id="credit_card_default">
         <label class="boolean optional toggle" for="credit_card_default">
@@ -26,7 +27,12 @@
         </label>
       </div>
     </div>
-    <p>En cliquant sur ce bouton, vous acceptez que vos coordonnées de carte bancaire soient stockées auprès de notre partenaire de paiement Stripe, qui utilise un cryptage de qualité bancaire.</p>
+
+    <div>
+      <%= f.input :terms_of_service, required: true, as: :boolean, label: "J'accepte les #{link_to('conditions générales d\'utilisation', '../general_conditions', target: :_blank, class: 'a_gold')} ainsi que les #{link_to('conditions générales d\'utilisation Stripe', 'https://stripe.com/fr/legal#translation', target: :_blank, class: 'a_gold')} appelées #{link_to('\'Stripe Services Agreement\'', 'https://stripe.com/fr/legal#translation', target: :_blank, class: 'a_gold')}. Vos coordonnées de carte bancaire seront stockées auprès de notre partenaire de paiement Stripe, qui utilise un cryptage de qualité bancaire.".html_safe, input_html: { data: { target: 'stripe-credit-cards.tosAcceptance'} } %>
+      <div class="text-danger" style="padding-left: 1.75rem" data-target='stripe-credit-cards.tosAcceptanceError' role="alert"></div>
+    </div>
+
     <div class="py-3 text-center">
       <%= f.button :button,
                    'Ajouter une carte',
