@@ -29,6 +29,7 @@ class User < ApplicationRecord
 
   monetize :total_payouts_for_dashboard_cents
 
+  validates :email, presence: true
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :phone_number,
