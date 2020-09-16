@@ -2,7 +2,7 @@ import { Controller } from 'stimulus';
 import Rails from 'rails-ujs';
 
 export default class extends Controller {
-  static targets = ['cardElement', 'cardError', 'form', 'tokenInput', 'cardholderInput'];
+  static targets = ['cardElement', 'cardError', 'form', 'tokenInput', 'cardholderInput', 'tosAcceptance', 'tosAcceptanceError'];
 
   stripe = Stripe(this.data.get('publishableKey'));
 
@@ -49,7 +49,7 @@ export default class extends Controller {
   }
 
   enableButton() {
-    this.formTarget.button.innerHTML = "Payer";
+    this.formTarget.button.innerHTML = "Ajouter une carte";
     this.formTarget.button.disabled = false;
   }
 
@@ -67,31 +67,42 @@ export default class extends Controller {
 
     this.disableButton();
 
-    const response = await fetch(this.data.get("url"));
-    // console.log(response);
+    // Check if general conditions checked
+    if (this.tosAcceptanceTarget.checked) {
+      const response = await fetch(this.data.get("url"));
+      // console.log(response);
 
-    const data = await response.json();
-    // console.log(data.client_secret);
+      const data = await response.json();
+      // console.log(data.client_secret);
 
-    const token = await this.stripe.confirmCardSetup(data.client_secret, {
-      payment_method: {
-        card: this.card,
-        billing_details: {
-          name: this.cardholderInputTarget.value,
+      const token = await this.stripe.confirmCardSetup(data.client_secret, {
+        payment_method: {
+          card: this.card,
+          billing_details: {
+            name: this.cardholderInputTarget.value,
+          },
+          metadata: {
+            tos_acceptance: this.tosAcceptanceTarget.checked,
+          },
         },
-      },
-    });
+      });
 
-    // console.log(token);
-    // console.log(token.error);
-    if (token.error) {
-      // Inform the customer that there was an error
-      this.cardErrorTarget.textContent = token.error.message;
-      this.enableButton();
+      // console.log(token);
+      // console.log(token.error);
+      if (token.error) {
+        // Inform the customer that there was an error
+        this.cardErrorTarget.textContent = token.error.message;
+        this.enableButton();
+      } else {
+        // Send the token to your server
+        this.handleStripeToken(token);
+      }
+
     } else {
-      // Send the token to your server
-      this.handleStripeToken(token);
+      this.tosAcceptanceErrorTarget.textContent = "Vous devez valider les conditions générales d'utilisation et les conditions générales d'utilisation Stripe";
+      this.enableButton();
     }
+
   };
 
   handleStripeToken = token => {
@@ -102,5 +113,7 @@ export default class extends Controller {
     // Submit the form
     this.formTarget.removeEventListener('submit', this.handleSubmit);
     Rails.fire(this.formTarget, 'submit');
+    // To enable raise in credit_cards controller / create, comment the line upper et uncomment the one below
+    // this.formTarget.submit();
   };
 };
