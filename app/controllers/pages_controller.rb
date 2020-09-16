@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: :welcome
+  skip_before_action :authenticate_user!, only: :general_conditions
   before_action :disable_turbolinks_cache, only: :home
 
   def home
