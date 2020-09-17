@@ -215,6 +215,14 @@ class Reservation < ApplicationRecord
     type_name == 'cocktail'
   end
 
+  def start_at_for_chef_and_service
+    start_at - time_for_preparation
+  end
+
+  def end_at_for_chef_and_service
+    end_at + time_for_tidying
+  end
+
   private
 
   def configure_from_type_name
@@ -251,5 +259,25 @@ class Reservation < ApplicationRecord
   def tenant_is_not_host
     return unless cookoon && user
     errors.add(:cookoon, :host_cannot_be_tenant) if cookoon.user == user
+  end
+
+  def total_time_including_preparation_and_tidying_in_seconds
+    duration * (60 * 60)
+  end
+
+  def total_time_excluding_preparation_and_tidying_in_seconds
+    (end_at - start_at)
+  end
+
+  def time_for_preparation_and_tidying
+    total_time_including_preparation_and_tidying_in_seconds - total_time_excluding_preparation_and_tidying_in_seconds
+  end
+
+  def time_for_preparation
+    2.fdiv(3) * time_for_preparation_and_tidying
+  end
+
+  def time_for_tidying
+    1.fdiv(3) * time_for_preparation_and_tidying
   end
 end
