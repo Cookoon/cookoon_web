@@ -13,7 +13,9 @@ export default class extends Controller {
     'accountTokenInput',
     'ibanElement',
     'ibanElementError',
-    'bankAccountTokenInput'
+    'bankAccountTokenInput',
+    'tosAcceptance',
+    'tosAcceptanceError'
   ];
 
   stripe = Stripe(this.data.get('publishableKey'));
@@ -64,77 +66,86 @@ export default class extends Controller {
     event.preventDefault();
     event.stopPropagation();
 
-    const {
-      token: accountToken,
-      error: accountError
-    } = await this.stripe.createToken('account', {
-      business_type: 'individual',
-      individual: {
-        first_name: this.firstNameInputTarget.value,
-        last_name: this.lastNameInputTarget.value,
-        dob: {
-          day: parseInt(document.getElementById('stripe_account_dob_3i').value),
-          month: parseInt(
-            document.getElementById('stripe_account_dob_2i').value
-          ),
-          year: parseInt(document.getElementById('stripe_account_dob_1i').value)
+    if (this.tosAcceptanceTarget.checked) {
+      const {
+        token: accountToken,
+        error: accountError
+      } = await this.stripe.createToken('account', {
+        business_type: 'individual',
+        individual: {
+          first_name: this.firstNameInputTarget.value,
+          last_name: this.lastNameInputTarget.value,
+          dob: {
+            day: parseInt(document.getElementById('stripe_account_dob_3i').value),
+            month: parseInt(
+              document.getElementById('stripe_account_dob_2i').value
+            ),
+            year: parseInt(document.getElementById('stripe_account_dob_1i').value)
+          },
+          address: {
+            line1: this.addressInputTarget.value,
+            postal_code: this.postalCodeInputTarget.value,
+            city: this.cityInputTarget.value
+          }
         },
-        address: {
-          line1: this.addressInputTarget.value,
-          postal_code: this.postalCodeInputTarget.value,
-          city: this.cityInputTarget.value
-        }
-      },
-      tos_shown_and_accepted: true
-    });
+        tos_shown_and_accepted: this.tosAcceptanceTarget.checked
+      });
 
-    // // Old code for this function
-    //     const {
-    //       token: accountToken,
-    //       error: accountError
-    //     } = await this.stripe.createToken('account', {
-    //       legal_entity: {
-    //         type: 'individual',
-    //         first_name: this.firstNameInputTarget.value,
-    //         last_name: this.lastNameInputTarget.value,
-    //         dob: {
-    //           day: parseInt(document.getElementById('stripe_account_dob_3i').value),
-    //           month: parseInt(
-    //             document.getElementById('stripe_account_dob_2i').value
-    //           ),
-    //           year: parseInt(document.getElementById('stripe_account_dob_1i').value)
-    //         },
-    //         address: {
-    //           line1: this.addressInputTarget.value,
-    //           postal_code: this.postalCodeInputTarget.value,
-    //           city: this.cityInputTarget.value
-    //         }
-    //       },
-    //       tos_shown_and_accepted: true
-    //     });
+      // console.log({ token: accountToken, error: accountError });
 
-    const {
-      token: bankAccountToken,
-      error: bankAccountError
-    } = await this.stripe.createToken(this.iban, {
-      currency: 'eur',
-      account_holder_name: `${this.firstNameInputTarget.value} ${
-        this.lastNameInputTarget.value
-      }`,
-      account_holder_type: 'individual'
-    });
+      // // Old code for this function
+      //     const {
+      //       token: accountToken,
+      //       error: accountError
+      //     } = await this.stripe.createToken('account', {
+      //       legal_entity: {
+      //         type: 'individual',
+      //         first_name: this.firstNameInputTarget.value,
+      //         last_name: this.lastNameInputTarget.value,
+      //         dob: {
+      //           day: parseInt(document.getElementById('stripe_account_dob_3i').value),
+      //           month: parseInt(
+      //             document.getElementById('stripe_account_dob_2i').value
+      //           ),
+      //           year: parseInt(document.getElementById('stripe_account_dob_1i').value)
+      //         },
+      //         address: {
+      //           line1: this.addressInputTarget.value,
+      //           postal_code: this.postalCodeInputTarget.value,
+      //           city: this.cityInputTarget.value
+      //         }
+      //       },
+      //       tos_shown_and_accepted: true
+      //     });
 
-    if (accountError || bankAccountError) {
-      // console.log(accountError);
-      // console.log(bankAccountError);
-      document.getElementById('loader').style = null;
+      const {
+        token: bankAccountToken,
+        error: bankAccountError
+      } = await this.stripe.createToken(this.iban, {
+        currency: 'eur',
+        account_holder_name: `${this.firstNameInputTarget.value} ${
+          this.lastNameInputTarget.value
+        }`,
+        account_holder_type: 'individual',
+      });
 
-      this.accountErrorTarget.textContent =
-        accountError && accountError.message;
-      this.ibanElementErrorTarget.textContent =
-        bankAccountError && bankAccountError.message;
+      // console.log({ token: bankAccountToken, error: bankAccountError });
+
+      if (accountError || bankAccountError) {
+        // console.log(accountError);
+        // console.log(bankAccountError);
+        document.getElementById('loader').style = null;
+
+        this.accountErrorTarget.textContent =
+          accountError && accountError.message;
+        this.ibanElementErrorTarget.textContent =
+          bankAccountError && bankAccountError.message;
+      } else {
+        this.handleStripeTokensSubmit(accountToken, bankAccountToken);
+      }
+
     } else {
-      this.handleStripeTokensSubmit(accountToken, bankAccountToken);
+      this.tosAcceptanceErrorTarget.textContent = "Vous devez valider les conditions générales d'utilisation, les conditions générales d'utilisation des comptes connectés Stripe et les conditions générales d'utilisation Stripe";
     }
   };
 
