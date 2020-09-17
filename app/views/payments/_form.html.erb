@@ -25,14 +25,19 @@
     <!-- We'll put the error messages in this element -->
     <div class="text-danger" data-target='stripe-payments.paymentError' role="alert"></div>
 
-    <div class="text-center mb-5 text-uppercase">
+    <div class="text-center mb-4 text-uppercase">
       <%= link_to 'Ajouter une carte de paiement', "#", class: 'text-secondary', data: {toggle: "modal", target: "#credit-card-modal"} %>
+    </div>
+
+    <div>
+      <%= f.input :terms_of_service, required: true, as: :boolean, label: "J'accepte les #{link_to('conditions générales d\'utilisation', '../general_conditions', target: :_blank, class: 'a_gold')} ainsi que les #{link_to('conditions générales d\'utilisation Stripe', 'https://stripe.com/fr/legal#translation', target: :_blank, class: 'a_gold')} appelées #{link_to('\'Stripe Services Agreement\'', 'https://stripe.com/fr/legal#translation', target: :_blank, class: 'a_gold')}.".html_safe, input_html: { data: { target: 'stripe-payments.tosAcceptance'} } %>
+      <div class="text-danger" style="padding-left: 1.75rem" data-target='stripe-payments.tosAcceptanceError' role="alert"></div>
     </div>
 
     <%= f.button :button,
                 'PAYER',
                 type: :submit,
-                class: 'btn-cookoon btn-cookoon-primary btn-block',
+                class: 'btn-cookoon btn-cookoon-primary btn-block mt-3',
                 data: {
                   controller: 'analytics-events',
                   action: 'click->analytics-events#reservationPaymentSubmit'
