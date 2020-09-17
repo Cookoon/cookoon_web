@@ -2,7 +2,7 @@ import { Controller } from 'stimulus';
 import Rails from 'rails-ujs';
 
 export default class extends Controller {
-  static targets = ['paymentForm', 'paymentSelection', 'paymentError'];
+  static targets = ['paymentForm', 'paymentSelection', 'paymentError', 'tosAcceptance', 'tosAcceptanceError'];
   // static targets = ['paymentForm', 'paymentSelection', 'paymentError', 'paymentSuccess'];
 
   stripe = Stripe(this.data.get('publishableKey'));
@@ -42,37 +42,44 @@ export default class extends Controller {
 
     this.disableButton();
 
-    const response = await fetch(this.data.get("url"));
-    // console.log(response);
+    if (this.tosAcceptanceTarget.checked) {
+      const response = await fetch(this.data.get("url"));
+      // console.log(response);
 
-    const data = await response.json();
-    // console.log(data.clientSecret);
+      const data = await response.json();
+      // console.log(data.clientSecret);
 
-    // this.paymentSelected = this.paymentSelectionTarget.selectedOptions[0].innerHTML;
-    this.paymentSelected = this.paymentSelectionTarget.selectedOptions[0].value;
-    // console.log(this.paymentSelected);
+      // this.paymentSelected = this.paymentSelectionTarget.selectedOptions[0].innerHTML;
+      this.paymentSelected = this.paymentSelectionTarget.selectedOptions[0].value;
+      // console.log(this.paymentSelected);
 
-    const result = await this.stripe.confirmCardPayment(data.clientSecret, {
-      payment_method: this.paymentSelected
+      const result = await this.stripe.confirmCardPayment(data.clientSecret, {
+        payment_method: this.paymentSelected
+        }
+      );
+      // console.log(result);
+
+      if (result.error) {
+        // Inform the customer that there was an error
+        this.paymentErrorTarget.classList.add("my-4");
+        this.paymentErrorTarget.textContent = result.error.message;
+        this.enableButton();
+      } else {
+        this.paymentFormTarget.removeEventListener('submit', this.handleSubmit);
+        // Hide paymentForm
+        this.paymentFormTarget.style.display = "none";
+        // // Add a success payment message
+        // this.paymentSuccessTarget.classList.add("mb-4");
+        // this.paymentSuccessTarget.textContent = "Votre paiement a bien été enregistré";
+        // Submit the form
+        // Rails.fire(this.paymentFormTarget, 'submit');
+        // To enable raise in payment controller / create, comment the line upper et uncomment the one below
+        this.paymentFormTarget.submit();
       }
-    );
-    // console.log(result);
-
-    if (result.error) {
-      // Inform the customer that there was an error
-      this.paymentErrorTarget.classList.add("my-4");
-      this.paymentErrorTarget.textContent = result.error.message;
-      this.enableButton();
     } else {
-      this.paymentFormTarget.removeEventListener('submit', this.handleSubmit);
-      // Hide paymentForm
-      this.paymentFormTarget.style.display = "none";
-      // // Add a success payment message
-      // this.paymentSuccessTarget.classList.add("mb-4");
-      // this.paymentSuccessTarget.textContent = "Votre paiement a bien été enregistré";
-      // Submit the form
-      Rails.fire(this.paymentFormTarget, 'submit');
-      // this.paymentFormTarget.submit();
+      this.tosAcceptanceErrorTarget.textContent = "Vous devez valider les conditions générales d'utilisation et les conditions générales d'utilisation Stripe";
+      this.enableButton();
     }
+
   };
 };
