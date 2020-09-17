@@ -5,7 +5,7 @@
 
   // lg-xl
   @media (min-width: 992px) {
-    grid-template-rows: repeat(9, 1fr);
+    grid-template-rows: repeat(8, 1fr) 1.5fr;
     grid-template-columns: repeat(9, 1fr);
   }
 
@@ -17,7 +17,7 @@
 
   // xs-sm
   @media (max-width: 767px) {
-    grid-template-rows: repeat(3, 3fr) 4fr;
+    grid-template-rows: repeat(3, 3fr) 5.5fr;
     grid-template-columns: repeat(6, 1fr);
   }
 
