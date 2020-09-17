@@ -26,6 +26,10 @@
         = link_to raw("<i class='fas fa-power-off text-primary'></i> Déconnexion"), destroy_user_session_path, class: 'navigation-dropdown-menu-item', method: 'delete'
         - if current_user.admin?
           = link_to raw("<i class='fas fa-users-cog text-primary'></i> Admin"), admin_dashboard_path, class: 'navigation-dropdown-menu-item'
+        .d-block.d-md-none
+          = link_to raw("<i class='co icon-cookoon-bibliotheque-pictogrammes_hotel-particulier text-primary'></i> Mes réservations"), reservations_path, class: 'navigation-dropdown-menu-item'
+          = link_to raw("<i class='co icon-max-people text-primary'></i> Mon réseau"), new_user_invitation_path, class: 'navigation-dropdown-menu-item'
+
 
   .cookoon-nav-bottom.bg-dark
     .cookoon-nav-navigation
