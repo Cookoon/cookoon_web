@@ -14,7 +14,8 @@ class ReservationDecorator < Draper::Decorator
 
   def recap_string_start_and_end_time
     end_at.strftime('%kH%M') == " 0H00" ? end_at_time = "minuit" : end_at_time = end_at.strftime('%kH%M')
-    "Votre décor de #{start_at.strftime('%kH%M')} à #{end_at_time}."
+    # "Votre décor de #{start_at.strftime('%kH%M')} à #{end_at_time}."
+    "Votre décor de #{start_at.strftime('%kH%M')} à #{end_at_time} (mise à disposition pour le chef et le service de #{start_at_for_chef_and_service.strftime('%kH%M')} à #{end_at_for_chef_and_service.strftime('%kH%M')})"
   end
 
   def recap_string_butler_count
