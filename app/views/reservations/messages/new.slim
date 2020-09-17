@@ -1,18 +1,17 @@
 .container.py-5
   h1 Confirmation de demande de location
 
-  .p-4.d-flex.align-items-center
+  //.px-4.d-flex.align-items-center
     i.co.co-check.fa-2x.text-primary.mr-3 aria-hidden="true"
     strong Votre demande de location a bien été envoyée.
-  .px-4
-    p Un message pour l'hôte ?
-    p
-      | N'hésitez pas à vous présenter et à lui expliquer
-        pourquoi vous souhaitez louer son Cookoon sur cette carte.
+  p
+    strong Votre demande de location a bien été envoyée.
+  p Vous souhaitez nous transmettre des informations complémentaires ?
+  p N'hésitez pas à nous les indiquer, nous vous recontacterons afin de satisfaire vos souhaits.
 
   = simple_form_for @reservation,
                     url: reservation_messages_path(@reservation),
                     method: :post,
                     remote: true do |f|
-    = f.input :message_for_host, label: false, placeholder: 'Je souhaite louer votre Cookoon pour ...', input_html: { rows: 7, style: 'height: inherit' }
+    = f.input :message_for_host, label: false, placeholder: "Ex: Allergies alimentaires, menus végétariens...", input_html: { rows: 7, style: 'height: inherit' }
     = f.submit 'ENVOYER', class: 'btn-cookoon btn-cookoon-primary btn-block'

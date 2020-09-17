@@ -4,9 +4,9 @@
       .edito-content-text
         p <strong>LES CHEFS</strong>
         h4 Exigence et qualité
-        p 
-          | Tous les chefs Cookoon sont issus de grandes maisons et mettent leur 
-          | savoir-faire au service des papilles de vos convives.
+        p
+          | Tous les chefs Cookoon sont issus de grandes maisons et mettent leur
+          | &nbsp savoir-faire au service des papilles de vos convives.
     .edito-content
       .edito-content-image.edito-content-image-chef style="background-image: url(#{image_path('cookoon-chefs.jpg')})"
   .edito-row.edito-row-reverse
@@ -14,9 +14,21 @@
       .edito-content-text
         p <strong>LA CONCIERGERIE</strong>
         h4 Toutes vos envies
-        p 
-          | Un millésime particulier ? Un convive exceptionnel ? 
-          | Un chef particulier ? La conciergerie vous permet de vivre 
-          | une expérience augmentée au plus proche de vos souhaits.
+        p
+          | Un millésime particulier ? Un convive exceptionnel ?
+          | &nbsp Un chef particulier ? La conciergerie vous permet de vivre
+          | &nbsp une expérience augmentée au plus proche de vos souhaits.
     .edito-content
       .edito-content-image.edito-content-image-conciergerie style="background-image: url(#{image_path('cookoon-conciergerie.jpg')})"
+  .edito-row
+    .edito-content
+      .edito-content-text
+        p <strong>LE SUR-MESURE</strong>
+        h4 Vos occasions exceptionnelles
+        p
+          | Vous avez une demande spéciale pour un nombre de convives plus important, un format différent ou un cahier des charges précis ?
+          | &nbsp
+          = mail_to 'concierge@cookoon.fr', 'Contactez-nous', subject: "Sur-mesure", target: :_blank, class: 'a_gold'
+          | &nbsp pour une offre sur-mesure.
+    .edito-content
+      .edito-content-image.edito-content-image-chef style="background-image: url(#{image_path('cookoon-chefs.jpg')})"
