@@ -82,7 +82,7 @@ class Service < ApplicationRecord
     when 'breakfast'
       # self.assign_attributes(
         assign_attributes(
-        name: 'Petit déjeuner',
+        name: 'Petit-déjeuner',
         quantity_base: 1,
         base_price: 50,
         quantity: reservation.people_count,
