@@ -1,15 +1,15 @@
 .search-recap
   .first.search-recap-box
-    p CONVIVES
-    p.search-recap-box-data = reservation.people_count
+    p.mb-0 CONVIVES
+    .search-recap-box-data = reservation.people_count
   .second.search-recap-box
-    p RÉCEPTION
-    p.search-recap-box-data = reservation.humanized_type_name.capitalize
+    p.mb-0 RÉCEPTION
+    .search-recap-box-data = reservation.humanized_type_name.capitalize
   .third.search-recap-box
-    p DATE
-    div
-      p.search-recap-box-data.month = reservation.start_at.day
-      p <span class ='small'>#{t('date.month_names')[reservation.start_at.month]}</span>
+    p.mb-0 DATE
+    div.mb-3
+      .search-recap-box-data.month = reservation.start_at.day
+      div class='small' #{t('date.month_names')[reservation.start_at.month]}
   .fourth.search-recap-box
     p.search-recap-box-data
       i.co.icon-cookoon-logo.fa-2x.text-primary
