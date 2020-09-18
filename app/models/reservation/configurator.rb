@@ -13,10 +13,13 @@ class Reservation
       when 'lunch'
         reservation.duration = 5
         reservation.start_at = start_at.change(hour: 12, min: 30)
+      when 'lunch_cocktail'
+        reservation.duration = 5
+        reservation.start_at = start_at.change(hour: 12, min: 30)
       when 'diner'
         reservation.duration = 7
         reservation.start_at = start_at.change(hour: 20, min: 0)
-      when 'cocktail'
+      when 'diner_cocktail'
         reservation.duration = 7
         reservation.start_at = start_at.change(hour: 19, min: 30)
       when 'morning'
