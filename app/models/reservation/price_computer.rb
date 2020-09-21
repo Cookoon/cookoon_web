@@ -5,7 +5,7 @@ class Reservation
     MARGIN = { butler: 0.25, menu: 0.25 }.freeze
     # accessible as Reservation::MARGIN
 
-    UNIT_PRICE_CENTS = { butler: 4200 }.freeze
+    UNIT_PRICE_CENTS = { butler: 3500 }.freeze
     # accessible as Reservation::UNIT_PRICE_CENTS
 
     TAX = 0.2.freeze
