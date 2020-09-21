@@ -62,7 +62,7 @@ class Reservation < ApplicationRecord
   validates :start_at, in_future: true, after_notice_period: true, on: :create
   validates :duration, presence: true
   validates :people_count, presence: true, numericality: { greater_than: 0 }
-  validates :type_name, inclusion: { in: %w[breakfast brunch lunch diner cocktail morning afternoon day], message: "Ce type de réservation n'est pas valide" }
+  validates :type_name, inclusion: { in: %w[breakfast brunch lunch diner diner_cocktail lunch_cocktail morning afternoon day], message: "Ce type de réservation n'est pas valide" }
   validates :menu_status, inclusion: { in: %w[initial selected cooking_by_user validated payment_required captured paid], message: "Le statut du menu n'est pas valide" }
   validates :services_status, inclusion: { in: %w[initial validated payment_required captured paid], message: "Le statut n'est pas valide" }
 
@@ -168,7 +168,7 @@ class Reservation < ApplicationRecord
   end
 
   def needs_chef?
-    %w[brunch lunch diner cocktail afternoon day].include? type_name
+    %w[brunch lunch diner diner_cocktail lunch_cocktail afternoon day].include? type_name
   end
 
   def needs_cookoon_butler_payment?
@@ -212,7 +212,7 @@ class Reservation < ApplicationRecord
   end
 
   def standing?
-    type_name == 'cocktail'
+    type_name == 'diner_cocktail' || type_name == 'lunch_cocktail'
   end
 
   def start_at_for_chef_and_service

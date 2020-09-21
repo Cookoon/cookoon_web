@@ -15,17 +15,19 @@ module SearchComponent
     [
       {data: 'brunch', display: 'Brunch'},
       {data: 'lunch', display: 'Déjeuner'},
+      {data: 'lunch_cocktail', display: 'Cocktail déjeunatoire'},
       {data: 'diner', display: 'Dîner'},
-      {data: 'cocktail', display: 'Cocktail'}
+      {data: 'diner_cocktail', display: 'Cocktail dînatoire'}
     ]
   end
 
   def business_types
     [
-      {data: 'breakfast', display: 'Petit déjeuner'},
+      {data: 'breakfast', display: 'Petit-déjeuner'},
       {data: 'lunch', display: 'Déjeuner'},
+      {data: 'lunch_cocktail', display: 'Cocktail déjeunatoire'},
       {data: 'diner', display: 'Dîner'},
-      {data: 'cocktail', display: 'Cocktail'},
+      {data: 'diner_cocktail', display: 'Cocktail dînatoire'},
       {data: 'morning', display: 'Matinée de travail'},
       {data: 'day', display: 'Journée de travail'},
       {data: 'afternoon', display: 'Après-midi de travail'}

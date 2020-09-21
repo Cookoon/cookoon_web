@@ -149,7 +149,8 @@ class ReservationDecorator < Draper::Decorator
       breakfast: 'petit-déjeuner',
       lunch: 'déjeuner',
       diner: 'dîner',
-      cocktail: 'cocktail',
+      diner_cocktail: 'cocktail dînatoire)',
+      lunch_cocktail: 'cocktail déjeunatoire',
       morning: 'matinée',
       day: 'journée',
       afternoon: 'après-midi',
@@ -170,7 +171,7 @@ class ReservationDecorator < Draper::Decorator
         [:corporate]
       when 'brunch'
         [:sommelier]
-      when 'lunch', 'diner', 'cocktail'
+      when 'lunch', 'diner', 'diner_cocktail', 'lunch_cocktail'
         [:sommelier, :parking]
       when 'morning', 'afternoon'
         [:corporate, :catering]
