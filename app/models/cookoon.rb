@@ -14,9 +14,10 @@ class Cookoon < ApplicationRecord
     end
   }
   scope :available_for, ->(user) { where.not(user: user) }
-  scope :available_in, ->(range) { without_reservation_in(range).without_availabilty_in(range) }
-  scope :without_reservation_in, ->(range) { where.not(id: Reservation.engaged.overlapping(range).pluck(:cookoon_id).uniq) }
-  scope :without_availabilty_in, ->(range) { where.not(id: Availability.unavailable.overlapping(range).pluck(:cookoon_id).uniq) }
+  scope :available_in, ->(range) { without_reservation_in(range).without_availability_in(range) }
+  # scope :without_reservation_in, ->(range) { where.not(id: Reservation.engaged.overlapping(range).pluck(:cookoon_id).uniq) }
+  scope :without_reservation_in, ->(range) { where.not(id: Reservation.engaged.map { |reservation| { cookoon_id: reservation.cookoon_id, start_at_for_chef_and_service: reservation.start_at_for_chef_and_service, end_at_for_chef_and_service: reservation.end_at_for_chef_and_service } }.select { |reservation| (reservation[:start_at_for_chef_and_service] >= range.first && reservation[:start_at_for_chef_and_service] <= range.last) || (reservation[:end_at_for_chef_and_service] >= range.first && reservation[:end_at_for_chef_and_service] <= range.last) }.pluck(:cookoon_id).uniq) }
+  scope :without_availability_in, ->(range) { where.not(id: Availability.unavailable.overlapping(range).pluck(:cookoon_id).uniq) }
   scope :created_in_day_range_around, ->(date_time) { where created_at: day_range(date_time) }
   scope :over_price, ->(price) { where 'price_cents >= ?', price }
 
@@ -64,9 +65,9 @@ class Cookoon < ApplicationRecord
   after_validation :geocode, if: :address_changed?
   after_update :award_invite_to_user, if: :saved_change_to_status?
 
-  def unavailabilites(date_range)
-    overlapping_reservations(date_range) + overlapping_availabilities(date_range)
-  end
+  # def unavailabilites(date_range)
+  #   overlapping_reservations(date_range) + overlapping_availabilities(date_range)
+  # end
 
   def list_perks
     # cannot pluck because of delegation
@@ -83,13 +84,13 @@ class Cookoon < ApplicationRecord
 
   private
 
-  def overlapping_reservations(date_range)
-    reservations.accepted.overlapping(date_range)
-  end
+  # def overlapping_reservations(date_range)
+  #   reservations.accepted.overlapping(date_range)
+  # end
 
-  def overlapping_availabilities(date_range)
-    availabilities.unavailable.overlapping(date_range)
-  end
+  # def overlapping_availabilities(date_range)
+  #   availabilities.unavailable.overlapping(date_range)
+  # end
 
   def notify_approved
     return unless saved_change_to_status == %w[under_review approved]

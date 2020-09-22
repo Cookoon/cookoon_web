@@ -149,7 +149,7 @@ class ReservationDecorator < Draper::Decorator
       breakfast: 'petit-déjeuner',
       lunch: 'déjeuner',
       diner: 'dîner',
-      diner_cocktail: 'cocktail dînatoire)',
+      diner_cocktail: 'cocktail dînatoire',
       lunch_cocktail: 'cocktail déjeunatoire',
       morning: 'matinée',
       day: 'journée',
