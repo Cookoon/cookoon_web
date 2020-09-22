@@ -12,7 +12,7 @@ class Reservations::MessagesController < ApplicationController
 
   def find_reservation
     @reservation = Reservation.find params[:reservation_id]
-    authorize @reservation
+    authorize(@reservation, :update?)
   end
 
   def reservation_params

@@ -39,6 +39,7 @@ class ServicesController < ApplicationController
 
   def set_reservation
     @reservation = Reservation.find(params[:reservation_id]).decorate
+    authorize(@reservation, :update?)
   end
 
   # def service_params
