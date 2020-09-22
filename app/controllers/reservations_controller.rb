@@ -24,7 +24,7 @@ class ReservationsController < ApplicationController
     if @reservation.save
       redirect_to reservation_cookoons_path(@reservation)
     else
-      flash.alert = "Oops, votre réservation n'est pas valide, vous devez remplir tous les champs"
+      flash.alert = "Votre réservation n'est pas valide, vous devez remplir tous les champs."
       redirect_to root_path
     end
   end
