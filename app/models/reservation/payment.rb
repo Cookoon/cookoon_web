@@ -4,7 +4,10 @@ class Reservation
     alias_method :reservation, :payable
 
     def charge
-      reservation.charge! if errors.empty?
+      if errors.empty?
+        reservation.charge!
+        reservation.update(cookoon_butler_payment_status: "charged")
+      end
     end
 
     def capture_menu_payment
