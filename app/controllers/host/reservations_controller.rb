@@ -26,6 +26,7 @@ module Host
       # if payment.capture
       if payment.capture(:stripe_charge_id)
         @reservation.accept!
+        @reservation.update(cookoon_butler_payment_status: "captured")
         @reservation.notify_users_after_confirmation
         flash[:notice] = 'Vous avez accepté la réservation'
       else
@@ -40,6 +41,7 @@ module Host
       # @reservation.payment.cancel
       @reservation.payment.cancel(:stripe_charge_id)
       @reservation.refuse!
+      @reservation.update(cookoon_butler_payment_status: "cancelled")
       # ReservationMailer.refused_to_tenant(@reservation).deliver_later
       flash[:notice] = 'Vous avez refusé la réservation'
     end
