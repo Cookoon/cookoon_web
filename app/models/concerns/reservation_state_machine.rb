@@ -16,6 +16,7 @@ module ReservationStateMachine
       state :quotation_asked
       state :quotation_proposed
       state :quotation_accepted
+      state :quotation_refused
       state :refused
       state :cancelled
       state :ongoing
@@ -63,6 +64,10 @@ module ReservationStateMachine
 
       event :propose_quotation do
         transitions from: :quotation_asked, to: :quotation_proposed
+      end
+
+      event :refuse_quotation do
+        transitions from: :quotation_proposed, to: :quotation_refused
       end
 
       event :accept do
