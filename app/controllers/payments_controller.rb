@@ -107,7 +107,7 @@ class PaymentsController < ApplicationController
 
   def find_reservation
     @reservation = Reservation.find(params[:reservation_id]).decorate
-    authorize @reservation
+    authorize(@reservation, :update?)
   end
 
   def find_cookoon

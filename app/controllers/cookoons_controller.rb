@@ -43,5 +43,6 @@ class CookoonsController < ApplicationController
 
   def find_reservation
     @reservation = Reservation.find(params[:reservation_id]).decorate
+    authorize(@reservation, :update?)
   end
 end
