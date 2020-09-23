@@ -20,7 +20,9 @@
 .edito-content-text {
   text-align: center;
   padding: 50px;
-
+  @media (min-width: 577px) and (max-width: 767px) {
+    padding: 25px;
+  }
   h4 {
     color: var(--primary);
     margin-bottom: 24px;
