@@ -1,0 +1,26 @@
+p.mb-3.font-weight-bold 1. Votre décor et le service
+.mb-3
+  = render 'reservations/recap_string', reservation: reservation
+  p.mb-1
+    '- L'adresse: #{reservation.cookoon.address}
+  p.mb-1
+    - if reservation.butler_count > 1
+      '- Les #{reservation.butler_count} maîtres d'hôtel
+    - else
+      '- Le maître d'hôtel
+.mb-4
+  - if reservation.pending?
+    .d-flex.justify-content-between
+      div
+        b A régler ce jour
+        br
+        i
+          '(Vous ne serez débité qu'après acceptation de votre réservation par l'hôte)
+      .text-right.text-nowrap
+        b #{humanized_money_with_symbol(reservation.cookoon_butler_with_tax)}TTC
+        br
+        i
+          '(soit #{humanized_money_with_symbol(reservation.cookoon_butler_price)}HT)
+    //.d-flex.justify-content-end
+      i
+        '(soit #{humanized_money_with_symbol(reservation.cookoon_butler_price)}HT)
