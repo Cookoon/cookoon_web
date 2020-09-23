@@ -39,6 +39,7 @@ fr:
         phone_number: Téléphone portable
         born_on: Date de naissance
         reset_password_token: Votre lien de réinitialisation
+        terms_of_service: Conditions générales d'utilisation
       menu:
         description: Titre
         meal_type: Type de repas (assis ou debout)
