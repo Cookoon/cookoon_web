@@ -5,8 +5,8 @@
   <%= f.input :last_name %>
   <%= f.input :born_on, start_year: Date.today.year - 90, end_year: Date.today.year - 12, selected: { year: 1965, day: 1, month: 1 } %>
   <%= f.input :phone_number %>
-  <%= f.input :password %>
-  <%= f.input :password_confirmation %>
+  <%= f.input :password, required: true %>
+  <%= f.input :password_confirmation, required: true %>
   <%= f.input :terms_of_service, as: :boolean, label: "J'accepte les #{link_to('conditions générales d\'utilisation', '../general_conditions', target: :_blank, class: 'a_gold')} ".html_safe %>
 
   <div class="text-center my-3">
