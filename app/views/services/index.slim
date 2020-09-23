@@ -1,3 +1,4 @@
+= console
 .container.px-sm-0
   .row.mx-0
     .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
@@ -20,14 +21,17 @@
           p.text-primary.mb-0.mb-md-3 Pour sublimer votre expérience, vous pouvez sélectionner des services complémentaires; nous vous contacterons afin de vous soumettre un choix et une tarification.
       .row.mx-0
         .col-12.px-0
-          = simple_form_for @reservation, url: select_services_reservation_path(@reservation), method: :patch do |f|
-            = f.input :services,
-              as: :check_boxes,
-              collection: @reservation.services_collection_for_view,
-              checked: @reservation.builtin_services,
-              label_method: :first,
-              value_method: :second,
-              item_wrapper_class: "font-weight-bold pl-5 py-1"
-            = f.submit 'Soumettre', class: 'btn-cookoon btn-cookoon-primary px-5 w-50'
+          - if @reservation.pending?
+            = simple_form_for @reservation, url: select_services_reservation_path(@reservation), method: :patch do |f|
+              = f.input :services,
+                as: :check_boxes,
+                collection: @reservation.services_collection_for_view,
+                checked: @reservation.builtin_services,
+                label_method: :first,
+                value_method: :second,
+                item_wrapper_class: "font-weight-bold pl-5 py-1"
+              = f.submit 'Soumettre', class: 'btn-cookoon btn-cookoon-primary px-5 w-50'
+          - else
+            p Vous avez choisi : #{@reservation.services.pluck(:name).join(", ").downcase}
 
 //p Choix des services pour la résa #{@reservation.id}
