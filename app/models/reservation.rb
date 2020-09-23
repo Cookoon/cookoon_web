@@ -17,7 +17,7 @@ class Reservation < ApplicationRecord
   scope :in_hour_range_around, ->(datetime) { where start_at: hour_range(datetime) }
   scope :finished_in_day_range_around, ->(datetime) { joins(:inventory).merge(Inventory.checked_out_in_day_range_around(datetime)) }
   scope :created_before, ->(date) { where('created_at < ?', date) }
-  scope :pending, -> { initial.or(cookoon_selected).or(services_selected) }
+  scope :pending, -> { initial.or(cookoon_selected).or(services_selected).or(services_selected) }
   scope :dropped_before_payment, -> { pending.created_before(DEFAULTS[:safety_period].ago) }
   scope :paid, -> { where(paid: true) }
   scope :short_notice, -> { paid.where('start_at < ?', Time.zone.now.in(DEFAULTS[:safety_period])) }
@@ -78,6 +78,10 @@ class Reservation < ApplicationRecord
   # need to connect this to another condiction
   after_save :report_to_slack, if: :saved_change_to_aasm_state?
   after_save :update_services, if: :services_need_update?
+
+  def pending?
+    initial? || cookoon_selected? || services_selected? || services_selected?
+  end
 
   def invoiceable?
     accepted? || ongoing? || passed?
