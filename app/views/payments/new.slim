@@ -14,32 +14,15 @@
       = render 'reservations/search_recap', reservation: @reservation
 
     .col-12.col-md-8.col-lg-9.px-0
-      = render 'reservations/recap_string', reservation: @reservation
 
-      div.mb-3
-        p.mb-3.font-weight-bold Votre décor et le service
-        p.mb-1
-          '- L'adresse: #{@reservation.cookoon.address}
-        p.mb-1
-          - if @reservation.butler_count > 1
-            '- Les #{@reservation.butler_count} maîtres d'hôtel
-          - else
-            '- Le maître d'hôtel
-      div.mb-4
-        .d-flex-default
-          b Montant
-          b #{humanized_money_with_symbol(@reservation.cookoon_butler_with_tax)}TTC
-        .d-flex.justify-content-end
-          i
-            '(soit #{humanized_money_with_symbol(@reservation.cookoon_butler_price)}HT)
+      = render 'payments/details_cookoon_butler', reservation: @reservation
 
       hr
 
-      = render 'menus/recap', reservation: @reservation
-
+      p.mb-3.font-weight-bold 2. Vos souhaits de chef et de menu
       - if @reservation.menu.present?
-        div.mb-3
-          p.mb-3.font-weight-bold Vos souhaits de chef et de menu
+        = render 'menus/recap', reservation: @reservation
+        .mb-3
           p.mb-1
             - if @reservation.menu.chef.gender == "female"
               '- La chef: #{@reservation.menu.chef.name}*
@@ -47,7 +30,7 @@
               '- Le chef: #{@reservation.menu.chef.name}*
           p.mb-1
             '- Le menu: #{@reservation.menu.description} (#{@reservation.menu.dishes.pluck(:name).join(' / ')})
-        div.mb-4
+        .mb-4
           .d-flex-default
             b Montant
             b #{humanized_money_with_symbol(@reservation.menu_with_tax)}TTC
@@ -59,23 +42,27 @@
               '*: sous réserve de disponibilité de la chef
             - else
               '*: sous réserve de disponibilité du chef
+      - else
+        = render 'menus/recap', reservation: @reservation
 
       hr
 
+      p.mb-3.font-weight-bold 3. Vos souhaits de service
       - if @reservation.services.present?
-        div.mb-3
-          p.mb-3.font-weight-bold Vos souhaits de service
+        .mb-3
           - @reservation.services.each do |service|
             p.mb-1
               '- &nbsp
               =service.name
-        div.mb-4
+        .mb-4
           .d-flex-default
             b Montant
             b #{humanized_money_with_symbol(@reservation.services_with_tax)}TTC
           .d-flex.justify-content-end
             i
               '(soit #{humanized_money_with_symbol(@reservation.services_price)}HT)
+      - else
+        .mb-4 Vous n'avez choisi aucun service additionnel
 
       - if @reservation.needs_cookoon_butler_payment?
         hr
