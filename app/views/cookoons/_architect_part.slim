@@ -22,8 +22,9 @@
   .sixth_element
     = link_to "Voir les photos", "#", data: {toggle: "modal", target: "#cookoon-photos-modal"}, class: "btn btn-cookoon btn-cookoon-secondary-gold w-100"
     = render 'cookoons/modal', photos: cookoon.all_photos
-    .recap
-      - if controller_path == "cookoons"
+
+    - if controller_path == "cookoons"
+      .recap
         p.text-center = reservation.recap_string_start_and_end_time
         p.text-center = reservation.recap_string_butler_count
         //p.text-primary.text-center.mb-0 Prix:
@@ -32,8 +33,13 @@
           // | &nbsp
           // span.text-primary.font-italic
           //  '(soit #{reservation.cookoon_butler_price}HT)
-      - elsif (controller_path == "admin/cookoons" || controller_path == "host/cookoons")
+      - if reservation.pending?
+        = link_to button_title, button_path, method: button_method, class: "btn-cookoon btn-cookoon-primary text-center"
+
+    - elsif (controller_path == "admin/cookoons" || controller_path == "host/cookoons")
+      .recap
         p.text-center style="line-height: 2rem" Vous pouvez modifier le décor présenté en cliquant sur le lien ci-dessous
-    = link_to button_title, button_path, method: button_method, class: "btn-cookoon btn-cookoon-primary text-center"
+      = link_to button_title, button_path, method: button_method, class: "btn-cookoon btn-cookoon-primary text-center"
+
 
 
