@@ -69,6 +69,9 @@
       grid-column: 2;
       align-self: end;
     }
+    @media (max-width: 767px) {
+      margin-top: 1rem;
+    }
   }
 }
 
