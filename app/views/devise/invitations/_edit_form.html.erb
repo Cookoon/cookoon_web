@@ -7,7 +7,7 @@
   <%= f.input :phone_number %>
   <%= f.input :password %>
   <%= f.input :password_confirmation %>
-  <%= f.input :terms_of_service, as: :boolean, label: "J'accepte les #{link_to('conditions générales d\'utilisation', '../general_conditions', target: :_blank), , class: 'a_gold'}".html_safe %>
+  <%= f.input :terms_of_service, as: :boolean, label: "J'accepte les #{link_to('conditions générales d\'utilisation', '../general_conditions', target: :_blank), class: 'a_gold'}".html_safe %>
 
   <div class="text-center my-3">
     <%= f.button :submit, t('.submit'), class: 'btn-cookoon btn-cookoon-primary' %>
