@@ -230,6 +230,18 @@ class Reservation < ApplicationRecord
     end_at + time_for_tidying
   end
 
+  def stripe_payment_intent_amount_cookoon_butler
+    stripe_payment_intent_amount(stripe_charge_id)
+  end
+
+  def stripe_payment_intent_amount_menu
+    stripe_payment_intent_amount(stripe_menu_id)
+  end
+
+  def stripe_payment_intent_amount_services
+    stripe_payment_intent_amount(stripe_services_id)
+  end
+
   private
 
   def configure_from_type_name
@@ -286,5 +298,9 @@ class Reservation < ApplicationRecord
 
   def time_for_tidying
     1.fdiv(3) * time_for_preparation_and_tidying
+  end
+
+  def stripe_payment_intent_amount(stripe_payment_intent)
+    Money.new(Stripe::PaymentIntent.retrieve(stripe_payment_intent).amount)
   end
 end

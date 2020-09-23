@@ -21,6 +21,18 @@ p.mb-3.font-weight-bold 1. Votre décor et le service
         br
         i
           '(soit #{humanized_money_with_symbol(reservation.cookoon_butler_price)}HT)
-    //.d-flex.justify-content-end
-      i
-        '(soit #{humanized_money_with_symbol(reservation.cookoon_butler_price)}HT)
+
+  - if reservation.stripe_charge_id.present?
+    .d-flex.justify-content-between
+      div
+        - if reservation.cookoon_butler_payment_status == "charged"
+          b En attente de débit
+          br
+          i
+            '(Vous ne serez débité qu'après acceptation de votre réservation par l'hôte)
+        - elsif (reservation.cookoon_butler_payment_status == "captured" || reservation.cookoon_butler_payment_status == "paid")
+          b Déjà réglé
+        - elsif reservation.cookoon_butler_payment_status == "cancelled"
+          b Annulé
+      .text-right.text-nowrap
+        b #{humanized_money_with_symbol(reservation.stripe_payment_intent_amount_cookoon_butler)}TTC
