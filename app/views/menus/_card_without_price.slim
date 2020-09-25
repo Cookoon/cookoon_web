@@ -1,0 +1,10 @@
+.menu-card.w-50
+  h5.menu-card-name = menu.description
+  .menu-card-items
+    .text-primary.my-2
+      '*****
+    - if menu.dishes.present?
+      - menu.dishes.each do |dish|
+        p = dish.name
+    .text-primary.my-2
+      '*****
