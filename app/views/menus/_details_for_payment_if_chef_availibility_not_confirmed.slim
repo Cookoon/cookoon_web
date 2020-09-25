@@ -1,0 +1,16 @@
+.mb-4
+  p.mb-1
+    - if reservation.menu.chef.gender == "female"
+      ' - La prestation de la chef #{reservation.menu.chef.name}*
+    - else
+      ' - La prestation du chef #{reservation.menu.chef.name}*
+  p.mb-1
+    ' - Les #{reservation.people_count} menus
+    ' "#{reservation.menu.description}"
+  p.mb-1.font-italic
+    - if reservation.menu.chef.gender == "female"
+      '* : sous réserve de la disponibilité de la chef
+    - else
+      '* : sous réserve de la disponibilité du chef
+  .my-4.d-flex.justify-content-center
+    = render 'menus/card_without_price', menu: reservation.menu
