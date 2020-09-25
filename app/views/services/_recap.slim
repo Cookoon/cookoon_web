@@ -1,0 +1,39 @@
+- if reservation.services.present?
+  .reservation-recap-string
+    <i class='co icon-losange text-primary mr-2'></i> Vous souhaitez les services suivants pour sublimer votre expérience
+    - if reservation.services_status == "initial"
+      - reservation.services.each do |service|
+        p.mb-0.text-left
+          '- &nbsp
+          - if service.name == "Sommelier"
+            | La présence d'un sommelier
+          - if service.name == "Voiturier"
+            | Le service voiturier
+          - if service.name == "Kit professionnel"
+            | Les #{reservation.people_count} kits professionnels
+          - if service.name == "Plateaux repas"
+            | Les #{reservation.people_count} plateaux repas
+          - if service.name == "Composition florale"
+            | Une composition florale - Notre concierge vous contactera afin de recueillir vos attentes
+          - if service.name == "Vin"
+            | La carte des vins - Notre sommelier vous contactera afin de vous accompagner dans le choix des vins
+    - else
+      - reservation.services.each do |service|
+        p.mb-0.text-left
+          '- &nbsp
+          - if service.name == "Sommelier"
+            | La présence d'un sommelier
+          - if service.name == "Voiturier"
+            | Le service voiturier
+          - if service.name == "Kit professionnel"
+            | Les #{reservation.people_count} kits professionnels
+          - if service.name == "Plateaux repas"
+            | Les #{reservation.people_count} plateaux repas
+          - if service.name == "Composition florale"
+            | Une composition florale
+          - if service.name == "Vin"
+            | La carte des vins
+
+- else
+  .reservation-recap-string
+    <i class='co icon-losange text-primary mr-2'></i> Vous n'avez choisi aucun service additionnel
