@@ -1,6 +1,7 @@
 p.mb-3.font-weight-bold 1. Votre décor et le service
-.mb-3
+.mb-4
   = render 'reservations/recap_string', reservation: reservation
+  p.font-weight-bold Premier règlement
   p.mb-1
     '- L'adresse: #{reservation.cookoon.address}
   p.mb-1
@@ -10,29 +11,32 @@ p.mb-3.font-weight-bold 1. Votre décor et le service
       '- Le maître d'hôtel
 .mb-4
   - if reservation.pending?
-    .d-flex.justify-content-between
-      div
-        b A régler ce jour
-        br
-        i
-          '(Vous ne serez débité qu'après acceptation de votre réservation par l'hôte)
-      .text-right.text-nowrap
-        b #{humanized_money_with_symbol(reservation.cookoon_butler_with_tax)}TTC
-        br
-        i
-          '(soit #{humanized_money_with_symbol(reservation.cookoon_butler_price)}HT)
+    = render 'payments/amounts_details', sentence_one: "A régler ce jour", sentence_two: "(Vous ne serez débité qu'après acceptation de votre réservation par l'hôte)", amount_ttc: reservation.cookoon_butler_with_tax, amount_ht: reservation.cookoon_butler_price
 
-  - if reservation.stripe_charge_id.present?
-    .d-flex.justify-content-between
-      div
-        - if reservation.cookoon_butler_payment_status == "charged"
-          b En attente de débit
-          br
-          i
-            '(Vous ne serez débité qu'après acceptation de votre réservation par l'hôte)
-        - elsif (reservation.cookoon_butler_payment_status == "captured" || reservation.cookoon_butler_payment_status == "paid")
-          b Déjà réglé
-        - elsif reservation.cookoon_butler_payment_status == "cancelled"
-          b Annulé
-      .text-right.text-nowrap
-        b #{humanized_money_with_symbol(reservation.stripe_payment_intent_amount_cookoon_butler)}TTC
+  - if reservation.charged?
+    = render 'payments/amounts_details', sentence_one: "Débit en attente", sentence_two: "(Vous ne serez débité qu'après acceptation de votre réservation par l'hôte)", amount_ttc: reservation.stripe_payment_intent_amount_cookoon_butler, amount_ht: ""
+
+  - if reservation.accepted? || reservation.menu_payment_captured? || reservation.services_payment_captured?
+    = render 'payments/amounts_details', sentence_one: "Réglé", sentence_two: "", amount_ttc: reservation.stripe_payment_intent_amount_cookoon_butler, amount_ht: ""
+
+  - if reservation.refused?
+    = render 'payments/amounts_details', sentence_one: "Annulé", sentence_two: "", amount_ttc: reservation.stripe_payment_intent_amount_cookoon_butler, amount_ht: ""
+
+  - if reservation.cancelled? || reservation.dead?
+    = render 'payments/amounts_details', sentence_one: "Annulé", sentence_two: "", amount_ttc: reservation.cookoon_butler_with_tax, amount_ht: reservation.cookoon_butler_price
+
+  - if reservation.quotation_asked?
+    = render 'payments/amounts_details', sentence_one: "Devis en cours de préparation", sentence_two: "", amount_ttc: "", amount_ht: ""
+
+  - if reservation.quotation_proposed?
+    = render 'payments/amounts_details', sentence_one: "Devis en attente de validation de votre part", sentence_two: "", amount_ttc: "", amount_ht: ""
+
+  - if reservation.quotation_accepted?
+    = render 'payments/amounts_details', sentence_one: "Devis accepté", sentence_two: "", amount_ttc: "", amount_ht: ""
+
+  - if reservation.quotation_refused?
+    = render 'payments/amounts_details', sentence_one: "Devis refusé", sentence_two: "", amount_ttc: "", amount_ht: ""
+
+  - if reservation.ongoing? || reservation.passed?
+
+
