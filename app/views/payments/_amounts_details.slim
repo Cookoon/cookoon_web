@@ -1,0 +1,13 @@
+.d-flex.justify-content-between
+  div
+    b = sentence_one
+    - if sentence_two.present?
+      br
+      i = sentence_two
+  .text-right.text-nowrap
+    - if amount_ttc.present?
+      b #{humanized_money_with_symbol(amount_ttc)}TTC
+    - if amount_ht.present?
+      br
+      i
+        '(soit #{humanized_money_with_symbol(amount_ht)}HT)
