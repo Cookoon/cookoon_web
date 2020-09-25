@@ -17,58 +17,23 @@
 
       = render 'payments/details_cookoon_butler', reservation: @reservation
 
-      hr
+      hr.my-5
 
-      p.mb-3.font-weight-bold 2. Vos souhaits de chef et de menu
-      - if @reservation.menu.present?
-        = render 'menus/recap', reservation: @reservation
-        .mb-3
-          p.mb-1
-            - if @reservation.menu.chef.gender == "female"
-              '- La chef: #{@reservation.menu.chef.name}*
-            - else
-              '- Le chef: #{@reservation.menu.chef.name}*
-          p.mb-1
-            '- Le menu: #{@reservation.menu.description} (#{@reservation.menu.dishes.pluck(:name).join(' / ')})
-        .mb-4
-          .d-flex-default
-            b Montant
-            b #{humanized_money_with_symbol(@reservation.menu_with_tax)}TTC
-          .d-flex.justify-content-end
-            i
-              '(soit #{humanized_money_with_symbol(@reservation.menu_price)}HT)
-          p.mb-1.font-italic
-            - if @reservation.menu.chef.gender == "female"
-              '*: sous réserve de disponibilité de la chef
-            - else
-              '*: sous réserve de disponibilité du chef
-      - else
-        = render 'menus/recap', reservation: @reservation
+      = render 'payments/details_menu', reservation: @reservation
 
-      hr
+      hr.my-5
 
-      p.mb-3.font-weight-bold 3. Vos souhaits de service
-      - if @reservation.services.present?
-        .mb-3
-          - @reservation.services.each do |service|
-            p.mb-1
-              '- &nbsp
-              =service.name
-        .mb-4
-          .d-flex-default
-            b Montant
-            b #{humanized_money_with_symbol(@reservation.services_with_tax)}TTC
-          .d-flex.justify-content-end
-            i
-              '(soit #{humanized_money_with_symbol(@reservation.services_price)}HT)
-      - else
-        .mb-4 Vous n'avez choisi aucun service additionnel
+      = render 'payments/details_services', reservation: @reservation
 
       - if @reservation.needs_cookoon_butler_payment?
         hr
         hr
         p.mb-3.font-weight-bold.text-center Régler le décor et le service:  #{humanized_money_with_symbol(@reservation.cookoon_butler_with_tax)}TTC
         = render 'credit_cards/selection', url_intent_secret: @url_intent_secret_cookoon_butler
+        .text-center
+          div style="font-size:12px; margin-top: 15px"
+            p.mb-2 Votre carte bleue ne sera débitée que si l'Hôte accepte votre demande de location.
+            p Attention : nous procédons tout de même à une demande d'autorisation de paiement sur votre compte.
       - if @reservation.needs_menu_payment?
         hr
         hr
@@ -81,10 +46,10 @@
         = render 'credit_cards/selection', url_intent_secret: @url_intent_secret_services
 
       - if @reservation.business?
-        hr
-        hr
+        hr.mt-5
+        hr.mb-5
         .text-center.mb-4
-          - if @reservation.cookoon_selected? || @reservation.menu_selected? ||  @reservation.services_selected?
+          - if @reservation.pending?
             p Vous pouvez aussi demander un devis
             = link_to 'Demander un Devis', ask_quotation_reservation_path(@reservation), class: 'btn-cookoon btn-cookoon-primary btn-block', method: :patch
           - elsif @reservation.quotation_asked?
