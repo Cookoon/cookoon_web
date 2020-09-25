@@ -81,8 +81,9 @@ class User < ApplicationRecord
   end
 
   def stripe_verified?
-    return false unless stripe_account
-    stripe_account.payouts_enabled
+    # return false unless stripe_account
+    # stripe_account.payouts_enabled
+    stripe_account.present?
   end
 
   def total_payouts_for_dashboard_cents
