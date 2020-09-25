@@ -25,6 +25,10 @@ class Service < ApplicationRecord
     Service::Payment.new(self, options)
   end
 
+  def price_with_margin_and_taxes
+    (calculate_price_with_margin_and_taxes)
+  end
+
   private
 
   def set_name_and_default_prices
@@ -134,6 +138,10 @@ class Service < ApplicationRecord
   def compute_price
     # self.price = (1 + self.margin) * ((self.quantity_base * self.base_price) + (self.quantity * self.unit_price))
     assign_attributes(price: (1 + margin) * ((quantity_base * base_price) + (quantity * unit_price)))
+  end
+
+  def calculate_price_with_margin_and_taxes
+    price * (1 + Reservation::PriceComputer::TAX )
   end
 
 end
