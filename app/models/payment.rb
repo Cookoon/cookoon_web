@@ -5,6 +5,18 @@ class Payment
 
   delegate :user, :payment_amount_cents, to: :payable
 
+  STATUSES = {
+    later: "A régler plus tard",
+    charged: "Débit en attente",
+    required: "A régler ce jour",
+    payed: "Déjà réglé",
+    cancelled: "Décliné par l'hôte",
+    quotation_asked: "Devis en cours d'élaboration",
+    quotation_proposed: "Devis en attente de validation de votre part",
+    quotation_accepted: "Devis accepté",
+    quotation_refused: "Devis refusé"
+  }
+
   def initialize(payable, options = {})
     @payable = payable
     @options = options
