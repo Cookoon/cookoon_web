@@ -10,14 +10,23 @@ p.mb-3.font-weight-bold 3. Vos souhaits de service
           '- &nbsp
           = service.name
         - if reservation.services_status == "initial" || reservation.services_status == "validated"
-          p.mb-1.text-right = Payment::STATUSES[:quotation_asked]
-        - elsif reservation.services_status == "payment_required"
+          - if service.price_displayable?
+            p.mb-1.text-right #{humanized_money_with_symbol(service.price_with_margin_and_taxes)}TTC
+          - else
+            p.mb-1.text-right = Payment::STATUSES[:quotation_asked]
+        - else
           p.mb-1.text-right #{humanized_money_with_symbol(service.price_with_margin_and_taxes)}TTC
 
   .mb-4
     - if reservation.pending? || reservation.charged? || reservation.accepted? || reservation.menu_payment_captured?
       - if reservation.services_status == "initial" || reservation.services_status == "selected" || reservation.services_status == "validated"
-        = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:quotation_asked], sentence_two: "", amount_ttc: "", amount_ht: ""
+        - if reservation.services.with_displayable_price.present?
+          - if reservation.services.without_displayable_price.present?
+            = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:temporary], sentence_two: "", amount_ttc: reservation.total_price_with_margin_and_taxes_for_services_with_displayable_price, amount_ht: ""
+          - else
+            = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:later], sentence_two: "", amount_ttc: reservation.services_with_tax, amount_ht: ""
+        - else
+          = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:quotation_asked], sentence_two: "", amount_ttc: "", amount_ht: ""
       - elsif reservation.services_status == "payment_required"
         = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:required], sentence_two: "", amount_ttc: reservation.services_with_tax, amount_ht: ""
       - elsif reservation.services_status == "captured" || reservation.services_status == "paid"
