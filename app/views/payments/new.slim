@@ -26,8 +26,8 @@
       = render 'payments/details_services', reservation: @reservation
 
       - if @reservation.needs_cookoon_butler_payment?
-        hr
-        hr
+        hr.mt-5
+        hr.mb-5
         p.mb-3.font-weight-bold.text-center Régler le décor et le service:  #{humanized_money_with_symbol(@reservation.cookoon_butler_with_tax)}TTC
         = render 'credit_cards/selection', url_intent_secret: @url_intent_secret_cookoon_butler
         .text-center
@@ -35,13 +35,13 @@
             p.mb-2 Votre carte bleue ne sera débitée que si l'Hôte accepte votre demande de location.
             p Attention : nous procédons tout de même à une demande d'autorisation de paiement sur votre compte.
       - if @reservation.needs_menu_payment?
-        hr
-        hr
+        hr.mt-5
+        hr.mb-5
         p.mb-3.font-weight-bold.text-center Régler le chef et le menu:  #{humanized_money_with_symbol(@reservation.menu_with_tax)}TTC
         = render 'credit_cards/selection', url_intent_secret: @url_intent_secret_menu
       - if @reservation.needs_services_payment?
-        hr
-        hr
+        hr.mt-5
+        hr.mb-5
         p.mb-3.font-weight-bold.text-center Régler les services: #{humanized_money_with_symbol(@reservation.services_with_tax)}TTC
         = render 'credit_cards/selection', url_intent_secret: @url_intent_secret_services
 
