@@ -10,36 +10,36 @@ p.mb-3.font-weight-bold 3. Vos souhaits de service
           '- &nbsp
           = service.name
         - if reservation.services_status == "initial" || reservation.services_status == "validated"
-          p.mb-1.text-right Devis en cours de préparation
+          p.mb-1.text-right = Payment::STATUSES[:quotation_asked]
         - elsif reservation.services_status == "payment_required"
           p.mb-1.text-right #{humanized_money_with_symbol(service.price_with_margin_and_taxes)}TTC
 
   .mb-4
     - if reservation.pending? || reservation.charged? || reservation.accepted? || reservation.menu_payment_captured?
       - if reservation.services_status == "initial" || reservation.services_status == "selected" || reservation.services_status == "validated"
-        = render 'payments/amounts_details', sentence_one: "Devis en cours de préparation", sentence_two: "", amount_ttc: "", amount_ht: ""
+        = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:quotation_asked], sentence_two: "", amount_ttc: "", amount_ht: ""
       - elsif reservation.services_status == "payment_required"
-        = render 'payments/amounts_details', sentence_one: "A régler ce jour", sentence_two: "", amount_ttc: reservation.services_with_tax, amount_ht: reservation.services_price
+        = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:required], sentence_two: "", amount_ttc: reservation.services_with_tax, amount_ht: ""
       - elsif reservation.services_status == "captured" || reservation.services_status == "paid"
-        = render 'payments/amounts_details', sentence_one: "Réglé", sentence_two: "", amount_ttc: reservation.stripe_payment_intent_amount_services, amount_ht: ""
+        = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:paid], sentence_two: "", amount_ttc: reservation.stripe_payment_intent_amount_services, amount_ht: ""
 
     - if reservation.services_payment_captured?
-      = render 'payments/amounts_details', sentence_one: "Réglé", sentence_two: "", amount_ttc: reservation.stripe_payment_intent_amount_services, amount_ht: ""
+      = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:paid], sentence_two: "", amount_ttc: reservation.stripe_payment_intent_amount_services, amount_ht: ""
 
     - if reservation.refused? || reservation.cancelled? || reservation.dead?
-      = render 'payments/amounts_details', sentence_one: "Annulé", sentence_two: "", amount_ttc: "", amount_ht: ""
+      = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:cancelled], sentence_two: "", amount_ttc: "", amount_ht: ""
 
     - if reservation.quotation_asked?
-      = render 'payments/amounts_details', sentence_one: "Devis en cours de préparation", sentence_two: "", amount_ttc: "", amount_ht: ""
+      = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:quotation_asked], sentence_two: "", amount_ttc: "", amount_ht: ""
 
     - if reservation.quotation_proposed?
-      = render 'payments/amounts_details', sentence_one: "Devis en attente de validation de votre part", sentence_two: "", amount_ttc: "", amount_ht: ""
+      = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:quotation_proposed], sentence_two: "", amount_ttc: "", amount_ht: ""
 
     - if reservation.quotation_accepted?
-      = render 'payments/amounts_details', sentence_one: "Devis accepté", sentence_two: "", amount_ttc: "", amount_ht: ""
+      = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:quotation_accepted], sentence_two: "", amount_ttc: "", amount_ht: ""
 
     - if reservation.quotation_refused?
-      = render 'payments/amounts_details', sentence_one: "Devis refusé", sentence_two: "", amount_ttc: "", amount_ht: ""
+      = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:quotation_refused], sentence_two: "", amount_ttc: "", amount_ht: ""
 
     - if reservation.ongoing? || reservation.passed?
 - else
