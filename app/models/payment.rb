@@ -15,7 +15,7 @@ class Payment
     quotation_proposed: "Devis en attente de validation de votre part",
     quotation_accepted: "Devis accepté",
     quotation_refused: "Devis refusé"
-  }
+  }.freeze
 
   def initialize(payable, options = {})
     @payable = payable
