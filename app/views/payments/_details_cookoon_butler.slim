@@ -11,7 +11,7 @@ p.mb-3.font-weight-bold 1. Votre décor et le service
       '- Le maître d'hôtel
 .mb-4
   - if reservation.pending?
-    = render 'payments/amounts_details', sentence_one: "A régler ce jour", sentence_two: "(Vous ne serez débité qu'après acceptation de votre réservation par l'hôte)", amount_ttc: reservation.cookoon_butler_with_tax, amount_ht: reservation.cookoon_butler_price
+    = render 'payments/amounts_details', sentence_one: "A régler ce jour", sentence_two: "(Vous ne serez débité qu'après acceptation de votre réservation par l'hôte)", amount_ttc: reservation.cookoon_butler_with_tax, amount_ht: ""
 
   - if reservation.charged?
     = render 'payments/amounts_details', sentence_one: "Débit en attente", sentence_two: "(Vous ne serez débité qu'après acceptation de votre réservation par l'hôte)", amount_ttc: reservation.stripe_payment_intent_amount_cookoon_butler, amount_ht: ""
@@ -23,7 +23,7 @@ p.mb-3.font-weight-bold 1. Votre décor et le service
     = render 'payments/amounts_details', sentence_one: "Annulé", sentence_two: "", amount_ttc: reservation.stripe_payment_intent_amount_cookoon_butler, amount_ht: ""
 
   - if reservation.cancelled? || reservation.dead?
-    = render 'payments/amounts_details', sentence_one: "Annulé", sentence_two: "", amount_ttc: reservation.cookoon_butler_with_tax, amount_ht: reservation.cookoon_butler_price
+    = render 'payments/amounts_details', sentence_one: "Annulé", sentence_two: "", amount_ttc: reservation.cookoon_butler_with_tax, amount_ht: ""
 
   - if reservation.quotation_asked?
     = render 'payments/amounts_details', sentence_one: "Devis en cours de préparation", sentence_two: "", amount_ttc: "", amount_ht: ""

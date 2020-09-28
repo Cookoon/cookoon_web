@@ -17,13 +17,13 @@ p.mb-3.font-weight-bold 2. Vos souhaits de chef et de menu
 .mb-4
   - if reservation.menu_status != "cooking_by_user"
     - if reservation.pending? || reservation.charged?
-      = render 'payments/amounts_details', sentence_one: "A régler plus tard", sentence_two: "(Le règlement vous sera demandé après acceptation de votre réservation par l'hôte et validation des disponibilités du chef)", amount_ttc: reservation.menu_with_tax, amount_ht: reservation.menu_price
+      = render 'payments/amounts_details', sentence_one: "A régler plus tard", sentence_two: "(Le règlement vous sera demandé après acceptation de votre réservation par l'hôte et validation des disponibilités du chef)", amount_ttc: reservation.menu_with_tax, amount_ht: ""
 
     - if reservation.accepted?
       - if reservation.menu_status == "initial" || reservation.menu_status == "selected" || reservation.menu_status == "validated"
-        = render 'payments/amounts_details', sentence_one: "A régler plus tard", sentence_two: "(Le règlement vous sera demandé après acceptation de votre réservation par l'hôte et validation des disponibilités du chef)", amount_ttc: reservation.menu_with_tax, amount_ht: reservation.menu_price
+        = render 'payments/amounts_details', sentence_one: "A régler plus tard", sentence_two: "(Le règlement vous sera demandé après acceptation de votre réservation par l'hôte et validation des disponibilités du chef)", amount_ttc: reservation.menu_with_tax, amount_ht: ""
       - elsif reservation.menu_status == "payment_required"
-        = render 'payments/amounts_details', sentence_one: "A régler ce jour", sentence_two: "", amount_ttc: reservation.menu_with_tax, amount_ht: reservation.menu_price
+        = render 'payments/amounts_details', sentence_one: "A régler ce jour", sentence_two: "", amount_ttc: reservation.menu_with_tax, amount_ht: ""
       - elsif reservation.menu_status == "captured" || reservation.menu_status == "paid"
         = render 'payments/amounts_details', sentence_one: "Réglé", sentence_two: "", amount_ttc: reservation.stripe_payment_intent_amount_menu, amount_ht: ""
 
@@ -31,8 +31,7 @@ p.mb-3.font-weight-bold 2. Vos souhaits de chef et de menu
       = render 'payments/amounts_details', sentence_one: "Réglé", sentence_two: "", amount_ttc: reservation.stripe_payment_intent_amount_menu, amount_ht: ""
 
     - if reservation.refused? || reservation.cancelled? || reservation.dead?
-      = render 'payments/amounts_details', sentence_one: "Annulé", sentence_two: "", amount_ttc: reservation.menu_with_tax, amount_ht: reservation.menu_price
-
+      = render 'payments/amounts_details', sentence_one: "Annulé", sentence_two: "", amount_ttc: reservation.menu_with_tax, amount_ht: ""
     - if reservation.quotation_asked?
       = render 'payments/amounts_details', sentence_one: "Devis en cours de préparation", sentence_two: "", amount_ttc: "", amount_ht: ""
 
