@@ -9,7 +9,7 @@ class Payment
     later: "A régler plus tard",
     charged: "Débit en attente",
     required: "A régler ce jour",
-    payed: "Déjà réglé",
+    paid: "Déjà réglé",
     cancelled: "Décliné par l'hôte",
     quotation_asked: "Devis en cours d'élaboration",
     quotation_proposed: "Devis en attente de validation de votre part",
