@@ -79,6 +79,10 @@ class Reservation < ApplicationRecord
   after_save :report_to_slack, if: :saved_change_to_aasm_state?
   after_save :update_services, if: :services_need_update?
 
+  def total_price_with_margin_and_taxes_for_services_with_displayable_price
+    services.with_displayable_price.map{ |service| service.price_with_margin_and_taxes }.sum()
+  end
+
   def pending?
     initial? || cookoon_selected? || menu_selected? || services_selected?
   end
