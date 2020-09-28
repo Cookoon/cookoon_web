@@ -4,44 +4,37 @@ p.mb-3.font-weight-bold 2. Vos souhaits de chef et de menu
 
   - if reservation.menu.present?
     p.font-weight-bold Second règlement
-    - if reservation.pending? || reservation.charged?
-      = render 'menus/details_for_payment_if_chef_availibility_not_confirmed', reservation: reservation
-    - elsif reservation.accepted?
-      - if reservation.menu_status == "initial" || reservation.menu_status == "selected"
-        = render 'menus/details_for_payment_if_chef_availibility_not_confirmed', reservation: reservation
-      - else
-        = render 'menus/details_for_payment_if_chef_availibility_confirmed', reservation: reservation
-    - else
-      = render 'menus/details_for_payment_if_chef_availibility_confirmed', reservation: reservation
+    = render 'menus/details_for_payment', reservation: reservation
 
 .mb-4
   - if reservation.menu_status != "cooking_by_user"
     - if reservation.pending? || reservation.charged?
-      = render 'payments/amounts_details', sentence_one: "A régler plus tard", sentence_two: "(Le règlement vous sera demandé après acceptation de votre réservation par l'hôte et validation des disponibilités du chef)", amount_ttc: reservation.menu_with_tax, amount_ht: ""
+      = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:later], sentence_two: "(Le règlement vous sera demandé après acceptation de votre réservation par l'hôte et validation des disponibilités du chef)", amount_ttc: reservation.menu_with_tax, amount_ht: ""
 
     - if reservation.accepted?
       - if reservation.menu_status == "initial" || reservation.menu_status == "selected" || reservation.menu_status == "validated"
-        = render 'payments/amounts_details', sentence_one: "A régler plus tard", sentence_two: "(Le règlement vous sera demandé après acceptation de votre réservation par l'hôte et validation des disponibilités du chef)", amount_ttc: reservation.menu_with_tax, amount_ht: ""
+        = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:later], sentence_two: "(Le règlement vous sera demandé après acceptation de votre réservation par l'hôte et validation des disponibilités du chef)", amount_ttc: reservation.menu_with_tax, amount_ht: ""
       - elsif reservation.menu_status == "payment_required"
-        = render 'payments/amounts_details', sentence_one: "A régler ce jour", sentence_two: "", amount_ttc: reservation.menu_with_tax, amount_ht: ""
+        = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:required], sentence_two: "", amount_ttc: reservation.menu_with_tax, amount_ht: ""
       - elsif reservation.menu_status == "captured" || reservation.menu_status == "paid"
-        = render 'payments/amounts_details', sentence_one: "Réglé", sentence_two: "", amount_ttc: reservation.stripe_payment_intent_amount_menu, amount_ht: ""
+        = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:paid], sentence_two: "", amount_ttc: reservation.stripe_payment_intent_amount_menu, amount_ht: ""
 
     - if reservation.menu_payment_captured? || reservation.services_payment_captured?
-      = render 'payments/amounts_details', sentence_one: "Réglé", sentence_two: "", amount_ttc: reservation.stripe_payment_intent_amount_menu, amount_ht: ""
+      = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:paid], sentence_two: "", amount_ttc: reservation.stripe_payment_intent_amount_menu, amount_ht: ""
 
     - if reservation.refused? || reservation.cancelled? || reservation.dead?
-      = render 'payments/amounts_details', sentence_one: "Annulé", sentence_two: "", amount_ttc: reservation.menu_with_tax, amount_ht: ""
+      = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:cancelled], sentence_two: "", amount_ttc: reservation.menu_with_tax, amount_ht: ""
+
     - if reservation.quotation_asked?
-      = render 'payments/amounts_details', sentence_one: "Devis en cours de préparation", sentence_two: "", amount_ttc: "", amount_ht: ""
+      = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:quotation_asked], sentence_two: "", amount_ttc: "", amount_ht: ""
 
     - if reservation.quotation_proposed?
-      = render 'payments/amounts_details', sentence_one: "Devis en attente de validation de votre part", sentence_two: "", amount_ttc: "", amount_ht: ""
+      = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:quotation_proposed], sentence_two: "", amount_ttc: "", amount_ht: ""
 
     - if reservation.quotation_accepted?
-      = render 'payments/amounts_details', sentence_one: "Devis accepté", sentence_two: "", amount_ttc: "", amount_ht: ""
+      = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:quotation_accepted], sentence_two: "", amount_ttc: "", amount_ht: ""
 
     - if reservation.quotation_refused?
-      = render 'payments/amounts_details', sentence_one: "Devis refusé", sentence_two: "", amount_ttc: "", amount_ht: ""
+      = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:quotation_refused], sentence_two: "", amount_ttc: "", amount_ht: ""
 
     - if reservation.ongoing? || reservation.passed?
