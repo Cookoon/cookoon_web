@@ -1,7 +1,11 @@
-- if reservation.menu_status == "selected" && reservation.menu.present?
-  .reservation-recap-string
-    <i class='co icon-losange text-primary mr-2'></i> Vous avez choisi <strong>#{reservation.menu.chef.name}</strong> comme chef avec le menu "#{reservation.menu.description}"
-- elsif reservation.menu_status == "cooking_by_user"
-  .reservation-recap-string
-    <i class='co icon-losange text-primary mr-2'></i> Vous avez choisi de cuisiner vous-même
-    //= link_to 'Annuler le choix', reset_menu_reservation_path(@reservation, cookoon_id: @cookoon.id), class: 'btn-cookoon btn-cookoon-primary', method: :patch, remote: true
+.reservation-recap-string
+  - if reservation.menu.present?
+    <i class='co icon-losange text-primary mr-2'></i> Vous avez choisi #{reservation.menu.chef.name} comme chef avec le menu "#{reservation.menu.description}".
+    - if reservation.menu_status == "selected"
+      br
+      <i class='co icon-losange text-primary mr-2'></i> Nous sommes d'ores et déjà en train de confirmer sa disponibilité.
+
+  - else
+    - if reservation.menu_status == "cooking_by_user"
+      <i class='co icon-losange text-primary mr-2'></i> Vous avez choisi de cuisiner vous-même
+      //= link_to 'Annuler le choix', reset_menu_reservation_path(@reservation, cookoon_id: @cookoon.id), class: 'btn-cookoon btn-cookoon-primary', method: :patch, remote: true
