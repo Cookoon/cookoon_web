@@ -9,6 +9,9 @@ class Service < ApplicationRecord
   monetize :price_cents
   monetize :base_price_cents
 
+  CATEGORIES_WITH_DISPLAYABLE_PRICE = %w[parking]
+  CATEGORIES_WITHOUT_DISPLAYABLE_PRICE = %w[special sommelier corporate catering breakfast flowers wine]
+
   # enum status: %i[initial quote captured paid]
   enum status: %i[initial validated payment_required captured paid]
   enum category: %i[special sommelier parking corporate catering breakfast flowers wine]
@@ -21,12 +24,19 @@ class Service < ApplicationRecord
   # validates :category, presence: true
   validates :category, uniqueness: { scope: :reservation }, unless: :wine?
 
+  scope :with_displayable_price, -> { where(category: CATEGORIES_WITH_DISPLAYABLE_PRICE) }
+  scope :without_displayable_price, -> { where(category: CATEGORIES_WITHOUT_DISPLAYABLE_PRICE) }
+
   def payment(options = {})
     Service::Payment.new(self, options)
   end
 
   def price_with_margin_and_taxes
     (calculate_price_with_margin_and_taxes)
+  end
+
+  def price_displayable?
+    CATEGORIES_WITH_DISPLAYABLE_PRICE.include?(category)
   end
 
   private
