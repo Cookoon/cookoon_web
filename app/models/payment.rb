@@ -14,7 +14,8 @@ class Payment
     quotation_asked: "Devis en cours d'élaboration",
     quotation_proposed: "Devis en attente de validation de votre part",
     quotation_accepted: "Devis accepté",
-    quotation_refused: "Devis refusé"
+    quotation_refused: "Devis refusé",
+    temporary: "Montant provisoire"
   }.freeze
 
   def initialize(payable, options = {})
