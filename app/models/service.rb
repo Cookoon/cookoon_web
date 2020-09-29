@@ -9,8 +9,9 @@ class Service < ApplicationRecord
   monetize :price_cents
   monetize :base_price_cents
 
-  CATEGORIES_WITH_DISPLAYABLE_PRICE = %w[parking]
-  CATEGORIES_WITHOUT_DISPLAYABLE_PRICE = %w[special sommelier corporate catering breakfast flowers wine]
+  CATEGORIES_WITH_FIXED_PRICE = %w[parking]
+  # CATEGORIES_WITH_DISPLAYABLE_PRICE = %w[parking]
+  # CATEGORIES_WITHOUT_DISPLAYABLE_PRICE = %w[special sommelier corporate catering breakfast flowers wine]
 
   # enum status: %i[initial quote captured paid]
   enum status: %i[initial validated payment_required captured paid]
@@ -18,25 +19,23 @@ class Service < ApplicationRecord
 
   default_scope -> { order(id: :asc) }
 
-  before_create :set_name_and_default_prices, :compute_price
+  before_create :set_name_and_default_prices, :compute_price, :set_status_validated_for_categories_with_fixed_price
   before_update :compute_price
 
   # validates :category, presence: true
   validates :category, uniqueness: { scope: :reservation }, unless: :wine?
 
-  scope :with_displayable_price, -> { where(category: CATEGORIES_WITH_DISPLAYABLE_PRICE) }
-  scope :without_displayable_price, -> { where(category: CATEGORIES_WITHOUT_DISPLAYABLE_PRICE) }
+  # scope :with_displayable_price, -> { where(category: CATEGORIES_WITH_DISPLAYABLE_PRICE) }
+  # scope :without_displayable_price, -> { where(category: CATEGORIES_WITHOUT_DISPLAYABLE_PRICE) }
+  scope :initial, -> { where(status: 'initial') }
+  scope :not_initial, -> { where.not(status: 'initial') }
 
   def payment(options = {})
     Service::Payment.new(self, options)
   end
 
   def price_with_margin_and_taxes
-    (calculate_price_with_margin_and_taxes)
-  end
-
-  def price_displayable?
-    CATEGORIES_WITH_DISPLAYABLE_PRICE.include?(category)
+    calculate_price_with_margin_and_taxes
   end
 
   private
@@ -152,6 +151,14 @@ class Service < ApplicationRecord
 
   def calculate_price_with_margin_and_taxes
     price * (1 + Reservation::PriceComputer::TAX )
+  end
+
+  def price_fixed?
+    CATEGORIES_WITH_FIXED_PRICE.include?(category)
+  end
+
+  def set_status_validated_for_categories_with_fixed_price
+    assign_attributes(status: 'validated') if price_fixed?
   end
 
 end
