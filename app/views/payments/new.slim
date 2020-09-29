@@ -25,6 +25,11 @@
 
       = render 'payments/details_services', reservation: @reservation
 
+      - if !@reservation.cancelled? && !@reservation.refused? && !@reservation.dead? && !@reservation.quotation_asked? && !@reservation.quotation_proposed? && !@reservation.quotation_accepted? && !@reservation.quotation_refused?
+        hr.my-5
+
+        = render 'payments/details_total', reservation: @reservation
+
       - if @reservation.needs_cookoon_butler_payment?
         hr.mt-5
         hr.mb-5

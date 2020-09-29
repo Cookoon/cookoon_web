@@ -45,6 +45,11 @@ class PaymentsController < ApplicationController
       @credit_cards = current_user.credit_cards
 
       @payment_method_to_display_first = current_user.find_default_stripe_payment_method || @credit_cards.first
+
+      @total = @reservation.total_with_tax
+      @total = @total - @reservation.cookoon_butler_with_tax + @reservation.stripe_payment_intent_amount_cookoon_butler if @reservation.stripe_charge_id.present?
+      @total = @total - @reservation.menu_with_tax + @reservation.stripe_payment_intent_amount_menu if @reservation.stripe_menu_id.present?
+      @total = @total - @reservation.services_with_tax + @reservation.stripe_payment_intent_amount_services if @reservation.stripe_services_id.present?
     end
   end
 

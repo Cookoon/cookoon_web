@@ -1,0 +1,5 @@
+.mb-4
+- if reservation.services.initial.present?
+  = render 'payments/amounts_details', sentence_one: "Total provisoire (hors #{reservation.services.initial.pluck(:name).to_sentence.downcase})", sentence_two: "", amount_ttc: @total, amount_ht: ""
+- else
+  = render 'payments/amounts_details', sentence_one: "Total", sentence_two: "", amount_ttc: @total, amount_ht: ""
