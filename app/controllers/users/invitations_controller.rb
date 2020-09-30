@@ -1,5 +1,6 @@
 class Users::InvitationsController < Devise::InvitationsController
   responders :invitations
+  before_action :set_time_now, only: %i[edit update]
 
   private
 
@@ -16,7 +17,12 @@ class Users::InvitationsController < Devise::InvitationsController
       :last_name,
       :phone_number,
       :born_on,
-      :terms_of_service
+      :terms_of_service,
+      :terms_of_service_at
     )
+  end
+
+  def set_time_now
+    @date_time_now = DateTime.now
   end
 end
