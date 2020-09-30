@@ -7,7 +7,8 @@
   <%= f.input :phone_number %>
   <%= f.input :password, required: true %>
   <%= f.input :password_confirmation, required: true %>
-  <%= f.input :terms_of_service, as: :boolean, label: "J'accepte les #{link_to('conditions générales de services', general_conditions_url, target: :_blank, class: 'a_gold')} ".html_safe %>
+  <%= f.input :terms_of_service, as: :boolean, label: "J'accepte les #{link_to('conditions générales de services', general_conditions_url, target: :_blank, class: 'a_gold')} ce #{@date_time_now.day} #{I18n.t('date.month_names')[@date_time_now.month]} à #{@date_time_now.strftime('%H:%M:%S')}".html_safe %>
+  <%= f.input :terms_of_service_at, as: :hidden, readonly: true, input_html: { value: @date_time_now } %>
 
   <div class="text-center my-3">
     <%= f.button :submit, t('.submit'), class: 'btn-cookoon btn-cookoon-primary' %>
