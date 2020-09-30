@@ -29,7 +29,7 @@
     </div>
 
     <div>
-      <%= f.input :terms_of_service, as: :boolean, label: "J'accepte les #{link_to('conditions générales de services', '../general_conditions', target: :_blank, class: 'a_gold')} ainsi que les #{link_to('conditions générales d\'utilisation Stripe', 'https://stripe.com/fr/legal#translation', target: :_blank, class: 'a_gold')} appelées #{link_to('\'Stripe Services Agreement\'', 'https://stripe.com/fr/legal#translation', target: :_blank, class: 'a_gold')}. Vos coordonnées de carte bancaire seront stockées auprès de notre partenaire de paiement Stripe, qui utilise un cryptage de qualité bancaire.".html_safe, input_html: { data: { target: 'stripe-credit-cards.tosAcceptance'} } %>
+      <%= f.input :terms_of_service, as: :boolean, label: "J'accepte les #{link_to('conditions générales de services', general_conditions_url, target: :_blank, class: 'a_gold')} ainsi que les #{link_to('conditions générales d\'utilisation Stripe', 'https://stripe.com/fr/legal#translation', target: :_blank, class: 'a_gold')} appelées #{link_to('\'Stripe Services Agreement\'', 'https://stripe.com/fr/legal#translation', target: :_blank, class: 'a_gold')}. Vos coordonnées de carte bancaire seront stockées auprès de notre partenaire de paiement Stripe, qui utilise un cryptage de qualité bancaire.".html_safe, input_html: { data: { target: 'stripe-credit-cards.tosAcceptance'} } %>
       <div class="text-danger" style="padding-left: 1.75rem" data-target='stripe-credit-cards.tosAcceptanceError' role="alert"></div>
     </div>
 
