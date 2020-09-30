@@ -30,6 +30,8 @@ Rails.application.routes.draw do
   resources :users, only: :index do
     post :impersonate, on: :member
     post :stop_impersonating, on: :collection
+    get 'general_conditions/acceptance', to: 'users#edit_general_conditions_acceptance', as: :edit_general_conditions_acceptance, on: :collection
+    patch 'general_conditions/acceptance', to: 'users#update_general_conditions_acceptance', as: :update_general_conditions_acceptance, on: :collection
   end
 
   resources :credit_cards, only: %i[index create destroy] do

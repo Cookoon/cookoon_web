@@ -11,6 +11,14 @@ class UserPolicy < ApplicationPolicy
     user_can_access?
   end
 
+  def edit_general_conditions_acceptance?
+    update?
+  end
+
+  def update_general_conditions_acceptance?
+    update?
+  end
+
   private
 
   def user_can_access?

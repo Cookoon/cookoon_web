@@ -36,7 +36,7 @@ class User < ApplicationRecord
             presence: true,
             format: { with: PHONE_REGEXP }
   validates :born_on, presence: true, if: :invited_to_sign_up?
-  validates :terms_of_service, acceptance: { message: 'Vous devez accepter les conditions générales pour continuer' }
+  validates :terms_of_service, acceptance: { message: 'Vous devez accepter les conditions générales de services pour continuer' }
 
   after_invitation_accepted :send_welcome_email
   after_save :upsert_mailchimp_subscription, if: :saved_change_to_born_on?
