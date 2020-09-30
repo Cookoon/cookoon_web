@@ -15,6 +15,8 @@ class ApplicationController < ActionController::Base
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
   after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
 
+  before_action :validate_general_conditions_if_needed, unless: :skip_general_conditions_validation?
+
   # Devise
   def is_flashing_format?
     controller_name.in? %w[invitations passwords]
@@ -49,5 +51,15 @@ class ApplicationController < ActionController::Base
 
   def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(pages$)/
+  end
+
+  def skip_general_conditions_validation?
+    devise_controller? || (params[:controller] == "pages" && params[:action] == "general_conditions") || (params[:controller] == "users" && (params[:action] == "edit_general_conditions_acceptance" || params[:action] == "update_general_conditions_acceptance"))
+  end
+
+  def validate_general_conditions_if_needed
+    if true_user.terms_of_service_at.blank? || (true_user.terms_of_service.present? && true_user.terms_of_service_at < DateTime.new(2020, 9, 30, 14, 00, 00))
+      redirect_to(edit_general_conditions_acceptance_users_path)
+    end
   end
 end
