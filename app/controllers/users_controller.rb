@@ -1,7 +1,6 @@
 class UsersController < ApplicationController
   before_action :build_user, only: %i[edit update]
   before_action :require_admin!, only: %i[index impersonate stop_impersonating]
-  # before_action :find_user, only: %i[edit_general_conditions_acceptance update_general_conditions_acceptance]
 
   def edit; end
 
