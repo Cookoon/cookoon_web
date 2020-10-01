@@ -22,10 +22,16 @@
         .col-12.px-0
           - if @reservation.pending?
             = simple_form_for @reservation, url: select_services_reservation_path(@reservation), method: :patch do |f|
-              = f.input :services,
+              //= f.input :services,
                 as: :check_boxes,
                 collection: @reservation.services_collection_for_view,
                 checked: @reservation.builtin_services,
+                label_method: :first,
+                value_method: :second,
+                item_wrapper_class: "font-weight-bold pl-5 py-1"
+              = f.input :services,
+                as: :check_boxes,
+                collection: @reservation.services_collection_for_event_type,
                 label_method: :first,
                 value_method: :second,
                 item_wrapper_class: "font-weight-bold pl-5 py-1"
