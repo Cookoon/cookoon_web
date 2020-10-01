@@ -60,7 +60,7 @@ class ReservationsController < ApplicationController
     @reservation.select_menu!(Menu.find(params[:menu_id]))
     @reservation.update(menu_status: "selected")
     # redirect_to reservation_cookoon_path(@reservation, @reservation.cookoon, anchor: 'reservation-menus-title')
-    redirect_to reservation_services_path(@reservation)
+    redirect_to reservation_services_path(@reservation), flash: { check_of_chef_availability_needed: true }
   end
 
   # def reset_menu

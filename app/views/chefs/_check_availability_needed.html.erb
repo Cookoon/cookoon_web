@@ -1,0 +1,16 @@
+<div class="modal fade" id="check_chef_availability_needed" tabindex="-1" role="dialog" aria-labelledby="invitedSuccessfullyLabel" data-controller = "show-modal" data-target='show-modal.modalId'>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body text-center">
+        <i class="co co-check fa-5x" aria-hidden="true" style="-webkit-text-fill-color:lightgray"></i>
+        <h4 class='pb-3'>Votre chef</h4>
+        <p>Vous avez choisi <%= @reservation.menu.chef.name %> comme chef.</p>
+        <p>Nous allons vérifier ses disponibilités.</p>
+      </div>
+
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn-cookoon btn-cookoon-primary ml-4" data-dismiss="modal" aria-label="Close">Continuer</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -29,3 +29,6 @@
 <% if flash[:invitation_accepted] %>
   <%= render 'devise/invitations/accepted' %>
 <% end %>
+<% if flash[:check_of_chef_availability_needed] %>
+  <%= render 'chefs/check_availability_needed' %>
+<% end %>
