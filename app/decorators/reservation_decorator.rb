@@ -139,6 +139,21 @@ class ReservationDecorator < Draper::Decorator
     ]
   end
 
+  def services_collection_for_event_type
+    case object.type_name
+      # when 'breakfast'
+      # when 'brunch'
+      when 'lunch', 'diner', 'diner_cocktail', 'lunch_cocktail'
+        [
+          ["La présence d'un sommelier", :parking],
+          ["Une composition florale - Notre concierge vous contactera afin de recueillir vos attentes", :flowers],
+          ["La carte des vins - Notre sommelier vous contactera afin de vous accompagner dans le choix des vins", :wine]
+        ]
+      # when 'morning', 'afternoon'
+      # when 'day'
+      end
+  end
+
   def services_collection_available_for_view
     services_affected = builtin_services.map {|element| element.to_sym}
     services_collection_for_view.delete_if {|element| services_affected.include?(element[1]) unless element[1] == "wine".to_sym }
