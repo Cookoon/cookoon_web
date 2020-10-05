@@ -46,4 +46,5 @@
     .cookoon-nav-hostlink
       .d-none.d-md-block
         - if current_user.cookoons.blank?
-          = link_to raw('Devenir Hôte <i class="fas fa-arrow-right"></i>'), 'https://cookoon.typeform.com/to/iY7Heh', class: 'btn-cookoon btn-cookoon-secondary'
+          //= link_to raw('Devenir Hôte <i class="fas fa-arrow-right"></i>'), 'https://cookoon.typeform.com/to/iY7Heh', class: 'btn-cookoon btn-cookoon-secondary'
+          = link_to raw('Devenir Hôte <i class="fas fa-arrow-right"></i>'), new_host_cookoon_path, class: 'btn-cookoon btn-cookoon-secondary'
