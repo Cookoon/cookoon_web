@@ -56,10 +56,10 @@ class Service < ApplicationRecord
       # self.assign_attributes(
         assign_attributes(
         name: 'Sommelier',
-        quantity_base: sommelier_count,
-        base_price: 250,
-        quantity: 0,
-        unit_price: 0,
+        quantity_base: 0,
+        base_price: 0,
+        quantity: sommelier_count,
+        unit_price: 250,
         margin: 0.25,
       )
     when 'parking'
