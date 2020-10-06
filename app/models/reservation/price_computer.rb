@@ -2,7 +2,7 @@ class Reservation
   module PriceComputer
     extend ActiveSupport::Concern
 
-    MARGIN = { butler: 0.25, menu: 0.25 }.freeze
+    MARGIN = { butler: 0.25, menu: 0.20 }.freeze
     # accessible as Reservation::MARGIN
 
     UNIT_PRICE_CENTS = { butler: 3500 }.freeze
@@ -60,10 +60,10 @@ class Reservation
       return 0 unless duration.present? && cookoon.present?
 
       cookoon_price_cents = duration * cookoon.price
-      if customer? && duration > 4
-        # discount applied
-        cookoon_price_cents = cookoon_price_cents  * 0.85
-      end
+      # if customer? && duration > 4
+      #   # discount applied
+      #   cookoon_price_cents = cookoon_price_cents  * 0.85
+      # end
 
       Money.new(cookoon_price_cents)
     end
