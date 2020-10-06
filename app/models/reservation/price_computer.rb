@@ -1,4 +1,4 @@
-aclass Reservation
+class Reservation
   module PriceComputer
     extend ActiveSupport::Concern
 
