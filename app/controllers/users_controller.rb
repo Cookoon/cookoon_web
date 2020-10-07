@@ -32,12 +32,12 @@ class UsersController < ApplicationController
 
   def edit_general_conditions_acceptance
     authorize true_user
-    @date_time_now = DateTime.now
+    @date_time_now = Time.zone.now
   end
 
   def update_general_conditions_acceptance
     authorize true_user
-    @date_time_now = DateTime.now
+    @date_time_now = Time.zone.now
     if current_user.update(user_params_for_general_conditions)
       redirect_to home_path
     else
