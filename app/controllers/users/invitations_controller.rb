@@ -23,6 +23,7 @@ class Users::InvitationsController < Devise::InvitationsController
   end
 
   def set_time_now
-    @date_time_now = DateTime.now
+    # @date_time_now = DateTime.now
+    @date_time_now = Time.zone.now
   end
 end
