@@ -4,7 +4,7 @@ class ReservationsController < ApplicationController
   before_action :find_cookoon, only: %i[select_cookoon]
 
   def index
-    reservations = policy_scope(Reservation).includes(cookoon: :user)
+    reservations = policy_scope(Reservation).includes(:cookoon, :user)
     @active_reservations = ReservationDecorator.decorate_collection(reservations.active)
     @inactive_reservations = ReservationDecorator.decorate_collection(reservations.inactive)
   end
