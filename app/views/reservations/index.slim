@@ -8,8 +8,8 @@ div(class=classnames(container: @device == :desktop))
       a.nav-link.h5 href="#inactive_user_reservations" data-toggle="pill" role="tab" Passées
 
   .tab-content.py-3
-    .tab-pane.fade.show.active id="#active_user_reservations" role="tabpanel"
+    .tab-pane.fade.show.active id="active_user_reservations" role="tabpanel"
       = reservations_list_or_empty_card(@active_reservations)
 
-    .tab-pane.fade id="#inactive_user_reservations" role="tabpanel"
+    .tab-pane.fade id="inactive_user_reservations" role="tabpanel"
       = reservations_list_or_empty_card(@inactive_reservations)
