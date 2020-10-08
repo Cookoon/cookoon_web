@@ -145,7 +145,7 @@ class ReservationDecorator < Draper::Decorator
       # when 'brunch'
       when 'lunch', 'diner', 'diner_cocktail', 'lunch_cocktail'
         [
-          ["La présence d'un sommelier", :parking],
+          ["La présence d'un voiturier", :parking],
           ["Une composition florale - Notre concierge vous contactera afin de recueillir vos attentes", :flowers],
           ["La carte des vins - Notre sommelier vous contactera afin de vous accompagner dans le choix des vins", :wine]
         ]
