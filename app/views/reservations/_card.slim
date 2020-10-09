@@ -1,8 +1,9 @@
-= link_to reservation_path(reservation) do
+p Alice
+// = link_to reservation_path(reservation) do
   .cookoon-card.p-4.border-primary
     h4.mb-5 = reservation.cookoon.name
 
-    //p.font-weight-bold
+    p.font-weight-bold
       | <i class='co icon-losange text-primary mr-2'></i>
       | #{display_date_for(reservation.start_at, without_year: true)}
       | - de #{reservation.start_time} à #{reservation.end_time}
@@ -10,7 +11,7 @@
 
     hr
 
-    //.d-flex-default
+    .d-flex-default
       p.w-50
         | Chez #{reservation.cookoon_owner_name} <br>
         | #{reservation.cookoon.address}
