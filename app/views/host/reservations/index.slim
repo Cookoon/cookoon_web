@@ -15,5 +15,5 @@ div(class=classnames(container: @device == :desktop))
     .tab-pane.fade.show.active id="active" role="tabpanel"
       = reservations_list_or_empty_card(@active_reservations)
 
-    .tab-pane.fade id="inactive" role="tabpanel"
-      = reservations_list_or_empty_card(@inactive_reservations)
+    .tab-pane.fade#inactive role="tabpanel"
+      = reservations_list_or_empty_card(@active_reservations)
