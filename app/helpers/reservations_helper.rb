@@ -15,12 +15,4 @@ module ReservationsHelper
     time = l(reservation.start_at, format: '%H')
     "<b>#{date}</b>, à <b>#{time}h</b> pour <b>#{reservation.duration}h</b>"
   end
-
-  def reservations_list_or_empty_card(reservations)
-    if reservations.any?
-      render 'reservations_list', reservations: reservations
-    else
-      render 'no_reservation'
-    end
-  end
 end
