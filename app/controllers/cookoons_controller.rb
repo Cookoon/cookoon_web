@@ -16,6 +16,7 @@ class CookoonsController < ApplicationController
     @cookoons = policy_scope(Cookoon)
                 .includes(:main_photo_files)
                 .filtrate(filtering_params)
+                .order(price_cents: :desc)
                 .decorate
   end
 
