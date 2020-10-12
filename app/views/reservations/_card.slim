@@ -1,17 +1,17 @@
-//= link_to reservation_path(reservation) do
-.cookoon-card.p-4.border-primary
-  h4.mb-5 = reservation.cookoon.name
+= link_to reservation_path(reservation) do
+  .cookoon-card.p-4.border-primary
+    h4.mb-5 = reservation.cookoon.name
 
-  p.font-weight-bold
-    | <i class='co icon-losange text-primary mr-2'></i>
-    | #{display_date_for(reservation.start_at, without_year: true)}
-    | - de #{reservation.start_time} à #{reservation.end_time}
-    | - #{reservation.people_count_text}
+    p.font-weight-bold
+      | <i class='co icon-losange text-primary mr-2'></i>
+      | #{display_date_for(reservation.start_at, without_year: true)} 
+      | - de #{reservation.start_time} à #{reservation.end_time} 
+      | - #{reservation.people_count_text}
 
-  hr
+    hr
 
-  .d-flex-default
-    p.w-50
-      | Chez #{reservation.cookoon_owner_name} <br>
-      | #{reservation.cookoon.address}
-    button.btn-cookoon.btn-cookoon-primary VOIR LA RÉSERVATION
+    .d-flex-default
+      p.w-50
+        | Chez #{reservation.cookoon_owner_name} <br>
+        | #{reservation.cookoon.address}
+      button.btn-cookoon.btn-cookoon-primary VOIR LA RÉSERVATION
