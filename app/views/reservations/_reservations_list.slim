@@ -1,5 +1,4 @@
 .row(class=classnames('no-gutters': @device != :desktop))
   - reservations.each do |reservation|
     .col-12.col-md-6
-    p = reservation
-      // = render 'card', reservation: reservation
+      = render 'card', reservation: reservation
