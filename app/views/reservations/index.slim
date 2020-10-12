@@ -9,15 +9,15 @@ div(class=classnames(container: @device == :desktop))
 
   .tab-content.py-3
     #active_user_reservations.tab-pane.fade.show.active(role="tabpanel")
-      // - if @active_reservations.any?
+      - if @active_reservations.any?
         = render 'reservations_list', reservations: @active_reservations
-      // - else
+      - else
         = render 'no_reservation'
       // = reservations_list_or_empty_card(@active_reservations)
 
     #inactive_user_reservations.tab-pane.fade(role="tabpanel")
-      // - if @inactive_reservations.any?
+      - if @inactive_reservations.any?
         = render 'reservations_list', reservations: @inactive_reservations
-      // - else
+      - else
         = render 'no_reservation'
       // = reservations_list_or_empty_card(@inactive_reservations)
