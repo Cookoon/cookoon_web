@@ -1,11 +1,50 @@
-= link_to reservation_path(reservation) do
+.reservation_card
+  h4.reservation_card-title = reservation.cookoon.name
+
+  .reservation_card-content
+    p
+      | <i class='co icon-losange text-primary mr-2'></i>
+      | #{reservation.recap_string}
+      br = reservation.recap_string_end_time
+
+    p
+      - if reservation.menu.present?
+        | <i class='co icon-losange text-primary mr-2'></i>
+        | Vous avez choisi #{reservation.menu.chef.name} comme chef avec le menu "#{reservation.menu.description}".
+      - elsif reservation.menu_status == "cooking_by_user"
+        | <i class='co icon-losange text-primary mr-2'></i>
+        | Vous avez choisi de cuisiner vous-même.
+
+
+    - if reservation.services.present?
+      p.mb-0
+        | <i class='co icon-losange text-primary mr-2'></i>
+        | Vous souhaitez les services suivants pour sublimer votre expérience:
+        | &nbsp
+      - reservation.services.each do |service|
+        ul.mb-0
+          - if service.name == "Sommelier"
+            li la présence d'un sommelier
+          - if service.name == "Voiturier"
+            li le service voiturier
+          - if service.name == "Kit professionnel"
+            li les #{reservation.people_count} kits professionnels
+          - if service.name == "Plateaux repas"
+            li les #{reservation.people_count} plateaux repas
+          - if service.name == "Composition florale"
+            li une composition florale
+          - if service.name == "Vin"
+            li la carte des vins
+
+
+// = link_to reservation_path(reservation) do
   .cookoon-card.p-4.border-primary
     h4.mb-5 = reservation.cookoon.name
 
     p.font-weight-bold
       | <i class='co icon-losange text-primary mr-2'></i>
-      | #{display_date_for(reservation.start_at, without_year: true)} 
-      | - de #{reservation.start_time} à #{reservation.end_time} 
+      | #{display_date_for(reservation.start_at, without_year: true)}
+      | - de #{reservation.start_time} à #{reservation.end_time}
       | - #{reservation.people_count_text}
 
     hr
