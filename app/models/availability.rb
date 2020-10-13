@@ -1,7 +1,7 @@
 class Availability < ApplicationRecord
   include DatesOverlapScope
 
-  enum time_slot: %i[morning noon afternoon evening]
+  enum time_slot: %i[morning noon evening]
 
   scope :future, -> { where('date >= ?', Time.zone.today) }
   scope :unavailable, -> { where(available: false) }
@@ -9,23 +9,26 @@ class Availability < ApplicationRecord
   TIME_SLOTS = {
     morning: {
       start_time: 7.hours,
-      end_time: 9.hours,
-      display: '7h-9h'
+      end_time: 11.hours,
+      display_time: "7h-11h",
+      display_type: "(petits-déjeuners)"
     },
     noon: {
-      start_time: 9.hours,
-      end_time: 14.hours,
-      display: '9h-14h'
+      start_time: 11.hours,
+      end_time: 18.hours,
+      display_time: "11h-18h",
+      display_type: "(déjeuners, cocktails déjeunatoires, brunchs)"
     },
-    afternoon: {
-      start_time: 14.hours,
-      end_time: 19.hours,
-      display: '14h-19h'
-    },
+    # afternoon: {
+    #   start_time: 14.hours,
+    #   end_time: 19.hours,
+    #   display: '14h-19h'
+    # },
     evening: {
-      start_time: 19.hours,
-      end_time: 26.hours,
-      display: '19h-02h'
+      start_time: 18.hours,
+      end_time: 25.hours,
+      display_time: "18h-1h",
+      display_type: "(dîners, cocktails dînatoires)"
     }
   }.freeze
 

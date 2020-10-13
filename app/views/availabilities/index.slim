@@ -1,3 +1,4 @@
+= console
 - content_for :navbar_back_url, host_dashboard_path
 = content_for :navbar_content do
   h4.text-primary Gérer mes disponibilités
@@ -10,8 +11,11 @@
       .offset-4.col-8
         .row.no-gutters.text-muted
           - Availability.time_slots.keys.each do |time_slot|
-            .col.d-flex.justify-content-center.align-items-center.text-center
-              small = Availability::TIME_SLOTS.dig(time_slot.to_sym, :display)
+            .col.d-flex.align-items-center.text-center.flex-column
+              small
+                = Availability::TIME_SLOTS.dig(time_slot.to_sym, :display_time)
+              small
+                = Availability::TIME_SLOTS.dig(time_slot.to_sym, :display_type)
 
     - week[:days].each do |day|
       .row.mt-2
