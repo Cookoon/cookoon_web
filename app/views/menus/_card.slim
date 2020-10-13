@@ -9,12 +9,13 @@
     .text-primary.my-2
       '*****
   .menu-card-price
-    .text-primary Prix:
-    span #{menu.computed_price_with_margin_and_taxes} €TTC
+    .text-primary.mb-2 Prix:
+    span #{menu.computed_price_with_chef_with_margin_and_taxes_per_person(@reservation.people_count)} €TTC par convive
+    .mb-4 pour #{@reservation.people_count} convives
     // | &nbsp
     // span.text-primary.font-italic
     //  '(soit #{menu.computed_price_with_margin} €HT)*
-    .text-primary.font-italic.small.text-left.mt-3
+    //.text-primary.font-italic.small.text-left.mt-3
       '*
       ':
       - if !chef.min_price.blank? && !chef.min_price.zero?
