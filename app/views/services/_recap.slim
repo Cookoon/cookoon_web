@@ -1,6 +1,6 @@
 - if reservation.services.present?
   .reservation-recap-string
-    <i class='co icon-losange text-primary mr-2'></i> Vous souhaitez les services suivants pour sublimer votre expérience
+    <i class='co icon-losange text-primary mr-2'></i> Vous souhaitez les services suivants pour sublimer votre expérience:
     - if reservation.services_status == "initial"
       - reservation.services.each do |service|
         p.mb-0.text-left
