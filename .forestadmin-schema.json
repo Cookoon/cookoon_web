@@ -280,7 +280,6 @@
       "enums": [
         "morning",
         "noon",
-        "afternoon",
         "evening"
       ],
       "integration": null,
