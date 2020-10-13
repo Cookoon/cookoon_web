@@ -1,0 +1,19 @@
+.reservation_cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+  @media (max-width: 767px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.reservation_card {
+  padding: 1.5rem;
+  border: 1px solid $primary;
+  &-title {
+    padding-bottom: 1rem;
+  }
+  &-content {
+
+  }
+}
