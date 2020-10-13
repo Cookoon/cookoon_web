@@ -41,8 +41,8 @@ RSpec.describe Availability, type: :model do
       availability = create(:availability)
       availability.time_slot = :noon
       availability.valid?
-      expect(availability.start_at.hour).to eq 9
-      expect(availability.end_at.hour).to eq 14
+      expect(availability.start_at.hour).to eq 11
+      expect(availability.end_at.hour).to eq 18
     end
   end
 end
