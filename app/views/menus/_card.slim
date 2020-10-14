@@ -10,10 +10,10 @@
       '*****
   .menu-card-price
     .text-primary.mb-2 Prix:
-    span #{menu.computed_price_with_chef_with_margin_and_taxes_per_person(@reservation.people_count)} €TTC par convive
-    .mb-4 pour #{@reservation.people_count} convives
+    p.mb-0 #{menu.computed_price_with_chef_with_margin_and_taxes_per_person(@reservation.people_count)} €TTC par convive
+    p.mb-3 pour #{@reservation.people_count} convives
     // | &nbsp
-    // span.text-primary.font-italic
+    small.text-primary.font-italic.align-left Ce tarif inclut la présence du chef, sa prestation et le menu
     //  '(soit #{menu.computed_price_with_margin} €HT)*
     //.text-primary.font-italic.small.text-left.mt-3
       '*
