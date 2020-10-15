@@ -32,6 +32,12 @@ Rails.application.routes.draw do
     post :stop_impersonating, on: :collection
     get 'general_conditions/acceptance', to: 'users#edit_general_conditions_acceptance', as: :edit_general_conditions_acceptance, on: :collection
     patch 'general_conditions/acceptance', to: 'users#update_general_conditions_acceptance', as: :update_general_conditions_acceptance, on: :collection
+
+    collection do
+      resources :inscription_payments, only: %i[new create] do
+        get 'secret_inscription', on: :collection
+      end
+    end
   end
 
   resources :credit_cards, only: %i[index create destroy] do
