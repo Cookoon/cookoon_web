@@ -1,0 +1,12 @@
+.container.mb-5
+  h1.my-4 Payer mon inscription
+
+  h3.mb-4 <i class='co icon-losange small text-primary mr-2'></i> Devenez membre Cookoon
+
+  p Afin de devenir membre, vous devez vous acquitter des frais d'inscription s'élevant à 300 €TTC. // texte greg
+
+  // = link_to 'Invitez un filleul', '#', class: 'btn-cookoon btn-cookoon-primary', data: {toggle: "modal", target: "#invitation-modal"}
+
+  p.mb-3.font-weight-bold.text-center Régler mon inscription: #{humanized_money_with_symbol(300)}TTC
+  = render 'credit_cards/selection', url_intent_secret: @url_intent_secret_inscription
+

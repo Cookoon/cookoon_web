@@ -1,0 +1,42 @@
+<%= simple_form_for :payment, url:inscription_payments_path ,html: { data: { target: 'stripe-payments.paymentForm' } }, authenticity_token: true, remote: true do |f| %>
+
+  <b>Vos moyens de paiement</b>
+
+  <div class="credit-card-select payment-block">
+    <i class="co co-cb"></i>
+    <%= f.input :source,
+                input_html: {
+                  data: {
+                    target: 'stripe-payments.paymentSelection'
+                  }
+                },
+                collection: @credit_cards,
+                selected: @payment_method_to_display_first.id,
+                label: false,
+                label_method: ->(card){ credit_card_label_for card },
+                value_method: ->(card){ card.id }
+    %>
+  </div>
+
+  <!-- We'll put the error messages in this element -->
+  <div class="text-danger" data-target='stripe-payments.paymentError' role="alert"></div>
+
+  <div class="text-center mb-4 text-uppercase">
+    <%= link_to 'Ajouter une carte de paiement', "#", class: 'text-secondary', data: {toggle: "modal", target: "#credit-card-modal"} %>
+  </div>
+
+  <div>
+    <%= f.input :terms_of_service, as: :boolean, label: "J'accepte les #{link_to('conditions générales de services', general_conditions_url, target: :_blank, class: 'a_gold')} ainsi que les #{link_to('conditions générales d\'utilisation Stripe', 'https://stripe.com/fr/legal#translation', target: :_blank, class: 'a_gold')} appelées #{link_to('\'Stripe Services Agreement\'', 'https://stripe.com/fr/legal#translation', target: :_blank, class: 'a_gold')}.".html_safe, input_html: { data: { target: 'stripe-payments.tosAcceptance'} } %>
+    <div class="text-danger" style="padding-left: 1.75rem" data-target='stripe-payments.tosAcceptanceError' role="alert"></div>
+  </div>
+
+  <%= f.button :button,
+              'PAYER',
+              type: :submit,
+              class: 'btn-cookoon btn-cookoon-primary btn-block mt-3',
+              data: {
+                controller: 'analytics-events',
+                action: 'click->analytics-events#reservationPaymentSubmit'
+             }
+  %>
+<% end %>

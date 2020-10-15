@@ -5,12 +5,12 @@
       p Vous devez en ajouter un avant de pouvoir faire une demande de réservation
 
     = link_to 'Ajouter une carte', "#", class: 'btn-cookoon btn-cookoon-primary', data: {toggle: "modal", target: "#credit-card-modal"}
+
 - else
   div data-controller='stripe-payments' data-stripe-payments-publishable-key=ENV['STRIPE_PUBLISHABLE_KEY'] data-stripe-payments-url=url_intent_secret
-    = render 'payments/form'
-  /.text-center
-  /  div style="font-size:12px; margin-top: 15px"
-  /    p Votre carte bleue ne sera débitée que si l'Hôte accepte votre demande de location.
-  /    p Attention : nous procédons tout de même à une demande d'autorisation de paiement sur votre compte.
+    - if controller_path == "payments"
+      = render 'payments/form'
+    - elsif controller_path == "inscription_payments"
+      = render 'inscription_payments/form'
 
 = render 'credit_cards/modal'

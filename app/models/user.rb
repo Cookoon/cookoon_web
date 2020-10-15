@@ -129,6 +129,10 @@ class User < ApplicationRecord
     stripe_account_requirements_currently_due.any? {|requirement| stripe_account_identity_requirements.include?(requirement)}
   end
 
+  def payment(options = {})
+    @payment ||= User::Payment.new(self, options)
+  end
+
   private
 
   def report_to_slack

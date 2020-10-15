@@ -28,8 +28,11 @@ class CreditCardsController < ApplicationController
 
   def handle_redirection(card)
     referer_infos = Rails.application.routes.recognize_path(request.referer)
+
     if referer_infos.key?(:reservation_id) && card
       return redirect_to new_reservation_payment_path(referer_infos[:reservation_id])
+    elsif referer_infos[:controller] == "inscription_payments" && card
+      return redirect_to new_inscription_payment_path
     end
 
     flash[:alert] = current_user.errors.full_messages.join(', ') unless card
