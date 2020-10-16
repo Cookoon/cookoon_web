@@ -22,6 +22,15 @@ class Users::InvitationsController < Devise::InvitationsController
     )
   end
 
+  def invite_params
+    params.require(:user).permit(
+      :first_name,
+      :last_name,
+      :email,
+      :inscription_payment_required,
+    )
+  end
+
   def set_time_now
     # @date_time_now = DateTime.now
     @date_time_now = Time.zone.now
