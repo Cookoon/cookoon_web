@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:invite, keys: %i[first_name last_name])
+    devise_parameter_sanitizer.permit(:invite, keys: %i[first_name last_name inscription_payment_required])
   end
 
   private
@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_user_needed?
-    terms_of_service_acceptance_needed? || inscription_payment_needed?
+    (terms_of_service_acceptance_needed? || inscription_payment_needed?) unless devise_controller?
   end
 
   def terms_of_service_acceptance_needed?
@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
   end
 
   def skip_inscription_payment?
-    devise_controller? || params[:controller] == "inscription_payments"
+    devise_controller? || params[:controller] == "inscription_payments" || params[:controller] == "credit_cards"
   end
 
   def redirect_user
