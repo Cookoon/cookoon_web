@@ -8,7 +8,7 @@ p.mb-3.font-weight-bold 3. Vos souhaits de service
       .d-flex.justify-content-between
         p.mb-1
           '- &nbsp
-          = service.name
+          = reservation.services_collection_for_view_with_sentence_if_quoted[service.category.to_sym]
         - if service.status == "initial"
           p.mb-1.text-right = Payment::STATUSES[:quotation_asked]
         - else

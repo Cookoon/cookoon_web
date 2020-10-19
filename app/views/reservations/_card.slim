@@ -24,18 +24,7 @@
           | &nbsp
         - reservation.services.each do |service|
           ul.mb-0
-            - if service.name == "Sommelier"
-              li la présence d'un sommelier
-            - if service.name == "Voiturier"
-              li le service voiturier
-            - if service.name == "Kit professionnel"
-              li les #{reservation.people_count} kits professionnels
-            - if service.name == "Plateaux repas"
-              li les #{reservation.people_count} plateaux repas
-            - if service.name == "Composition florale"
-              li une composition florale
-            - if service.name == "Vin"
-              li la carte des vins
+            li = reservation.services_collection_for_view_with_sentence_if_quoted[service.category.to_sym]
 
   = link_to "VOIR LA RÉSERVATION", new_reservation_payment_path(reservation), class: 'btn-cookoon btn-cookoon-primary mt-2 text-center'
 

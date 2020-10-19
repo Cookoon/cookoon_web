@@ -5,34 +5,12 @@
       - reservation.services.each do |service|
         p.mb-0.text-left
           '- &nbsp
-          - if service.name == "Sommelier"
-            | La présence d'un sommelier
-          - if service.name == "Voiturier"
-            | Le service voiturier
-          - if service.name == "Kit professionnel"
-            | Les #{reservation.people_count} kits professionnels
-          - if service.name == "Plateaux repas"
-            | Les #{reservation.people_count} plateaux repas
-          - if service.name == "Composition florale"
-            | Une composition florale - Notre concierge vous contactera afin de recueillir vos attentes
-          - if service.name == "Vin"
-            | La carte des vins - Notre sommelier vous contactera afin de vous accompagner dans le choix des vins
+          = reservation.services_collection_for_view_with_sentence_if_not_quoted[service.category.to_sym]
     - else
       - reservation.services.each do |service|
         p.mb-0.text-left
           '- &nbsp
-          - if service.name == "Sommelier"
-            | La présence d'un sommelier
-          - if service.name == "Voiturier"
-            | Le service voiturier
-          - if service.name == "Kit professionnel"
-            | Les #{reservation.people_count} kits professionnels
-          - if service.name == "Plateaux repas"
-            | Les #{reservation.people_count} plateaux repas
-          - if service.name == "Composition florale"
-            | Une composition florale
-          - if service.name == "Vin"
-            | La carte des vins
+          = reservation.services_collection_for_view_with_sentence_if_quoted[service.category.to_sym]
 
 - else
   .reservation-recap-string
