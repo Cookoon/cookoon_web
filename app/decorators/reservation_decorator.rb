@@ -4,7 +4,19 @@ class ReservationDecorator < Draper::Decorator
   def recap_string
     # "Votre maitre d'hôtel vous accueillera le #{start_at.day} #{I18n.t('date.month_names')[start_at.month]} pour un #{type_name} à #{start_at.strftime('%HH%M')} avec #{people_count_text}"
     humanized_type_name == "Journée" ? pronom = "une" : pronom = "un"
-    "Votre maitre d'hôtel vous accueillera le #{I18n.l start_at, format: '%A %d %B'} pour #{pronom} #{humanized_type_name} à #{start_at.strftime('%kH%M')} de #{people_count_text}."
+    if butler_count > 1
+      "Vos maitres d'hôtel vous accueilleront le #{I18n.l start_at, format: '%A %d %B'} pour #{pronom} #{humanized_type_name} à #{start_at.strftime('%kH%M')} de #{people_count_text}."
+    else
+      "Votre maitre d'hôtel vous accueillera le #{I18n.l start_at, format: '%A %d %B'} pour #{pronom} #{humanized_type_name} à #{start_at.strftime('%kH%M')} de #{people_count_text}."
+    end
+  end
+
+  def recap_string_without_day_and_people_count
+    if butler_count > 1
+      "Vos maitres d'hôtel vous accueilleront à #{start_at.strftime('%kH%M')}."
+    else
+      "Votre maitre d'hôtel vous accueillera à #{start_at.strftime('%kH%M')}."
+    end
   end
 
   def recap_string_end_time
@@ -139,15 +151,39 @@ class ReservationDecorator < Draper::Decorator
     ]
   end
 
+  def services_collection_for_view_with_sentence_if_not_quoted
+    # Can filter depending on reservation type
+    {
+      sommelier: "La présence d'un sommelier",
+      parking: "Le service voiturier",
+      corporate: "Les #{people_count} kits professionnels",
+      catering: "Les #{people_count} plateaux repas",
+      flowers: "Une composition florale - Notre concierge vous contactera afin de recueillir vos attentes",
+      wine: "La carte des vins - Notre sommelier vous contactera afin de vous accompagner dans le choix des vins"
+    }
+  end
+
+  def services_collection_for_view_with_sentence_if_quoted
+    # Can filter depending on reservation type
+    {
+      sommelier: "La présence d'un sommelier",
+      parking: "Le service voiturier",
+      corporate: "Les #{people_count} kits professionnels",
+      catering: "Les #{people_count} plateaux repas",
+      flowers: "Une composition florale",
+      wine: "La carte des vins"
+    }
+  end
+
   def services_collection_for_event_type
     case object.type_name
       # when 'breakfast'
       # when 'brunch'
       when 'lunch', 'diner', 'diner_cocktail', 'lunch_cocktail'
         [
-          ["La présence d'un voiturier", :parking],
-          ["Une composition florale - Notre concierge vous contactera afin de recueillir vos attentes", :flowers],
-          ["La carte des vins - Notre sommelier vous contactera afin de vous accompagner dans le choix des vins", :wine]
+          [services_collection_for_view_with_sentence_if_not_quoted[:parking], :parking],
+          [services_collection_for_view_with_sentence_if_not_quoted[:flowers], :flowers],
+          [services_collection_for_view_with_sentence_if_not_quoted[:wine], :wine]
         ]
       # when 'morning', 'afternoon'
       # when 'day'

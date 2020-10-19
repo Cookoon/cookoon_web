@@ -37,6 +37,12 @@
                 item_wrapper_class: "font-weight-bold pl-5 py-1"
               = f.submit 'Soumettre', class: 'btn-cookoon btn-cookoon-primary px-5 w-50'
           - else
-            p Vous avez choisi : #{@reservation.services.pluck(:name).join(", ").downcase}
+            - if @reservation.services.present?
+              p Vous avez choisi :
+              ul
+                - @reservation.services.each do |service|
+                  li = @reservation.services_collection_for_view_with_sentence_if_quoted[service.category.to_sym]
+            - else
+              p Vous n'avez choisi aucun service additionnel.
 
 //p Choix des services pour la résa #{@reservation.id}
