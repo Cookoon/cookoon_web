@@ -4,6 +4,10 @@ class ReservationMailerPreview < ActionMailer::Preview
     ReservationMailer.paid_request_to_tenant(Reservation.last)
   end
 
+  def paid_request_cookoon_butler_to_tenant
+    ReservationMailer.paid_request_cookoon_butler_to_tenant(Reservation.last)
+  end
+
   def cancelled_by_tenant_to_tenant
     ReservationMailer.cancelled_by_tenant_to_tenant(Reservation.last)
   end

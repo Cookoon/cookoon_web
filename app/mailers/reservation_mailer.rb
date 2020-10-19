@@ -11,6 +11,14 @@ class ReservationMailer < ApplicationMailer
     mail(to: @tenant.full_email, subject: 'Vous avez demandé un Cookoon !')
   end
 
+  def paid_request_cookoon_butler_to_tenant(reservation)
+    @reservation = reservation
+    @tenant = @reservation.user
+    @cookoon = @reservation.cookoon
+    @host = @cookoon.user
+    mail(to: @tenant.full_email, subject: 'Votre demande de réservation')
+  end
+
   def confirmed_to_tenant(reservation)
     @reservation = reservation
     @tenant = @reservation.user

@@ -62,6 +62,7 @@ class PaymentsController < ApplicationController
     if @reservation.needs_cookoon_butler_payment?
       if payment.charge
         flash.notice = "Votre paiement a bien été effectué"
+        @reservation.notify_users_after_cookoon_butler_payment
         redirect_to new_reservation_message_path(@reservation)
       else
         flash.alert = "Une erreur est survenue, néanmoins votre demande de paiement est bien effective. Veuillez contacter notre service d'aide"

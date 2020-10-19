@@ -7,13 +7,19 @@ module DatetimeHelper
   end
 
   def display_date_for(datetime, attrs = {})
-    format = attrs[:without_year] ? '%-d %B' : '%-d %B %Y'
+    format = attrs[:without_year] ? '%A %d %B' : '%A %d %B %Y'
     l(datetime, format: format)
   end
 
   def display_time_for(datetime, attrs = {})
-    time_separator = attrs[:time_separator] || 'h'
-    l(datetime, format: "%k#{time_separator}%M")
+    if datetime.hour == 0 && datetime.min == 0 && datetime.sec == 0
+      "minuit"
+    elsif datetime.hour == 12 && datetime.min == 0 && datetime.sec == 0
+      "midi"
+    else
+      time_separator = attrs[:time_separator] || 'h'
+      l(datetime, format: "%k#{time_separator}%M")
+    end
   end
 
   def display_duration_for(duration)
