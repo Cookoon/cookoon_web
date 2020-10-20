@@ -65,16 +65,23 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "cookoon_web_#{Rails.env}"
   config.action_mailer.perform_caching = false
 
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    user_name: ENV['MAILTRAP_USERNAME'],
-    password: ENV['MAILTRAP_PASSWORD'],
-    address: 'smtp.mailtrap.io',
-    domain: 'smtp.mailtrap.io',
-    port: '2525',
-    authentication: :cram_md5
-  }
+  # # initial
+  # config.action_mailer.delivery_method = :smtp
+  # config.action_mailer.smtp_settings = {
+  #   user_name: ENV['MAILTRAP_USERNAME'],
+  #   password: ENV['MAILTRAP_PASSWORD'],
+  #   address: 'smtp.mailtrap.io',
+  #   domain: 'smtp.mailtrap.io',
+  #   port: '2525',
+  #   authentication: :cram_md5
+  # }
+  # config.action_mailer.default_url_options = { host: 'cookoon-staging.herokuapp.com' }
+
+  # # test email-sending
+  config.action_mailer.delivery_method     = :postmark
+  config.action_mailer.postmark_settings   = { api_token: ENV['POSTMARK_API_KEY'] }
   config.action_mailer.default_url_options = { host: 'cookoon-staging.herokuapp.com' }
+
   config.roadie.url_options = { host: 'cookoon-staging.herokuapp.com', scheme: 'https' }
   config.action_mailer.asset_host = nil
 
