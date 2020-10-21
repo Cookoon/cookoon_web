@@ -2,32 +2,27 @@ class ReservationDecorator < Draper::Decorator
   delegate_all
 
   def recap_string
-    # "Votre maitre d'hôtel vous accueillera le #{start_at.day} #{I18n.t('date.month_names')[start_at.month]} pour un #{type_name} à #{start_at.strftime('%HH%M')} avec #{people_count_text}"
-    humanized_type_name == "Journée" ? pronom = "une" : pronom = "un"
     if butler_count > 1
-      "Vos maitres d'hôtel vous accueilleront le #{I18n.l start_at, format: '%A %d %B'} pour #{pronom} #{humanized_type_name} à #{start_at.strftime('%kH%M')} de #{people_count_text}."
+      "Vos maitres d'hôtel vous accueilleront le #{start_on} pour votre #{humanized_type_name} à #{start_time} de #{people_count_text}."
     else
-      "Votre maitre d'hôtel vous accueillera le #{I18n.l start_at, format: '%A %d %B'} pour #{pronom} #{humanized_type_name} à #{start_at.strftime('%kH%M')} de #{people_count_text}."
+      "Votre maitre d'hôtel vous accueillera le #{start_on} pour votre #{humanized_type_name} à #{start_time} de #{people_count_text}."
     end
   end
 
   def recap_string_without_day_and_people_count
     if butler_count > 1
-      "Vos maitres d'hôtel vous accueilleront à #{start_at.strftime('%kH%M')}."
+      "Vos maitres d'hôtel vous accueilleront à #{start_time}."
     else
-      "Votre maitre d'hôtel vous accueillera à #{start_at.strftime('%kH%M')}."
+      "Votre maitre d'hôtel vous accueillera à #{start_time}."
     end
   end
 
   def recap_string_end_time
-    end_at.strftime('%kH%M') == " 0H00" ? end_at_time = "minuit" : end_at_time = end_at.strftime('%kH%M')
-    "Votre réception se prolongera jusqu'à #{end_at_time}."
+    "Votre réception se prolongera jusqu'à #{end_time}."
   end
 
   def recap_string_start_and_end_time
-    end_at.strftime('%kH%M') == " 0H00" ? end_at_time = "minuit" : end_at_time = end_at.strftime('%kH%M')
-    # "Votre décor de #{start_at.strftime('%kH%M')} à #{end_at_time}."
-    "Votre décor de #{start_at.strftime('%kH%M')} à #{end_at_time} (mise à disposition pour le chef et le service de #{start_at_for_chef_and_service.strftime('%kH%M')} à #{end_at_for_chef_and_service.strftime('%kH%M')})"
+    "Votre décor de #{start_time} à #{end_time} (mise à disposition pour le chef et le service de #{start_time_for_chef_and_service} à #{end_time_for_chef_and_service})"
   end
 
   def recap_string_butler_count
@@ -45,6 +40,14 @@ class ReservationDecorator < Draper::Decorator
 
   def end_time
     h.display_time_for object.end_at
+  end
+
+  def start_time_for_chef_and_service
+    h.display_time_for object.start_at_for_chef_and_service
+  end
+
+  def end_time_for_chef_and_service
+    h.display_time_for object.end_at_for_chef_and_service
   end
 
   def start_on(options = {})
@@ -211,6 +214,11 @@ class ReservationDecorator < Draper::Decorator
 
   def humanized_type_name
     type_names[object.type_name.to_sym]
+  end
+
+  def humanized_type_name_with_pronom
+    type_name == "morning" || type_name == "day" ? pronom = "une" : pronom = "un"
+    "#{pronom} #{humanized_type_name}"
   end
 
   def builtin_services
