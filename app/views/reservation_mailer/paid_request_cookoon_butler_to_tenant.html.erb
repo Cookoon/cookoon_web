@@ -3,11 +3,11 @@
 <% else %>
   <p>Bonjour,</p>
 <% end %>
-<p>Vous avez réservé "<%= "#{@cookoon.name}" %>" dans le cadre de votre <%= "#{ @reservation.decorate.humanized_type_name }" %> de <%= "#{ @reservation.decorate.people_count_text }" %> le <%= @reservation.decorate.start_on %>.</p>
+<p>Vous avez émis une demande de réservation pour "<%= "#{@cookoon.name}" %>", dans le cadre de votre <%= "#{ @reservation.decorate.humanized_type_name }" %> de <%= "#{ @reservation.decorate.people_count_text }" %> le <strong><%= @reservation.decorate.start_on %></strong>.</p>
 
 <h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> Votre décor et le service</h4>
-<p><%= @reservation.decorate.recap_string_without_day_and_people_count %> <%= @reservation.decorate.recap_string_end_time %></p>
-<p>Une pré-autorisation de <%= @reservation.stripe_payment_intent_amount_cookoon_butler %> €TTC a été effectuée sur votre carte de crédit. Ce montant sera débité après acceptation de votre demande par l'hôte (la pré-autorisation sera annulé dans le cas contraire).</p>
+<p>Votre décor est situé au <%= @cookoon.address %>.</p>
+<p><%= @reservation.decorate.recap_string_without_day_and_people_count %> <%= @reservation.decorate.recap_string_end_time_with_bolded_time %></p>
 
 <h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> Vos souhaits de chef et de menu</h4>
 <p>
@@ -24,7 +24,6 @@
 <% end %>
 
 <h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> Vos souhaits de services</h4>
-
 <% if @reservation.services.present? %>
   <p> Vous souhaitez les services suivants pour sublimer votre expérience: </p>
   <% if @reservation.services_status == "initial" %>
@@ -43,3 +42,6 @@
 <% else %>
     <p>Vous n'avez choisi aucun service additionnel.</p>
 <% end %>
+
+<h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> Votre paiement pour le décor et le service</h4>
+<p>Une pré-autorisation de <%= @reservation.stripe_payment_intent_amount_cookoon_butler %> €TTC a été effectuée sur votre carte de crédit. Ce montant sera débité après acceptation de votre demande par l'hôte (la pré-autorisation sera annulé dans le cas contraire).</p>
