@@ -3,14 +3,15 @@
 <% else %>
   <p>Bonjour,</p>
 <% end %>
-<p>Vous avez une demande de réservation pour "<%= "#{@cookoon.name}" %>" dans le cadre d'<%= "#{ @reservation.decorate.humanized_type_name_with_pronom }" %> de <%= "#{ @reservation.decorate.people_count_text }" %> le <strong><%= display_date_for(@reservation.start_at) %></strong>.</p>
+
+<p>Vous avez une demande de réservation pour "<%= "#{@cookoon.name}" %>", dans le cadre d'<%= "#{ @reservation.decorate.humanized_type_name_with_pronom }" %> de <%= "#{ @reservation.decorate.people_count_text }" %> le <strong><%= display_date_for(@reservation.start_at) %></strong>.</p>
 
 <h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> La demande de réservation</h4>
 <% if @tenant.full_name.present? %>
   <p>Cette demande a été émise par <%= "#{@tenant.full_name}" %>.</p>
 <% end %>
 <p>Les invités seront présents de <strong><%= @reservation.decorate.start_time %></strong> à <strong><%= @reservation.decorate.end_time %></strong>.</p>
-<p>Votre décor devra être mis à disposition de <strong><%= @reservation.decorate.start_time_for_chef_and_service %></strong> à <strong><%= @reservation.decorate.end_time_for_chef_and_service %></strong> pour la préparation et le rangement.</p>
+<p>Votre lieu devra être mis à disposition de <strong><%= @reservation.decorate.start_time_for_chef_and_service %></strong> à <strong><%= @reservation.decorate.end_time_for_chef_and_service %></strong> pour la préparation et le rangement.</p>
 
 <h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> Votre rémunération</h4>
 <p>Vous recevrez <%= @reservation.cookoon_price %> € dans le cadre de cette réservation.</p>

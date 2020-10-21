@@ -16,7 +16,7 @@ class ReservationMailer < ApplicationMailer
     @tenant = @reservation.user
     @cookoon = @reservation.cookoon
     @host = @cookoon.user
-    mail(to: @tenant.full_email, subject: 'Votre demande de réservation')
+    mail(to: @tenant.full_email, subject: "Cookoon: votre demande de réservation pour \"#{@cookoon.name}\"")
   end
 
   def confirmed_to_tenant(reservation)
@@ -25,7 +25,7 @@ class ReservationMailer < ApplicationMailer
     @cookoon = @reservation.cookoon
     @host = @cookoon.user
 
-    mail(to: @tenant.full_email, subject: "Votre réservation Cookoon est confirmée : #{@cookoon.name}")
+    mail(to: @tenant.full_email, subject: "Cookoon: votre réservation est confirmée pour \"#{@cookoon.name}\"")
   end
 
   def refused_to_tenant(reservation)
@@ -104,7 +104,7 @@ class ReservationMailer < ApplicationMailer
     @tenant = @reservation.user
     @cookoon = @reservation.cookoon
     @host = @cookoon.user
-    mail(to: @host.full_email, subject: 'Vous avez une demande de réservation')
+    mail(to: @host.full_email, subject: "Cookoon: vous avez une demande de réservation pour \"#{@cookoon.name}\"")
   end
 
   def confirmed_to_host(reservation)
@@ -113,7 +113,7 @@ class ReservationMailer < ApplicationMailer
     @cookoon = @reservation.cookoon
     @host = @cookoon.user
 
-    mail(to: @host.full_email, subject: 'Vous avez confirmé une demande de location !')
+    mail(to: @host.full_email, subject: "Cookoon: vous avez confirmé la demande de réservation pour \"#{@cookoon.name}\"")
   end
 
   def cancelled_by_tenant_to_host(reservation)

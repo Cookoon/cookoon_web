@@ -1,55 +1,105 @@
-<p>Cher(e) <%= @tenant.first_name %>,</p>
-<p>Votre demande de location Cookoon a été confirmée par <%= @host.first_name %> :</p>
+<% if @tenant.first_name.present? %>
+  <p>Cher(e) <%= "#{@tenant.first_name.capitalize}" %>,</p>
+<% else %>
+  <p>Bonjour,</p>
+<% end %>
+<p>Votre demande de réservation a été acceptée par l'hôte pour "<%= "#{@cookoon.name}" %>", dans le cadre de votre <%= "#{ @reservation.decorate.humanized_type_name }" %> de <%= "#{ @reservation.decorate.people_count_text }" %> le <strong><%= @reservation.decorate.start_on %></strong>.</p>
+
+<h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> Votre décor et le service</h4>
+<p>Votre décor est situé au <%= @cookoon.address %>.</p>
+<p><%= @reservation.decorate.recap_string_without_day_and_people_count %> <%= @reservation.decorate.recap_string_end_time_with_bolded_time %></p>
+
+<h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> Vos souhaits de chef et de menu</h4>
+<p>
+  <% if @reservation.menu.present? %>
+    <span>Vous avez choisi <%= "#{@reservation.menu.chef.name}" %> comme chef avec le menu "<%= "#{@reservation.menu.description}" %>".</span>
+    <% if @reservation.menu_status == "selected" %>
+      <span> Nous sommes d'ores et déjà en train de confirmer sa disponibilité.</span>
+    <% end %>
+</p>
+<% else %>
+  <% if @reservation.menu_status == "cooking_by_user" %>
+    <p>Vous avez choisi de cuisiner vous-même.</p>
+  <% end %>
+<% end %>
+
+<h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> Vos souhaits de services</h4>
+<% if @reservation.services.present? %>
+  <p> Vous souhaitez les services suivants pour sublimer votre expérience: </p>
+  <% if @reservation.services_status == "initial" %>
+    <ul>
+      <% @reservation.services.each do |service| %>
+        <li><%= @reservation.decorate.services_collection_for_view_with_sentence_if_not_quoted[service.category.to_sym] %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <ul>
+      <% @reservation.services.each do |service| %>
+        <li><%= @reservation.decorate.services_collection_for_view_with_sentence_if_quoted[service.category.to_sym] %></li>
+      <% end %>
+    </ul>
+  <% end %>
+<% else %>
+    <p>Vous n'avez choisi aucun service additionnel.</p>
+<% end %>
+
+<h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> Votre paiement pour le décor et le service</h4>
+<p>Le montant de <%= @reservation.stripe_payment_intent_amount_cookoon_butler %> €TTC a été débité sur votre carte de crédit.</p>
+
+
+
+<!-- <p>Cher(e) <%#= @tenant.first_name %>,</p>
+<p>Votre demande de location Cookoon a été confirmée par <%#= @host.first_name %> :</p>
 
 <table border="0" cellpadding="0" cellspacing="10" class="info"><tbody>
   <tr>
     <td align="center">
-      <%= image_tag('icon-home.png', alt: 'Cookoon') %>
+      <%#= image_tag('icon-home.png', alt: 'Cookoon') %>
     </td>
     <td>
-      <b><%= @cookoon.name %></b>
-      <br>le <%= display_date_for(@reservation.start_at) %>
-      <br>à <%= display_time_for(@reservation.start_at) %> pour <%= display_duration_for(@reservation.duration) %>
+      <b><%#= @cookoon.name %></b>
+      <br>le <%#= display_date_for(@reservation.start_at) %>
+      <br>à <%#= display_time_for(@reservation.start_at) %> pour <%#= display_duration_for(@reservation.duration) %>
     </td>
   </tr>
-  <% if @reservation.has_tied_services? %>
+  <%# if @reservation.has_tied_services? %>
     <tr>
       <td align="center">
-        <%= image_tag('icon-services.png', alt: 'Services') %>
+        <%#= image_tag('icon-services.png', alt: 'Services') %>
       </td>
     </tr>
-  <% end %>
+  <%# end %>
   <tr>
     <td align="center">
-      <%= image_tag('icon-meeting.png', alt: 'Rendez-vous') %>
+      <%#= image_tag('icon-meeting.png', alt: 'Rendez-vous') %>
     </td>
     <td>
       <b>Rendez-vous au :</b>
-      <br><%= @cookoon.address %>
+      <br><%#= @cookoon.address %>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <%= image_tag('icon-euro.png', alt: 'Prix') %>
+      <%#= image_tag('icon-euro.png', alt: 'Prix') %>
     </td>
     <td>
       <b>Le coût de votre location :</b>
-      <br><%= humanized_money_with_symbol @reservation.payment_amount %>
-      <% if @reservation.has_tied_services? %>
-        <br><small>soit <%= humanized_money_with_symbol @reservation.cookoon_price %> + <%= humanized_money_with_symbol @reservation.services_price %> de services, ainsi que <%= humanized_money_with_symbol @reservation.tenant_fee %> de frais</small>
-      <% else %>
-        <br><small>soit <%= humanized_money_with_symbol @reservation.cookoon_price %> + <%= humanized_money_with_symbol @reservation.tenant_fee %> de frais</small>
-      <% end %>
+      <br><%##= humanized_money_with_symbol @reservation.payment_amount %>
+      <%# if @reservation.has_tied_services? %>
+        <br><small>soit <%##= humanized_money_with_symbol @reservation.cookoon_price %> + <%##= humanized_money_with_symbol @reservation.services_price %> de services, ainsi que <%#= humanized_money_with_symbol @reservation.tenant_fee %> de frais</small>
+      <%# else %>
+        <br><small>soit <%##= humanized_money_with_symbol @reservation.cookoon_price %> + <%##= humanized_money_with_symbol @reservation.tenant_fee %> de frais</small>
+      <%# end %>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <%= image_tag('icon-user.png', alt: 'Hôte') %>
+      <%#= image_tag('icon-user.png', alt: 'Hôte') %>
     </td>
     <td>
-      <b>Pour contacter <%= @host.first_name %> :</b>
-      <br><%= @host.phone_number %>
-      <br><%= mail_to @host.full_email, @host.email, target: :_blank %>
+      <b>Pour contacter <%#= @host.first_name %> :</b>
+      <br><%#= @host.phone_number %>
+      <br><%#= mail_to @host.full_email, @host.email, target: :_blank %>
     </td>
   </tr>
 </tbody></table>
@@ -57,6 +107,7 @@
 <h3>Conseil d'usage</h3>
 <p>Pensez à votre hôte et aux membres qui occuperont le Cookoon après vous : rendez le dans l'état dans lequel vous l'avez trouvé.</p>
 
-<% content_for :post_scriptum do %>
-  <p>PS : Une question ? Rendez-vous sur <%= link_to 'aide.cookoon.fr', 'https://aide.cookoon.fr', target: :_blank %>.</p>
-<% end %>
+<%# content_for :post_scriptum do %>
+  <p>PS : Une question ? Rendez-vous sur <%#= link_to 'aide.cookoon.fr', 'https://aide.cookoon.fr', target: :_blank %>.</p>
+<%# end %>
+ -->

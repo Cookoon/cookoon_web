@@ -1,48 +1,66 @@
-<p>Bonjour <%= @host.first_name %>,</p>
-<p>La demande de location de <%= @tenant.first_name %> est bien confirmée :</p>
+<% if @host.first_name.present? %>
+  <p>Cher(e) <%= "#{@host.first_name.capitalize}" %>,</p>
+<% else %>
+  <p>Bonjour,</p>
+<% end %>
+
+<p>Vous avez accepté la demande de réservation pour "<%= "#{@cookoon.name}" %>", dans le cadre d'<%= "#{ @reservation.decorate.humanized_type_name_with_pronom }" %> de <%= "#{ @reservation.decorate.people_count_text }" %> le <strong><%= display_date_for(@reservation.start_at) %></strong>.</p>
+
+<h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> La demande de réservation</h4>
+<% if @tenant.full_name.present? %>
+  <p>Cette demande a été émise par <%= "#{@tenant.full_name}" %>.</p>
+<% end %>
+<p>Les invités seront présents de <strong><%= @reservation.decorate.start_time %></strong> à <strong><%= @reservation.decorate.end_time %></strong>.</p>
+<p>Votre lieu devra être mis à disposition de <strong><%= @reservation.decorate.start_time_for_chef_and_service %></strong> à <strong><%= @reservation.decorate.end_time_for_chef_and_service %></strong> pour la préparation et le rangement.</p>
+
+<h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> Votre rémunération</h4>
+<p>Vous recevrez <%= @reservation.cookoon_price %> € dans le cadre de cette réservation.</p>
+
+<!-- <p>Bonjour <%#= @host.first_name %>,</p>
+<p>La demande de location de <%#= @tenant.first_name %> est bien confirmée :</p>
 
 <table border="0" cellpadding="0" cellspacing="10" class="info"><tbody>
   <tr>
     <td align="center">
-      <%= image_tag('icon-home.png', alt: 'Cookoon') %>
+      <%#= image_tag('icon-home.png', alt: 'Cookoon') %>
     </td>
     <td>
-      <b><%= @cookoon.name %></b>
-      <br>le <%= display_date_for(@reservation.start_at) %>
-      <br>à <%= display_time_for(@reservation.start_at) %> pour <%= display_duration_for(@reservation.duration) %>
+      <b><%#= @cookoon.name %></b>
+      <br>le <%#= display_date_for(@reservation.start_at) %>
+      <br>à <%#= display_time_for(@reservation.start_at) %> pour <%#= display_duration_for(@reservation.duration) %>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <%= image_tag('icon-euro.png', alt: 'Prix') %>
+      <%#= image_tag('icon-euro.png', alt: 'Prix') %>
     </td>
     <td>
       <b>Vous recevrez :</b>
-      <br><%= humanized_money_with_symbol @reservation.host_payout_price %>
+      <br><%#= humanized_money_with_symbol @reservation.host_payout_price %>
       <br>
       <small>
-        soit <%= humanized_money_with_symbol @reservation.price %> - <%= humanized_money_with_symbol @reservation.host_fee %> de frais
+        soit <%#= humanized_money_with_symbol @reservation.price %> - <%#= humanized_money_with_symbol @reservation.host_fee %> de frais
       </small>
     </td>
   </tr>
   <tr>
     <td align="center">
-      <%= image_tag('icon-user.png', alt: 'Hôte') %>
+      <%#= image_tag('icon-user.png', alt: 'Hôte') %>
     </td>
     <td>
       <b>Découvrez le locataire</b>
-      <br><%= @tenant.full_name %>
-      <br><%= @tenant.phone_number %> - <%= mail_to @tenant.full_email, @tenant.email, target: :_blank %>
-      <br><small>membre depuis le <%= display_date_for(@host.invitation_accepted_at || @host.created_at) %></small>
+      <br><%#= @tenant.full_name %>
+      <br><%#= @tenant.phone_number %> - <%#= mail_to @tenant.full_email, @tenant.email, target: :_blank %>
+      <br><small>membre depuis le <%#= display_date_for(@host.invitation_accepted_at || @host.created_at) %></small>
     </td>
   </tr>
 </tbody></table>
 
-<p>Cette location est confirmée. Si vous avez un problème et que vous ne pouvez plus accueillir cette location, vous devez <%= mail_to 'concierge@cookoon.fr', 'contacter notre équipe', target: :_blank %> pour l'annuler. Des pénalités pourront vous être appliquées.</p>
+<p>Cette location est confirmée. Si vous avez un problème et que vous ne pouvez plus accueillir cette location, vous devez <%#= mail_to 'concierge@cookoon.fr', 'contacter notre équipe', target: :_blank %> pour l'annuler. Des pénalités pourront vous être appliquées.</p>
 
-<h3>Préparez-vous à l'arrivée de <%= @tenant.first_name %></h3>
+<h3>Préparez-vous à l'arrivée de <%#= @tenant.first_name %></h3>
 <ul>
   <li>Indiquez à votre locataire comment accéder à votre Cookoon : adresse, codes d'accès, étage, etc.</li>
   <li>Mettez les informations pratiques à sa disposition : code Wifi, quelles pièces sont inacessibles, etc.</li>
   <li>Rangez votre appartement : assurez-vous que vos locataires seront accueillis dans un endroit bien tenu et chaleureux !</li>
-</ul>
+</ul> -->
