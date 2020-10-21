@@ -65,10 +65,12 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "cookoon_web_#{Rails.env}"
   config.action_mailer.perform_caching = false
 
+  # To comment to stop mails sending
   config.action_mailer.delivery_method = :postmark
+  # To comment to stop mails sending
   config.action_mailer.postmark_settings = { api_token: ENV['POSTMARK_API_KEY'] }
 
-  # Commented to get mailer working
+  # Commented to get mails sending working
   # config.action_mailer.delivery_method = :smtp
   # config.action_mailer.smtp_settings = {
   #   user_name: ENV['MAILTRAP_USERNAME'],
@@ -78,6 +80,7 @@ Rails.application.configure do
   #   port: '2525',
   #   authentication: :cram_md5
   # }
+
   config.action_mailer.default_url_options = { host: 'cookoon-staging.herokuapp.com' }
   config.roadie.url_options = { host: 'cookoon-staging.herokuapp.com', scheme: 'https' }
   config.action_mailer.asset_host = nil
