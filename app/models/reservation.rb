@@ -118,7 +118,7 @@ class Reservation < ApplicationRecord
 
   def notify_users_after_cookoon_butler_payment
     ReservationMailer.paid_request_cookoon_butler_to_tenant(self).deliver_later
-    # ReservationMailer.paid_request_to_host(self).deliver_later
+    ReservationMailer.paid_request_cookoon_butler_to_host(self).deliver_later
   end
 
   def notify_users_after_confirmation

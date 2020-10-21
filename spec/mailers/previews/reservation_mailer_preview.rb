@@ -1,8 +1,8 @@
 class ReservationMailerPreview < ActionMailer::Preview
   # ==== Mails for Users =====
-  def paid_request_to_tenant
-    ReservationMailer.paid_request_to_tenant(Reservation.last)
-  end
+  # def paid_request_to_tenant
+  #   ReservationMailer.paid_request_to_tenant(Reservation.last)
+  # end
 
   def paid_request_cookoon_butler_to_tenant
     ReservationMailer.paid_request_cookoon_butler_to_tenant(Reservation.last)
@@ -29,8 +29,12 @@ class ReservationMailerPreview < ActionMailer::Preview
   end
 
   # ==== Mails for Host =====
-  def paid_request_to_host
-    ReservationMailer.paid_request_to_host(Reservation.last)
+  # def paid_request_to_host
+  #   ReservationMailer.paid_request_to_host(Reservation.last)
+  # end
+
+  def paid_request_cookoon_butler_to_host
+    ReservationMailer.paid_request_cookoon_butler_to_host(Reservation.last)
   end
 
   def notify_awaiting_request_to_host
