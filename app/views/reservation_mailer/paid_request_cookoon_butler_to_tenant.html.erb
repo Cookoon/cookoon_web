@@ -3,7 +3,7 @@
 <% else %>
   <p>Bonjour,</p>
 <% end %>
-<p>Vous avez réservé "<%= "#{@cookoon.name}" %>" pour votre <%= "#{ @reservation.decorate.humanized_type_name }" %> de <%= "#{ @reservation.decorate.people_count_text }" %> le <%= display_date_for(@reservation.start_at) %>.</p>
+<p>Vous avez réservé "<%= "#{@cookoon.name}" %>" dans le cadre de votre <%= "#{ @reservation.decorate.humanized_type_name }" %> de <%= "#{ @reservation.decorate.people_count_text }" %> le <%= @reservation.decorate.start_on %>.</p>
 
 <h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> Votre décor et le service</h4>
 <p><%= @reservation.decorate.recap_string_without_day_and_people_count %> <%= @reservation.decorate.recap_string_end_time %></p>
@@ -41,5 +41,5 @@
     </ul>
   <% end %>
 <% else %>
-    <p>Vous n'avez choisi aucun service additionnel</p>
+    <p>Vous n'avez choisi aucun service additionnel.</p>
 <% end %>
