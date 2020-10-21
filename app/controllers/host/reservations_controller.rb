@@ -27,7 +27,7 @@ module Host
       if payment.capture(:stripe_charge_id)
         @reservation.accept!
         @reservation.update(cookoon_butler_payment_status: "captured")
-        @reservation.notify_users_after_confirmation
+        @reservation.notify_users_after_host_confirmation
         flash[:notice] = 'Vous avez accepté la réservation'
       else
         # TODO : Essayer a nouveau de capturer la charge ou afficher une erreur.
