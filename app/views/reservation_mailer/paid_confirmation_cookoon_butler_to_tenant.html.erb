@@ -23,9 +23,9 @@
   <% end %>
 <% end %>
 
-<h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> Vos souhaits de services</h4>
+<h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> Vos souhaits de services additionnels</h4>
 <% if @reservation.services.present? %>
-  <p> Vous souhaitez les services suivants pour sublimer votre expérience: </p>
+  <p> Vous souhaitez les services additionnels suivants pour sublimer votre expérience: </p>
   <% if @reservation.services_status == "initial" %>
     <ul>
       <% @reservation.services.each do |service| %>
