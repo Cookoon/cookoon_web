@@ -42,7 +42,7 @@
       - if @reservation.needs_menu_payment?
         hr.mt-5
         hr.mb-5
-        p.mb-3.font-weight-bold.text-center Régler le chef et le menu:  #{humanized_money_with_symbol(@reservation.menu_with_tax)}TTC
+        p.mb-3.font-weight-bold.text-center Régler le chef et les menus:  #{humanized_money_with_symbol(@reservation.menu_with_tax)}TTC
         = render 'credit_cards/selection', url_intent_secret: @url_intent_secret_menu
       - if @reservation.needs_services_payment?
         hr.mt-5
