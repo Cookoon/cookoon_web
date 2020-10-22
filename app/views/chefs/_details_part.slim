@@ -1,10 +1,7 @@
 .chef_presentation_block.mb-3
   p.text-primary.mb-1 Vous rencontrez...
   h2.mb-3 style = "font-family: 'Avenir'"
-    - if chef.female?
-      | La chef #{chef.name}
-    - else
-      | Le chef #{chef.name}
+    | #{chef.recap_string}
   .chef_main_picture style="background-image: url(#{cl_image_path(chef.main_photo.path)})"
   = render 'chefs/perks', chef_perks: chef.chef_perks
 

@@ -60,6 +60,10 @@ class Chef < ApplicationRecord
     gender == "female"
   end
 
+  def recap_string
+    female? ? "La chef #{name}" : "Le chef #{name}"
+  end
+
   private
 
   def compute_min_price_with_margin

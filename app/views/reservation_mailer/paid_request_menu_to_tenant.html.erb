@@ -3,7 +3,7 @@
 <% else %>
   <p>Bonjour,</p>
 <% end %>
-<p>Vous avez émis une demande de réservation pour "<%= "#{@cookoon.name}" %>", dans le cadre de votre <%= "#{ @reservation.decorate.humanized_type_name }" %> de <%= "#{ @reservation.decorate.people_count_text }" %> le <strong><%= @reservation.decorate.start_on %></strong>.</p>
+<p><%= "#{@reservation.menu.chef.recap_string}" %> a confirmé sa présence dans le cadre de votre <%= "#{ @reservation.decorate.humanized_type_name }" %> de <%= "#{ @reservation.decorate.people_count_text }" %> le <strong><%= @reservation.decorate.start_on %></strong>.</p>
 
 <h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> Votre décor et le service</h4>
 <p>Votre décor est situé au <%= @cookoon.address %>.</p>
@@ -23,7 +23,7 @@
   <% end %>
 <% end %>
 
- additionnels<h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> Vos souhaits de services additionnels</h4>
+<h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> Vos souhaits de services additionnels</h4>
 <% if @reservation.services.present? %>
   <p> Vous souhaitez les services additionnels suivants pour sublimer votre expérience: </p>
   <% if @reservation.services_status == "initial" %>
@@ -44,4 +44,13 @@
 <% end %>
 
 <h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> Votre paiement pour le décor et le service</h4>
-<p>Une pré-autorisation de <%= @reservation.stripe_payment_intent_amount_cookoon_butler %> €TTC a été effectuée sur votre carte de crédit. Ce montant sera débité après acceptation de votre demande par l'hôte (la pré-autorisation sera annulé dans le cas contraire).</p>
+<p>Le montant de <%= @reservation.stripe_payment_intent_amount_cookoon_butler %> €TTC a été prélevé sur votre carte de crédit.</p>
+
+<h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> Votre paiement pour le chef et les menus</h4>
+<p>Le montant de <%= @reservation.menu_with_tax %> €TTC est en attente de règlement de votre part.</p>
+
+<table border="0" cellpadding="0" cellspacing="10" class="btn btn-pb-0 btn-primary"><tbody><tr>
+  <td align="center">
+    <%= link_to 'Régler le chef et les menus', new_reservation_payment_url(@reservation), target: :_blank %>
+  </td>
+</tr></tbody></table>
