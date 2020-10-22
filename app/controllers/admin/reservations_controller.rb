@@ -25,7 +25,7 @@ module Admin
     def ask_menu_payment
       if @reservation.update(menu_status: "payment_required")
         flash.notice = "Le paiement du menu va bien être demandé"
-        # TO DO send email to user to require payment
+        @reservation.notify_users_menu_payment_required
         redirect_to admin_reservation_path(@reservation)
       else
         flash.alert = "Il y a eu un problème"
@@ -46,7 +46,7 @@ module Admin
     def ask_services_payment
       if @reservation.update(services_status: "payment_required")
         flash.notice = "Le paiement des services va bien être demandé"
-        # TO DO send email to user to require payment
+        @reservation.notify_users_services_payment_required
         redirect_to admin_reservation_path(@reservation)
       else
         flash.alert = "Il y a eu un problème"
