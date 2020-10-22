@@ -70,6 +70,7 @@ class PaymentsController < ApplicationController
       end
     elsif @reservation.needs_menu_payment?
       if payment.capture_menu_payment
+        @reservation.notify_users_after_menu_payment
         flash.notice = "Votre paiement a bien été effectué"
         redirect_to home_path
       else
@@ -79,6 +80,7 @@ class PaymentsController < ApplicationController
     elsif @reservation.needs_services_payment?
       if payment.capture_services_payment
         flash.notice = "Votre paiement a bien été effectué"
+        @reservation.notify_users_after_services_payment
         redirect_to home_path
       else
         flash.alert = "Une erreur est survenue, néanmoins votre demande de paiement est bien effective. Veuillez contacter notre service d'aide"
