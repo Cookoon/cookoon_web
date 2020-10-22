@@ -122,8 +122,24 @@ class Reservation < ApplicationRecord
   end
 
   def notify_users_after_host_confirmation
-    ReservationMailer.confirmed_to_tenant(self).deliver_later
-    ReservationMailer.confirmed_to_host(self).deliver_later
+    ReservationMailer.paid_request_cookoon_butler_to_tenant(self).deliver_later
+    ReservationMailer.paid_confirmation_cookoon_butler_to_host(self).deliver_later
+  end
+
+  def notify_users_menu_payment_required
+    ReservationMailer.paid_request_menu_to_tenant(self).deliver_later
+  end
+
+  def notify_users_services_payment_required
+    ReservationMailer.paid_request_services_to_tenant(self).deliver_later
+  end
+
+  def notify_users_after_menu_payment
+    ReservationMailer.paid_confirmation_menu_to_tenant(self).deliver_later
+  end
+
+  def notify_users_after_services_payment
+    ReservationMailer.paid_confirmation_services_to_tenant(self).deliver_later
   end
 
   def admin_close
