@@ -5,12 +5,10 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
-    authorize @user
   end
 
   def create
     @user = User.new(new_user_params)
-    authorize @user
     @user.membership_asking = true
     @user.skip_password_validation = true
     if @user.save
