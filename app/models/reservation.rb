@@ -122,7 +122,7 @@ class Reservation < ApplicationRecord
   end
 
   def notify_users_after_host_confirmation
-    ReservationMailer.paid_request_cookoon_butler_to_tenant(self).deliver_later
+    ReservationMailer.paid_confirmation_cookoon_butler_to_tenant(self).deliver_later
     ReservationMailer.paid_confirmation_cookoon_butler_to_host(self).deliver_later
   end
 
