@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   end
 
   # -------- RESOURCES ---------
+  resource :users, only: %i[new create]
   resource :users, only: %i[edit update]
   resources :users, only: :index do
     post :impersonate, on: :member
@@ -127,8 +128,13 @@ Rails.application.routes.draw do
         patch :validate_services
         patch :ask_services_payment
       end
-      resources :users, only: %i[index] do
+      resources :users do
+        # Hosts
+        get 'hosts', to: 'users#index_hosts', as: :index_hosts, on: :collection
         patch 'users', to: 'users#add_identity_documents', as: :add_identity_documents
+        # Users who want to become member
+        get 'membership_asking', to: 'users#index_membership_asking', as: :membership_asking, on: :collection
+        post 'send_invitation', to: 'users#send_invitation', as: :send_invitation
       end
       # patch 'reservations/:id', to: 'reservations#require_payment_for_menus', as: :require_payment_for_menus
       # patch 'reservations/:id', to: 'reservations#validate_menus', as: :validate_menus
