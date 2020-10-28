@@ -2,6 +2,14 @@ class Users::InvitationsController < Devise::InvitationsController
   responders :invitations
   before_action :set_time_now, only: %i[edit update]
 
+  def new
+    if terms_of_service_acceptance_needed_for_true_user?
+      redirect_to(edit_general_conditions_acceptance_users_path)
+    else
+      super
+    end
+  end
+
   private
 
   def after_accept_path_for(resource)

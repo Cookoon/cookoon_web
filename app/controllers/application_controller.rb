@@ -26,6 +26,10 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:invite, keys: %i[first_name last_name inscription_payment_required])
   end
 
+  def terms_of_service_acceptance_needed_for_true_user?
+    terms_of_service_acceptance_needed?
+  end
+
   private
 
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
@@ -49,12 +53,24 @@ class ApplicationController < ActionController::Base
               end
   end
 
+  def devise_controller_or_new_user_asking?
+    devise_controller? || (params[:controller] == "users" && (params[:action] == "new" || params[:action] == "create"))
+  end
+
+  def users_invitations_controller_edit_or_update?
+    params[:controller] == "users/invitations" && (params[:action] == "edit" || params[:action] == "update")
+  end
+
   def skip_pundit?
-    devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(pages$)/
+    devise_controller_or_new_user_asking? || params[:controller] =~ /(^(rails_)?admin)|(pages$)/
   end
 
   def redirect_user_needed?
-    (terms_of_service_acceptance_needed? || inscription_payment_needed?) unless devise_controller?
+    if (devise_controller_or_new_user_asking? == true || users_invitations_controller_edit_or_update? == true)
+      false
+    else
+      terms_of_service_acceptance_needed? || inscription_payment_needed?
+    end
   end
 
   def terms_of_service_acceptance_needed?
@@ -66,11 +82,11 @@ class ApplicationController < ActionController::Base
   end
 
   def skip_general_conditions_validation?
-    devise_controller? || (params[:controller] == "pages" && params[:action] == "general_conditions") || (params[:controller] == "users" && (params[:action] == "edit_general_conditions_acceptance" || params[:action] == "update_general_conditions_acceptance"))
+    (params[:controller] == "pages" && params[:action] == "general_conditions") || (params[:controller] == "users" && (params[:action] == "edit_general_conditions_acceptance" || params[:action] == "update_general_conditions_acceptance"))
   end
 
   def skip_inscription_payment?
-    devise_controller? || params[:controller] == "inscription_payments" || params[:controller] == "credit_cards"
+    params[:controller] == "inscription_payments" || params[:controller] == "credit_cards"
   end
 
   def redirect_user

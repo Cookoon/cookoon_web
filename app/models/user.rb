@@ -3,6 +3,8 @@ class User < ApplicationRecord
   include Stripe::Customerable
   class NotProError < StandardError; end
 
+  attr_accessor :skip_password_validation
+
   scope :pending_invitation, -> { where.not(invitation_token: nil) }
   scope :invited_in_day_range_around, ->(date_time) { pending_invitation.where invitation_sent_at: day_range(date_time) }
   scope :joined_in_day_range_around, ->(date_time) { where invitation_accepted_at: day_range(date_time) }
@@ -13,6 +15,7 @@ class User < ApplicationRecord
   scope :with_reservation_finished_in_day_range_around, ->(date_time) { joins(:reservations).merge(Reservation.finished_in_day_range_around(date_time)).distinct }
   scope :has_cookoon, -> { joins(:cookoons).distinct }
   scope :has_no_cookoon, -> { left_outer_joins(:cookoons).where(cookoons: { id: nil }) }
+  scope :membership_asking, -> { where(membership_asking: true) }
   enum emailing_preferences: { no_emails: 0, all_emails: 1 }
 
   PHONE_REGEXP = /\A(\+\d+)?([\s\-\.]?\(?\d+\)?)+\z/
@@ -93,6 +96,8 @@ class User < ApplicationRecord
   def send_reset_password_instructions
     if invited_to_sign_up?
       errors.add :email, :invitation_not_yet_accepted
+    elsif membership_asking?
+      errors.add :email, :membership_asking_not_yet_accepted
     else
       super
     end
@@ -134,6 +139,15 @@ class User < ApplicationRecord
   end
 
   private
+
+  def membership_asking?
+    membership_asking == true
+  end
+
+  def password_required?
+    return false if skip_password_validation
+    super
+  end
 
   def report_to_slack
     return unless Rails.env.production?

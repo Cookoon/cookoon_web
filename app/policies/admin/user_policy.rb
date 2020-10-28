@@ -4,6 +4,10 @@ class Admin::UserPolicy < ApplicationPolicy
     user.admin == true
   end
 
+  def send_invitation?
+    user.admin == true
+  end
+
   class Scope < Scope
     def resolve
       scope.all

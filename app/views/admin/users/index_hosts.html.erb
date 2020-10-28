@@ -39,13 +39,13 @@
       <div class="row mx-0">
         <div class="tab-content py-0 py-md-3 w-100">
           <div class="tab-pane fade show active" id="missing_iban" role="tabpanel">
-            <%= render "list", users: @hosts_missing_stripe_account %>
+            <%= render "hosts_list", users: @hosts_missing_stripe_account %>
           </div>
           <div class="tab-pane fade" id="missing_docs" role="tabpanel">
-            <%= render "list", users: @hosts_missing_docs %>
+            <%= render "hosts_list", users: @hosts_missing_docs %>
           </div>
           <div class="tab-pane fade" id="missing_nothing" role="tabpanel">
-            <%= render "list", users: @hosts_missing_nothing %>
+            <%= render "hosts_list", users: @hosts_missing_nothing %>
           </div>
         </div>
       </div>

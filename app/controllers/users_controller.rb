@@ -1,12 +1,29 @@
 class UsersController < ApplicationController
   before_action :build_user, only: %i[edit update]
   before_action :require_admin!, only: %i[index impersonate stop_impersonating]
+  skip_before_action :authenticate_user!, only: %i[new create]
+
+  def new
+    @user = User.new
+  end
+
+  def create
+    @user = User.new(new_user_params)
+    @user.membership_asking = true
+    @user.skip_password_validation = true
+    if @user.save
+      flash[:notice] = "Votre demande d'adhésion nous a été transmise, nous reviendrons vers vous après avoir étudié votre candidature."
+      redirect_to new_user_session_path
+    else
+      render :new
+    end
+  end
 
   def edit; end
 
   def update
     if @user.update(user_params)
-      flash[:notice] = 'Profil mis à jour'
+      flash[:notice] = 'Votre profil a été mis à jour'
       redirect_to root_path
     else
       render :edit
@@ -47,6 +64,10 @@ class UsersController < ApplicationController
   end
 
   private
+
+  def new_user_params
+    params.require(:user).permit(:first_name, :last_name, :email, :born_on, :phone_number, :photo, :description)
+  end
 
   def user_params
     params.require(:user).permit(:first_name, :last_name, :born_on, :phone_number, :photo, :description)

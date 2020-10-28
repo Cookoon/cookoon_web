@@ -35,7 +35,7 @@ fr:
       reservation:
         start_at: la date de réservation
       user:
-        email: Adresse email
+        email: Adresse e-mail
         phone_number: Téléphone portable
         born_on: Date de naissance
         reset_password_token: Votre lien de réinitialisation
@@ -69,8 +69,10 @@ fr:
         user:
           attributes:
             email:
-              invalid: Cet email comporte une erreur...
-              taken: Cet utilisateur est déjà membre !
+              invalid: |
+                : comporte une erreur.
+              taken: |
+                : cet utilisateur est déjà membre.
             phone_number:
               invalid: vérifiez le format de votre numéro de téléphone
 
@@ -87,12 +89,15 @@ fr:
     attributes:
       email:
         blank: doit être renseigné
-        invalid: n'est pas un email valide
+        invalid: n'est pas valide
         invitation_not_yet_accepted: |
-          Vous n'avez pas encore créé votre compte Cookoon : retournez sur votre
-          invitation e-mail pour activer votre compte et choisir un mot de passe !
+          : vous n'avez pas encore créé votre compte Cookoon. Retournez sur votre
+          invitation e-mail pour activer votre compte et choisir un mot de passe.
+        membership_asking_not_yet_accepted: |
+          : votre demande d'adhésion est en cours d'étude. Vous recevrez une
+          invitation dès que celle-ci sera validé par notre comité.
         not_found: |
-          Cette adresse e-mail n'est pas associée à un membre Cookoon.
+          : cette adresse n'est pas associée à un membre Cookoon.
           Avez-vous bien reçu votre invitation à cette adresse ?
       first_name:
         blank: doit être renseigné

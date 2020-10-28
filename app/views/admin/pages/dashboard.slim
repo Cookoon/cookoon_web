@@ -4,6 +4,16 @@
   .pb-3
     .d-flex-default
       div
+        h3 <i class='co icon-losange small text-primary mr-2'></i> Les utilisateurs
+        p Visualisez les utilisateurs qui ont fait une demande d'adhésion
+      div
+        = link_to 'Les utilisateurs qui souhaitent devenir membre', membership_asking_admin_users_path, class: 'btn-cookoon btn-cookoon-primary'
+
+  hr
+
+  .pb-3
+    .d-flex-default
+      div
         h3 <i class='co icon-losange small text-primary mr-2'></i> Les réservations
         p Visualisez tous les décors
       div
@@ -47,7 +57,7 @@
         h3 <i class='co icon-losange small text-primary mr-2'></i> Les hôtes
         p Visualisez les hôtes
       div
-        = link_to 'Les hôtes', admin_users_path, class: 'btn-cookoon btn-cookoon-primary'
+        = link_to 'Les hôtes', index_hosts_admin_users_path, class: 'btn-cookoon btn-cookoon-primary'
 
   hr
 

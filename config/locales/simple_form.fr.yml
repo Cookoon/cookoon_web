@@ -5,7 +5,8 @@ fr:
       reservation:
         create: Consulter les expériences
       user:
-        update: Modifier
+        update: Modifier mon profil
+        create: Envoyer ma demande d'adhésion
   simple_form:
     error_notification:
       default_message: 'Merci de revoir les éléments ci-dessous :'

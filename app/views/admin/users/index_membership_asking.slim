@@ -1,0 +1,19 @@
+.container.px-sm-0
+  .row.mx-0
+    .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
+
+    .col-12.col-md-8.col-lg-9.px-0
+      .breadcrumbs
+        h1.text-center.first-title Les utilisateurs en attente d'invitation pour devenir membre
+      hr.breadcrumbs-hr
+
+.container.d-flex.justify-content-center.px-sm-0.pb-5
+  .row
+    .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
+      = render 'shared/back_button_transparent', button_title: 'Retour au dashboard', path: admin_dashboard_path
+
+    .col-12.col-md-8.col-lg-9.px-0
+      - if @users_membership_asking.present?
+        = render 'membership_asking_list', users: @users_membership_asking
+      - else
+        p Il n'y a aucune demande d'adhésion en attente.
