@@ -115,14 +115,14 @@ class StripeAccountService
 
   def prepare_account_link
     if Rails.env.development? # Rails.env == "development"
-      refresh_url = 'http://localhost:3000/admin/users'
-      return_url = 'http://localhost:3000/admin/users'
+      refresh_url = 'http://localhost:3000/admin/users/hosts'
+      return_url = 'http://localhost:3000/admin/users/hosts'
     elsif Rails.env.staging?
-      refresh_url = 'https://cookoon-staging.herokuapp.com/admin/users'
-      return_url = 'https://cookoon-staging.herokuapp.com/admin/users'
+      refresh_url = 'https://cookoon-staging.herokuapp.com/admin/users/hosts'
+      return_url = 'https://cookoon-staging.herokuapp.com/admin/users/hosts'
     elsif Rails.env.production?
-      refresh_url = 'https://membre.cookoon.club/admin/users'
-      return_url = 'https://membre.cookoon.club/admin/users'
+      refresh_url = 'https://membre.cookoon.club/admin/users/hosts'
+      return_url = 'https://membre.cookoon.club/admin/users/hosts'
     end
 
     {
