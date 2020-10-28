@@ -143,7 +143,7 @@ Devise.setup do |config|
 
   # Resend invitation if user with invited status is invited again
   # Default: true
-  # config.resend_invitation = false
+  config.resend_invitation = false
 
   # The class name of the inviting model. If this is nil,
   # the #invited_by association is declared to be polymorphic.
