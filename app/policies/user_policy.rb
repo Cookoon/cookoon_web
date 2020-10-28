@@ -1,13 +1,5 @@
 class UserPolicy < ApplicationPolicy
 
-  def new?
-    create?
-  end
-
-  def create?
-    true
-  end
-
   def update?
     user == record
   end
