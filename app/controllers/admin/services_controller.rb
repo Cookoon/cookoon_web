@@ -2,9 +2,9 @@ module Admin
   class ServicesController < ApplicationController
     # not necessary because it is specified directly in routes
     # before_action :require_admin
-    before_action :find_reservation, only: %i[new create edit update]
+    before_action :find_reservation, only: %i[new create edit update validate_service]
     before_action :find_service, only: %i[edit update]
-
+    before_action :find_service_with_service_id, only: %i[validate_service]
     def new
       @service = Service.new(reservation: @reservation)
       authorize @service, policy_class: Admin::ServicePolicy
@@ -48,6 +48,19 @@ module Admin
       end
     end
 
+    def validate_service
+      if @service.validate!
+        @reservation.assign_prices
+        if @reservation.save
+          redirect_to admin_reservation_path(@reservation), notice: "Le service a bien été validé"
+        else
+          redirect_to admin_reservation_path(@reservation), alert: "Il y a eu un problème, veuillez contacter le support"
+        end
+      else
+        redirect_to admin_reservation_path(@reservation), alert: "Il y a eu un problème, veuillez contacter le support"
+      end
+    end
+
     private
 
     def find_reservation
@@ -56,6 +69,11 @@ module Admin
 
     def find_service
       @service = Service.find(params[:id])
+      authorize @service, policy_class: Admin::ServicePolicy
+    end
+
+    def find_service_with_service_id
+      @service = Service.find(params[:service_id])
       authorize @service, policy_class: Admin::ServicePolicy
     end
 

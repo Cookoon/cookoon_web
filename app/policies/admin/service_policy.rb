@@ -8,11 +8,15 @@ class Admin::ServicePolicy < ApplicationPolicy
   end
 
   def edit?
-    user.admin == true && record.reservation.needs_services_validation?
+    user.admin == true && record.reservation.needs_services_validation? && record.initial?
   end
 
   def update?
     edit?
+  end
+
+  def validate_service?
+    user.admin == true && record.initial?
   end
 
   # class Scope < Scope
