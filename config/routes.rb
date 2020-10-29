@@ -124,7 +124,9 @@ Rails.application.routes.draw do
       resources :reservations, only: %i[index show] do
         patch :validate_menu
         patch :ask_menu_payment
-        resources :services, only: %i[new create edit update]
+        resources :services, only: %i[new create edit update] do
+          patch 'validate_service', to: 'services#validate_service', as: :validate_service
+        end
         patch :validate_services
         patch :ask_services_payment
       end

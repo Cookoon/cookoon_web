@@ -235,6 +235,10 @@ class Reservation < ApplicationRecord
     needs_services_validation?
   end
 
+  def has_all_services_validated?
+    services.pluck(:status).uniq == ["validated"]
+  end
+
   def seated?
     type_name == 'diner' || type_name == 'lunch' || type_name == 'brunch'
   end

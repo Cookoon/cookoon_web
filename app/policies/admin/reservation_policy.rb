@@ -12,7 +12,7 @@ class Admin::ReservationPolicy < ApplicationPolicy
   end
 
   def validate_services?
-    user.admin == true && record.needs_services_validation?
+    user.admin == true && record.needs_services_validation? && record.has_all_services_validated?
   end
 
   def ask_services_payment?

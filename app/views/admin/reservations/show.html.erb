@@ -50,19 +50,21 @@
           <% @reservation.services.each do |service| %>
             <div class="mb-5">
               <p><%= service.name %></p>
+              <p>Statut: <%= service.status %></p>
               <p>Tarif: <%= service.quantity %> x <%= service.unit_price %></p>
               <p>Frais de service: <%= service.quantity_base %> x <%= service.base_price %></p>
               <p>Marge: <%= service.margin %></p>
               <p>Total HT avec marge: <%= service.price %></p>
-              <% if @reservation.accepts_new_service? %>
+              <% if @reservation.accepts_new_service? && service.initial? %>
                 <%= link_to 'Modifier', edit_admin_reservation_service_path(@reservation, service), :class => "btn-cookoon btn-cookoon-primary mb-4" %>
+                <%= link_to 'Valider', admin_reservation_service_validate_service_path(@reservation, service), method: :patch, :class => "btn-cookoon btn-cookoon-primary mb-4" %>
               <% end %>
             </div>
           <% end %>
           <% if @reservation.accepts_new_service? %>
             <%= link_to 'Ajouter un service', new_admin_reservation_service_path(@reservation), :class => "btn-cookoon btn-cookoon-primary mb-4" %>
           <% end %>
-          <% if @reservation.needs_services_validation? %>
+          <% if @reservation.needs_services_validation? && @reservation.has_all_services_validated? %>
             <%= link_to 'Valider les services', admin_reservation_validate_services_path(@reservation), :class => "btn-cookoon btn-cookoon-primary mb-4", method: :patch %>
           <% end %>
           <% if @reservation.needs_services_payment_asking? %>

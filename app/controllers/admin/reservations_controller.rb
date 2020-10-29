@@ -35,8 +35,13 @@ module Admin
 
     def validate_services
       if @reservation.update(services_status: "validated")
-        flash.notice = "Les services ont bien été validés"
-        redirect_to admin_reservation_path(@reservation)
+        @reservation.assign_prices
+        if @reservation.save
+          redirect_to admin_reservation_path(@reservation), notice: "Les services ont bien été validés."
+        else
+          flash.alert = "Il y a eu un problème"
+          render :show
+        end
       else
         flash.alert = "Il y a eu un problème"
         render :show

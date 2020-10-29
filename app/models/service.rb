@@ -38,6 +38,14 @@ class Service < ApplicationRecord
     calculate_price_with_margin_and_taxes
   end
 
+  def validate!
+    set_validated_status!
+  end
+
+  def initial?
+    status == "initial"
+  end
+
   private
 
   def set_name_and_default_prices
@@ -123,6 +131,10 @@ class Service < ApplicationRecord
         margin: 2,
       )
     end
+  end
+
+  def set_validated_status!
+    update_attributes(status: 'validated')
   end
 
   def sommelier_count
