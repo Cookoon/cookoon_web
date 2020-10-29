@@ -40,6 +40,7 @@ fr:
         born_on: Date de naissance
         reset_password_token: Votre lien de réinitialisation
         terms_of_service: Conditions générales de services
+        address: Adresse
       menu:
         description: Titre
         meal_type: Type de repas (assis ou debout)
@@ -74,7 +75,7 @@ fr:
               taken: |
                 : cet utilisateur est déjà membre.
             phone_number:
-              invalid: vérifiez le format de votre numéro de téléphone
+              # invalid: vérifiez le format de votre numéro de téléphone
 
     models:
       user: Utilisateur
@@ -88,7 +89,7 @@ fr:
   errors:
     attributes:
       email:
-        blank: doit être renseigné
+        # blank: doit être renseigné
         invalid: n'est pas valide
         invitation_not_yet_accepted: |
           : vous n'avez pas encore créé votre compte Cookoon. Retournez sur votre
@@ -100,6 +101,8 @@ fr:
           : cette adresse n'est pas associée à un membre Cookoon.
           Avez-vous bien reçu votre invitation à cette adresse ?
       first_name:
-        blank: doit être renseigné
+        # blank: doit être renseigné
       last_name:
-        blank: doit être renseigné
+        # blank: doit être renseigné
+      address:
+        # blank: doit être renseignée
