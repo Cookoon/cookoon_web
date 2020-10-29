@@ -1,4 +1,4 @@
-= simple_form_for user, url: users_path, default: { label: false }, remote: true do |f|
+= simple_form_for @user, url: users_path, default: { label: false }, data: { controller: 'google-maps-autocomplete' }, remote: true do |f|
   .form-inputs
     = f.input :photo, as: :attachinary, input_html: { data: { controller: 'attachinary' } }
     = f.input :first_name
@@ -6,10 +6,10 @@
 
     - if (params[:action] == "new" || params[:action] == "create")
       = f.input :email
+      = f.input :address, input_html: { data: { target: 'google-maps-autocomplete.addressInput google-maps-autocomplete.formattedAddress' } }
 
     = f.input :born_on, start_year: Date.today.year - 90, end_year: Date.today.year - 12, selected: @user.born_on || Date.new(1965, 1, 1)
     = f.input :phone_number
-
 
   .form-actions.mb-4
     .text-center = f.submit class: 'btn-cookoon btn-cookoon-primary px-5'
