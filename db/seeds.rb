@@ -40,7 +40,13 @@ users_attributes = [
   { email: 'laura@cookoon.fr', password: 'plopplop', first_name: 'Laura', last_name: 'Escure', description: 'Un bon user', phone_number: '0636686565', photo_url: "https://ca.slack-edge.com/T0A4A3AQZ-U0A5L9L8K-7eda5a7e311c-512", admin: true, address: "8 rue de la Vrillière, Paris" }
 ]
 puts "Seeding Users"
-users_attributes.each { |attributes| User.create! attributes }
+# users_attributes.each { |attributes| User.create! attributes }
+users_attributes.each do |user_attribute|
+  user = User.new(user_attribute)
+  user.build_job(job_title: "Développeur", company: "Cookoon", linkedin_profile: "https://www.linkedin.com/in/alice-fabre-676211182/")
+  user.save
+end
+puts "Cookoons done"
 puts "Users done"
 
 cookoons_attributes = [
