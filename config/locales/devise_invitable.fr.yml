@@ -7,7 +7,7 @@ fr:
         other: Vous pouvez les parrainer, vous disposez actuellement de %{count} invitations, choisissez-les bien.
         zero: Vous pourrez les parrainer dès que vous disposerez d'invitations. Choisissez les bien !
       edit:
-        header: Vous rejoignez la communauté ?
+        header: Rejoignez la communauté Cookoon
       edit_form:
         submit: Je m'inscris
       invitation_removed: Votre invitation a été supprimée.
