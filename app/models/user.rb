@@ -27,6 +27,8 @@ class User < ApplicationRecord
   has_many :cookoons, dependent: :restrict_with_exception
   has_many :reservations, dependent: :restrict_with_exception
   has_many :reservation_requests, through: :cookoons, source: :reservations
+  has_one :job, dependent: :destroy
+  accepts_nested_attributes_for :job
 
   has_attachment :photo
 
@@ -41,6 +43,7 @@ class User < ApplicationRecord
   validates :born_on, presence: true, if: :invited_to_sign_up?
   validates :terms_of_service, acceptance: { message: 'Vous devez accepter les conditions générales de services pour continuer' }
   validates :address, presence: true, on: :create
+  validates :job, presence: true, on: :create
 
   after_invitation_accepted :send_welcome_email
   after_save :upsert_mailchimp_subscription, if: :saved_change_to_born_on?
