@@ -5,12 +5,15 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @job = @user.build_job
   end
 
   def create
     @user = User.new(new_user_params)
-    @user.membership_asking = true
-    @user.skip_password_validation = true
+    @user.assign_attributes(membership_asking: true, skip_password_validation: true)
+
+    @job = @user.build_job(job_params)
+
     if @user.save
       flash[:notice] = "Votre demande d'adhésion nous a été transmise, nous reviendrons vers vous après avoir étudié votre candidature."
       redirect_to new_user_session_path
@@ -67,6 +70,10 @@ class UsersController < ApplicationController
 
   def new_user_params
     params.require(:user).permit(:first_name, :last_name, :email, :born_on, :phone_number, :photo, :description, :address)
+  end
+
+  def job_params
+    params.require(:job).permit(:job_title, :company, :linkedin_profile)
   end
 
   def user_params
