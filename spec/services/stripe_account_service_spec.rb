@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe StripeAccountService do
-  let(:user) { create(:user) }
+  let(:user) { create(:user, :with_job) }
   let(:params) { ActionController::Parameters.new('first_name' => user.first_name, 'last_name' => user.last_name, 'dob(3i)' => '1', 'dob(2i)' => '1', 'dob(1i)' => '1965', 'address' => { 'line1' => '1 rue eugène eichenberger', 'postal_code' => '92800', 'city' => 'PUTEAUX' }, 'account_token' => 'ct_1ClzG4JwSREaPZl4WsUkeOtl', 'bank_account_token' => 'btok_1ClzG4JwSREaPZl4jINzAaeE') }
   let(:invalid_params) { params.slice(:first_name, :last_name) }
 
@@ -79,7 +79,7 @@ RSpec.describe StripeAccountService do
     context 'user has an account' do
       it 'returns Stripe Account object' do
         VCR.use_cassette 'stripe_account/retrieve_account_success' do
-          user = create(:user, :with_stripe_account)
+          user = create(:user, :with_stripe_account, :with_job)
           service = described_class.new(params: params, user: user)
           account = service.retrieve_stripe_account
           expect(account).to be_a(Stripe::Account)
