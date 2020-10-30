@@ -1,9 +1,16 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  it 'is valid with a first name, last name, email and phone_number' do
-    user = build(:user)
+  it 'is valid with a first name, last name, email and phone_number, address and job' do
+    user = build(:user, :with_job)
     expect(user).to be_valid
+  end
+
+  # not working
+  it 'is invalid without a job' do
+    user = build(:user)
+    user.valid?
+    expect(user.errors[:job]).to include('doit être rempli(e)')
   end
 
   it 'is invalid without a first name' do

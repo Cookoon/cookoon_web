@@ -1,9 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe Cookoon, type: :model do
-  it 'is valid with a user, name, surface, price, address, capacity, category, perks, description, citation and photos' do
+  it 'is valid with a user, name, surface, price, address, capacity, category, perks, description, citation, photos and perks' do
     cookoon = build(:cookoon)
     expect(cookoon).to be_valid
+  end
+
+  it 'is invalid without perks' do
+    cookoon = build(:cookoon, :without_perks)
+    cookoon.valid?
+    expect(cookoon.errors[:perks]).to include("doit être rempli(e)")
   end
 
   it 'is invalid without a user' do
@@ -63,7 +69,7 @@ RSpec.describe Cookoon, type: :model do
   end
 
   context 'user already has cookoons' do
-    let(:user) { create(:user)}
+    let(:user) { create(:user, :with_job)}
 
     it 'is valid when user has one cookoon' do
       create(:cookoon, user: user)

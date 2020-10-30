@@ -6,7 +6,7 @@ FactoryBot.define do
     end
     before(:create) { Attachinary::File.define_method(:remove_temporary_tag) {} }
 
-    association :user
+    association :user, :with_job
     name { 'Grand Salon 1930 - Silicon Sentier' }
     surface { 100 }
     price { 3000 }
@@ -43,6 +43,12 @@ FactoryBot.define do
 
     trait :with_photos_upload do
       photo_urls { %w[https://picsum.photos/400/300 https://picsum.photos/400/300] }
+    end
+
+    trait :without_perks do
+      after(:build) do |cookoon|
+        cookoon.perks.delete_all
+      end
     end
   end
 end
