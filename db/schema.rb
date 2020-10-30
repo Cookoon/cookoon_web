@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_29_193842) do
+ActiveRecord::Schema.define(version: 2020_10_30_091005) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,6 +141,16 @@ ActiveRecord::Schema.define(version: 2020_10_29_193842) do
     t.datetime "checkout_at"
     t.text "remark"
     t.index ["reservation_id"], name: "index_inventories_on_reservation_id"
+  end
+
+  create_table "jobs", force: :cascade do |t|
+    t.string "job_title"
+    t.string "company"
+    t.text "linkedin_profile"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_jobs_on_user_id"
   end
 
   create_table "menus", force: :cascade do |t|
@@ -285,6 +295,7 @@ ActiveRecord::Schema.define(version: 2020_10_29_193842) do
   add_foreign_key "cookoons", "users"
   add_foreign_key "dishes", "menus"
   add_foreign_key "inventories", "reservations"
+  add_foreign_key "jobs", "users"
   add_foreign_key "menus", "chefs"
   add_foreign_key "perks", "cookoons"
   add_foreign_key "perks", "perk_specifications"
