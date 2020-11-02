@@ -69,7 +69,7 @@ RSpec.describe Cookoon, type: :model do
   end
 
   context 'user already has cookoons' do
-    let(:user) { create(:user, :with_job)}
+    let(:user) { create(:user, :with_job, :with_personal_taste, :with_motivation)}
 
     it 'is valid when user has one cookoon' do
       create(:cookoon, user: user)
