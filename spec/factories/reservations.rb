@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :reservation do
     association :cookoon
-    association :user, :with_job
+    association :user, :with_job, :with_personal_taste, :with_motivation
     start_at 10.days.from_now
     people_count 6
     type_name 'breakfast'
