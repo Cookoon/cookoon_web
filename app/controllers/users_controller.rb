@@ -6,6 +6,8 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     @job = @user.build_job
+    @personal_taste = @user.build_personal_taste
+    @motivation = @user.build_motivation
   end
 
   def create
@@ -13,6 +15,8 @@ class UsersController < ApplicationController
     @user.assign_attributes(membership_asking: true, skip_password_validation: true)
 
     @job = @user.build_job(job_params)
+    @personal_taste = @user.build_personal_taste(personal_taste_params)
+    @motivation = @user.build_motivation(motivation_params)
 
     if @user.save
       flash[:notice] = "Votre demande d'adhésion nous a été transmise, nous reviendrons vers vous après avoir étudié votre candidature."
@@ -74,6 +78,14 @@ class UsersController < ApplicationController
 
   def job_params
     params.require(:job).permit(:job_title, :company, :linkedin_profile)
+  end
+
+  def personal_taste_params
+    params.require(:personal_taste).permit(:favorite_champagne, :favorite_wine, :favorite_restaurant_one, :favorite_restaurant_two, :favorite_restaurant_three)
+  end
+
+  def motivation_params
+    params.require(:motivation).permit(:content)
   end
 
   def user_params
