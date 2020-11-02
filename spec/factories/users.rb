@@ -20,5 +20,17 @@ FactoryBot.define do
       end
     end
 
+    trait :with_personal_taste do
+      after(:build) do |user|
+        user.build_personal_taste(user: user, favorite_champagne: "Roederer Brut Premier", favorite_wine: "Côte Rôtie, Stéphane Ogier", favorite_restaurant_one: "Guy Savoy", favorite_restaurant_two: "Michel Sarran", favorite_restaurant_three: "Frédéric Simonin")
+      end
+    end
+
+    trait :with_motivation do
+      after(:build) do |user|
+        user.build_motivation(user: user, content: "Je suis épicurien.")
+      end
+    end
+
   end
 end
