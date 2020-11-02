@@ -51,6 +51,10 @@ label.collection_check_boxes {
   margin-bottom: 0px;
 }
 
+label.disabled > abbr {
+  display: none;
+}
+
 .reservation .form-check {
   display: flex;
   border-top: 1px solid $gray;

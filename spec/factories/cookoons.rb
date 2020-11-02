@@ -6,7 +6,7 @@ FactoryBot.define do
     end
     before(:create) { Attachinary::File.define_method(:remove_temporary_tag) {} }
 
-    association :user, :with_job
+    association :user, :with_job, :with_personal_taste, :with_motivation
     name { 'Grand Salon 1930 - Silicon Sentier' }
     surface { 100 }
     price { 3000 }

@@ -39,14 +39,16 @@ users_attributes = [
   { email: 'francois@cookoon.fr', password: 'azerty', first_name: 'François', last_name: 'Catuhe', description: 'Un bon user', phone_number: '0636686565', photo_url: "https://ca.slack-edge.com/T0A4A3AQZ-U0A5L9L8K-7eda5a7e311c-512", admin: true, address: "8 rue de la Vrillière, Paris" },
   { email: 'laura@cookoon.fr', password: 'plopplop', first_name: 'Laura', last_name: 'Escure', description: 'Un bon user', phone_number: '0636686565', photo_url: "https://ca.slack-edge.com/T0A4A3AQZ-U0A5L9L8K-7eda5a7e311c-512", admin: true, address: "8 rue de la Vrillière, Paris" }
 ]
+
 puts "Seeding Users"
 # users_attributes.each { |attributes| User.create! attributes }
 users_attributes.each do |user_attribute|
   user = User.new(user_attribute)
   user.build_job(job_title: "Développeur", company: "Cookoon", linkedin_profile: "https://www.linkedin.com/in/alice-fabre-676211182/")
+  user.build_personal_taste(favorite_champagne: "Roederer Brut Premier", favorite_wine: "Côte Rôtie, Stéphane Ogier", favorite_restaurant_one: "Guy Savoy", favorite_restaurant_two: "Michel Sarran", favorite_restaurant_three: "Frédéric Simonin")
+  user.build_motivation(content: "Je suis un épicurien.")
   user.save
 end
-puts "Cookoons done"
 puts "Users done"
 
 cookoons_attributes = [

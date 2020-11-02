@@ -36,7 +36,7 @@ fr:
         start_at: la date de réservation
       user:
         email: Adresse e-mail
-        phone_number: Téléphone portable
+        phone_number: Numéro de téléphone
         born_on: Date de naissance
         reset_password_token: Votre lien de réinitialisation
         terms_of_service: Conditions générales de services
@@ -49,6 +49,15 @@ fr:
         job_title: Poste actuel
         company: Société
         linkedin_profile: Profil Linkedin
+      motivation:
+        content: Pourquoi rejoindre Cookoon ?
+      personal_taste:
+        favorite_champagne: Champagne préféré
+        favorite_wine: Vin préféré
+        favorite_restaurant_one: Premier restaurant préféré
+        favorite_restaurant_two: Second restaurant préféré
+        favorite_restaurant_three: Troisième restaurant préféré
+
     errors:
       models:
         availability:

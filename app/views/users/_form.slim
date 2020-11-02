@@ -1,21 +1,39 @@
 = simple_form_for @user, url: users_path, default: { label: false }, data: { controller: 'google-maps-autocomplete' }, remote: true do |f|
   .form-inputs
-    = f.input :photo, as: :attachinary, input_html: { data: { controller: 'attachinary' } }
-    = f.input :first_name
-    = f.input :last_name
+    h2 Vous connaître...
+    br
+    = f.input :photo, as: :attachinary, input_html: { data: { controller: 'attachinary' } }, label: "Votre photo de profil"
+    = f.input :first_name, label: "Votre prénom"
+    = f.input :last_name, label: "Votre nom"
 
     - if (params[:action] == "new" || params[:action] == "create")
-      = f.input :email
-      = f.input :address, input_html: { data: { target: 'google-maps-autocomplete.addressInput google-maps-autocomplete.formattedAddress' } }
+      = f.input :email, label: "Votre adresse e-mail"
+      = f.input :address, input_html: { data: { target: 'google-maps-autocomplete.addressInput google-maps-autocomplete.formattedAddress' } }, label: "Votre adresse"
 
-    = f.input :born_on, start_year: Date.today.year - 90, end_year: Date.today.year - 12, selected: @user.born_on || Date.new(1965, 1, 1)
-    = f.input :phone_number
+    = f.input :born_on, start_year: Date.today.year - 90, end_year: Date.today.year - 12, selected: @user.born_on || Date.new(1965, 1, 1), label: "Votre date de naissance"
+    = f.input :phone_number, label: "Votre numéro de téléphone"
 
     - if (params[:action] == "new" || params[:action] == "create")
       = simple_fields_for @job do |ff|
-        = ff.input :job_title
-        = ff.input :company
-        = ff.input :linkedin_profile
+        = ff.input :job_title, label: "Votre poste actuel"
+        = ff.input :company, label: "Votre société actuelle"
+        = ff.input :linkedin_profile, label: "Votre profil Linkedin"
+
+      br
+      h2 Connaître vos goûts...
+      br
+      = simple_fields_for @personal_taste do |fff|
+        = fff.input :favorite_champagne, label: "Votre champagne préféré"
+        = fff.input :favorite_wine, label: "Votre vin préféré"
+        = fff.input :favorite_restaurant_one, label: "Votre premier restaurant préféré"
+        = fff.input :favorite_restaurant_two, label: "Votre second restaurant préféré"
+        = fff.input :favorite_restaurant_three, label: "Votre troisième restaurant préféré"
+
+      br
+      h2 Pourquoi rejoindre Cookoon ?
+      br
+      = simple_fields_for @motivation do |ffff|
+        = ffff.input :content, label: false
 
   .form-actions.mb-4
     .text-center = f.submit class: 'btn-cookoon btn-cookoon-primary px-5'
