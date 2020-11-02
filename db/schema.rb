@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_30_091005) do
+ActiveRecord::Schema.define(version: 2020_11_02_101345) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -165,6 +165,14 @@ ActiveRecord::Schema.define(version: 2020_10_30_091005) do
     t.index ["chef_id"], name: "index_menus_on_chef_id"
   end
 
+  create_table "motivations", force: :cascade do |t|
+    t.text "content"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_motivations_on_user_id"
+  end
+
   create_table "perk_specifications", force: :cascade do |t|
     t.string "name"
     t.string "icon_name"
@@ -180,6 +188,18 @@ ActiveRecord::Schema.define(version: 2020_10_30_091005) do
     t.datetime "updated_at", null: false
     t.index ["cookoon_id"], name: "index_perks_on_cookoon_id"
     t.index ["perk_specification_id"], name: "index_perks_on_perk_specification_id"
+  end
+
+  create_table "personal_tastes", force: :cascade do |t|
+    t.string "favorite_champagne"
+    t.string "favorite_wine"
+    t.string "favorite_restaurant_one"
+    t.string "favorite_restaurant_two"
+    t.string "favorite_restaurant_three"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_personal_tastes_on_user_id"
   end
 
   create_table "reservations", force: :cascade do |t|
@@ -297,8 +317,10 @@ ActiveRecord::Schema.define(version: 2020_10_30_091005) do
   add_foreign_key "inventories", "reservations"
   add_foreign_key "jobs", "users"
   add_foreign_key "menus", "chefs"
+  add_foreign_key "motivations", "users"
   add_foreign_key "perks", "cookoons"
   add_foreign_key "perks", "perk_specifications"
+  add_foreign_key "personal_tastes", "users"
   add_foreign_key "reservations", "cookoons"
   add_foreign_key "reservations", "menus"
   add_foreign_key "reservations", "users"
