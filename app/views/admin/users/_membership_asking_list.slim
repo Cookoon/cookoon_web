@@ -2,13 +2,32 @@
   .cookoon-card.p-2
     .mb-3
       h5.text-center = user.full_name
-      li Date de naissance: #{ l(user.born_on, format: '%d %B %Y') }
-      li Téléphone portable: #{ user.phone_number }
 
       = simple_form_for user, url: admin_user_send_invitation_path(user), html: { method: :post }, remote: true do |f|
-        = f.input :first_name, disabled: true
-        = f.input :last_name, disabled: true
-        = f.input :email, disabled: true
+        p.mb-0 #{f.label :email, disabled: true} : #{user.email}
+        p.mb-0 #{f.label :born_on, disabled: true} : #{user.born_on.strftime('%d / %m / %Y')}
+        p.mb-0 #{f.label :phone_number, disabled: true} : #{user.phone_number}
+        p.mb-0 #{f.label :address, disabled: true} : #{user.address}
+
+        h5.mt-3 Poste
+        = simple_fields_for user.job do |ff|
+          p.mb-0 #{ff.label :job_title, disabled: true} : #{user.job.job_title}
+          p.mb-0 #{ff.label :company, disabled: true} : #{user.job.company}
+          p.mb-0 #{ff.label :linkedin_profile, disabled: true} : #{user.job.linkedin_profile}
+
+        h5.mt-3 Goûts
+        = simple_fields_for user.personal_taste do |fff|
+          p.mb-0 #{fff.label :favorite_champagne, disabled: true} : #{user.personal_taste.favorite_champagne}
+          p.mb-0 #{fff.label :favorite_wine, disabled: true} : #{user.personal_taste.favorite_wine}
+          p.mb-0 #{fff.label :favorite_restaurant_one, disabled: true} : #{user.personal_taste.favorite_restaurant_one}
+          p.mb-0 #{fff.label :favorite_restaurant_two, disabled: true} : #{user.personal_taste.favorite_restaurant_two}
+          p.mb-0 #{fff.label :favorite_restaurant_three, disabled: true} : #{user.personal_taste.favorite_restaurant_three}
+
+        h5.mt-3 Motivation
+        = simple_fields_for user.motivation do |ffff|
+          p.mb-0 = ffff.label :content, disabled: true
+          p = user.motivation.content
+
         = f.input :inscription_payment_required, as: :boolean, label: "Inscription payante : 300 €TTC"
         = f.input :membership_asking, input_html: { value: false }, as: :hidden
         .text-center
