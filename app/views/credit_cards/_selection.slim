@@ -1,8 +1,8 @@
 - if @credit_cards.blank?
   .text-center.py-3
-    .py-3
-      p Vous n'avez aucun moyen de paiement
-      p Vous devez en ajouter un avant de pouvoir faire une demande de réservation
+    .pb-3
+      p Vous n'avez aucun moyen de paiement.
+      p Vous devez en ajouter un afin de pouvoir procéder au règlement.
 
     = link_to 'Ajouter une carte', "#", class: 'btn-cookoon btn-cookoon-primary', data: {toggle: "modal", target: "#credit-card-modal"}
 
