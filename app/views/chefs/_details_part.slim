@@ -11,8 +11,9 @@
     .first-letter-bigger = chef.description
     - if @chef.references.present?
       .text-center.my-2
-        - 3.times do
-          = image_tag("cookoon-losange.png", size: '24')
+        h3.mb-4.text-center.mb-n2
+          - 3.times do
+            <i class='co icon-losange small text-primary mr-2'></i>
       .chef_references = simple_format(@chef.references)
   .second_element style="background-image: url(#{cl_image_path(chef.photos.first.path)})"
   .third_element style="background-image: url(#{cl_image_path(chef.photos.second.path)})"
