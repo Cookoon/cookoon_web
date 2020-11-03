@@ -2,7 +2,7 @@ class InscriptionPaymentsController < ApplicationController
 
   def secret_inscription
     authorize :inscription_payment, :secret_inscription?
-    secret('automatic', 30000, :stripe_inscription_id)
+    secret('automatic', 45000, :stripe_inscription_id)
   end
 
   def new
@@ -16,7 +16,7 @@ class InscriptionPaymentsController < ApplicationController
     authorize :inscription_payment, :create?
     payment = current_user.payment
     if payment.capture_inscription_payment
-      flash.notice = "Votre paiement a bien été effectué"
+      flash.notice = "Votre paiement a bien été effectué."
       redirect_to home_path
     else
       flash.alert = "Une erreur est survenue, néanmoins votre demande de paiement est bien effective. Veuillez contacter notre service d'aide"
