@@ -8,7 +8,7 @@ class StripeAccountsController < ApplicationController
     if @service.create_and_link_account
       # redirect_to "#{@service.stripe_account_link_id_verification.url}"
       flash[:notice] = 'Votre compte est maintenant lié avec Stripe. Vous pourrez prochainement récupérer vos paiements en attente'
-      redirect_to edit_users_path
+      redirect_to host_dashboard_path
     else
       flash.now[:alert] = @service.error_messages
       render :new

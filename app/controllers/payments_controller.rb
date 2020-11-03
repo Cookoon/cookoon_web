@@ -61,7 +61,7 @@ class PaymentsController < ApplicationController
     payment = @reservation.payment
     if @reservation.needs_cookoon_butler_payment?
       if payment.charge
-        flash.notice = "Votre paiement a bien été effectué"
+        flash.notice = "Votre paiement a bien été effectué."
         @reservation.notify_users_after_cookoon_butler_payment
         redirect_to new_reservation_message_path(@reservation)
       else
@@ -71,7 +71,7 @@ class PaymentsController < ApplicationController
     elsif @reservation.needs_menu_payment?
       if payment.capture_menu_payment
         @reservation.notify_users_after_menu_payment
-        flash.notice = "Votre paiement a bien été effectué"
+        flash.notice = "Votre paiement a bien été effectué."
         redirect_to home_path
       else
         flash.alert = "Une erreur est survenue, néanmoins votre demande de paiement est bien effective. Veuillez contacter notre service d'aide"
@@ -79,7 +79,7 @@ class PaymentsController < ApplicationController
       end
     elsif @reservation.needs_services_payment?
       if payment.capture_services_payment
-        flash.notice = "Votre paiement a bien été effectué"
+        flash.notice = "Votre paiement a bien été effectué."
         @reservation.notify_users_after_services_payment
         redirect_to home_path
       else
