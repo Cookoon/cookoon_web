@@ -8,10 +8,10 @@
 
     - if (params[:action] == "new" || params[:action] == "create")
       = f.input :email, label: "Votre adresse e-mail"
-      = f.input :address, input_html: { data: { target: 'google-maps-autocomplete.addressInput google-maps-autocomplete.formattedAddress' } }, label: "Votre adresse"
 
     = f.input :born_on, start_year: Date.today.year - 90, end_year: Date.today.year - 12, selected: @user.born_on || Date.new(1965, 1, 1), label: "Votre date de naissance"
     = f.input :phone_number, label: "Votre numéro de téléphone"
+    = f.input :address, input_html: { data: { target: 'google-maps-autocomplete.addressInput google-maps-autocomplete.formattedAddress' } }, label: "Votre adresse"
 
     - if (params[:action] == "new" || params[:action] == "create")
       = simple_fields_for @job do |ff|
