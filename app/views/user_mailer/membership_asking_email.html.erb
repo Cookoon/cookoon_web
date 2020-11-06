@@ -1,0 +1,4 @@
+<p>Cher(e) <%= @user.first_name.capitalize %>,</p>
+<p>Votre demande d'adhésion a bien été prise en compte. Vous recevrez en cas d'avis favorable un e-mail vous invitant à valider votre inscription, après délibération du comité Cookoon.</p>
+
+<p>Si vous avez une question, n'hésitez pas à contacter votre <%= mail_to 'concierge@cookoon.fr', 'concierge Cookoon', subject: "Demande d'informations", target: :_blank %>.</p>
