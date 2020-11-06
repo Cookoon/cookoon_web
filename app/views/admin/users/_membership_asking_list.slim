@@ -28,7 +28,7 @@
           p.mb-0 = ffff.label :content, disabled: true
           p = user.motivation.content
 
-        = f.input :inscription_payment_required, as: :boolean, label: "Inscription payante : 450 €TTC"
+        = f.input :inscription_payment_required, as: :boolean, label: "Inscription payante : #{humanized_money_with_symbol(User::Payment::INSCRIPTION_PRICE)}TTC"
         = f.input :membership_asking, input_html: { value: false }, as: :hidden
         .text-center
           = f.button :submit, "INVITER", class: 'btn-cookoon btn-cookoon-primary btn-block'
