@@ -2,79 +2,61 @@
   h1.my-4 Espace administrateur
 
   .pb-3
-    .d-flex-default
-      div
-        h3 <i class='co icon-losange small text-primary mr-2'></i> Les utilisateurs
-        p Visualisez les utilisateurs qui ont fait une demande d'adhésion
-      div
-        = link_to 'Les utilisateurs qui souhaitent devenir membre', membership_asking_admin_users_path, class: 'btn-cookoon btn-cookoon-primary'
+    h3 <i class='co icon-losange small text-primary mr-2'></i> Les utilisateurs
+    .d-flex-default.mb-2
+      p.mb-0 Visualisez les utilisateurs qui ont fait une demande d'adhésion
+      = link_to 'Les utilisateurs qui souhaitent devenir membre', membership_asking_admin_users_path, class: 'btn-cookoon btn-cookoon-primary text-center'
 
   hr
 
   .pb-3
-    .d-flex-default
-      div
-        h3 <i class='co icon-losange small text-primary mr-2'></i> Les réservations
-        p Visualisez tous les décors
-      div
-        = link_to 'Les reservations', admin_reservations_path, class: 'btn-cookoon btn-cookoon-primary'
+    h3 <i class='co icon-losange small text-primary mr-2'></i> Les réservations
+    .d-flex-default.mb-2
+      p.mb-0 Visualisez tous les décors
+      = link_to 'Les reservations', admin_reservations_path, class: 'btn-cookoon btn-cookoon-primary text-center'
 
   hr
 
   .pb-3
-    .d-flex-default
-      div
-        h3 <i class='co icon-losange small text-primary mr-2'></i> Les décors
-        p Visualisez tous les décors
-      div
-        = link_to 'Les décors', admin_cookoons_path, class: 'btn-cookoon btn-cookoon-primary'
-    .d-flex-default
-      div
-        p Visualisez / Ajouter / Supprimer des spécifications
-      div
-        = link_to 'Les spécifications', admin_perk_specifications_path, class: 'btn-cookoon btn-cookoon-primary'
+    h3 <i class='co icon-losange small text-primary mr-2'></i> Les décors
+    .d-flex-default.mb-2
+      p.mb-0 Visualisez tous les décors
+      = link_to 'Les décors', admin_cookoons_path, class: 'btn-cookoon btn-cookoon-primary text-center'
+    .d-flex-default.mb-2
+      p.mb-0 Visualisez / Ajouter / Supprimer des spécifications
+      = link_to 'Les spécifications', admin_perk_specifications_path, class: 'btn-cookoon btn-cookoon-primary text-center'
 
   hr
 
   .pb-3
-    .d-flex-default
-      div
-        h3 <i class='co icon-losange small text-primary mr-2'></i> Les Chefs
-        p Visualisez tous les chefs & menus
-      div
-        = link_to 'Les chefs', admin_chefs_path, class: 'btn-cookoon btn-cookoon-primary'
-    .d-flex-default
-      div
-        p Visualisez / Ajouter / Supprimer des spécifications
-      div
-        = link_to 'Les spécifications', admin_chef_perk_specifications_path, class: 'btn-cookoon btn-cookoon-primary'
+    h3 <i class='co icon-losange small text-primary mr-2'></i> Les Chefs
+    .d-flex-default.mb-2
+      p.mb-0 Visualisez tous les chefs & menus
+      = link_to 'Les chefs', admin_chefs_path, class: 'btn-cookoon btn-cookoon-primary text-center'
+    .d-flex-default.mb-2
+      p.mb-0 Visualisez / Ajouter / Supprimer des spécifications
+      = link_to 'Les spécifications', admin_chef_perk_specifications_path, class: 'btn-cookoon btn-cookoon-primary text-center'
 
   hr
 
   .pb-3
-    .d-flex-default
-      div
-        h3 <i class='co icon-losange small text-primary mr-2'></i> Les hôtes
-        p Visualisez les hôtes
-      div
-        = link_to 'Les hôtes', index_hosts_admin_users_path, class: 'btn-cookoon btn-cookoon-primary'
+    h3 <i class='co icon-losange small text-primary mr-2'></i> Les hôtes
+    .d-flex-default.mb-2
+      p.mb-0 Visualisez les hôtes
+      = link_to 'Les hôtes', index_hosts_admin_users_path, class: 'btn-cookoon btn-cookoon-primary text-center'
 
   hr
 
   .pb-3
-    .d-flex-default
-      div
-        h3 <i class='co icon-losange small text-primary mr-2'></i> Les mails
-        p Visualisez les mails envoyés
-      div
-        = link_to 'Les mails', root_url + 'rails/mailers/', class: 'btn-cookoon btn-cookoon-primary', target: :_blank
+    h3 <i class='co icon-losange small text-primary mr-2'></i> Les mails
+    .d-flex-default.mb-2
+      p.mb-0 Visualisez les mails envoyés
+      = link_to 'Les mails', root_url + 'rails/mailers/', class: 'btn-cookoon btn-cookoon-primary text-center', target: :_blank
 
   hr
 
   .pb-3
-    .d-flex-default
-      div
-        h3 <i class='co icon-losange small text-primary mr-2'></i> Les jobs
-        p Visualisez les jobs envoyés
-      div
-        = link_to 'Les jobs', root_url + 'sidekiq/', class: 'btn-cookoon btn-cookoon-primary', target: :_blank
+    h3 <i class='co icon-losange small text-primary mr-2'></i> Les jobs
+    .d-flex-default.mb-2
+      p.mb-0 Visualisez les jobs envoyés
+      = link_to 'Les jobs', root_url + 'sidekiq/', class: 'btn-cookoon btn-cookoon-primary text-center', target: :_blank

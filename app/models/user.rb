@@ -149,6 +149,10 @@ class User < ApplicationRecord
     @payment ||= User::Payment.new(self, options)
   end
 
+  def send_membership_asking_email
+    UserMailer.membership_asking_email(self).deliver_later
+  end
+
   private
 
   def membership_asking?

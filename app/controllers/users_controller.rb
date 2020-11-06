@@ -19,6 +19,7 @@ class UsersController < ApplicationController
     @motivation = @user.build_motivation(motivation_params)
 
     if @user.save
+      @user.send_membership_asking_email
       flash[:notice] = "Votre demande d'adhésion nous a été transmise, nous reviendrons vers vous après avoir étudié votre candidature."
       redirect_to new_user_session_path
     else
