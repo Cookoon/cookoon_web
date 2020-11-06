@@ -69,7 +69,7 @@ class ApplicationController < ActionController::Base
     if (devise_controller_or_new_user_asking? == true || users_invitations_controller_edit_or_update? == true)
       false
     else
-      terms_of_service_acceptance_needed? || inscription_payment_needed?
+      terms_of_service_acceptance_needed? || inscription_payment_needed? || user_photo_needed?
     end
   end
 
@@ -81,6 +81,10 @@ class ApplicationController < ActionController::Base
     true_user.inscription_payment_required?
   end
 
+  def user_photo_needed?
+    !true_user.photo?
+  end
+
   def skip_general_conditions_validation?
     (params[:controller] == "pages" && params[:action] == "general_conditions") || (params[:controller] == "users" && (params[:action] == "edit_general_conditions_acceptance" || params[:action] == "update_general_conditions_acceptance"))
   end
@@ -89,11 +93,20 @@ class ApplicationController < ActionController::Base
     params[:controller] == "inscription_payments" || params[:controller] == "credit_cards"
   end
 
+  def skip_user_photo_adding?
+    params[:controller] == "users" && (params[:action] == "edit" || params[:action] == "update")
+  end
+
   def redirect_user
     if terms_of_service_acceptance_needed?
       redirect_to(edit_general_conditions_acceptance_users_path) unless skip_general_conditions_validation?
     elsif inscription_payment_needed?
       redirect_to(new_inscription_payment_path) unless skip_inscription_payment?
+    elsif user_photo_needed?
+      unless skip_user_photo_adding?
+        flash[:alert] = "Vous devez ajouter une photo de profil."
+        redirect_to(edit_users_path)
+      end
     end
   end
 end

@@ -50,6 +50,7 @@ class User < ApplicationRecord
   validates :job, presence: true, on: :create
   validates :personal_taste, presence: true, on: :create
   validates :motivation, presence: true, on: :create
+  validates :photo, presence: true
 
   after_invitation_accepted :send_welcome_email
   after_save :upsert_mailchimp_subscription, if: :saved_change_to_born_on?
