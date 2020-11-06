@@ -1,4 +1,3 @@
-= console
 .container.mb-5
   h1.my-4 Payer mon inscription
 
@@ -15,7 +14,7 @@
       p En tant que membre adhérant, vous pourrez :
       ul
         li accéder au site membre.cookoon.club et composer les repas ou cocktails de votre choix en sélectionnant lieux et chefs.
-        li bénéficier de 5% de remise sur toutes vos réservations.
+        li bénéficier de 10% de remise sur toutes vos réservations.
         li accéder au service de conciergerie Cookoon pour vos demandes exceptionnelles.
         li recevoir des invitations pour deux personnes à des événements privés.
 
@@ -23,20 +22,20 @@
 
       h3.mb-4 <i class='co icon-losange small text-primary mr-2'></i> Rejoindre Cookoon
 
-      p Notre comité a rendu un avis favorable à votre demande de candidature. Votre adhésion sera validée moyennant le règlement des nos frais annuels d'adhésion de 450 €TTC (300€ TTC à partir de la seconde année).
+      p Notre comité a rendu un avis favorable à votre demande de candidature. Votre adhésion sera validée moyennant le règlement des nos frais annuels d'adhésion de #{humanized_money_with_symbol(User::Payment::INSCRIPTION_PRICE)}TTC.
 
       hr.my-4
 
       h3.mb-4 <i class='co icon-losange small text-primary mr-2'></i> Régler mon inscription
 
-      p Les frais d'inscription s'élèvent à  #{humanized_money_with_symbol(450)}TTC.
+      p Les frais d'inscription s'élèvent à  #{humanized_money_with_symbol(User::Payment::INSCRIPTION_PRICE)}TTC.
 
       h3.mb-4.text-center
         - 3.times do
           <i class='co icon-losange small text-primary mr-2'></i>
 
       - if current_user.credit_cards.present?
-        p.mb-3.font-weight-bold.text-center Régler mon inscription: #{humanized_money_with_symbol(450)}TTC
+        p.mb-3.font-weight-bold.text-center Régler mon inscription: #{humanized_money_with_symbol(User::Payment::INSCRIPTION_PRICE)}TTC
 
       = render 'credit_cards/selection', url_intent_secret: @url_intent_secret_inscription
 

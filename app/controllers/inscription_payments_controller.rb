@@ -2,7 +2,7 @@ class InscriptionPaymentsController < ApplicationController
 
   def secret_inscription
     authorize :inscription_payment, :secret_inscription?
-    secret('automatic', 45000, :stripe_inscription_id)
+    secret('automatic', User::Payment::INSCRIPTION_PRICE_CENTS, :stripe_inscription_id)
   end
 
   def new
