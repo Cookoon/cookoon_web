@@ -2,8 +2,8 @@ class User
   class Payment < ::Payment
     alias_method :user, :payable
 
-    INSCRIPTION_PRICE_CENTS = 45000
-    INSCRIPTION_PRICE = INSCRIPTION_PRICE_CENTS / 100
+    INSCRIPTION_PRICE_CENTS = 45000.freeze
+    INSCRIPTION_PRICE = (INSCRIPTION_PRICE_CENTS / 100).freeze
 
     def capture_inscription_payment
       if errors.empty?
