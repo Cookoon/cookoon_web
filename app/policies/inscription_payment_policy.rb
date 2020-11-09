@@ -10,4 +10,8 @@ class InscriptionPaymentPolicy < Struct.new(:user, :inscription_payment)
   def secret_inscription?
     create?
   end
+
+  def inscription_stripe_intent?
+    create?
+  end
 end
