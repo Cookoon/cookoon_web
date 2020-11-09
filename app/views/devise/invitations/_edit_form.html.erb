@@ -1,12 +1,13 @@
 <%= simple_form_for resource, as: resource_name, url: invitation_path(resource_name), remote: true, authenticity_token: true do |f| %>
   <%= f.hidden_field :invitation_token %>
 
-  <%= f.input :first_name %>
-  <%= f.input :last_name %>
-  <%= f.input :born_on, start_year: Date.today.year - 90, end_year: Date.today.year - 12, selected: { year: 1965, day: 1, month: 1 } %>
-  <%= f.input :phone_number %>
-  <%= f.input :password, required: true %>
-  <%= f.input :password_confirmation, required: true %>
+  <%= f.input :photo, as: :attachinary, input_html: { data: { controller: 'attachinary' } }, label: "Votre photo de profil" %>
+  <%= f.input :first_name, label: "Votre prénom" %>
+  <%= f.input :last_name, label: "Votre nom" %>
+  <%= f.input :born_on, start_year: Date.today.year - 90, end_year: Date.today.year - 12, selected: { year: 1965, day: 1, month: 1 }, label: "Votre date de naissance"  %>
+  <%= f.input :phone_number, label: "Votre numéro de téléphone" %>
+  <%= f.input :password, required: true, label: "Votre mot de passe" %>
+  <%= f.input :password_confirmation, required: true, label: "Confirmation de votre mot de passe" %>
   <%= f.input :terms_of_service, as: :boolean, label: "J'accepte les #{link_to('conditions générales de services', general_conditions_url, target: :_blank, class: 'a_gold')} ce #{@date_time_now.day} #{I18n.t('date.month_names')[@date_time_now.month]} à #{@date_time_now.strftime('%H:%M:%S')}".html_safe %>
   <%= f.input :terms_of_service_at, as: :hidden, readonly: true, input_html: { value: @date_time_now } %>
 
