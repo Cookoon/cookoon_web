@@ -33,22 +33,29 @@
       - if @reservation.needs_cookoon_butler_payment?
         hr.mt-5
         hr.mb-5
-        p.mb-3.font-weight-bold.text-center Régler le décor et le service:  #{humanized_money_with_symbol(@reservation.cookoon_butler_with_tax)}TTC
-        = render 'credit_cards/selection', url_intent_secret: @url_intent_secret_cookoon_butler
-        .text-center
-          div style="font-size:12px; margin-top: 15px"
-            p.mb-2 Votre carte bleue ne sera débitée que si l'Hôte accepte votre demande de location.
-            p Attention : nous procédons tout de même à une demande d'autorisation de paiement sur votre compte.
+        p.mb-3.font-weight-bold.text-center Total décor et service: #{humanized_money_with_symbol(@reservation.cookoon_butler_with_tax)}TTC
+        .py-3
+          .d-flex.justify-content-center = link_to 'Régler le décor et le service', cookoon_butler_stripe_intent_reservation_payments_path(@reservation), class: "btn-cookoon btn-cookoon-primary mr-2 text-center", method: :patch, data: { toggle: "modal", target: "#cookoon-butler-payment-modal" }, id: "btn_cookoon-butler-payment-modal"
+
+        = render 'payments/modal/modal_cookoon_butler'
+
       - if @reservation.needs_menu_payment?
         hr.mt-5
         hr.mb-5
-        p.mb-3.font-weight-bold.text-center Régler le chef et les menus:  #{humanized_money_with_symbol(@reservation.menu_with_tax)}TTC
-        = render 'credit_cards/selection', url_intent_secret: @url_intent_secret_menu
+        p.mb-3.font-weight-bold.text-center Total chef et menus:  #{humanized_money_with_symbol(@reservation.menu_with_tax)}TTC
+        .py-3
+          .d-flex.justify-content-center = link_to 'Régler le le chef et les menus', menu_stripe_intent_reservation_payments_path(@reservation), class: "btn-cookoon btn-cookoon-primary mr-2 text-center", method: :patch, data: { toggle: "modal", target: "#menu-payment-modal" }, id: "btn_cookoon-menu-modal"
+
+        = render 'payments/modal/modal_menu'
+
       - if @reservation.needs_services_payment?
         hr.mt-5
         hr.mb-5
-        p.mb-3.font-weight-bold.text-center Régler les services: #{humanized_money_with_symbol(@reservation.services_with_tax)}TTC
-        = render 'credit_cards/selection', url_intent_secret: @url_intent_secret_services
+        p.mb-3.font-weight-bold.text-center Total services: #{humanized_money_with_symbol(@reservation.services_with_tax)}TTC
+        .py-3
+          .d-flex.justify-content-center = link_to 'Régler les services additionnels', services_stripe_intent_reservation_payments_path(@reservation), class: "btn-cookoon btn-cookoon-primary mr-2 text-center", method: :patch, data: { toggle: "modal", target: "#services-payment-modal" }, id: "btn_services-payment-modal"
+
+        = render 'payments/modal/modal_services'
 
       - if @reservation.business?
         hr.mt-5
