@@ -18,6 +18,7 @@ class Users::InvitationsController < Devise::InvitationsController
 
   def update_resource_params
     params.require(:user).permit(
+      :photo,
       :invitation_token,
       :password,
       :password_confirmation,
