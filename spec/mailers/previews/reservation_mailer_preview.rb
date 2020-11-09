@@ -28,6 +28,10 @@ class ReservationMailerPreview < ActionMailer::Preview
     ReservationMailer.paid_confirmation_services_to_tenant(Reservation.last)
   end
 
+  def quotation_request_to_tenant
+    ReservationMailer.quotation_request_to_tenant(Reservation.last)
+  end
+
   # def cancelled_by_tenant_to_tenant
   #   ReservationMailer.cancelled_by_tenant_to_tenant(Reservation.last)
   # end

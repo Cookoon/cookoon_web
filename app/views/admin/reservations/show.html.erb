@@ -34,6 +34,18 @@
           <%= render 'admin/users/form_one_line', user: @reservation.cookoon.user %>
         </p>
 
+        <% if @reservation.needs_cookoon_butler_validation? %>
+          <h3>Décor</h3>
+          <p>
+            <strong>Décor: </strong>
+            <%= @reservation.cookoon.name %>
+          </p>
+          <div class="mb-4">
+            <%= link_to 'Valider le décor', admin_reservation_validate_cookoon_butler_path(@reservation), :class => "btn-cookoon btn-cookoon-primary", method: :patch %>
+          </div>
+          <p>Devis en attente</p>
+        <% end %>
+
         <h3>Chef et menu</h3>
         <% if @reservation.menu.present? %>
           <p>
@@ -72,6 +84,17 @@
           <% end %>
         <% else %>
           <p>Aucun service n'a été sélectionné</p>
+        <% end %>
+
+        <% if policy([:admin, @reservation]).quotation_sent? %>
+          <div class="d-flex justify-content-center mt-5">
+            <%= link_to 'Le devis a été envoyé', admin_reservation_quotation_sent_path(@reservation), :class => "btn-cookoon btn-cookoon-primary", method: :patch %>
+          </div>
+        <% elsif policy([:admin, @reservation]).quotation_accepted? || policy([:admin, @reservation]).quotation_refused? %>
+          <div class="d-flex justify-content-between mt-5">
+            <%= link_to 'Le devis a été accepté', admin_reservation_quotation_accepted_path(@reservation), :class => "btn-cookoon btn-cookoon-primary mr-2 text-center", method: :patch %>
+            <%= link_to 'Le devis a été refusé', admin_reservation_quotation_refused_path(@reservation), :class => "btn-cookoon btn-cookoon-primary ml-2 text-center", method: :patch %>
+          </div>
         <% end %>
       </div>
     </div>

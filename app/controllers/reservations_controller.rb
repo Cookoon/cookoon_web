@@ -51,10 +51,11 @@ class ReservationsController < ApplicationController
   end
 
   def ask_quotation
-    @reservation.ask_quotation!
-    flash.notice = 'Votre demande de devis est enregistrée notre concierge reviendra vers vous rapidement par email !'
-
-    redirect_to reservations_path
+    if @reservation.ask_quotation!
+      @reservation.notify_users_after_quotation_asking
+      flash.notice = 'Votre demande de devis est enregistrée.'
+      redirect_to reservations_path
+    end
   end
 
   def select_menu

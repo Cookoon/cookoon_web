@@ -37,6 +37,19 @@
           <li class="nav-item">
             <a href="#services_payment_captured" class="nav-link" data-toggle="pill" role="tab">Services payment captured</a>
           </li>
+
+          <li class="nav-item">
+            <a href="#quotation_asked" class="nav-link" data-toggle="pill" role="tab">Quotation asked</a>
+          </li>
+          <li class="nav-item">
+            <a href="#quotation_sent" class="nav-link" data-toggle="pill" role="tab">Quotation sent</a>
+          </li>
+          <li class="nav-item">
+            <a href="#quotation_accepted" class="nav-link" data-toggle="pill" role="tab">Quotation accepted</a>
+          </li>
+          <li class="nav-item">
+            <a href="#quotation_refused" class="nav-link" data-toggle="pill" role="tab">Quotation refused</a>
+          </li>
         </ul>
       </div>
 
@@ -53,6 +66,18 @@
           </div>
           <div class="tab-pane fade" id="services_payment_captured" role="tabpanel">
             <%= render "list", resas: @reservations.services_payment_captured.decorate %>
+          </div>
+          <div class="tab-pane fade" id="quotation_asked" role="tabpanel">
+            <%= render "list", resas: @reservations.quotation_asked.decorate %>
+          </div>
+          <div class="tab-pane fade" id="quotation_sent" role="tabpanel">
+            <%= render "list", resas: @reservations.quotation_proposed.decorate %>
+          </div>
+          <div class="tab-pane fade" id="quotation_accepted" role="tabpanel">
+            <%= render "list", resas: @reservations.quotation_accepted.decorate %>
+          </div>
+          <div class="tab-pane fade" id="quotation_refused" role="tabpanel">
+            <%= render "list", resas: @reservations.quotation_refused.decorate %>
           </div>
         </div>
       </div>
