@@ -1,23 +1,24 @@
-.cookoon-card.p-4.border-primary
-  h4.mb-5 = reservation.cookoon.name
+.cookoon-card.p-4.border-primary.mb-0.h-100.d-flex.flex-column.justify-content-between
+  h4.mb-4.text-center = reservation.cookoon.name
 
-  p.font-weight-bold
-    | <i class='co icon-losange text-primary mr-2'></i>
-    | #{display_date_for(reservation.start_at, without_year: true)}
-    |  - de #{reservation.start_time} à #{reservation.end_time}
-    |  - #{reservation.people_count_text}
+  div
+    p.font-weight-bold
+      | <i class='co icon-losange text-primary mr-2'></i>
+      | #{display_date_for(reservation.start_at, without_year: true)}
+      |  - de #{reservation.start_time} à #{reservation.end_time}
+      |  - #{reservation.people_count_text}
 
-  p Vous recevez : #{humanized_money_with_symbol reservation.host_payout_price}
+    p Vous recevez : #{humanized_money_with_symbol reservation.host_payout_price}
 
-  hr
+    hr
 
-  .d-flex-default
-    p.w-50
-      | Locataire : #{reservation.user.full_name} <br>
-      | <span class='small'>Membre depuis le #{display_date_for(reservation.user.created_at)}</span>
+    .d-flex-default
+      p.w-50
+        | Locataire : #{reservation.user.full_name} <br>
+        | <span class='small'>Membre depuis le #{display_date_for(reservation.user.created_at)}</span>
 
-    - if reservation.charged?
-      div
-        = simple_form_for [:host, reservation] do |f|
-          = f.submit 'Accepter', name: "accept", class: 'btn-cookoon btn-cookoon-primary btn-block'
-          = f.submit 'Refuser', name: "refuse", class: 'btn-cookoon btn-cookoon-primary btn-block'
+      - if reservation.charged?
+        div
+          = simple_form_for [:host, reservation] do |f|
+            = f.submit 'Accepter', name: "accept", class: 'btn-cookoon btn-cookoon-primary btn-block'
+            = f.submit 'Refuser', name: "refuse", class: 'btn-cookoon btn-cookoon-primary btn-block'
