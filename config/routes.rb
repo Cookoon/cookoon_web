@@ -37,6 +37,7 @@ Rails.application.routes.draw do
     collection do
       resources :inscription_payments, only: %i[new create] do
         get 'secret_inscription', on: :collection
+        patch 'inscription_stripe_intent', on: :collection
       end
     end
   end
@@ -68,6 +69,9 @@ Rails.application.routes.draw do
         get 'secret_cookoon_butler', to: 'payments#secret_cookoon_butler'
         get 'secret_menu', to: 'payments#secret_menu'
         get 'secret_services', to: 'payments#secret_services'
+        patch 'cookoon_butler_stripe_intent', to: 'payments#cookoon_butler_stripe_intent'
+        patch 'menu_stripe_intent', to: 'payments#menu_stripe_intent'
+        patch 'services_stripe_intent', to: 'payments#services_stripe_intent'
       end
     end
     resources :menus do
