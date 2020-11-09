@@ -1,0 +1,13 @@
+.modal.fade#cookoon-butler-payment-modal tabindex="-1" role="dialog" aria-labelledby="cookoonButlerPaymentModalLabel"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        h4.modal-title#cookoonButlerPaymentModalLabel Régler le décor et le service: #{humanized_money_with_symbol(@reservation.cookoon_butler_with_tax)}TTC
+        button.close type="button" data-dismiss="modal" aria-label="Close" ×
+
+      .modal-body style='padding: 15px;'
+        = render 'credit_cards/selection', url_intent_secret: @url_intent_secret_cookoon_butler
+        .text-center
+          div style="font-size:12px; margin-top: 15px"
+            p.mb-2 Votre carte bleue ne sera débitée que si l'Hôte accepte votre demande de location.
+            p Attention : nous procédons tout de même à une demande d'autorisation de paiement sur votre compte.

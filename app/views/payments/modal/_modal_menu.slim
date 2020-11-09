@@ -1,0 +1,9 @@
+.modal.fade#menu-payment-modal tabindex="-1" role="dialog" aria-labelledby="menuPaymentModalLabel"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        h4.modal-title#menuPaymentModalLabel Régler le chef et les menus: #{humanized_money_with_symbol(@reservation.menu_with_tax)}TTC
+        button.close type="button" data-dismiss="modal" aria-label="Close" ×
+
+      .modal-body style='padding: 15px;'
+        = render 'credit_cards/selection', url_intent_secret: @url_intent_secret_menu
