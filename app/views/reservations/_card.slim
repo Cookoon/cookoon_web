@@ -25,6 +25,10 @@
         - reservation.services.each do |service|
           ul.mb-0
             li = reservation.services_collection_for_view_with_sentence_if_quoted[service.category.to_sym]
+      - else
+        p.mb-0
+          | <i class='co icon-losange text-primary mr-2'></i>
+          | Vous n'avez choisi aucun service additionnel.
 
   = link_to "VOIR LA RÉSERVATION", new_reservation_payment_path(reservation), class: 'btn-cookoon btn-cookoon-primary mt-2 text-center'
 
