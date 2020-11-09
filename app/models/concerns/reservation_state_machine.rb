@@ -59,11 +59,15 @@ module ReservationStateMachine
       end
 
       event :ask_quotation do
-        transitions from: :services_selected, to: :quotation_asked
+        transitions from: [:menu_selected, :cookoon_selected, :services_selected], to: :quotation_asked
       end
 
-      event :propose_quotation do
+      event :send_quotation do
         transitions from: :quotation_asked, to: :quotation_proposed
+      end
+
+      event :accept_quotation do
+        transitions from: :quotation_proposed, to: :quotation_accepted
       end
 
       event :refuse_quotation do
@@ -72,10 +76,6 @@ module ReservationStateMachine
 
       event :accept do
         transitions from: [:charged], to: :accepted
-      end
-
-      event :accept_quotation do
-        transitions from: [:quotation_proposed], to: :quotation_accepted
       end
 
       event :refuse do
