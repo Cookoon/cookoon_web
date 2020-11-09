@@ -64,6 +64,18 @@ class ReservationPolicy < ApplicationPolicy
     record.user == user && record.needs_services_payment?
   end
 
+  def cookoon_butler_stripe_intent?
+    secret_cookoon_butler?
+  end
+
+  def menu_stripe_intent?
+    secret_menu?
+  end
+
+  def services_stripe_intent?
+    secret_services?
+  end
+
   class Scope < Scope
     def resolve
       scope.for_tenant(user).displayable

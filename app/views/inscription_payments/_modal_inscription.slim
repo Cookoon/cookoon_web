@@ -1,0 +1,9 @@
+.modal.fade#inscription-payment-modal tabindex="-1" role="dialog" aria-labelledby="inscriptionPaymentModalLabel"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        h4.modal-title#inscriptionPaymentModalLabel Régler l'inscription annuelle: #{humanized_money_with_symbol(User::Payment::INSCRIPTION_PRICE)}TTC
+        button.close type="button" data-dismiss="modal" aria-label="Close" ×
+
+      .modal-body style='padding: 15px;'
+        = render 'credit_cards/selection', url_intent_secret: @url_intent_secret_inscription

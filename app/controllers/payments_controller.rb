@@ -14,6 +14,18 @@ class PaymentsController < ApplicationController
   #   proceed_payment(payment_services, :stripe_services_id)
   # end
 
+  def cookoon_butler_stripe_intent
+    create_or_retrieve_and_update_stripe_intent('manual', @reservation.object.cookoon_butler_with_tax_cents, :stripe_charge_id)
+  end
+
+  def menu_stripe_intent
+    create_or_retrieve_and_update_stripe_intent('automatic', @reservation.object.menu_with_tax_cents, :stripe_menu_id)
+  end
+
+  def services_stripe_intent
+    create_or_retrieve_and_update_stripe_intent('automatic', @reservation.object.services_with_tax_cents, :stripe_services_id)
+  end
+
   def secret_cookoon_butler
     secret('manual', @reservation.object.cookoon_butler_with_tax_cents, :stripe_charge_id)
   end
@@ -54,9 +66,6 @@ class PaymentsController < ApplicationController
   end
 
   def create
-    # TO DO ALICE : notify user after payment by mail
-    # @reservation.notify_users_after_payment
-
     # payment = Reservation::Payment.new(@reservation.object)
     payment = @reservation.payment
     if @reservation.needs_cookoon_butler_payment?
@@ -136,5 +145,10 @@ class PaymentsController < ApplicationController
       flash.alert = payment.displayable_errors
       redirect_to new_reservation_payment_path(payment.payable)
     end
+  end
+
+  def create_or_retrieve_and_update_stripe_intent(capture_method_value, charge_amount_cents_value, stripe_intent)
+    payment = Reservation::Payment.new(@reservation.object, options = { capture_method: capture_method_value, charge_amount_cents: charge_amount_cents_value })
+    payment.create_or_retrieve_and_update(stripe_intent)
   end
 end

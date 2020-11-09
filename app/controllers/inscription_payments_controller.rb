@@ -1,5 +1,10 @@
 class InscriptionPaymentsController < ApplicationController
 
+  def inscription_stripe_intent
+    authorize :inscription_payment, :inscription_stripe_intent?
+    create_or_retrieve_and_update_stripe_intent('automatic', User::Payment::INSCRIPTION_PRICE_CENTS, :stripe_inscription_id)
+  end
+
   def secret_inscription
     authorize :inscription_payment, :secret_inscription?
     secret('automatic', User::Payment::INSCRIPTION_PRICE_CENTS, :stripe_inscription_id)
@@ -38,5 +43,10 @@ class InscriptionPaymentsController < ApplicationController
       flash.alert = payment.displayable_errors
       redirect_to secret_inscription_inscription_payments_path
     end
+  end
+
+  def create_or_retrieve_and_update_stripe_intent(capture_method_value, charge_amount_cents_value, stripe_intent)
+    payment = User::Payment.new(current_user, options = { capture_method: capture_method_value, charge_amount_cents: charge_amount_cents_value })
+    payment.create_or_retrieve_and_update(stripe_intent)
   end
 end
