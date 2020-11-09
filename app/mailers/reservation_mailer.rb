@@ -60,6 +60,14 @@ class ReservationMailer < ApplicationMailer
     mail(to: @tenant.full_email, subject: "Cookoon: votre paiement pour les services additionnels dans le cadre de votre réservation pour \"#{@cookoon.name}\" est confirmé")
   end
 
+  def quotation_request_to_tenant(reservation)
+    @reservation = reservation
+    @tenant = @reservation.user
+    @cookoon = @reservation.cookoon
+    @host = @cookoon.user
+    mail(to: @tenant.full_email, subject: "Cookoon: votre demande de devis pour \"#{@cookoon.name}\"")
+  end
+
   # def refused_to_tenant(reservation)
   #   @reservation = reservation
   #   @tenant = @reservation.user
