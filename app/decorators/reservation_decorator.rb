@@ -35,7 +35,7 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def default_people_count
-    10
+    8
   end
 
   def start_time
