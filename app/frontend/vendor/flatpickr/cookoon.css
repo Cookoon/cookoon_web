@@ -513,6 +513,7 @@ span.flatpickr-weekday {
 .flatpickr-day.disabled:hover {
   cursor: not-allowed;
   color: rgba(0, 66, 84, 0.1);
+  text-decoration-line: line-through;
 }
 .flatpickr-day.week.selected {
   border-radius: 0;
