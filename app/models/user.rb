@@ -33,6 +33,7 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :job
   accepts_nested_attributes_for :personal_taste
   accepts_nested_attributes_for :motivation
+  has_one :amex_code
 
   has_attachment :photo
 
@@ -44,19 +45,23 @@ class User < ApplicationRecord
   validates :phone_number,
             presence: true,
             format: { with: PHONE_REGEXP }
-  validates :born_on, presence: true, if: :invited_to_sign_up?
-  validates :terms_of_service, acceptance: { message: 'Vous devez accepter les conditions générales de services pour continuer' }
-  validates :address, presence: true, on: :create
-  validates :job, presence: true, on: :create
-  validates :personal_taste, presence: true, on: :create
-  validates :motivation, presence: true, on: :create
-  validates :photo, presence: true
+  validates :born_on, presence: true, if: :invited_to_sign_up?, unless: :amex?
+  validates :terms_of_service, acceptance: { message: 'Vous devez accepter les conditions générales de services pour continuer' }, unless: :amex?
+  validates :address, presence: true, on: :create, unless: :amex?
+  validates :job, presence: true, on: :create, unless: :amex?
+  validates :personal_taste, presence: true, on: :create, unless: :amex?
+  validates :motivation, presence: true, on: :create, unless: :amex?
+  validates :photo, presence: true, unless: :amex?
 
   after_invitation_accepted :send_welcome_email
   after_save :upsert_mailchimp_subscription, if: :saved_change_to_born_on?
   before_update :report_to_slack, if: :stripe_account_id_changed?
 
   alias_attribute :customerable_label, :email
+
+  def amex?
+    amex
+  end
 
   def full_name
     if first_name.present? && last_name.present?
