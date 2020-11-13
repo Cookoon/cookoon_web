@@ -3,6 +3,7 @@ Reservation.destroy_all
 Perk.destroy_all
 Cookoon.destroy_all
 PerkSpecification.destroy_all
+AmexCode.destroy_all
 User.destroy_all
 Dish.destroy_all
 Menu.destroy_all
@@ -50,6 +51,10 @@ users_attributes.each do |user_attribute|
   user.save
 end
 puts "Users done"
+
+puts "Seeding Amex Codes"
+  10.times { AmexCode.create!(code: SecureRandom.base64(12)) }
+puts "Amex Codes done"
 
 cookoons_attributes = [
   {
