@@ -4,8 +4,8 @@ module Host
 
     def index
       reservations = policy_scope([:host, Reservation]).includes(:cookoon, :user)
-      @active_reservations = ReservationDecorator.decorate_collection(reservations.active)
-      @inactive_reservations = ReservationDecorator.decorate_collection(reservations.inactive)
+      @active_reservations = ReservationDecorator.decorate_collection(reservations.engaged)
+      @inactive_reservations = ReservationDecorator.decorate_collection(reservations.passed)
     end
 
     def update
