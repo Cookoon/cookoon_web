@@ -8,11 +8,11 @@ class Reservation < ApplicationRecord
   scope :displayable, -> { where.not(aasm_state: :initial).order(start_at: :asc) }
   scope :for_tenant, ->(user) { where(user: user) }
   scope :for_host, ->(user) { where(cookoon: user.cookoons) }
-  scope :active, -> { charged.or(accepted).or(ongoing).or(quotation_asked).or(quotation_proposed).or(quotation_accepted) }
+  # scope :active, -> { charged.or(accepted).or(ongoing).or(quotation_asked).or(quotation_proposed).or(quotation_accepted) }
   # scope :engaged, -> { accepted.or(ongoing) }
   scope :engaged, -> { charged.or(accepted).or(menu_payment_captured).or(services_payment_captured).or(quotation_asked).or(quotation_proposed).or(quotation_accepted).or(ongoing) }
   # scope :inactive, -> { refused.or(passed) }
-  scope :inactive, -> { refused.or(quotation_refused).or(passed).or(cancelled)}
+  scope :inactive, -> { refused.or(quotation_refused).or(passed).or(cancelled).or(dead)}
   scope :created_in_day_range_around, ->(datetime) { where created_at: day_range(datetime) }
   scope :in_hour_range_around, ->(datetime) { where start_at: hour_range(datetime) }
   scope :finished_in_day_range_around, ->(datetime) { joins(:inventory).merge(Inventory.checked_out_in_day_range_around(datetime)) }

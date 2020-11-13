@@ -441,6 +441,9 @@ span.flatpickr-weekday {
   background: transparent;
   border-color: var(--primary);
 }
+.flatpickr-day.flatpickr-disabled:hover {
+  border-color: transparent;;
+}
 .flatpickr-day.today {
   border-color: #fff;
 }
@@ -500,10 +503,11 @@ span.flatpickr-weekday {
 .flatpickr-day.disabled,
 .flatpickr-day.disabled:hover,
 .flatpickr-day.prevMonthDay,
-.flatpickr-day.nextMonthDay,
+/*.flatpickr-day.nextMonthDay,*/
 .flatpickr-day.notAllowed,
 .flatpickr-day.notAllowed.prevMonthDay,
-.flatpickr-day.notAllowed.nextMonthDay {
+.flatpickr-day.notAllowed.nextMonthDay,
+.flatpickr-disabled {
   color: rgba(0, 66, 84, 0.3);
   background: transparent;
   border-color: transparent;

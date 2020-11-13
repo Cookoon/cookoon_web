@@ -26,7 +26,12 @@ export default class extends Controller {
   connect() {
     flatpickr(this.dateSelectionTarget, {
       dateFormat: 'Y-m-dTH:i',
+      // disable: ["2020-11-30", "2020-12-09"],
+      disable: JSON.parse(this.dateSelectionTarget.getAttribute("data-dates-with-no-cookoon-available")),
       minDate: 'today',
+      maxDate: this.dateSelectionTarget.getAttribute("data-end-date-available"),
+      // not working if day is sunday
+      // maxDate: (new Date().fp_incr(5*7)).fp_incr(-((new Date().fp_incr(5*7)).getDay())),
       disableMobile: "true",
       onValueUpdate: (selectedDates, dateStr) => {
         this.selectDate(selectedDates, dateStr)
