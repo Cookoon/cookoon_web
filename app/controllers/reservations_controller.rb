@@ -6,8 +6,8 @@ class ReservationsController < ApplicationController
   def index
     # reservations = policy_scope(Reservation).includes(cookoon: :user)
     reservations = policy_scope(Reservation).includes(:cookoon)
-    @active_reservations = ReservationDecorator.decorate_collection(reservations.includes(:menu, :services).active)
-    @inactive_reservations = ReservationDecorator.decorate_collection(reservations.includes(:menu, :services).inactive)
+    @active_reservations = ReservationDecorator.decorate_collection(reservations.includes(:menu, :services).engaged)
+    @inactive_reservations = ReservationDecorator.decorate_collection(reservations.includes(:menu, :services).passed)
   end
 
   def show
