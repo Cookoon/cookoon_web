@@ -16,6 +16,7 @@ class Cookoon < ApplicationRecord
   scope :available_for, ->(user) { where.not(user: user) }
   scope :available_in, ->(range) { without_reservation_in(range).without_availability_in(range) }
   # scope :without_reservation_in, ->(range) { where.not(id: Reservation.engaged.overlapping(range).pluck(:cookoon_id).uniq) }
+  scope :available_in_day, -> (day) { approved.displayable_on_index.available_in((day.in_time_zone.beginning_of_day + 2.hours)..(day.in_time_zone.end_of_day)) }
   scope :without_reservation_in, ->(range) { where.not(id: Reservation.engaged.map { |reservation| { cookoon_id: reservation.cookoon_id, start_at_for_chef_and_service: reservation.start_at_for_chef_and_service, end_at_for_chef_and_service: reservation.end_at_for_chef_and_service } }.select { |reservation| (reservation[:start_at_for_chef_and_service] >= range.first && reservation[:start_at_for_chef_and_service] <= range.last) || (reservation[:end_at_for_chef_and_service] >= range.first && reservation[:end_at_for_chef_and_service] <= range.last) }.pluck(:cookoon_id).uniq) }
   scope :without_availability_in, ->(range) { where.not(id: Availability.unavailable.overlapping(range).pluck(:cookoon_id).uniq) }
   scope :created_in_day_range_around, ->(date_time) { where created_at: day_range(date_time) }
