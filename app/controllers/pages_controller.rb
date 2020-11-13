@@ -4,6 +4,11 @@ class PagesController < ApplicationController
 
   def home
     @reservation = Reservation.new.decorate
+    @end_date_available = ((Time.zone.today + 5.weeks).beginning_of_week) - 1.days
+    @dates_with_no_cookoon_available = []
+    (Date.today..(Date.today + (7 * 5))).to_a.each do |date|
+      @dates_with_no_cookoon_available << date.strftime("%Y-%m-%d") if Cookoon.available_in_day(date).blank?
+    end
   end
 
   def support; end
