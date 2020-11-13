@@ -442,7 +442,7 @@ span.flatpickr-weekday {
   border-color: var(--primary);
 }
 .flatpickr-day.flatpickr-disabled:hover {
-  border-color: transparent;;
+  border-color: transparent;
 }
 .flatpickr-day.today {
   border-color: #fff;
@@ -513,9 +513,9 @@ span.flatpickr-weekday {
   border-color: transparent;
   cursor: default;
 }
-.flatpickr-day.disabled,
-.flatpickr-day.disabled:hover {
-  cursor: not-allowed;
+.flatpickr-day.flatpickr-disabled,
+.flatpickr-day.flatpickr-disabled:hover {
+  cursor: default;
   color: rgba(0, 66, 84, 0.1);
   text-decoration-line: line-through;
 }
