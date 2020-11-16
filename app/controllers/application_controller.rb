@@ -104,7 +104,7 @@ class ApplicationController < ActionController::Base
       redirect_to(new_inscription_payment_path) unless skip_inscription_payment?
     elsif user_photo_needed?
       unless skip_user_photo_adding?
-        flash[:alert] = "Vous devez ajouter une photo de profil."
+        flash[:alert] = "Vous devez ajouter une photo."
         redirect_to(edit_users_path)
       end
     end
