@@ -12,12 +12,15 @@
 
     = f.input :born_on, start_year: Date.today.year - 90, end_year: Date.today.year - 12, selected: @user.born_on || Date.new(1965, 1, 1), label: "Votre date de naissance"
     = f.input :phone_number, label: "Votre numéro de téléphone"
-    = f.input :address, input_html: { data: { target: 'google-maps-autocomplete.addressInput google-maps-autocomplete.formattedAddress' } }, label: "Votre adresse"
+    - if (params[:action] == "new" || params[:action] == "create")
+      = f.input :address, input_html: { data: { target: 'google-maps-autocomplete.addressInput google-maps-autocomplete.formattedAddress' } }, label: "Votre adresse", required: true
+    - else
+      = f.input :address, input_html: { data: { target: 'google-maps-autocomplete.addressInput google-maps-autocomplete.formattedAddress' } }, label: "Votre adresse"
 
     - if (params[:action] == "new" || params[:action] == "create")
       = simple_fields_for @job do |ff|
-        = ff.input :job_title, label: "Votre poste actuel"
-        = ff.input :company, label: "Votre société actuelle"
+        = ff.input :job_title, label: "Votre poste"
+        = ff.input :company, label: "L'entreprise dans laquelle vous travaillez"
         = ff.input :linkedin_profile, label: "Votre profil Linkedin"
 
       h3.mt-4.mb-3.text-center
@@ -44,7 +47,7 @@
 
   - if (params[:action] == "new" || params[:action] == "create")
     .form-actions.mt-5
+      .text-center = f.submit class: 'btn-cookoon btn-cookoon-primary', style: "white-space: normal"
   - else
     .form-actions.my-5
-
-  .text-center = f.submit class: 'btn-cookoon btn-cookoon-primary', style: "white-space: normal"
+      .text-center = f.submit class: 'btn-cookoon btn-cookoon-primary', style: "white-space: normal"
