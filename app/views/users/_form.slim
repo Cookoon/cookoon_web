@@ -1,8 +1,9 @@
 = simple_form_for @user, url: users_path, default: { label: false }, data: { controller: 'google-maps-autocomplete' }, remote: true do |f|
   .form-inputs
-    h2 Vous connaître...
-    br
-    = f.input :photo, as: :attachinary, input_html: { data: { controller: 'attachinary' } }, label: "Votre photo de profil"
+    - if (params[:action] == "new" || params[:action] == "create")
+      h4 Vous connaître...
+      br
+    = f.input :photo, as: :attachinary, input_html: { data: { controller: 'attachinary' } }, label: "Votre photo", required: true
     = f.input :first_name, label: "Votre prénom"
     = f.input :last_name, label: "Votre nom"
 
@@ -19,8 +20,11 @@
         = ff.input :company, label: "Votre société actuelle"
         = ff.input :linkedin_profile, label: "Votre profil Linkedin"
 
-      br
-      h2 Connaître vos goûts...
+      h3.mt-4.mb-3.text-center
+        - 3.times do
+          <i class='co icon-losange small text-primary mr-2'></i>
+
+      h4 Connaître vos goûts...
       br
       = simple_fields_for @personal_taste do |fff|
         = fff.input :favorite_champagne, label: "Votre champagne préféré"
@@ -29,11 +33,18 @@
         = fff.input :favorite_restaurant_two, label: "Votre second restaurant préféré"
         = fff.input :favorite_restaurant_three, label: "Votre troisième restaurant préféré"
 
-      br
-      h2 Pourquoi rejoindre Cookoon ?
+      h3.mt-4.mb-3.text-center
+        - 3.times do
+          <i class='co icon-losange small text-primary mr-2'></i>
+
+      h4 Pourquoi rejoindre Cookoon ?
       br
       = simple_fields_for @motivation do |ffff|
         = ffff.input :content, label: false
 
-  .form-actions.mb-4
-    .text-center = f.submit class: 'btn-cookoon btn-cookoon-primary px-5'
+  - if (params[:action] == "new" || params[:action] == "create")
+    .form-actions.mt-5
+  - else
+    .form-actions.my-5
+
+  .text-center = f.submit class: 'btn-cookoon btn-cookoon-primary', style: "white-space: normal"
