@@ -30,11 +30,8 @@
       h4 Connaître vos goûts...
       br
       = simple_fields_for @personal_taste do |fff|
-        = fff.input :favorite_champagne, label: "Votre champagne préféré"
-        = fff.input :favorite_wine, label: "Votre vin préféré"
-        = fff.input :favorite_restaurant_one, label: "Votre premier restaurant préféré"
-        = fff.input :favorite_restaurant_two, label: "Votre second restaurant préféré"
-        = fff.input :favorite_restaurant_three, label: "Votre troisième restaurant préféré"
+        = fff.input :favorite_wines, label: "Vos vins préférés"
+        = fff.input :favorite_restaurants, label: "Vos trois restaurants favoris"
 
       h3.mt-4.mb-3.text-center
         - 3.times do

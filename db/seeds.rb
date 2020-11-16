@@ -46,7 +46,7 @@ puts "Seeding Users"
 users_attributes.each do |user_attribute|
   user = User.new(user_attribute)
   user.build_job(job_title: "Développeur", company: "Cookoon", linkedin_profile: "https://www.linkedin.com/in/alice-fabre-676211182/")
-  user.build_personal_taste(favorite_champagne: "Roederer Brut Premier", favorite_wine: "Côte Rôtie, Stéphane Ogier", favorite_restaurant_one: "Guy Savoy", favorite_restaurant_two: "Michel Sarran", favorite_restaurant_three: "Frédéric Simonin")
+  user.build_personal_taste(favorite_wines: "Roederer Brut Premier / Côte Rôtie, Stéphane Ogier", favorite_restaurants: "Guy Savoy, Michel Sarran, Frédéric Simonin")
   user.build_motivation(content: "Je suis un épicurien.")
   user.save
 end

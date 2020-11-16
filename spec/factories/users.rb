@@ -30,7 +30,7 @@ FactoryBot.define do
 
     trait :with_personal_taste do
       after(:build) do |user|
-        user.build_personal_taste(user: user, favorite_champagne: "Roederer Brut Premier", favorite_wine: "Côte Rôtie, Stéphane Ogier", favorite_restaurant_one: "Guy Savoy", favorite_restaurant_two: "Michel Sarran", favorite_restaurant_three: "Frédéric Simonin")
+        user.build_personal_taste(user: user, favorite_wines: "Roederer Brut Premier / Côte Rôtie, Stéphane Ogier", favorite_restaurants: "Guy Savoy, Michel Sarran, Frédéric Simonin")
       end
     end
 

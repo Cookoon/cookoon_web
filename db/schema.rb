@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_12_194341) do
+ActiveRecord::Schema.define(version: 2020_11_16_181514) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -199,14 +199,11 @@ ActiveRecord::Schema.define(version: 2020_11_12_194341) do
   end
 
   create_table "personal_tastes", force: :cascade do |t|
-    t.string "favorite_champagne"
-    t.string "favorite_wine"
-    t.string "favorite_restaurant_one"
-    t.string "favorite_restaurant_two"
-    t.string "favorite_restaurant_three"
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "favorite_restaurants"
+    t.string "favorite_wines"
     t.index ["user_id"], name: "index_personal_tastes_on_user_id"
   end
 

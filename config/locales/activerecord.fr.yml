@@ -52,11 +52,8 @@ fr:
       motivation:
         content: Pourquoi rejoindre Cookoon ?
       personal_taste:
-        favorite_champagne: Champagne préféré
-        favorite_wine: Vin préféré
-        favorite_restaurant_one: Premier restaurant préféré
-        favorite_restaurant_two: Second restaurant préféré
-        favorite_restaurant_three: Troisième restaurant préféré
+        favorite_wines: Vins préférés
+        favorite_restaurants: Restaurants préférés
 
     errors:
       models:

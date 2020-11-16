@@ -82,7 +82,7 @@ class UsersController < ApplicationController
   end
 
   def personal_taste_params
-    params.require(:personal_taste).permit(:favorite_champagne, :favorite_wine, :favorite_restaurant_one, :favorite_restaurant_two, :favorite_restaurant_three)
+    params.require(:personal_taste).permit(:favorite_wines, :favorite_restaurants)
   end
 
   def motivation_params
