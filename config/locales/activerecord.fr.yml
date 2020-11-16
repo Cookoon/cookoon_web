@@ -46,8 +46,8 @@ fr:
         meal_type: Type de repas (assis ou debout)
         unit_price: Prix HT sans marge
       job:
-        job_title: Poste actuel
-        company: Société
+        job_title: Poste
+        company: Entreprise
         linkedin_profile: Profil Linkedin
       motivation:
         content: Pourquoi rejoindre Cookoon ?
