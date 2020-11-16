@@ -17,11 +17,8 @@
 
         h5.mt-3 Goûts
         = simple_fields_for user.personal_taste do |fff|
-          p.mb-0 #{fff.label :favorite_champagne, disabled: true} : #{user.personal_taste.favorite_champagne}
-          p.mb-0 #{fff.label :favorite_wine, disabled: true} : #{user.personal_taste.favorite_wine}
-          p.mb-0 #{fff.label :favorite_restaurant_one, disabled: true} : #{user.personal_taste.favorite_restaurant_one}
-          p.mb-0 #{fff.label :favorite_restaurant_two, disabled: true} : #{user.personal_taste.favorite_restaurant_two}
-          p.mb-0 #{fff.label :favorite_restaurant_three, disabled: true} : #{user.personal_taste.favorite_restaurant_three}
+          p.mb-0 #{fff.label :favorite_wines, disabled: true} : #{user.personal_taste.favorite_wines}
+          p.mb-0 #{fff.label :favorite_restaurants, disabled: true} : #{user.personal_taste.favorite_restaurants}
 
         h5.mt-3 Motivation
         = simple_fields_for user.motivation do |ffff|

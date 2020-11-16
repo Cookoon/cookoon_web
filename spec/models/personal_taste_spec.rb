@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe PersonalTaste, type: :model do
-  it 'is valid with a user, a favorite_champagne, a favorite_wine, a favorite_restaurant_one, a favorite_restaurant_two, a favorite_restaurant_three' do
+  it 'is valid with a user, favorite_wines, favorite_restaurants'
       user = build(:user, :with_job, :with_motivation)
       personal_taste = build(:personal_taste, user: user)
       personal_taste.valid?
@@ -14,38 +14,17 @@ RSpec.describe PersonalTaste, type: :model do
       expect(personal_taste.errors[:user]).to include('doit exister')
     end
 
-    it 'is invalid without a favorite_champagne' do
+    it 'is invalid without favorite_wines' do
       user = build(:user, :with_job, :with_motivation)
-      personal_taste = build(:personal_taste, user: user, favorite_champagne: nil)
+      personal_taste = build(:personal_taste, user: user, favorite_wines: nil)
       personal_taste.valid?
-      expect(personal_taste.errors[:favorite_champagne]).to include('doit être rempli(e)')
+      expect(personal_taste.errors[:favorite_wines]).to include('doit être rempli(e)')
     end
 
-    it 'is invalid without a favorite_wine' do
+    it 'is invalid without a favorite_restaurants' do
       user = build(:user, :with_job, :with_motivation)
-      personal_taste = build(:personal_taste, user: user, favorite_wine: nil)
+      personal_taste = build(:personal_taste, user: user, favorite_restaurants: nil)
       personal_taste.valid?
-      expect(personal_taste.errors[:favorite_wine]).to include('doit être rempli(e)')
-    end
-
-    it 'is invalid without a favorite_restaurant_one' do
-      user = build(:user, :with_job, :with_motivation)
-      personal_taste = build(:personal_taste, user: user, favorite_restaurant_one: nil)
-      personal_taste.valid?
-      expect(personal_taste.errors[:favorite_restaurant_one]).to include('doit être rempli(e)')
-    end
-
-    it 'is invalid without a favorite_restaurant_two' do
-      user = build(:user, :with_job, :with_motivation)
-      personal_taste = build(:personal_taste, user: user, favorite_restaurant_two: nil)
-      personal_taste.valid?
-      expect(personal_taste.errors[:favorite_restaurant_two]).to include('doit être rempli(e)')
-    end
-
-    it 'is invalid without a favorite_restaurant_three' do
-      user = build(:user, :with_job, :with_motivation)
-      personal_taste = build(:personal_taste, user: user, favorite_restaurant_three: nil)
-      personal_taste.valid?
-      expect(personal_taste.errors[:favorite_restaurant_three]).to include('doit être rempli(e)')
+      expect(personal_taste.errors[:favorite_restaurants]).to include('doit être rempli(e)')
     end
 end
