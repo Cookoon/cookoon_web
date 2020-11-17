@@ -8,7 +8,7 @@
 
 .chef_four_elements_block.pb-5
   .first_element
-    .first-letter-bigger = chef.description
+    .first-letter-bigger = simple_format(chef.description)
     - if @chef.references.present?
       .text-center.my-2
         h3.mb-4.text-center.mb-n2
