@@ -502,7 +502,7 @@ span.flatpickr-weekday {
 }
 .flatpickr-day.disabled,
 .flatpickr-day.disabled:hover,
-.flatpickr-day.prevMonthDay,
+/*.flatpickr-day.prevMonthDay,*/
 /*.flatpickr-day.nextMonthDay,*/
 .flatpickr-day.notAllowed,
 .flatpickr-day.notAllowed.prevMonthDay,
@@ -517,7 +517,7 @@ span.flatpickr-weekday {
 .flatpickr-day.flatpickr-disabled:hover {
   cursor: default;
   color: rgba(0, 66, 84, 0.1);
-  text-decoration-line: line-through;
+  /*text-decoration-line: line-through;*/
 }
 .flatpickr-day.week.selected {
   border-radius: 0;
