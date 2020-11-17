@@ -40,7 +40,7 @@
       h4 Pourquoi rejoindre Cookoon ?
       br
       = simple_fields_for @motivation do |ffff|
-        = ffff.input :content, label: false
+        = ffff.input :content, label: false, placeholder: "Dites-en nous plus sur vous!"
 
   - if (params[:action] == "new" || params[:action] == "create")
     .form-actions.mt-5
