@@ -144,6 +144,7 @@ class Reservation < ApplicationRecord
 
   def notify_users_after_quotation_asking
     ReservationMailer.quotation_request_to_tenant(self).deliver_later
+    ReservationMailer.quotation_request_to_host(self).deliver_later
   end
 
   def admin_close
