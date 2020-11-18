@@ -1,0 +1,8 @@
+.footer {
+  &-link {
+    text-align: start;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
