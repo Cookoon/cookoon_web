@@ -1,19 +1,20 @@
 footer.text-white
   .bg-dark
-    .container.pt-5.pb-3.text-center
-      p.m-0 <i class="fas fa-question"></i> À propos
-      a href='mailto:gregory@cookoon.fr'
-        p.m-0 <i class='co icon-mail'></i> Relations Presse
-      p.m-0 <i class='co icon-payment'></i> Paiement sécurisé
-
-      = link_to general_conditions_path do
-        p.m-0
-          i.co.icon-cookoon-logo
-          | &nbsp;
-          | Conditions générales
-
-      /a href='general_conditions'
-      /  p.m-0 <i class='co icon-cookoon-logo'></i> Condition générales
-
-      .pt-4
-        p <i class='co icon-cookoon-logo text-primary mr-2'></i> COOKOON  -  Copyright 2019 - Mentions légales
+    .container.py-5.text-center
+      .d-flex-default.flex-column.pb-4
+        = image_tag "cookoon-logo-white.png", style: "width: 200px"
+      .d-flex-default.flex-column
+        .d-flex.flex-row.pb-2
+          i.fas.fa-question.pr-2
+          .footer-link = link_to 'Qui sommes-nous?', 'https://cookoon.club/la_societe/', target: :_blank
+        .d-flex.flex-row.pb-2
+          i.co.icon-mail.pr-2
+          .footer-link = mail_to 'concierge@cookoon.fr', 'Nous contacter', target: :_blank
+        .d-flex.flex-row.pb-2
+          i.co.icon-cookoon-logo.pr-2
+          .footer-link = link_to 'Conditions générales de services', general_conditions_path, target: :_blank
+        .d-flex.flex-row.pb-2
+          i.fas.fa-user-md.pr-2
+          .footer-link = link_to 'Guide des bonnes pratiques sanitaires', 'https://cookoon.club/guide-bonnes-pratiques-sanitaires/', target: :_blank
+        //.d-flex-default.flex-column.mt-4
+          p <i class='co icon-cookoon-logo text-primary mr-2'></i> COOKOON  -  Copyright 2019 - Mentions légales
