@@ -2,6 +2,8 @@ class ReservationsController < ApplicationController
   before_action :find_reservation, only: %i[update show ask_quotation reset_menu select_services cooking_by_user]
   before_action :find_reservation_with_reservation_id, only: %i[select_cookoon select_menu]
   before_action :find_cookoon, only: %i[select_cookoon]
+  before_action :set_end_date_available, only: :new
+  before_action :set_dates_with_no_cookoon_available_for_current_user, only: :new
 
   def index
     # reservations = policy_scope(Reservation).includes(cookoon: :user)
@@ -14,7 +16,7 @@ class ReservationsController < ApplicationController
   end
 
   def new
-    @reservation = Reservation.new(category: params[:category]).decorate
+    @reservation = Reservation.new(category: params[:category], user: current_user, end_date_available: @end_date_available, dates_with_no_cookoon_available_for_current_user: @dates_with_no_cookoon_available_for_current_user).decorate
     authorize @reservation
   end
 
@@ -103,5 +105,16 @@ class ReservationsController < ApplicationController
 
   def reservation_params
     params.require(:reservation).permit(:category, :people_count, :type_name, :start_at)
+  end
+
+  def set_end_date_available
+    @end_date_available = ((Date.today + Availability::SETTABLE_WEEKS_AHEAD.weeks).beginning_of_week) - 1.days
+  end
+
+  def set_dates_with_no_cookoon_available_for_current_user
+    @dates_with_no_cookoon_available_for_current_user = Array.new
+    (Date.today..@end_date_available).to_a.each do |date|
+      @dates_with_no_cookoon_available_for_current_user << date.strftime("%Y-%m-%d") if Cookoon.available_for(current_user).available_in_day(date).blank?
+    end
   end
 end
