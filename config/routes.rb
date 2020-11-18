@@ -104,6 +104,11 @@ Rails.application.routes.draw do
     end
   end
 
+  # -------- AMEX NAMESPACE ---------
+  namespace :un_chef_pour_vous do
+    root 'pages#home'
+  end
+
   # -------- ADMIN ROUTES ---------
   # Sidekiq Web UI, only for admins
   authenticate :user, ->(user) { user.admin } do

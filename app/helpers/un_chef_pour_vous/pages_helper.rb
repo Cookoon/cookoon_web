@@ -1,0 +1,2 @@
+module UnChefPourVous::PagesHelper
+end

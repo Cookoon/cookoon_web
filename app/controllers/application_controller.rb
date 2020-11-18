@@ -10,6 +10,7 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!
   before_action :set_device
+  before_action :set_namespace
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
@@ -53,6 +54,13 @@ class ApplicationController < ActionController::Base
               end
   end
 
+  def set_namespace
+    @namespace = params[:controller].split("/").first
+    # controller.class.parents.first == UnChefPourVous
+    # controller_path.start_with? 'un_chef_pour_vous'
+    # params[:controller].split("/").first == "un_chef_pour_vous"
+  end
+
   def devise_controller_or_new_user_asking?
     devise_controller? || (params[:controller] == "users" && (params[:action] == "new" || params[:action] == "create"))
   end
@@ -66,7 +74,7 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_user_needed?
-    if (devise_controller_or_new_user_asking? == true || users_invitations_controller_edit_or_update? == true)
+    if (devise_controller_or_new_user_asking? == true || users_invitations_controller_edit_or_update? == true || @namespace == "un_chef_pour_vous")
       false
     else
       terms_of_service_acceptance_needed? || inscription_payment_needed? || user_photo_needed?
