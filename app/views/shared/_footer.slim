@@ -1,7 +1,7 @@
 footer.text-white
   .bg-dark
     .container.py-5.text-center
-      .d-flex-default.flex-column.pb-4
+      .d-flex-default.flex-column.pb-5
         = image_tag "cookoon-logo-white.png", style: "width: 200px"
       .d-flex-default.flex-column
         .d-flex.flex-row.pb-2
@@ -16,5 +16,8 @@ footer.text-white
         .d-flex.flex-row.pb-2
           i.fas.fa-user-md.pr-2
           .footer-link = link_to 'Guide des bonnes pratiques sanitaires', 'https://cookoon.club/guide-bonnes-pratiques-sanitaires/', target: :_blank
+        .d-flex.flex-row.pb-2
+          i.co.icon-payment.pr-2
+          .footer-link = link_to 'Paiment sécurisé', general_conditions_path(anchor: "stripe"), target: :_blank
         //.d-flex-default.flex-column.mt-4
           p <i class='co icon-cookoon-logo text-primary mr-2'></i> COOKOON  -  Copyright 2019 - Mentions légales
