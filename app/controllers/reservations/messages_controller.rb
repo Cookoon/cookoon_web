@@ -16,6 +16,6 @@ class Reservations::MessagesController < ApplicationController
   end
 
   def reservation_params
-    params.require(:reservation).permit(:message_for_host)
+    params.require(:reservation).permit(:message)
   end
 end
