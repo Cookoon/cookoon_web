@@ -5,6 +5,7 @@ Cookoon.destroy_all
 PerkSpecification.destroy_all
 AmexCode.destroy_all
 User.destroy_all
+Company.destroy_all
 Dish.destroy_all
 Menu.destroy_all
 Chef.destroy_all
@@ -12,6 +13,9 @@ ChefPerk.destroy_all
 Chef.destroy_all
 ChefPerkSpecification.destroy_all
 
+puts 'Seeding Companies'
+Company.create!(name: "Réceptions Nouvelles", address: "30 rue des Dames, 75017 Paris", siren: 821316239, siret: 82131623900010, vat: "FR 28 821316239", referent_email: 'gregory@cookoon.fr')
+puts 'Companies done'
 
 perks_specification_attributes = [
   { name: "Écran", icon_name: "fas fa-tv" },
@@ -34,11 +38,11 @@ perks_specification_attributes.each { |attributes| PerkSpecification.create! att
 puts "Perks Specification done"
 
 users_attributes = [
-  { email: 'quentin@cookoon.fr', password: 'plopplop', first_name: 'Quentin', last_name: 'Pernez', description: 'Un bon user', phone_number: '0636686565', photo_url: "https://ca.slack-edge.com/T0A4A3AQZ-U0A5L9L8K-7eda5a7e311c-512", admin: true, address: "8 rue de la Vrillière, Paris", invitation_limit: 100 },
-  { email: 'charles@cookoon.fr', password: 'plopplop', first_name: 'Charles', last_name: 'Pernet', description: 'Un user heureux', phone_number: '0660283574', photo_url: "https://ca.slack-edge.com/T0A4A3AQZ-U5C18PEJZ-13810bfae838-512", admin: true, address: "8 rue de la Vrillière, Paris", invitation_limit: 100 },
-  { email: 'gregory@cookoon.fr', password: 'plopplop', first_name: 'Gregory', last_name: 'Escure', description: 'Un bon user', phone_number: '0636686565', photo_url: "https://ca.slack-edge.com/T0A4A3AQZ-U0A5L9L8K-7eda5a7e311c-512", admin: true, address: "8 rue de la Vrillière, Paris", invitation_limit: 100 },
-  { email: 'francois@cookoon.fr', password: 'azerty', first_name: 'François', last_name: 'Catuhe', description: 'Un bon user', phone_number: '0636686565', photo_url: "https://ca.slack-edge.com/T0A4A3AQZ-U0A5L9L8K-7eda5a7e311c-512", admin: true, address: "8 rue de la Vrillière, Paris", invitation_limit: 100 },
-  { email: 'laura@cookoon.fr', password: 'plopplop', first_name: 'Laura', last_name: 'Escure', description: 'Un bon user', phone_number: '0636686565', photo_url: "https://ca.slack-edge.com/T0A4A3AQZ-U0A5L9L8K-7eda5a7e311c-512", admin: true, address: "8 rue de la Vrillière, Paris", invitation_limit: 100 }
+  { email: 'quentin@cookoon.fr', password: 'plopplop', first_name: 'Quentin', last_name: 'Pernez', description: 'Un bon user', phone_number: '0636686565', photo_url: "https://ca.slack-edge.com/T0A4A3AQZ-U0A5L9L8K-7eda5a7e311c-512", admin: true, address: "8 rue de la Vrillière, Paris", invitation_limit: 100, company: Company.first },
+  { email: 'charles@cookoon.fr', password: 'plopplop', first_name: 'Charles', last_name: 'Pernet', description: 'Un user heureux', phone_number: '0660283574', photo_url: "https://ca.slack-edge.com/T0A4A3AQZ-U5C18PEJZ-13810bfae838-512", admin: true, address: "8 rue de la Vrillière, Paris", invitation_limit: 100, company: Company.first },
+  { email: 'gregory@cookoon.fr', password: 'plopplop', first_name: 'Gregory', last_name: 'Escure', description: 'Un bon user', phone_number: '0636686565', photo_url: "https://ca.slack-edge.com/T0A4A3AQZ-U0A5L9L8K-7eda5a7e311c-512", admin: true, address: "8 rue de la Vrillière, Paris", invitation_limit: 100, company: Company.first },
+  { email: 'francois@cookoon.fr', password: 'azerty', first_name: 'François', last_name: 'Catuhe', description: 'Un bon user', phone_number: '0636686565', photo_url: "https://ca.slack-edge.com/T0A4A3AQZ-U0A5L9L8K-7eda5a7e311c-512", admin: true, address: "8 rue de la Vrillière, Paris", invitation_limit: 100, company: Company.first },
+  { email: 'laura@cookoon.fr', password: 'plopplop', first_name: 'Laura', last_name: 'Escure', description: 'Un bon user', phone_number: '0636686565', photo_url: "https://ca.slack-edge.com/T0A4A3AQZ-U0A5L9L8K-7eda5a7e311c-512", admin: true, address: "8 rue de la Vrillière, Paris", invitation_limit: 100, company: Company.first }
 ]
 
 puts "Seeding Users"
@@ -169,10 +173,6 @@ cookoons_attributes.each do |cookoon_attribute|
   cookoon.save
 end
 puts "Cookoons done"
-
-puts 'Seeding Companies'
-Company.create!(name: "Réceptions Nouvelles", address: "30 rue des Dames, 75017 Paris", siren: 821316239, siret: 82131623900010, vat: "FR 28 821316239", referent_email: 'gregory@cookoon.fr')
-puts 'Companies done'
 
 chef_attributes = [
   {
