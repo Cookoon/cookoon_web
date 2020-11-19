@@ -131,7 +131,6 @@ Rails.application.routes.draw do
         patch 'menus/:id/archive_menu', to: 'menus#archive_menu', as: :archive_menu
       end
       resources :reservations, only: %i[index show] do
-        patch :validate_cookoon_butler
         patch :validate_menu
         patch :ask_menu_payment
         resources :services, only: %i[new create edit update] do
