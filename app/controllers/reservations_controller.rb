@@ -56,7 +56,7 @@ class ReservationsController < ApplicationController
     if @reservation.ask_quotation!
       @reservation.notify_users_after_quotation_asking
       flash.notice = 'Votre demande de devis est enregistrée.'
-      redirect_to reservations_path
+      redirect_to new_reservation_message_path(@reservation)
     end
   end
 
