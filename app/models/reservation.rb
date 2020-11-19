@@ -216,27 +216,27 @@ class Reservation < ApplicationRecord
   end
 
   def needs_menu_validation?
-    (charged? || accepted? || quotation_asked?) && menu_status == "selected"
+    menu.present? && (charged? || accepted? || quotation_asked? || quotation_accepted_by_host?) && menu_status == "selected"
   end
 
   def needs_menu_payment_asking?
-    menu_with_tax > 0 && accepted? && menu_status == "validated"
+    menu.present? && menu_with_tax > 0 && accepted? && menu_status == "validated"
   end
 
   def needs_menu_payment?
-    accepted? && menu_status == "payment_required"
+    menu.present? && menu_with_tax > 0 && accepted? && menu_status == "payment_required"
   end
 
   def needs_services_validation?
-    services_status == "initial" && (charged? || accepted? || quotation_asked? || menu_payment_captured?)
+    services.present? && (charged? || accepted? || menu_payment_captured? || quotation_asked? || quotation_accepted_by_host?) && services_status == "initial"
   end
 
   def needs_services_payment_asking?
-    services_with_tax > 0 && services_status == "validated" && ((accepted? && menu_status == "cooking_by_user") || menu_payment_captured?)
+    services.present? && services_with_tax > 0 && ((accepted? && menu_status == "cooking_by_user") || menu_payment_captured?) && services_status == "validated"
   end
 
   def needs_services_payment?
-    services_status == "payment_required" && ((accepted? && menu_status == "cooking_by_user") || menu_payment_captured?)
+    services.present? && services_with_tax > 0 && ((accepted? && menu_status == "cooking_by_user") || menu_payment_captured?) && services_status == "payment_required"
   end
 
   def accepts_new_service?
