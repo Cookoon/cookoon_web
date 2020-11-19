@@ -10,8 +10,13 @@ module Host
 
     def update
       # params['accept'].present? ? capture_payment_and_notify : refund_payment_and_notify
-      params['accept'].present? ? capture_payment_and_notify : cancel_payment_and_notify
-      redirect_to host_reservations_path
+      if @reservation.charged?
+        params['accept'].present? ? capture_payment_and_notify : cancel_payment_and_notify
+        redirect_to host_reservations_path
+      elsif @reservation.quotation_asked?
+        params['accept'].present? ? accept_quotation_asked : refuse_quotation_asked
+        redirect_to host_reservations_path
+      end
     end
 
     private
@@ -44,6 +49,16 @@ module Host
       @reservation.update(cookoon_butler_payment_status: "cancelled")
       # ReservationMailer.refused_to_tenant(@reservation).deliver_later
       flash[:notice] = 'Vous avez refusé la réservation'
+    end
+
+    def accept_quotation_asked
+      @reservation.host_accept_quotation!
+      flash[:notice] = 'Vous avez accepté la réservation'
+    end
+
+    def refuse_quotation_asked
+      @reservation.host_refuse_quotation!
+      flash[:alert] = 'Vous avez refusé la réservation'
     end
   end
 end
