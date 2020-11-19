@@ -46,6 +46,15 @@
           <p>Devis en attente</p>
         <% end %>
 
+        <h3>Message</h3>
+        <% if @reservation.message.present? %>
+          <p>
+            <%= simple_format(@reservation.message) %>
+          </p>
+        <% else %>
+          <p>Aucun message n'a été indiqué</p>
+        <% end %>
+
         <h3>Chef et menu</h3>
         <% if @reservation.menu.present? %>
           <p>
