@@ -70,7 +70,7 @@ class Reservation < ApplicationRecord
   validates :type_name, inclusion: { in: %w[breakfast brunch lunch diner diner_cocktail lunch_cocktail morning afternoon day], message: "Ce type de réservation n'est pas valide" }
   validates :menu_status, inclusion: { in: %w[initial selected cooking_by_user validated payment_required captured paid], message: "Le statut du menu n'est pas valide" }
   validates :services_status, inclusion: { in: %w[initial validated payment_required captured paid], message: "Le statut n'est pas valide" }
-  validates :cookoon_butler_payment_status, inclusion: { in: %w[initial validated charged captured cancelled paid] }
+  validates :cookoon_butler_payment_status, inclusion: { in: %w[initial charged captured cancelled paid] }
 
   validate :tenant_is_not_host
 
@@ -205,10 +205,6 @@ class Reservation < ApplicationRecord
 
   def needs_chef?
     %w[brunch lunch diner diner_cocktail lunch_cocktail afternoon day].include? type_name
-  end
-
-  def needs_cookoon_butler_validation?
-    quotation_asked? && cookoon_butler_payment_status == "initial"
   end
 
   def needs_cookoon_butler_payment?
