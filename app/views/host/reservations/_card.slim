@@ -8,16 +8,16 @@
       |  - de #{reservation.start_time} à #{reservation.end_time}
       |  - #{reservation.people_count_text}
 
-    p Vous recevez : #{humanized_money_with_symbol reservation.host_payout_price}
+    p Votre rémunération : #{humanized_money_with_symbol reservation.host_payout_price}
 
     hr
 
     .d-flex-default
       p.w-50
-        | Locataire : #{reservation.user.full_name} <br>
+        | Membre : #{reservation.user.full_name} <br>
         | <span class='small'>Membre depuis le #{display_date_for(reservation.user.created_at)}</span>
 
-      - if reservation.charged?
+      - if reservation.charged? || reservation.quotation_asked?
         div
           = simple_form_for [:host, reservation] do |f|
             = f.submit 'Accepter', name: "accept", class: 'btn-cookoon btn-cookoon-primary btn-block'
