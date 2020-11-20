@@ -17,5 +17,18 @@ FactoryBot.define do
     trait :created_ten_days_ago do
       created_at { 10.days.ago }
     end
+
+    trait :with_menu do
+      association :menu
+    end
+
+    trait :with_two_services do
+      type_name 'diner'
+      after(:build) do |reservation|
+        reservation.services.build([{reservation: reservation}, {reservation: reservation, name: 'wine'}])
+        # reservation.services.build(reservation: reservation)
+        # reservation.services.build(reservation: reservation, name: 'wine')
+      end
+    end
   end
 end
