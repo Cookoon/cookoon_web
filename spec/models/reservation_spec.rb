@@ -172,5 +172,19 @@ RSpec.describe Reservation, type: :model do
         expect((described_class.needs_user_action_for_services).count).to eq(2)
       end
     end
+
+    describe '.needs_admin_action' do
+      it 'returns only reservations which needs admin action for menu and services' do
+        expect(described_class.needs_admin_action).to include(reservation_charged_with_menu_selected, reservation_accepted_with_menu_validated, reservation_accepted_with_menu_payment_required, reservation_charged_with_services, reservation_accepted_and_cooked_by_user_with_services, reservation_menu_payment_captured_with_services, reservation_accepted_and_cooked_by_user_with_services_validated, reservation_menu_payment_captured_with_services_validated)
+        expect((described_class.needs_admin_action).count).to eq(8)
+      end
+    end
+
+    describe '.needs_user_action' do
+      it 'returns only reservations which needs user action for menu and services' do
+        expect(described_class.needs_user_action).to include(reservation_accepted_with_menu_payment_required, reservation_accepted_and_cooked_by_user_with_services_payment_required, reservation_menu_payment_captured_with_services_payment_required)
+        expect((described_class.needs_user_action).count).to eq(3)
+      end
+    end
   end
 end
