@@ -14,6 +14,8 @@ module ReservationStateMachine
       state :menu_payment_captured
       state :services_payment_captured
       state :quotation_asked
+      state :quotation_accepted_by_host
+      state :quotation_refused_by_host
       state :quotation_proposed
       state :quotation_accepted
       state :quotation_refused
@@ -62,8 +64,16 @@ module ReservationStateMachine
         transitions from: [:menu_selected, :cookoon_selected, :services_selected], to: :quotation_asked
       end
 
+      event :host_accept_quotation do
+        transitions from: :quotation_asked, to: :quotation_accepted_by_host
+      end
+
+      event :host_refuse_quotation do
+        transitions from: :quotation_asked, to: :quotation_refused_by_host
+      end
+
       event :send_quotation do
-        transitions from: :quotation_asked, to: :quotation_proposed
+        transitions from: :quotation_accepted_by_host, to: :quotation_proposed
       end
 
       event :accept_quotation do

@@ -34,16 +34,13 @@
           <%= render 'admin/users/form_one_line', user: @reservation.cookoon.user %>
         </p>
 
-        <% if @reservation.needs_cookoon_butler_validation? %>
-          <h3>Décor</h3>
+        <h3>Message</h3>
+        <% if @reservation.message.present? %>
           <p>
-            <strong>Décor: </strong>
-            <%= @reservation.cookoon.name %>
+            <%= simple_format(@reservation.message) %>
           </p>
-          <div class="mb-4">
-            <%= link_to 'Valider le décor', admin_reservation_validate_cookoon_butler_path(@reservation), :class => "btn-cookoon btn-cookoon-primary", method: :patch %>
-          </div>
-          <p>Devis en attente</p>
+        <% else %>
+          <p>Aucun message n'a été indiqué</p>
         <% end %>
 
         <h3>Chef et menu</h3>

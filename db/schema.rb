@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_16_181514) do
+ActiveRecord::Schema.define(version: 2020_11_19_092747) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -217,7 +217,7 @@ ActiveRecord::Schema.define(version: 2020_11_16_181514) do
     t.string "stripe_charge_id"
     t.datetime "end_at"
     t.integer "people_count"
-    t.text "message_for_host"
+    t.text "message"
     t.string "aasm_state"
     t.boolean "paid", default: false
     t.integer "category", default: 0

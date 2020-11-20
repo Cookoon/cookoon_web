@@ -3074,7 +3074,7 @@
       "widget": null,
       "validations": []
     }, {
-      "field": "message_for_host",
+      "field": "message",
       "type": "String",
       "default_value": null,
       "enums": null,

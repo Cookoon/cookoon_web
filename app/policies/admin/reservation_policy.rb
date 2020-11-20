@@ -3,12 +3,8 @@ class Admin::ReservationPolicy < ApplicationPolicy
     user.admin == true
   end
 
-  def validate_cookoon_butler?
-    user.admin == true && record.needs_cookoon_butler_validation?
-  end
-
   def quotation_sent?
-    user.admin == true && record.quotation_asked? && record.cookoon_butler_payment_status == "validated"
+    user.admin == true && record.quotation_accepted_by_host?
   end
 
   def quotation_accepted?

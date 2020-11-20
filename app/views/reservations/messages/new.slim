@@ -13,5 +13,5 @@
                     url: reservation_messages_path(@reservation),
                     method: :post,
                     remote: true do |f|
-    = f.input :message_for_host, label: false, placeholder: "Ex: Allergies alimentaires, menus végétariens...", input_html: { rows: 7, style: 'height: inherit' }
+    = f.input :message, label: false, placeholder: "Ex: Allergies alimentaires, menus végétariens...", input_html: { rows: 7, style: 'height: inherit' }
     = f.submit 'ENVOYER', class: 'btn-cookoon btn-cookoon-primary btn-block'

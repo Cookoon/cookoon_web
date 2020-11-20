@@ -13,9 +13,9 @@ class Reservation < ApplicationRecord
   scope :for_host, ->(user) { where(cookoon: user.cookoons) }
   # scope :active, -> { charged.or(accepted).or(ongoing).or(quotation_asked).or(quotation_proposed).or(quotation_accepted) }
   # scope :engaged, -> { accepted.or(ongoing) }
-  scope :engaged, -> { charged.or(accepted).or(menu_payment_captured).or(services_payment_captured).or(quotation_asked).or(quotation_proposed).or(quotation_accepted).or(ongoing) }
+  scope :engaged, -> { charged.or(accepted).or(menu_payment_captured).or(services_payment_captured).or(quotation_asked).or(quotation_accepted_by_host).or(quotation_proposed).or(quotation_accepted).or(ongoing) }
   # scope :inactive, -> { refused.or(passed) }
-  scope :inactive, -> { refused.or(quotation_refused).or(passed).or(cancelled).or(dead)}
+  scope :inactive, -> { refused.or(quotation_refused_by_host).or(quotation_refused).or(passed).or(cancelled).or(dead)}
   scope :created_in_day_range_around, ->(datetime) { where created_at: day_range(datetime) }
   scope :in_hour_range_around, ->(datetime) { where start_at: hour_range(datetime) }
   scope :finished_in_day_range_around, ->(datetime) { joins(:inventory).merge(Inventory.checked_out_in_day_range_around(datetime)) }
@@ -70,7 +70,7 @@ class Reservation < ApplicationRecord
   validates :type_name, inclusion: { in: %w[breakfast brunch lunch diner diner_cocktail lunch_cocktail morning afternoon day], message: "Ce type de réservation n'est pas valide" }
   validates :menu_status, inclusion: { in: %w[initial selected cooking_by_user validated payment_required captured paid], message: "Le statut du menu n'est pas valide" }
   validates :services_status, inclusion: { in: %w[initial validated payment_required captured paid], message: "Le statut n'est pas valide" }
-  validates :cookoon_butler_payment_status, inclusion: { in: %w[initial validated charged captured cancelled paid] }
+  validates :cookoon_butler_payment_status, inclusion: { in: %w[initial charged captured cancelled paid] }
 
   validate :tenant_is_not_host
 
@@ -207,10 +207,6 @@ class Reservation < ApplicationRecord
     %w[brunch lunch diner diner_cocktail lunch_cocktail afternoon day].include? type_name
   end
 
-  def needs_cookoon_butler_validation?
-    quotation_asked? && cookoon_butler_payment_status == "initial"
-  end
-
   def needs_cookoon_butler_payment?
     cookoon_butler_with_tax > 0 && (cookoon_selected? || menu_selected? || services_selected?) && cookoon_butler_with_tax > 0
   end
@@ -220,27 +216,27 @@ class Reservation < ApplicationRecord
   end
 
   def needs_menu_validation?
-    (charged? || accepted? || quotation_asked?) && menu_status == "selected"
+    menu.present? && (charged? || accepted? || quotation_asked? || quotation_accepted_by_host?) && menu_status == "selected"
   end
 
   def needs_menu_payment_asking?
-    menu_with_tax > 0 && accepted? && menu_status == "validated"
+    menu.present? && menu_with_tax > 0 && accepted? && menu_status == "validated"
   end
 
   def needs_menu_payment?
-    accepted? && menu_status == "payment_required"
+    menu.present? && menu_with_tax > 0 && accepted? && menu_status == "payment_required"
   end
 
   def needs_services_validation?
-    services_status == "initial" && (charged? || accepted? || quotation_asked? || menu_payment_captured?)
+    services.present? && (charged? || accepted? || menu_payment_captured? || quotation_asked? || quotation_accepted_by_host?) && services_status == "initial"
   end
 
   def needs_services_payment_asking?
-    services_with_tax > 0 && services_status == "validated" && ((accepted? && menu_status == "cooking_by_user") || menu_payment_captured?)
+    services.present? && services_with_tax > 0 && ((accepted? && menu_status == "cooking_by_user") || menu_payment_captured?) && services_status == "validated"
   end
 
   def needs_services_payment?
-    services_status == "payment_required" && ((accepted? && menu_status == "cooking_by_user") || menu_payment_captured?)
+    services.present? && services_with_tax > 0 && ((accepted? && menu_status == "cooking_by_user") || menu_payment_captured?) && services_status == "payment_required"
   end
 
   def accepts_new_service?
