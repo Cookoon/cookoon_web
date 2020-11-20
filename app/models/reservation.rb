@@ -26,6 +26,21 @@ class Reservation < ApplicationRecord
   scope :short_notice, -> { paid.where('start_at < ?', Time.zone.now.in(DEFAULTS[:safety_period])) }
   scope :stripe_will_not_capture, -> { paid.created_before(DEFAULTS[:stripe_validity_period].ago.in(DEFAULTS[:safety_period])) }
 
+  scope :with_menu , -> { joins(:menu) }
+  scope :with_services , -> { joins(:services).distinct }
+  scope :needs_menu_validation, -> { charged.or(accepted).or(quotation_asked).or(quotation_accepted_by_host).where(menu_status: "selected").with_menu }
+  scope :needs_menu_payment_asking, -> { accepted.where(menu_status: "validated").with_menu }
+  scope :needs_menu_payment, -> { accepted.where(menu_status: "payment_required").with_menu }
+  scope :needs_services_validation, -> { charged.or(accepted).or(menu_payment_captured).or(quotation_asked).or(quotation_accepted_by_host).where(services_status: "initial").with_services }
+  scope :needs_services_payment_asking, -> { ((accepted.where(menu_status: "cooking_by_user")).or(menu_payment_captured)).where(services_status: "validated").with_services }
+  scope :needs_services_payment, -> { ((accepted.where(menu_status: "cooking_by_user")).or(menu_payment_captured)).where(services_status: "payment_required").with_services }
+
+  scope :needs_host_action, -> { charged.or(quotation_asked) }
+  scope :needs_admin_action_for_menu, -> { needs_menu_validation.or(needs_menu_payment_asking) }
+  scope :needs_admin_action_for_services, -> { needs_services_validation.or(needs_services_payment_asking) }
+  scope :needs_user_action_for_menu, -> { needs_menu_payment }
+  scope :needs_user_action_for_services, -> { needs_services_payment }
+
   belongs_to :user
   belongs_to :cookoon, optional: true
   belongs_to :menu, optional: true
@@ -216,7 +231,7 @@ class Reservation < ApplicationRecord
   end
 
   def needs_menu_validation?
-    menu.present? && (charged? || accepted? || quotation_asked? || quotation_accepted_by_host?) && menu_status == "selected"
+    menu.present? && menu_with_tax > 0 && (charged? || accepted? || quotation_asked? || quotation_accepted_by_host?) && menu_status == "selected"
   end
 
   def needs_menu_payment_asking?
