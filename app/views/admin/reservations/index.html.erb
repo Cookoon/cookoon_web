@@ -23,61 +23,36 @@
       <div class="row mx-0">
         <ul class="nav nav-pills mb-2">
           <li class="nav-item">
-            <a href="#charged" class="nav-link active" data-toggle="pill" role="tab">Charged</a>
+            <a href="#customer_reservations_to_come" class="nav-link active" data-toggle="pill" role="tab">A venir</a>
           </li>
 
           <li class="nav-item">
-            <a href="#accepted" class="nav-link" data-toggle="pill" role="tab">Accepted</a>
+            <a href="#customer_reservations_that_needs_host_action" class="nav-link" data-toggle="pill" role="tab">Action hôte requise</a>
           </li>
 
           <li class="nav-item">
-            <a href="#menu_payment_captured" class="nav-link" data-toggle="pill" role="tab">Menu payment captured</a>
+            <a href="#customer_reservations_that_needs_admin_action" class="nav-link" data-toggle="pill" role="tab"> Action admin requise</a>
           </li>
 
           <li class="nav-item">
-            <a href="#services_payment_captured" class="nav-link" data-toggle="pill" role="tab">Services payment captured</a>
-          </li>
-
-          <li class="nav-item">
-            <a href="#quotation_asked" class="nav-link" data-toggle="pill" role="tab">Quotation asked</a>
-          </li>
-          <li class="nav-item">
-            <a href="#quotation_sent" class="nav-link" data-toggle="pill" role="tab">Quotation sent</a>
-          </li>
-          <li class="nav-item">
-            <a href="#quotation_accepted" class="nav-link" data-toggle="pill" role="tab">Quotation accepted</a>
-          </li>
-          <li class="nav-item">
-            <a href="#quotation_refused" class="nav-link" data-toggle="pill" role="tab">Quotation refused</a>
+            <a href="#customer_reservations_that_needs_user_action" class="nav-link" data-toggle="pill" role="tab"> Action user requise</a>
           </li>
         </ul>
       </div>
 
       <div class="row mx-0">
         <div class="tab-content py-0 py-md-3 w-100">
-          <div class="tab-pane fade show active" id="charged" role="tabpanel">
-            <%= render "list", resas: @reservations.charged.decorate %>
+          <div class="tab-pane fade show active" id="customer_reservations_to_come" role="tabpanel">
+            <%= render "list", resas: @customer_reservations_to_come %>
           </div>
-          <div class="tab-pane fade" id="accepted" role="tabpanel">
-            <%= render "list", resas: @reservations.accepted.decorate %>
+          <div class="tab-pane fade" id="customer_reservations_that_needs_host_action" role="tabpanel">
+            <%= render "list", resas: @customer_reservations_that_needs_host_action %>
           </div>
-          <div class="tab-pane fade" id="menu_payment_captured" role="tabpanel">
-            <%= render "list", resas: @reservations.menu_payment_captured.decorate %>
+          <div class="tab-pane fade" id="customer_reservations_that_needs_admin_action" role="tabpanel">
+            <%= render "list", resas: @customer_reservations_that_needs_admin_action %>
           </div>
-          <div class="tab-pane fade" id="services_payment_captured" role="tabpanel">
-            <%= render "list", resas: @reservations.services_payment_captured.decorate %>
-          </div>
-          <div class="tab-pane fade" id="quotation_asked" role="tabpanel">
-            <%= render "list", resas: @reservations.quotation_asked.decorate %>
-          </div>
-          <div class="tab-pane fade" id="quotation_sent" role="tabpanel">
-            <%= render "list", resas: @reservations.quotation_proposed.decorate %>
-          </div>
-          <div class="tab-pane fade" id="quotation_accepted" role="tabpanel">
-            <%= render "list", resas: @reservations.quotation_accepted.decorate %>
-          </div>
-          <div class="tab-pane fade" id="quotation_refused" role="tabpanel">
-            <%= render "list", resas: @reservations.quotation_refused.decorate %>
+          <div class="tab-pane fade" id="customer_reservations_that_needs_user_action" role="tabpanel">
+            <%= render "list", resas: @customer_reservations_that_needs_user_action %>
           </div>
         </div>
       </div>
