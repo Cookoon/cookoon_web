@@ -74,7 +74,7 @@ class ApplicationController < ActionController::Base
   end
 
   def redirect_user_needed?
-    if (devise_controller_or_new_user_asking? == true || users_invitations_controller_edit_or_update? == true || @namespace == "un_chef_pour_vous")
+    if (devise_controller_or_new_user_asking? == true || users_invitations_controller_edit_or_update? == true || @namespace == "un_chef_pour_vous" || (params[:controller] == "pages" && params[:action] == "general_conditions"))
       false
     else
       terms_of_service_acceptance_needed? || inscription_payment_needed? || user_photo_needed?
