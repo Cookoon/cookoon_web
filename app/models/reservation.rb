@@ -326,12 +326,13 @@ class Reservation < ApplicationRecord
   # end
 
   def report_to_slack
-    return unless Rails.env.production?
+    # return unless Rails.env.production?
+    return if Rails.env.development? #comment + perform_now to get it in development
     PingSlackReservationJob.perform_later(id) if notification_needed?
   end
 
   def notification_needed?
-    %w(charged quotation_asked accepted refused ongoing passed cancelled).include? aasm_state
+    %w(charged accepted menu_payment_captured services_payment_captured quotation_asked quotation_accepted_by_host quotation_refused_by_host quotation_proposed quotation_accepted quotation_refused refused cancelled ongoing passed).include? aasm_state
   end
 
   def tenant_is_not_host
