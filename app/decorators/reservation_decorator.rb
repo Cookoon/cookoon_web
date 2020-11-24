@@ -2,11 +2,11 @@ class ReservationDecorator < Draper::Decorator
   delegate_all
 
   def recap_string
-    if butler_count > 1
-      "Vos maitres d'hôtel vous accueilleront le #{start_on} pour votre #{humanized_type_name} à #{start_time} de #{people_count_text}."
-    else
-      "Votre maitre d'hôtel vous accueillera le #{start_on} pour votre #{humanized_type_name} à #{start_time} de #{people_count_text}."
-    end
+    begin_of_sentence = "Vos maitres d'hôtel vous accueilleront" if start_at >= Date.today && butler_count > 1
+    begin_of_sentence = "Votre maitre d'hôtel vous accueillera" if start_at >= Date.today && butler_count == 1
+    begin_of_sentence = "Vos maitres d'hôtel vous ont accueilli" if start_at < Date.today && butler_count > 1
+    begin_of_sentence = "Votre maitre d'hôtel vous a accueilli" if start_at < Date.today && butler_count == 1
+    "#{begin_of_sentence} le #{start_on} pour votre #{humanized_type_name} à #{start_time} de #{people_count_text}."
   end
 
   def recap_string_without_day_and_people_count
@@ -18,7 +18,8 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def recap_string_end_time
-    "Votre réception se prolongera jusqu'à #{end_time}."
+    start_at >= Date.today ? verb = "se prolongera" : verb = "s'est prolongée"
+    "Votre réception #{verb} jusqu'à #{end_time}."
   end
 
   def recap_string_end_time_with_bolded_time
