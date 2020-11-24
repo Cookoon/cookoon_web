@@ -6,6 +6,8 @@ class Chef < ApplicationRecord
   has_attachments :photos, order: 'id ASC'
   has_attachment :main_photo
 
+  default_scope -> { order(updated_at: :desc) }
+
   GENDER = %w[male female]
 
   validates :name, presence: true
