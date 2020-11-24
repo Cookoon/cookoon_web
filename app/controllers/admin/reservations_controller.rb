@@ -3,7 +3,7 @@ module Admin
     # not necessary because it is specified directly in routes
     # before_action :require_admin
     before_action :find_reservation, only: %i[show]
-    before_action :find_reservation_with_reservation_id, only: %i[validate_menu ask_menu_payment validate_services ask_services_payment quotation_sent quotation_accepted quotation_refused]
+    before_action :find_reservation_with_reservation_id, only: %i[validate_menu ask_menu_payment validate_services ask_services_payment quotation_is_sent quotation_is_accepted quotation_is_refused]
 
     def index
       reservations = policy_scope([:admin, Reservation]).includes(:cookoon, :user, menu: [:chef], cookoon: [:user]).order(id: :desc)
@@ -14,6 +14,7 @@ module Admin
       @engaged_reservations_that_needs_admin_action = engaged_reservations.needs_admin_action
       @engaged_reservations_that_needs_user_action = engaged_reservations.needs_user_action
       @passed_reservations = engaged_reservations.starting_before_today + reservations.passed
+      @reservations_refused_by_host = reservations.refused.or(quotation_refused)
       # @cancelled_reservations_because_host_did_not_reply = reservations.cancelled
 
       # @engaged_customer_reservations = reservations.customer.engaged_credit_card_payment
@@ -71,7 +72,7 @@ module Admin
       end
     end
 
-    def quotation_sent
+    def quotation_is_sent
       if @reservation.send_quotation!
         flash.notice = "Le statut de la réservation a bien été mis à jour."
         redirect_to admin_reservation_path(@reservation)
@@ -81,7 +82,7 @@ module Admin
       end
     end
 
-    def quotation_accepted
+    def quotation_is_accepted
       if @reservation.accept_quotation!
         flash.notice = "Le statut de la réservation a bien été mis à jour."
         redirect_to admin_reservation_path(@reservation)
@@ -91,7 +92,7 @@ module Admin
       end
     end
 
-    def quotation_refused
+    def quotation_is_refused
       if @reservation.refuse_quotation!
         flash.notice = "Le statut de la réservation a bien été mis à jour."
         redirect_to admin_reservation_path(@reservation)

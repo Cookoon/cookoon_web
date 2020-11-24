@@ -138,9 +138,9 @@ Rails.application.routes.draw do
         end
         patch :validate_services
         patch :ask_services_payment
-        patch :quotation_sent
-        patch :quotation_accepted
-        patch :quotation_refused
+        patch :quotation_is_sent
+        patch :quotation_is_accepted
+        patch :quotation_is_refused
       end
       resources :users do
         # Hosts
