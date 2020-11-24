@@ -3,15 +3,15 @@ class Admin::ReservationPolicy < ApplicationPolicy
     user.admin == true
   end
 
-  def quotation_sent?
+  def quotation_is_sent?
     user.admin == true && record.quotation_accepted_by_host?
   end
 
-  def quotation_accepted?
+  def quotation_is_accepted?
     user.admin == true && record.quotation_proposed?
   end
 
-  def quotation_refused?
+  def quotation_is_refused?
     user.admin == true && record.quotation_proposed?
   end
 

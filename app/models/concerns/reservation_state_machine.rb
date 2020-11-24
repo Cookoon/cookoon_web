@@ -105,7 +105,7 @@ module ReservationStateMachine
       end
 
       event :kill do
-        transitions from: [:initial, :cookoon_selected, :menu_selected, :services_selected, :charged, :quotation_asked, :quotation_proposed, :accepted, :refused, :ongoing, :passed, :dead], to: :dead
+        transitions from: [:initial, :cookoon_selected, :menu_selected, :services_selected], to: :dead
       end
     end
   end

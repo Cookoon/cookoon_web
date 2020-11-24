@@ -14,16 +14,19 @@ class Reservation < ApplicationRecord
   # scope :active, -> { charged.or(accepted).or(ongoing).or(quotation_asked).or(quotation_proposed).or(quotation_accepted) }
   scope :engaged_credit_card_payment, -> { charged.or(accepted).or(menu_payment_captured).or(services_payment_captured).or(ongoing) }
   scope :engaged_quotation, -> { quotation_asked.or(quotation_accepted_by_host).or(quotation_proposed).or(quotation_accepted).or(ongoing) }
+  scope :engaged, -> { (engaged_credit_card_payment.or(engaged_quotation)).distinct }
   # scope :engaged, -> { charged.or(accepted).or(menu_payment_captured).or(services_payment_captured).or(quotation_asked).or(quotation_accepted_by_host).or(quotation_proposed).or(quotation_accepted).or(ongoing) }
-  scope :engaged, -> { (engaged_credit_card_payment + engaged_quotation).uniq }
   # scope :inactive, -> { refused.or(passed) }
+  scope :refused_by_host, -> { refused.or(quotation_refused_by_host) }
   scope :inactive, -> { refused.or(quotation_refused_by_host).or(quotation_refused).or(passed).or(cancelled).or(dead)}
   scope :created_in_day_range_around, ->(datetime) { where created_at: day_range(datetime) }
   scope :in_hour_range_around, ->(datetime) { where start_at: hour_range(datetime) }
   scope :finished_in_day_range_around, ->(datetime) { joins(:inventory).merge(Inventory.checked_out_in_day_range_around(datetime)) }
   scope :created_before, ->(date) { where('created_at < ?', date) }
   scope :starting_after, ->(date) { where('start_at > ?', date) }
+  scope :starting_before, ->(date) { where('start_at < ?', date) }
   scope :starting_after_today, -> { starting_after(Date.today) }
+  scope :starting_before_today, -> { starting_before(Date.today) }
   scope :pending, -> { initial.or(cookoon_selected).or(menu_selected).or(services_selected) }
   scope :dropped_before_payment, -> { pending.created_before(DEFAULTS[:safety_period].ago) }
   scope :paid, -> { where(paid: true) }
@@ -42,10 +45,12 @@ class Reservation < ApplicationRecord
   scope :needs_host_action, -> { charged.or(quotation_asked) }
   scope :needs_admin_action_for_menu, -> { needs_menu_validation.or(needs_menu_payment_asking) }
   scope :needs_admin_action_for_services, -> { needs_services_validation.or(needs_services_payment_asking) }
-  scope :needs_admin_action, -> { (needs_admin_action_for_menu + needs_admin_action_for_services).uniq }
+  scope :needs_admin_action_for_quotation, -> { quotation_accepted_by_host.or(quotation_proposed) }
+  scope :needs_admin_action, -> { (needs_admin_action_for_menu + needs_admin_action_for_services + needs_admin_action_for_quotation).uniq }
   scope :needs_user_action_for_menu, -> { needs_menu_payment }
   scope :needs_user_action_for_services, -> { needs_services_payment }
-  scope :needs_user_action, -> { (needs_user_action_for_menu + needs_user_action_for_services).uniq }
+  scope :needs_user_action_for_quotation, -> { quotation_proposed }
+  scope :needs_user_action, -> { (needs_user_action_for_menu + needs_user_action_for_services + needs_user_action_for_quotation).uniq }
 
   belongs_to :user
   belongs_to :cookoon, optional: true

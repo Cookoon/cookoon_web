@@ -83,14 +83,14 @@
           <p>Aucun service n'a été sélectionné</p>
         <% end %>
 
-        <% if policy([:admin, @reservation]).quotation_sent? %>
+        <% if policy([:admin, @reservation]).quotation_is_sent? %>
           <div class="d-flex justify-content-center mt-5">
-            <%= link_to 'Le devis a été envoyé', admin_reservation_quotation_sent_path(@reservation), :class => "btn-cookoon btn-cookoon-primary", method: :patch %>
+            <%= link_to 'Le devis a été envoyé', admin_reservation_quotation_is_sent_path(@reservation), :class => "btn-cookoon btn-cookoon-primary", method: :patch %>
           </div>
-        <% elsif policy([:admin, @reservation]).quotation_accepted? || policy([:admin, @reservation]).quotation_refused? %>
+        <% elsif policy([:admin, @reservation]).quotation_is_accepted? || policy([:admin, @reservation]).quotation_is_refused? %>
           <div class="d-flex justify-content-between mt-5">
-            <%= link_to 'Le devis a été accepté', admin_reservation_quotation_accepted_path(@reservation), :class => "btn-cookoon btn-cookoon-primary mr-2 text-center", method: :patch %>
-            <%= link_to 'Le devis a été refusé', admin_reservation_quotation_refused_path(@reservation), :class => "btn-cookoon btn-cookoon-primary ml-2 text-center", method: :patch %>
+            <%= link_to 'Le devis a été accepté', admin_reservation_quotation_is_accepted_path(@reservation), :class => "btn-cookoon btn-cookoon-primary mr-2 text-center", method: :patch %>
+            <%= link_to 'Le devis a été refusé', admin_reservation_quotation_is_refused_path(@reservation), :class => "btn-cookoon btn-cookoon-primary ml-2 text-center", method: :patch %>
           </div>
         <% end %>
       </div>
