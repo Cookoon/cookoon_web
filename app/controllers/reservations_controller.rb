@@ -7,9 +7,14 @@ class ReservationsController < ApplicationController
 
   def index
     # reservations = policy_scope(Reservation).includes(cookoon: :user)
-    reservations = policy_scope(Reservation).includes(:cookoon)
-    @active_reservations = ReservationDecorator.decorate_collection(reservations.includes(:menu, :services).engaged)
-    @inactive_reservations = ReservationDecorator.decorate_collection(reservations.includes(:menu, :services).passed)
+    reservations = policy_scope(Reservation).includes(:cookoon, :menu, :services)
+
+    @reservations_needs_user_action = ReservationDecorator.decorate_collection(reservations.needs_user_action)
+    @reservations_to_come = ReservationDecorator.decorate_collection(reservations.engaged.starting_after_today) - @reservations_needs_user_action
+    @reservations_passed = ReservationDecorator.decorate_collection(reservations.engaged.starting_before_today + reservations.passed)
+
+    # @active_reservations = ReservationDecorator.decorate_collection(reservations.includes(:menu, :services).engaged)
+    # @inactive_reservations = ReservationDecorator.decorate_collection(reservations.includes(:menu, :services).passed)
   end
 
   def show
