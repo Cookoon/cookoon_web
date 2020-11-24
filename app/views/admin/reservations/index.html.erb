@@ -23,37 +23,49 @@
       <div class="row mx-0">
         <ul class="nav nav-pills mb-2">
           <li class="nav-item">
-            <a href="#customer_reservations_to_come" class="nav-link active" data-toggle="pill" role="tab">A venir</a>
+            <a href="#engaged_reservations_to_come" class="nav-link active" data-toggle="pill" role="tab">A venir</a>
           </li>
 
           <li class="nav-item">
-            <a href="#customer_reservations_that_needs_host_action" class="nav-link" data-toggle="pill" role="tab">Action hôte requise</a>
+            <a href="#engaged_reservations_that_needs_host_action" class="nav-link" data-toggle="pill" role="tab">Action hôte requise</a>
           </li>
 
           <li class="nav-item">
-            <a href="#customer_reservations_that_needs_admin_action" class="nav-link" data-toggle="pill" role="tab"> Action admin requise</a>
+            <a href="#engaged_reservations_that_needs_admin_action" class="nav-link" data-toggle="pill" role="tab">Action admin requise</a>
           </li>
 
           <li class="nav-item">
-            <a href="#customer_reservations_that_needs_user_action" class="nav-link" data-toggle="pill" role="tab"> Action user requise</a>
+            <a href="#engaged_reservations_that_needs_user_action" class="nav-link" data-toggle="pill" role="tab">Action user requise</a>
           </li>
+          <li class="nav-item">
+            <a href="#passed_reservations" class="nav-link" data-toggle="pill" role="tab">Passées</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a href="#cancelled_reservations_because_host_did_not_reply" class="nav-link" data-toggle="pill" role="tab">Annulées car hôte n'a pas répondu</a>
+          </li> -->
         </ul>
       </div>
 
       <div class="row mx-0">
         <div class="tab-content py-0 py-md-3 w-100">
-          <div class="tab-pane fade show active" id="customer_reservations_to_come" role="tabpanel">
-            <%= render "list", resas: @customer_reservations_to_come %>
+          <div class="tab-pane fade show active" id="engaged_reservations_to_come" role="tabpanel">
+            <%= render "list", resas: @engaged_reservations_to_come %>
           </div>
-          <div class="tab-pane fade" id="customer_reservations_that_needs_host_action" role="tabpanel">
-            <%= render "list", resas: @customer_reservations_that_needs_host_action %>
+          <div class="tab-pane fade" id="engaged_reservations_that_needs_host_action" role="tabpanel">
+            <%= render "list", resas: @engaged_reservations_that_needs_host_action %>
           </div>
-          <div class="tab-pane fade" id="customer_reservations_that_needs_admin_action" role="tabpanel">
-            <%= render "list", resas: @customer_reservations_that_needs_admin_action %>
+          <div class="tab-pane fade" id="engaged_reservations_that_needs_admin_action" role="tabpanel">
+            <%= render "list", resas: @engaged_reservations_that_needs_admin_action %>
           </div>
-          <div class="tab-pane fade" id="customer_reservations_that_needs_user_action" role="tabpanel">
-            <%= render "list", resas: @customer_reservations_that_needs_user_action %>
+          <div class="tab-pane fade" id="engaged_reservations_that_needs_user_action" role="tabpanel">
+            <%= render "list", resas: @engaged_reservations_that_needs_user_action %>
           </div>
+          <div class="tab-pane fade" id="passed_reservations" role="tabpanel">
+            <%= render "list", resas: @passed_reservations %>
+          </div>
+          <!-- <div class="tab-pane fade" id="cancelled_reservations_because_host_did_not_reply" role="tabpanel">
+            <%#= render "list", resas: @cancelled_reservations_because_host_did_not_reply %>
+          </div> -->
         </div>
       </div>
 
