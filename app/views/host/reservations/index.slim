@@ -3,17 +3,34 @@ div(class=classnames(container: @device == :desktop))
 
   ul.nav.nav-pills.mb-2
     li.nav-item
-      a.nav-link.active href="#active" data-toggle="pill" role="tab" A traiter#{render 'shared/pending_reservations_count'}
+      a.nav-link.active href="#reservations_needs_host_action" data-toggle="pill" role="tab" En attente d'acception#{render 'shared/pending_reservations_count'}
       /a.nav-link.actived.d-flex.justify-content-start href="#active" data-toggle="pill" role="tab"
       /  div A traiter
       /  div #{render 'shared/pending_reservations_count'}
 
     li.nav-item
-      a.nav-link href="#inactive" data-toggle="pill" role="tab" Passées
+      a.nav-link href="#reservations_to_come" data-toggle="pill" role="tab" A venir
+    li.nav-item
+      a.nav-link href="#reservations_passed" data-toggle="pill" role="tab" Passées
 
   .tab-content.py-3
-    .tab-pane.fade.show.active id="active" role="tabpanel"
-      = reservations_list_or_empty_card(@active_reservations)
+    .tab-pane.fade.show.active id="reservations_needs_host_action" role="tabpanel"
+      - if @reservations_needs_host_action.present?
+        = render 'reservations_list', reservations: @reservations_needs_host_action
+      - else
+        = render 'no_reservation_needs_host_action'
+      //= reservations_list_or_empty_card(@reservations_needs_host_action)
 
-    .tab-pane.fade#inactive role="tabpanel"
-      = reservations_list_or_empty_card(@inactive_reservations)
+    .tab-pane.fade#reservations_to_come role="tabpanel"
+      - if @reservations_to_come.present?
+        = render 'reservations_list', reservations: @reservations_to_come
+      - else
+        = render 'no_reservation_to_come'
+      //= reservations_list_or_empty_card(@reservations_to_come)
+
+    .tab-pane.fade#reservations_passed role="tabpanel"
+      - if @reservations_passed.present?
+        = render 'reservations_list', reservations: @reservations_passed
+      - else
+        = render 'no_reservation_passed'
+      //= reservations_list_or_empty_card(@inactive_reservations)
