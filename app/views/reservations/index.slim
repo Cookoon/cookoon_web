@@ -3,14 +3,32 @@
   h1.my-4 Mes réservations
   ul(class=classnames('nav', 'nav-pills', 'mb-2', 'mx-2rem': @device != :desktop))
     li.nav-item
-      a.nav-link.active.h5(href="#active" data-toggle="pill" role="tab") En cours
+      a.nav-link.h5.active(href="#reservations_needs_user_action" data-toggle="pill" role="tab") En attente de règlement
 
     li.nav-item
-      a.nav-link.h5(href="#inactive" data-toggle="pill" role="tab") Passées
+      a.nav-link.h5(href="#reservations_to_come" data-toggle="pill" role="tab") A venir
+
+    li.nav-item
+      a.nav-link.h5(href="#reservations_passed" data-toggle="pill" role="tab") Passées
 
   .tab-content.py-3
-    #active.tab-pane.fade.show.active(role="tabpanel")
-      = reservations_list_or_empty_card(@active_reservations)
+    #reservations_needs_user_action.tab-pane.fade.show.active(role="tabpanel")
+      - if @reservations_needs_user_action.present?
+        = render 'reservations_list', reservations: @reservations_needs_user_action
+      - else
+        = render 'no_reservation_needs_user_action'
+      //= reservations_list_or_empty_card(@active_reservations)
 
-    #inactive.tab-pane.fade(role="tabpanel")
-      = reservations_list_or_empty_card(@inactive_reservations)
+    #reservations_to_come.tab-pane.fade(role="tabpanel")
+      - if @reservations_to_come.present?
+        = render 'reservations_list', reservations: @reservations_to_come
+      - else
+        = render 'no_reservation_to_come'
+      //= reservations_list_or_empty_card(@inactive_reservations)
+
+    #reservations_passed.tab-pane.fade(role="tabpanel")
+      - if @reservations_passed.present?
+        = render 'reservations_list', reservations: @reservations_passed
+      - else
+        = render 'no_reservation_passed'
+      //= reservations_list_or_empty_card(@inactive_reservations)
