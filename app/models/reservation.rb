@@ -17,6 +17,7 @@ class Reservation < ApplicationRecord
   scope :engaged, -> { (engaged_credit_card_payment.or(engaged_quotation)).distinct }
   # scope :engaged, -> { charged.or(accepted).or(menu_payment_captured).or(services_payment_captured).or(quotation_asked).or(quotation_accepted_by_host).or(quotation_proposed).or(quotation_accepted).or(ongoing) }
   # scope :inactive, -> { refused.or(passed) }
+  scope :refused_by_host, -> { refused.or(quotation_refused_by_host) }
   scope :inactive, -> { refused.or(quotation_refused_by_host).or(quotation_refused).or(passed).or(cancelled).or(dead)}
   scope :created_in_day_range_around, ->(datetime) { where created_at: day_range(datetime) }
   scope :in_hour_range_around, ->(datetime) { where start_at: hour_range(datetime) }

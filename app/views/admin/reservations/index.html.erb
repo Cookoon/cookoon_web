@@ -40,6 +40,9 @@
           <li class="nav-item">
             <a href="#passed_reservations" class="nav-link" data-toggle="pill" role="tab">Passées</a>
           </li>
+          <li class="nav-item">
+            <a href="#reservations_refused_by_host" class="nav-link" data-toggle="pill" role="tab">Refusées par hôte</a>
+          </li>
           <!-- <li class="nav-item">
             <a href="#cancelled_reservations_because_host_did_not_reply" class="nav-link" data-toggle="pill" role="tab">Annulées car hôte n'a pas répondu</a>
           </li> -->
@@ -62,6 +65,9 @@
           </div>
           <div class="tab-pane fade" id="passed_reservations" role="tabpanel">
             <%= render "list", resas: @passed_reservations %>
+          </div>
+          <div class="tab-pane fade" id="reservations_refused_by_host" role="tabpanel">
+            <%= render "list", resas: @reservations_refused_by_host %>
           </div>
           <!-- <div class="tab-pane fade" id="cancelled_reservations_because_host_did_not_reply" role="tabpanel">
             <%#= render "list", resas: @cancelled_reservations_because_host_did_not_reply %>
