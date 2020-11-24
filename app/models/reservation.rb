@@ -45,10 +45,12 @@ class Reservation < ApplicationRecord
   scope :needs_host_action, -> { charged.or(quotation_asked) }
   scope :needs_admin_action_for_menu, -> { needs_menu_validation.or(needs_menu_payment_asking) }
   scope :needs_admin_action_for_services, -> { needs_services_validation.or(needs_services_payment_asking) }
-  scope :needs_admin_action, -> { (needs_admin_action_for_menu + needs_admin_action_for_services).uniq }
+  scope :needs_admin_action_for_quotation, -> { quotation_accepted_by_host.or(quotation_proposed) }
+  scope :needs_admin_action, -> { (needs_admin_action_for_menu + needs_admin_action_for_services + needs_admin_action_for_quotation).uniq }
   scope :needs_user_action_for_menu, -> { needs_menu_payment }
   scope :needs_user_action_for_services, -> { needs_services_payment }
-  scope :needs_user_action, -> { (needs_user_action_for_menu + needs_user_action_for_services).uniq }
+  scope :needs_user_action_for_quotation, -> { quotation_proposed }
+  scope :needs_user_action, -> { (needs_user_action_for_menu + needs_user_action_for_services + needs_user_action_for_quotation).uniq }
 
   belongs_to :user
   belongs_to :cookoon, optional: true
