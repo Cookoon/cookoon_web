@@ -66,9 +66,9 @@ Rails.application.configure do
   config.action_mailer.perform_caching = false
 
   # To comment to stop mails sending
-  config.action_mailer.delivery_method = :postmark
+  # config.action_mailer.delivery_method = :postmark
   # To comment to stop mails sending
-  config.action_mailer.postmark_settings = { api_token: ENV['POSTMARK_API_KEY'] }
+  # config.action_mailer.postmark_settings = { api_token: ENV['POSTMARK_API_KEY'] }
 
   # Commented to get mails sending working
   # config.action_mailer.delivery_method = :smtp
