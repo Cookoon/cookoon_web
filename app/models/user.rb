@@ -178,7 +178,7 @@ class User < ApplicationRecord
   def report_to_slack_new_membership_asking
     # return unless Rails.env.production?
     return if Rails.env.development? #comment + perform_now to get it in development
-    PingSlackUserJob.perform_later(id)# if notification_needed?
+    PingSlackUserJob.perform_later(id)
   end
 
   def send_welcome_email
