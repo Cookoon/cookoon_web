@@ -48,7 +48,7 @@ module Admin
     private
 
     def find_membership_asking
-      @users_membership_asking = policy_scope([:admin, User]).membership_asking
+      @users_membership_asking = policy_scope([:admin, User]).membership_asking.includes(:job, :personal_taste, :motivation)
     end
 
     def find_hosts
