@@ -54,7 +54,7 @@ Rails.application.routes.draw do
   end
 
   # resources :reservations, only: %i[index show new create update] do
-  resources :reservations, only: %i[index new create update] do
+  resources :reservations, only: %i[index new create] do
     resources :cookoons, only: %i[index show] do
       resources :payments, only: [] do
         post :amounts, on: :collection

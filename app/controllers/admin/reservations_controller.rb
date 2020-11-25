@@ -15,7 +15,8 @@ module Admin
       @engaged_reservations_that_needs_user_action = engaged_reservations.needs_user_action
       @passed_reservations = engaged_reservations.starting_before_today + reservations.passed
       @reservations_refused_by_host = reservations.refused_by_host
-      # @cancelled_reservations_because_host_did_not_reply = reservations.cancelled
+      # @cancelled_reservations_because_host_did_not_reply_in_validity_period = reservations.cancelled_because_host_did_not_reply_in_validity_period
+      # @cancelled_reservations_because_short_notice = reservations.cancelled_because_short_notice
 
       # @engaged_customer_reservations = reservations.customer.engaged_credit_card_payment
       # @engaged_business_with_credit_card_payment_reservations = reservations.business.engaged_credit_card_payment

@@ -60,8 +60,11 @@ module Slack
       when :passed
         "[FIN] la location pour #{cookoon.name} par #{tenant.full_name} vient de se terminer.
         #{url_for_admin_reservation}"
-      when :cancelled
-        "[ANNULATION] la location pour #{cookoon.name} le #{formatted_date} vient d'être annulée.
+      when :cancelled_because_host_did_not_reply_in_validity_period
+        "[ANNULATION] la location pour #{cookoon.name} le #{formatted_date} vient d'être annulée car l'hôte n'a pas répondu dans les temps.
+        #{url_for_admin_reservation}"
+      when :cancelled_because_short_notice
+        "[ANNULATION] la location pour #{cookoon.name} le #{formatted_date} vient d'être annulée car le délai est trop court.
         #{url_for_admin_reservation}"
       end
     end

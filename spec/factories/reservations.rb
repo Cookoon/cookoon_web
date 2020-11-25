@@ -10,6 +10,10 @@ FactoryBot.define do
       paid true
     end
 
+    trait :charged do
+      aasm_state "charged"
+    end
+
     trait :created_two_days_ago do
       created_at { 2.days.ago }
     end
