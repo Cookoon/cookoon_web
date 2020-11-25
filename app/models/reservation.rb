@@ -30,7 +30,8 @@ class Reservation < ApplicationRecord
   scope :pending, -> { initial.or(cookoon_selected).or(menu_selected).or(services_selected) }
   scope :dropped_before_payment, -> { pending.created_before(DEFAULTS[:safety_period].ago) }
   scope :paid, -> { where(paid: true) }
-  scope :short_notice, -> { paid.where('start_at < ?', Time.zone.now.in(DEFAULTS[:safety_period])) }
+  # scope :short_notice, -> { paid.where('start_at < ?', Time.zone.now.in(DEFAULTS[:safety_period])) }
+  scope :short_notice, -> { charged.or(quotation_asked).where('start_at < ?', Time.zone.now.in(DEFAULTS[:safety_period])) }
   scope :stripe_will_not_capture, -> { paid.created_before(DEFAULTS[:stripe_validity_period].ago.in(DEFAULTS[:safety_period])) }
   scope :host_did_not_reply_in_validity_period, -> { charged.or(quotation_asked).created_before(DEFAULTS[:validity_period].ago) }
 
