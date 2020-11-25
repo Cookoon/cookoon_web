@@ -16,7 +16,7 @@ class ReservationsCleanupJob < ApplicationJob
 
   def cleanup_short_notice
     Reservation.short_notice.each do |reservation|
-      reservation.cancel!
+      reservation.cancel_because_short_notice!
       # ReservationMailer.autocancel_short_notice_to_tenant(reservation).deliver_later
     end
   end
