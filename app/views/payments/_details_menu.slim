@@ -22,7 +22,7 @@ p.mb-3.font-weight-bold 2. Vos souhaits de chef et de menu
     - if reservation.menu_payment_captured? || reservation.services_payment_captured?
       = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:paid], sentence_two: "", amount_ttc: reservation.stripe_payment_intent_amount_menu, amount_ht: ""
 
-    - if reservation.refused? || reservation.cancelled_because_host_did_not_reply_in_validity_period? || reservation.dead?
+    - if reservation.refused? || reservation.cancelled_because_host_did_not_reply_in_validity_period? || reservation.cancelled_because_short_notice || reservation.dead?
       = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:cancelled], sentence_two: "", amount_ttc: reservation.menu_with_tax, amount_ht: ""
 
     - if reservation.quotation_asked?

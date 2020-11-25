@@ -33,7 +33,7 @@ p.mb-3.font-weight-bold 3. Vos souhaits de service
     - if reservation.services_payment_captured?
       = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:paid], sentence_two: "", amount_ttc: reservation.stripe_payment_intent_amount_services, amount_ht: ""
 
-    - if reservation.refused? || reservation.cancelled_because_host_did_not_reply_in_validity_period? || reservation.dead?
+    - if reservation.refused? || reservation.cancelled_because_host_did_not_reply_in_validity_period? || reservation.cancelled_because_short_notice || reservation.dead?
       = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:cancelled], sentence_two: "", amount_ttc: "", amount_ht: ""
 
     - if reservation.quotation_asked?
