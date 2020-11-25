@@ -80,8 +80,6 @@ Rails.application.configure do
   #   port: '2525',
   #   authentication: :cram_md5
   # }
-  # To comment if we want to get mail sending
-  config.action_mailer.delivery_method = :letter_opener
 
   config.action_mailer.default_url_options = { host: 'cookoon-staging.herokuapp.com' }
   config.roadie.url_options = { host: 'cookoon-staging.herokuapp.com', scheme: 'https' }
