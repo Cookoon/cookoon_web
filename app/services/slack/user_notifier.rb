@@ -24,7 +24,7 @@ module Slack
         "https://membre.cookoon.club/admin/users/membership_asking"
       # when "development"
       #   "http://localhost:3000/admin/users/membership_asking"
-      # end
+      end
     end
   end
 end
