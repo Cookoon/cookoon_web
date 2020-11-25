@@ -65,6 +65,7 @@ module Slack
         #{url_for_admin_reservation}"
       when :cancelled_because_short_notice
         "[ANNULATION] la location pour #{cookoon.name} le #{formatted_date} vient d'être annulée car le délai est trop court.
+        #{url_for_admin_reservation}"
       end
     end
 
