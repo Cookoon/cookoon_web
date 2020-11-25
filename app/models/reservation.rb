@@ -18,7 +18,7 @@ class Reservation < ApplicationRecord
   # scope :engaged, -> { charged.or(accepted).or(menu_payment_captured).or(services_payment_captured).or(quotation_asked).or(quotation_accepted_by_host).or(quotation_proposed).or(quotation_accepted).or(ongoing) }
   # scope :inactive, -> { refused.or(passed) }
   scope :refused_by_host, -> { refused.or(quotation_refused_by_host) }
-  scope :inactive, -> { refused.or(quotation_refused_by_host).or(quotation_refused).or(passed).or(cancelled).or(dead)}
+  scope :inactive, -> { refused.or(quotation_refused_by_host).or(quotation_refused).or(passed).or(cancelled_because_host_did_not_reply).or(dead)}
   scope :created_in_day_range_around, ->(datetime) { where created_at: day_range(datetime) }
   scope :in_hour_range_around, ->(datetime) { where start_at: hour_range(datetime) }
   scope :finished_in_day_range_around, ->(datetime) { joins(:inventory).merge(Inventory.checked_out_in_day_range_around(datetime)) }
@@ -96,7 +96,7 @@ class Reservation < ApplicationRecord
   validates :type_name, inclusion: { in: %w[breakfast brunch lunch diner diner_cocktail lunch_cocktail morning afternoon day], message: "Ce type de réservation n'est pas valide" }
   validates :menu_status, inclusion: { in: %w[initial selected cooking_by_user validated payment_required captured paid], message: "Le statut du menu n'est pas valide" }
   validates :services_status, inclusion: { in: %w[initial validated payment_required captured paid], message: "Le statut n'est pas valide" }
-  validates :cookoon_butler_payment_status, inclusion: { in: %w[initial charged captured cancelled paid] }
+  validates :cookoon_butler_payment_status, inclusion: { in: %w[initial charged captured cancelled_because_host_did_not_reply paid] }
 
   validate :tenant_is_not_host
 
@@ -124,9 +124,9 @@ class Reservation < ApplicationRecord
     initial? || paid
   end
 
-  def refused_passed_or_cancelled?
-    refused? || passed? #|| cancelled? Uncomment when implementing cancel
-  end
+  # def refused_passed_or_cancelled?
+  #   refused? || passed? #|| cancelled? Uncomment when implementing cancel
+  # end
 
   def payment(options = {})
     @payment ||= Reservation::Payment.new(self, options)
@@ -332,7 +332,7 @@ class Reservation < ApplicationRecord
   end
 
   def notification_needed?
-    %w(charged accepted menu_payment_captured services_payment_captured quotation_asked quotation_accepted_by_host quotation_refused_by_host quotation_proposed quotation_accepted quotation_refused refused cancelled ongoing passed).include? aasm_state
+    %w(charged accepted menu_payment_captured services_payment_captured quotation_asked quotation_accepted_by_host quotation_refused_by_host quotation_proposed quotation_accepted quotation_refused refused cancelled_because_host_did_not_reply ongoing passed).include? aasm_state
   end
 
   def tenant_is_not_host
