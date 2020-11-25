@@ -56,6 +56,7 @@ class User < ApplicationRecord
   after_invitation_accepted :send_welcome_email
   after_save :upsert_mailchimp_subscription, if: :saved_change_to_born_on?
   before_update :report_to_slack, if: :stripe_account_id_changed?
+  after_create :report_to_slack_new_membership_asking, if: :saved_change_to_membership_asking?
 
   alias_attribute :customerable_label, :email
 
@@ -172,6 +173,12 @@ class User < ApplicationRecord
   def report_to_slack
     return unless Rails.env.production?
     PingSlackHostJob.perform_later(id)
+  end
+
+  def report_to_slack_new_membership_asking
+    # return unless Rails.env.production?
+    return if Rails.env.development? #comment + perform_now to get it in development
+    PingSlackUserJob.perform_later(id)# if notification_needed?
   end
 
   def send_welcome_email
