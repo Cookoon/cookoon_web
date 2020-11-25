@@ -21,7 +21,7 @@ module ReservationStateMachine
       state :quotation_refused
       state :refused
       # state :cancelled
-      state :cancelled_because_host_did_not_reply
+      state :cancelled_because_host_did_not_reply_in_validity_period
       state :ongoing
       state :passed
       state :dead
@@ -97,8 +97,8 @@ module ReservationStateMachine
       #   transitions from: [:initial, :cookoon_selected, :menu_selected, :services_selected, :charged, :quotation_asked, :quotation_proposed], to: :cancelled
       # end
 
-      event :cancel_because_host_did_not_reply do
-        transitions from: [:charged, :quotation_asked], to: :cancelled_because_host_did_not_reply
+      event :cancel_because_host_did_not_reply_in_validity_period do
+        transitions from: [:charged, :quotation_asked], to: :cancelled_because_host_did_not_reply_in_validity_period
       end
 
       event :start do
