@@ -20,7 +20,8 @@ module ReservationStateMachine
       state :quotation_accepted
       state :quotation_refused
       state :refused
-      state :cancelled
+      # state :cancelled
+      state :cancelled_because_host_did_not_reply
       state :ongoing
       state :passed
       state :dead
@@ -92,8 +93,12 @@ module ReservationStateMachine
         transitions from: :charged, to: :refused
       end
 
-      event :cancel do
-        transitions from: [:initial, :cookoon_selected, :menu_selected, :services_selected, :charged, :quotation_asked, :quotation_proposed], to: :cancelled
+      # event :cancel do
+      #   transitions from: [:initial, :cookoon_selected, :menu_selected, :services_selected, :charged, :quotation_asked, :quotation_proposed], to: :cancelled
+      # end
+
+      event :cancel_because_host_did_not_reply do
+        transitions from: [:charged, :quotation_asked], to: :cancelled_because_host_did_not_reply
       end
 
       event :start do
