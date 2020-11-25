@@ -29,6 +29,7 @@ RSpec.describe Reservation, type: :model do
     let!(:paid) { create(:reservation, :paid) }
     let!(:two_days_ago) { create(:reservation, :created_two_days_ago) }
     let!(:paid_ten_days_ago) { create(:reservation, :paid, :created_ten_days_ago) }
+    let!(:charged) { create(:reservation, :charged ) }
 
     let!(:reservation_initial_with_menu) { create(:reservation, :with_menu) }
     let!(:reservation_charged_with_menu_selected) { create(:reservation, :with_menu, aasm_state: 'charged', menu_status: "selected") }
@@ -54,7 +55,7 @@ RSpec.describe Reservation, type: :model do
     end
 
     describe '.short_notice' do
-      let!(:paid) { create(:reservation, :paid) }
+      let!(:paid) { create(:reservation, :charged) }
 
       it 'returns only paid reservations starting in less than few hours' do
         Timecop.freeze(10.days.from_now) do
@@ -110,7 +111,7 @@ RSpec.describe Reservation, type: :model do
     describe '.with_services' do
       it 'returns only reservations with services' do
         expect(described_class.with_services).to include(reservation_initial_with_services)
-        expect((described_class.with_services).count).to eq(16)
+        expect((described_class.with_services).count).to eq(17)
       end
     end
 
@@ -118,7 +119,7 @@ RSpec.describe Reservation, type: :model do
       it 'returns only reservations which needs services validation' do
         expect(described_class.needs_services_validation).to include(reservation_charged_with_services)
         expect(described_class.needs_services_validation).to_not include(reservation_initial_with_services)
-        expect((described_class.needs_services_validation).count).to eq(6)
+        expect((described_class.needs_services_validation).count).to eq(7)
       end
     end
 
@@ -141,7 +142,7 @@ RSpec.describe Reservation, type: :model do
     describe '.needs_host_action' do
       it 'returns only reservations which needs host action' do
         expect(described_class.needs_host_action).to include(reservation_charged_with_menu_selected, reservation_charged_with_services)
-        expect((described_class.needs_host_action).count).to eq(2)
+        expect((described_class.needs_host_action).count).to eq(3)
       end
     end
 
@@ -155,7 +156,7 @@ RSpec.describe Reservation, type: :model do
     describe '.needs_admin_action_for_services' do
       it 'returns only reservations which needs admin action for services' do
         expect(described_class.needs_admin_action_for_services).to include(reservation_charged_with_menu_selected, reservation_accepted_with_menu_validated, reservation_accepted_with_menu_payment_required, reservation_charged_with_services, reservation_accepted_and_cooked_by_user_with_services, reservation_menu_payment_captured_with_services, reservation_accepted_and_cooked_by_user_with_services_validated, reservation_menu_payment_captured_with_services_validated)
-        expect((described_class.needs_admin_action_for_services).count).to eq(8)
+        expect((described_class.needs_admin_action_for_services).count).to eq(9)
       end
     end
 
@@ -176,7 +177,7 @@ RSpec.describe Reservation, type: :model do
     describe '.needs_admin_action' do
       it 'returns only reservations which needs admin action for menu and services' do
         expect(described_class.needs_admin_action).to include(reservation_charged_with_menu_selected, reservation_accepted_with_menu_validated, reservation_accepted_with_menu_payment_required, reservation_charged_with_services, reservation_accepted_and_cooked_by_user_with_services, reservation_menu_payment_captured_with_services, reservation_accepted_and_cooked_by_user_with_services_validated, reservation_menu_payment_captured_with_services_validated)
-        expect((described_class.needs_admin_action).count).to eq(8)
+        expect((described_class.needs_admin_action).count).to eq(9)
       end
     end
 
