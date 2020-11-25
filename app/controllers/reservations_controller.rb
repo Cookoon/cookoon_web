@@ -37,12 +37,12 @@ class ReservationsController < ApplicationController
     end
   end
 
-  def update
-    @reservation.cancelled!
-    # ReservationMailer.cancelled_by_tenant_to_tenant(@reservation).deliver_later
-    # ReservationMailer.cancelled_by_tenant_to_host(@reservation).deliver_later
-    redirect_to reservations_path
-  end
+  # def update
+  #   @reservation.cancelled!
+  #   # ReservationMailer.cancelled_by_tenant_to_tenant(@reservation).deliver_later
+  #   # ReservationMailer.cancelled_by_tenant_to_host(@reservation).deliver_later
+  #   redirect_to reservations_path
+  # end
 
   def select_cookoon
     if @reservation.pending?

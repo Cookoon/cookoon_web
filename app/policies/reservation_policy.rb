@@ -16,9 +16,9 @@ class ReservationPolicy < ApplicationPolicy
     end
   end
 
-  def update?
-    record.user == user
-  end
+  # def update?
+  #   record.user == user
+  # end
 
   def amounts?
     record.user == user
