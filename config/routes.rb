@@ -53,8 +53,7 @@ Rails.application.routes.draw do
     resources :availabilities, only: %i[index create update], shallow: true
   end
 
-  # resources :reservations, only: %i[index show new create update] do
-  resources :reservations, only: %i[index new create] do
+  resources :reservations, only: %i[index show new create update] do
     resources :cookoons, only: %i[index show] do
       resources :payments, only: [] do
         post :amounts, on: :collection
