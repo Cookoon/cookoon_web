@@ -22,7 +22,7 @@ p.mb-3.font-weight-bold 1. Votre décor et le service
   - if reservation.refused?
     = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:cancelled], sentence_two: "", amount_ttc: reservation.stripe_payment_intent_amount_cookoon_butler, amount_ht: ""
 
-  - if reservation.cancelled_because_host_did_not_reply? || reservation.dead?
+  - if reservation.cancelled_because_host_did_not_reply_in_validity_period? || reservation.dead?
     = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:cancelled], sentence_two: "", amount_ttc: reservation.cookoon_butler_with_tax, amount_ht: ""
 
   - if reservation.quotation_asked?
