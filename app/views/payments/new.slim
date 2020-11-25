@@ -25,7 +25,7 @@
 
       = render 'payments/details_services', reservation: @reservation
 
-      - if !@reservation.cancelled_because_host_did_not_reply_in_validity_period? && !reservation.cancelled_because_short_notice && !@reservation.refused? && !@reservation.dead? && !@reservation.quotation_asked? && !@reservation.quotation_proposed? && !@reservation.quotation_accepted? && !@reservation.quotation_refused?
+      - if !@reservation.cancelled_because_host_did_not_reply_in_validity_period? && !reservation.cancelled_because_short_notice? && !@reservation.refused? && !@reservation.dead? && !@reservation.quotation_asked? && !@reservation.quotation_proposed? && !@reservation.quotation_accepted? && !@reservation.quotation_refused?
         hr.my-5
 
         = render 'payments/details_total', reservation: @reservation
