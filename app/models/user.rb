@@ -159,6 +159,16 @@ class User < ApplicationRecord
     UserMailer.membership_asking_email(self).deliver_later
   end
 
+  def send_inscription_payment_email
+    UserMailer.inscription_payment_email(self).deliver_later
+  end
+
+  def report_to_slack_inscription_payment
+    # return unless Rails.env.production?
+    return if Rails.env.development?
+    PingSlackInscriptionPaymentJob.perform_later(id)
+  end
+
   private
 
   def membership_asking?

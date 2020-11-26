@@ -64,10 +64,6 @@ class Payment
     end
   end
 
-  def report_to_slack_new_inscription_payment
-    report_to_slack_inscription_payment
-  end
-
   private
 
   # def before_proceed; end
@@ -95,12 +91,6 @@ class Payment
   def stripe_customer
     return nil unless user.stripe_customer?
     user.stripe_customer
-  end
-
-  def report_to_slack_inscription_payment
-    # return unless Rails.env.production?
-    return if Rails.env.development?
-    PingSlackInscriptionPaymentJob.perform_later(payable.id)
   end
 end
 

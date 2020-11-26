@@ -7,6 +7,10 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.membership_asking_email(User.last)
   end
 
+  def inscription_payment_email
+    UserMailer.inscription_payment_email(User.last)
+  end
+
   # def notify_invitations_awarded
   #   UserMailer.notify_invitations_awarded(User.last, 5, 'Message personnalisé')
   # end
