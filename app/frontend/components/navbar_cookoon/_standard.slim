@@ -24,7 +24,7 @@
           = link_to raw("<i class='fas fa-users-cog text-primary'></i> Admin"), admin_dashboard_path, class: 'navigation-dropdown-menu-item'
         = link_to raw("<i class='co icon-user text-primary'></i> Mon compte"), edit_users_path, class: 'navigation-dropdown-menu-item'
         = link_to raw("<i class='far fa-credit-card text-primary'></i> Mes moyens de paiement"), credit_cards_path, class: 'navigation-dropdown-menu-item'
-        = link_to raw("<i class='co icon-cookoon-bibliotheque-pictogrammes_loft text-primary'></i> Mon espace hôte #{render 'shared/pending_reservations_count'}"), host_dashboard_path, class: 'navigation-dropdown-menu-item'
+        = link_to raw("<i class='co icon-cookoon-bibliotheque-pictogrammes_loft text-primary'></i> Mon espace hôte #{render 'shared/counter', count: current_user.reservation_requests.needs_host_action.count}"), host_dashboard_path, class: 'navigation-dropdown-menu-item'
         = link_to raw("<i class='fas fa-power-off text-primary'></i> Déconnexion"), destroy_user_session_path, class: 'navigation-dropdown-menu-item', method: 'delete'
         .d-block.d-md-none
           = link_to raw("<i class='co icon-cookoon-bibliotheque-pictogrammes_hotel-particulier text-primary'></i> Mes réservations"), reservations_path, class: 'navigation-dropdown-menu-item'
