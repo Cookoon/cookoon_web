@@ -3,15 +3,15 @@ div(class=classnames(container: @device == :desktop))
 
   ul.nav.nav-pills.mb-2
     li.nav-item
-      a.nav-link.h5.active href="#reservations_needs_host_action" data-toggle="pill" role="tab" En attente d'acception#{render 'shared/pending_reservations_count'}
+      a.nav-link.h5.active href="#reservations_needs_host_action" data-toggle="pill" role="tab" En attente d'acception#{render 'shared/counter', count: @reservations_needs_host_action.count}
       /a.nav-link.actived.d-flex.justify-content-start href="#active" data-toggle="pill" role="tab"
       /  div A traiter
       /  div #{render 'shared/pending_reservations_count'}
 
     li.nav-item
-      a.nav-link.h5 href="#reservations_to_come" data-toggle="pill" role="tab" A venir
+      a.nav-link.h5 href="#reservations_to_come" data-toggle="pill" role="tab" A venir#{render 'shared/counter', count: @reservations_to_come.count}
     li.nav-item
-      a.nav-link.h5 href="#reservations_passed" data-toggle="pill" role="tab" Passées
+      a.nav-link.h5 href="#reservations_passed" data-toggle="pill" role="tab" Passées#{render 'shared/counter', count: @reservations_passed.count}
 
   .tab-content.py-3
     .tab-pane.fade.show.active id="reservations_needs_host_action" role="tabpanel"
