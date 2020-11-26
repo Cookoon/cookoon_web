@@ -1,0 +1,4 @@
+<p>Cher(e) <%= @user.first_name.capitalize %>,</p>
+<p>Le règlement de votre adhésion annuelle (<%= User::Payment::INSCRIPTION_PRICE %> €TTC) a bien été pris en compte.</p>
+
+<p>Si vous avez une question, n'hésitez pas à contacter votre <%= mail_to 'concierge@cookoon.fr', 'concierge Cookoon', subject: "Demande d'informations", target: :_blank %>.</p>

@@ -159,8 +159,14 @@ class User < ApplicationRecord
     UserMailer.membership_asking_email(self).deliver_later
   end
 
-  def report_to_slack_new_inscription_payment
-    report_to_slack_inscription_payment
+  def send_inscription_payment_email
+    UserMailer.inscription_payment_email(self).deliver_later
+  end
+
+  def report_to_slack_inscription_payment
+    # return unless Rails.env.production?
+    return if Rails.env.development?
+    PingSlackInscriptionPaymentJob.perform_later(id)
   end
 
   private
@@ -183,12 +189,6 @@ class User < ApplicationRecord
     # return unless Rails.env.production?
     return if Rails.env.development? #comment + perform_now to get it in development
     PingSlackUserJob.perform_later(id)
-  end
-
-  def report_to_slack_inscription_payment
-    # return unless Rails.env.production?
-    return if Rails.env.development?
-    PingSlackInscriptionPaymentJob.perform_later(id)
   end
 
   def send_welcome_email

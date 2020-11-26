@@ -23,7 +23,8 @@ class InscriptionPaymentsController < ApplicationController
     if payment.capture_inscription_payment
       flash.notice = "Votre paiement a bien été effectué."
       redirect_to home_path
-      current_user.report_to_slack_new_inscription_payment
+      current_user.report_to_slack_inscription_payment
+      current_user.send_inscription_payment_email
     else
       flash.alert = "Une erreur est survenue, néanmoins votre demande de paiement est bien effective. Veuillez contacter notre service d'aide"
       redirect_to new_inscription_payment_path
