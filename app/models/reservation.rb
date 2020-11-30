@@ -60,7 +60,7 @@ class Reservation < ApplicationRecord
 
   accepts_nested_attributes_for :services
 
-  enum category: %i[customer business]
+  enum category: %i[customer business amex]
 
   DEFAULTS = {
     stripe_validity_period: 7.days,
