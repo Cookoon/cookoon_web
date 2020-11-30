@@ -27,7 +27,7 @@ export default class extends Controller {
     flatpickr(this.dateSelectionTarget, {
       dateFormat: 'Y-m-dTH:i',
       // disable: ["2020-11-30", "2020-12-09"],
-      disable: JSON.parse(this.dateSelectionTarget.getAttribute("data-dates-with-no-cookoon-available")),
+      disable: JSON.parse(this.dateSelectionTarget.getAttribute("data-dates-unavailable")),
       // minDate: 'today',
       minDate: new Date().fp_incr(3),
       maxDate: this.dateSelectionTarget.getAttribute("data-end-date-available"),
