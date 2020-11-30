@@ -8,9 +8,9 @@ class ChefsController < ApplicationController
     # # policy_scope displays chef that only have active menus thanks to scope.has_active_menus in chef policy
     # @chefs = policy_scope(Chef).includes(:main_photo_files, :chef_perks, chef_perks: :chef_perk_specification)
     if @reservation.seated?
-      @chefs = policy_scope(Chef).has_active_seated_menus.includes(:main_photo_files, :chef_perks, chef_perks: :chef_perk_specification)
+      @chefs = policy_scope(Chef).has_active_seated_menus.without_engaged_reservations_in_day(@reservation.start_at).includes(:main_photo_files, :chef_perks, chef_perks: :chef_perk_specification)
     elsif @reservation.standing?
-      @chefs = policy_scope(Chef).has_active_standing_menus.includes(:main_photo_files, :chef_perks, chef_perks: :chef_perk_specification)
+      @chefs = policy_scope(Chef).has_active_standing_menus.without_engaged_reservations_in_day(@reservation.start_at).includes(:main_photo_files, :chef_perks, chef_perks: :chef_perk_specification)
     else
       @chefs = policy_scope(Chef).none
     end
