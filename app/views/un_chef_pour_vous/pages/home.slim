@@ -1,1 +1,11 @@
-= render 'shared/construction'
+.home-banner style= "z-index: 0; position: relative; display: flex; justify-content: center; align-items: center;"
+  = carousel_for(['vavin.jpg', 'cookoon-chefs.jpg', 'cookoon_dish.jpg', 'merouan_bounekraf.jpg', 'champagne.jpg', 'cookoon-table-1.jpg'])
+
+.container
+  #search-form-home
+    = c 'search'
+
+  .text-center
+    h3 Expérience d'exception
+
+  = render 'pages/home/edito'
