@@ -1,0 +1,22 @@
+.container.px-sm-0
+  .row.mx-0
+    .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
+
+    .col-12.col-md-8.col-lg-9.px-0
+      = render 'reservations/breadcrumbs'
+
+.container.d-flex.justify-content-center.px-sm-0.pb-5
+  .row
+    .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
+      = render 'reservations/search_recap', reservation: reservation
+
+    .col-12.col-md-8.col-lg-9.px-0
+      .row.mx-0
+        .col-12.col-md-9.col-lg-6.px-0
+          h1 Choisissez le décor de votre réception
+      .row.mx-0
+        .col-12.px-0
+          p.text-primary.mb-0.mb-md-3 Une expérience unique se fabrique dans un décor unique... Chacun de nos lieux présente une atmosphère et un caractère propre. Choisissez celui qui correspond le mieux à l'expérience que vous souhaitez vivre avec vos convives.
+      .row.mx-0
+        .col-12.px-0
+          = render 'list', reservation: reservation, cookoons_available: cookoons_available, cookoons_unavailable: cookoons_unavailable
