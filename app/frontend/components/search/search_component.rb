@@ -2,15 +2,7 @@ module SearchComponent
   extend ComponentHelper
 
   def types
-    # @reservation.business? ? business_types : customer_types
-    case @reservation.category
-    when 'business'
-      business_types
-    when 'customer'
-      customer_types
-    when 'amex'
-      amex_types
-    end
+    @reservation.business? ? business_types : customer_types
   end
 
   def people_counts
@@ -18,13 +10,6 @@ module SearchComponent
   end
 
   private
-
-  def amex_types
-    [
-      {data: 'lunch', display: 'Déjeuner'},
-      {data: 'diner', display: 'Dîner'},
-    ]
-  end
 
   def customer_types
     [
