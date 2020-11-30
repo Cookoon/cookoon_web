@@ -688,6 +688,22 @@
       "widget": null,
       "validations": []
     }, {
+      "field": "reservations",
+      "type": ["Number"],
+      "default_value": null,
+      "enums": null,
+      "integration": null,
+      "is_filterable": false,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": "Reservation.id",
+      "inverse_of": "chef",
+      "relationship": "HasMany",
+      "widget": null,
+      "validations": []
+    }, {
       "field": "photo_files",
       "type": ["Number"],
       "default_value": null,
@@ -3122,7 +3138,11 @@
       "field": "category",
       "type": "Enum",
       "default_value": "0",
-      "enums": ["customer", "business"],
+      "enums": [
+        "customer",
+        "business",
+        "amex"
+      ],
       "integration": null,
       "is_filterable": true,
       "is_read_only": false,
@@ -3508,6 +3528,22 @@
       "is_virtual": false,
       "reference": "Inventory.id",
       "inverse_of": "reservation",
+      "relationship": "HasOne",
+      "widget": null,
+      "validations": []
+    }, {
+      "field": "chef",
+      "type": "Number",
+      "default_value": null,
+      "enums": null,
+      "integration": null,
+      "is_filterable": true,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": "Chef.id",
+      "inverse_of": "reservations",
       "relationship": "HasOne",
       "widget": null,
       "validations": []
