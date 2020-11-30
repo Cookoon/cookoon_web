@@ -10,8 +10,9 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!
   before_action :set_device
-  before_action :set_namespace
+  before_action :amex?
   before_action :configure_permitted_parameters, if: :devise_controller?
+  # before_action :namespace_is_amex?
 
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
   after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
@@ -54,27 +55,47 @@ class ApplicationController < ActionController::Base
               end
   end
 
-  def set_namespace
-    @namespace = params[:controller].split("/").first
+  def namespace
+    params[:controller].split("/").first
     # controller.class.parents.first == UnChefPourVous
     # controller_path.start_with? 'un_chef_pour_vous'
     # params[:controller].split("/").first == "un_chef_pour_vous"
   end
 
-  def devise_controller_or_new_user_asking?
-    devise_controller? || (params[:controller] == "users" && (params[:action] == "new" || params[:action] == "create"))
+  def amex?
+    namespace == "un_chef_pour_vous"
   end
 
-  def users_invitations_controller_edit_or_update?
+  def new_user_asking?
+    params[:controller] == "users" && (params[:action] == "new" || params[:action] == "create")
+  end
+
+  def user_answer_invitation?
     params[:controller] == "users/invitations" && (params[:action] == "edit" || params[:action] == "update")
   end
 
+  def general_conditions?
+    params[:controller] == "pages" && params[:action] == "general_conditions"
+  end
+
+  def general_conditions_validation?
+    params[:controller] == "users" && (params[:action] == "edit_general_conditions_acceptance" || params[:action] == "update_general_conditions_acceptance")
+  end
+
+  def inscription_payment?
+    params[:controller] == "inscription_payments" || params[:controller] == "credit_cards"
+  end
+
+  def user_photo_adding?
+    params[:controller] == "users" && (params[:action] == "edit" || params[:action] == "update")
+  end
+
   def skip_pundit?
-    devise_controller_or_new_user_asking? || params[:controller] =~ /(^(rails_)?admin)|(pages$)/
+    devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(pages$)/ || new_user_asking?
   end
 
   def redirect_user_needed?
-    if (devise_controller_or_new_user_asking? == true || users_invitations_controller_edit_or_update? == true || @namespace == "un_chef_pour_vous" || (params[:controller] == "pages" && params[:action] == "general_conditions"))
+    if (devise_controller? || new_user_asking? || user_answer_invitation? || general_conditions? || amex?)
       false
     else
       terms_of_service_acceptance_needed? || inscription_payment_needed? || user_photo_needed?
@@ -94,15 +115,15 @@ class ApplicationController < ActionController::Base
   end
 
   def skip_general_conditions_validation?
-    (params[:controller] == "pages" && params[:action] == "general_conditions") || (params[:controller] == "users" && (params[:action] == "edit_general_conditions_acceptance" || params[:action] == "update_general_conditions_acceptance"))
+    general_conditions? || general_conditions_validation?
   end
 
   def skip_inscription_payment?
-    params[:controller] == "inscription_payments" || params[:controller] == "credit_cards"
+    inscription_payment?
   end
 
   def skip_user_photo_adding?
-    params[:controller] == "users" && (params[:action] == "edit" || params[:action] == "update")
+    user_photo_adding?
   end
 
   def redirect_user
