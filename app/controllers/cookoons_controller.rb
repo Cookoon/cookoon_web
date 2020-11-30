@@ -9,7 +9,8 @@ class CookoonsController < ApplicationController
       # accomodates_for: (@reservation.people_count),
       accomodates_for: (@reservation),
       # available_in: (@reservation.start_at..@reservation.end_at),
-      available_in: (@reservation.start_at_for_chef_and_service..@reservation.end_at_for_chef_and_service),
+      # available_in: (@reservation.start_at_for_chef_and_service..@reservation.end_at_for_chef_and_service),
+      available_in_day: (@reservation.start_at),
       available_for: current_user
     }
 
