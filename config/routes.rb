@@ -106,6 +106,7 @@ Rails.application.routes.draw do
   # -------- AMEX NAMESPACE ---------
   namespace :un_chef_pour_vous do
     root 'pages#home'
+    resources :reservations, only: %i[create]
   end
 
   # -------- ADMIN ROUTES ---------

@@ -51,7 +51,9 @@ class Reservation < ApplicationRecord
   scope :needs_user_action_for_quotation, -> { quotation_proposed }
   scope :needs_user_action, -> { (needs_user_action_for_menu + needs_user_action_for_services + needs_user_action_for_quotation).uniq }
 
-  belongs_to :user
+  # updated to optional: true because of AMEX (before: only belongs_to :user)
+  belongs_to :user, optional: true
+  # end of AMEX
   belongs_to :cookoon, optional: true
   belongs_to :menu, optional: true
   has_many :services, dependent: :destroy
@@ -60,7 +62,7 @@ class Reservation < ApplicationRecord
 
   accepts_nested_attributes_for :services
 
-  enum category: %i[customer business]
+  enum category: %i[customer business amex]
 
   DEFAULTS = {
     stripe_validity_period: 7.days,
@@ -89,7 +91,9 @@ class Reservation < ApplicationRecord
   monetize :menu_tax_cents
   monetize :menu_with_tax_cents
 
-
+  # add validation on user presence because of AMEX (no validation before)
+  validates :user, presence: true, unless: :amex_category?
+  # end of AMEX
   validates :start_at, presence: true
   validates :start_at, in_future: true, after_notice_period: true, on: :create
   validates :duration, presence: true
@@ -363,5 +367,9 @@ class Reservation < ApplicationRecord
 
   def stripe_payment_intent_amount(stripe_payment_intent)
     Money.new(Stripe::PaymentIntent.retrieve(stripe_payment_intent).amount)
+  end
+
+  def amex_category?
+    category == 'amex'
   end
 end

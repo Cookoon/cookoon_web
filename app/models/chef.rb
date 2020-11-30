@@ -17,6 +17,17 @@ class Chef < ApplicationRecord
       }
     ) }
 
+  scope :amex, -> { where(id: AMEX_CHEFS) }
+
+  case Rails.env
+  when "staging"
+    AMEX_CHEFS = [2, 4]
+  when "production"
+    AMEX_CHEFS = []
+  when "development"
+    AMEX_CHEFS = [Chef.first.id, Chef.last.id]
+  end
+
   GENDER = %w[male female]
 
   validates :name, presence: true
