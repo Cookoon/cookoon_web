@@ -12,7 +12,6 @@ class ApplicationController < ActionController::Base
   before_action :set_device
   before_action :amex?
   before_action :configure_permitted_parameters, if: :devise_controller?
-  # before_action :namespace_is_amex?
 
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
   after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
@@ -91,7 +90,7 @@ class ApplicationController < ActionController::Base
   end
 
   def skip_pundit?
-    devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(pages$)/ || new_user_asking?
+    devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(pages$)/ || new_user_asking? || amex?
   end
 
   def redirect_user_needed?
