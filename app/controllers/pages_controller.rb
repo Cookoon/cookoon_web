@@ -22,7 +22,9 @@ class PagesController < ApplicationController
   def set_dates_with_no_cookoon_available_for_current_user
     @dates_with_no_cookoon_available_for_current_user = Array.new
     (Date.today..@end_date_available).to_a.each do |date|
-      @dates_with_no_cookoon_available_for_current_user << date.strftime("%Y-%m-%d") if Cookoon.available_for(current_user).available_in_day(date).blank?
+      if Cookoon.available_for(current_user).available_in_day(date).blank? || Chef.without_engaged_reservations_in_day(date).blank?
+        @dates_with_no_cookoon_available_for_current_user << date.strftime("%Y-%m-%d")
+      end
     end
   end
 
