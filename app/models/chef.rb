@@ -2,6 +2,7 @@ class Chef < ApplicationRecord
   has_many :menus
   has_many :chef_perks, dependent: :destroy
   has_many :chef_perk_specifications, through: :chef_perks
+  has_many :reservations, through: :menus
 
   has_attachments :photos, order: 'id ASC'
   has_attachment :main_photo

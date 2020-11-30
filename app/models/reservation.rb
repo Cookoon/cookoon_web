@@ -59,6 +59,7 @@ class Reservation < ApplicationRecord
   belongs_to :menu, optional: true
   has_many :services, dependent: :destroy
   has_one :inventory, dependent: :destroy
+  has_one :chef, through: :menu
 
   accepts_nested_attributes_for :services
 
