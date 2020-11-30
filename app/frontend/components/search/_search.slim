@@ -1,29 +1,32 @@
-.search.search-home data={controller: "search", action: 'click@window->search#hideSelections'}
-  .search-inputs-container
-    - if current_user.pro?
-      .search-category-selection.d-flex-default.mb-3
-        span.d-none.d-md-block.btn-cookoon style="text-transform: none" Vous souhaitez réserver pour :
-        = link_to 'Une occasion particulière', new_reservation_path(category: :customer), remote: true, class: classnames('btn-cookoon', 'text-center', {'btn-cookoon-primary': @reservation.customer?})
-        = link_to 'Une occasion professionnelle', new_reservation_path(category: :business), remote: true, class: classnames('btn-cookoon', 'text-center', {'btn-cookoon-primary': @reservation.business?})
+- if @reservation.category == 'amex'
+  = render 'search_amex'
+- else
+  .search.search-home data={controller: "search", action: 'click@window->search#hideSelections'}
+    .search-inputs-container
+      - if current_user.pro?
+        .search-category-selection.d-flex-default.mb-3
+          span.d-none.d-md-block.btn-cookoon style="text-transform: none" Vous souhaitez réserver pour :
+          = link_to 'Une occasion particulière', new_reservation_path(category: :customer), remote: true, class: classnames('btn-cookoon', 'text-center', {'btn-cookoon-primary': @reservation.customer?})
+          = link_to 'Une occasion professionnelle', new_reservation_path(category: :business), remote: true, class: classnames('btn-cookoon', 'text-center', {'btn-cookoon-primary': @reservation.business?})
 
-    .search-inputs
-      .input-cookoon-search data={action: 'click->search#toggleSelection', target: 'search.selection'}
-        p Convives
-        span.input-cookoon-search-data data={target: 'search.countText'} = @reservation.default_people_count
-        .input-cookoon-search-selection.d-none
-          - people_counts.each do |count|
-            .input-cookoon-search-selection-item data={count: count, action: 'click->search#selectCount'} #{count} personnes
+      .search-inputs
+        .input-cookoon-search data={action: 'click->search#toggleSelection', target: 'search.selection'}
+          p Convives
+          span.input-cookoon-search-data data={target: 'search.countText'} = @reservation.default_people_count
+          .input-cookoon-search-selection.d-none
+            - people_counts.each do |count|
+              .input-cookoon-search-selection-item data={count: count, action: 'click->search#selectCount'} #{count} personnes
 
-      .input-cookoon-search data={action: 'click->search#toggleSelection', target: 'search.selection'}
-        p Type de réception
-        span.input-cookoon-search-data data={target: 'search.typeText'} = @reservation.default_type.first
-        .input-cookoon-search-selection.d-none
-          - types.each do |type|
-            .input-cookoon-search-selection-item data={type: type[:data], text: type[:display], action: 'click->search#selectType'} #{type[:display]}
+        .input-cookoon-search data={action: 'click->search#toggleSelection', target: 'search.selection'}
+          p Type de réception
+          span.input-cookoon-search-data data={target: 'search.typeText'} = @reservation.default_type.first
+          .input-cookoon-search-selection.d-none
+            - types.each do |type|
+              .input-cookoon-search-selection-item data={type: type[:data], text: type[:display], action: 'click->search#selectType'} #{type[:display]}
 
-      .input-cookoon-search data={target: 'search.dateSelection', 'end-date-available': @end_date_available, 'dates-unavailable': @dates_unavailable}
-        p Date
-        span.input-cookoon-search-data data={target: 'search.dateText'} = @reservation.default_date
+        .input-cookoon-search data={target: 'search.dateSelection', 'end-date-available': @end_date_available, 'dates-unavailable': @dates_unavailable}
+          p Date
+          span.input-cookoon-search-data data={target: 'search.dateText'} = @reservation.default_date
 
-  .btn-cookoon-search-container
-    = render 'form'
+    .btn-cookoon-search-container
+      = render 'form'
