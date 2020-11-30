@@ -10,7 +10,6 @@ Dish.destroy_all
 Menu.destroy_all
 Chef.destroy_all
 ChefPerk.destroy_all
-Chef.destroy_all
 ChefPerkSpecification.destroy_all
 
 puts 'Seeding Companies'
@@ -199,6 +198,18 @@ chef_attributes = [
     main_photo_url: "https://upload.wikimedia.org/wikipedia/commons/6/6f/Gordon_Ramsay.jpg",
     citation: "Je suis un super Chef",
     gender: "male"
+  },
+  {
+    name: 'Baptiste Renouard',
+    description: "Avant la 10ème édition de Top Chef, Baptiste a travaillé avec des chefs prestigieux tel que Paolo Boscaro, Yannick Alléno et Frédéric Simonin.
+      À seulement 13 ans il effectua un stage chez Robuchon puis le retrouvera à nouveau plus tard, ce qui provoquera un déclic sur l'art de la restauration.
+      Pendant son passage à Top Chef, il ouvre son propre restaurant, Ochre, et poursuit son rêve de décrocher une étoile au guide Michelin.",
+    photo_urls: ["https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60", "https://images.unsplash.com/photo-1542197745-c70e10f66af8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"],
+    min_price: 500,
+    references: "",
+    main_photo_url: "https://res.cloudinary.com/cookoon/image/upload/v1598366705/pp9fhlmnzyi4p4yvikga.jpg",
+    citation: "Je suis un super Chef",
+    gender: "male"
   }
 ]
 
@@ -224,17 +235,31 @@ menu_attributes = [
     meal_type: "seated_meal"
   },
   {
-    chef: Chef.last,
+    chef: Chef.second,
     status: "active",
     unit_price_cents: 3500,
     description: "Menu d'été",
     meal_type: "seated_meal"
   },
   {
-    chef: Chef.last,
+    chef: Chef.second,
     status: "initial",
     unit_price_cents: 5000,
     description: "Menu d'automne",
+    meal_type: "standing_meal"
+  },
+  {
+    chef: Chef.last,
+    status: "active",
+    unit_price_cents: 3500,
+    description: "Menu I",
+    meal_type: "seated_meal"
+  },
+  {
+    chef: Chef.last,
+    status: "initial",
+    unit_price_cents: 5000,
+    description: "Menu II",
     meal_type: "standing_meal"
   }
 ]
@@ -302,6 +327,42 @@ dish_attributes = [
     name: "La tomate",
     category: "Entrée",
     order: 1,
+    menu: Menu.fourth,
+  },
+  {
+    name: "L'agneau",
+    category: "Plat",
+    order: 2,
+    menu: Menu.fourth,
+  },
+  {
+    name: "La poire",
+    category: "Dessert",
+    order: 3,
+    menu: Menu.fourth,
+  },
+  {
+    name: "Les gambas",
+    category: "Entrée",
+    order: 1,
+    menu: Menu.fifth,
+  },
+  {
+    name: "Le saumon",
+    category: "Plat",
+    order: 2,
+    menu: Menu.fifth,
+  },
+  {
+    name: "Le chocolat",
+    category: "Dessert",
+    order: 3,
+    menu: Menu.fifth,
+  },
+  {
+    name: "Les crevettes",
+    category: "Entrée",
+    order: 1,
     menu: Menu.last,
   },
   {
@@ -311,7 +372,7 @@ dish_attributes = [
     menu: Menu.last,
   },
   {
-    name: "La poire",
+    name: "La pomme",
     category: "Dessert",
     order: 3,
     menu: Menu.last,
@@ -367,11 +428,19 @@ chef_perk_attributes = [
     chef_perk_specification: ChefPerkSpecification.last,
   },
   {
-    chef: Chef.last,
+    chef: Chef.second,
     chef_perk_specification: ChefPerkSpecification.last,
   },
   {
-    chef: Chef.last,
+    chef: Chef.second,
+    chef_perk_specification: ChefPerkSpecification.second,
+  },
+  {
+    chef: Chef.third,
+    chef_perk_specification: ChefPerkSpecification.last,
+  },
+  {
+    chef: Chef.third,
     chef_perk_specification: ChefPerkSpecification.second,
   },
 ]
