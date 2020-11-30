@@ -5,9 +5,6 @@ class Reservation < ApplicationRecord
   include TimeRangeBuilder
   include PriceComputer
 
-  attr_accessor :end_date_available
-  attr_accessor :dates_with_no_cookoon_available_for_current_user
-
   scope :displayable, -> { where.not(aasm_state: :initial).order(start_at: :asc) }
   scope :for_tenant, ->(user) { where(user: user) }
   scope :for_host, ->(user) { where(cookoon: user.cookoons) }
@@ -59,6 +56,7 @@ class Reservation < ApplicationRecord
   belongs_to :menu, optional: true
   has_many :services, dependent: :destroy
   has_one :inventory, dependent: :destroy
+  has_one :chef, through: :menu
 
   accepts_nested_attributes_for :services
 

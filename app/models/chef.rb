@@ -2,11 +2,20 @@ class Chef < ApplicationRecord
   has_many :menus
   has_many :chef_perks, dependent: :destroy
   has_many :chef_perk_specifications, through: :chef_perks
+  has_many :reservations, through: :menus
 
   has_attachments :photos, order: 'id ASC'
   has_attachment :main_photo
 
   default_scope -> { order(updated_at: :desc) }
+
+  scope :without_engaged_reservations_in_day, -> (day) { where.not(id:
+    Reservation.engaged.joins(:menu).where(
+      'start_at >= ? AND start_at <= ?', day.beginning_of_day, day.end_of_day
+      ).pluck(:menu_id).map {
+      |e| e = Menu.find(e).chef.id
+      }
+    ) }
 
   GENDER = %w[male female]
 
