@@ -235,6 +235,13 @@ menu_attributes = [
     meal_type: "seated_meal"
   },
   {
+    chef: Chef.first,
+    status: "amex",
+    unit_price_cents: 3000,
+    description: "Menu Amex I",
+    meal_type: "seated_meal"
+  },
+  {
     chef: Chef.second,
     status: "active",
     unit_price_cents: 3500,
@@ -261,7 +268,14 @@ menu_attributes = [
     unit_price_cents: 5000,
     description: "Menu II",
     meal_type: "standing_meal"
-  }
+  },
+  {
+    chef: Chef.last,
+    status: "amex",
+    unit_price_cents: 5000,
+    description: "Menu Amex II",
+    meal_type: "seated_meal"
+  },
 ]
 
 puts 'Seeding Menus'
@@ -286,6 +300,24 @@ dish_attributes = [
     category: "Dessert",
     order: 3,
     menu: Menu.first,
+  },
+  {
+    name: "La sardine amex",
+    category: "Entrée",
+    order: 1,
+    menu: Menu.third,
+  },
+  {
+    name: "Le canard amex",
+    category: "Plat",
+    order: 2,
+    menu: Menu.third,
+  },
+  {
+    name: "La passion amex",
+    category: "Dessert",
+    order: 3,
+    menu: Menu.third,
   },
   {
     name: "Le maquereau",
@@ -377,6 +409,24 @@ dish_attributes = [
     order: 3,
     menu: Menu.last,
   },
+  {
+    name: "Les crevettes amex",
+    category: "Entrée",
+    order: 1,
+    menu: Menu.last,
+  },
+  {
+    name: "L'agneau amex",
+    category: "Plat",
+    order: 2,
+    menu: Menu.last,
+  },
+  {
+    name: "La pomme amex",
+    category: "Dessert",
+    order: 3,
+    menu: Menu.last,
+  }
 ]
 
 puts 'Seeding Dishes'
