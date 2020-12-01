@@ -38,7 +38,7 @@ class Cookoon < ApplicationRecord
   when "staging"
     AMEX_COOKOONS = [2, 9]
   when "production"
-    AMEX_COOKOONS = []
+    AMEX_COOKOONS = [59, 89, 82, 9]
   when "development"
     AMEX_COOKOONS = [Cookoon.first.id, Cookoon.last.id]
   end
