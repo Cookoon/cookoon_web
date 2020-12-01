@@ -235,6 +235,13 @@ menu_attributes = [
     meal_type: "seated_meal"
   },
   {
+    chef: Chef.first,
+    status: "amex",
+    unit_price_cents: 3000,
+    description: "Menu Amex I",
+    meal_type: "seated_meal"
+  },
+  {
     chef: Chef.second,
     status: "active",
     unit_price_cents: 3500,
@@ -243,9 +250,9 @@ menu_attributes = [
   },
   {
     chef: Chef.second,
-    status: "initial",
+    status: "active",
     unit_price_cents: 5000,
-    description: "Menu d'automne",
+    description: "Cocktail d'automne",
     meal_type: "standing_meal"
   },
   {
@@ -257,11 +264,18 @@ menu_attributes = [
   },
   {
     chef: Chef.last,
-    status: "initial",
+    status: "active",
     unit_price_cents: 5000,
     description: "Menu II",
-    meal_type: "standing_meal"
-  }
+    meal_type: "seated_meal"
+  },
+  {
+    chef: Chef.last,
+    status: "amex",
+    unit_price_cents: 5000,
+    description: "Menu Amex II",
+    meal_type: "seated_meal"
+  },
 ]
 
 puts 'Seeding Menus'
@@ -306,77 +320,113 @@ dish_attributes = [
     menu: Menu.second,
   },
   {
-    name: "La Saint-Jacques cuisinée comme ma grand-mère",
+    name: "La sardine amex",
     category: "Entrée",
     order: 1,
     menu: Menu.third,
+  },
+  {
+    name: "Le canard amex",
+    category: "Plat",
+    order: 2,
+    menu: Menu.third,
+  },
+  {
+    name: "La passion amex",
+    category: "Dessert",
+    order: 3,
+    menu: Menu.third,
+  },
+  {
+    name: "La Saint-Jacques cuisinée comme ma grand-mère",
+    category: "Entrée",
+    order: 1,
+    menu: Menu.fourth,
   },
   {
     name: "Le boeuf",
     category: "Plat",
     order: 2,
-    menu: Menu.third,
+    menu: Menu.fourth,
   },
   {
     name: "Le tiramisu",
     category: "Dessert",
     order: 3,
-    menu: Menu.third,
+    menu: Menu.fourth,
   },
   {
     name: "La tomate",
     category: "Entrée",
     order: 1,
-    menu: Menu.fourth,
+    menu: Menu.fifth,
   },
   {
     name: "L'agneau",
     category: "Plat",
     order: 2,
-    menu: Menu.fourth,
+    menu: Menu.fifth,
   },
   {
     name: "La poire",
     category: "Dessert",
     order: 3,
-    menu: Menu.fourth,
+    menu: Menu.fifth,
   },
   {
     name: "Les gambas",
     category: "Entrée",
     order: 1,
-    menu: Menu.fifth,
+    menu: Menu.find(Menu.last.id - 2),
   },
   {
     name: "Le saumon",
     category: "Plat",
     order: 2,
-    menu: Menu.fifth,
+    menu: Menu.find(Menu.last.id - 2),
   },
   {
     name: "Le chocolat",
     category: "Dessert",
     order: 3,
-    menu: Menu.fifth,
+    menu: Menu.find(Menu.last.id - 2),
   },
   {
     name: "Les crevettes",
     category: "Entrée",
     order: 1,
-    menu: Menu.last,
+    menu: Menu.find(Menu.last.id - 1),
   },
   {
     name: "L'agneau",
     category: "Plat",
     order: 2,
-    menu: Menu.last,
+    menu: Menu.find(Menu.last.id - 1),
   },
   {
     name: "La pomme",
     category: "Dessert",
     order: 3,
+    menu: Menu.find(Menu.last.id - 1),
+  },
+  {
+    name: "Les crevettes amex",
+    category: "Entrée",
+    order: 1,
     menu: Menu.last,
   },
+  {
+    name: "L'agneau amex",
+    category: "Plat",
+    order: 2,
+    menu: Menu.last,
+  },
+  {
+    name: "La pomme amex",
+    category: "Dessert",
+    order: 3,
+    menu: Menu.last,
+  }
 ]
 
 puts 'Seeding Dishes'

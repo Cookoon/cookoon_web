@@ -1,6 +1,6 @@
 class Menu < ApplicationRecord
 
-  STATUSES = %w[initial active archived].freeze
+  STATUSES = %w[initial active archived amex].freeze
   MEAL_TYPES = { "seated_meal" => "Repas assis", "standing_meal" => "Repas debout" }.freeze
   MAX_PER_CHEF = 2
 
@@ -23,6 +23,7 @@ class Menu < ApplicationRecord
   scope :archived, -> { where("status = 'archived'") }
   scope :seated, -> { where("meal_type = 'seated_meal'") }
   scope :standing, -> { where("meal_type = 'standing_meal'") }
+  scope :amex, -> { where("status = 'amex'") }
 
   def active?
     status == "active"
@@ -34,6 +35,10 @@ class Menu < ApplicationRecord
 
   def initial?
     status == "initial"
+  end
+
+  def amex?
+    status == "amex"
   end
 
   def standing?

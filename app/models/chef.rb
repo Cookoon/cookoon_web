@@ -23,7 +23,7 @@ class Chef < ApplicationRecord
   when "staging"
     AMEX_CHEFS = [2, 4]
   when "production"
-    AMEX_CHEFS = []
+    AMEX_CHEFS = [1, 2]
   when "development"
     AMEX_CHEFS = [Chef.first.id, Chef.last.id]
   end
