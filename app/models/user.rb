@@ -19,6 +19,7 @@ class User < ApplicationRecord
   enum emailing_preferences: { no_emails: 0, all_emails: 1 }
 
   PHONE_REGEXP = /\A(\+\d+)?([\s\-\.]?\(?\d+\)?)+\z/
+  TERMS_OF_SERVICE_DATE = DateTime.new(2020, 9, 30, 14, 00, 00)
 
   devise :invitable, :database_authenticatable, :recoverable,
          :trackable, :validatable, :rememberable
@@ -51,7 +52,7 @@ class User < ApplicationRecord
   validates :job, presence: true, on: :create, unless: :amex?
   validates :personal_taste, presence: true, on: :create, unless: :amex?
   validates :motivation, presence: true, on: :create, unless: :amex?
-  validates :photo, presence: true, unless: :amex?
+  validates :photo, presence: true, on: :create, unless: :amex?
 
   after_invitation_accepted :send_welcome_email
   after_save :upsert_mailchimp_subscription, if: :saved_change_to_born_on?
@@ -59,10 +60,6 @@ class User < ApplicationRecord
   after_create :report_to_slack_new_membership_asking, if: :saved_change_to_membership_asking?
 
   alias_attribute :customerable_label, :email
-
-  def amex?
-    amex
-  end
 
   def full_name
     if first_name.present? && last_name.present?
@@ -221,4 +218,7 @@ class User < ApplicationRecord
     stripe_account.present?
   end
 
+  def amex?
+    amex
+  end
 end

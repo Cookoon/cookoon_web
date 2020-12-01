@@ -7,7 +7,7 @@
       <hr class="breadcrumbs-hr">
     </div>
   </div>
-  <p>Nos conditions générales de services ont évoluées, veuillez les valider avant de continuer.</p>
+  <p>Nos conditions générales de services ont évolué, veuillez les valider avant de continuer.</p>
     <%= simple_form_for true_user, url: update_general_conditions_acceptance_users_path do |f| %>
       <%= f.input :terms_of_service, as: :boolean, input_html: { checked: false }, label: "J'accepte les #{link_to('conditions générales de services', general_conditions_url, target: :_blank, class: 'a_gold')} ce #{@date_time_now.day} #{I18n.t('date.month_names')[@date_time_now.month]} à #{@date_time_now.strftime('%H:%M:%S')}".html_safe, label_html: { style: "color: inherit" } %>
       <%= f.input :terms_of_service_at, as: :hidden, readonly: true, input_html: { value: @date_time_now } %>
