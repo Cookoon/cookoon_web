@@ -14,13 +14,21 @@ class Cookoon < ApplicationRecord
     end
   }
   scope :available_for, ->(user) { where.not(user: user) }
-  scope :available_in, ->(range) { without_reservation_in(range).without_availability_in(range) }
+  # scope :available_in, ->(range) { without_reservation_in(range).without_availability_in(range) }
   # scope :without_reservation_in, ->(range) { where.not(id: Reservation.engaged.overlapping(range).pluck(:cookoon_id).uniq) }
-  scope :available_in_day, -> (day) { approved.displayable_on_index.available_in((day.in_time_zone.beginning_of_day + 2.hours)..(day.in_time_zone.end_of_day)) }
-  scope :without_reservation_in, ->(range) { where.not(id: Reservation.engaged.map { |reservation| { cookoon_id: reservation.cookoon_id, start_at_for_chef_and_service: reservation.start_at_for_chef_and_service, end_at_for_chef_and_service: reservation.end_at_for_chef_and_service } }.select { |reservation| (reservation[:start_at_for_chef_and_service] >= range.first && reservation[:start_at_for_chef_and_service] <= range.last) || (reservation[:end_at_for_chef_and_service] >= range.first && reservation[:end_at_for_chef_and_service] <= range.last) }.pluck(:cookoon_id).uniq) }
-  scope :without_availability_in, ->(range) { where.not(id: Availability.unavailable.overlapping(range).pluck(:cookoon_id).uniq) }
+  # scope :available_in_day, -> (day) { approved.displayable_on_index.available_in((day.in_time_zone.beginning_of_day + 2.hours)..(day.in_time_zone.end_of_day)) }
+  # scope :without_reservation_in, ->(range) { where.not(id: Reservation.engaged.map { |reservation| { cookoon_id: reservation.cookoon_id, start_at_for_chef_and_service: reservation.start_at_for_chef_and_service, end_at_for_chef_and_service: reservation.end_at_for_chef_and_service } }.select { |reservation| (reservation[:start_at_for_chef_and_service] >= range.first && reservation[:start_at_for_chef_and_service] <= range.last) || (reservation[:end_at_for_chef_and_service] >= range.first && reservation[:end_at_for_chef_and_service] <= range.last) }.pluck(:cookoon_id).uniq) }
+  # scope :without_availability_in, ->(range) { where.not(id: Availability.unavailable.overlapping(range).pluck(:cookoon_id).uniq) }
   scope :created_in_day_range_around, ->(date_time) { where created_at: day_range(date_time) }
   scope :over_price, ->(price) { where 'price_cents >= ?', price }
+
+  scope :available_in_day, -> (day) { approved.displayable_on_index.without_reservation_in_day(day).without_availability_in_day(day) }
+  scope :without_reservation_in_day, ->(day) { where.not(id: Reservation.engaged.where('start_at >= ? AND start_at <= ?', day.beginning_of_day, day.end_of_day).pluck(:cookoon_id).uniq) }
+  scope :without_availability_in_day, ->(day) { where.not(id: Availability.unavailable.where(date: day).pluck(:cookoon_id).uniq) }
+
+  scope :unavailable_in_day, -> (day) { (approved.displayable_on_index.with_reservation_in_day(day)).or(approved.displayable_on_index.with_availability_in_day(day)) }
+  scope :with_reservation_in_day, ->(day) { where(id: Reservation.engaged.where('start_at >= ? AND start_at <= ?', day.beginning_of_day, day.end_of_day).pluck(:cookoon_id).uniq) }
+  scope :with_availability_in_day, ->(day) { where(id: Availability.unavailable.where(date: day).pluck(:cookoon_id).uniq) }
 
   scope :random, -> { order(Arel::Nodes::NamedFunction.new('RANDOM', [])) }
 

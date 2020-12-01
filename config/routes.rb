@@ -106,7 +106,11 @@ Rails.application.routes.draw do
   # -------- AMEX NAMESPACE ---------
   namespace :un_chef_pour_vous do
     root 'pages#home'
-    resources :reservations, only: %i[create]
+    resources :reservations, only: %i[create] do
+      resources :cookoons, only: %i[index show] do
+        patch :select_cookoon, to: 'reservations#select_cookoon', as: :select_cookoon
+      end
+    end
   end
 
   # -------- ADMIN ROUTES ---------

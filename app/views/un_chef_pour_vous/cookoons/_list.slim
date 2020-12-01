@@ -1,0 +1,7 @@
+.cookoon-cards
+  - cookoons_available.each do |cookoon|
+    = link_to un_chef_pour_vous_reservation_cookoon_select_cookoon_path(reservation, cookoon), method: :patch, remote: true do
+      = render 'cookoons/card', cookoon: cookoon
+  - cookoons_unavailable.each do |cookoon|
+    .cookoon_unavailable
+      = render 'cookoons/card', cookoon: cookoon

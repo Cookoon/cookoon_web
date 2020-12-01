@@ -95,3 +95,10 @@
     // position: relative;
   }
 }
+
+.cookoon_unavailable {
+  .cookoon-card {
+    filter: grayscale(100%);
+  }
+
+}
