@@ -110,6 +110,7 @@ Rails.application.routes.draw do
       resources :cookoons, only: %i[index show] do
         patch :select_cookoon, to: 'reservations#select_cookoon', as: :select_cookoon
       end
+      resources :chefs, only: %i[index show]
     end
   end
 
