@@ -1,6 +1,7 @@
 class UnChefPourVous::CookoonsController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[index show select_cookoon]
-  before_action :find_reservation, only: %i[index show select_cookoon]
+  skip_before_action :authenticate_user!, only: %i[index show]
+  before_action :find_reservation, only: %i[index show]
+  before_action :find_cookoon, only: %i[show]
 
   def index
     cookoons = Cookoon.amex.accomodates_for(@reservation).includes(:main_photo_files)
@@ -9,17 +10,23 @@ class UnChefPourVous::CookoonsController < ApplicationController
   end
 
   def show
-    raise
-  end
-
-  def select_cookoon
-    raise
+    @sample_photos = @cookoon.sample_photos
+    if @cookoon.geocoded?
+      @marker = {
+        lat: @cookoon.latitude,
+        lng: @cookoon.longitude
+      }
+    end
   end
 
   private
 
   def find_reservation
     @reservation = Reservation.find(params[:reservation_id]).decorate
+  end
+
+  def find_cookoon
+    @cookoon = Cookoon.find(params[:id]).decorate
   end
 
 end
