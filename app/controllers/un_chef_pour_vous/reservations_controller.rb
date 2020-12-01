@@ -1,5 +1,7 @@
 class UnChefPourVous::ReservationsController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[create]
+  skip_before_action :authenticate_user!, only: %i[create select_cookoon]
+  before_action :find_reservation, only: %i[select_cookoon]
+  before_action :find_cookoon, only: %i[select_cookoon]
 
   def create
     @reservation = Reservation.new(reservation_params.merge(category: 'amex', people_count: 2))
@@ -11,7 +13,27 @@ class UnChefPourVous::ReservationsController < ApplicationController
     end
   end
 
+  def select_cookoon
+    if @reservation.pending?
+      if @reservation.select_cookoon!(@cookoon)
+        redirect_to un_chef_pour_vous_reservation_cookoon_path(@reservation, @cookoon)
+      else
+        redirect_to un_chef_pour_vous_reservation_cookoons_path(@reservation), alert: "Une erreur s'est produite, veuillez essayer à nouveau"
+      end
+    else
+      redirect_to un_chef_pour_vous_reservation_cookoon_path(@reservation, @cookoon)
+    end
+  end
+
   def reservation_params
     params.require(:reservation).permit(:start_at, :type_name)
+  end
+
+  def find_reservation
+    @reservation = Reservation.find(params[:reservation_id]).decorate
+  end
+
+  def find_cookoon
+    @cookoon = Cookoon.find(params[:cookoon_id])
   end
 end

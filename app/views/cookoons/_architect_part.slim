@@ -23,7 +23,7 @@
     = link_to "Voir les photos", "#", data: {toggle: "modal", target: "#cookoon-photos-modal"}, class: "btn btn-cookoon btn-cookoon-secondary-gold w-100"
     = render 'cookoons/modal', photos: cookoon.all_photos
 
-    - if controller_path == "cookoons"
+    - if controller_path == "cookoons" || controller_path == "un_chef_pour_vous/cookoons"
       .recap
         p.text-center = reservation.recap_string_start_and_end_time
         p.text-center = reservation.recap_string_butler_count

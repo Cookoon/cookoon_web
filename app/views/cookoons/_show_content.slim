@@ -1,0 +1,90 @@
+.container.px-sm-0
+  .row.mx-0
+    .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
+
+    .col-12.col-md-8.col-lg-9.px-0
+      = render 'reservations/breadcrumbs'
+
+.container.d-flex.justify-content-center.px-sm-0.pb-5
+  .row
+    .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
+      = render 'shared/back_button_transparent', button_title: 'Retour aux décors', path: back_button_path
+      = render 'reservations/search_recap', reservation: reservation
+
+    .col-12.col-md-8.col-lg-9.px-0
+      = render 'cookoons/details_part', cookoon: cookoon
+
+      - if @cookoon.geocoded?
+        = render 'cookoons/architect_part', cookoon: cookoon, sample_photos: sample_photos, marker: marker, button_title: 'Choisir', button_path: button_path, button_method: button_method, reservation: reservation
+      - else
+        = render 'cookoons/architect_part', cookoon: cookoon, sample_photos: sample_photos, button_title: 'Choisir', button_path: button_path, button_method: button_method, reservation: reservation
+
+//.container
+  h1.text-center.my-4 = @cookoon.name
+
+//.container.d-flex.justify-content-center.px-0
+  .row
+    .d-none.d-md-block.col-md-4.col-lg-3.px-md-2
+      .px-md-2.px-lg-0
+        = link_to '< Retour aux décors', reservation_cookoons_path(@reservation), class: 'btn-cookoon btn-block btn-cookoon-secondary-gold mb-2 small'
+        = render 'reservations/search_recap', reservation: @reservation
+
+    .col-12.col-md-8.col-lg-9.px-0.px-md-2.pr-lg-0
+      .px-0.px-md-2.pb-4
+        h3 Votre décor
+        .text-center
+          = carousel_for(@cookoon.photos)
+        .col-12
+          = render 'presentation', cookoon: @cookoon, perks: @cookoon.perks
+
+        //#reservation-menus
+          = render 'chefs/selection', chefs: @chefs if @reservation.needs_chef?
+
+        #reservation-services
+          h3 Les services intégrés
+
+          = simple_form_for :reservation, url: select_services_reservation_path(@reservation), method: :patch, remote: true do |f|
+            = f.input :services,
+                as: :check_boxes,
+                collection: @reservation.services_collection_for_view,
+                checked: @reservation.builtin_services,
+                label_method: :first,
+                value_method: :second,
+                item_wrapper_class: "font-weight-bold pl-5 py-1"
+
+            = render 'reservations/recap_string', reservation: @reservation
+
+            = f.submit 'Confirmer', class: 'btn-cookoon btn-cookoon-primary btn-lg btn-block mb-4'
+
+//h1.text-center.my-4 = @cookoon.name
+
+//div class=classnames(container: desktop_view?)
+  .d-flex
+    .d-none.d-md-block.mr-2
+      = link_to '< Retour aux annonces', reservation_cookoons_path(@reservation), class: 'btn-cookoon btn-block btn-cookoon-secondary-gold mb-2 small'
+      = render 'reservations/search_recap', reservation: @reservation
+
+    .container
+      .bg-dark.text-center
+        = carousel_for(@cookoon.photos)
+
+      = render 'presentation', cookoon: @cookoon
+
+      #reservation-menus
+        = render 'chefs/selection', chefs: @chefs if @reservation.needs_chef?
+
+      #reservation-services
+        h3 Les services intégrés
+
+        = simple_form_for :reservation, url: select_services_reservation_path(@reservation), method: :patch do |f|
+          = f.input :services,
+              as: :check_boxes,
+              collection: @reservation.services_collection_for_view,
+              checked: @reservation.builtin_services,
+              label_method: :first,
+              value_method: :second,
+              item_wrapper_class: "font-weight-bold pl-5 py-1"
+
+          = render 'reservations/recap_string', reservation: @reservation
+
+          = f.submit 'Confirmer', class: 'btn-cookoon btn-cookoon-primary btn-lg btn-block mb-4'
