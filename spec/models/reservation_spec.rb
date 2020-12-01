@@ -57,14 +57,14 @@ RSpec.describe Reservation, type: :model do
     describe '.short_notice' do
       let!(:paid) { create(:reservation, :charged) }
 
-      # it 'returns only paid reservations starting in less than few hours' do
-      #   Timecop.freeze(10.days.from_now) do
-      #     expect(described_class.short_notice).to include(paid)
-      #   end
-      #   Timecop.freeze(8.days.from_now) do
-      #     expect(described_class.short_notice).to_not include(paid)
-      #   end
-      # end
+      it 'returns only paid reservations starting in less than few hours' do
+        Timecop.freeze(10.days.from_now) do
+          expect(described_class.short_notice).to include(paid)
+        end
+        Timecop.freeze(8.days.from_now) do
+          expect(described_class.short_notice).to_not include(paid)
+        end
+      end
     end
 
     describe '.stripe_will_not_capture' do
