@@ -250,9 +250,9 @@ menu_attributes = [
   },
   {
     chef: Chef.second,
-    status: "initial",
+    status: "active",
     unit_price_cents: 5000,
-    description: "Menu d'automne",
+    description: "Cocktail d'automne",
     meal_type: "standing_meal"
   },
   {
