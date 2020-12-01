@@ -77,3 +77,9 @@
       - else
         p Il n'y a pas de menu archivé pour ce Chef
 
+      h5.pt-4 Les menus amex
+      - if @chef.menus.amex.present?
+        = render 'admin/menus/list', menus: @chef.menus.amex.order_by_meal_type.order_by_asc_price
+      - else
+        p Il n'y a pas de menu amex pour ce Chef
+
