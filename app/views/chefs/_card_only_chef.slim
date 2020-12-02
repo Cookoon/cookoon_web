@@ -1,11 +1,11 @@
-= link_to path do
-  .cookoon-card.mb-0.h-100.d-flex.flex-column.justify-content-between
-    div
-      .cookoon-card-image-div-squared
-        .cookoon-card-image style="background-image: url(#{cl_image_path(chef.main_photo.path)}); background-size: cover; background-position: center"
+//= link_to path do
+.cookoon-card.mb-0.h-100.d-flex.flex-column.justify-content-between
+  div
+    .cookoon-card-image-div-squared
+      .cookoon-card-image style="background-image: url(#{cl_image_path(chef.main_photo.path)}); background-size: cover; background-position: center"
 
-      .cookoon-card-body.pb-0
-        h4.text-center style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"
-          = chef.name
+    .cookoon-card-body.pb-0
+      h4.text-center style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"
+        = chef.name
 
-        .text-center = render 'chefs/perks_in_card', div_style: "", chef_perks: chef.chef_perks, p_style: "overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"
+      .text-center = render 'chefs/perks_in_card', div_style: "", chef_perks: chef.chef_perks, p_style: "overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"

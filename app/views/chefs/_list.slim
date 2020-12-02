@@ -1,0 +1,9 @@
+.cookoon-cards
+  - chefs_available.each do |chef|
+    = link_to reservation_chef_path(reservation, chef) do
+      = render 'card_only_chef', chef: chef
+  - chefs_unavailable.each do |chef|
+    .cookoon_unavailable
+      = render 'card_only_chef', chef: chef
+  - if reservation.pending?
+    .cookoon-card-in-last-column.text-center = link_to 'Je souhaite cuisiner moi-même', cooking_by_user_reservation_path(reservation), class: 'btn-cookoon btn-block btn-gray text-black', method: :patch
