@@ -9,16 +9,6 @@ class Chef < ApplicationRecord
 
   default_scope -> { order(updated_at: :desc) }
 
-  scope :without_engaged_reservations_in_day, -> (day) { where.not(id:
-    Reservation.engaged.joins(:menu).where(
-      'start_at >= ? AND start_at <= ?', day.beginning_of_day, day.end_of_day
-      ).pluck(:menu_id).map {
-      |e| e = Menu.find(e).chef.id
-      }
-    ) }
-
-  scope :amex, -> { where(id: AMEX_CHEFS) }
-
   case Rails.env
   when "staging"
     AMEX_CHEFS = [2, 4]
@@ -47,6 +37,21 @@ class Chef < ApplicationRecord
   # scope :has_active_menus, -> { where(id: Menu.where(status: "active").pluck(:chef_id)) }
   scope :has_active_seated_menus, -> { where(id: Menu.active.seated.pluck(:chef_id)) }
   scope :has_active_standing_menus, -> { where(id: Menu.active.standing.pluck(:chef_id)) }
+  scope :without_engaged_reservations_in_day, -> (day) { where.not(id:
+    Reservation.engaged.joins(:menu).where(
+      'start_at >= ? AND start_at <= ?', day.beginning_of_day, day.end_of_day
+      ).pluck(:menu_id).map {
+      |e| e = Menu.find(e).chef.id
+      }
+    ) }
+  scope :with_engaged_reservations_in_day, -> (day) { where(id:
+    Reservation.engaged.joins(:menu).where(
+      'start_at >= ? AND start_at <= ?', day.beginning_of_day, day.end_of_day
+      ).pluck(:menu_id).map {
+      |e| e = Menu.find(e).chef.id
+      }
+    ) }
+  scope :amex, -> { where(id: AMEX_CHEFS) }
 
   def base_price_or_min_price_positive
     if base_price.positive? && min_price.positive?
