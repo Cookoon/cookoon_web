@@ -36,7 +36,9 @@ class Chef < ApplicationRecord
 
   # scope :has_active_menus, -> { where(id: Menu.where(status: "active").pluck(:chef_id)) }
   scope :has_active_seated_menus, -> { where(id: Menu.active.seated.pluck(:chef_id)) }
+  scope :has_not_active_seated_menus, -> { where.not(id: Menu.active.seated.pluck(:chef_id)) }
   scope :has_active_standing_menus, -> { where(id: Menu.active.standing.pluck(:chef_id)) }
+  scope :has_not_active_standing_menus, -> { where.not(id: Menu.active.standing.pluck(:chef_id)) }
   scope :without_engaged_reservations_in_day, -> (day) { where.not(id:
     Reservation.engaged.joins(:menu).where(
       'start_at >= ? AND start_at <= ?', day.beginning_of_day, day.end_of_day
