@@ -1,0 +1,7 @@
+.cookoon-cards
+  - chefs_available.includes(:main_photo_files, :chef_perks, chef_perks: :chef_perk_specification).each do |chef|
+    = link_to un_chef_pour_vous_reservation_chef_path(reservation, chef) do
+      = render 'chefs/card_only_chef', chef: chef
+  - chefs_unavailable.each do |chef|
+    .cookoon_unavailable
+      = render 'chefs/card_only_chef', chef: chef

@@ -3,16 +3,13 @@
     .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
 
     .col-12.col-md-8.col-lg-9.px-0
-      .breadcrumbs
-        h1.text-center.first-title Les chefs
-      hr.breadcrumbs-hr
+      = render 'reservations/breadcrumbs'
 
 .container.d-flex.justify-content-center.px-sm-0.pb-5
   .row
     .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
-      = render 'shared/back_button_transparent', button_title: 'Retour au dashboard', path: admin_dashboard_path
-      - if policy([:admin, Chef]).create?
-        = render 'shared/button_transparent', button_title: 'Nouveau chef', path: new_admin_chef_path
+      = render 'shared/back_button_transparent', button_title: 'Retour aux décors', path: back_button_path
+      = render 'reservations/search_recap', reservation: reservation
 
     .col-12.col-md-8.col-lg-9.px-0
       .row.mx-0
@@ -23,7 +20,4 @@
           p.text-primary.mb-0.mb-md-3 Etoilés, issus de grandes maisons ou de célèbres émissions, les chefs vous feront vivre une expérience gastronomique exclusive.
       .row.mx-0
         .col-12.px-0
-          .cookoon-cards
-            - @chefs.each do |chef|
-              = link_to admin_chef_path(chef)
-                = render 'chefs/card_only_chef', chef: chef
+          = render 'list', reservation: reservation, chefs_available: chefs_available, chefs_unavailable: chefs_unavailable
