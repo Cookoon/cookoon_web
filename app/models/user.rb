@@ -45,13 +45,13 @@ class User < ApplicationRecord
   validates :phone_number,
             presence: true,
             format: { with: PHONE_REGEXP }
-  validates :born_on, presence: true, if: :invited_to_sign_up?, unless: :amex?
-  validates :terms_of_service, acceptance: { message: 'Vous devez accepter les conditions générales de services pour continuer' }, unless: :amex?
-  validates :address, presence: true, on: :create, unless: :amex?
-  validates :job, presence: true, on: :create, unless: :amex?
-  validates :personal_taste, presence: true, on: :create, unless: :amex?
-  validates :motivation, presence: true, on: :create, unless: :amex?
-  validates :photo, presence: true, on: :create, unless: :amex?
+  validates :born_on, presence: true, if: :invited_to_sign_up?
+  validates :terms_of_service, acceptance: { message: 'Vous devez accepter les conditions générales de services pour continuer' }
+  validates :address, presence: true, on: :create
+  validates :job, presence: true, on: :create
+  validates :personal_taste, presence: true, on: :create
+  validates :motivation, presence: true, on: :create
+  validates :photo, presence: true, on: :create
 
   after_invitation_accepted :send_welcome_email
   after_save :upsert_mailchimp_subscription, if: :saved_change_to_born_on?
@@ -215,9 +215,5 @@ class User < ApplicationRecord
 
   def stripe_account?
     stripe_account.present?
-  end
-
-  def amex?
-    amex
   end
 end

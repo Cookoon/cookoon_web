@@ -46,22 +46,6 @@
         "value": 12
       }]
     }, {
-      "field": "user",
-      "type": "Number",
-      "default_value": null,
-      "enums": null,
-      "integration": null,
-      "is_filterable": true,
-      "is_read_only": false,
-      "is_required": false,
-      "is_sortable": true,
-      "is_virtual": false,
-      "reference": "User.id",
-      "inverse_of": "amex_code",
-      "relationship": "BelongsTo",
-      "widget": null,
-      "validations": []
-    }, {
       "field": "created_at",
       "type": "Date",
       "default_value": null,
@@ -89,6 +73,22 @@
       "is_virtual": false,
       "reference": null,
       "inverse_of": null,
+      "widget": null,
+      "validations": []
+    }, {
+      "field": "user",
+      "type": "Number",
+      "default_value": null,
+      "enums": null,
+      "integration": null,
+      "is_filterable": true,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": "User.id",
+      "inverse_of": null,
+      "relationship": "BelongsTo",
       "widget": null,
       "validations": []
     }],
@@ -4588,22 +4588,6 @@
       "is_sortable": true,
       "is_virtual": false,
       "reference": "Motivation.id",
-      "inverse_of": "user",
-      "relationship": "HasOne",
-      "widget": null,
-      "validations": []
-    }, {
-      "field": "amex_code",
-      "type": "Number",
-      "default_value": null,
-      "enums": null,
-      "integration": null,
-      "is_filterable": true,
-      "is_read_only": false,
-      "is_required": false,
-      "is_sortable": true,
-      "is_virtual": false,
-      "reference": "AmexCode.id",
       "inverse_of": "user",
       "relationship": "HasOne",
       "widget": null,
