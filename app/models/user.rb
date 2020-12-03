@@ -34,7 +34,6 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :job
   accepts_nested_attributes_for :personal_taste
   accepts_nested_attributes_for :motivation
-  has_one :amex_code
 
   has_attachment :photo
 
