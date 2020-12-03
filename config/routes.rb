@@ -111,6 +111,9 @@ Rails.application.routes.draw do
         patch :select_cookoon, to: 'reservations#select_cookoon', as: :select_cookoon
       end
       resources :chefs, only: %i[index show]
+      resources :menus do
+        patch :select_menu, to: 'reservations#select_menu'
+      end
     end
   end
 
