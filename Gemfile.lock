@@ -234,6 +234,7 @@ GEM
     multi_json (1.13.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
+    nested_form (0.3.2)
     netrc (0.11.0)
     nio4r (2.5.2)
     nio4r (2.5.2-java)
@@ -438,6 +439,9 @@ GEM
     turbolinks (5.1.1)
       turbolinks-source (~> 5.1)
     turbolinks-source (5.1.0)
+    turbolinks_render (0.9.20)
+      rails (>= 5.2.0)
+      turbolinks-source (~> 5.1)
     tzinfo (1.2.7)
       thread_safe (~> 0.1)
     tzinfo-data (1.2019.1)
@@ -506,6 +510,7 @@ DEPENDENCIES
   letter_opener
   listen (>= 3.0.5, < 3.2)
   money-rails
+  nested_form
   pg (>= 0.18, < 2.0)
   postmark-rails
   pretender
@@ -534,6 +539,7 @@ DEPENDENCIES
   stripe
   timecop
   turbolinks
+  turbolinks_render
   tzinfo-data
   vcr
   web-console (>= 3.3.0)
