@@ -1,0 +1,10 @@
+p.mb-3.font-weight-bold 1. Votre décor et le service
+.mb-4
+  = render 'reservations/recap_string', reservation: reservation
+  p.mb-1
+    '- L'adresse: #{reservation.cookoon.address}
+  p.mb-1
+    - if reservation.butler_count > 1
+      '- Les #{reservation.butler_count} maîtres d'hôtel
+    - else
+      '- Le maître d'hôtel

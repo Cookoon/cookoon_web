@@ -1,0 +1,17 @@
+= console
+.container.px-sm-0
+  .row.mx-0
+    .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
+
+    .col-12.col-md-8.col-lg-9.px-0
+      = render 'reservations/breadcrumbs'
+
+.container.d-flex.justify-content-center.px-sm-0.pb-5
+  .row
+    .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
+      = render 'shared/back_button_transparent', button_title: 'Retour aux décors', path: un_chef_pour_vous_reservation_cookoons_path(@reservation)
+      = render 'shared/back_button_transparent', button_title: 'Retour aux chefs', path: un_chef_pour_vous_reservation_chefs_path(@reservation)
+      = render 'reservations/search_recap', reservation: @reservation
+
+    .col-12.col-md-8.col-lg-9.px-0
+      = render 'form'

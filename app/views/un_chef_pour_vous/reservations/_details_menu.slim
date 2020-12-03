@@ -1,0 +1,8 @@
+p.mb-3.font-weight-bold 2. Vos souhaits de chef et de menu
+.div
+  = render 'menus/recap', reservation: reservation
+
+  - if reservation.menu.present?
+    .mb-4
+      .my-4.d-flex.justify-content-center
+        = render 'menus/card_without_price', menu: reservation.menu
