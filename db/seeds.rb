@@ -56,7 +56,17 @@ end
 puts "Users done"
 
 puts "Seeding Amex Codes"
-  10.times { AmexCode.create!(code: SecureRandom.base64(12)) }
+amex_codes_attributes = [
+  { code: SecureRandom.hex(4), email: 'a@test.fr' },
+  { code: SecureRandom.hex(4), email: 'b@test.fr' },
+  { code: SecureRandom.hex(4), email: 'c@test.fr' },
+  { code: SecureRandom.hex(4), email: 'd@test.fr' },
+  { code: SecureRandom.hex(4), email: 'e@test.fr' },
+  { code: SecureRandom.hex(4), email: 'f@test.fr' },
+  { code: SecureRandom.hex(4), email: 'g@test.fr' },
+  { code: SecureRandom.hex(4), email: 'h@test.fr' },
+]
+AmexCode.create! amex_codes_attributes
 puts "Amex Codes done"
 
 cookoons_attributes = [
