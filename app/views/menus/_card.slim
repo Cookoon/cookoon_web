@@ -10,8 +10,8 @@
       '*****
   .menu-card-price
     .text-primary.mb-2 Prix:
-    p.mb-0 #{menu.computed_price_with_chef_with_margin_and_taxes_per_person(@reservation.people_count)} €TTC par convive
-    p.mb-3 pour #{@reservation.people_count} convives
+    p.mb-0 #{menu.computed_price_with_chef_with_margin_and_taxes_per_person(reservation.people_count)} €TTC par convive
+    p.mb-3 pour #{reservation.people_count} convives
     // | &nbsp
     small.text-primary.font-italic.align-left Ce tarif inclut la présence du chef, sa prestation et le menu
     //  '(soit #{menu.computed_price_with_margin} €HT)*
@@ -27,9 +27,9 @@
         // | &nbsp
         // '(soit #{chef.computed_base_price_with_margin} €HT)
 
-  - if policy(@reservation).select_menu?
-    = link_to 'Choisir ce menu', reservation_menu_select_menu_path(@reservation, menu), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
-  - if policy([:admin, @reservation]).validate_menu?
-    = link_to 'Valider ce menu', admin_reservation_validate_menu_path(@reservation), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
-  - if policy([:admin, @reservation]).ask_menu_payment?
-    = link_to 'Demander le paiement du menu', admin_reservation_ask_menu_payment_path(@reservation), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
+  - if policy(reservation).select_menu?
+    = link_to 'Choisir ce menu', reservation_menu_select_menu_path(reservation, menu), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
+  - if policy([:admin, reservation]).validate_menu?
+    = link_to 'Valider ce menu', admin_reservation_validate_menu_path(reservation), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
+  - if policy([:admin, reservation]).ask_menu_payment?
+    = link_to 'Demander le paiement du menu', admin_reservation_ask_menu_payment_path(reservation), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
