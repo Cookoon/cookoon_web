@@ -54,6 +54,12 @@ fr:
       personal_taste:
         favorite_wines: Vins préférés
         favorite_restaurants: Restaurants préférés
+      amex_code:
+        code: Code
+        e-mail: Adresse e-mail
+        first_name: Prénom
+        last_name: Nom
+        phone_number: Numéro de téléphone
 
     errors:
       models:
