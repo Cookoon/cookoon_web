@@ -10,6 +10,7 @@ class UnChefPourVous::ChefsController < ApplicationController
   end
 
   def show
+    @menus = @chef.menus.amex
   end
 
   private
@@ -19,7 +20,7 @@ class UnChefPourVous::ChefsController < ApplicationController
   end
 
   def find_chef
-    @chef = Chef.includes(menus: :dishes).find(params[:id])
+    @chef = Chef.find(params[:id])
   end
 
 end
