@@ -150,6 +150,10 @@
       "validations": [{
         "message": null,
         "type": "is present"
+      }, {
+        "message": null,
+        "type": "is like",
+        "value": "/^(\\+\d+)?([\\s\-\\.]?\\(?\\d+\\)?)+$/"
       }]
     }, {
       "field": "reservation",
