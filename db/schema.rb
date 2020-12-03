@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_03_094744) do
+ActiveRecord::Schema.define(version: 2020_12_03_100312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,12 @@ ActiveRecord::Schema.define(version: 2020_12_03_094744) do
     t.string "code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "email"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone_number"
+    t.bigint "reservation_id"
+    t.index ["reservation_id"], name: "index_amex_codes_on_reservation_id"
   end
 
   create_table "attachinary_files", force: :cascade do |t|
@@ -312,6 +318,7 @@ ActiveRecord::Schema.define(version: 2020_12_03_094744) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "amex_codes", "reservations"
   add_foreign_key "availabilities", "cookoons"
   add_foreign_key "chef_perks", "chef_perk_specifications"
   add_foreign_key "chef_perks", "chefs"
