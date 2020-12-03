@@ -62,6 +62,7 @@ class Reservation < ApplicationRecord
   has_one :amex_code
 
   accepts_nested_attributes_for :services
+  accepts_nested_attributes_for :amex_code
 
   enum category: %i[customer business amex]
 
