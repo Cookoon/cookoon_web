@@ -1,0 +1,12 @@
+.menu-card style="grid-column: 1 / span 2;"
+  h5.menu-card-name = menu.description
+  .menu-card-items
+    .text-primary.my-2
+      '*****
+    - if menu.dishes.present?
+      - menu.dishes.each do |dish|
+        p = dish.name
+    .text-primary.my-2
+      '*****
+  = link_to 'Choisir ce menu', un_chef_pour_vous_reservation_menu_select_menu_path(reservation, menu), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
+

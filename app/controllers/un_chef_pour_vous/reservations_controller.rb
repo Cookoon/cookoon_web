@@ -1,6 +1,6 @@
 class UnChefPourVous::ReservationsController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[create select_cookoon]
-  before_action :find_reservation, only: %i[select_cookoon]
+  skip_before_action :authenticate_user!, only: %i[create select_cookoon select_menu]
+  before_action :find_reservation, only: %i[select_cookoon select_menu]
   before_action :find_cookoon, only: %i[select_cookoon]
 
   def create
@@ -24,6 +24,14 @@ class UnChefPourVous::ReservationsController < ApplicationController
       redirect_to un_chef_pour_vous_reservation_cookoon_path(@reservation, @cookoon)
     end
   end
+
+  def select_menu
+    @reservation.select_menu!(Menu.find(params[:menu_id]))
+    @reservation.update(menu_status: "selected")
+    redirect_to un_chef_pour_vous_reservation_chefs_path(@reservation), flash: { check_of_chef_availability_needed: true }
+  end
+
+  private
 
   def reservation_params
     params.require(:reservation).permit(:start_at, :type_name)

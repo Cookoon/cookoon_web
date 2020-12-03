@@ -22,6 +22,11 @@ class ChefsController < ApplicationController
   end
 
   def show
+    if @reservation.seated?
+      @menus = @chef.menus.active.seated.order_by_asc_price
+    elsif @reservation.standing?
+      @menus = @chef.menus.active.standing.order_by_asc_price
+    end
   end
 
   private
@@ -32,7 +37,7 @@ class ChefsController < ApplicationController
   end
 
   def find_chef
-    @chef = Chef.includes(menus: :dishes).find(params[:id])
+    @chef = Chef.find(params[:id])
     authorize @chef
   end
 

@@ -1,0 +1,21 @@
+.container.px-sm-0
+  .row.mx-0
+    .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
+
+    .col-12.col-md-8.col-lg-9.px-0
+      = render 'reservations/breadcrumbs'
+
+.container.d-flex.justify-content-center.px-sm-0.pb-5
+  .row
+    .d-none.d-md-block.col-md-4.col-lg-3.px-0.pr-3
+      = render 'shared/back_button_transparent', button_title: 'Retour aux chefs', path: back_button_path
+      = render 'reservations/search_recap', reservation: reservation
+
+    .col-12.col-md-8.col-lg-9.px-0
+      = render 'chefs/details_part', chef: chef
+
+      h2.text-center.mb-0 style = "font-family: 'Avenir'" Les menus
+      hr.primary.mt-n1.mb-1
+      p.text-primary.text-center.font-italic.pb-2 signés #{@chef.name}
+
+      = render 'menus/list', menus: menus, reservation: reservation

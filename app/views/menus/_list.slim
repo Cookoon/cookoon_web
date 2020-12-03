@@ -1,3 +1,6 @@
 .menu-cards
   - menus.each do |menu|
-    = render 'menus/card', menu: menu, chef: @chef, reservation: @reservation
+    - if reservation.amex?
+      = render 'un_chef_pour_vous/menus/card', menu: menu, reservation: reservation
+    - else
+      = render 'menus/card', menu: menu, reservation: reservation
