@@ -23,9 +23,9 @@ class ChefsController < ApplicationController
 
   def show
     if @reservation.seated?
-      @menus = @chef.menus.active.seated.order_by_asc_price
+      @menus = @chef.menus.includes(:dishes).active.seated.order_by_asc_price
     elsif @reservation.standing?
-      @menus = @chef.menus.active.standing.order_by_asc_price
+      @menus = @chef.menus.includes(:dishes).active.standing.order_by_asc_price
     end
   end
 

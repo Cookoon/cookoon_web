@@ -6,7 +6,7 @@ module Admin
     before_action :find_reservation_with_reservation_id, only: %i[validate_menu ask_menu_payment validate_services ask_services_payment quotation_is_sent quotation_is_accepted quotation_is_refused]
 
     def index
-      reservations = policy_scope([:admin, Reservation]).includes(:cookoon, :user, menu: [:chef], cookoon: [:user]).order(id: :desc)
+      reservations = policy_scope([:admin, Reservation]).includes(:cookoon, :user, :amex_code, menu: [:chef], cookoon: [:user]).order(id: :desc)
       engaged_reservations = reservations.engaged
 
       @engaged_reservations_to_come = engaged_reservations.starting_after_today
@@ -21,6 +21,17 @@ module Admin
       # @engaged_customer_reservations = reservations.customer.engaged_credit_card_payment
       # @engaged_business_with_credit_card_payment_reservations = reservations.business.engaged_credit_card_payment
       # @engaged_business_with_quotation_reservations = reservations.business.engaged_quotation
+
+      # reservations = policy_scope([:admin, Reservation])
+      # engaged_reservations_amex = reservations.engaged.amex
+      # engaged_reservations_not_amex = (reservations.engaged.customer).or(reservations.engaged.business)
+
+      # @engaged_reservations_to_come = engaged_reservations_not_amex.starting_after_today.includes(:cookoon, :user, menu: [:chef], cookoon: [:user]) + engaged_reservations_amex.starting_after_today.includes(:cookoon, :amex_code, menu: [:chef], cookoon: [:user])
+      # @engaged_reservations_that_needs_host_action = engaged_reservations_not_amex.needs_host_action.includes(:cookoon, :user, menu: [:chef], cookoon: [:user]) + engaged_reservations_amex.needs_host_action.includes(:cookoon, :amex_code, menu: [:chef], cookoon: [:user])
+      # @engaged_reservations_that_needs_admin_action = engaged_reservations_not_amex.includes(:cookoon, :user, menu: [:chef], cookoon: [:user]).needs_admin_action + engaged_reservations_amex.includes(:cookoon, :amex_code, menu: [:chef], cookoon: [:user]).needs_admin_action
+      # @engaged_reservations_that_needs_user_action = engaged_reservations_not_amex.includes(:cookoon, :user, menu: [:chef], cookoon: [:user]).needs_user_action + engaged_reservations_amex.includes(:cookoon, :amex_code, menu: [:chef], cookoon: [:user]).needs_user_action
+      # @passed_reservations = engaged_reservations_not_amex.starting_before_today.includes(:cookoon, :user, menu: [:chef], cookoon: [:user]) + engaged_reservations_not_amex.passed.includes(:cookoon, :user, menu: [:chef], cookoon: [:user]) + engaged_reservations_amex.starting_before_today.includes(:cookoon, :amex_code, menu: [:chef], cookoon: [:user]) + engaged_reservations_amex.passed.includes(:cookoon, :amex_code, menu: [:chef], cookoon: [:user])
+      # @reservations_refused_by_host = (reservations.customer).or(reservations.business).refused_by_host.includes(:cookoon, :user, menu: [:chef], cookoon: [:user]) + reservations.amex.refused_by_host.includes(:cookoon, :amex_code, menu: [:chef], cookoon: [:user])
     end
 
     def show

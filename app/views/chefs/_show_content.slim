@@ -14,8 +14,13 @@
     .col-12.col-md-8.col-lg-9.px-0
       = render 'chefs/details_part', chef: chef
 
-      h2.text-center.mb-0 style = "font-family: 'Avenir'" Les menus
-      hr.primary.mt-n1.mb-1
-      p.text-primary.text-center.font-italic.pb-2 signés #{@chef.name}
+      - if menus.count == 1
+        h2.text-center.mb-0 style = "font-family: 'Avenir'" Le menu
+        hr.primary.mt-n1.mb-1
+        p.text-primary.text-center.font-italic.pb-2 signé #{@chef.name}
+      - else
+        h2.text-center.mb-0 style = "font-family: 'Avenir'" Les menus
+        hr.primary.mt-n1.mb-1
+        p.text-primary.text-center.font-italic.pb-2 signés #{@chef.name}
 
       = render 'menus/list', menus: menus, reservation: reservation

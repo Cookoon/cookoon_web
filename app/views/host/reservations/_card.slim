@@ -14,10 +14,13 @@
 
     .d-flex-default
       p.w-50
-        | Membre : #{reservation.user.full_name} <br>
-        | <span class='small'>Membre depuis le #{display_date_for(reservation.user.created_at)}</span>
+        - if reservation.amex?
+          | Membre : #{reservation.amex_code.first_name.capitalize} #{reservation.amex_code.last_name.capitalize} <br>
+        - else
+          | Membre : #{reservation.user.full_name} <br>
+          | <span class='small'>Membre depuis le #{display_date_for(reservation.user.created_at)}</span>
 
-      - if reservation.charged? || reservation.quotation_asked?
+      - if reservation.charged? || reservation.quotation_asked? || reservation.amex_asked?
         div
           = simple_form_for [:host, reservation] do |f|
             = f.submit 'Accepter', name: "accept", class: 'btn-cookoon btn-cookoon-primary btn-block'

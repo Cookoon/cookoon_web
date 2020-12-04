@@ -30,6 +30,7 @@ class UnChefPourVous::ReservationsController < ApplicationController
     else
       @amex_code.reservation = @reservation
       if @amex_code.update(amex_code_params)
+        @reservation.ask_amex!
         redirect_to un_chef_pour_vous_root_path, notice: "Votre réservation a bien été prise en compte. Nous vous recontacterons dès que celle-ci sera validée par votre hôte et votre chef."
       else
         render :edit

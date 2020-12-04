@@ -19,6 +19,12 @@ module ReservationStateMachine
       state :quotation_proposed
       state :quotation_accepted
       state :quotation_refused
+
+      # AMEX
+      state :amex_asked
+      state :amex_accepted_by_host
+      state :amex_refused_by_host
+
       state :refused
       # state :cancelled
       state :cancelled_because_host_did_not_reply_in_validity_period
@@ -94,16 +100,28 @@ module ReservationStateMachine
         transitions from: :charged, to: :refused
       end
 
+      event :ask_amex do
+        transitions from: [:menu_selected, :cookoon_selected, :services_selected], to: :amex_asked
+      end
+
+      event :host_accept_amex do
+        transitions from: :amex_asked, to: :amex_accepted_by_host
+      end
+
+      event :host_refuse_amex do
+        transitions from: :amex_asked, to: :amex_refused_by_host
+      end
+
       # event :cancel do
       #   transitions from: [:initial, :cookoon_selected, :menu_selected, :services_selected, :charged, :quotation_asked, :quotation_proposed], to: :cancelled
       # end
 
       event :cancel_because_host_did_not_reply_in_validity_period do
-        transitions from: [:charged, :quotation_asked], to: :cancelled_because_host_did_not_reply_in_validity_period
+        transitions from: [:charged, :quotation_asked, :amex_asked], to: :cancelled_because_host_did_not_reply_in_validity_period
       end
 
       event :cancel_because_short_notice do
-        transitions from: [:charged, :quotation_asked], to: :cancelled_because_short_notice
+        transitions from: [:charged, :quotation_asked, :amex_asked], to: :cancelled_because_short_notice
       end
 
       event :start do

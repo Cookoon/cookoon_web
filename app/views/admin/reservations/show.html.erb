@@ -25,8 +25,13 @@
 
       <div class="mt-5">
         <p>
-          <strong>Utilisateur: </strong>
-          <%= render 'admin/users/form_one_line', user: @reservation.user %>
+          <% if @reservation.amex? %>
+            <strong>Utilisateur Amex: </strong>
+            <%= render 'admin/users/form_one_line', user: @reservation.amex_code %>
+          <% else %>
+            <strong>Utilisateur: </strong>
+            <%= render 'admin/users/form_one_line', user: @reservation.user %>
+          <% end %>
         </p>
 
         <p>
@@ -49,7 +54,7 @@
             <strong>Chef: </strong>
             <%= @reservation.menu.chef.name %>
           </p>
-          <%= render 'menus/card', menu: @reservation.menu, chef: @reservation.menu.chef %>
+          <%= render 'menus/card', menu: @reservation.menu, chef: @reservation.menu.chef, reservation: @reservation %>
         <% else %>
           <p>Aucun menu n'a été sélectionné</p>
         <% end %>

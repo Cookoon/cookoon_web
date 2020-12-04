@@ -3,13 +3,22 @@ module Host
     before_action :find_reservation, only: %i[update]
 
     def index
-      reservations = policy_scope([:host, Reservation]).includes(:cookoon, :user)
+      reservations = policy_scope([:host, Reservation]).includes(:cookoon, :user, :amex_code)
+
       @reservations_needs_host_action = ReservationDecorator.decorate_collection(reservations.needs_host_action)
       @reservations_to_come = ReservationDecorator.decorate_collection(reservations.engaged.starting_after_today) - @reservations_needs_host_action
       @reservations_passed = ReservationDecorator.decorate_collection(reservations.engaged.starting_before_today + reservations.passed)
 
       # @active_reservations = ReservationDecorator.decorate_collection(reservations.engaged)
       # @inactive_reservations = ReservationDecorator.decorate_collection(reservations.passed)
+
+      # reservations = policy_scope([:host, Reservation])
+      # reservations_not_amex = (reservations.customer).or(reservations.business)
+      # reservations_amex = reservations.amex
+
+      # @reservations_needs_host_action = reservations_not_amex.needs_host_action.includes(:cookoon, :user) + reservations_amex.needs_host_action.includes(:cookoon, :amex_code)
+      # @reservations_to_come = reservations_not_amex.engaged.includes(:cookoon, :user) + reservations_amex.engaged.includes(:cookoon, :amex_code) - @reservations_needs_host_action
+      # @reservations_passed = reservations_not_amex.engaged.starting_before_today.includes(:cookoon, :user) + reservations_amex.engaged.starting_before_today.includes(:cookoon, :amex_code) + reservations_not_amex.passed.includes(:cookoon, :user) + reservations_amex.passed.includes(:cookoon, :amex_code)
     end
 
     def update
@@ -19,6 +28,9 @@ module Host
         redirect_to host_reservations_path
       elsif @reservation.quotation_asked?
         params['accept'].present? ? accept_quotation_asked : refuse_quotation_asked
+        redirect_to host_reservations_path
+      elsif @reservation.amex_asked?
+        params['accept'].present? ? accept_amex_asked : refuse_amex_asked
         redirect_to host_reservations_path
       end
     end
@@ -62,6 +74,16 @@ module Host
 
     def refuse_quotation_asked
       @reservation.host_refuse_quotation!
+      flash[:alert] = 'Vous avez refusé la réservation'
+    end
+
+    def accept_amex_asked
+      @reservation.host_accept_amex!
+      flash[:notice] = 'Vous avez accepté la réservation'
+    end
+
+    def refuse_amex_asked
+      @reservation.host_refuse_amex!
       flash[:alert] = 'Vous avez refusé la réservation'
     end
   end
