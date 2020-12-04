@@ -14,4 +14,16 @@ class AmexCode < ApplicationRecord
     reservation.present? || first_name.present? || last_name.present? || phone_number.present?
   end
 
+  def full_name
+    if first_name.present? && last_name.present?
+      "#{first_name.capitalize} #{last_name.capitalize}"
+    else
+      'Membre Cookoon'
+    end
+  end
+
+  def full_email
+    Mail::Address.new("#{full_name} <#{email}>")
+  end
+
 end
