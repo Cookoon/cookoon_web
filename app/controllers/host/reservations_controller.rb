@@ -79,11 +79,13 @@ module Host
 
     def accept_amex_asked
       @reservation.host_accept_amex!
+      @reservation.notify_users_after_amex_host_confirmation
       flash[:notice] = 'Vous avez accepté la réservation'
     end
 
     def refuse_amex_asked
       @reservation.host_refuse_amex!
+      @reservation.notify_users_after_quotation_host_confirmation
       flash[:alert] = 'Vous avez refusé la réservation'
     end
   end
