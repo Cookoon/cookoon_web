@@ -11,11 +11,12 @@ class Reservation < ApplicationRecord
   # scope :active, -> { charged.or(accepted).or(ongoing).or(quotation_asked).or(quotation_proposed).or(quotation_accepted) }
   scope :engaged_credit_card_payment, -> { charged.or(accepted).or(menu_payment_captured).or(services_payment_captured).or(ongoing) }
   scope :engaged_quotation, -> { quotation_asked.or(quotation_accepted_by_host).or(quotation_proposed).or(quotation_accepted).or(ongoing) }
-  scope :engaged, -> { (engaged_credit_card_payment.or(engaged_quotation)).distinct }
+  scope :engaged_amex, -> { amex_asked.or(amex_accepted_by_host).or(ongoing) }
+  scope :engaged, -> { (engaged_credit_card_payment.or(engaged_quotation).or(engaged_amex)).distinct }
   # scope :engaged, -> { charged.or(accepted).or(menu_payment_captured).or(services_payment_captured).or(quotation_asked).or(quotation_accepted_by_host).or(quotation_proposed).or(quotation_accepted).or(ongoing) }
   # scope :inactive, -> { refused.or(passed) }
-  scope :refused_by_host, -> { refused.or(quotation_refused_by_host) }
-  scope :inactive, -> { refused.or(quotation_refused_by_host).or(quotation_refused).or(passed).or(cancelled_because_host_did_not_reply_in_validity_period).or(cancelled_because_short_notice).or(dead)}
+  scope :refused_by_host, -> { refused.or(quotation_refused_by_host).or(amex_refused_by_host) }
+  scope :inactive, -> { refused.or(quotation_refused_by_host).or(amex_refused_by_host).or(quotation_refused).or(passed).or(cancelled_because_host_did_not_reply_in_validity_period).or(cancelled_because_short_notice).or(dead)}
   scope :created_in_day_range_around, ->(datetime) { where created_at: day_range(datetime) }
   scope :in_hour_range_around, ->(datetime) { where start_at: hour_range(datetime) }
   scope :finished_in_day_range_around, ->(datetime) { joins(:inventory).merge(Inventory.checked_out_in_day_range_around(datetime)) }
@@ -28,20 +29,20 @@ class Reservation < ApplicationRecord
   scope :dropped_before_payment, -> { pending.created_before(DEFAULTS[:safety_period].ago) }
   scope :paid, -> { where(paid: true) }
   # scope :short_notice, -> { paid.where('start_at < ?', Time.zone.now.in(DEFAULTS[:safety_period])) }
-  scope :short_notice, -> { charged.or(quotation_asked).where('start_at < ?', Time.zone.now.in(DEFAULTS[:safety_period])) }
+  scope :short_notice, -> { charged.or(quotation_asked).or(amex_asked).where('start_at < ?', Time.zone.now.in(DEFAULTS[:safety_period])) }
   scope :stripe_will_not_capture, -> { paid.created_before(DEFAULTS[:stripe_validity_period].ago.in(DEFAULTS[:safety_period])) }
-  scope :host_did_not_reply_in_validity_period, -> { charged.or(quotation_asked).created_before(DEFAULTS[:validity_period].ago) }
+  scope :host_did_not_reply_in_validity_period, -> { charged.or(quotation_asked).or(amex_asked).created_before(DEFAULTS[:validity_period].ago) }
 
   scope :with_menu , -> { joins(:menu) }
   scope :with_services , -> { joins(:services).distinct }
-  scope :needs_menu_validation, -> { charged.or(accepted).or(quotation_asked).or(quotation_accepted_by_host).where(menu_status: "selected").with_menu }
+  scope :needs_menu_validation, -> { charged.or(accepted).or(quotation_asked).or(quotation_accepted_by_host).or(amex_asked).or(amex_accepted_by_host).where(menu_status: "selected").with_menu }
   scope :needs_menu_payment_asking, -> { accepted.where(menu_status: "validated").with_menu }
   scope :needs_menu_payment, -> { accepted.where(menu_status: "payment_required").with_menu }
   scope :needs_services_validation, -> { charged.or(accepted).or(menu_payment_captured).or(quotation_asked).or(quotation_accepted_by_host).where(services_status: "initial").with_services }
   scope :needs_services_payment_asking, -> { ((accepted.where(menu_status: "cooking_by_user")).or(menu_payment_captured)).where(services_status: "validated").with_services }
   scope :needs_services_payment, -> { ((accepted.where(menu_status: "cooking_by_user")).or(menu_payment_captured)).where(services_status: "payment_required").with_services }
 
-  scope :needs_host_action, -> { charged.or(quotation_asked) }
+  scope :needs_host_action, -> { charged.or(quotation_asked).or(amex_asked) }
   scope :needs_admin_action_for_menu, -> { needs_menu_validation.or(needs_menu_payment_asking) }
   scope :needs_admin_action_for_services, -> { needs_services_validation.or(needs_services_payment_asking) }
   scope :needs_admin_action_for_quotation, -> { quotation_accepted_by_host.or(quotation_proposed) }
@@ -249,7 +250,7 @@ class Reservation < ApplicationRecord
   end
 
   def needs_menu_validation?
-    menu.present? && menu_with_tax > 0 && (charged? || accepted? || quotation_asked? || quotation_accepted_by_host?) && menu_status == "selected"
+    menu.present? && menu_with_tax > 0 && (charged? || accepted? || quotation_asked? || quotation_accepted_by_host? || amex_asked? || amex_accepted_by_host?) && menu_status == "selected"
   end
 
   def needs_menu_payment_asking?
@@ -339,7 +340,7 @@ class Reservation < ApplicationRecord
   end
 
   def notification_needed?
-    %w(charged accepted menu_payment_captured services_payment_captured quotation_asked quotation_accepted_by_host quotation_refused_by_host quotation_proposed quotation_accepted quotation_refused refused cancelled_because_host_did_not_reply_in_validity_period cancelled_because_short_notice ongoing passed).include? aasm_state
+    %w(charged accepted menu_payment_captured services_payment_captured quotation_asked quotation_accepted_by_host quotation_refused_by_host quotation_proposed quotation_accepted quotation_refused amex_asked amex_accepted_by_host amex_refused_by_host quotation_proposed refused cancelled_because_host_did_not_reply_in_validity_period cancelled_because_short_notice ongoing passed).include? aasm_state
   end
 
   def tenant_is_not_host
