@@ -4,36 +4,56 @@ class ReservationMailerPreview < ActionMailer::Preview
   #   ReservationMailer.paid_request_to_tenant(Reservation.last)
   # end
 
-  def paid_request_cookoon_butler_to_tenant
-    ReservationMailer.paid_request_cookoon_butler_to_tenant(Reservation.last)
+  def quotation_host_confirmation_to_host
+    ReservationMailer.quotation_host_confirmation_to_host(Reservation.business.last)
+  end
+
+  def amex_host_confirmation_to_tenant
+    ReservationMailer.amex_host_confirmation_to_tenant(Reservation.amex.engaged.last)
+  end
+
+  def amex_host_confirmation_to_host
+    ReservationMailer.amex_host_confirmation_to_host(Reservation.amex.engaged.last)
+  end
+
+  def amex_request_to_tenant
+    ReservationMailer.amex_request_to_tenant(Reservation.amex.engaged.last)
+  end
+
+  def amex_request_to_host
+    ReservationMailer.amex_request_to_host(Reservation.amex.engaged.last)
   end
 
   def paid_request_cookoon_butler_to_tenant
-    ReservationMailer.paid_request_cookoon_butler_to_tenant(Reservation.last)
+    ReservationMailer.paid_request_cookoon_butler_to_tenant(Reservation.customer.last)
+  end
+
+  def paid_request_cookoon_butler_to_tenant
+    ReservationMailer.paid_request_cookoon_butler_to_tenant(Reservation.customer.last)
   end
 
   def paid_request_menu_to_tenant
-    ReservationMailer.paid_request_menu_to_tenant(Reservation.last)
+    ReservationMailer.paid_request_menu_to_tenant(Reservation.customer.last)
   end
 
   def paid_confirmation_menu_to_tenant
-    ReservationMailer.paid_confirmation_menu_to_tenant(Reservation.last)
+    ReservationMailer.paid_confirmation_menu_to_tenant(Reservation.customer.last)
   end
 
   def paid_request_services_to_tenant
-    ReservationMailer.paid_request_services_to_tenant(Reservation.last)
+    ReservationMailer.paid_request_services_to_tenant(Reservation.customer.last)
   end
 
   def paid_confirmation_services_to_tenant
-    ReservationMailer.paid_confirmation_services_to_tenant(Reservation.last)
+    ReservationMailer.paid_confirmation_services_to_tenant(Reservation.customer.last)
   end
 
   def quotation_request_to_tenant
-    ReservationMailer.quotation_request_to_tenant(Reservation.last)
+    ReservationMailer.quotation_request_to_tenant(Reservation.business.last)
   end
 
   def quotation_request_to_host
-    ReservationMailer.quotation_request_to_host(Reservation.last)
+    ReservationMailer.quotation_request_to_host(Reservation.business.last)
   end
 
   # def cancelled_by_tenant_to_tenant
@@ -58,11 +78,11 @@ class ReservationMailerPreview < ActionMailer::Preview
   # end
 
   def paid_request_cookoon_butler_to_host
-    ReservationMailer.paid_request_cookoon_butler_to_host(Reservation.last)
+    ReservationMailer.paid_request_cookoon_butler_to_host(Reservation.customer.last)
   end
 
   def paid_confirmation_cookoon_butler_to_host
-    ReservationMailer.paid_confirmation_cookoon_butler_to_host(Reservation.last)
+    ReservationMailer.paid_confirmation_cookoon_butler_to_host(Reservation.customer.last)
   end
 
   # def notify_awaiting_request_to_host
