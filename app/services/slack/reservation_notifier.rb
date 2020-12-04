@@ -6,7 +6,7 @@ module Slack
 
     def initialize(attributes)
       @reservation = attributes[:reservation]
-      @tenant = @reservation.user
+      @tenant = @reservation.user unless @reservation.amex?
       @cookoon = @reservation.cookoon
       @host = @cookoon.user
       # @channel = '#locations-dev' if Rails.env.development?
@@ -65,6 +65,16 @@ module Slack
         #{url_for_admin_reservation}"
       when :cancelled_because_short_notice
         "[ANNULATION] la location pour #{cookoon.name} le #{formatted_date} vient d'être annulée car le délai est trop court.
+        #{url_for_admin_reservation}"
+      when :amex_asked
+        "[NOUVELLE DEMANDE AMEX EN ATTENTE DE VALIDATION HOTE] #{cookoon.name} le #{formatted_date} par #{reservation.amex_code.first_name} #{reservation.amex_code.last_name}
+        pour #{reservation.people_count} personnes pendant #{reservation.duration} heures.
+        #{url_for_admin_reservation}"
+      when :amex_accepted_by_host
+        "[ACCEPTATION AMEX] la location pour #{cookoon.name} le #{formatted_date} vient d'être acceptée par #{host.full_name}
+        #{url_for_admin_reservation}"
+      when :amex_refused_by_host
+        "[REFUS AMEX] la location pour #{cookoon.name} le #{formatted_date} vient d'être refusée par #{host.full_name}
         #{url_for_admin_reservation}"
       end
     end
