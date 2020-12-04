@@ -16,8 +16,12 @@
           | : &nbsp
           = I18n.l resa.start_at, format: '%A %d %B'
         hr
-        p.text-center Utilisateur
-        = render "admin/users/form", user: resa.user
+        - if resa.amex?
+          p.text-center Utilisateur Amex
+          = render "admin/users/form", user: resa.amex_code
+        - else
+          p.text-center Utilisateur
+          = render "admin/users/form", user: resa.user
         hr
         p.text-center Hôte
         = render "admin/users/form", user: resa.cookoon.user
