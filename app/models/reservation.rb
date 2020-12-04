@@ -59,8 +59,10 @@ class Reservation < ApplicationRecord
   has_many :services, dependent: :destroy
   has_one :inventory, dependent: :destroy
   has_one :chef, through: :menu
+  has_one :amex_code
 
   accepts_nested_attributes_for :services
+  accepts_nested_attributes_for :amex_code
 
   enum category: %i[customer business amex]
 

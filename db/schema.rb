@@ -10,17 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_19_092747) do
+ActiveRecord::Schema.define(version: 2020_12_03_100312) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "amex_codes", force: :cascade do |t|
     t.string "code"
-    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_amex_codes_on_user_id"
+    t.string "email"
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone_number"
+    t.bigint "reservation_id"
+    t.index ["reservation_id"], name: "index_amex_codes_on_reservation_id"
   end
 
   create_table "attachinary_files", force: :cascade do |t|
@@ -305,7 +309,6 @@ ActiveRecord::Schema.define(version: 2020_11_19_092747) do
     t.boolean "inscription_payment_required"
     t.boolean "membership_asking"
     t.string "address"
-    t.boolean "amex", default: false
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
@@ -315,7 +318,7 @@ ActiveRecord::Schema.define(version: 2020_11_19_092747) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "amex_codes", "users"
+  add_foreign_key "amex_codes", "reservations"
   add_foreign_key "availabilities", "cookoons"
   add_foreign_key "chef_perks", "chef_perk_specifications"
   add_foreign_key "chef_perks", "chefs"

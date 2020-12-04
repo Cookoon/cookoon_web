@@ -1,0 +1,22 @@
+.d-none.d-sm-block.cookoon-nav-bottom.bg-dark
+  .cookoon-nav-navigation
+    = link_to un_chef_pour_vous_root_path do
+      .logo
+        i.co.icon-cookoon-logo.fa-2x.text-primary
+        div.pl-2 Cookoon
+
+    .menu
+      ul.list-inline.text-right
+        li.list-inline-item.px-2 = mail_to 'concierge@cookoon.fr', 'concierge@cookoon.fr', subject: "Demande d'informations", target: :_blank
+        li.list-inline-item.px-2 = link_to number_to_phone("06 78 19 59 57", area_code: true), "tel: 06 78 19 59 57"
+
+.d-block.d-sm-none.cookoon-nav-bottom.bg-dark
+  .cookoon-nav-navigation.justify-content-between
+    = link_to un_chef_pour_vous_root_path do
+      .logo
+        i.co.icon-cookoon-logo.fa-2x.text-primary
+        div.pl-2 Cookoon
+
+    .menu.d-flex.flex-column.w-auto.align-items-end
+      .px-2 = mail_to 'concierge@cookoon.fr', 'concierge@cookoon.fr', subject: "Demande d'informations", target: :_blank
+      .px-2 = link_to number_to_phone("06 78 19 59 57", area_code: true), "tel: 06 78 19 59 57"

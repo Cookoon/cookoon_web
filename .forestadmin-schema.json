@@ -43,24 +43,12 @@
       }, {
         "message": null,
         "type": "is longer than",
-        "value": 12
+        "value": 8
+      }, {
+        "message": null,
+        "type": "is shorter than",
+        "value": 8
       }]
-    }, {
-      "field": "user",
-      "type": "Number",
-      "default_value": null,
-      "enums": null,
-      "integration": null,
-      "is_filterable": true,
-      "is_read_only": false,
-      "is_required": false,
-      "is_sortable": true,
-      "is_virtual": false,
-      "reference": "User.id",
-      "inverse_of": "amex_code",
-      "relationship": "BelongsTo",
-      "widget": null,
-      "validations": []
     }, {
       "field": "created_at",
       "type": "Date",
@@ -89,6 +77,98 @@
       "is_virtual": false,
       "reference": null,
       "inverse_of": null,
+      "widget": null,
+      "validations": []
+    }, {
+      "field": "email",
+      "type": "String",
+      "default_value": null,
+      "enums": null,
+      "integration": null,
+      "is_filterable": true,
+      "is_read_only": false,
+      "is_required": true,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": null,
+      "inverse_of": null,
+      "widget": null,
+      "validations": [{
+        "message": null,
+        "type": "is present"
+      }]
+    }, {
+      "field": "first_name",
+      "type": "String",
+      "default_value": null,
+      "enums": null,
+      "integration": null,
+      "is_filterable": true,
+      "is_read_only": false,
+      "is_required": true,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": null,
+      "inverse_of": null,
+      "widget": null,
+      "validations": [{
+        "message": null,
+        "type": "is present"
+      }]
+    }, {
+      "field": "last_name",
+      "type": "String",
+      "default_value": null,
+      "enums": null,
+      "integration": null,
+      "is_filterable": true,
+      "is_read_only": false,
+      "is_required": true,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": null,
+      "inverse_of": null,
+      "widget": null,
+      "validations": [{
+        "message": null,
+        "type": "is present"
+      }]
+    }, {
+      "field": "phone_number",
+      "type": "String",
+      "default_value": null,
+      "enums": null,
+      "integration": null,
+      "is_filterable": true,
+      "is_read_only": false,
+      "is_required": true,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": null,
+      "inverse_of": null,
+      "widget": null,
+      "validations": [{
+        "message": null,
+        "type": "is present"
+      }, {
+        "message": null,
+        "type": "is like",
+        "value": "/^(\\+\d+)?([\\s\-\\.]?\\(?\\d+\\)?)+$/"
+      }]
+    }, {
+      "field": "reservation",
+      "type": "Number",
+      "default_value": null,
+      "enums": null,
+      "integration": null,
+      "is_filterable": true,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": "Reservation.id",
+      "inverse_of": "amex_code",
+      "relationship": "BelongsTo",
       "widget": null,
       "validations": []
     }],
@@ -3547,6 +3627,22 @@
       "relationship": "HasOne",
       "widget": null,
       "validations": []
+    }, {
+      "field": "amex_code",
+      "type": "Number",
+      "default_value": null,
+      "enums": null,
+      "integration": null,
+      "is_filterable": true,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": "AmexCode.id",
+      "inverse_of": "reservation",
+      "relationship": "HasOne",
+      "widget": null,
+      "validations": []
     }],
     "segments": [],
     "actions": [{
@@ -4402,21 +4498,6 @@
       "widget": null,
       "validations": []
     }, {
-      "field": "amex",
-      "type": "Boolean",
-      "default_value": "false",
-      "enums": null,
-      "integration": null,
-      "is_filterable": true,
-      "is_read_only": false,
-      "is_required": false,
-      "is_sortable": true,
-      "is_virtual": false,
-      "reference": null,
-      "inverse_of": null,
-      "widget": null,
-      "validations": []
-    }, {
       "field": "stripe_payments",
       "type": ["String"],
       "default_value": null,
@@ -4588,22 +4669,6 @@
       "is_sortable": true,
       "is_virtual": false,
       "reference": "Motivation.id",
-      "inverse_of": "user",
-      "relationship": "HasOne",
-      "widget": null,
-      "validations": []
-    }, {
-      "field": "amex_code",
-      "type": "Number",
-      "default_value": null,
-      "enums": null,
-      "integration": null,
-      "is_filterable": true,
-      "is_read_only": false,
-      "is_required": false,
-      "is_sortable": true,
-      "is_virtual": false,
-      "reference": "AmexCode.id",
       "inverse_of": "user",
       "relationship": "HasOne",
       "widget": null,

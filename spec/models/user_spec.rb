@@ -6,10 +6,10 @@ RSpec.describe User, type: :model do
     expect(user).to be_valid
   end
 
-  it 'is valid with a first name, last name, email and phone_number only if amex user' do
-    user = build(:user, password: nil, address: nil, photo: nil, amex: true, skip_password_validation: true)
-    expect(user).to be_valid
-  end
+  # it 'is valid with a first name, last name, email and phone_number only if amex user' do
+  #   user = build(:user, password: nil, address: nil, photo: nil, amex: true, skip_password_validation: true)
+  #   expect(user).to be_valid
+  # end
 
   it 'is invalid without a photo' do
     user = build(:user, :with_job, :with_personal_taste, :with_motivation)

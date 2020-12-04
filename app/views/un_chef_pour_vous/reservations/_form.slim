@@ -1,0 +1,10 @@
+= simple_form_for [:un_chef_pour_vous, @reservation], remote: true do |f|
+  = simple_fields_for @amex_code do |ff|
+    p.mb-0
+    = ff.input :code, label: 'Votre code'
+    = ff.input :email, label: 'Votre e-mail'
+    = ff.input :first_name, required: true, required: true, label: 'Votre prénom'
+    = ff.input :last_name, required: true, label: 'Votre e-mail', required: true, label: 'Votre nom'
+    = ff.input :phone_number, required: true, label: 'Votre numéro de téléphone'
+  .text-center.pt-5
+    = f.submit 'Valider ma réservation', class: 'btn-cookoon btn-cookoon-primary'
