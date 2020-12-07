@@ -3,12 +3,7 @@ p.mb-3.font-weight-bold 1. Votre décor et le service
   = render 'reservations/recap_string', reservation: reservation
   p.font-weight-bold Premier règlement
   p.mb-1
-    '- L'adresse: #{reservation.cookoon.address}
-  p.mb-1
-    - if reservation.butler_count > 1
-      '- Les #{reservation.butler_count} maîtres d'hôtel
-    - else
-      '- Le maître d'hôtel
+    'L'adresse: #{reservation.cookoon.address}
 .mb-4
   - if reservation.pending?
     = render 'payments/amounts_details', sentence_one: Payment::STATUSES[:required], sentence_two: "(Vous ne serez débité qu'après acceptation de votre réservation par l'hôte)", amount_ttc: reservation.cookoon_butler_with_tax, amount_ht: ""
