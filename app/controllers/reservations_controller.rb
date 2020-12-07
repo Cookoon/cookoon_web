@@ -113,7 +113,8 @@ class ReservationsController < ApplicationController
   end
 
   def set_end_date_available
-    @end_date_available = ((Date.today + Availability::SETTABLE_WEEKS_AHEAD.weeks).beginning_of_week) - 1.days
+    # @end_date_available = ((Date.today + Availability::SETTABLE_WEEKS_AHEAD.weeks).beginning_of_week) - 1.days
+    @end_date_available = Date.today + 1.years
   end
 
   def set_dates_unavailable

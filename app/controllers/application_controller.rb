@@ -85,9 +85,9 @@ class ApplicationController < ActionController::Base
     params[:controller] == "inscription_payments" || params[:controller] == "credit_cards"
   end
 
-  def user_photo_adding?
-    params[:controller] == "users" && (params[:action] == "edit" || params[:action] == "update")
-  end
+  # def user_photo_adding?
+  #   params[:controller] == "users" && (params[:action] == "edit" || params[:action] == "update")
+  # end
 
   def skip_pundit?
     devise_controller? || params[:controller] =~ /(^(rails_)?admin)|(pages$)/ || new_user_asking? || amex?
@@ -97,7 +97,7 @@ class ApplicationController < ActionController::Base
     if (devise_controller? || new_user_asking? || user_answer_invitation? || general_conditions? || amex?)
       false
     else
-      terms_of_service_acceptance_needed? || inscription_payment_needed? || user_photo_needed?
+      terms_of_service_acceptance_needed? || inscription_payment_needed? #|| user_photo_needed?
     end
   end
 
@@ -109,9 +109,9 @@ class ApplicationController < ActionController::Base
     true_user.inscription_payment_required?
   end
 
-  def user_photo_needed?
-    !true_user.photo?
-  end
+  # def user_photo_needed?
+  #   !true_user.photo?
+  # end
 
   def skip_general_conditions_validation?
     general_conditions? || general_conditions_validation?
@@ -121,20 +121,20 @@ class ApplicationController < ActionController::Base
     inscription_payment?
   end
 
-  def skip_user_photo_adding?
-    user_photo_adding?
-  end
+  # def skip_user_photo_adding?
+  #   user_photo_adding?
+  # end
 
   def redirect_user
     if terms_of_service_acceptance_needed?
       redirect_to(edit_general_conditions_acceptance_users_path) unless skip_general_conditions_validation?
     elsif inscription_payment_needed?
       redirect_to(new_inscription_payment_path) unless skip_inscription_payment?
-    elsif user_photo_needed?
-      unless skip_user_photo_adding?
-        flash[:alert] = "Vous devez ajouter une photo."
-        redirect_to(edit_users_path)
-      end
+    # elsif user_photo_needed?
+    #   unless skip_user_photo_adding?
+    #     flash[:alert] = "Vous devez ajouter une photo."
+    #     redirect_to(edit_users_path)
+    #   end
     end
   end
 end
