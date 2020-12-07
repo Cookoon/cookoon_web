@@ -1,7 +1,7 @@
 <%= simple_form_for resource, as: resource_name, url: invitation_path(resource_name), remote: true, authenticity_token: true do |f| %>
   <%= f.hidden_field :invitation_token %>
 
-  <%= f.input :photo, as: :attachinary, input_html: { data: { controller: 'attachinary' } }, label: "Votre photo de profil", required: true %>
+  <%= f.input :photo, as: :attachinary, input_html: { data: { controller: 'attachinary' } }, label: "Votre photo de profil (maximum 5MB)", required: true %>
   <%= f.input :first_name, label: "Votre prénom" %>
   <%= f.input :last_name, label: "Votre nom" %>
   <%= f.input :born_on, start_year: Date.today.year - 90, end_year: Date.today.year - 12, selected: { year: 1965, day: 1, month: 1 }, label: "Votre date de naissance"  %>
