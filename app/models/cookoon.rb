@@ -32,16 +32,17 @@ class Cookoon < ApplicationRecord
 
   scope :random, -> { order(Arel::Nodes::NamedFunction.new('RANDOM', [])) }
 
-  scope :amex, -> { where(id: AMEX_COOKOONS) }
+  # scope :amex, -> { where(id: AMEX_COOKOONS) }
+  scope :amex, -> { where(amex: true) }
 
-  case Rails.env
-  when "staging"
-    AMEX_COOKOONS = [2, 9]
-  when "production"
-    AMEX_COOKOONS = [59, 89, 82, 9]
-  when "development"
-    AMEX_COOKOONS = [Cookoon.first.id, Cookoon.last.id]
-  end
+  # case Rails.env
+  # when "staging"
+  #   AMEX_COOKOONS = [11, 12, 13, 14]
+  # when "production"
+  #   AMEX_COOKOONS = [59, 89, 82, 9]
+  # when "development"
+  #   AMEX_COOKOONS = [Cookoon.first.id, Cookoon.last.id]
+  # end
 
   CATEGORIES = %w[Appartement Maison Jardin Loft Terrasse Toit Villa].freeze
   MAX_PER_USER = 2

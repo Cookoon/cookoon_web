@@ -94,7 +94,8 @@ cookoons_attributes = [
     architect_name: "Alice Fabre",
     architect_title: "Architecte - décorateur",
     architect_build_year: 2020,
-    architect_url: "htpps://membre.cookoon.club"
+    architect_url: "htpps://membre.cookoon.club",
+    amex: true
   },
   {
     user: User.first,
@@ -165,6 +166,7 @@ cookoons_attributes = [
     long_photo_url: "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
     main_photo_url: "https://images.unsplash.com/photo-1559310278-18a9192d909f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
     citation: "Un espace vivant",
+    amex: true
   },
 ]
 
@@ -194,7 +196,8 @@ chef_attributes = [
     references: "Restaurant : Hélène Darroze",
     main_photo_url: "https://static.lexpress.fr/medias_11664/w_2048,h_1146,c_crop,x_0,y_0/w_1000,h_563,c_fill,g_north/v1509987362/helene-darroze-portrait_5972444.jpg",
     citation: "Je suis un super Chef",
-    gender: "female"
+    gender: "female",
+    amex: true
   },
   {
     name: 'Gordon Ramsay',
@@ -219,7 +222,8 @@ chef_attributes = [
     references: "",
     main_photo_url: "https://res.cloudinary.com/cookoon/image/upload/v1598366705/pp9fhlmnzyi4p4yvikga.jpg",
     citation: "Je suis un super Chef",
-    gender: "male"
+    gender: "male",
+    amex: true
   }
 ]
 

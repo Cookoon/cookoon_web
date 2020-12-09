@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_03_100312) do
+ActiveRecord::Schema.define(version: 2020_12_09_103756) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 2020_12_03_100312) do
     t.text "references"
     t.string "citation"
     t.string "gender"
+    t.boolean "amex", default: false
   end
 
   create_table "companies", force: :cascade do |t|
@@ -131,6 +132,7 @@ ActiveRecord::Schema.define(version: 2020_12_03_100312) do
     t.integer "architect_build_year"
     t.string "architect_title"
     t.string "architect_url"
+    t.boolean "amex", default: false
     t.index ["user_id"], name: "index_cookoons_on_user_id"
   end
 
