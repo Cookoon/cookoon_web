@@ -31,6 +31,12 @@ class Reservation
       when 'day'
         reservation.duration = 11
         reservation.start_at = start_at.change(hour: 9, min: 0)
+      when 'amex_lunch'
+        reservation.duration = 4
+        reservation.start_at = start_at.change(hour: 12, min: 30)
+      when 'amex_diner'
+        reservation.duration = 6
+        reservation.start_at = start_at.change(hour: 20, min: 0)
       end
     end
 
