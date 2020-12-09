@@ -101,7 +101,7 @@ class Reservation < ApplicationRecord
   validates :start_at, in_future: true, after_notice_period: true, on: :create
   validates :duration, presence: true
   validates :people_count, presence: true, numericality: { greater_than: 0 }
-  validates :type_name, inclusion: { in: %w[breakfast brunch lunch diner diner_cocktail lunch_cocktail morning afternoon day], message: "Ce type de réservation n'est pas valide" }
+  validates :type_name, inclusion: { in: %w[breakfast brunch lunch diner diner_cocktail lunch_cocktail morning afternoon day amex_lunch amex_diner], message: "Ce type de réservation n'est pas valide" }
   validates :menu_status, inclusion: { in: %w[initial selected cooking_by_user validated payment_required captured paid], message: "Le statut du menu n'est pas valide" }
   validates :services_status, inclusion: { in: %w[initial validated payment_required captured paid], message: "Le statut n'est pas valide" }
   validates :cookoon_butler_payment_status, inclusion: { in: %w[initial charged captured cancelled paid] }
