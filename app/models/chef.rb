@@ -9,14 +9,14 @@ class Chef < ApplicationRecord
 
   default_scope -> { order(updated_at: :desc) }
 
-  case Rails.env
-  when "staging"
-    AMEX_CHEFS = [2, 4]
-  when "production"
-    AMEX_CHEFS = [1, 2]
-  when "development"
-    AMEX_CHEFS = [Chef.first.id, Chef.last.id]
-  end
+  # case Rails.env
+  # when "staging"
+  #   AMEX_CHEFS = [2, 8]
+  # when "production"
+  #   AMEX_CHEFS = [1, 2]
+  # when "development"
+  #   AMEX_CHEFS = [Chef.first.id, Chef.last.id]
+  # end
 
   GENDER = %w[male female]
 
@@ -53,7 +53,8 @@ class Chef < ApplicationRecord
       |e| e = Menu.find(e).chef.id
       }
     ) }
-  scope :amex, -> { where(id: AMEX_CHEFS) }
+  # scope :amex, -> { where(id: AMEX_CHEFS) }
+  scope :amex, -> { where(amex: true) }
 
   def base_price_or_min_price_positive
     if base_price.positive? && min_price.positive?
