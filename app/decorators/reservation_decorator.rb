@@ -60,7 +60,11 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def default_type
-    ['Dîner', 'diner']
+    if amex?
+      ['Dîner', 'amex_diner']
+    else
+      ['Dîner', 'diner']
+    end
   end
 
   def default_date
@@ -213,7 +217,9 @@ class ReservationDecorator < Draper::Decorator
       morning: 'matinée',
       day: 'journée',
       afternoon: 'après-midi',
-      brunch: 'brunch'
+      brunch: 'brunch',
+      amex_diner: 'dîner',
+      amex_lunch: 'déjeuner',
     }
   end
 
