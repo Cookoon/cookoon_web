@@ -15,10 +15,14 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def recap_string_without_day_and_people_count
-    if butler_count > 1
-      ("Vos maitres d'hôtel vous accueilleront à <strong>#{start_time}</strong>.").html_safe
+    if amex?
+      ("Vous serez accueillis à <strong>#{start_time}</strong>.").html_safe
     else
-      ("Votre maitre d'hôtel vous accueillera à <strong>#{start_time}</strong>.").html_safe
+      if butler_count > 1
+        ("Vos maitres d'hôtel vous accueilleront à <strong>#{start_time}</strong>.").html_safe
+      else
+        ("Votre maitre d'hôtel vous accueillera à <strong>#{start_time}</strong>.").html_safe
+      end
     end
   end
 
