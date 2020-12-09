@@ -9,10 +9,6 @@ class ReservationDecorator < Draper::Decorator
     "#{begin_of_sentence} le #{start_on} pour votre #{humanized_type_name} à #{start_time} de #{people_count_text}."
   end
 
-  def amex_recap_string
-    "Vous serez accueilli le #{start_on} pour votre #{humanized_type_name} à #{start_time} de #{people_count_text}."
-  end
-
   def recap_string_without_day_and_people_count
     if butler_count > 1
       ("Vos maitres d'hôtel vous accueilleront à <strong>#{start_time}</strong>.").html_safe
@@ -26,31 +22,12 @@ class ReservationDecorator < Draper::Decorator
     "Votre réception #{verb} jusqu'à #{end_time}."
   end
 
-  def amex_recap_string_end_time
-    start_at >= Date.today ? verb = "se prolongera" : verb = "s'est prolongée"
-    case type_name
-    when 'diner'
-      "Votre réception #{verb} jusqu'à #{h.display_time_for (end_at - 1.hours)}."
-    when 'lunch'
-      "Votre réception #{verb} jusqu'à #{h.display_time_for (end_at - 0.5.hours)}."
-    end
-  end
-
   def recap_string_end_time_with_bolded_time
     ("Votre réception se prolongera jusqu'à <strong>#{end_time}</strong>.").html_safe
   end
 
   def recap_string_start_and_end_time
     "Votre décor de #{start_time} à #{end_time} (mise à disposition pour le chef et le service de #{start_time_for_chef_and_service} à #{end_time_for_chef_and_service})"
-  end
-
-  def amex_recap_string_start_and_end_time
-    case type_name
-    when 'diner'
-      "Votre décor vous ouvrira ses portes à #{start_time}. Votre #{humanized_type_name} se prolongera jusqu’à #{h.display_time_for (end_at - 1.hours)}."
-    when 'lunch'
-      "Votre décor vous ouvrira ses portes à #{start_time}. Votre #{humanized_type_name} se prolongera jusqu’à #{h.display_time_for (end_at - 0.5.hours)}."
-    end
   end
 
   def recap_string_butler_count
