@@ -101,7 +101,7 @@ class Reservation < ApplicationRecord
   validates :start_at, in_future: true, after_notice_period: true, on: :create
   validates :duration, presence: true
   validates :people_count, presence: true, numericality: { greater_than: 0 }
-  validates :type_name, inclusion: { in: %w[breakfast brunch lunch diner diner_cocktail lunch_cocktail morning afternoon day], message: "Ce type de réservation n'est pas valide" }
+  validates :type_name, inclusion: { in: %w[breakfast brunch lunch diner diner_cocktail lunch_cocktail morning afternoon day amex_lunch amex_diner], message: "Ce type de réservation n'est pas valide" }
   validates :menu_status, inclusion: { in: %w[initial selected cooking_by_user validated payment_required captured paid], message: "Le statut du menu n'est pas valide" }
   validates :services_status, inclusion: { in: %w[initial validated payment_required captured paid], message: "Le statut n'est pas valide" }
   validates :cookoon_butler_payment_status, inclusion: { in: %w[initial charged captured cancelled paid] }
@@ -212,9 +212,13 @@ class Reservation < ApplicationRecord
     # Magic numbers can be stored in ::DEFAULT
     return 1 unless people_count
     # customer_per_butler = business? ? 9 : 11
-    customer_per_butler = business? ? 8 : 10
-    # 1 + (people_count / customer_per_butler)
-    1 + ((people_count - 1) / customer_per_butler)
+    if amex?
+      0
+    else
+      customer_per_butler = business? ? 8 : 10
+      # 1 + (people_count / customer_per_butler)
+      1 + ((people_count - 1) / customer_per_butler)
+    end
   end
 
   def send_ending_surveys
@@ -252,7 +256,7 @@ class Reservation < ApplicationRecord
   end
 
   def needs_chef?
-    %w[brunch lunch diner diner_cocktail lunch_cocktail afternoon day].include? type_name
+    %w[brunch lunch diner diner_cocktail lunch_cocktail afternoon day amex_lunch amex_diner].include? type_name
   end
 
   def needs_cookoon_butler_payment?
@@ -296,7 +300,7 @@ class Reservation < ApplicationRecord
   end
 
   def seated?
-    type_name == 'diner' || type_name == 'lunch' || type_name == 'brunch'
+    type_name == 'diner' || type_name == 'lunch' || type_name == 'brunch' || type_name == 'amex_diner' || type_name == 'amex_lunch'
   end
 
   def standing?

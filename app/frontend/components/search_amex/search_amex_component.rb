@@ -9,8 +9,8 @@ module SearchAmexComponent
 
   def amex_types
     [
-      {data: 'lunch', display: 'Déjeuner'},
-      {data: 'diner', display: 'Dîner'},
+      {data: 'amex_lunch', display: 'Déjeuner'},
+      {data: 'amex_diner', display: 'Dîner'},
     ]
   end
 end

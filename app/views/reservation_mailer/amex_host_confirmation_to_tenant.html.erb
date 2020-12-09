@@ -5,7 +5,7 @@
 <% end %>
 <p>Votre demande de réservation a été acceptée par l'hôte pour "<%= "#{@cookoon.name}" %>", dans le cadre de votre <%= "#{ @reservation.decorate.humanized_type_name }" %> de <%= "#{ @reservation.decorate.people_count_text }" %> le <strong><%= @reservation.decorate.start_on %></strong>.</p>
 
-<h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> Votre décor et le service</h4>
+<h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> Votre décor</h4>
 <p>Votre décor est situé au <%= @cookoon.address %>.</p>
 <p><%= @reservation.decorate.recap_string_without_day_and_people_count %> <%= @reservation.decorate.recap_string_end_time_with_bolded_time %></p>
 

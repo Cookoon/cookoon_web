@@ -27,6 +27,8 @@ module EndAtSetter
       morning: 1,
       afternoon: 1,
       day: 1,
+      amex_lunch: 1.5,
+      amex_diner: 3
     }
   end
 end

@@ -2,18 +2,27 @@ class ReservationDecorator < Draper::Decorator
   delegate_all
 
   def recap_string
-    begin_of_sentence = "Vos maitres d'hôtel vous accueilleront" if start_at >= Date.today && butler_count > 1
-    begin_of_sentence = "Votre maitre d'hôtel vous accueillera" if start_at >= Date.today && butler_count == 1
-    begin_of_sentence = "Vos maitres d'hôtel vous ont accueilli" if start_at < Date.today && butler_count > 1
-    begin_of_sentence = "Votre maitre d'hôtel vous a accueilli" if start_at < Date.today && butler_count == 1
+    if amex?
+      begin_of_sentence = "Vous serez accueilli" if start_at >= Date.today
+      begin_of_sentence = "Vous avez été accueilli" if start_at < Date.today
+    else
+      begin_of_sentence = "Vos maitres d'hôtel vous accueilleront" if start_at >= Date.today && butler_count > 1
+      begin_of_sentence = "Votre maitre d'hôtel vous accueillera" if start_at >= Date.today && butler_count == 1
+      begin_of_sentence = "Vos maitres d'hôtel vous ont accueilli" if start_at < Date.today && butler_count > 1
+      begin_of_sentence = "Votre maitre d'hôtel vous a accueilli" if start_at < Date.today && butler_count == 1
+    end
     "#{begin_of_sentence} le #{start_on} pour votre #{humanized_type_name} à #{start_time} de #{people_count_text}."
   end
 
   def recap_string_without_day_and_people_count
-    if butler_count > 1
-      ("Vos maitres d'hôtel vous accueilleront à <strong>#{start_time}</strong>.").html_safe
+    if amex?
+      ("Vous serez accueillis à <strong>#{start_time}</strong>.").html_safe
     else
-      ("Votre maitre d'hôtel vous accueillera à <strong>#{start_time}</strong>.").html_safe
+      if butler_count > 1
+        ("Vos maitres d'hôtel vous accueilleront à <strong>#{start_time}</strong>.").html_safe
+      else
+        ("Votre maitre d'hôtel vous accueillera à <strong>#{start_time}</strong>.").html_safe
+      end
     end
   end
 
@@ -27,7 +36,15 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def recap_string_start_and_end_time
+    if amex?
+      begin_of_sentence = "Votre décor vous ouvrira ses portes" if start_at >= Date.today
+      begin_of_sentence = "Votre décor vous a ouvert ses portes" if start_at < Date.today
+      end_of_sentence = "se prolongera jusqu’à " if start_at >= Date.today
+      end_of_sentence = "s'est prolongé jusqu’à " if start_at < Date.today
+      "#{begin_of_sentence} à #{start_time}. Votre #{humanized_type_name} #{end_of_sentence} #{end_time}."
+    else
     "Votre décor de #{start_time} à #{end_time} (mise à disposition pour le chef et le service de #{start_time_for_chef_and_service} à #{end_time_for_chef_and_service})"
+    end
   end
 
   def recap_string_butler_count
@@ -60,7 +77,11 @@ class ReservationDecorator < Draper::Decorator
   end
 
   def default_type
-    ['Dîner', 'diner']
+    if amex?
+      ['Dîner', 'amex_diner']
+    else
+      ['Dîner', 'diner']
+    end
   end
 
   def default_date
@@ -213,7 +234,9 @@ class ReservationDecorator < Draper::Decorator
       morning: 'matinée',
       day: 'journée',
       afternoon: 'après-midi',
-      brunch: 'brunch'
+      brunch: 'brunch',
+      amex_diner: 'dîner',
+      amex_lunch: 'déjeuner',
     }
   end
 
