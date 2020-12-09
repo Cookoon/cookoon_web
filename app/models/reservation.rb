@@ -212,9 +212,13 @@ class Reservation < ApplicationRecord
     # Magic numbers can be stored in ::DEFAULT
     return 1 unless people_count
     # customer_per_butler = business? ? 9 : 11
-    customer_per_butler = business? ? 8 : 10
-    # 1 + (people_count / customer_per_butler)
-    1 + ((people_count - 1) / customer_per_butler)
+    if amex?
+      0
+    else
+      customer_per_butler = business? ? 8 : 10
+      # 1 + (people_count / customer_per_butler)
+      1 + ((people_count - 1) / customer_per_butler)
+    end
   end
 
   def send_ending_surveys
