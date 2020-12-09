@@ -1,9 +1,9 @@
 puts 'Destroying'
+AmexCode.destroy_all
 Reservation.destroy_all
 Perk.destroy_all
 Cookoon.destroy_all
 PerkSpecification.destroy_all
-AmexCode.destroy_all
 User.destroy_all
 Company.destroy_all
 Dish.destroy_all
