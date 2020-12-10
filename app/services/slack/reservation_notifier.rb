@@ -10,8 +10,8 @@ module Slack
       @cookoon = @reservation.cookoon
       @host = @cookoon.user
       # @channel = '#locations-dev' if Rails.env.development?
-      @channel = '#locations-staging' if Rails.env.staging?
-      @channel = '#locations' if Rails.env.production?
+      @channel = '#réservations-staging' if Rails.env.staging?
+      @channel = '#réservations' if Rails.env.production?
     end
 
     private
