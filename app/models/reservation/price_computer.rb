@@ -2,7 +2,7 @@ class Reservation
   module PriceComputer
     extend ActiveSupport::Concern
 
-    MARGIN = { butler: 0.25, menu: 0.20 }.freeze
+    MARGIN = { butler: 0.25, menu: 0.15 }.freeze
     # accessible as Reservation::MARGIN
 
     UNIT_PRICE_CENTS = { butler: 3500 }.freeze
