@@ -12,16 +12,16 @@ RSpec.describe Menu, type: :model do
     # p menu_for_chef_with_base_price_500
     # p menu_for_chef_with_min_price_600
 
-    expect(menu_for_chef_with_base_price_500.computed_price_with_chef_with_margin_per_person(1)).to eq(Money.new 66000, 'EUR')
-    expect(menu_for_chef_with_base_price_500.computed_price_with_chef_with_margin_per_person(2)).to eq(Money.new 36000, 'EUR')
-    expect(menu_for_chef_with_base_price_500.computed_price_with_chef_with_margin_per_person(10)).to eq(Money.new 12000, 'EUR')
-    expect(menu_for_chef_with_base_price_500.computed_price_with_chef_with_margin_per_person(50)).to eq(Money.new 7200, 'EUR')
+    expect(menu_for_chef_with_base_price_500.computed_price_with_chef_with_margin_per_person(1)).to eq(Money.new 63250, 'EUR')
+    expect(menu_for_chef_with_base_price_500.computed_price_with_chef_with_margin_per_person(2)).to eq(Money.new 34500, 'EUR')
+    expect(menu_for_chef_with_base_price_500.computed_price_with_chef_with_margin_per_person(10)).to eq(Money.new 11500, 'EUR')
+    expect(menu_for_chef_with_base_price_500.computed_price_with_chef_with_margin_per_person(50)).to eq(Money.new 6900, 'EUR')
 
-    expect(menu_for_chef_with_min_price_600.computed_price_with_chef_with_margin_per_person(1)).to eq(Money.new 72000, 'EUR')
-    expect(menu_for_chef_with_min_price_600.computed_price_with_chef_with_margin_per_person(2)).to eq(Money.new 36000, 'EUR')
-    expect(menu_for_chef_with_min_price_600.computed_price_with_chef_with_margin_per_person(10)).to eq(Money.new 7200, 'EUR')
-    expect(menu_for_chef_with_min_price_600.computed_price_with_chef_with_margin_per_person(20)).to eq(Money.new 6000, 'EUR')
-    expect(menu_for_chef_with_min_price_600.computed_price_with_chef_with_margin_per_person(50)).to eq(Money.new 6000, 'EUR')
+    expect(menu_for_chef_with_min_price_600.computed_price_with_chef_with_margin_per_person(1)).to eq(Money.new 69000, 'EUR')
+    expect(menu_for_chef_with_min_price_600.computed_price_with_chef_with_margin_per_person(2)).to eq(Money.new 34500, 'EUR')
+    expect(menu_for_chef_with_min_price_600.computed_price_with_chef_with_margin_per_person(10)).to eq(Money.new 6900, 'EUR')
+    expect(menu_for_chef_with_min_price_600.computed_price_with_chef_with_margin_per_person(20)).to eq(Money.new 5750, 'EUR')
+    expect(menu_for_chef_with_min_price_600.computed_price_with_chef_with_margin_per_person(50)).to eq(Money.new 5750, 'EUR')
   end
 
   it 'returns the good price per person with margin and taxes' do
@@ -31,15 +31,15 @@ RSpec.describe Menu, type: :model do
     menu_for_chef_with_base_price_500 = build(:menu, chef: chef_with_base_price_500)
     menu_for_chef_with_min_price_600 = build(:menu, chef: chef_with_min_price_600)
 
-    expect(menu_for_chef_with_base_price_500.computed_price_with_chef_with_margin_and_taxes_per_person(1)).to eq(Money.new 79200, 'EUR')
-    expect(menu_for_chef_with_base_price_500.computed_price_with_chef_with_margin_and_taxes_per_person(2)).to eq(Money.new 43200, 'EUR')
-    expect(menu_for_chef_with_base_price_500.computed_price_with_chef_with_margin_and_taxes_per_person(10)).to eq(Money.new 14400, 'EUR')
-    expect(menu_for_chef_with_base_price_500.computed_price_with_chef_with_margin_and_taxes_per_person(50)).to eq(Money.new 8640, 'EUR')
+    expect(menu_for_chef_with_base_price_500.computed_price_with_chef_with_margin_and_taxes_per_person(1)).to eq(Money.new 75900, 'EUR')
+    expect(menu_for_chef_with_base_price_500.computed_price_with_chef_with_margin_and_taxes_per_person(2)).to eq(Money.new 41400, 'EUR')
+    expect(menu_for_chef_with_base_price_500.computed_price_with_chef_with_margin_and_taxes_per_person(10)).to eq(Money.new 13800, 'EUR')
+    expect(menu_for_chef_with_base_price_500.computed_price_with_chef_with_margin_and_taxes_per_person(50)).to eq(Money.new 8280, 'EUR')
 
-    expect(menu_for_chef_with_min_price_600.computed_price_with_chef_with_margin_and_taxes_per_person(1)).to eq(Money.new 86400, 'EUR')
-    expect(menu_for_chef_with_min_price_600.computed_price_with_chef_with_margin_and_taxes_per_person(2)).to eq(Money.new 43200, 'EUR')
-    expect(menu_for_chef_with_min_price_600.computed_price_with_chef_with_margin_and_taxes_per_person(10)).to eq(Money.new 8640, 'EUR')
-    expect(menu_for_chef_with_min_price_600.computed_price_with_chef_with_margin_and_taxes_per_person(20)).to eq(Money.new 7200, 'EUR')
-    expect(menu_for_chef_with_min_price_600.computed_price_with_chef_with_margin_and_taxes_per_person(50)).to eq(Money.new 7200, 'EUR')
+    expect(menu_for_chef_with_min_price_600.computed_price_with_chef_with_margin_and_taxes_per_person(1)).to eq(Money.new 82800, 'EUR')
+    expect(menu_for_chef_with_min_price_600.computed_price_with_chef_with_margin_and_taxes_per_person(2)).to eq(Money.new 41400, 'EUR')
+    expect(menu_for_chef_with_min_price_600.computed_price_with_chef_with_margin_and_taxes_per_person(10)).to eq(Money.new 8280, 'EUR')
+    expect(menu_for_chef_with_min_price_600.computed_price_with_chef_with_margin_and_taxes_per_person(20)).to eq(Money.new 6900, 'EUR')
+    expect(menu_for_chef_with_min_price_600.computed_price_with_chef_with_margin_and_taxes_per_person(50)).to eq(Money.new 6900, 'EUR')
   end
 end
