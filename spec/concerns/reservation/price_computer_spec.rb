@@ -69,7 +69,7 @@ RSpec.describe Reservation::PriceComputer do
       # puts reservation.people_count
       # puts prices[:menu][:menu_price]
       expect(prices[:menu][:menu_price]).to eq(Money.new 0, 'EUR')
-      expect(prices_a[:menu][:menu_price]).to eq(Money.new 240000, 'EUR')
+      expect(prices_a[:menu][:menu_price]).to eq(Money.new 230000, 'EUR')
     end
 
     it 'computes services_price' do
@@ -85,7 +85,7 @@ RSpec.describe Reservation::PriceComputer do
       # puts prices[:services][:services_price]
       # puts prices[:total][:total_price]
       expect(prices[:total][:total_price]).to eq(Money.new 80750, 'EUR')
-      expect(prices_a[:total][:total_price]).to eq(Money.new 323750, 'EUR')
+      expect(prices_a[:total][:total_price]).to eq(Money.new 313750, 'EUR')
 
     end
 
@@ -102,7 +102,7 @@ RSpec.describe Reservation::PriceComputer do
 
     it 'computes menu_tax' do
       expect(prices[:menu][:menu_tax]).to eq(Money.new 0, 'EUR')
-      expect(prices_a[:menu][:menu_tax]).to eq(Money.new 48000, 'EUR')
+      expect(prices_a[:menu][:menu_tax]).to eq(Money.new 46000, 'EUR')
     end
 
     it 'computes services_tax' do
@@ -116,7 +116,7 @@ RSpec.describe Reservation::PriceComputer do
       # puts prices[:services][:services_tax]
       # puts prices[:total][:total_tax]
       expect(prices[:total][:total_tax]).to eq(Money.new 10750, 'EUR')
-      expect(prices_a[:total][:total_tax]).to eq(Money.new 61750, 'EUR')
+      expect(prices_a[:total][:total_tax]).to eq(Money.new 59750, 'EUR')
     end
 
     it 'computes butler_with_tax' do
@@ -135,7 +135,7 @@ RSpec.describe Reservation::PriceComputer do
 
     it 'computes menu_with_tax' do
       expect(prices[:menu][:menu_with_tax]).to eq(Money.new 0, 'EUR')
-      expect(prices_a[:menu][:menu_with_tax]).to eq(Money.new 288000, 'EUR')
+      expect(prices_a[:menu][:menu_with_tax]).to eq(Money.new 276000, 'EUR')
     end
 
     it 'computes services_with_tax' do
@@ -147,7 +147,7 @@ RSpec.describe Reservation::PriceComputer do
     it 'computes total_with_tax' do
       # puts prices[:total]
       expect(prices[:total][:total_with_tax]).to eq(Money.new 91500, 'EUR')
-      expect(prices_a[:total][:total_with_tax]).to eq(Money.new 385500, 'EUR')
+      expect(prices_a[:total][:total_with_tax]).to eq(Money.new 373500, 'EUR')
     end
   end
 end
