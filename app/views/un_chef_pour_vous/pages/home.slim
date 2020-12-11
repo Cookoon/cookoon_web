@@ -2,7 +2,8 @@
 = render 'un_chef_pour_vous/shared/navbar'
 
 .home-banner style= "z-index: 0; position: relative; display: flex; justify-content: center; align-items: center;"
-  = carousel_for(['un_chef_pour_vous.jpg', 'cookoon-chefs.jpg', 'merouan_bounekraf.jpg'])
+  //= carousel_for(['un_chef_pour_vous.jpg', 'cookoon-chefs.jpg', 'merouan_bounekraf.jpg'])
+  = render 'carousel'
 
 .container
   #search-form-home
