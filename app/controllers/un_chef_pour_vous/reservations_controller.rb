@@ -22,10 +22,10 @@ class UnChefPourVous::ReservationsController < ApplicationController
     end
 
     if @amex_code.blank?
-      flash.now.alert = "Ce code ou cet e-mail est incorrect."
+      flash.now.alert = "Ce code de réservation ou cet e-mail est incorrect."
       render :edit
     elsif @amex_code.already_used?
-      flash.now.alert = "Ce code a déjà été utilisé."
+      flash.now.alert = "Ce code de réservation a déjà été utilisé."
       render :edit
     else
       @amex_code.reservation = @reservation
@@ -75,9 +75,9 @@ class UnChefPourVous::ReservationsController < ApplicationController
 
   def amex_code_params
     if params[:amex_code].present?
-      params.require(:amex_code).permit(:first_name, :last_name, :phone_number)
+      params.require(:amex_code).permit(:first_name, :last_name, :phone_number, :terms_of_service)
     else
-      params.permit(:first_name, :last_name, :phone_number)
+      params.permit(:first_name, :last_name, :phone_number, :terms_of_service)
     end
   end
 
