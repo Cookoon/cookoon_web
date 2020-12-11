@@ -60,6 +60,7 @@ fr:
         first_name: Prénom
         last_name: Nom
         phone_number: Numéro de téléphone
+        terms_of_service: Autorisation de conservation des données personnelles par Cookoon
 
     errors:
       models:

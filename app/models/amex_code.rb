@@ -9,6 +9,7 @@ class AmexCode < ApplicationRecord
   validates :last_name, presence: true, on: :update
   validates :phone_number, presence: true, format: { with: PHONE_REGEXP }, on: :update
   validates :reservation, presence: true, on: :update
+  validates :terms_of_service, on: :update, acceptance: true
 
   def already_used?
     reservation.present? || first_name.present? || last_name.present? || phone_number.present?
