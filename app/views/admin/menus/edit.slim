@@ -13,4 +13,5 @@
       = render 'shared/back_button_transparent', button_title: 'Retour au Chef', path: admin_chef_path(@chef)
 
     .col-12.col-md-8.col-lg-9.px-0
-      = render 'form_without_price', chef: @chef, menu: @menu
+      //= render 'form_without_price', chef: @chef, menu: @menu
+      = render 'form', chef: @chef, menu: @menu

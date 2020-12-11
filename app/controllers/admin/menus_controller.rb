@@ -31,7 +31,7 @@ module Admin
     end
 
     def update
-      if @menu.update(menu_title_params)
+      if @menu.update(menu_params) #@menu.update(menu_title_params)
         redirect_to admin_chef_path(@chef), notice: 'Le menu a bien été modifié !'
       else
         render :edit
