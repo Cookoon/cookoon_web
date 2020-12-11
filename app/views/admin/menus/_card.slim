@@ -17,7 +17,7 @@
     .text-primary.pt-3 Type:
     span #{Menu::MEAL_TYPES[menu.meal_type]}
 
-  = link_to 'Modifier le titre', edit_admin_chef_menu_path(chef, menu), class: 'btn-cookoon btn-block btn-cookoon-primary'
+  = link_to 'Modifier', edit_admin_chef_menu_path(chef, menu), class: 'btn-cookoon btn-block btn-cookoon-primary'
   = link_to 'Ajouter, supprimer des plats', admin_chef_menu_path(chef, menu), class: 'btn-cookoon btn-block btn-cookoon-primary'
   - if menu.archived? || menu.initial?
     = link_to 'Valider', admin_chef_validate_menu_path(chef, menu), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch
