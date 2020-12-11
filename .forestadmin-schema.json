@@ -2493,7 +2493,7 @@
     }, {
       "field": "unit_price_cents",
       "type": "Number",
-      "default_value": "0",
+      "default_value": "0.0",
       "enums": null,
       "integration": null,
       "is_filterable": true,
