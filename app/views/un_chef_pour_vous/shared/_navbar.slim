@@ -1,24 +1,12 @@
-.d-none.d-sm-block.cookoon-nav-bottom.bg-dark
-  .cookoon-nav-navigation.justify-content-between.align-items-center
+.d-block.cookoon-nav-bottom.bg-dark
+  .cookoon-nav-navigation-amex
     = link_to un_chef_pour_vous_root_path do
-      .logo style="width:max-content"
+      .logo.d-flex.flex-nowrap.align-items-center
         i.co.icon-cookoon-logo.fa-2x.text-primary
-        div.pl-2 COOKOON en partenariat avec
-        .pl-2 = image_tag 'amex.png', style:"height: 75px;"
+        .pl-2 COOKOON
+        .pl-3 pour
+        .pl-3 = image_tag 'amex.png', style:"height: 60px;"
 
-    .menu.d-flex.flex-column.w-auto.align-items-end
+    .menu
       .px-2 = mail_to 'concierge@cookoon.fr', 'concierge@cookoon.fr', subject: "Demande d'informations", target: :_blank
-      .px-2 = link_to number_to_phone("01 83 62 91 72", area_code: true), "tel: 01 83 62 91 72"
-
-.d-block.d-sm-none.cookoon-nav-bottom.bg-dark
-  .cookoon-nav-navigation.justify-content-between.flex-column
-    = link_to un_chef_pour_vous_root_path do
-      .d-flex.align-items-center.flex-row.no-wrap.pb-4
-        .logo
-        i.co.icon-cookoon-logo.fa-2x.text-primary
-        .pl-2 style="width:max-content" COOKOON en partenariat avec
-        .pl-2 = image_tag 'amex.png', style:"height: 75px;"
-
-    .menu.d-flex.justify-content-between
-      .px-2 = mail_to 'concierge@cookoon.fr', 'concierge@cookoon.fr', subject: "Demande d'informations", target: :_blank
-      .px-2 = link_to number_to_phone("01 83 62 91 72", area_code: true), "tel: 01 83 62 91 72"
+      .px-2 = link_to number_to_phone("+33(1) 83 62 91 72", area_code: true), "tel: 00331 83 62 91 72"
