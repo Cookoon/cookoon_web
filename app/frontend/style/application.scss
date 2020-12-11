@@ -6,6 +6,12 @@
 @import '~bootstrap/scss/bootstrap';
 @import 'vendor/icon_fonts';
 
+@import url("//hello.myfonts.net/count/3cd2ea");
+@font-face {
+  font-family: 'Recoleta-Regular';
+  src: url('fonts/webFonts/Recoleta-Regular/font.woff2') format('woff2'), url('fonts/webFonts/Recoleta-Regular/font.woff') format('woff');
+}
+
 // CSS
 @import 'override/bootstrap/index';
 @import 'override/simple_form/index';

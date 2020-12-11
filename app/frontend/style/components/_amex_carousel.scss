@@ -1,0 +1,35 @@
+#amex-carousel {
+  color: gray;
+  h1 {
+    font-family: 'Recoleta-Regular';
+  }
+  h5 {
+    font-family: 'Avenir', serif;
+  }
+  .carousel-inner, .carousel-item {
+    height: 65vh;
+  }
+  img {
+    display: block;
+    width: 100%;
+    height: 65vh;
+    object-fit: cover;
+  }
+  .amex-carousel-figcaption {
+    position: relative;
+    height: 65vh;
+    bottom: 65vh;
+    text-align: left;
+    padding: 5rem 2rem;
+    @media(min-width: 992px) {
+      padding: 5rem 2rem;
+    }
+    @media(min-width: 1200px) {
+      padding: 5rem 10rem;
+    }
+    &-main-picture {
+      text-align: center;
+    }
+
+  }
+}

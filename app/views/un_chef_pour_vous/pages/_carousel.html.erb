@@ -1,30 +1,40 @@
 <div id="amex-carousel" class="carousel slide" data-ride="carousel" data-interval="100000">
-  <div class="carousel-inner" style="height: 65vh">
-    <div class="carousel-item active" style="height: 65vh">
-      <div class="figure">
-        <%= image_tag 'un_chef_pour_vous.jpg', class:'d-block w-100', style:'height: 65vh; object-fit: cover;' %>
-        <figcaption style="position: relative; bottom: 25vh; color: gray; text-align: center">
-            <h1 style="font-family: 'Recoleta-Regular'">Un Chef pour Vous</h1>
-            <h5 class="mb-0" style="font-family: 'Avenir', serif">avec</h5>
-            <h5 class="mb-0" style="font-family: 'Avenir', serif">Baptiste Renouard ou Mérouan Bounekraf</h5>
-          </figcaption>
-      </div>
-    </div>
-    <div class="carousel-item" style="height: 65vh">
-      <div class="figure">
-        <%= image_tag 'baptiste_renouard.jpg', class:'d-block w-100', style:'height: 65vh; object-fit: cover;' %>
-        <figcaption style="position: relative; bottom: 60vh; color: gray; text-align: left", class="ml-5">
-          <h1 style="font-family: 'Recoleta-Regular';">Baptiste Renouard</h1>
-          <h5 style="font-family: 'Avenir', serif">Chef de l'Ochre • Candidat Top Chef 2019</h5>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div class="figure" style="height:65vh">
+        <%= image_tag 'un_chef_pour_vous.jpg' %>
+        <figcaption class="amex-carousel-figcaption amex-carousel-figcaption-main-picture">
+          <div class="d-flex flex-column h-100 justify-content-between">
+            <div class="d-flex justify-content-between align-items-center">
+              <h1>Un Chef<br>pour Vous</h1>
+              <h5>
+                Votre invité, vous<br>et le chef de votre choix<br>dans un lieu exclusivement réservé<br>pour cette occasion
+              </h5>
+            </div>
+            <h5>
+              Cette invitation est offerte par le programme de parrainage American Express.
+            </h5>
+          </div>
         </figcaption>
       </div>
     </div>
-    <div class="carousel-item" style="height: 65vh">
-      <div class="figure">
-        <%= image_tag 'merouan_bounekraf.jpg', class:'d-block w-100', style:'height: 65vh; object-fit: cover;' %>
-        <figcaption style="position: relative; bottom: 60vh; color: gray; text-align: left", class="ml-5">
-          <h1 style="font-family: 'Recoleta-Regular'">Mérouan Bounekraf</h1>
-          <h5 style="font-family: 'Avenir', serif">Candidat Top Chef 2019 • Jury "Mon gâteau est le meilleur de France"</h5>
+    <div class="carousel-item">
+      <div class="figure" style="height:65vh">
+        <%= image_tag 'baptiste_renouard.jpg' %>
+        <figcaption class="amex-carousel-figcaption">
+          <h1>Baptiste Renouard</h1>
+          <h5>Chef du restaurant l'Ochre</h5>
+          <h5>Candidat Top Chef 2019</h5>
+        </figcaption>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <div class="figure" style="height:65vh">
+        <%= image_tag 'merouan_bounekraf.jpg' %>
+        <figcaption class="amex-carousel-figcaption">
+          <h1>Mérouan Bounekraf</h1>
+          <h5>Candidat Top Chef 2019"</h5>
+          <h5>Jury "Mon gâteau est le meilleur de France"</h5>
         </figcaption>
       </div>
     </div>
