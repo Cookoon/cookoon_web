@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_09_103756) do
+ActiveRecord::Schema.define(version: 2020_12_11_154138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2020_12_09_103756) do
     t.string "last_name"
     t.string "phone_number"
     t.bigint "reservation_id"
+    t.boolean "terms_of_service", default: false
     t.index ["reservation_id"], name: "index_amex_codes_on_reservation_id"
   end
 
