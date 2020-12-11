@@ -6,5 +6,6 @@
     = ff.input :first_name, required: true, required: true, label: 'Votre prénom'
     = ff.input :last_name, required: true, label: 'Votre e-mail', required: true, label: 'Votre nom'
     = ff.input :phone_number, required: true, label: 'Votre numéro de téléphone'
+    = ff.input :terms_of_service, as: :boolean, label: "J'autorise Cookoon à conserver mes données personnelles (nom, prénom, adresse e-mail, numéro de téléphone).", input_html: { checked: false }
   .text-center.pt-5
     = f.submit 'Valider ma réservation', class: 'btn-cookoon btn-cookoon-primary'
