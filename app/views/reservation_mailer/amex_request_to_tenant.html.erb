@@ -3,7 +3,8 @@
 <% else %>
   <p>Bonjour,</p>
 <% end %>
-<p>Vous avez émis une demande de réservation pour "<%= "#{@cookoon.name}" %>", dans le cadre de votre <%= "#{ @reservation.decorate.humanized_type_name }" %> de <%= "#{ @reservation.decorate.people_count_text }" %> le <strong><%= @reservation.decorate.start_on %></strong>.</p>
+<p>Vous avez été invité(e) par le programme de parrainage American Express à un déjeuner ou dîner Cookoon pour vous et la personne de votre choix.</p>
+<p>Vous avez émis une demande de réservation pour "<%= "#{@cookoon.name}" %>", dans le cadre d'un <%= "#{ @reservation.decorate.humanized_type_name }" %> le <strong><%= @reservation.decorate.start_on %></strong>.</p>
 
 <h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> Votre décor</h4>
 <p>Votre décor est situé au <%= @cookoon.address %>.</p>
