@@ -2,13 +2,13 @@
   color: gray;
   h1 {
     font-family: 'Recoleta-Regular';
-    @media(max-width: 767px) {
+    @media(max-width: 991px) {
       font-size: 75%;
     }
   }
   h5 {
     font-family: 'Avenir', serif;
-    @media(max-width: 767px) {
+    @media(max-width: 991px) {
       font-size: 75%;
     }
   }
@@ -26,10 +26,15 @@
     height: 65vh;
     bottom: 65vh;
     text-align: left;
-    @media(max-width: 767px) {
-      padding: 1rem 1rem 4rem 1rem;
+    @media(max-width: 991px) {
+      @media (orientation: portrait) {
+        padding: 3rem 1rem 4rem 1rem;
+      }
+      @media (orientation: landscape) {
+        padding: 1rem 1rem 4rem 1rem;
+      }
     }
-    @media(min-width: 768px) {
+    @media(min-width: 992px) {
       padding: 5rem 2rem;
     }
     @media(min-width: 1200px) {
