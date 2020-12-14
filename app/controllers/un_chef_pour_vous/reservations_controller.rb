@@ -32,7 +32,7 @@ class UnChefPourVous::ReservationsController < ApplicationController
       if @amex_code.update(amex_code_params)
         @reservation.ask_amex!
         @reservation.notify_users_after_amex_asking
-        redirect_to un_chef_pour_vous_root_path, notice: "Votre réservation a bien été prise en compte. Nous vous recontacterons dès que celle-ci sera validée par votre hôte et votre chef."
+        redirect_to un_chef_pour_vous_root_path, flash: { amex_reservation_confirmed: true }
       else
         render :edit
       end
