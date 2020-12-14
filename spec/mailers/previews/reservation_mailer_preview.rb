@@ -16,6 +16,10 @@ class ReservationMailerPreview < ActionMailer::Preview
     ReservationMailer.amex_host_confirmation_to_host(Reservation.amex.engaged.last)
   end
 
+  def amex_request_to_amex
+    ReservationMailer.amex_request_to_amex(Reservation.amex.engaged.last)
+  end
+
   def amex_request_to_tenant
     ReservationMailer.amex_request_to_tenant(Reservation.amex.engaged.last)
   end
