@@ -2,6 +2,16 @@ class ReservationMailer < ApplicationMailer
   include DatetimeHelper
   helper :datetime
 
+  # ==== Amex transaction =====
+  def amex_request_to_amex(reservation)
+    @reservation = reservation
+    @tenant = @reservation.amex_code
+    @cookoon = @reservation.cookoon
+    @host = @cookoon.user
+    mail(to: "alice.fabre@hotmail.fr; alice.fabre1984@gmail.com", subject: "Cookoon: nouvelle demande de réservation - #{@tenant.first_name.capitalize} #{@tenant.last_name.capitalize}")
+  end
+
+
   # ==== Tenant transaction =====
   # def paid_request_to_tenant(reservation)
   #   @reservation = reservation
