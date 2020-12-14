@@ -12,11 +12,16 @@ class UnChefPourVous::PagesController < ApplicationController
   end
 
   def set_dates_unavailable
-    @dates_unavailable = Array.new
-    (Date.today..@end_date_available).to_a.each do |date|
-      if Cookoon.amex.approved.displayable_on_index.available_in_day(date).blank? || Chef.amex.without_engaged_reservations_in_day(date).blank?
-        @dates_unavailable << date.strftime("%Y-%m-%d")
-      end
+    if Date.today > Date.new(2021, 1, 14)
+      @dates_unavailable = Array.new
+    else
+      @dates_unavailable = ((Date.today)..(Date.new(2021, 1, 14))).to_a.map{ |date| date.strftime("%Y-%m-%d") }
     end
+    # @dates_unavailable = Array.new
+    # (Date.today..@end_date_available).to_a.each do |date|
+    #   if Cookoon.amex.approved.displayable_on_index.available_in_day(date).blank? || Chef.amex.without_engaged_reservations_in_day(date).blank?
+    #     @dates_unavailable << date.strftime("%Y-%m-%d")
+    #   end
+    # end
   end
 end
