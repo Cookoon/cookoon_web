@@ -14,7 +14,10 @@
     .col-12.col-md-8.col-lg-9.px-0
       .row.mx-0
         .col-12.col-md-9.col-lg-8.px-0
-          h1 Choisissez le chef qui cuisinera pour vous et vos convives
+          - if reservation.people_count > 2
+            h1 Choisissez le chef qui cuisinera pour vous et vos convives
+          - else
+            h1 Choisissez le chef qui cuisinera pour vous et votre convive
       .row.mx-0
         .col-12.px-0
           p.text-primary.mb-0.mb-md-3 Etoilés, issus de grandes maisons ou de célèbres émissions, les chefs vous feront vivre une expérience gastronomique exclusive.
