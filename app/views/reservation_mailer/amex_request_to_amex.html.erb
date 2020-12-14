@@ -1,6 +1,6 @@
 <p>Chère Justine, cher Julien,</p>
 
-<p>Une demande de réservation pour "<%= "#{@cookoon.name}" %>" (<%= @cookoon.address %>), dans le cadre d'un <%= "#{ @reservation.decorate.humanized_type_name }" %> le <strong><%= @reservation.decorate.start_on %></strong> vient d'être effectuée, avec le Chef <%= "#{@reservation.menu.chef.name}" %>.</p>
+<p>Une demande de réservation vient d'être effectuée.</p>
 
 <p>Voici les informations du membre platinum:</p>
 <p style="margin-bottom:0">- Prénom : <%= "#{@tenant.first_name.capitalize}" %></p>
