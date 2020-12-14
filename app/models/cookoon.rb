@@ -96,11 +96,11 @@ class Cookoon < ApplicationRecord
   end
 
   def all_photos
-    self.photos.shuffle.unshift(self.main_photo, self.long_photo)
+    photos.shuffle.unshift(main_photo, long_photo)
   end
 
   def sample_photos
-    self.photos.sample(4)
+    photos.sample(4)
   end
 
   private
