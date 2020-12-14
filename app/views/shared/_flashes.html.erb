@@ -32,3 +32,6 @@
 <% if flash[:check_of_chef_availability_needed] %>
   <%= render 'chefs/check_availability_needed' %>
 <% end %>
+<% if flash[:amex_reservation_confirmed] %>
+  <%= render 'un_chef_pour_vous/reservations/amex_reservation_confirmed' %>
+<% end %>

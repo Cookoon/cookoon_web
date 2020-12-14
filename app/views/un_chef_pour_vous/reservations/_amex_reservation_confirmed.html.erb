@@ -1,0 +1,19 @@
+<div class="modal fade" id="check_chef_availability_needed" tabindex="-1" role="dialog" aria-labelledby="invitedSuccessfullyLabel" data-controller = "show-modal" data-target='show-modal.modalId'>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <button type="button" style="width:fit-content; position:absolute; top:0.5rem; right:0.5rem; z-index: 1;", class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-body text-center">
+        <i class="co co-check fa-5x" aria-hidden="true" style="-webkit-text-fill-color:lightgray"></i>
+        <h4 class='pb-3'>Votre demande de réservation</h4>
+        <p>Votre demande de réservation a bien été enregistrée.</p>
+        <p>Nous allons vous recontacter dans les plus brefs délais.</p>
+      </div>
+
+      <div class="modal-footer justify-content-center">
+        <%= link_to "Découvrir Cookoon", "https://cookoon.club/", class: "btn-cookoon btn-cookoon-primary ml-4", target: :_blank %>
+      </div>
+    </div>
+  </div>
+</div>

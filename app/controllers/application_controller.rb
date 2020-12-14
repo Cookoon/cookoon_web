@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
 
   before_action :authenticate_user!
   before_action :set_device
-  before_action :amex?
+  before_action :set_namespace
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
@@ -29,6 +29,10 @@ class ApplicationController < ActionController::Base
 
   def terms_of_service_acceptance_needed_for_true_user?
     terms_of_service_acceptance_needed?
+  end
+
+  def set_namespace
+    @namespace = namespace
   end
 
   private
