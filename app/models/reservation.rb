@@ -186,13 +186,13 @@ class Reservation < ApplicationRecord
 
   def notify_users_after_amex_asking
     ReservationMailer.amex_request_to_tenant(self).deliver_later
-    ReservationMailer.amex_request_to_host(self).deliver_later
+    # ReservationMailer.amex_request_to_host(self).deliver_later
     ReservationMailer.amex_request_to_amex(self).deliver_later
   end
 
   def notify_users_after_amex_host_confirmation
     ReservationMailer.amex_host_confirmation_to_tenant(self).deliver_later
-    ReservationMailer.amex_host_confirmation_to_host(self).deliver_later
+    # ReservationMailer.amex_host_confirmation_to_host(self).deliver_later
   end
 
   def notify_users_after_quotation_host_confirmation
