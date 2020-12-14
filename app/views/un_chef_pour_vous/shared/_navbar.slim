@@ -5,8 +5,8 @@
         i.co.icon-cookoon-logo.fa-2x.text-primary
         .pl-2 COOKOON
         .pl-3 pour
-        .pl-3 = image_tag 'amex.png', style:"height: 60px;"
+        .pl-3 = image_tag 'amex.png', style:"height: 50px;"
 
     .menu
       .px-2 = mail_to 'concierge@cookoon.fr', 'concierge@cookoon.fr', subject: "Demande d'informations", target: :_blank
-      .px-2 = link_to number_to_phone("+33(1) 83 62 91 72", area_code: true), "tel: 00331 83 62 91 72"
+      .px-2 = link_to number_to_phone("+33 (0) 1 83 62 91 72", area_code: true), "tel: +33 (0) 1 83 62 91 72"
