@@ -8,7 +8,7 @@ class ReservationMailer < ApplicationMailer
     @tenant = @reservation.amex_code
     @cookoon = @reservation.cookoon
     @host = @cookoon.user
-    mail(to: "alice.fabre@hotmail.fr; alice.fabre1984@gmail.com", subject: "Cookoon: nouvelle demande de réservation - #{@tenant.first_name.capitalize} #{@tenant.last_name.capitalize}")
+    mail(to: "Justine.Plaisance1@aexp.com; julien.b.stumpf@aexp.com", subject: "Cookoon: nouvelle demande de réservation - #{@tenant.first_name.capitalize} #{@tenant.last_name.capitalize}")
   end
 
 
