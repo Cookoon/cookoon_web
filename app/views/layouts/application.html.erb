@@ -26,8 +26,12 @@
   </head>
 
   <body class="<%= yield(:body_class) %>" data-controller="application-navigation" >
-    <%= c 'navbar_cookoon',
-          type: content_for?(:navbar_type) ? yield(:navbar_type) : :standard if current_user %>
+    <% if @namespace == "un_chef_pour_vous" %>
+      <%= render 'un_chef_pour_vous/shared/navbar' %>
+    <% else %>
+      <%= c 'navbar_cookoon',
+            type: content_for?(:navbar_type) ? yield(:navbar_type) : :standard if current_user %>
+    <% end %>
 
     <%= render 'shared/pretender_infos' %>
     <div id="flash">
