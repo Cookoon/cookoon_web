@@ -159,7 +159,7 @@ class ReservationMailer < ApplicationMailer
     @tenant = @reservation.amex_code
     @cookoon = @reservation.cookoon
     @host = @cookoon.user
-    mail(to: @tenant.full_email, subject: "Cookoon: vous avez confirmé la demande de réservation pour \"#{@cookoon.name}\"")
+    mail(to: @host.full_email, subject: "Cookoon: vous avez confirmé la demande de réservation pour \"#{@cookoon.name}\"")
   end
 
   def amex_request_to_host(reservation)
