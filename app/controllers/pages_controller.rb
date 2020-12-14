@@ -22,11 +22,12 @@ class PagesController < ApplicationController
 
   def set_dates_unavailable
     @dates_unavailable = Array.new
-    (Date.today..@end_date_available).to_a.each do |date|
-      if Cookoon.available_for(current_user).available_in_day(date).blank? || Chef.without_engaged_reservations_in_day(date).blank?
-        @dates_unavailable << date.strftime("%Y-%m-%d")
-      end
-    end
+    # @dates_unavailable = Array.new
+    # (Date.today..@end_date_available).to_a.each do |date|
+    #   if Cookoon.available_for(current_user).available_in_day(date).blank? || Chef.without_engaged_reservations_in_day(date).blank?
+    #     @dates_unavailable << date.strftime("%Y-%m-%d")
+    #   end
+    # end
   end
 
 end
