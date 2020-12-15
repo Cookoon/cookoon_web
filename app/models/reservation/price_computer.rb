@@ -59,7 +59,11 @@ class Reservation
     def compute_cookoon_price
       return 0 unless duration.present? && cookoon.present?
 
-      cookoon_price_cents = duration * cookoon.price
+      if amex?
+        cookoon_price_cents = cookoon.amex_price
+      else
+        cookoon_price_cents = duration * cookoon.price
+      end
       # if customer? && duration > 4
       #   # discount applied
       #   cookoon_price_cents = cookoon_price_cents  * 0.85
