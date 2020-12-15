@@ -99,7 +99,11 @@ class Reservation
     end
 
     def compute_total_price
-      [compute_cookoon_butler_price, compute_menu_price, compute_services_price].sum
+      if amex?
+        (Money.new(120000) - compute_cookoon_price) * (1 - TAX) + compute_cookoon_price
+      else
+        [compute_cookoon_butler_price, compute_menu_price, compute_services_price].sum
+      end
     end
 
 
@@ -121,7 +125,11 @@ class Reservation
     end
 
     def compute_total_tax
-      [compute_cookoon_butler_tax, compute_menu_tax, compute_services_tax].sum
+      if amex?
+        (Money.new(120000) - compute_cookoon_price) * TAX
+      else
+        [compute_cookoon_butler_tax, compute_menu_tax, compute_services_tax].sum
+      end
     end
 
 
@@ -143,7 +151,11 @@ class Reservation
     end
 
     def compute_total_with_tax
-      [compute_total_price, compute_total_tax].sum
+      if amex?
+        Money.new(120000)
+      else
+        [compute_total_price, compute_total_tax].sum
+      end
     end
 
   end
