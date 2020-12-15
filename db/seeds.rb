@@ -96,7 +96,7 @@ cookoons_attributes = [
     architect_build_year: 2020,
     architect_url: "htpps://membre.cookoon.club",
     amex: true,
-    amex_price: 1000,
+    amex_price: 350,
   },
   {
     user: User.first,
@@ -168,7 +168,7 @@ cookoons_attributes = [
     main_photo_url: "https://images.unsplash.com/photo-1559310278-18a9192d909f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
     citation: "Un espace vivant",
     amex: true,
-    amex_price: 1500
+    amex_price: 400
   },
 ]
 
@@ -222,7 +222,7 @@ chef_attributes = [
     photo_urls: ["https://images.unsplash.com/photo-1514326640560-7d063ef2aed5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60", "https://images.unsplash.com/photo-1542197745-c70e10f66af8?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60"],
     min_price: 500,
     references: "",
-    main_photo_url: "https://res.cloudinary.com/cookoon/image/upload/v1598366705/pp9fhlmnzyi4p4yvikga.jpg",
+    main_photo_url: "https://res.cloudinary.com/cookoon/image/upload/v1607691658/ntrfcnmfy36zadm8zpsu.jpg",
     citation: "Je suis un super Chef",
     gender: "male",
     amex: true

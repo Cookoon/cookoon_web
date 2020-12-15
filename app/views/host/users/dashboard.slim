@@ -10,7 +10,7 @@
       h3 <i class='co icon-losange small text-primary mr-2'></i> Optimisez vos revenus
       p
         | Recevez des demandes de locations au bon moment en
-          mettant à jour les disponibilités de votre Cookoon:
+          mettant à jour les disponibilités de votre Cookoon.
 
       .pt-4.pb-3.text-right
         = link_to 'Mon calendrier', cookoon_availabilities_path(@cookoons.first), class: 'btn-cookoon btn-cookoon-primary'
@@ -21,7 +21,7 @@
       h3 <i class='co icon-losange small text-primary mr-2'></i> Vos dernières demandes de réservation
       p
         | Vous avez <b class="text-primary">#{@pending_reservations_count} demande(s) de réservation</b>
-          en attente
+          en attente.
 
       .pt-4.pb-3.text-right
         = link_to 'Voir mes demandes de réservation', host_reservations_path, class: 'btn-cookoon btn-cookoon-primary'
