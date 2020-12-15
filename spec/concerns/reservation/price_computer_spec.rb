@@ -11,13 +11,16 @@ RSpec.describe Reservation::PriceComputer do
     let(:prices) { reservation.computed_price_attributes }
 
     # let(:cookoon_a) { create(:cookoon, price_cents: 3000) }
-    let(:cookoon_a) { create(:cookoon, price_cents: 3000, amex: true, amex_price_cents: 500000) }
+    let(:cookoon_a) { create(:cookoon, price_cents: 3000, amex: true, amex_price_cents: 50000) }
     # let(:chef_a) { create(:chef, base_price_cents: 0, min_price_cents: 200000) }
     let(:chef_a) { create(:chef, base_price_cents: 0, min_price_cents: 200000, amex: true) }
+    let(:chef_b) { create(:chef, base_price_cents: 0, min_price_cents: 40000, amex: true) }
     let(:menu_a) { create(:menu, chef: chef_a, unit_price_cents: 2500) }
     let(:menu_amex) { create(:menu, chef: chef_a, status: 'amex', unit_price_cents: 0) }
+    let(:menu_amex_b) { create(:menu, chef: chef_b, status: 'amex', unit_price_cents: 0) }
     let(:reservation_a) { create(:reservation, cookoon: cookoon_a, people_count: 2, type_name: 'lunch_cocktail', category: 'customer', menu: menu_a) }
     let(:reservation_amex) { create(:reservation, cookoon: cookoon_a, people_count: 2, type_name: 'amex_diner', category: 'amex', menu: menu_amex) }
+    let(:reservation_amex_b) { create(:reservation, cookoon: cookoon_a, people_count: 2, type_name: 'amex_diner', category: 'amex', menu: menu_amex_b) }
     let!(:service_a_a) { create(:service, reservation: reservation_a, category: 'sommelier') }
     let!(:service_a_b) { create(:service, reservation: reservation_a, category: 'parking') }
     let!(:service_a_f) { create(:service, reservation: reservation_a, category: 'flowers') }
@@ -26,6 +29,7 @@ RSpec.describe Reservation::PriceComputer do
     let!(:service_a_o) { create(:service, reservation: reservation_a, category: 'wine') }
     let(:prices_a) { reservation_a.computed_price_attributes }
     let(:prices_amex) { reservation_amex.computed_price_attributes }
+    let(:prices_amex_b) { reservation_amex_b.computed_price_attributes }
 
     # it 'prints the instances' do
     #   puts reservation.class.to_s.upcase
@@ -45,6 +49,7 @@ RSpec.describe Reservation::PriceComputer do
       expect(prices).to be_a(Hash)
       expect(prices_a).to be_a(Hash)
       expect(prices_amex).to be_a(Hash)
+      expect(prices_amex_b).to be_a(Hash)
     end
 
     it 'computes cookoon_price' do
@@ -53,7 +58,8 @@ RSpec.describe Reservation::PriceComputer do
       # puts prices[:cookoon][:cookoon_price]
       expect(prices[:cookoon][:cookoon_price]).to eq(Money.new 27000, 'EUR')
       expect(prices_a[:cookoon][:cookoon_price]).to eq(Money.new 15000, 'EUR')
-      expect(prices_amex[:cookoon][:cookoon_price]).to eq(Money.new 500000, 'EUR')
+      expect(prices_amex[:cookoon][:cookoon_price]).to eq(Money.new 50000, 'EUR')
+      expect(prices_amex_b[:cookoon][:cookoon_price]).to eq(Money.new 50000, 'EUR')
     end
 
     it 'computes butler_price' do
@@ -62,6 +68,7 @@ RSpec.describe Reservation::PriceComputer do
       expect(prices[:butler][:butler_price]).to eq(Money.new 26250, 'EUR')
       expect(prices_a[:butler][:butler_price]).to eq(Money.new 21875, 'EUR')
       expect(prices_amex[:butler][:butler_price]).to eq(Money.new 0, 'EUR')
+      expect(prices_amex_b[:butler][:butler_price]).to eq(Money.new 0, 'EUR')
     end
 
     it 'computes cookoon_butler_price for duration' do
@@ -70,7 +77,8 @@ RSpec.describe Reservation::PriceComputer do
       # puts prices[:cookoon_butler][:cookoon_butler_price]
       expect(prices[:cookoon_butler][:cookoon_butler_price]).to eq(Money.new 53250, 'EUR')
       expect(prices_a[:cookoon_butler][:cookoon_butler_price]).to eq(Money.new 36875, 'EUR')
-      expect(prices_amex[:cookoon_butler][:cookoon_butler_price]).to eq(Money.new 500000, 'EUR')
+      expect(prices_amex[:cookoon_butler][:cookoon_butler_price]).to eq(Money.new 50000, 'EUR')
+      expect(prices_amex_b[:cookoon_butler][:cookoon_butler_price]).to eq(Money.new 50000, 'EUR')
     end
 
     it 'computes menu_price' do
@@ -80,6 +88,7 @@ RSpec.describe Reservation::PriceComputer do
       expect(prices[:menu][:menu_price]).to eq(Money.new 0, 'EUR')
       expect(prices_a[:menu][:menu_price]).to eq(Money.new 230000, 'EUR')
       expect(prices_amex[:menu][:menu_price]).to eq(Money.new 230000, 'EUR')
+      expect(prices_amex_b[:menu][:menu_price]).to eq(Money.new 46000, 'EUR')
     end
 
     it 'computes services_price' do
@@ -88,6 +97,7 @@ RSpec.describe Reservation::PriceComputer do
       expect(prices[:services][:services_price]).to eq(Money.new 27500, 'EUR')
       expect(prices_a[:services][:services_price]).to eq(Money.new 46875, 'EUR')
       expect(prices_amex[:services][:services_price]).to eq(Money.new 0, 'EUR')
+      expect(prices_amex_b[:services][:services_price]).to eq(Money.new 0, 'EUR')
     end
 
     it 'computes total_price' do
@@ -97,7 +107,8 @@ RSpec.describe Reservation::PriceComputer do
       # puts prices[:total][:total_price]
       expect(prices[:total][:total_price]).to eq(Money.new 80750, 'EUR')
       expect(prices_a[:total][:total_price]).to eq(Money.new 313750, 'EUR')
-      expect(prices_amex[:total][:total_price]).to eq(Money.new 730000, 'EUR')
+      expect(prices_amex[:total][:total_price]).to eq(Money.new 106000, 'EUR')
+      expect(prices_amex_b[:total][:total_price]).to eq(Money.new 106000, 'EUR')
     end
 
     it 'computes butler_tax' do
@@ -105,24 +116,28 @@ RSpec.describe Reservation::PriceComputer do
       expect(prices[:butler][:butler_tax]).to eq(Money.new 5250, 'EUR')
       expect(prices_a[:butler][:butler_tax]).to eq(Money.new 4375, 'EUR')
       expect(prices_amex[:butler][:butler_tax]).to eq(Money.new 0, 'EUR')
+      expect(prices_amex_b[:butler][:butler_tax]).to eq(Money.new 0, 'EUR')
     end
 
     it 'computes cookoon_butler_tax' do
       expect(prices[:cookoon_butler][:cookoon_butler_tax]).to eq(Money.new 5250, 'EUR')
       expect(prices_a[:cookoon_butler][:cookoon_butler_tax]).to eq(Money.new 4375, 'EUR')
       expect(prices_amex[:cookoon_butler][:cookoon_butler_tax]).to eq(Money.new 0, 'EUR')
+      expect(prices_amex_b[:cookoon_butler][:cookoon_butler_tax]).to eq(Money.new 0, 'EUR')
     end
 
     it 'computes menu_tax' do
       expect(prices[:menu][:menu_tax]).to eq(Money.new 0, 'EUR')
       expect(prices_a[:menu][:menu_tax]).to eq(Money.new 46000, 'EUR')
       expect(prices_amex[:menu][:menu_tax]).to eq(Money.new 46000, 'EUR')
+      expect(prices_amex_b[:menu][:menu_tax]).to eq(Money.new 9200, 'EUR')
     end
 
     it 'computes services_tax' do
       expect(prices[:services][:services_tax]).to eq(Money.new 5500, 'EUR')
       expect(prices_a[:services][:services_tax]).to eq(Money.new 9375, 'EUR')
       expect(prices_amex[:services][:services_tax]).to eq(Money.new 0, 'EUR')
+      expect(prices_amex_b[:services][:services_tax]).to eq(Money.new 0, 'EUR')
     end
 
     it 'computes total_tax' do
@@ -132,7 +147,8 @@ RSpec.describe Reservation::PriceComputer do
       # puts prices[:total][:total_tax]
       expect(prices[:total][:total_tax]).to eq(Money.new 10750, 'EUR')
       expect(prices_a[:total][:total_tax]).to eq(Money.new 59750, 'EUR')
-      expect(prices_amex[:total][:total_tax]).to eq(Money.new 46000, 'EUR')
+      expect(prices_amex[:total][:total_tax]).to eq(Money.new 14000, 'EUR')
+      expect(prices_amex_b[:total][:total_tax]).to eq(Money.new 14000, 'EUR')
     end
 
     it 'computes butler_with_tax' do
@@ -143,18 +159,21 @@ RSpec.describe Reservation::PriceComputer do
       expect(prices[:butler][:butler_with_tax]).to eq(Money.new 31500, 'EUR')
       expect(prices_a[:butler][:butler_with_tax]).to eq(Money.new 26250, 'EUR')
       expect(prices_amex[:butler][:butler_with_tax]).to eq(Money.new 0, 'EUR')
+      expect(prices_amex_b[:butler][:butler_with_tax]).to eq(Money.new 0, 'EUR')
     end
 
     it 'computes cookoon_butler_with_tax' do
       expect(prices[:cookoon_butler][:cookoon_butler_with_tax]).to eq(Money.new 58500, 'EUR')
       expect(prices_a[:cookoon_butler][:cookoon_butler_with_tax]).to eq(Money.new 41250, 'EUR')
-      expect(prices_amex[:cookoon_butler][:cookoon_butler_with_tax]).to eq(Money.new 500000, 'EUR')
+      expect(prices_amex[:cookoon_butler][:cookoon_butler_with_tax]).to eq(Money.new 50000, 'EUR')
+      expect(prices_amex_b[:cookoon_butler][:cookoon_butler_with_tax]).to eq(Money.new 50000, 'EUR')
     end
 
     it 'computes menu_with_tax' do
       expect(prices[:menu][:menu_with_tax]).to eq(Money.new 0, 'EUR')
       expect(prices_a[:menu][:menu_with_tax]).to eq(Money.new 276000, 'EUR')
       expect(prices_amex[:menu][:menu_with_tax]).to eq(Money.new 276000, 'EUR')
+      expect(prices_amex_b[:menu][:menu_with_tax]).to eq(Money.new 55200, 'EUR')
     end
 
     it 'computes services_with_tax' do
@@ -162,13 +181,15 @@ RSpec.describe Reservation::PriceComputer do
       expect(prices[:services][:services_with_tax]).to eq(Money.new 33000, 'EUR')
       expect(prices_a[:services][:services_with_tax]).to eq(Money.new 56250, 'EUR')
       expect(prices_amex[:services][:services_with_tax]).to eq(Money.new 0, 'EUR')
+      expect(prices_amex_b[:services][:services_with_tax]).to eq(Money.new 0, 'EUR')
     end
 
     it 'computes total_with_tax' do
       # puts prices[:total]
       expect(prices[:total][:total_with_tax]).to eq(Money.new 91500, 'EUR')
       expect(prices_a[:total][:total_with_tax]).to eq(Money.new 373500, 'EUR')
-      expect(prices_amex[:total][:total_with_tax]).to eq(Money.new 776000, 'EUR')
+      expect(prices_amex[:total][:total_with_tax]).to eq(Money.new 120000, 'EUR')
+      expect(prices_amex_b[:total][:total_with_tax]).to eq(Money.new 120000, 'EUR')
     end
   end
 end
