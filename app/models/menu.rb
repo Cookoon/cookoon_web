@@ -11,7 +11,7 @@ class Menu < ApplicationRecord
   monetize :unit_price_cents
 
   validates :description, presence: true
-  validates :unit_price, presence: true, numericality: { greater_than: 0 }
+  validates :unit_price, presence: true, numericality: { greater_than: 0 }, unless: :amex?
   validates :status, presence: true, inclusion: { in: Menu::STATUSES }
   validates :meal_type, presence: true, inclusion: { in: Menu::MEAL_TYPES.keys }
 
