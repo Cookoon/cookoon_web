@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_11_154138) do
+ActiveRecord::Schema.define(version: 2020_12_15_144108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,6 +134,7 @@ ActiveRecord::Schema.define(version: 2020_12_11_154138) do
     t.string "architect_title"
     t.string "architect_url"
     t.boolean "amex", default: false
+    t.integer "amex_price_cents", default: 0
     t.index ["user_id"], name: "index_cookoons_on_user_id"
   end
 
