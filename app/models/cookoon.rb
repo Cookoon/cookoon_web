@@ -64,6 +64,7 @@ class Cookoon < ApplicationRecord
   enum status: %i[under_review approved suspended]
   geocoded_by :address
   monetize :price_cents
+  monetize :amex_price_cents
 
   validates :name,     presence: true
   validates :citation, presence: true
