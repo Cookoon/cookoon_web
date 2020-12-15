@@ -15,9 +15,10 @@
     .d-flex-default
       p.w-50
         - if reservation.amex?
-          | Membre : #{reservation.amex_code.first_name.capitalize} #{reservation.amex_code.last_name.capitalize} <br>
+          | <span class='font-weight-bold'>AMERICAN EXPRESS</span><br>
+          | #{reservation.amex_code.first_name.capitalize} #{reservation.amex_code.last_name.capitalize}
         - else
-          | Membre : #{reservation.user.full_name} <br>
+          | Membre: #{reservation.user.full_name} <br>
           | <span class='small'>Membre depuis le #{display_date_for(reservation.user.created_at)}</span>
 
       - if reservation.charged? || reservation.quotation_asked? || reservation.amex_asked?
