@@ -95,7 +95,8 @@ cookoons_attributes = [
     architect_title: "Architecte - décorateur",
     architect_build_year: 2020,
     architect_url: "htpps://membre.cookoon.club",
-    amex: true
+    amex: true,
+    amex_price: 1000,
   },
   {
     user: User.first,
@@ -166,7 +167,8 @@ cookoons_attributes = [
     long_photo_url: "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
     main_photo_url: "https://images.unsplash.com/photo-1559310278-18a9192d909f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60",
     citation: "Un espace vivant",
-    amex: true
+    amex: true,
+    amex_price: 1500
   },
 ]
 
@@ -251,7 +253,7 @@ menu_attributes = [
   {
     chef: Chef.first,
     status: "amex",
-    unit_price_cents: 3000,
+    unit_price_cents: 0,
     description: "Menu Amex I",
     meal_type: "seated_meal"
   },
@@ -286,7 +288,7 @@ menu_attributes = [
   {
     chef: Chef.last,
     status: "amex",
-    unit_price_cents: 5000,
+    unit_price_cents: 0,
     description: "Menu Amex II",
     meal_type: "seated_meal"
   },
