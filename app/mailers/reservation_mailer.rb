@@ -8,11 +8,10 @@ class ReservationMailer < ApplicationMailer
     @tenant = @reservation.amex_code
     @cookoon = @reservation.cookoon
     @host = @cookoon.user
-    # mail(to: "Justine.Plaisance1@aexp.com; julien.b.stumpf@aexp.com", subject: "Cookoon: nouvelle demande de réservation - #{@tenant.first_name.capitalize} #{@tenant.last_name.capitalize}")
     if Rails.env.staging?
-      mail(to: "alice.fabre@hotmail.fr; alice.fabre@hotmail.fr", subject: "Cookoon: nouvelle demande de réservation - #{@tenant.first_name.capitalize} #{@tenant.last_name.capitalize}")
+      mail(to: "alice.fabre@hotmail.fr; alicefabre1984@gmail.com", subject: "Cookoon: nouvelle demande de réservation - #{@tenant.first_name.capitalize} #{@tenant.last_name.capitalize}")
     elsif Rails.env.production?
-      mail(to: "alicefabre1984@gmail.com; alicefabre1984@gmail.com", subject: "Cookoon: nouvelle demande de réservation - #{@tenant.first_name.capitalize} #{@tenant.last_name.capitalize}")
+      mail(to: "Justine.Plaisance1@aexp.com; julien.b.stumpf@aexp.com", subject: "Cookoon: nouvelle demande de réservation - #{@tenant.first_name.capitalize} #{@tenant.last_name.capitalize}")
     end
   end
 
