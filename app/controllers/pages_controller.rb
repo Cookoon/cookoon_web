@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
   skip_before_action :authenticate_user!, only: :general_conditions
   before_action :disable_turbolinks_cache, only: :home
+  before_action :set_start_date_available, only: :home
   before_action :set_end_date_available, only: :home
   before_action :set_dates_unavailable, only: :home
 
@@ -14,6 +15,10 @@ class PagesController < ApplicationController
   def general_conditions; end
 
   private
+
+  def set_start_date_available
+    @start_date_available = Date.today + 3.days
+  end
 
   def set_end_date_available
     # @end_date_available = ((Date.today + Availability::SETTABLE_WEEKS_AHEAD.weeks).beginning_of_week) - 1.days
