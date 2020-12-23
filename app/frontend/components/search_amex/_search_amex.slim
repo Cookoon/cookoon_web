@@ -13,7 +13,7 @@
           - types.each do |type|
             .input-cookoon-search-selection-item data={type: type[:data], text: type[:display], action: 'click->search#selectType'} #{type[:display]}
 
-      .input-cookoon-search data={target: 'search.dateSelection', 'end-date-available': @end_date_available, 'dates-unavailable': @dates_unavailable}
+      .input-cookoon-search data={target: 'search.dateSelection', 'end-date-available': @end_date_available, 'start-date-available': @start_date_available, 'dates-unavailable': @dates_unavailable}
         p Date
         span.input-cookoon-search-data data={target: 'search.dateText'} = @reservation.default_date
 
