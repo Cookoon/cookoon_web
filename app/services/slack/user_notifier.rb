@@ -4,7 +4,7 @@ module Slack
       @user = attributes[:user]
       # @channel = '#users-dev' if Rails.env.development?
       @channel = '#users-staging' if Rails.env.staging?
-      @channel = '#users' if Rails.env.production?
+      @channel = '#membres' if Rails.env.production?
     end
 
     private
