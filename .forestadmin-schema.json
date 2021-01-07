@@ -171,6 +171,21 @@
       "relationship": "BelongsTo",
       "widget": null,
       "validations": []
+    }, {
+      "field": "terms_of_service",
+      "type": "Boolean",
+      "default_value": "false",
+      "enums": null,
+      "integration": null,
+      "is_filterable": true,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": null,
+      "inverse_of": null,
+      "widget": null,
+      "validations": []
     }],
     "segments": [],
     "actions": []
@@ -1864,6 +1879,21 @@
       "widget": null,
       "validations": []
     }, {
+      "field": "amex_price_cents",
+      "type": "Number",
+      "default_value": "0",
+      "enums": null,
+      "integration": null,
+      "is_filterable": true,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": null,
+      "inverse_of": null,
+      "widget": null,
+      "validations": []
+    }, {
       "field": "reservations",
       "type": ["Number"],
       "default_value": null,
@@ -2337,16 +2367,13 @@
       "integration": null,
       "is_filterable": true,
       "is_read_only": false,
-      "is_required": true,
+      "is_required": false,
       "is_sortable": true,
       "is_virtual": false,
       "reference": null,
       "inverse_of": null,
       "widget": null,
-      "validations": [{
-        "message": null,
-        "type": "is present"
-      }]
+      "validations": []
     }, {
       "field": "company",
       "type": "String",
@@ -2355,16 +2382,13 @@
       "integration": null,
       "is_filterable": true,
       "is_read_only": false,
-      "is_required": true,
+      "is_required": false,
       "is_sortable": true,
       "is_virtual": false,
       "reference": null,
       "inverse_of": null,
       "widget": null,
-      "validations": [{
-        "message": null,
-        "type": "is present"
-      }]
+      "validations": []
     }, {
       "field": "linkedin_profile",
       "type": "String",
@@ -2373,16 +2397,13 @@
       "integration": null,
       "is_filterable": true,
       "is_read_only": false,
-      "is_required": true,
+      "is_required": false,
       "is_sortable": true,
       "is_virtual": false,
       "reference": null,
       "inverse_of": null,
       "widget": null,
-      "validations": [{
-        "message": null,
-        "type": "is present"
-      }]
+      "validations": []
     }, {
       "field": "user",
       "type": "Number",
@@ -2653,20 +2674,13 @@
       "integration": null,
       "is_filterable": true,
       "is_read_only": false,
-      "is_required": true,
+      "is_required": false,
       "is_sortable": true,
       "is_virtual": false,
       "reference": null,
       "inverse_of": null,
       "widget": null,
-      "validations": [{
-        "message": null,
-        "type": "is present"
-      }, {
-        "message": null,
-        "type": "is shorter than",
-        "value": 200
-      }]
+      "validations": []
     }, {
       "field": "user",
       "type": "Number",
@@ -3007,16 +3021,13 @@
       "integration": null,
       "is_filterable": true,
       "is_read_only": false,
-      "is_required": true,
+      "is_required": false,
       "is_sortable": true,
       "is_virtual": false,
       "reference": null,
       "inverse_of": null,
       "widget": null,
-      "validations": [{
-        "message": null,
-        "type": "is present"
-      }]
+      "validations": []
     }, {
       "field": "favorite_wines",
       "type": "String",
@@ -3025,16 +3036,13 @@
       "integration": null,
       "is_filterable": true,
       "is_read_only": false,
-      "is_required": true,
+      "is_required": false,
       "is_sortable": true,
       "is_virtual": false,
       "reference": null,
       "inverse_of": null,
       "widget": null,
-      "validations": [{
-        "message": null,
-        "type": "is present"
-      }]
+      "validations": []
     }],
     "segments": [],
     "actions": []

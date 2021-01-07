@@ -106,7 +106,7 @@ class ApplicationController < ActionController::Base
   end
 
   def terms_of_service_acceptance_needed?
-    true_user.terms_of_service_at.blank? || (true_user.terms_of_service.present? && true_user.terms_of_service_at < User::TERMS_OF_SERVICE_DATE)
+    true_user.terms_of_service_at.blank? || true_user.terms_of_service.blank? || (true_user.terms_of_service.present? && true_user.terms_of_service_at < User::TERMS_OF_SERVICE_DATE)
   end
 
   def inscription_payment_needed?
