@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[new create]
 
   def new
-    @user = User.new
+    @user = User.new(special_offer: params["special-offer"])
     @job = @user.build_job
     @personal_taste = @user.build_personal_taste
     @motivation = @user.build_motivation
@@ -12,6 +12,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(new_user_params)
+    @user.special_offer = params[:user][:special_offer]
     @user.assign_attributes(membership_asking: true, skip_password_validation: true)
 
     @job = @user.build_job(job_params)
@@ -23,7 +24,12 @@ class UsersController < ApplicationController
       flash[:notice] = "Votre demande d'adhésion nous a été transmise, nous reviendrons vers vous après avoir étudié votre candidature."
       redirect_to new_user_session_path
     else
-      render :new
+      if @user.errors.messages[:special_offer].present?
+        flash.now.alert = "L'url de la page que vous avez renseignée semble incorrecte. Veuillez la vérifier pour finaliser votre demande."
+        render :new, special_offer: @user.special_offer
+      else
+        render :new
+      end
     end
   end
 
@@ -74,7 +80,7 @@ class UsersController < ApplicationController
   private
 
   def new_user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :born_on, :phone_number, :photo, :description, :address)
+    params.require(:user).permit(:first_name, :last_name, :email, :born_on, :phone_number, :photo, :description, :address, :special_offer)
   end
 
   def job_params
