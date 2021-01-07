@@ -24,12 +24,7 @@ class UsersController < ApplicationController
       flash[:notice] = "Votre demande d'adhésion nous a été transmise, nous reviendrons vers vous après avoir étudié votre candidature."
       redirect_to new_user_session_path
     else
-      if @user.errors.messages[:special_offer].present?
-        flash.now.alert = "L'url de la page que vous avez renseignée semble incorrecte. Veuillez la vérifier pour finaliser votre demande."
-        render :new, special_offer: @user.special_offer
-      else
-        render :new
-      end
+      render :new
     end
   end
 

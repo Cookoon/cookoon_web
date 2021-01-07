@@ -9,7 +9,7 @@
         p.mb-0 #{f.label :phone_number, disabled: true} : #{user.phone_number}
         p.mb-0 #{f.label :address, disabled: true} : #{user.address}
 
-        - if user.special_offer.present?
+        - if User::SPECIAL_OFFER.include?(user.special_offer)
           h5.mt-3.text-primary Offre spéciale
           p.mb-0.text-primary Cet utilisateur a indiqué bénéficier de l'offre "#{user.special_offer}"
 
