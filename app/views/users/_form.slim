@@ -3,7 +3,7 @@
     - if (params[:action] == "new" || params[:action] == "create")
       h4 Vous connaître...
       br
-      = f.input :special_offer, as: :hidden
+      = f.input :special_offer
     = f.input :photo, as: :attachinary, input_html: { data: { controller: 'attachinary' } }, label: "Votre photo (maximum 5MB)", required: true
     = f.input :first_name, label: "Votre prénom"
     = f.input :last_name, label: "Votre nom"
