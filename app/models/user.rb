@@ -20,6 +20,7 @@ class User < ApplicationRecord
 
   PHONE_REGEXP = /\A(\+\d+)?([\s\-\.]?\(?\d+\)?)+\z/
   TERMS_OF_SERVICE_DATE = DateTime.new(2020, 9, 30, 14, 00, 00)
+  SPECIAL_OFFER = %w[free-membership]
 
   devise :invitable, :database_authenticatable, :recoverable,
          :trackable, :validatable, :rememberable
@@ -52,6 +53,7 @@ class User < ApplicationRecord
   validates :personal_taste, presence: true, on: :create
   validates :motivation, presence: true, on: :create
   validates :photo, presence: true, on: :create
+  validates :special_offer, inclusion: { in: SPECIAL_OFFER }, allow_blank: true
 
   after_invitation_accepted :send_welcome_email
   after_save :upsert_mailchimp_subscription, if: :saved_change_to_born_on?
