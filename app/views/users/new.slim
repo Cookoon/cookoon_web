@@ -1,3 +1,4 @@
+= console
 .container
   .text-center.my-5 = image_tag 'cookoon-logo-black-small.png'
 
@@ -5,7 +6,7 @@
     .cookoon-card-body
       h3.mb-4 <i class='co icon-losange small text-primary mr-2'></i> Le club et l'offre Cookoon
       p Cookoon permet à ses membres de vivre des expériences gastronomiques exceptionnelles.
-      - if (@user.special_offer.blank?  || Date.today > Date.new(2021, 2, 1))
+      - unless (User::SPECIAL_OFFER.include?(@user.special_offer) && Date.today < Date.new(2021, 2, 1))
         p Si vous proposez votre candidature et que celle-ci est acceptée*, un règlement de 450 €TTC vous sera demandé au titre des frais annuels de membres.
         p En tant que membre cotisant, vous pourrez:
       - else
@@ -14,7 +15,7 @@
 
       ul
         li accéder au site #{link_to('membre.cookoon.club', 'https://membre.cookoon.club/', target: :_blank, class: 'a_gold')} et composer les repas ou cocktails de votre choix en sélectionnant lieux et chefs;
-        - if (@user.special_offer.blank?  || Date.today > Date.new(2021, 2, 1))
+        - unless (User::SPECIAL_OFFER.include?(@user.special_offer) && Date.today < Date.new(2021, 2, 1))
           li inviter 5 nouveaux membres par an à rejoindre Cookoon;
           li bénéficier de 10% de remise membre sur toutes vos réservations;
         li accéder au service de conciergerie Cookoon pour vos demandes exceptionnelles.
