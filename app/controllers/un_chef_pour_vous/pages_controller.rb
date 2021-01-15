@@ -11,8 +11,8 @@ class UnChefPourVous::PagesController < ApplicationController
   private
 
   def set_start_date_available
-    if Date.today < Date.new(2021, 1, 12)
-      @start_date_available = Date.new(2021, 1, 15)
+    if Date.today < Date.new(2021, 2, 12)
+      @start_date_available = Date.new(2021, 2, 15)
     else
       @start_date_available = Date.today + 3.days
     end
