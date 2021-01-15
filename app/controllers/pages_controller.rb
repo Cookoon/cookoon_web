@@ -17,7 +17,11 @@ class PagesController < ApplicationController
   private
 
   def set_start_date_available
-    @start_date_available = Date.today + 3.days
+    if Date.today < Date.new(2021, 2, 12)
+      @start_date_available = Date.new(2021, 2, 15)
+    else
+      @start_date_available = Date.today + 3.days
+    end
   end
 
   def set_end_date_available
