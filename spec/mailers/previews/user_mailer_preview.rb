@@ -11,6 +11,10 @@ class UserMailerPreview < ActionMailer::Preview
     UserMailer.inscription_payment_email(User.last)
   end
 
+  def notify_twelve_days_after_invite
+    UserMailer.notify_twelve_days_after_invite(User.last, 'fakeToken')
+  end
+
   # def notify_invitations_awarded
   #   UserMailer.notify_invitations_awarded(User.last, 5, 'Message personnalisé')
   # end

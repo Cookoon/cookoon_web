@@ -17,6 +17,12 @@ class UserMailer < ApplicationMailer
     mail(to: @user.full_email, subject: "Cookoon : votre paiement d'adhésion")
   end
 
+  def notify_twelve_days_after_invite(user, token)
+    @user = user
+    @token = token
+    mail(to: @user.full_email, subject: "Cookoon: vous n'avez pas encore accepté l'invitation de #{@user&.invited_by&.full_name}")
+  end
+
   # def notify_invitations_awarded(user, invitation_quantity, message)
   #   @user = user
   #   @invitation_quantity = invitation_quantity
