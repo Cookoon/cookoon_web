@@ -89,9 +89,9 @@ class ReservationMailerPreview < ActionMailer::Preview
     ReservationMailer.paid_confirmation_cookoon_butler_to_host(Reservation.customer.last)
   end
 
-  # def notify_awaiting_request_to_host
-  #   ReservationMailer.notify_awaiting_request_to_host(Reservation.last)
-  # end
+  def notify_awaiting_request_to_host
+    ReservationMailer.notify_awaiting_request_to_host(Reservation.last)
+  end
 
   # def cancelled_by_tenant_to_host
   #   ReservationMailer.cancelled_by_tenant_to_host(Reservation.last)
