@@ -11,13 +11,13 @@
 <p>En étant membre Cookoon, vous pouvez organiser vos réceptions, proposer un lieu afin que d'autres membres puissent le louer ponctuellement pour un repas ou un cocktail, et enfin coopter d'autres membres lorsque nous vous octroyons des invitations.</p>
 
 <p>Votre identifiant pour vous connecter :
-  <%= link_to "#{@user.email}", branch_url(accept_invitation_url(@user, invitation_token: @token)), target: :_blank, style: "font-weight: bold; text-decoration: none; font-style: normal; color: black" %>
+  <%= link_to "#{@user.email}", accept_invitation_url(@user, invitation_token: @token), target: :_blank, style: "font-weight: bold; text-decoration: none; font-style: normal; color: black" %>
 </p>
 
 <p>Pour créer votre compte, suivez le lien ci-dessous :</p>
 <table border="0" cellpadding="0" cellspacing="10" class="btn btn-pb-0 btn-primary"><tbody><tr>
   <td align="center">
-    <%= link_to 'Je deviens membre Cookoon', branch_url(accept_invitation_url(@user, invitation_token: @token)), target: :_blank %>
+    <%= link_to 'Je deviens membre Cookoon', accept_invitation_url(@user, invitation_token: @token), target: :_blank %>
   </td>
 </tr></tbody></table>
 
