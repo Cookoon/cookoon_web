@@ -1,6 +1,6 @@
 = simple_form_for @reservation, html: { class: "bg-white h-100 d-flex justify-content-center align-items-center" }, data: { target: 'search.submitForm', action: 'click->search#submitForm mouseover->search#logoWhiteBackgroundBold mouseout->search#logoBoldBackgroundWhite'} do |f|
 
-  = f.input :category, as: :string, as: :hidden
+  = f.input :category, as: :hidden
 
   = f.input :people_count, input_html: { value: @reservation.default_people_count, data: {target: 'search.countInput'} }, as: :hidden
 
