@@ -16,5 +16,9 @@ module Slack
     def message
       "[URGENT - ATTENTE VALIDATION HOTE] #{@host.full_name} n'a pas répondu pour la réservation #{@reservation.id} du #{@reservation.formatted_date}"
     end
+
+    def formatted_date
+      display_datetime_for(reservation.start_at, join_expression: 'à', without_year: true)
+    end
   end
 end
