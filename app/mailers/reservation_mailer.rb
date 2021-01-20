@@ -249,13 +249,17 @@ class ReservationMailer < ApplicationMailer
   # end
 
   # ==== Host notification =====
-  # def notify_awaiting_request_to_host(reservation)
-  #   @reservation = reservation
-  #   @tenant = @reservation.user
-  #   @cookoon = @reservation.cookoon
-  #   @host = @cookoon.user
-  #   mail(to: @host.full_email, subject: "Rappel: #{@tenant.first_name} souhaite louer votre Cookoon !")
-  # end
+  def notify_awaiting_request_to_host(reservation)
+    @reservation = reservation
+    if @reservation.amex?
+      @tenant = @reservation.amex_code
+    else
+      @tenant = @reservation.user
+    end
+    @cookoon = @reservation.cookoon
+    @host = @cookoon.user
+    mail(to: @host.full_email, subject: "Rappel Cookoon: vous avez une demande de réservation pour \"#{@cookoon.name}\"")
+  end
 
   # def autocancel_stripe_period_to_host(reservation)
   #   @reservation = reservation

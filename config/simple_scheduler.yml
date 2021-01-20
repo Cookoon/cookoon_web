@@ -33,11 +33,11 @@ notify_user_ten_days_after_invite:
   at: '14:00'
   expires_after: '23.hours'
 
-notify_user_twelve_days_after_invite:
-  class: 'NotifyUserTwelveDaysAfterInviteJob'
-  every: '1.hour'
-  at: '*:00'
-  expires_after: '3.hours'
+# notify_user_twelve_days_after_invite:
+#   class: 'NotifyUserTwelveDaysAfterInviteJob'
+#   every: '1.hour'
+#   at: '*:00'
+#   expires_after: '3.hours'
 
 notify_user_six_days_after_reservation:
   class: 'NotifyUserSixDaysAfterReservationJob'

@@ -1,52 +1,25 @@
-<p>Bonjour <%= @host.first_name %>,</p>
-<p>Vous avez reçu une demande location de <%= @tenant.first_name %> : encore 24h pour y répondre, dépéchez-vous :</p>
+<% if @host.first_name.present? %>
+  <p>Cher(e) <%= "#{@host.first_name.capitalize}" %>,</p>
+<% else %>
+  <p>Bonjour,</p>
+<% end %>
 
-<table border="0" cellpadding="0" cellspacing="10" class="info"><tbody>
-  <tr>
-    <td align="center">
-      <%= image_tag('icon-home.png', alt: 'Cookoon') %>
-    </td>
-    <td>
-      <b><%= @cookoon.name %></b>
-      <br>le <%= display_date_for(@reservation.start_at) %>
-      <br>à <%= display_time_for(@reservation.start_at) %> pour <%= display_duration_for(@reservation.duration) %>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <%= image_tag('icon-euro.png', alt: 'Prix') %>
-    </td>
-    <td>
-      <b>Vous recevrez :</b>
-      <br><%= humanized_money_with_symbol @reservation.host_payout_price %>
-      <br>
-      <small>
-        soit <%= humanized_money_with_symbol @reservation.price %> - <%= humanized_money_with_symbol @reservation.host_fee %> de frais
-      </small>
-    </td>
-  </tr>
-  <tr>
-    <td align="center">
-      <%= image_tag('icon-user.png', alt: 'Hôte') %>
-    </td>
-    <td>
-      <b>Découvrez le locataire</b>
-      <br><%= @tenant.full_name %>
-      <br><%= @tenant.phone_number %> - <%= mail_to @tenant.full_email, @tenant.email %>
-      <br><small>membre depuis le <%= display_date_for(@host.invitation_accepted_at || @host.created_at) %></small>
-    </td>
-  </tr>
-</tbody></table>
+<p>Vous avez une demande de réservation pour "<%= "#{@cookoon.name}" %>", dans le cadre d'<%= "#{ @reservation.decorate.humanized_type_name_with_pronom }" %> de <%= "#{ @reservation.decorate.people_count_text }" %> le <strong><%= display_date_for(@reservation.start_at) %></strong>.</p>
 
-<table border="0" cellpadding="0" cellspacing="10" class="btn btn-primary"><tbody><tr>
+<p><b>Il ne vous reste plus que 24h pour y répondre.</b></p>
+
+<h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> La demande de réservation</h4>
+<% if @tenant.full_name.present? %>
+  <p>Cette demande a été émise par <%= "#{@tenant.full_name}" %>.</p>
+<% end %>
+<p>Les invités seront présents de <strong><%= @reservation.decorate.start_time %></strong> à <strong><%= @reservation.decorate.end_time %></strong>.</p>
+<p>Votre lieu de réception devra être mis à disposition de <strong><%= @reservation.decorate.start_time_for_chef_and_service %></strong> à <strong><%= @reservation.decorate.end_time_for_chef_and_service %></strong> pour la préparation et le rangement.</p>
+
+<h4><%= image_tag("cookoon-losange.png", size: '18', style: 'margin-bottom: -2px;') %> Votre rémunération</h4>
+<p>Vous recevrez <%= @reservation.cookoon_price %> € dans le cadre de cette réservation.</p>
+
+<table border="0" cellpadding="0" cellspacing="10" class="btn btn-pb-0 btn-primary"><tbody><tr>
   <td align="center">
     <%= link_to 'Répondre à la demande', host_reservations_url, target: :_blank %>
   </td>
 </tr></tbody></table>
-
-<h3>Nous nous occupons de tout</h3>
-<p>Vous avez finalement besoin d'un concierge ou du service ménage? Faites une demande à <%= mail_to 'concierge@cookoon.fr', 'concierge@cookoon.fr', target: :_blank %></p>
-
-<% content_for :post_scriptum do %>
-  <p>PS : Une question ? Rendez-vous sur <%= link_to 'aide.cookoon.fr', 'https://aide.cookoon.fr', target: :_blank %>.</p>
-<% end %>
