@@ -11,15 +11,15 @@ tz: 'Europe/Paris' # The application time zone will be used by default if not se
 
 notify_reservation_one_day_without_answer:
   class: 'NotifyReservationOneDayWithoutAnswerJob'
-  every: '1.hour'
-  at: '*:00'
+  every: '1.day'
+  at: '15:00'
   expires_after: '23.hours'
 
 notify_user_twelve_days_after_invite:
   class: 'NotifyUserTwelveDaysAfterInviteJob'
-  every: '1.hour'
-  at: '*:00'
-  expires_after: '3.hours'
+  every: '1.day'
+  at: '15:00'
+  expires_after: '23.hours'
 
 # notify_user_two_days_after_join:
 #   class: 'NotifyUserTwoDaysAfterJoinJob'
@@ -32,13 +32,13 @@ notify_user_twelve_days_after_invite:
 #   every: '1.day'
 #   at: '14:00'
 #   expires_after: '23.hours'
-#
+
 # notify_user_ten_days_after_invite:
 #   class: 'NotifyUserTenDaysAfterInviteJob'
 #   every: '1.day'
 #   at: '14:00'
 #   expires_after: '23.hours'
-#
+
 # notify_user_six_days_after_reservation:
 #   class: 'NotifyUserSixDaysAfterReservationJob'
 #   every: '1.day'
