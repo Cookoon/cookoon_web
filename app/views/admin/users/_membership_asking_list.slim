@@ -29,7 +29,7 @@
           p.mb-0 = ffff.label :content, disabled: true
           p = user.motivation.content
 
-        - unless (user.special_offer.present? && Date.today < Date.new(2021, 2, 1))
+        - unless (user.special_offer.present? && Date.today < Date.new(2021, 2, 16))
           = f.input :inscription_payment_required, as: :boolean, label: "Inscription payante : #{humanized_money_with_symbol(User::Payment::INSCRIPTION_PRICE)}TTC"
         = f.input :membership_asking, input_html: { value: false }, as: :hidden
         .text-center
