@@ -18,6 +18,7 @@ class Reservation < ApplicationRecord
   scope :refused_by_host, -> { refused.or(quotation_refused_by_host).or(amex_refused_by_host) }
   scope :inactive, -> { refused.or(quotation_refused_by_host).or(amex_refused_by_host).or(quotation_refused).or(passed).or(cancelled_because_host_did_not_reply_in_validity_period).or(cancelled_because_short_notice).or(dead)}
   scope :created_in_day_range_around, ->(datetime) { where created_at: day_range(datetime) }
+  scope :created_in_hour_range_around, ->(datetime) { where created_at: hour_range(datetime) }
   scope :in_hour_range_around, ->(datetime) { where start_at: hour_range(datetime) }
   scope :finished_in_day_range_around, ->(datetime) { joins(:inventory).merge(Inventory.checked_out_in_day_range_around(datetime)) }
   scope :created_before, ->(date) { where('created_at < ?', date) }
