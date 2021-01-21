@@ -14,7 +14,7 @@ module Slack
     attr_reader :reservation, :host
 
     def message
-      "[URGENT - ATTENTE VALIDATION HOTE] #{host.full_name} n'a pas répondu pour la réservation #{reservation.id} du #{display_datetime_for(reservation.start_at, join_expression: 'à', without_year: true)}"
+      "[URGENT - ATTENTE VALIDATION HOTE] #{host.full_name} n'a pas répondu pour la réservation #{reservation.id} du #{reservation.start_at}"
     end
   end
 end
