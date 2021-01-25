@@ -30,7 +30,7 @@ class ReservationsCleanupJob < ApplicationJob
   # end
 
   def cleanup_host_did_not_reply_in_validity_period
-    Reservation.host_did_not_reply_in_validity_period.each do |reservation|
+    Reservation.host_did_not_reply_in_validity_period.where(cancel_cleanup_job: [nil, false]).each do |reservation|
       reservation.cancel_because_host_did_not_reply_in_validity_period!
     end
   end
