@@ -24,7 +24,7 @@ ping_slack_reservation_one_day_without_host_answer_job:
 notify_user_twelve_days_after_invite:
   class: 'NotifyUserTwelveDaysAfterInviteJob'
   every: '1.day'
-  at: '20:00'
+  at: '14:00'
   expires_after: '23.hours'
 
 # notify_user_two_days_after_join:
