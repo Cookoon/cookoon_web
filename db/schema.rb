@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_06_135457) do
+ActiveRecord::Schema.define(version: 2021_01_25_113657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -252,6 +252,7 @@ ActiveRecord::Schema.define(version: 2021_01_06_135457) do
     t.integer "butler_tax_cents", default: 0, null: false
     t.integer "butler_with_tax_cents", default: 0, null: false
     t.string "stripe_menu_id"
+    t.boolean "cancel_cleanup_job"
     t.index ["cookoon_id"], name: "index_reservations_on_cookoon_id"
     t.index ["menu_id"], name: "index_reservations_on_menu_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
