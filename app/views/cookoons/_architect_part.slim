@@ -28,12 +28,12 @@
         p.text-center = reservation.recap_string_start_and_end_time
         - if !reservation.amex?
           p.text-center = reservation.recap_string_butler_count
-        //p.text-primary.text-center.mb-0 Prix:
-        //p.text-center.mb-0
-          span #{reservation.cookoon_butler_full_price}TTC
-          | &nbsp
-          span.text-primary.font-italic
-          '(soit #{reservation.cookoon_butler_price}HT)
+          // p.text-primary.text-center.mb-0 Tarification:
+          p.text-center.mb-0
+            span #{reservation.cookoon_butler_full_price}TTC
+            // | &nbsp
+            // span.text-primary.font-italic
+              '(soit #{reservation.cookoon_butler_price}HT)
       - if reservation.pending?
         = link_to button_title, button_path, method: button_method, class: "btn-cookoon btn-cookoon-primary text-center"
 

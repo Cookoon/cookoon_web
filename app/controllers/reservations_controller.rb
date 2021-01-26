@@ -2,6 +2,7 @@ class ReservationsController < ApplicationController
   before_action :find_reservation, only: %i[update show ask_quotation reset_menu select_services cooking_by_user]
   before_action :find_reservation_with_reservation_id, only: %i[select_cookoon select_menu]
   before_action :find_cookoon, only: %i[select_cookoon]
+  before_action :set_start_date_available, only: :new
   before_action :set_end_date_available, only: :new
   before_action :set_dates_unavailable, only: :new
 
@@ -110,6 +111,14 @@ class ReservationsController < ApplicationController
 
   def reservation_params
     params.require(:reservation).permit(:category, :people_count, :type_name, :start_at)
+  end
+
+  def set_start_date_available
+    if Date.today < Date.new(2021, 2, 12)
+      @start_date_available = Date.new(2021, 2, 15)
+    else
+      @start_date_available = Date.today + 3.days
+    end
   end
 
   def set_end_date_available
