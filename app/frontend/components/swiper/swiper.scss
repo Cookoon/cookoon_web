@@ -2,7 +2,8 @@
   &-container {
     &.card_cookoon {
       .swiper-slide {
-        width: calc(100% - 4rem);
+        // width: calc(100% - 4rem);
+        width: 100%;
         .card-cookoon {
           height: calc(174.9375px + 2.3375rem);
         }

@@ -42,7 +42,7 @@ module CarouselHelper
         # renvoie l'url de l'image contenue dans cloudinary
         image_full_url = cl_image_path(
           image.path,
-          width: 800, height: 450, crop: :fill
+          # width: 800, height: 450, crop: :fill
         )
       end
 

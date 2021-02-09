@@ -2,13 +2,13 @@
   - if (cookoon.architect_name || cookoon.architect_build_year || cookoon.architect_url || cookoon.architect_title).present?
     .first_element
       = render 'cookoons/architect_card', cookoon: cookoon
-    .second_element style="background-image:url(#{cl_image_path(sample_photos.second.path)})"
-    .third_element style="background-image:url(#{cl_image_path(sample_photos.third.path)})"
+    .second_element style="background-image:url(#{cl_image_path(sample_photos.second.path, height: 700, crop: 'fill')})"
+    .third_element style="background-image:url(#{cl_image_path(sample_photos.third.path, height: 350, crop: 'fill')})"
   - else
-    .second_element_full_column style="background-image:url(#{cl_image_path(sample_photos.second.path)})"
+    .second_element_full_column style="background-image:url(#{cl_image_path(sample_photos.second.path, height: 700, crop: 'fill')})"
     .third_element_full_row style="background-image:url(#{cl_image_path(sample_photos.third.path)})"
 
-  .fourth_element style="background-image:url(#{cl_image_path(sample_photos.fourth.path)})"
+  .fourth_element style="background-image:url(#{cl_image_path(sample_photos.fourth.path, height: 350, crop: 'fill')})"
 
   //.fifth_element
     = link_to "", data: {toggle: "modal", target: "#cookoon-photos-modal"}, class: "see_pictures_card " do

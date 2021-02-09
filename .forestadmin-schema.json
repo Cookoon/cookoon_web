@@ -2523,7 +2523,7 @@
     }, {
       "field": "unit_price_cents",
       "type": "Number",
-      "default_value": "0",
+      "default_value": "0.0",
       "enums": null,
       "integration": null,
       "is_filterable": true,
@@ -3640,21 +3640,6 @@
       "widget": null,
       "validations": []
     }, {
-      "field": "cancel_cleanup_job",
-      "type": "Boolean",
-      "default_value": null,
-      "enums": null,
-      "integration": null,
-      "is_filterable": true,
-      "is_read_only": false,
-      "is_required": false,
-      "is_sortable": true,
-      "is_virtual": false,
-      "reference": null,
-      "inverse_of": null,
-      "widget": null,
-      "validations": []
-    }, {
       "field": "services",
       "type": ["Number"],
       "default_value": null,
@@ -4559,21 +4544,6 @@
       "validations": []
     }, {
       "field": "address",
-      "type": "String",
-      "default_value": null,
-      "enums": null,
-      "integration": null,
-      "is_filterable": true,
-      "is_read_only": false,
-      "is_required": false,
-      "is_sortable": true,
-      "is_virtual": false,
-      "reference": null,
-      "inverse_of": null,
-      "widget": null,
-      "validations": []
-    }, {
-      "field": "special_offer",
       "type": "String",
       "default_value": null,
       "enums": null,
