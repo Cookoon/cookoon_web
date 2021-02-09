@@ -11,11 +11,11 @@ class ChefsController < ApplicationController
     chefs_with_active_standing_menus = chefs.has_active_standing_menus
     chefs_without_active_standing_menus = chefs.has_not_active_standing_menus
     if @reservation.seated?
-      @chefs_available = chefs_with_active_seated_menus.without_engaged_reservations_in_day(@reservation.start_at)
-      @chefs_unavailable = chefs_without_active_seated_menus.or(chefs_with_active_seated_menus.with_engaged_reservations_in_day(@reservation.start_at))
+      @chefs_available = chefs_with_active_seated_menus.available_in_day(@reservation.start_at)
+      @chefs_unavailable = chefs_without_active_seated_menus.or(chefs_with_active_seated_menus.unavailable_in_day(@reservation.start_at))
     elsif @reservation.standing?
-      @chefs_available = chefs_with_active_standing_menus.without_engaged_reservations_in_day(@reservation.start_at)
-      @chefs_unavailable = chefs_without_active_standing_menus.or(chefs_with_active_standing_menus.with_engaged_reservations_in_day(@reservation.start_at))
+      @chefs_available = chefs_with_active_standing_menus.available_in_day(@reservation.start_at)
+      @chefs_unavailable = chefs_without_active_standing_menus.or(chefs_with_active_standing_menus.unavailable_in_day(@reservation.start_at))
     else
       @chefs = policy_scope(Chef).none
     end

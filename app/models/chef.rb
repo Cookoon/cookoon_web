@@ -3,6 +3,7 @@ class Chef < ApplicationRecord
   has_many :chef_perks, dependent: :destroy
   has_many :chef_perk_specifications, through: :chef_perks
   has_many :reservations, through: :menus
+  has_many :chef_unavailabilities
 
   has_attachments :photos, order: 'id ASC'
   has_attachment :main_photo
@@ -53,6 +54,10 @@ class Chef < ApplicationRecord
       |e| e = Menu.find(e).chef.id
       }
     ) }
+  scope :without_unavailability_in_day, ->(day) { where.not(id: ChefUnavailability.unavailable.where(date: day).pluck(:chef_id).uniq) }
+  scope :with_unavailability_in_day, ->(day) { where(id: ChefUnavailability.unavailable.where(date: day).pluck(:chef_id).uniq) }
+  scope :available_in_day, -> (day) { without_engaged_reservations_in_day(day).without_unavailability_in_day(day) }
+  scope :unavailable_in_day, -> (day) { with_engaged_reservations_in_day(day).or(with_unavailability_in_day(day)) }
   # scope :amex, -> { where(id: AMEX_CHEFS) }
   scope :amex, -> { where(amex: true) }
 
