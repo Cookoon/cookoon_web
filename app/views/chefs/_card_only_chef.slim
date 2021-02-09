@@ -2,7 +2,7 @@
 .cookoon-card.mb-0.h-100.d-flex.flex-column.justify-content-between
   div
     .cookoon-card-image-div-squared
-      .cookoon-card-image style="background-image: url(#{cl_image_path(chef.main_photo.path)}); background-size: cover; background-position: center"
+      .cookoon-card-image style="background-image: url(#{cl_image_path(chef.main_photo.path, width: 500, height: 500, crop: "fill")}); background-size: cover; background-position: center"
 
     .cookoon-card-body.pb-0
       h4.text-center style="overflow: hidden; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"

@@ -19,7 +19,7 @@
     hr.w-50.ml-0
   - if reservation.cookoon.present?
     p.small.mt-4 = reservation.cookoon.name
-    = cl_image_tag(reservation.cookoon.main_photo.path)
+    = cl_image_tag(reservation.cookoon.main_photo.path, width: 250, crop: 'fill')
   - if reservation.menu.present?
     p.small.mt-4 = reservation.menu.chef.name
-    = cl_image_tag(reservation.menu.chef.main_photo.path)
+    = cl_image_tag(reservation.menu.chef.main_photo.path, width: 250, crop: 'fill')
