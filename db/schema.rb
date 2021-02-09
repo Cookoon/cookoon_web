@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_25_113657) do
+ActiveRecord::Schema.define(version: 2021_02_09_131718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,18 @@ ActiveRecord::Schema.define(version: 2021_01_25_113657) do
     t.datetime "updated_at", null: false
     t.index ["chef_id"], name: "index_chef_perks_on_chef_id"
     t.index ["chef_perk_specification_id"], name: "index_chef_perks_on_chef_perk_specification_id"
+  end
+
+  create_table "chef_unavailabilities", force: :cascade do |t|
+    t.boolean "available", default: false
+    t.date "date"
+    t.integer "time_slot"
+    t.datetime "start_at"
+    t.datetime "end_at"
+    t.bigint "chef_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["chef_id"], name: "index_chef_unavailabilities_on_chef_id"
   end
 
   create_table "chefs", force: :cascade do |t|
@@ -328,6 +340,7 @@ ActiveRecord::Schema.define(version: 2021_01_25_113657) do
   add_foreign_key "availabilities", "cookoons"
   add_foreign_key "chef_perks", "chef_perk_specifications"
   add_foreign_key "chef_perks", "chefs"
+  add_foreign_key "chef_unavailabilities", "chefs"
   add_foreign_key "cookoons", "users"
   add_foreign_key "dishes", "menus"
   add_foreign_key "inventories", "reservations"
