@@ -42,7 +42,7 @@ class PaymentsController < ApplicationController
     if @reservation.cookoon.blank?
       flash.alert = "Vous devez choisir un décor"
       redirect_to reservation_cookoons_path(@reservation)
-    elsif @reservation.menu_status == "initial" && @reservation.needs_chef?
+    elsif @reservation.menu_status == "initial"
       flash.alert = "Vous devez choisir un menu ou indiquer si vous souhaitez cuisiner vous-même"
       redirect_to reservation_chefs_path(@reservation)
     else
