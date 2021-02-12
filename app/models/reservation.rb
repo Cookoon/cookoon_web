@@ -258,7 +258,7 @@ class Reservation < ApplicationRecord
   end
 
   def needs_chef?
-    %w[brunch lunch diner diner_cocktail lunch_cocktail afternoon day amex_lunch amex_diner].include? type_name
+    %w[brunch lunch diner diner_cocktail lunch_cocktail amex_lunch amex_diner].include? type_name
   end
 
   def needs_cookoon_butler_payment?
