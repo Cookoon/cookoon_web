@@ -1,11 +1,10 @@
-- unless reservation.needs_chef?
-  p.mb-3.font-weight-bold 2. Vos souhaits de chef et de menu
-  .div
-    = render 'menus/recap', reservation: reservation
+p.mb-3.font-weight-bold 2. Vos souhaits de chef et de menu
+.div
+  = render 'menus/recap', reservation: reservation
 
-    - if reservation.menu.present?
-      p.font-weight-bold Second règlement
-      = render 'menus/details_for_payment', reservation: reservation
+  - if reservation.menu.present?
+    p.font-weight-bold Second règlement
+    = render 'menus/details_for_payment', reservation: reservation
 
 .mb-4
   - if reservation.menu_status != "cooking_by_user"
