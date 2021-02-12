@@ -19,9 +19,10 @@
 
       hr.my-5
 
-      = render 'payments/details_menu', reservation: @reservation
+      - if @reservation.menu.present? || @reservation.menu_status == "cooking_by_user"
+        = render 'payments/details_menu', reservation: @reservation
 
-      hr.my-5
+        hr.my-5
 
       = render 'payments/details_services', reservation: @reservation
 
