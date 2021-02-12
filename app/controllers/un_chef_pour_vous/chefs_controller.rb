@@ -5,8 +5,8 @@ class UnChefPourVous::ChefsController < ApplicationController
 
   def index
     chefs = Chef.amex
-    @chefs_available = chefs.without_engaged_reservations_in_day(@reservation.start_at).includes(:main_photo_files, :chef_perks, chef_perks: :chef_perk_specification)
-    @chefs_unavailable = chefs.with_engaged_reservations_in_day(@reservation.start_at).includes(:main_photo_files, :chef_perks, chef_perks: :chef_perk_specification)
+    @chefs_available = chefs.available_in_day(@reservation.start_at).includes(:main_photo_files, :chef_perks, chef_perks: :chef_perk_specification)
+    @chefs_unavailable = chefs.unavailable_in_day(@reservation.start_at).includes(:main_photo_files, :chef_perks, chef_perks: :chef_perk_specification)
   end
 
   def show
