@@ -6,3 +6,5 @@
 .container
   #search-form-home
     = c 'search_amex'
+    - if Date.today < @start_date_available_for_diner
+      p.font-italic.mt-3 style="top: -65px; position: relative;" En raison du cadre sanitaire fixé par le gouvernement, nous ne serons en mesure d'accepter de réservation en soirée qu'à partir du #{display_date_for(@start_date_available_for_diner)}.

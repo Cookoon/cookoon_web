@@ -1,14 +1,21 @@
 class UnChefPourVous::PagesController < ApplicationController
+  include DatetimeHelper
+
   skip_before_action :authenticate_user!, only: :home
   before_action :set_start_date_available, only: :home
   before_action :set_end_date_available, only: :home
   before_action :set_dates_unavailable, only: :home
+  before_action :set_start_date_available_for_diner, only: :home
 
   def home
     @reservation = Reservation.new(category: 'amex', people_count: 2).decorate
   end
 
   private
+
+  def set_start_date_available_for_diner
+    @start_date_available_for_diner = Date.new(2021, 3, 16)
+  end
 
   def set_start_date_available
     if Date.today < Date.new(2021, 2, 12)

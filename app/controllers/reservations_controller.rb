@@ -1,10 +1,13 @@
 class ReservationsController < ApplicationController
+  include DatetimeHelper
+
   before_action :find_reservation, only: %i[update show ask_quotation reset_menu select_services cooking_by_user]
   before_action :find_reservation_with_reservation_id, only: %i[select_cookoon select_menu]
   before_action :find_cookoon, only: %i[select_cookoon]
   before_action :set_start_date_available, only: :new
   before_action :set_end_date_available, only: :new
   before_action :set_dates_unavailable, only: :new
+  before_action :set_start_date_available_for_diner, only: :new
 
   def index
     # reservations = policy_scope(Reservation).includes(cookoon: :user)
@@ -94,6 +97,10 @@ class ReservationsController < ApplicationController
   end
 
   private
+
+  def set_start_date_available_for_diner
+    @start_date_available_for_diner = Date.new(2021, 3, 16)
+  end
 
   def find_reservation
     @reservation = Reservation.find(params[:id]).decorate
