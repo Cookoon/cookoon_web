@@ -24,21 +24,7 @@ export default class extends Controller {
   }
 
   connect() {
-    flatpickr(this.dateSelectionTarget, {
-      dateFormat: 'Y-m-dTH:i',
-      // disable: ["2020-11-30", "2020-12-09"],
-      disable: JSON.parse(this.dateSelectionTarget.getAttribute("data-dates-unavailable")),
-      // minDate: 'today',
-      // minDate: new Date().fp_incr(3),
-      minDate: this.dateSelectionTarget.getAttribute("data-start-date-available"),
-      maxDate: this.dateSelectionTarget.getAttribute("data-end-date-available"),
-      // not working if day is sunday
-      // maxDate: (new Date().fp_incr(5*7)).fp_incr(-((new Date().fp_incr(5*7)).getDay())),
-      disableMobile: "true",
-      onValueUpdate: (selectedDates, dateStr) => {
-        this.selectDate(selectedDates, dateStr)
-      },
-    })
+    this.initFlatpickr()
   }
 
   toggleSelection() {
@@ -64,11 +50,16 @@ export default class extends Controller {
   }
 
   selectType() {
+    this.dateTextTarget.innerText = "Votre choix"
+    this.dateInputTarget.value = ""
+
     const duration = event.target.dataset.type
     const text = event.target.dataset.text
     this.typeTextTarget.innerHTML = text
     this.typeInputTarget.value = duration
     event.target.closest('.input-cookoon-search').classList.remove('focus')
+
+    this.initFlatpickr()
   }
 
   selectDate(selectedDates, dateStr) {
@@ -97,5 +88,35 @@ export default class extends Controller {
   logoBoldBackgroundWhite() {
     const logo = this.submitFormLogoTarget.dataset.logoBold;
     this.changeImageAndToggleBg(logo);
+  }
+
+  initFlatpickr = () => {
+    flatpickr(this.dateSelectionTarget, {
+      dateFormat: 'Y-m-dTH:i',
+      // disable: ["2020-11-30", "2020-12-09"],
+      disable: JSON.parse(this.dateSelectionTarget.getAttribute("data-dates-unavailable")),
+      minDate: this.flatpickrMinDate(),
+      // minDate: 'today',
+      // minDate: new Date().fp_incr(3),
+      maxDate: this.dateSelectionTarget.getAttribute("data-end-date-available"),
+      // not working if day is sunday
+      // maxDate: (new Date().fp_incr(5*7)).fp_incr(-((new Date().fp_incr(5*7)).getDay())),
+      disableMobile: "true",
+      onValueUpdate: (selectedDates, dateStr) => {
+        this.selectDate(selectedDates, dateStr)
+      },
+    })
+  }
+
+  flatpickrMinDate = () => {
+    const typeName = this.typeTextTarget.innerText;
+    const startDateAvailable = this.dateSelectionTarget.getAttribute("data-start-date-available")
+    const startDateAvailableForDiner = this.dateSelectionTarget.getAttribute("data-start-date-available-for-diner")
+
+    if ((startDateAvailable < startDateAvailableForDiner) && (typeName === "Dîner" || typeName === "Cocktail dînatoire")) {
+      return startDateAvailableForDiner
+    } else {
+      return startDateAvailable
+    }
   }
 }
