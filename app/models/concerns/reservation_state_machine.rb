@@ -26,7 +26,7 @@ module ReservationStateMachine
       state :amex_refused_by_host
 
       state :refused
-      # state :cancelled
+      state :cancelled
       state :cancelled_because_host_did_not_reply_in_validity_period
       state :cancelled_because_short_notice
       state :ongoing
