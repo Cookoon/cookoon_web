@@ -16,7 +16,7 @@ class Reservation < ApplicationRecord
   # scope :engaged, -> { charged.or(accepted).or(menu_payment_captured).or(services_payment_captured).or(quotation_asked).or(quotation_accepted_by_host).or(quotation_proposed).or(quotation_accepted).or(ongoing) }
   # scope :inactive, -> { refused.or(passed) }
   scope :refused_by_host, -> { refused.or(quotation_refused_by_host).or(amex_refused_by_host) }
-  scope :inactive, -> { refused.or(quotation_refused_by_host).or(amex_refused_by_host).or(quotation_refused).or(passed).or(cancelled_because_host_did_not_reply_in_validity_period).or(cancelled_because_short_notice).or(dead)}
+  scope :inactive, -> { refused.or(quotation_refused_by_host).or(amex_refused_by_host).or(quotation_refused).or(passed).or(cancelled_because_host_did_not_reply_in_validity_period).or(cancelled_because_short_notice).or(dead).or(cancelled)}
   scope :created_in_day_range_around, ->(datetime) { where created_at: day_range(datetime) }
   scope :created_in_hour_range_around, ->(datetime) { where created_at: hour_range(datetime) }
   scope :in_hour_range_around, ->(datetime) { where start_at: hour_range(datetime) }
@@ -360,7 +360,7 @@ class Reservation < ApplicationRecord
   end
 
   def notification_needed?
-    %w(charged accepted menu_payment_captured services_payment_captured quotation_asked quotation_accepted_by_host quotation_refused_by_host quotation_proposed quotation_accepted quotation_refused amex_asked amex_accepted_by_host amex_refused_by_host quotation_proposed refused cancelled_because_host_did_not_reply_in_validity_period cancelled_because_short_notice ongoing passed).include? aasm_state
+    %w(charged accepted menu_payment_captured services_payment_captured quotation_asked quotation_accepted_by_host quotation_refused_by_host quotation_proposed quotation_accepted quotation_refused amex_asked amex_accepted_by_host amex_refused_by_host quotation_proposed refused cancelled_because_host_did_not_reply_in_validity_period cancelled_because_short_notice ongoing passed cancelled).include? aasm_state
   end
 
   def tenant_is_not_host
