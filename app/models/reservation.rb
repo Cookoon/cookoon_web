@@ -192,7 +192,7 @@ class Reservation < ApplicationRecord
   end
 
   def notify_users_after_amex_host_confirmation
-    ReservationMailer.amex_host_confirmation_to_tenant(self).deliver_later
+    # ReservationMailer.amex_host_confirmation_to_tenant(self).deliver_later
     ReservationMailer.amex_host_confirmation_to_host(self).deliver_later
   end
 
