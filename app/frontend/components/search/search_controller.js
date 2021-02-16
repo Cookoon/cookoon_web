@@ -39,7 +39,9 @@ export default class extends Controller {
         },
       })
     } else {
-      console.log("I'm in data-start-date-available-for-diner")
+      console.log("I'm in data-start-date-available-for-diner");
+      console.log(this.dateSelectionTarget.getAttribute("data-start-date-available-for-diner"));
+      console.log(this.dateSelectionTarget.getAttribute("data-end-date-available"));
       flatpickr(this.dateSelectionTarget, {
         dateFormat: 'Y-m-dTH:i',
         disable: JSON.parse(this.dateSelectionTarget.getAttribute("data-dates-unavailable")),
