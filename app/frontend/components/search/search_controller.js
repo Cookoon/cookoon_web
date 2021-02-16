@@ -24,35 +24,7 @@ export default class extends Controller {
   }
 
   connect() {
-    // this.initFlatpickr()
-    console.log("I'm in connect");
-    if ((this.dateSelectionTarget.getAttribute("data-start-date-available") > this.dateSelectionTarget.getAttribute("data-start-date-available-for-diner")) && (this.typeTextTarget.innerText != "Dîner" || this.typeTextTarget.innerText != "Cocktail dînatoire")) {
-      console.log("I'm in data-start-date-available");
-      flatpickr(this.dateSelectionTarget, {
-        dateFormat: 'Y-m-dTH:i',
-        disable: JSON.parse(this.dateSelectionTarget.getAttribute("data-dates-unavailable")),
-        minDate: this.dateSelectionTarget.getAttribute("data-start-date-available"),
-        maxDate: this.dateSelectionTarget.getAttribute("data-end-date-available"),
-        disableMobile: "true",
-        onValueUpdate: (selectedDates, dateStr) => {
-          this.selectDate(selectedDates, dateStr)
-        },
-      })
-    } else {
-      console.log("I'm in data-start-date-available-for-diner");
-      console.log(this.dateSelectionTarget.getAttribute("data-start-date-available-for-diner"));
-      console.log(this.dateSelectionTarget.getAttribute("data-end-date-available"));
-      flatpickr(this.dateSelectionTarget, {
-        dateFormat: 'Y-m-dTH:i',
-        disable: JSON.parse(this.dateSelectionTarget.getAttribute("data-dates-unavailable")),
-        minDate: this.dateSelectionTarget.getAttribute("data-start-date-available-for-diner"),
-        maxDate: this.dateSelectionTarget.getAttribute("data-end-date-available"),
-        disableMobile: "true",
-        onValueUpdate: (selectedDates, dateStr) => {
-          this.selectDate(selectedDates, dateStr)
-        },
-      })
-    }
+    this.initFlatpickr()
   }
 
   toggleSelection() {
