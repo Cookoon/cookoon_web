@@ -26,12 +26,12 @@ export default class extends Controller {
   connect() {
     // this.initFlatpickr()
     console.log("I'm in connect");
-    if ((this.dateSelectionTarget.getAttribute("data-start-date-available") < this.dateSelectionTarget.getAttribute("data-start-date-available-for-diner")) && (this.typeTextTarget.innerText === "Dîner" || this.typeTextTarget.innerText === "Cocktail dînatoire")) {
-      console.log("I'm in data-start-date-available-for-diner");
+    if ((this.dateSelectionTarget.getAttribute("data-start-date-available") > this.dateSelectionTarget.getAttribute("data-start-date-available-for-diner")) && (this.typeTextTarget.innerText != "Dîner" || this.typeTextTarget.innerText != "Cocktail dînatoire")) {
+      console.log("I'm in data-start-date-available");
       flatpickr(this.dateSelectionTarget, {
         dateFormat: 'Y-m-dTH:i',
         disable: JSON.parse(this.dateSelectionTarget.getAttribute("data-dates-unavailable")),
-        minDate: this.dateSelectionTarget.getAttribute("data-start-date-available-for-diner"),
+        minDate: this.dateSelectionTarget.getAttribute("data-start-date-available"),
         maxDate: this.dateSelectionTarget.getAttribute("data-end-date-available"),
         disableMobile: "true",
         onValueUpdate: (selectedDates, dateStr) => {
@@ -39,11 +39,11 @@ export default class extends Controller {
         },
       })
     } else {
-      console.log("I'm in data-start-date-available")
+      console.log("I'm in data-start-date-available-for-diner")
       flatpickr(this.dateSelectionTarget, {
         dateFormat: 'Y-m-dTH:i',
         disable: JSON.parse(this.dateSelectionTarget.getAttribute("data-dates-unavailable")),
-        minDate: this.dateSelectionTarget.getAttribute("data-start-date-available"),
+        minDate: this.dateSelectionTarget.getAttribute("data-start-date-available-for-diner"),
         maxDate: this.dateSelectionTarget.getAttribute("data-end-date-available"),
         disableMobile: "true",
         onValueUpdate: (selectedDates, dateStr) => {
