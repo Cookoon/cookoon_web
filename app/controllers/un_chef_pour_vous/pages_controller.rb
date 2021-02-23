@@ -26,7 +26,7 @@ class UnChefPourVous::PagesController < ApplicationController
   end
 
   def set_end_date_available
-    @end_date_available = Date.new(2021, 6, 30)
+    @end_date_available = Date.new(2021, 7, 31)
   end
 
   def set_dates_unavailable
