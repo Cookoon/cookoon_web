@@ -20,7 +20,7 @@ class PagesController < ApplicationController
   private
 
   def set_start_date_available_for_diner
-    @start_date_available_for_diner = Date.new(2021, 3, 16)
+    @start_date_available_for_diner = Date.new(2021, 3, 15)
   end
 
   def set_start_date_available
