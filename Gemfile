@@ -72,7 +72,7 @@ gem 'humanize'
 gem 'turbolinks_render'
 
 # Admin
-gem 'forest_liana'
+gem 'forest_liana', '~> 6.0', '>= 6.0.3'
 gem 'pretender'
 
 # External
