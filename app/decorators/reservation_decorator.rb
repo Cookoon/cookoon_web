@@ -156,6 +156,10 @@ class ReservationDecorator < Draper::Decorator
     h.humanized_money_with_symbol object.cookoon_butler_with_tax
   end
 
+  def cookoon_butler_full_price_without_cents
+    h.money_without_cents_and_with_symbol object.cookoon_butler_with_tax
+  end
+
   def butler_price
     h.humanized_money_with_symbol object.butler_price
   end

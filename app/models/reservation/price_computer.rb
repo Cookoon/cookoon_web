@@ -60,31 +60,29 @@ class Reservation
     end
 
     # COMPUTE PRICE
-    def compute_cookoon_price
+    def compute_cookoon_price_cents
       return 0 unless duration.present? && cookoon.present?
-
       if amex?
-        cookoon_price_cents = cookoon.amex_price
+        cookoon.amex_price_cents
       else
-        cookoon_price_cents = duration * cookoon.price
+        duration * cookoon.price_cents
       end
       # if customer? && duration > 4
       #   # discount applied
       #   cookoon_price_cents = cookoon_price_cents  * 0.85
       # end
+    end
 
-      Money.new(cookoon_price_cents)
+    def compute_cookoon_price
+      Money.new(compute_cookoon_price_cents)
     end
 
     def compute_butler_price
-      # 42€HT * butler_count * duration * MARGIN[:butler]
-      return 0 unless duration.present?
-      Money.new((1 + MARGIN[:butler]) * (butler_count * duration * UNIT_PRICE_CENTS[:butler]))
+      set_ht(compute_butler_with_tax)
     end
 
     def compute_cookoon_butler_price
-      return 0 unless duration.present?
-      Money.new([compute_cookoon_price, compute_butler_price].sum)
+      [compute_cookoon_price, compute_butler_price].sum
     end
 
     def compute_menu_price
@@ -142,12 +140,22 @@ class Reservation
 
 
     # COMPUTE WITH TAX
+    def compute_butler_with_tax_without_rounding
+      # 35€HT * 1.2 * butler_count * duration * MARGIN[:butler]
+      return 0 unless duration.present?
+      (1 + TAX) * (1 + MARGIN[:butler]) * (butler_count * duration * UNIT_PRICE_CENTS[:butler])
+    end
+
+    def compute_cookoon_butler_with_tax_without_rounding
+      [compute_cookoon_price_cents, compute_butler_with_tax_without_rounding].sum
+    end
+
     def compute_butler_with_tax
-      [compute_butler_price, compute_butler_tax].sum
+      compute_cookoon_butler_with_tax - compute_cookoon_price
     end
 
     def compute_cookoon_butler_with_tax
-      [compute_cookoon_butler_price, compute_cookoon_butler_tax].sum
+      Money.new((compute_cookoon_butler_with_tax_without_rounding / 5 ).ceil(-2) * 5)
     end
 
     def compute_menu_with_tax
