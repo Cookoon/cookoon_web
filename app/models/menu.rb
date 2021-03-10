@@ -1,4 +1,5 @@
 class Menu < ApplicationRecord
+  include PriceComputer
 
   STATUSES = %w[initial active archived amex].freeze
   MEAL_TYPES = { "seated_meal" => "Repas assis", "standing_meal" => "Repas debout" }.freeze
@@ -48,51 +49,4 @@ class Menu < ApplicationRecord
   def seated?
     meal_type == "seated_meal"
   end
-
-  def computed_price_with_margin
-    compute_price_with_margin
-  end
-
-  def computed_price_with_margin_and_taxes
-    compute_price_with_margin_and_taxes
-  end
-
-  def computed_price_with_chef_with_margin_per_person(people_count)
-    compute_price_with_chef_with_margin(people_count) / people_count
-  end
-
-  def computed_price_with_chef_with_margin_and_taxes_per_person(people_count)
-    compute_price_with_chef_with_margin_and_taxes(people_count) / people_count
-  end
-
-  private
-
-  def computed_price_with_chef_with_margin(people_count)
-    compute_price_with_chef_with_margin(people_count)
-  end
-
-  def computed_price_with_chef_with_margin_and_taxes(people_count)
-    compute_price_with_chef_with_margin_and_taxes(people_count)
-  end
-
-  def compute_price_with_chef_with_margin(people_count)
-    if chef.min_price.zero? # chef has base_price
-      self.computed_price_with_margin * people_count + chef.computed_base_price_with_margin
-    else
-      [ self.computed_price_with_margin * people_count, chef.computed_min_price_with_margin ].max
-    end
-  end
-
-  def compute_price_with_chef_with_margin_and_taxes(people_count)
-    (1 + Reservation::TAX) * compute_price_with_chef_with_margin(people_count)
-  end
-
-  def compute_price_with_margin
-    Money.new((1 + Reservation::MARGIN[:menu]) * (self.unit_price_cents))
-  end
-
-  def compute_price_with_margin_and_taxes
-    (1 + Reservation::TAX) * compute_price_with_margin
-  end
-
 end

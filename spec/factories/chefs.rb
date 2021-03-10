@@ -1,5 +1,7 @@
 FactoryBot.define do
   factory :chef do
+    before(:create) { Attachinary::File.define_method(:remove_temporary_tag) {} }
+
     name { "Gordon Ramsay" }
     description { "Un très bon chef" }
     citation { "Une cuisine parfaite" }
