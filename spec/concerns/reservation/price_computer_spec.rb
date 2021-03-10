@@ -72,7 +72,7 @@ RSpec.describe Reservation::PriceComputer do
       # puts reservation.duration
       # puts prices[:butler][:butler_price]
       expect(prices[:butler][:butler_price]).to eq(Money.new 26250, 'EUR')
-      expect(prices_a[:butler][:butler_price]).to eq(Money.new 21875, 'EUR')
+      expect(prices_a[:butler][:butler_price]).to eq(Money.new 22083, 'EUR')
       expect(prices_amex[:butler][:butler_price]).to eq(Money.new 0, 'EUR')
       expect(prices_amex_b[:butler][:butler_price]).to eq(Money.new 0, 'EUR')
     end
@@ -82,7 +82,7 @@ RSpec.describe Reservation::PriceComputer do
       # puts reservation.butler_price_cents
       # puts prices[:cookoon_butler][:cookoon_butler_price]
       expect(prices[:cookoon_butler][:cookoon_butler_price]).to eq(Money.new 53250, 'EUR')
-      expect(prices_a[:cookoon_butler][:cookoon_butler_price]).to eq(Money.new 36875, 'EUR')
+      expect(prices_a[:cookoon_butler][:cookoon_butler_price]).to eq(Money.new 37083, 'EUR')
       expect(prices_amex[:cookoon_butler][:cookoon_butler_price]).to eq(Money.new 50000, 'EUR')
       expect(prices_amex_b[:cookoon_butler][:cookoon_butler_price]).to eq(Money.new 50000, 'EUR')
     end
@@ -112,7 +112,7 @@ RSpec.describe Reservation::PriceComputer do
       # puts prices[:services][:services_price]
       # puts prices[:total][:total_price]
       expect(prices[:total][:total_price]).to eq(Money.new 80750, 'EUR')
-      expect(prices_a[:total][:total_price]).to eq(Money.new 313750, 'EUR')
+      expect(prices_a[:total][:total_price]).to eq(Money.new 313958, 'EUR')
       expect(prices_amex[:total][:total_price]).to eq(Money.new 106000, 'EUR')
       expect(prices_amex_b[:total][:total_price]).to eq(Money.new 106000, 'EUR')
     end
@@ -120,14 +120,14 @@ RSpec.describe Reservation::PriceComputer do
     it 'computes butler_tax' do
       # puts prices[:butler][:butler_price] * 0.2
       expect(prices[:butler][:butler_tax]).to eq(Money.new 5250, 'EUR')
-      expect(prices_a[:butler][:butler_tax]).to eq(Money.new 4375, 'EUR')
+      expect(prices_a[:butler][:butler_tax]).to eq(Money.new 4417, 'EUR')
       expect(prices_amex[:butler][:butler_tax]).to eq(Money.new 0, 'EUR')
       expect(prices_amex_b[:butler][:butler_tax]).to eq(Money.new 0, 'EUR')
     end
 
     it 'computes cookoon_butler_tax' do
       expect(prices[:cookoon_butler][:cookoon_butler_tax]).to eq(Money.new 5250, 'EUR')
-      expect(prices_a[:cookoon_butler][:cookoon_butler_tax]).to eq(Money.new 4375, 'EUR')
+      expect(prices_a[:cookoon_butler][:cookoon_butler_tax]).to eq(Money.new 4417, 'EUR')
       expect(prices_amex[:cookoon_butler][:cookoon_butler_tax]).to eq(Money.new 0, 'EUR')
       expect(prices_amex_b[:cookoon_butler][:cookoon_butler_tax]).to eq(Money.new 0, 'EUR')
     end
@@ -152,7 +152,7 @@ RSpec.describe Reservation::PriceComputer do
       # puts prices[:services][:services_tax]
       # puts prices[:total][:total_tax]
       expect(prices[:total][:total_tax]).to eq(Money.new 10750, 'EUR')
-      expect(prices_a[:total][:total_tax]).to eq(Money.new 59750, 'EUR')
+      expect(prices_a[:total][:total_tax]).to eq(Money.new 59792, 'EUR')
       expect(prices_amex[:total][:total_tax]).to eq(Money.new 14000, 'EUR')
       expect(prices_amex_b[:total][:total_tax]).to eq(Money.new 14000, 'EUR')
     end
@@ -163,14 +163,14 @@ RSpec.describe Reservation::PriceComputer do
       # puts prices[:butler][:butler_price] + prices[:butler][:butler_tax]
       # puts prices[:butler][:butler_with_tax]
       expect(prices[:butler][:butler_with_tax]).to eq(Money.new 31500, 'EUR')
-      expect(prices_a[:butler][:butler_with_tax]).to eq(Money.new 26250, 'EUR')
+      expect(prices_a[:butler][:butler_with_tax]).to eq(Money.new 26500, 'EUR')
       expect(prices_amex[:butler][:butler_with_tax]).to eq(Money.new 0, 'EUR')
       expect(prices_amex_b[:butler][:butler_with_tax]).to eq(Money.new 0, 'EUR')
     end
 
     it 'computes cookoon_butler_with_tax' do
       expect(prices[:cookoon_butler][:cookoon_butler_with_tax]).to eq(Money.new 58500, 'EUR')
-      expect(prices_a[:cookoon_butler][:cookoon_butler_with_tax]).to eq(Money.new 41250, 'EUR')
+      expect(prices_a[:cookoon_butler][:cookoon_butler_with_tax]).to eq(Money.new 41500, 'EUR')
       expect(prices_amex[:cookoon_butler][:cookoon_butler_with_tax]).to eq(Money.new 50000, 'EUR')
       expect(prices_amex_b[:cookoon_butler][:cookoon_butler_with_tax]).to eq(Money.new 50000, 'EUR')
     end
@@ -193,7 +193,7 @@ RSpec.describe Reservation::PriceComputer do
     it 'computes total_with_tax' do
       # puts prices[:total]
       expect(prices[:total][:total_with_tax]).to eq(Money.new 91500, 'EUR')
-      expect(prices_a[:total][:total_with_tax]).to eq(Money.new 373500, 'EUR')
+      expect(prices_a[:total][:total_with_tax]).to eq(Money.new 373750, 'EUR')
       expect(prices_amex[:total][:total_with_tax]).to eq(Money.new 120000, 'EUR')
       expect(prices_amex_b[:total][:total_with_tax]).to eq(Money.new 120000, 'EUR')
     end
@@ -213,7 +213,7 @@ RSpec.describe Reservation::PriceComputer do
       @computed_prices = @reservation.computed_price_attributes
       @results = {
         menu: { menu_price: Money.new(59167, 'EUR'), menu_tax: Money.new(11833, 'EUR'), menu_with_tax: Money.new(71000, 'EUR') },
-        total: { total_price: Money.new(124792, 'EUR'), total_tax: Money.new(17958, 'EUR'), total_with_tax: Money.new(142750, 'EUR') }
+        total: { total_price: Money.new(125000, 'EUR'), total_tax: Money.new(18000, 'EUR'), total_with_tax: Money.new(143000, 'EUR') }
       }
       test_menu_and_total_prices # method in spec/support/reservation_helpers
       expect(@reservation.menu.price_with_tax_per_person(@reservation.people_count)).to eq(Money.new(35500, 'EUR'))
@@ -224,7 +224,7 @@ RSpec.describe Reservation::PriceComputer do
       @computed_prices = @reservation.computed_price_attributes
       @results = {
         menu: { menu_price: Money.new(60000, 'EUR'), menu_tax: Money.new(12000, 'EUR'), menu_with_tax: Money.new(72000, 'EUR') },
-        total: { total_price: Money.new(125625, 'EUR'), total_tax: Money.new(18125, 'EUR'), total_with_tax: Money.new(143750, 'EUR') }
+        total: { total_price: Money.new(125833, 'EUR'), total_tax: Money.new(18167, 'EUR'), total_with_tax: Money.new(144000, 'EUR') }
       }
       test_menu_and_total_prices
       expect(@reservation.menu.price_with_tax_per_person(@reservation.people_count)).to eq(Money.new(8000, 'EUR'))
@@ -235,7 +235,7 @@ RSpec.describe Reservation::PriceComputer do
       @computed_prices = @reservation.computed_price_attributes
       @results = {
         menu: { menu_price: Money.new(62500, 'EUR'), menu_tax: Money.new(12500, 'EUR'), menu_with_tax: Money.new(75000, 'EUR') },
-        total: { total_price: Money.new(128125, 'EUR'), total_tax: Money.new(18625, 'EUR'), total_with_tax: Money.new(146750, 'EUR') }
+        total: { total_price: Money.new(128333, 'EUR'), total_tax: Money.new(18667, 'EUR'), total_with_tax: Money.new(147000, 'EUR') }
       }
       test_menu_and_total_prices
       expect(@reservation.menu.price_with_tax_per_person(@reservation.people_count)).to eq(Money.new(7500, 'EUR'))
@@ -246,7 +246,7 @@ RSpec.describe Reservation::PriceComputer do
       @computed_prices = @reservation.computed_price_attributes
       @results = {
         menu: { menu_price: Money.new(137500, 'EUR'), menu_tax: Money.new(27500, 'EUR'), menu_with_tax: Money.new(165000, 'EUR') },
-        total: { total_price: Money.new(264375, 'EUR'), total_tax: Money.new(45875, 'EUR'), total_with_tax: Money.new(310250, 'EUR') }
+        total: { total_price: Money.new(264583, 'EUR'), total_tax: Money.new(45917, 'EUR'), total_with_tax: Money.new(310500, 'EUR') }
       }
       test_menu_and_total_prices
       expect(@reservation.menu.price_with_tax_per_person(@reservation.people_count)).to eq(Money.new(7500, 'EUR'))
@@ -258,7 +258,7 @@ RSpec.describe Reservation::PriceComputer do
       @computed_prices = @reservation.computed_price_attributes
       @results = {
         menu: { menu_price: Money.new(98333, 'EUR'), menu_tax: Money.new(19667, 'EUR'), menu_with_tax: Money.new(118000, 'EUR') },
-        total: { total_price: Money.new(163958, 'EUR'), total_tax: Money.new(25792, 'EUR'), total_with_tax: Money.new(189750, 'EUR') }
+        total: { total_price: Money.new(164166, 'EUR'), total_tax: Money.new(25834, 'EUR'), total_with_tax: Money.new(190000, 'EUR') }
       }
       test_menu_and_total_prices # method in spec/support/reservation_helpers
       expect(@reservation.menu.price_with_tax_per_person(@reservation.people_count)).to eq(Money.new(59000, 'EUR'))
@@ -269,7 +269,7 @@ RSpec.describe Reservation::PriceComputer do
       @computed_prices = @reservation.computed_price_attributes
       @results = {
         menu: { menu_price: Money.new(195000, 'EUR'), menu_tax: Money.new(39000, 'EUR'), menu_with_tax: Money.new(234000, 'EUR') },
-        total: { total_price: Money.new(260625, 'EUR'), total_tax: Money.new(45125, 'EUR'), total_with_tax: Money.new(305750, 'EUR') }
+        total: { total_price: Money.new(260833, 'EUR'), total_tax: Money.new(45167, 'EUR'), total_with_tax: Money.new(306000, 'EUR') }
       }
       test_menu_and_total_prices
       expect(@reservation.menu.price_with_tax_per_person(@reservation.people_count)).to eq(Money.new(26000, 'EUR'))
@@ -280,7 +280,7 @@ RSpec.describe Reservation::PriceComputer do
       @computed_prices = @reservation.computed_price_attributes
       @results = {
         menu: { menu_price: Money.new(208333, 'EUR'), menu_tax: Money.new(41667, 'EUR'), menu_with_tax: Money.new(250000, 'EUR') },
-        total: { total_price: Money.new(273958, 'EUR'), total_tax: Money.new(47792, 'EUR'), total_with_tax: Money.new(321750, 'EUR') }
+        total: { total_price: Money.new(274166, 'EUR'), total_tax: Money.new(47834, 'EUR'), total_with_tax: Money.new(322000, 'EUR') }
       }
       test_menu_and_total_prices
       expect(@reservation.menu.price_with_tax_per_person(@reservation.people_count)).to eq(Money.new(25000, 'EUR'))
@@ -291,7 +291,7 @@ RSpec.describe Reservation::PriceComputer do
       @computed_prices = @reservation.computed_price_attributes
       @results = {
         menu: { menu_price: Money.new(375833, 'EUR'), menu_tax: Money.new(75167, 'EUR'), menu_with_tax: Money.new(451000, 'EUR') },
-        total: { total_price: Money.new(502708, 'EUR'), total_tax: Money.new(93542, 'EUR'), total_with_tax: Money.new(596250, 'EUR') }
+        total: { total_price: Money.new(502916, 'EUR'), total_tax: Money.new(93584, 'EUR'), total_with_tax: Money.new(596500, 'EUR') }
       }
       test_menu_and_total_prices
       expect(@reservation.menu.price_with_tax_per_person(@reservation.people_count)).to eq(Money.new(20500, 'EUR'))
