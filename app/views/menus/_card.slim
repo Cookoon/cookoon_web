@@ -10,22 +10,9 @@
       '*****
   .menu-card-price
     .text-primary.mb-2 Prix:
-    p.mb-0 #{menu.computed_price_with_chef_with_margin_and_taxes_per_person(reservation.people_count)} €TTC par convive
+    p.mb-0 #{menu.price_with_tax_per_person(reservation.people_count)} €TTC par convive
     p.mb-3 pour #{reservation.people_count} convives
-    // | &nbsp
     small.text-primary.font-italic.align-left Ce tarif inclut la présence du chef, sa prestation et le menu
-    //  '(soit #{menu.computed_price_with_margin} €HT)*
-    //.text-primary.font-italic.small.text-left.mt-3
-      '*
-      ':
-      - if !chef.min_price.blank? && !chef.min_price.zero?
-        span minimum de facturation du chef de #{chef.computed_min_price_with_margin_and_taxes} €TTC
-        // | &nbsp
-        // '(soit #{chef.computed_min_price_with_margin} €HT)
-      - if !chef.base_price.blank? && !chef.base_price.zero?
-        span prestation du chef en sus de  #{chef.computed_base_price_with_margin_and_taxes} €TTC
-        // | &nbsp
-        // '(soit #{chef.computed_base_price_with_margin} €HT)
 
   - if policy(reservation).select_menu?
     = link_to 'Choisir ce menu', reservation_menu_select_menu_path(reservation, menu), class: 'btn-cookoon btn-block btn-cookoon-primary', method: :patch

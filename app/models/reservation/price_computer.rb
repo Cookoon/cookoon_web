@@ -9,7 +9,7 @@ class Reservation
     # accessible as Reservation::UNIT_PRICE_CENTS
 
     TAX = 0.2.freeze
-    # accessible as Reservation:TAX
+    # accessible as Reservation::TAX
 
     def computed_price_attributes
       {
@@ -55,6 +55,10 @@ class Reservation
       Money.new(TAX * item)
     end
 
+    def set_ht(item)
+      Money.new(item / (1 + TAX))
+    end
+
     # COMPUTE PRICE
     def compute_cookoon_price
       return 0 unless duration.present? && cookoon.present?
@@ -84,11 +88,15 @@ class Reservation
     end
 
     def compute_menu_price
-      return 0 unless menu.present?
-      if menu.chef.base_price_cents.positive?
-        Money.new((1 + MARGIN[:menu]) * (menu.chef.base_price_cents + (menu.unit_price_cents * people_count)))
-      elsif menu.chef.min_price_cents.positive?
-        Money.new((1 + MARGIN[:menu]) * ([menu.chef.min_price_cents, (menu.unit_price_cents * people_count)].max))
+      if amex?
+        return 0 unless menu.present?
+        if menu.chef.base_price_cents.positive?
+          Money.new((1 + MARGIN[:menu]) * (menu.chef.base_price_cents + (menu.unit_price_cents * people_count)))
+        elsif menu.chef.min_price_cents.positive?
+          Money.new((1 + MARGIN[:menu]) * ([menu.chef.min_price_cents, (menu.unit_price_cents * people_count)].max))
+        end
+      else
+        set_ht(compute_menu_with_tax)
       end
     end
 
@@ -143,7 +151,13 @@ class Reservation
     end
 
     def compute_menu_with_tax
-      [compute_menu_price, compute_menu_tax].sum
+      if amex?
+        [compute_menu_price, compute_menu_tax].sum
+      else
+        return 0 unless menu.present?
+        menu.price_with_tax_per_person(people_count) * people_count
+        # price_with_tax_per_person available in app/models/menu/concerns/price_computer
+      end
     end
 
     def compute_services_with_tax

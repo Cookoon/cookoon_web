@@ -1,6 +1,12 @@
 # rspec spec/concerns/reservation/price_computer_spec.rb
 require 'rails_helper'
 
+require 'support/reservation_helpers'
+
+RSpec.configure do |c|
+  c.include ReservationHelpers
+end
+
 RSpec.describe Reservation::PriceComputer do
   describe '#computed_price_attributes' do
     let(:cookoon) { create(:cookoon, price_cents: 9000) }
@@ -190,6 +196,105 @@ RSpec.describe Reservation::PriceComputer do
       expect(prices_a[:total][:total_with_tax]).to eq(Money.new 373500, 'EUR')
       expect(prices_amex[:total][:total_with_tax]).to eq(Money.new 120000, 'EUR')
       expect(prices_amex_b[:total][:total_with_tax]).to eq(Money.new 120000, 'EUR')
+    end
+  end
+
+  describe '#computed_price_attributes for menu and total' do
+    let(:chef_with_base_price) { create(:chef, base_price_cents: 61200) }
+    let(:chef_with_min_price) { create(:chef, :with_min_price_instead_of_base_price, min_price_cents: 51200) }
+
+    let(:menu_for_chef_with_base_price) { create(:menu, chef: chef_with_base_price, unit_price_cents: 11800) }
+    let(:menu_for_chef_with_min_price) { create(:menu, chef: chef_with_min_price, unit_price_cents: 5200) }
+
+    ### CHEF WITH MIN PRICE
+    it 'computes prices for reservation with 2 people and chef with min price' do
+      create_reservation(2, menu_for_chef_with_min_price) # method in spec/support/reservation_helpers
+      # => create cookoon, @reservation
+      @computed_prices = @reservation.computed_price_attributes
+      @results = {
+        menu: { menu_price: Money.new(59167, 'EUR'), menu_tax: Money.new(11833, 'EUR'), menu_with_tax: Money.new(71000, 'EUR') },
+        total: { total_price: Money.new(124792, 'EUR'), total_tax: Money.new(17958, 'EUR'), total_with_tax: Money.new(142750, 'EUR') }
+      }
+      test_menu_and_total_prices # method in spec/support/reservation_helpers
+      expect(@reservation.menu.price_with_tax_per_person(@reservation.people_count)).to eq(Money.new(35500, 'EUR'))
+    end
+
+    it 'computes prices for reservation with 9 people and chef with min price' do
+      create_reservation(9, menu_for_chef_with_min_price)
+      @computed_prices = @reservation.computed_price_attributes
+      @results = {
+        menu: { menu_price: Money.new(60000, 'EUR'), menu_tax: Money.new(12000, 'EUR'), menu_with_tax: Money.new(72000, 'EUR') },
+        total: { total_price: Money.new(125625, 'EUR'), total_tax: Money.new(18125, 'EUR'), total_with_tax: Money.new(143750, 'EUR') }
+      }
+      test_menu_and_total_prices
+      expect(@reservation.menu.price_with_tax_per_person(@reservation.people_count)).to eq(Money.new(8000, 'EUR'))
+    end
+
+    it 'computes prices for reservation with 10 people and chef with min price' do
+      create_reservation(10, menu_for_chef_with_min_price)
+      @computed_prices = @reservation.computed_price_attributes
+      @results = {
+        menu: { menu_price: Money.new(62500, 'EUR'), menu_tax: Money.new(12500, 'EUR'), menu_with_tax: Money.new(75000, 'EUR') },
+        total: { total_price: Money.new(128125, 'EUR'), total_tax: Money.new(18625, 'EUR'), total_with_tax: Money.new(146750, 'EUR') }
+      }
+      test_menu_and_total_prices
+      expect(@reservation.menu.price_with_tax_per_person(@reservation.people_count)).to eq(Money.new(7500, 'EUR'))
+    end
+
+    it 'computes prices for reservation with 22 people and chef with min price' do
+      create_reservation(22, menu_for_chef_with_min_price)
+      @computed_prices = @reservation.computed_price_attributes
+      @results = {
+        menu: { menu_price: Money.new(137500, 'EUR'), menu_tax: Money.new(27500, 'EUR'), menu_with_tax: Money.new(165000, 'EUR') },
+        total: { total_price: Money.new(264375, 'EUR'), total_tax: Money.new(45875, 'EUR'), total_with_tax: Money.new(310250, 'EUR') }
+      }
+      test_menu_and_total_prices
+      expect(@reservation.menu.price_with_tax_per_person(@reservation.people_count)).to eq(Money.new(7500, 'EUR'))
+    end
+
+    ### CHEF WITH BASE PRICE
+    it 'computes prices for reservation with 2 people and chef with base price' do
+      create_reservation(2, menu_for_chef_with_base_price)
+      @computed_prices = @reservation.computed_price_attributes
+      @results = {
+        menu: { menu_price: Money.new(98333, 'EUR'), menu_tax: Money.new(19667, 'EUR'), menu_with_tax: Money.new(118000, 'EUR') },
+        total: { total_price: Money.new(163958, 'EUR'), total_tax: Money.new(25792, 'EUR'), total_with_tax: Money.new(189750, 'EUR') }
+      }
+      test_menu_and_total_prices # method in spec/support/reservation_helpers
+      expect(@reservation.menu.price_with_tax_per_person(@reservation.people_count)).to eq(Money.new(59000, 'EUR'))
+    end
+
+    it 'computes prices for reservation with 9 people and chef with base price' do
+      create_reservation(9, menu_for_chef_with_base_price)
+      @computed_prices = @reservation.computed_price_attributes
+      @results = {
+        menu: { menu_price: Money.new(195000, 'EUR'), menu_tax: Money.new(39000, 'EUR'), menu_with_tax: Money.new(234000, 'EUR') },
+        total: { total_price: Money.new(260625, 'EUR'), total_tax: Money.new(45125, 'EUR'), total_with_tax: Money.new(305750, 'EUR') }
+      }
+      test_menu_and_total_prices
+      expect(@reservation.menu.price_with_tax_per_person(@reservation.people_count)).to eq(Money.new(26000, 'EUR'))
+    end
+
+    it 'computes prices for reservation with 10 people and chef with base price' do
+      create_reservation(10, menu_for_chef_with_base_price)
+      @computed_prices = @reservation.computed_price_attributes
+      @results = {
+        menu: { menu_price: Money.new(208333, 'EUR'), menu_tax: Money.new(41667, 'EUR'), menu_with_tax: Money.new(250000, 'EUR') },
+        total: { total_price: Money.new(273958, 'EUR'), total_tax: Money.new(47792, 'EUR'), total_with_tax: Money.new(321750, 'EUR') }
+      }
+      test_menu_and_total_prices
+      expect(@reservation.menu.price_with_tax_per_person(@reservation.people_count)).to eq(Money.new(25000, 'EUR'))
+    end
+
+    it 'computes prices for reservation with 22 people and chef with base price' do
+      create_reservation(22, menu_for_chef_with_base_price)
+      @computed_prices = @reservation.computed_price_attributes
+      @results = {
+        menu: { menu_price: Money.new(375833, 'EUR'), menu_tax: Money.new(75167, 'EUR'), menu_with_tax: Money.new(451000, 'EUR') },
+        total: { total_price: Money.new(502708, 'EUR'), total_tax: Money.new(93542, 'EUR'), total_with_tax: Money.new(596250, 'EUR') }
+      }
+      test_menu_and_total_prices
+      expect(@reservation.menu.price_with_tax_per_person(@reservation.people_count)).to eq(Money.new(20500, 'EUR'))
     end
   end
 end
