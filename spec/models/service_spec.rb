@@ -24,7 +24,7 @@ RSpec.describe Service, type: :model do
 
     puts "Test création des services pour un dîner de #{@reservation.people_count} personnes"
 
-    @results = { service_special_price_cents: 0, service_sommelier_price_cents: 31250, service_parking_price_cents: 61875, service_corporate_price_cents: 27500, service_catering_price_cents: 37500, service_breakfast_price_cents: 51000, service_flowers_price_cents: 22500, service_wine_price_cents: 7500 }
+    @results = { service_special_price_cents: 0, service_sommelier_price_cents: 31250, service_parking_price_cents: 62083, service_corporate_price_cents: 27500, service_catering_price_cents: 37500, service_breakfast_price_cents: 51250, service_flowers_price_cents: 22500, service_wine_price_cents: 7500 }
 
     test_the_services_prices # method in spec/support/service_helpers
   end
@@ -35,7 +35,7 @@ RSpec.describe Service, type: :model do
 
     puts "Test création des services pour un dîner de #{@reservation.people_count} personnes"
 
-    @results = { service_special_price_cents: 0, service_sommelier_price_cents: 62500, service_parking_price_cents: 114375, service_corporate_price_cents: 50000, service_catering_price_cents: 84375, service_breakfast_price_cents: 105000, service_flowers_price_cents: 22500, service_wine_price_cents: 7500 }
+    @results = { service_special_price_cents: 0, service_sommelier_price_cents: 62500, service_parking_price_cents: 114583, service_corporate_price_cents: 50000, service_catering_price_cents: 84583, service_breakfast_price_cents: 105000, service_flowers_price_cents: 22500, service_wine_price_cents: 7500 }
 
     test_the_services_prices # method in spec/support/service_helpers
   end
@@ -46,7 +46,7 @@ RSpec.describe Service, type: :model do
 
     puts "Test création des services pour un dîner de #{@reservation.people_count} personnes"
 
-    @results = { service_special_price_cents: 0, service_sommelier_price_cents: 31250, service_parking_price_cents: 61875, service_corporate_price_cents: 15500, service_catering_price_cents: 12500, service_breakfast_price_cents: 22200, service_flowers_price_cents: 22500, service_wine_price_cents: 7500 }
+    @results = { service_special_price_cents: 0, service_sommelier_price_cents: 31250, service_parking_price_cents: 62083, service_corporate_price_cents: 15833, service_catering_price_cents: 12500, service_breakfast_price_cents: 22500, service_flowers_price_cents: 22500, service_wine_price_cents: 7500 }
 
     test_the_services_prices # method in spec/support/service_helpers
   end
@@ -57,7 +57,7 @@ RSpec.describe Service, type: :model do
 
     puts "Test création des services pour un dîner de #{@reservation.people_count} personnes"
 
-    @results = { service_special_price_cents: 0, service_sommelier_price_cents: 218750, service_parking_price_cents: 481875, service_corporate_price_cents: 200000, service_catering_price_cents: 396875, service_breakfast_price_cents: 465000, service_flowers_price_cents: 22500, service_wine_price_cents: 7500 }
+    @results = { service_special_price_cents: 0, service_sommelier_price_cents: 218750, service_parking_price_cents: 482083, service_corporate_price_cents: 200000, service_catering_price_cents: 397083, service_breakfast_price_cents: 465000, service_flowers_price_cents: 22500, service_wine_price_cents: 7500 }
 
     test_the_services_prices # method in spec/support/service_helpers
   end
