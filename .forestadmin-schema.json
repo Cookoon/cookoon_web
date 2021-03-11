@@ -105,13 +105,16 @@
       "integration": null,
       "is_filterable": true,
       "is_read_only": false,
-      "is_required": false,
+      "is_required": true,
       "is_sortable": true,
       "is_virtual": false,
       "reference": null,
       "inverse_of": null,
       "widget": null,
-      "validations": []
+      "validations": [{
+        "message": null,
+        "type": "is present"
+      }]
     }, {
       "field": "last_name",
       "type": "String",
@@ -120,13 +123,16 @@
       "integration": null,
       "is_filterable": true,
       "is_read_only": false,
-      "is_required": false,
+      "is_required": true,
       "is_sortable": true,
       "is_virtual": false,
       "reference": null,
       "inverse_of": null,
       "widget": null,
-      "validations": []
+      "validations": [{
+        "message": null,
+        "type": "is present"
+      }]
     }, {
       "field": "phone_number",
       "type": "String",
@@ -135,13 +141,20 @@
       "integration": null,
       "is_filterable": true,
       "is_read_only": false,
-      "is_required": false,
+      "is_required": true,
       "is_sortable": true,
       "is_virtual": false,
       "reference": null,
       "inverse_of": null,
       "widget": null,
-      "validations": []
+      "validations": [{
+        "message": null,
+        "type": "is present"
+      }, {
+        "message": null,
+        "type": "is like",
+        "value": "/^(\\+\d+)?([\\s\-\\.]?\\(?\\d+\\)?)+$/"
+      }]
     }, {
       "field": "reservation",
       "type": "Number",
@@ -1623,11 +1636,7 @@
         "description": null,
         "position": 2,
         "widget": null
-      }],
-      "hooks": {
-        "load": false,
-        "change": []
-      }
+      }]
     }]
   }, {
     "name": "Cookoon",
@@ -4049,11 +4058,7 @@
         "description": "Are you sure?",
         "position": 0,
         "widget": null
-      }],
-      "hooks": {
-        "load": false,
-        "change": []
-      }
+      }]
     }, {
       "name": "Create Service",
       "type": "bulk",
@@ -4082,11 +4087,7 @@
         "description": "Price in €, ex. 99,99",
         "position": 1,
         "widget": null
-      }],
-      "hooks": {
-        "load": false,
-        "change": []
-      }
+      }]
     }]
   }, {
     "name": "Service",
@@ -5148,11 +5149,7 @@
         "description": null,
         "position": 0,
         "widget": null
-      }],
-      "hooks": {
-        "load": false,
-        "change": []
-      }
+      }]
     }, {
       "name": "Award invitations",
       "type": "bulk",
@@ -5181,11 +5178,7 @@
         "description": "The specific message you want to embed in the email",
         "position": 1,
         "widget": "text area"
-      }],
-      "hooks": {
-        "load": false,
-        "change": []
-      }
+      }]
     }, {
       "name": "Change e-mailing preferences",
       "type": "bulk",
@@ -5204,11 +5197,7 @@
         "description": null,
         "position": 0,
         "widget": null
-      }],
-      "hooks": {
-        "load": false,
-        "change": []
-      }
+      }]
     }]
   }, {
     "name": "User_stripe_bank_accounts",
@@ -5743,54 +5732,6 @@
       "widget": null,
       "validations": null
     }, {
-      "field": "amount_paid",
-      "type": "Number",
-      "default_value": null,
-      "enums": null,
-      "integration": null,
-      "is_filterable": false,
-      "is_read_only": false,
-      "is_required": false,
-      "is_sortable": true,
-      "is_virtual": false,
-      "reference": null,
-      "inverse_of": null,
-      "relationship": null,
-      "widget": null,
-      "validations": null
-    }, {
-      "field": "amount_remaining",
-      "type": "Number",
-      "default_value": null,
-      "enums": null,
-      "integration": null,
-      "is_filterable": false,
-      "is_read_only": false,
-      "is_required": false,
-      "is_sortable": true,
-      "is_virtual": false,
-      "reference": null,
-      "inverse_of": null,
-      "relationship": null,
-      "widget": null,
-      "validations": null
-    }, {
-      "field": "application_fee_amount",
-      "type": "Number",
-      "default_value": null,
-      "enums": null,
-      "integration": null,
-      "is_filterable": false,
-      "is_read_only": false,
-      "is_required": false,
-      "is_sortable": true,
-      "is_virtual": false,
-      "reference": null,
-      "inverse_of": null,
-      "relationship": null,
-      "widget": null,
-      "validations": null
-    }, {
       "field": "attempt_count",
       "type": "Number",
       "default_value": null,
@@ -5823,6 +5764,22 @@
       "widget": null,
       "validations": null
     }, {
+      "field": "closed",
+      "type": "Boolean",
+      "default_value": null,
+      "enums": null,
+      "integration": null,
+      "is_filterable": false,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": null,
+      "inverse_of": null,
+      "relationship": null,
+      "widget": null,
+      "validations": null
+    }, {
       "field": "currency",
       "type": "String",
       "default_value": null,
@@ -5839,8 +5796,24 @@
       "widget": null,
       "validations": null
     }, {
-      "field": "due_date",
+      "field": "date",
       "type": "Date",
+      "default_value": null,
+      "enums": null,
+      "integration": null,
+      "is_filterable": false,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": null,
+      "inverse_of": null,
+      "relationship": null,
+      "widget": null,
+      "validations": null
+    }, {
+      "field": "forgiven",
+      "type": "Boolean",
       "default_value": null,
       "enums": null,
       "integration": null,
@@ -5887,28 +5860,6 @@
       "widget": null,
       "validations": null
     }, {
-      "field": "status",
-      "type": "String",
-      "default_value": null,
-      "enums": [
-        "draft",
-        "open",
-        "paid",
-        "uncollectible",
-        "void"
-      ],
-      "integration": null,
-      "is_filterable": false,
-      "is_read_only": false,
-      "is_required": false,
-      "is_sortable": true,
-      "is_virtual": false,
-      "reference": null,
-      "inverse_of": null,
-      "relationship": null,
-      "widget": null,
-      "validations": null
-    }, {
       "field": "subtotal",
       "type": "Number",
       "default_value": null,
@@ -5941,7 +5892,39 @@
       "widget": null,
       "validations": null
     }, {
+      "field": "application_fee",
+      "type": "Number",
+      "default_value": null,
+      "enums": null,
+      "integration": null,
+      "is_filterable": false,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": null,
+      "inverse_of": null,
+      "relationship": null,
+      "widget": null,
+      "validations": null
+    }, {
       "field": "tax",
+      "type": "Number",
+      "default_value": null,
+      "enums": null,
+      "integration": null,
+      "is_filterable": false,
+      "is_read_only": false,
+      "is_required": false,
+      "is_sortable": true,
+      "is_virtual": false,
+      "reference": null,
+      "inverse_of": null,
+      "relationship": null,
+      "widget": null,
+      "validations": null
+    }, {
+      "field": "tax_percent",
       "type": "Number",
       "default_value": null,
       "enums": null,
@@ -6123,11 +6106,7 @@
       "http_method": "POST",
       "redirect": null,
       "download": false,
-      "fields": [],
-      "hooks": {
-        "load": false,
-        "change": []
-      }
+      "fields": []
     }]
   }, {
     "name": "User_stripe_subscriptions",
@@ -6385,8 +6364,9 @@
   }],
   "meta": {
     "database_type": "postgresql",
+    "framework_version": "5.2.4.3",
     "liana": "forest-rails",
-    "liana_version": "6.0.5",
+    "liana_version": "3.2.0",
     "orm_version": "5.2.4.3"
   }
 }
