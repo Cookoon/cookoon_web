@@ -3,7 +3,11 @@ class Service
     extend ActiveSupport::Concern
 
     def price_with_tax
-      (1 + Reservation::TAX) * price
+      price_with_tax_cents / 100
+    end
+
+    def price_with_tax_cents
+      (price_with_tax_cents_without_rounding / 5).ceil(-2) * 5
     end
 
     private
@@ -14,10 +18,6 @@ class Service
 
     def price_with_tax_cents_without_rounding
       (1 + Reservation::TAX) * (1 + margin) * ((quantity_base * base_price_cents) + (quantity * unit_price_cents))
-    end
-
-    def price_with_tax_cents
-      (price_with_tax_cents_without_rounding / 5).ceil(-2) * 5
     end
   end
 end

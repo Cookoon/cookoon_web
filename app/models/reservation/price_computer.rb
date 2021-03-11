@@ -99,9 +99,7 @@ class Reservation
     end
 
     def compute_services_price
-      # return 0 unless services.present?
-      Money.new(services.where.not(status: "initial").pluck(:price_cents).sum)
-      # Money.new(services.pluck(:price_cents).sum)
+      set_ht(compute_services_with_tax)
     end
 
     def compute_total_price
@@ -169,7 +167,7 @@ class Reservation
     end
 
     def compute_services_with_tax
-      [compute_services_price, compute_services_tax].sum
+      Money.new(services.where.not(status: "initial").map { |service| service.price_with_tax_cents }.sum)
     end
 
     def compute_total_with_tax
