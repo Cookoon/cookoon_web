@@ -4,7 +4,7 @@ p.mb-3.font-weight-bold 3. Vos souhaits de service
 - if reservation.services.present?
   .mb-4
     p.font-weight-bold Troisième règlement
-    - reservation.services.each do |service|
+    - ServiceDecorator.decorate_collection(reservation.services).each do |service|
       .d-flex.justify-content-between
         p.mb-1
           '- &nbsp
@@ -12,8 +12,7 @@ p.mb-3.font-weight-bold 3. Vos souhaits de service
         - if service.status == "initial"
           p.mb-1.text-right = Payment::STATUSES[:quotation_asked]
         - else
-          p.mb-1.text-right #{humanized_money_with_symbol(service.price_with_margin_and_taxes)}TTC
-
+          p.mb-1.text-right #{service.decorate.full_price}TTC
 
   .mb-4
     - if reservation.pending? || reservation.charged? || reservation.accepted? || reservation.menu_payment_captured?

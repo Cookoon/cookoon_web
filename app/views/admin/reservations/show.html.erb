@@ -54,21 +54,21 @@
             <strong>Chef: </strong>
             <%= @reservation.menu.chef.name %>
           </p>
-          <%= render 'menus/card', menu: @reservation.menu, chef: @reservation.menu.chef, reservation: @reservation %>
+          <%= render 'menus/card', menu: @reservation.menu.decorate, chef: @reservation.menu.chef, reservation: @reservation %>
         <% else %>
           <p>Aucun menu n'a été sélectionné</p>
         <% end %>
 
         <h3 class="mt-3">Services</h3>
         <% if @reservation.services.present? %>
-          <% @reservation.services.each do |service| %>
+          <% ServiceDecorator.decorate_collection(@reservation.services).each do |service| %>
             <div class="mb-5">
               <p><%= service.name %></p>
               <p>Statut: <%= service.status %></p>
               <p>Tarif: <%= service.quantity %> x <%= service.unit_price %></p>
               <p>Frais de service: <%= service.quantity_base %> x <%= service.base_price %></p>
               <p>Marge: <%= service.margin %></p>
-              <p>Total HT avec marge: <%= service.price %></p>
+              <p>Total avec marge: <%= service.full_price %>TTC</p>
               <% if @reservation.accepts_new_service? && service.initial? %>
                 <%= link_to 'Modifier', edit_admin_reservation_service_path(@reservation, service), :class => "btn-cookoon btn-cookoon-primary mb-4" %>
                 <%= link_to 'Valider', admin_reservation_service_validate_service_path(@reservation, service), method: :patch, :class => "btn-cookoon btn-cookoon-primary mb-4" %>

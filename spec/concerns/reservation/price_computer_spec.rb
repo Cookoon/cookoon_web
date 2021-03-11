@@ -101,7 +101,7 @@ RSpec.describe Reservation::PriceComputer do
       # puts reservation.services.pluck(:price_cents) unless reservation.services.nil?
       # puts prices[:services][:services_price]
       expect(prices[:services][:services_price]).to eq(Money.new 27500, 'EUR')
-      expect(prices_a[:services][:services_price]).to eq(Money.new 46875, 'EUR')
+      expect(prices_a[:services][:services_price]).to eq(Money.new 47083, 'EUR')
       expect(prices_amex[:services][:services_price]).to eq(Money.new 0, 'EUR')
       expect(prices_amex_b[:services][:services_price]).to eq(Money.new 0, 'EUR')
     end
@@ -112,7 +112,7 @@ RSpec.describe Reservation::PriceComputer do
       # puts prices[:services][:services_price]
       # puts prices[:total][:total_price]
       expect(prices[:total][:total_price]).to eq(Money.new 80750, 'EUR')
-      expect(prices_a[:total][:total_price]).to eq(Money.new 313958, 'EUR')
+      expect(prices_a[:total][:total_price]).to eq(Money.new 314166, 'EUR')
       expect(prices_amex[:total][:total_price]).to eq(Money.new 106000, 'EUR')
       expect(prices_amex_b[:total][:total_price]).to eq(Money.new 106000, 'EUR')
     end
@@ -141,7 +141,7 @@ RSpec.describe Reservation::PriceComputer do
 
     it 'computes services_tax' do
       expect(prices[:services][:services_tax]).to eq(Money.new 5500, 'EUR')
-      expect(prices_a[:services][:services_tax]).to eq(Money.new 9375, 'EUR')
+      expect(prices_a[:services][:services_tax]).to eq(Money.new 9417, 'EUR')
       expect(prices_amex[:services][:services_tax]).to eq(Money.new 0, 'EUR')
       expect(prices_amex_b[:services][:services_tax]).to eq(Money.new 0, 'EUR')
     end
@@ -152,7 +152,7 @@ RSpec.describe Reservation::PriceComputer do
       # puts prices[:services][:services_tax]
       # puts prices[:total][:total_tax]
       expect(prices[:total][:total_tax]).to eq(Money.new 10750, 'EUR')
-      expect(prices_a[:total][:total_tax]).to eq(Money.new 59792, 'EUR')
+      expect(prices_a[:total][:total_tax]).to eq(Money.new 59834, 'EUR')
       expect(prices_amex[:total][:total_tax]).to eq(Money.new 14000, 'EUR')
       expect(prices_amex_b[:total][:total_tax]).to eq(Money.new 14000, 'EUR')
     end
@@ -185,7 +185,7 @@ RSpec.describe Reservation::PriceComputer do
     it 'computes services_with_tax' do
       # puts prices[:services]
       expect(prices[:services][:services_with_tax]).to eq(Money.new 33000, 'EUR')
-      expect(prices_a[:services][:services_with_tax]).to eq(Money.new 56250, 'EUR')
+      expect(prices_a[:services][:services_with_tax]).to eq(Money.new 56500, 'EUR')
       expect(prices_amex[:services][:services_with_tax]).to eq(Money.new 0, 'EUR')
       expect(prices_amex_b[:services][:services_with_tax]).to eq(Money.new 0, 'EUR')
     end
@@ -193,7 +193,7 @@ RSpec.describe Reservation::PriceComputer do
     it 'computes total_with_tax' do
       # puts prices[:total]
       expect(prices[:total][:total_with_tax]).to eq(Money.new 91500, 'EUR')
-      expect(prices_a[:total][:total_with_tax]).to eq(Money.new 373750, 'EUR')
+      expect(prices_a[:total][:total_with_tax]).to eq(Money.new 374000, 'EUR')
       expect(prices_amex[:total][:total_with_tax]).to eq(Money.new 120000, 'EUR')
       expect(prices_amex_b[:total][:total_with_tax]).to eq(Money.new 120000, 'EUR')
     end
