@@ -1,4 +1,6 @@
 class Service < ApplicationRecord
+  include PriceComputer
+
   belongs_to :reservation
 
   scope :payment_tied_to_reservation, -> { where(payment_tied_to_reservation: true) }
@@ -32,10 +34,6 @@ class Service < ApplicationRecord
 
   def payment(options = {})
     Service::Payment.new(self, options)
-  end
-
-  def price_with_margin_and_taxes
-    calculate_price_with_margin_and_taxes
   end
 
   def validate!
@@ -156,15 +154,6 @@ class Service < ApplicationRecord
     category == "wine"
   end
 
-  def compute_price
-    # self.price = (1 + self.margin) * ((self.quantity_base * self.base_price) + (self.quantity * self.unit_price))
-    assign_attributes(price: (1 + margin) * ((quantity_base * base_price) + (quantity * unit_price)))
-  end
-
-  def calculate_price_with_margin_and_taxes
-    price * (1 + Reservation::PriceComputer::TAX )
-  end
-
   def price_fixed?
     CATEGORIES_WITH_FIXED_PRICE.include?(category)
   end
@@ -172,7 +161,6 @@ class Service < ApplicationRecord
   def set_status_validated_for_categories_with_fixed_price
     assign_attributes(status: 'validated') if price_fixed?
   end
-
 end
 
 # class Service < ApplicationRecord
