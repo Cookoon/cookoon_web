@@ -54,7 +54,7 @@
             <strong>Chef: </strong>
             <%= @reservation.menu.chef.name %>
           </p>
-          <%= render 'menus/card', menu: @reservation.menu, chef: @reservation.menu.chef, reservation: @reservation %>
+          <%= render 'menus/card', menu: @reservation.menu.decorate, chef: @reservation.menu.chef, reservation: @reservation %>
         <% else %>
           <p>Aucun menu n'a été sélectionné</p>
         <% end %>
