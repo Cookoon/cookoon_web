@@ -145,7 +145,7 @@ GEM
       rails (>= 4.0)
       rotp
       useragent
-    geocoder (1.5.0)
+    geocoder (1.6.1)
     gibbon (3.2.0)
       faraday (>= 0.9.1)
       multi_json (>= 1.11.0)
@@ -234,7 +234,6 @@ GEM
     multi_json (1.13.1)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
-    nested_form (0.3.2)
     netrc (0.11.0)
     nio4r (2.5.2)
     nio4r (2.5.2-java)
@@ -510,7 +509,6 @@ DEPENDENCIES
   letter_opener
   listen (>= 3.0.5, < 3.2)
   money-rails
-  nested_form
   pg (>= 0.18, < 2.0)
   postmark-rails
   pretender
